@@ -1,0 +1,31 @@
+/*
+ * Function: FUN_00083954
+ * Entry:    00083954
+ * Prototype: undefined FUN_00083954()
+ */
+
+
+int FUN_00083954(undefined4 param_1,int param_2)
+
+{
+  int iVar1;
+  undefined4 local_14;
+  undefined4 uStack_10;
+  undefined4 local_c;
+  
+  if (param_2 == 0) {
+    local_14 = 6;
+  }
+  else {
+    local_14 = 4;
+  }
+  uStack_10 = 0;
+  local_c = 0;
+  iVar1 = FUN_00060ab0(param_1,&local_14,0,local_14,param_1);
+  if (iVar1 != 0) {
+    iVar1 = -5;
+  }
+  return iVar1;
+}
+
+

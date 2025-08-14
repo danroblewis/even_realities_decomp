@@ -1,0 +1,34 @@
+/*
+ * Function: FUN_0008149a
+ * Entry:    0008149a
+ * Prototype: undefined FUN_0008149a()
+ */
+
+
+int FUN_0008149a(int param_1,byte param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  uint *puVar1;
+  int iVar2;
+  
+  if (*(char *)(param_1 + 0xd) == '\a') {
+    puVar1 = (uint *)(param_1 + 4);
+    if ((int)((uint)param_2 << 0x18) < 0) {
+      *puVar1 = *puVar1 | 0x800;
+    }
+    else {
+      FUN_000813b4(puVar1,0xfffff7ff,param_3,(uint)param_2 << 0x18,param_4);
+    }
+    *(byte *)(param_1 + 10) = param_2 & 0x7f;
+    iVar2 = FUN_0005d964(param_1);
+    if (iVar2 != 0) {
+      *(undefined1 *)(param_1 + 10) = *(undefined1 *)(param_1 + 9);
+    }
+  }
+  else {
+    iVar2 = -0x80;
+  }
+  return iVar2;
+}
+
+

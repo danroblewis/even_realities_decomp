@@ -1,0 +1,25 @@
+/*
+ * Function: FUN_0005ea18
+ * Entry:    0005ea18
+ * Prototype: undefined FUN_0005ea18()
+ */
+
+
+void FUN_0005ea18(undefined1 *param_1)
+
+{
+  if (param_1 == (undefined1 *)0x0) {
+    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","keys != ((void *)0)",
+                 "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x131);
+                    /* WARNING: Subroutine does not return */
+    FUN_0007e2ec("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x131);
+  }
+  if ((int)((uint)(byte)param_1[8] << 0x1d) < 0) {
+    FUN_00055094();
+  }
+  FUN_00053184(*param_1,param_1 + 1);
+  fill_memory_buffer(param_1,0,0x5c);
+  return;
+}
+
+

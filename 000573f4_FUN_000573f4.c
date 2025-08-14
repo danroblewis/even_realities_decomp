@@ -1,0 +1,34 @@
+/*
+ * Function: FUN_000573f4
+ * Entry:    000573f4
+ * Prototype: undefined FUN_000573f4()
+ */
+
+
+int FUN_000573f4(int param_1,undefined1 param_2,undefined2 param_3,undefined4 param_4)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined1 *puVar3;
+  undefined4 local_18;
+  
+  uVar1 = 0x20003ab0;
+  if (param_1 != 6) {
+    uVar1 = 0;
+  }
+  local_18 = param_4;
+  iVar2 = FUN_000569ec(uVar1,4,0x10000,0);
+  if (iVar2 == 0) {
+    local_18 = 3;
+    FUN_00081746(&DAT_00088160,0x1840,&local_18);
+    return 0;
+  }
+  puVar3 = (undefined1 *)FUN_0005f5d0(iVar2 + 0xc,4);
+  *puVar3 = (char)param_1;
+  puVar3[1] = param_2;
+  *(undefined2 *)(puVar3 + 2) = param_3;
+  return iVar2;
+}
+
+

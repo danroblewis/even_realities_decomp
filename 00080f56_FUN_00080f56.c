@@ -1,0 +1,31 @@
+/*
+ * Function: FUN_00080f56
+ * Entry:    00080f56
+ * Prototype: undefined FUN_00080f56()
+ */
+
+
+void FUN_00080f56(undefined2 param_1,undefined1 param_2)
+
+{
+  int iVar1;
+  undefined2 *puVar2;
+  undefined4 extraout_r2;
+  undefined4 extraout_r3;
+  undefined8 uVar3;
+  
+  uVar3 = FUN_00053cd4(0x2021,3);
+  iVar1 = (int)uVar3;
+  if (iVar1 == 0) {
+    FUN_00080ea2(&DAT_00088138,0x1040,&stack0xfffffff0,2,0,(int)((ulonglong)uVar3 >> 0x20),
+                 extraout_r2,extraout_r3);
+    return;
+  }
+  puVar2 = (undefined2 *)FUN_0005f5d0(iVar1 + 0xc,3);
+  *puVar2 = param_1;
+  *(undefined1 *)(puVar2 + 1) = param_2;
+  FUN_000543d8(0x2021,iVar1);
+  return;
+}
+
+

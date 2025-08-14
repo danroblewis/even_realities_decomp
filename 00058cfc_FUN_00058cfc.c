@@ -1,0 +1,103 @@
+/*
+ * Function: FUN_00058cfc
+ * Entry:    00058cfc
+ * Prototype: undefined FUN_00058cfc()
+ */
+
+
+undefined4 FUN_00058cfc(int param_1,int param_2)
+
+{
+  char cVar1;
+  byte *pbVar2;
+  undefined4 uVar3;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  undefined8 uVar7;
+  undefined4 local_58;
+  char *local_54;
+  uint uStack_50;
+  uint local_4c;
+  int local_44;
+  undefined4 local_30;
+  char *local_2c;
+  
+  if (*(short *)(param_2 + 0x10) == 0) {
+    local_2c = "Too small ATT PDU received";
+    local_30 = 2;
+    FUN_00081ddc(&DAT_00088100,0x1040,&local_30);
+  }
+  else {
+    pbVar2 = (byte *)FUN_0005f594(param_2 + 0xc,1);
+    if (*(int *)(param_1 + -8) != 0) {
+      iVar6 = 0;
+      do {
+        if ((&DAT_0008b2b4)[iVar6 * 8] == *pbVar2) {
+          local_44 = *(int *)(param_1 + 0x13c);
+          if (local_44 != 0) goto LAB_00058dbc;
+          uVar3 = FUN_0005f2d4(param_2);
+          cVar1 = (&DAT_0008b2b6)[iVar6 * 8];
+          *(undefined4 *)(param_1 + 0x13c) = uVar3;
+          if (cVar1 == '\x01') {
+            iVar4 = FUN_00082236(param_1 + 0x118,local_44);
+            if (iVar4 == 0) {
+LAB_00058e30:
+              if ((uint)*(ushort *)(param_2 + 0x10) < (uint)(byte)(&DAT_0008b2b5)[iVar6 * 8]) {
+                local_4c = (uint)*pbVar2;
+                local_54 = "Invalid len %u for code 0x%02x";
+                local_58 = 4;
+                uStack_50 = (uint)*(ushort *)(param_2 + 0x10);
+                FUN_00081ddc(&DAT_00088100,0x2040,&local_58);
+                if ((&DAT_0008b2b6)[iVar6 * 8] != '\x01') goto LAB_00058d9c;
+                iVar6 = 4;
+              }
+              else {
+                iVar6 = (*(code *)(&DAT_0008b2b8)[iVar6 * 2])(param_1 + -8,param_2);
+                if ((cVar1 != '\x01') || (iVar6 == 0)) goto LAB_00058d9c;
+              }
+              uVar5 = (uint)*pbVar2;
+              goto LAB_00058e12;
+            }
+            local_2c = "Ignoring unexpected request";
+          }
+          else {
+            if ((cVar1 != '\x05') || (iVar4 = FUN_00082236(param_1 + 0x118,1), iVar4 == 0))
+            goto LAB_00058e30;
+            local_2c = "Ignoring unexpected indication";
+          }
+          local_30 = 2;
+          FUN_00081ddc(&DAT_00088100,0x1080,&local_30);
+          goto LAB_00058d9c;
+        }
+        iVar6 = iVar6 + 1;
+      } while (iVar6 != 0x1e);
+      if (*(int *)(param_1 + 0x13c) != 0) {
+LAB_00058dbc:
+        DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!att_chan->rsp_buf",
+                     "WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0xb54);
+                    /* WARNING: Subroutine does not return */
+        FUN_0007e2ec("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0xb54);
+      }
+      uVar3 = FUN_0005f2d4(param_2);
+      *(undefined4 *)(param_1 + 0x13c) = uVar3;
+      uStack_50 = (uint)*pbVar2;
+      local_54 = "Unhandled ATT code 0x%02x";
+      local_58 = 3;
+      FUN_00081ddc(&DAT_00088100,0x1880,&local_58);
+      uVar7 = FUN_000582b8(*pbVar2);
+      uVar5 = (uint)((ulonglong)uVar7 >> 0x20);
+      if (((int)uVar7 != 0) && ((int)uVar7 != 5)) {
+        iVar6 = 6;
+LAB_00058e12:
+        FUN_000821f4(param_1 + -8,uVar5,0,iVar6);
+      }
+LAB_00058d9c:
+      FUN_0005f24c(*(undefined4 *)(param_1 + 0x13c));
+      *(undefined4 *)(param_1 + 0x13c) = 0;
+    }
+  }
+  return 0;
+}
+
+

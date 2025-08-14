@@ -1,0 +1,32 @@
+/*
+ * Function: FUN_0007b194
+ * Entry:    0007b194
+ * Prototype: undefined FUN_0007b194()
+ */
+
+
+undefined4 FUN_0007b194(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  
+  if (param_1 == (int *)0x0) {
+    return 0xf30000;
+  }
+  iVar1 = *param_1;
+  if (iVar1 == 1) {
+    thunk_FUN_00086c44(param_1 + 2,&DAT_000988b8,0x20,1,param_4);
+  }
+  else if (iVar1 == 2) {
+    thunk_FUN_00086c44(param_1 + 2,&DAT_000988d8,0x20,2,param_4);
+  }
+  else {
+    if (iVar1 != 0) {
+      return 0xf30001;
+    }
+    thunk_FUN_00086c44(param_1 + 2,&DAT_000988f8,0x14,0,param_4);
+  }
+  return 0;
+}
+
+

@@ -1,0 +1,49 @@
+/*
+ * Function: FUN_00054784
+ * Entry:    00054784
+ * Prototype: undefined FUN_00054784()
+ */
+
+
+void FUN_00054784(int param_1)
+
+{
+  ushort uVar1;
+  bool bVar2;
+  uint uVar3;
+  undefined1 *puVar4;
+  int iVar5;
+  
+  uVar3 = FUN_00083728(param_1 + 0xc);
+  uVar1 = *(ushort *)(param_1 + 0x10);
+  if (uVar1 < 2) {
+    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf->len >= sizeof(*hdr)",
+                 "WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0xe85);
+    bVar2 = (bool)isCurrentModePrivileged();
+    if (bVar2) {
+      setBasePriority(0);
+    }
+    software_interrupt(2);
+  }
+  puVar4 = (undefined1 *)FUN_0005f594(param_1 + 0xc,2);
+  iVar5 = FUN_00080e14(*puVar4);
+  if (-1 < iVar5 << 0x1f) {
+    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","evt_flags & (1UL << (0))",
+                 "WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0xe89);
+    bVar2 = (bool)isCurrentModePrivileged();
+    if (bVar2) {
+      setBasePriority(0);
+    }
+    software_interrupt(2);
+  }
+  FUN_00053658(*puVar4,param_1,&DAT_0008b168,5);
+  if (iVar5 << 0x1e < 0) {
+    *(ushort *)(param_1 + 0x10) = uVar1;
+    *(uint *)(param_1 + 0xc) = *(int *)(param_1 + 0x14) + (uVar3 & 0xffff);
+    return;
+  }
+  FUN_0005f24c(param_1);
+  return;
+}
+
+

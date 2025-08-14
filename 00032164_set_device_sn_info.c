@@ -1,0 +1,68 @@
+/*
+ * Function: set_device_sn_info
+ * Entry:    00032164
+ * Prototype: undefined set_device_sn_info()
+ */
+
+
+undefined4
+set_device_sn_info(int param_1,undefined4 param_2,undefined4 *param_3,undefined1 *param_4)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  char cVar3;
+  undefined1 *puVar4;
+  undefined1 auStack_9c [21];
+  undefined1 auStack_87 [115];
+  
+  DEBUG_PRINT("join in get_query_sn_info\n");
+  if ((param_3 == (undefined4 *)0x0) || (param_4 == (undefined1 *)0x0)) {
+    DEBUG_PRINT("get_query_sn_info para is NULL\n");
+    uVar1 = 0xffffffff;
+  }
+  else if (DAT_20019ef3 == '\x01') {
+    param_1 = param_1 + 4;
+    puVar4 = (undefined1 *)*param_3;
+    FUN_000232c0(param_1);
+    FUN_000777f0("The string is: %s\n",param_1);
+    uVar1 = get_work_mode();
+    FUN_00022b00(uVar1,0);
+    if (2 < LOG_LEVEL) {
+      if (IS_DEBUG == 0) {
+        uVar1 = FUN_000232b0();
+        DEBUG_PRINT("%s(): BLE_REQ_PUT_DEVICE_SN new sn:%16s\n","set_device_sn_info",uVar1);
+      }
+      else {
+        uVar1 = FUN_000232b0();
+        handle_heartbeat("%s(): BLE_REQ_PUT_DEVICE_SN new sn:%16s\n","set_device_sn_info",uVar1);
+      }
+    }
+    *puVar4 = 0x1c;
+    puVar4[1] = 1;
+    puVar4[3] = 1;
+    cVar3 = '\x05';
+    puVar4[2] = 3;
+    puVar4[4] = 0;
+    *param_4 = 5;
+    do {
+      iVar2 = read_sys_settting_from_flash(auStack_9c);
+      if ((iVar2 == 0) && (iVar2 = memcmp_byte_arrays(param_1,auStack_87,0xe), iVar2 == 0)) {
+        DEBUG_PRINT("SN codes updated and written to flash successfully.\n");
+        goto LAB_00032204;
+      }
+      cVar3 = cVar3 + -1;
+      FUN_0007d14a(100);
+    } while (cVar3 != '\0');
+    puVar4[4] = 1;
+LAB_00032204:
+    uVar1 = 0;
+  }
+  else {
+    DEBUG_PRINT("warning: not test mode,disable setting\n");
+    uVar1 = 0xfffffffe;
+  }
+  return uVar1;
+}
+
+

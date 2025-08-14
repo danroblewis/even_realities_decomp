@@ -1,0 +1,48 @@
+/*
+ * Function: FUN_0005cdc4
+ * Entry:    0005cdc4
+ * Prototype: undefined FUN_0005cdc4()
+ */
+
+
+undefined4 FUN_0005cdc4(int param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  undefined4 local_28;
+  char *local_24;
+  uint local_20;
+  
+  uVar3 = (uint)*(byte *)(param_1 + 8);
+  if (uVar3 < 3) {
+    if (uVar3 != 0) {
+      uVar3 = *(uint *)(param_1 + 0xd8) >> (uint)*(byte *)(param_1 + 0xdc) & 1 | 0x80;
+    }
+  }
+  else {
+    if (uVar3 != 3) {
+      local_24 = "Unknown pairing method (%u)";
+      local_28 = 3;
+      local_20 = uVar3;
+      FUN_00083074(&DAT_00088180,0x1840,&local_28);
+      return 8;
+    }
+    uVar3 = 0;
+  }
+  iVar1 = FUN_000830b0(param_1,3);
+  if (iVar1 != 0) {
+    local_20 = FUN_0005f5d0(iVar1 + 0xc,0x10);
+    iVar2 = FUN_000835ea(DAT_2000af48,param_1 + 0x57,param_1 + 0x27,uVar3);
+    if (iVar2 == 0) {
+      FUN_0005cb38(param_1,iVar1,0);
+      FUN_0008304c(param_1 + 4,0);
+      return 0;
+    }
+    FUN_0005f24c(iVar1);
+  }
+  return 8;
+}
+
+
