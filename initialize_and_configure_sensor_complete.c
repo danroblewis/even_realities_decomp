@@ -15,11 +15,11 @@ int initialize_and_configure_sensor_complete(int *param_1)
   
   if ((((param_1 != (int *)0x0) && (*param_1 != 0)) && (param_1[1] != 0)) &&
      ((param_1[2] != 0 && (param_1[3] != 0)))) {
-    DAT_20007bc8 = 0;
-    SENSOR_INITIALIZATION_STATE = 0;
+    DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE = 0;
+    DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = 0;
     SENSOR_CALIBRATION_DATA_BUFFER = 0;
     SENSOR_INITIALIZATION_AND_CONFIGURATION_COMPLETE_STATE = 1;
-    SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT = param_1;
+    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = param_1;
     iVar1 = check_sensor_status_and_validate();
     if ((iVar1 != -1) &&
        ((iVar1 = configure_sensor_parameters(), iVar1 == 0 &&

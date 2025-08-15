@@ -40,7 +40,7 @@ undefined4 serialization_init(void)
     if (-1 < (int)uVar2) {
       manage_ble_connection_state_comprehensive
                 (&DAT_200039c8,(int)((ulonglong)uVar2 >> 0x20),0xffffffff,0xffffffff);
-      DAT_20007a80 = 1;
+      SERIALIZATION_INITIALIZATION_STATE = 1;
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): ipc_service[HOST] has ready!\n\n","serialization_init");

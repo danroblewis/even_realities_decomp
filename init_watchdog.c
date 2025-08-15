@@ -52,9 +52,9 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
         handle_heartbeat();
       }
     }
-    HARDWARE_OPERATION_PARAMETER =
+    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE =
          configure_timer_interrupt_parameters(&HARDWARE_OPERATION_MESSAGE,&uStack_30);
-    if (HARDWARE_OPERATION_PARAMETER == -0x86) {
+    if (DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE == -0x86) {
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): Callback support rejected, continuing anyway\n","init_watchdog");
@@ -64,10 +64,10 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
         }
       }
       local_28 = 0;
-      HARDWARE_OPERATION_PARAMETER =
+      DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE =
            configure_timer_interrupt_parameters(&HARDWARE_OPERATION_MESSAGE,&uStack_30);
     }
-    if (HARDWARE_OPERATION_PARAMETER < 0) {
+    if (DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE < 0) {
       if (LOG_LEVEL < 1) {
         return 0;
       }
@@ -102,7 +102,9 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
             }
           }
           iVar2 = conditional_callback_execution_with_parameter_packing
-                            (&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
+                            (&HARDWARE_OPERATION_MESSAGE,
+                             DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE
+                            );
           if (iVar2 == 0) break;
           calculate_ble_schedule_timing(0x667,0);
           iVar1 = iVar1 + -1;

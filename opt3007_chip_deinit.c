@@ -9,9 +9,10 @@ void opt3007_chip_deinit(undefined4 param_1,undefined4 param_2,undefined4 param_
                         )
 
 {
-  if (OPT3007_LIGHT_SENSOR_STATE != 0) {
+  if (DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE != 0) {
     param_3 = 0;
-    *(undefined4 *)(OPT3007_LIGHT_SENSOR_STATE + 0x10) = 0;
+    *(undefined4 *)
+     (DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE + 0x10) = 0;
   }
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {

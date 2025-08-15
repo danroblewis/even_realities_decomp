@@ -20,8 +20,9 @@ void check_sw0_status(void)
         handle_heartbeat();
       }
     }
-    SW0_STATUS_CHECK_BUFFER = SW0_STATUS_CHECK_BUFFER + 1;
-    if (3 < SW0_STATUS_CHECK_BUFFER) {
+    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE =
+         DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE + 1;
+    if (3 < DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE) {
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): interrupt line abnormal, now reset\n","check_sw0_status");
@@ -35,7 +36,7 @@ void check_sw0_status(void)
     }
   }
   else {
-    SW0_STATUS_CHECK_BUFFER = 0;
+    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = 0;
   }
   return;
 }

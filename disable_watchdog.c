@@ -12,10 +12,11 @@ int disable_watchdog(void)
   int iVar1;
   int iVar2;
   
-  if (HARDWARE_OPERATION_PARAMETER < 0) {
+  if (DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE < 0) {
     if (3 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
-        DEBUG_PRINT("%s(): watchdog is disabled\n","disable_watchdog",HARDWARE_OPERATION_PARAMETER,0
+        DEBUG_PRINT("%s(): watchdog is disabled\n","disable_watchdog",
+                    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE,0
                     ,in_r3);
       }
       else {
@@ -38,7 +39,7 @@ LAB_0002aed6:
       }
       iVar1 = execute_callback_and_update_state_on_success(&HARDWARE_OPERATION_MESSAGE);
       if (iVar1 == 0) {
-        HARDWARE_OPERATION_PARAMETER = -0x10;
+        DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = -0x10;
         goto LAB_0002aed6;
       }
       calculate_ble_schedule_timing(0x667,0);

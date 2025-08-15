@@ -129,10 +129,11 @@ LAB_0002fb54:
               handle_heartbeat();
             }
           }
-          AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
-          AUDIO_STREAM_FILE_MANAGER_STATE = 0;
+          DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+               (char *)0x0;
+          DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = 0;
           fill_memory_buffer(&DAT_20018daa,0,0x1000);
-          AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE = 0;
+          DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE = 0;
           AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = 1;
           return 0;
         }
@@ -199,10 +200,15 @@ LAB_0002fc9e:
     if (iVar1 == 0) {
       if (local_f4[0] != '\x01') {
         if (local_f4[0] == '\x02') {
-          pcVar2 = AUDIO_STREAM_FILE_MANAGER_DATA + local_f2;
+          pcVar2 = DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE +
+                   local_f2;
           if (0xfff < (int)pcVar2) {
-            memcpy(&DAT_20018daa + (int)AUDIO_STREAM_FILE_MANAGER_DATA,local_f0,
-                   0x1000 - (int)AUDIO_STREAM_FILE_MANAGER_DATA);
+            memcpy(&DAT_20018daa +
+                   (int)
+                   DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE,
+                   local_f0,0x1000 - (int)
+                                     DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                  );
             if (2 < iVar3) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): To complete a sector of data, perform flash write operations\n",
@@ -215,7 +221,8 @@ LAB_0002fc9e:
             iVar3 = check_driver_ready(&FLASH_DRIVER_INTERFACE);
             if (iVar3 == 0) goto LAB_0002f9be;
             iVar3 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x421000 +
-                    AUDIO_STREAM_FILE_MANAGER_STATE * 0x1000;
+                    DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE *
+                    0x1000;
             if (iVar3 <= (int)((uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x431000)) {
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -236,9 +243,12 @@ LAB_0002fc9e:
               uVar4 = get_work_mode();
               pcVar2 = (char *)(*pcVar8)(uVar4,iVar3,&DAT_20018daa,0x1000);
               if (pcVar2 == (char *)0x0) {
-                AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE =
-                     calculate_crc32(AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE,&DAT_20018daa,0x1000);
-                AUDIO_STREAM_FILE_MANAGER_STATE = AUDIO_STREAM_FILE_MANAGER_STATE + 1;
+                DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     calculate_crc32(DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                                     ,&DAT_20018daa,0x1000);
+                DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE =
+                     DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE
+                     + 1;
                 if (2 < LOG_LEVEL) {
                   if (IS_DEBUG == 0) {
                     DEBUG_PRINT("%s(): wirte 4k voice data to flash,write address = 0x%08x\n",
@@ -248,8 +258,10 @@ LAB_0002fc9e:
                     handle_heartbeat();
                   }
                 }
-                pcVar2 = AUDIO_STREAM_FILE_MANAGER_DATA;
-                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
+                pcVar2 = 
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE;
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     (char *)0x0;
                 fill_memory_buffer(&DAT_20018daa,0,0x1000);
                 iVar3 = -(int)pcVar2 + 0x1000;
                 if (2 < LOG_LEVEL) {
@@ -262,10 +274,15 @@ LAB_0002fc9e:
                   }
                 }
                 iVar3 = local_f2 - iVar3;
-                iVar1 = (int)AUDIO_STREAM_FILE_MANAGER_DATA + iVar3;
-                memcpy(&DAT_20018daa + (int)AUDIO_STREAM_FILE_MANAGER_DATA,
-                       &stack0x00000f10 + -(int)pcVar2,iVar3);
-                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)iVar1;
+                iVar1 = (int)
+                        DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                        + iVar3;
+                memcpy(&DAT_20018daa +
+                       (int)
+                       DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                       ,&stack0x00000f10 + -(int)pcVar2,iVar3);
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     (char *)iVar1;
                 return 0;
               }
               goto joined_r0x0002fe02;
@@ -294,13 +311,15 @@ LAB_0002fc9e:
             display_DelayClose(10000);
             goto LAB_0002fd4a;
           }
-          memcpy(&DAT_20018daa + (int)AUDIO_STREAM_FILE_MANAGER_DATA,local_f0);
+          memcpy(&DAT_20018daa +
+                 (int)DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                 ,local_f0);
           if (iVar3 < 3) {
-            AUDIO_STREAM_FILE_MANAGER_DATA = pcVar2;
+            DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE = pcVar2;
             return 0;
           }
           format_string = "%s(): copy %d byte into audio cache\n";
-          AUDIO_STREAM_FILE_MANAGER_DATA = pcVar2;
+          DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE = pcVar2;
         }
         else {
           if (local_f4[0] != '\x03') {
@@ -342,7 +361,8 @@ LAB_0002fd4a:
           iVar3 = check_driver_ready(&FLASH_DRIVER_INTERFACE);
           if (iVar3 == 0) goto LAB_0002f9be;
           iVar3 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x421000 +
-                  AUDIO_STREAM_FILE_MANAGER_STATE * 0x1000;
+                  DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE *
+                  0x1000;
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): wirte addr = 0x%08x\n","audioStreamFileManagerHandler",iVar3);
@@ -369,9 +389,11 @@ joined_r0x0002fe02:
               format_string = "%s(): Flash write failed! %d\n\n";
               goto LAB_0002fc9e;
             }
-            AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE =
-                 calculate_crc32(AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE,&DAT_20018daa,
-                                 AUDIO_STREAM_FILE_MANAGER_DATA);
+            DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                 calculate_crc32(DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                                 ,&DAT_20018daa,
+                                 DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                                );
             fill_memory_buffer(&DAT_20018daa,0,0x1000);
             iVar3 = get_work_mode();
             pcVar8 = *(code **)(iVar3 + 0x1030);
@@ -382,7 +404,7 @@ joined_r0x0002fe02:
             pcVar8 = *(code **)(iVar3 + 0x1038);
             uVar4 = get_work_mode();
             pcVar2 = (char *)(*pcVar8)(uVar4,0x400000,0x1000);
-            iVar3 = AUDIO_STREAM_FILE_MANAGER_STATE;
+            iVar3 = DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE;
             if (pcVar2 == (char *)0x0) {
               _DAT_20018daa = 0x5aa5aa5a;
               iVar1 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x14;
@@ -393,7 +415,8 @@ joined_r0x0002fe02:
               DAT_20018db0 = 0;
               DAT_20018db1 = 0;
               *(char **)(&DAT_20018dba + iVar1) =
-                   AUDIO_STREAM_FILE_MANAGER_DATA + iVar6 + iVar3 * 0x1000;
+                   DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE +
+                   iVar6 + iVar3 * 0x1000;
               (&DAT_20018db2)[iVar1] = 2;
               (&DAT_20018db3)[iVar1] = 0;
               (&DAT_20018db4)[iVar1] = 0;
@@ -403,7 +426,7 @@ joined_r0x0002fe02:
               uVar5 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER;
               *(undefined4 *)(&DAT_20018dbe + uVar5 * 0x14) = uVar4;
               *(undefined4 *)(&DAT_20018dc2 + uVar5 * 0x14) =
-                   AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE;
+                   DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE;
               if (2 < iVar3) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): upgrade Num.%d voice manager block,total write sector num = %d, total write byte = %d ,crc32 = %d\n"
@@ -426,8 +449,9 @@ joined_r0x0002fe02:
                 }
                 AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = '\0';
                 AUDIO_STREAM_FILE_MANAGER_BUFFER = 0;
-                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
-                AUDIO_STREAM_FILE_MANAGER_STATE = 0;
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     (char *)0x0;
+                DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = 0;
                 process_sensor_data_buffer();
                 if (LOG_LEVEL < 1) {
                   return 0;
@@ -443,8 +467,9 @@ joined_r0x0002fe02:
                 pcVar2 = (char *)(*pcVar8)(uVar4,0x400000,&DAT_20018daa,0x1000);
                 AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = '\0';
                 AUDIO_STREAM_FILE_MANAGER_BUFFER = 0;
-                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
-                AUDIO_STREAM_FILE_MANAGER_STATE = 0;
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     (char *)0x0;
+                DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = 0;
                 process_sensor_data_buffer();
                 requestAudioInfoToApp(1);
                 if (pcVar2 != (char *)0x0) goto joined_r0x0002fe02;

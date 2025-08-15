@@ -17,15 +17,18 @@ int ext_flash_write(int work_mode_context,undefined4 flash_address,undefined4 bu
     debug_hook_before_flash_read();
     iVar1 = extraout_r1;
   }
-  if (FLASH_DRIVER_INSTANCE == 0) {
+  if (DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE == 0) {
     if (-1 < (int)((uint)*(ushort *)(work_mode_context + 0x105c) << 0x1b)) {
       debug_hook_flash_driver_not_ready();
     }
   }
   else {
     resource_mutex_acquire(&FLASH_MUTEX,iVar1,0xffffffff,0xffffffff);
-    iVar1 = (**(code **)(*(int *)(FLASH_DRIVER_INSTANCE + 8) + 4))
-                      (FLASH_DRIVER_INSTANCE,flash_address,buffer_ptr,buffer_size);
+    iVar1 = (**(code **)(*(int *)(
+                                 DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                                 + 8) + 4))
+                      (DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                       ,flash_address,buffer_ptr,buffer_size);
     mutex_unlock(&FLASH_MUTEX);
     if (-1 < (int)((uint)*(ushort *)(work_mode_context + 0x105c) << 0x1b)) {
       debug_hook_flash_driver_not_ready();

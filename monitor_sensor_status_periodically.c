@@ -23,12 +23,13 @@ void monitor_sensor_status_periodically(void)
     calculate_ble_schedule_timing(0x290,0);
   } while (uVar2 != 10);
   iVar1 = calculate_ble_connection_timing_scaled();
-  if (999 < (uint)(iVar1 - SENSOR_STATUS_MONITORING_DATA)) {
+  if (999 < (uint)(iVar1 - 
+                  DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE)) {
     if (uVar2 == 10) {
       DAT_20019ef0 = DAT_20019ef0 + 1;
       if (3 < DAT_20019ef0) {
         SENSOR_STATUS_PERIODIC_MONITORING = 0;
-        SENSOR_STATUS_MONITORING_DATA = iVar1;
+        DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = iVar1;
         DAT_20019ef0 = 3;
         return;
       }
@@ -37,7 +38,7 @@ void monitor_sensor_status_periodically(void)
       DAT_20019ef0 = 0;
     }
     SENSOR_STATUS_PERIODIC_MONITORING = 1;
-    SENSOR_STATUS_MONITORING_DATA = iVar1;
+    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE = iVar1;
   }
   return;
 }

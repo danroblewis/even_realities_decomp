@@ -533,7 +533,9 @@ LAB_0002812a:
             handle_heartbeat();
           }
         }
-        atomic_set_bit_1(&PROXY_THREAD_MUTEX);
+        atomic_set_bit_1(&
+                         DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                        );
       }
       break;
     case 7:

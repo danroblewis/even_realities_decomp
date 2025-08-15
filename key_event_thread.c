@@ -38,13 +38,13 @@ LAB_0002956e:
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): key event trigger, type %d\n\n","key_event_thread",
-                  KEY_EVENT_THREAD_STATE_DATA);
+                  DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE);
     }
     else {
       handle_heartbeat();
     }
   }
-  if (KEY_EVENT_THREAD_STATE_DATA == 1) {
+  if (DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE == 1) {
     if (**(char **)(param_1 + 0x1014) == '\0') {
       if ((**(byte **)(param_1 + 0x100c) - 7 < 5) || (**(char **)(param_1 + 0x101c) != '\0')) {
         uVar5 = 1;
@@ -171,7 +171,7 @@ LAB_000296bc:
     }
     goto LAB_0002956e;
   }
-  switch(KEY_EVENT_THREAD_STATE_DATA) {
+  switch(DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE) {
   case 2:
     if (**(char **)(param_1 + 0x1014) != '\0') {
       uVar5 = 0x19;
@@ -311,7 +311,9 @@ LAB_00029aac:
                         handle_heartbeat();
                       }
                     }
-                    atomic_set_bit_1(&PROXY_THREAD_MUTEX);
+                    atomic_set_bit_1(&
+                                     DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                                    );
                     break;
                   }
                   if (1 < LOG_LEVEL) {
@@ -329,7 +331,9 @@ LAB_00029aac:
             }
           }
           else {
-            atomic_set_bit_1(&KEY_EVENT_THREAD_STATE);
+            atomic_set_bit_1(&
+                             DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE
+                            );
             do {
               iVar6 = sync_to_slave(param_1,8,&local_30,2);
               if (iVar6 < 5000) {
@@ -659,7 +663,7 @@ LAB_0002a062:
     }
   }
 switchD_000297f8_caseD_5:
-  KEY_EVENT_THREAD_STATE_DATA = 0;
+  DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE = 0;
   goto LAB_0002956e;
 LAB_00029578:
   calculate_ble_schedule_timing(0x28000,0);
@@ -687,7 +691,7 @@ LAB_00029a02:
       handle_heartbeat();
     }
   }
-  atomic_set_bit_1(&PROXY_THREAD_MUTEX);
+  atomic_set_bit_1(&DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE);
   goto LAB_0002956e;
 }
 

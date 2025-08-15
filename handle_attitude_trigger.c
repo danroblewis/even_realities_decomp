@@ -85,7 +85,7 @@ void handle_attitude_trigger(char *param_1)
               lVar16 = calculate_ble_connection_timing_with_validation();
               local_a4 = (uint)(lVar16 * 1000) >> 0xf |
                          (int)((ulonglong)(lVar16 * 1000) >> 0x20) * 0x20000;
-              if (1000 < local_a4 - DAT_20007a94) {
+              if (1000 < local_a4 - ATTITUDE_TRIGGER_EXTENDED_STATE) {
                 initialize_attitude_data_structure((undefined4 *)(param_1 + 0x28));
               }
               goto LAB_0000ffb4;
@@ -180,9 +180,9 @@ LAB_0000ffb4:
           iVar13 = (int)(fVar4 * 100.0);
           iVar14 = (int)(fVar3 * 100.0);
           iVar15 = (int)(local_a0[2] * 100.0);
-          SYSTEM_LEVEL_CONFIG = iVar15;
-          SYSTEM_BASE_VALUE_CONFIG = iVar14;
-          ATTITUDE_PITCH_VALUE = iVar13;
+          DISPLAY_DISPATCH_THREAD_OPERATION_STATE = iVar15;
+          DISPLAY_DISPATCH_THREAD_EXTENDED_OPERATION_STATE = iVar14;
+          DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE = iVar13;
           iVar1 = get_system_ready_state();
           if ((iVar1 == 1) && (param_1[0x106] == '\v')) {
             *param_1 = '\x02';
@@ -190,14 +190,14 @@ LAB_0001021e:
             uVar2 = 0x148;
           }
           else {
-            DAT_20007a94 = local_a4;
+            ATTITUDE_TRIGGER_EXTENDED_STATE = local_a4;
             DAT_20007ab4 = DAT_20007ab4 + 1;
-            if (DAT_20007ab0 == '\0') {
+            if (DISPLAY_DISPATCH_THREAD_COMPLETION_STATE == '\0') {
               if (DAT_20007ab4 < 0xc9) goto LAB_0001021e;
-              DAT_20007ab0 = '\x01';
-              ATTITUDE_TRIGGER_STATE_BUFFER_2 = local_a0[0];
-              ATTITUDE_TRIGGER_STATE_BUFFER_3 = local_a0[1];
-              ATTITUDE_TRIGGER_STATE_BUFFER_4 = local_a0[2];
+              DISPLAY_DISPATCH_THREAD_COMPLETION_STATE = '\x01';
+              DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_COMPREHENSIVE_COMPLETION_STATE = local_a0[0];
+              DISPLAY_DISPATCH_THREAD_ULTIMATE_COMPLETION_STATE = local_a0[1];
+              DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_COMPLETION_STATE = local_a0[2];
             }
             calculate_work_mode_parameters(param_1);
             if ((byte)param_1[-0xe0f] == 0) {
@@ -226,9 +226,9 @@ LAB_000102e0:
               if ((iVar13 <= *(int *)(param_1 + 8) + 100) && (*(int *)(param_1 + 0xc) <= iVar13))
               goto LAB_00010734;
               SYSTEM_NAVIGATION_CONFIG = SYSTEM_NAVIGATION_CONFIG + 1;
-              SYSTEM_LEVEL_CONFIG = iVar15;
-              SYSTEM_BASE_VALUE_CONFIG = iVar14;
-              ATTITUDE_PITCH_VALUE = iVar13;
+              DISPLAY_DISPATCH_THREAD_OPERATION_STATE = iVar15;
+              DISPLAY_DISPATCH_THREAD_EXTENDED_OPERATION_STATE = iVar14;
+              DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE = iVar13;
               if ((int)SYSTEM_NAVIGATION_CONFIG < 2) goto LAB_0001027a;
               SYSTEM_NAVIGATION_CONFIG = 0xfffffffd;
               DISPLAY_UI_STATE = 1;
@@ -269,19 +269,19 @@ LAB_00010544:
 LAB_0001027a:
               if ((*param_1 == '\x01') && ((int)SYSTEM_NAVIGATION_CONFIG < 1)) {
                 calculate_ble_connection_timing_with_validation();
-                DAT_20007a88 = iVar13;
+                ATTITUDE_TRIGGER_HANDLER_STATE = iVar13;
               }
             }
             else {
               if ((iVar13 <= *(int *)(param_1 + 8)) && (*(int *)(param_1 + 0xc) <= iVar13)) {
-                SYSTEM_LEVEL_CONFIG = iVar15;
-                SYSTEM_BASE_VALUE_CONFIG = iVar14;
-                ATTITUDE_PITCH_VALUE = iVar13;
+                DISPLAY_DISPATCH_THREAD_OPERATION_STATE = iVar15;
+                DISPLAY_DISPATCH_THREAD_EXTENDED_OPERATION_STATE = iVar14;
+                DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE = iVar13;
                 calculate_ble_connection_timing_with_validation();
                 SYSTEM_NAVIGATION_CONFIG = SYSTEM_NAVIGATION_CONFIG + 1;
                 if (1 < (int)SYSTEM_NAVIGATION_CONFIG) {
                   SYSTEM_NAVIGATION_CONFIG = 0xfffffffd;
-                  if ((param_1[-0xe0f] != '\0') || (iVar13 < DAT_20007a88)) {
+                  if ((param_1[-0xe0f] != '\0') || (iVar13 < ATTITUDE_TRIGGER_HANDLER_STATE)) {
                     DISPLAY_UI_STATE = 1;
                     if (IS_DEBUG == 0) {
                       DEBUG_PRINT("look up################################################,screen_id is %d, pitch_y is %d, pitch_threshold_bow_head is %d, pitch_threshold_level is %d\n"
@@ -314,7 +314,7 @@ LAB_0001027a:
                     if (iVar1 == 0) {
                       iVar1 = get_pointer_value(&DASHBOARD_LOCK_STATUS);
                       if (iVar1 << 0x1e < 0) {
-                        iVar1 = get_pointer_value(&DASHBOARD_LOCK_INFO_STORAGE);
+                        iVar1 = get_pointer_value(&DISPLAY_DISPATCH_THREAD_TIMING_CONTROL);
                         if (((-1 < iVar1 << 0x1e) &&
                             (iVar1 = get_pointer_value(&DASHBOARD_LOCK_CONTROL), -1 < iVar1 << 0x1e)
                             ) && (iVar1 = get_pointer_value(&DASHBOARD_LOCK_STATUS),
@@ -358,7 +358,7 @@ LAB_0001027a:
                           cal_panel_canvas_coord(param_1 + -0x20,param_1 + -0x2c);
                         }
                         change_work_mode_to(2);
-                        iVar1 = get_pointer_value(&DASHBOARD_LOCK_INFO_STORAGE);
+                        iVar1 = get_pointer_value(&DISPLAY_DISPATCH_THREAD_TIMING_CONTROL);
                         if (-1 < iVar1 << 0x1e) {
                           *extraout_r3 = *extraout_r3 | 2;
                         }
@@ -375,29 +375,30 @@ LAB_0001027a:
 LAB_00010734:
               if ((int)SYSTEM_NAVIGATION_CONFIG < 0) {
                 SYSTEM_NAVIGATION_CONFIG = SYSTEM_NAVIGATION_CONFIG + 1;
-                SYSTEM_LEVEL_CONFIG = iVar15;
-                SYSTEM_BASE_VALUE_CONFIG = iVar14;
-                ATTITUDE_PITCH_VALUE = iVar13;
+                DISPLAY_DISPATCH_THREAD_OPERATION_STATE = iVar15;
+                DISPLAY_DISPATCH_THREAD_EXTENDED_OPERATION_STATE = iVar14;
+                DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE = iVar13;
               }
               else {
                 SYSTEM_NAVIGATION_CONFIG = 0;
-                SYSTEM_LEVEL_CONFIG = iVar15;
-                SYSTEM_BASE_VALUE_CONFIG = iVar14;
-                ATTITUDE_PITCH_VALUE = iVar13;
+                DISPLAY_DISPATCH_THREAD_OPERATION_STATE = iVar15;
+                DISPLAY_DISPATCH_THREAD_EXTENDED_OPERATION_STATE = iVar14;
+                DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE = iVar13;
               }
             }
 LAB_000103ea:
             iVar1 = 0;
-            local_a0[3] = local_a0[0] - ATTITUDE_TRIGGER_STATE_BUFFER_2;
-            local_a0[4] = local_a0[1] - ATTITUDE_TRIGGER_STATE_BUFFER_3;
-            local_a0[5] = local_a0[2] - ATTITUDE_TRIGGER_STATE_BUFFER_4;
+            local_a0[3] = local_a0[0] -
+                          DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_COMPREHENSIVE_COMPLETION_STATE;
+            local_a0[4] = local_a0[1] - DISPLAY_DISPATCH_THREAD_ULTIMATE_COMPLETION_STATE;
+            local_a0[5] = local_a0[2] - DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_COMPLETION_STATE;
             local_a0[6] = 0.0;
             local_a0[7] = 0.0;
             local_a0[8] = 0.0;
             if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\x01') {
               pfVar7 = (float *)&local_7c;
               pfVar12 = local_a0 + 6;
-              pfVar9 = &DAT_20007ad8;
+              pfVar9 = &DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPLETION_STATE;
               pfVar10 = local_a0;
               do {
                 fVar3 = *pfVar10;
@@ -419,33 +420,39 @@ LAB_000103ea:
                 pfVar12 = pfVar12 + 1;
                 pfVar9 = pfVar9 + 1;
               } while (iVar1 != 3);
-              if (((0.1 < ABS(local_a0[0] - ATTITUDE_TRIGGER_STATE_BUFFER_2)) ||
-                  (0.1 < ABS(local_a0[1] - ATTITUDE_TRIGGER_STATE_BUFFER_3))) ||
-                 (0.1 < ABS(local_a0[2] - ATTITUDE_TRIGGER_STATE_BUFFER_4))) {
-                ATTITUDE_TRIGGER_STATE = 0;
+              if (((0.1 < ABS(local_a0[0] -
+                              DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_COMPREHENSIVE_COMPLETION_STATE)
+                   ) || (0.1 < ABS(local_a0[1] - DISPLAY_DISPATCH_THREAD_ULTIMATE_COMPLETION_STATE))
+                  ) || (0.1 < ABS(local_a0[2] -
+                                  DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_COMPLETION_STATE))) {
+                DISPLAY_DISPATCH_THREAD_FINAL_COMPLETION_STATE = 0;
               }
               else {
-                ATTITUDE_TRIGGER_STATE = ATTITUDE_TRIGGER_STATE + 1;
-                if (4 < ATTITUDE_TRIGGER_STATE) {
+                DISPLAY_DISPATCH_THREAD_FINAL_COMPLETION_STATE =
+                     DISPLAY_DISPATCH_THREAD_FINAL_COMPLETION_STATE + 1;
+                if (4 < DISPLAY_DISPATCH_THREAD_FINAL_COMPLETION_STATE) {
                   ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\x02';
-                  ATTITUDE_TRIGGER_HANDLER_STATE_5 = local_a0[6];
-                  ATTITUDE_TRIGGER_HANDLER_STATE_6 = local_a0[7];
-                  ATTITUDE_TRIGGER_HANDLER_STATE_7 = local_a0[8];
+                  DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_COMPREHENSIVE_ULTIMATE_COMPLETION_STATE =
+                       local_a0[6];
+                  DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_COMPREHENSIVE_FINAL_COMPLETION_STATE =
+                       local_a0[7];
+                  DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_COMPREHENSIVE_FINAL_COMPLETION_STATE =
+                       local_a0[8];
                 }
               }
             }
             else if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\x02') {
-              ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS = 0;
-              ATTITUDE_TRIGGER_STATE = 0;
-              DAT_20007ac0 = 0;
-              ATTITUDE_TRIGGER_HANDLER_STATE_1 = 0;
-              ATTITUDE_TRIGGER_HANDLER_STATE_2 = 0;
+              DISPLAY_DISPATCH_THREAD_EXTENDED_COMPLETION_STATE = 0;
+              DISPLAY_DISPATCH_THREAD_FINAL_COMPLETION_STATE = 0;
+              DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_COMPLETION_STATE = 0;
+              DISPLAY_DISPATCH_THREAD_COMPREHENSIVE_COMPLETION_STATE = 0;
+              DISPLAY_DISPATCH_THREAD_EXTENDED_COMPREHENSIVE_COMPLETION_STATE = 0;
               ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\0';
             }
             else if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\0') {
               pfVar12 = (float *)&FLOAT_FORMATTING_CONSTANTS_8;
               pfVar7 = local_a0 + 3;
-              piVar8 = &DAT_20007ac0;
+              piVar8 = &DISPLAY_DISPATCH_THREAD_EXTENDED_FINAL_COMPLETION_STATE;
               iVar1 = 0;
               iVar13 = 0;
               do {
@@ -470,24 +477,26 @@ LAB_000103ea:
                 piVar8 = piVar8 + 1;
               } while (iVar13 != 3);
               if (iVar1 != 0) {
-                if (ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS == 0) {
-                  DAT_20007ad8 = local_a0[0];
-                  ATTITUDE_TRIGGER_HANDLER_STATE_3 = local_a0[1];
-                  ATTITUDE_TRIGGER_HANDLER_STATE_4 = local_a0[2];
-                  ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS = 1;
+                if (DISPLAY_DISPATCH_THREAD_EXTENDED_COMPLETION_STATE == 0) {
+                  DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPLETION_STATE = local_a0[0];
+                  DISPLAY_DISPATCH_THREAD_COMPREHENSIVE_EXTENDED_ULTIMATE_COMPLETION_STATE =
+                       local_a0[1];
+                  DISPLAY_DISPATCH_THREAD_EXTENDED_COMPREHENSIVE_ULTIMATE_COMPLETION_STATE =
+                       local_a0[2];
+                  DISPLAY_DISPATCH_THREAD_EXTENDED_COMPLETION_STATE = 1;
                 }
                 else {
-                  ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS =
-                       ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS + 1;
-                  if (4 < ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS) {
+                  DISPLAY_DISPATCH_THREAD_EXTENDED_COMPLETION_STATE =
+                       DISPLAY_DISPATCH_THREAD_EXTENDED_COMPLETION_STATE + 1;
+                  if (4 < DISPLAY_DISPATCH_THREAD_EXTENDED_COMPLETION_STATE) {
                     ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\x01';
                   }
                 }
               }
             }
-            ATTITUDE_TRIGGER_STATE_BUFFER_2 = local_a0[0];
-            ATTITUDE_TRIGGER_STATE_BUFFER_3 = local_a0[1];
-            ATTITUDE_TRIGGER_STATE_BUFFER_4 = local_a0[2];
+            DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_COMPREHENSIVE_COMPLETION_STATE = local_a0[0];
+            DISPLAY_DISPATCH_THREAD_ULTIMATE_COMPLETION_STATE = local_a0[1];
+            DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_COMPLETION_STATE = local_a0[2];
             if (*param_1 == '\x02') {
               uVar2 = 0x4de;
             }

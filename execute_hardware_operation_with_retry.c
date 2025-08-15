@@ -20,7 +20,8 @@ int execute_hardware_operation_with_retry
   do {
     function_result =
          conditional_callback_execution_with_parameter_packing
-                   (&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
+                   (&HARDWARE_OPERATION_MESSAGE,
+                    DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE);
     if (function_result == 0) {
       return 0;
     }

@@ -23,8 +23,8 @@ void dmic_record_start(void)
   }
   process_sensor_data_buffer();
   startAudioStreamRecord();
-  uVar1 = DMIC_AUDIO_STREAM_STATE;
-  DMIC_AUDIO_STREAM_STATE = 1;
+  uVar1 = DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE;
+  DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE = 1;
   iVar2 = get_work_mode(0,uVar1);
   *(undefined4 *)(iVar2 + 0x104c) = 0x1d;
   iVar2 = get_work_mode();

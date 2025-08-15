@@ -25,7 +25,7 @@ undefined4 opt3007_chip_init(int param_1)
     param_1 = get_work_mode();
     param_1 = param_1 + 0xf80;
   }
-  OPT3007_LIGHT_SENSOR_STATE = param_1;
+  DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE = param_1;
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): opt3007 init start:\n","opt3007_chip_init");
@@ -88,8 +88,11 @@ undefined4 opt3007_chip_init(int param_1)
             iVar1 = (**(code **)(*(int *)(OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER + 8) + 8))
                               (OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER,&local_24,1,0x45);
             if (-1 < iVar1) {
-              if (OPT3007_LIGHT_SENSOR_STATE != 0) {
-                *(undefined4 *)(OPT3007_LIGHT_SENSOR_STATE + 0x10) = 1;
+              if (DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE !=
+                  0) {
+                *(undefined4 *)
+                 (DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE +
+                 0x10) = 1;
               }
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {

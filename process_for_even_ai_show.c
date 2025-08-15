@@ -162,9 +162,13 @@ LAB_0002e040:
         goto LAB_0002e040;
       }
       if (((*param_2 == 2) && (iVar9 = get_system_byte_2(), iVar9 == 0)) ||
-         (((int)(PROXY_THREAD_MUTEX << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1)))) {
-        if ((int)(PROXY_THREAD_MUTEX << 0x1e) < 0) {
-          PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX & 0xfffffffd;
+         (((int)(DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE <<
+                0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1)))) {
+        if ((int)(DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE <<
+                 0x1e) < 0) {
+          DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+               DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE &
+               0xfffffffd;
         }
         iVar9 = check_system_status_conditions();
         if (iVar9 == 0) {
@@ -424,11 +428,15 @@ LAB_0002ca3c:
           goto LAB_0002caae;
         }
         if ((((*param_2 == 1) && (iVar9 = get_system_byte_2(), iVar9 == 0)) ||
-            (((int)(PROXY_THREAD_MUTEX << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1))))
-           || (((int)(PROXY_THREAD_MUTEX << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 2)))
-           ) {
-          if ((int)(PROXY_THREAD_MUTEX << 0x1e) < 0) {
-            PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX & 0xfffffffd;
+            (((int)(DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                   << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1)))) ||
+           (((int)(DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE <<
+                  0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 2)))) {
+          if ((int)(DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                   << 0x1e) < 0) {
+            DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                 DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE &
+                 0xfffffffd;
           }
           iVar9 = now_has_persist_task(param_1,param_1[0xd5]);
           if (iVar9 != 1) {

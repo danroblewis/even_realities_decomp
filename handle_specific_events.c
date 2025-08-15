@@ -11,7 +11,8 @@ void handle_specific_events(undefined4 param_1,undefined4 param_2,int param_3)
   int iVar1;
   
   handle_bit_pattern_event(&DAT_000889d0,0x200000);
-  if ((param_3 == 0x200) && (DAT_20007bcc != 0)) {
+  if ((param_3 == 0x200) &&
+     (DISPLAY_DISPATCH_THREAD_EXTENDED_ULTIMATE_FINAL_COMPREHENSIVE_COMPLETION_STATE != 0)) {
     TOUCH_SENSOR_SETUP_FLAG = 1;
     iVar1 = get_work_mode();
     z_spin_lock_valid(iVar1 + 0xb0);

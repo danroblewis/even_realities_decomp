@@ -609,7 +609,9 @@ LAB_000480f4:
                     handle_heartbeat();
                   }
                 }
-                PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX | 2;
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                     | 2;
                 break;
               }
               if (1 < LOG_LEVEL) {
@@ -644,7 +646,9 @@ LAB_000480f4:
                     handle_heartbeat();
                   }
                 }
-                PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX | 2;
+                DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+                     DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                     | 2;
                 break;
               }
               if (1 < LOG_LEVEL) {

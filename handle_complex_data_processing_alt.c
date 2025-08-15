@@ -17,7 +17,7 @@ int handle_complex_data_processing_alt
   undefined4 local_18;
   undefined4 uStack_14;
   
-  DAT_20007a1c = 0;
+  COMPLEX_DATA_PROCESSING_EXTENDED_STATE = 0;
   local_1c = param_2;
   local_18 = param_3;
   uStack_14 = param_4;
@@ -26,7 +26,7 @@ int handle_complex_data_processing_alt
   if (iVar2 == 0) {
     if (((byte)((char)local_18 + 0x1fU) < 2) && ((local_18._1_1_ & 0xfc) == 0x40)) {
       uVar4 = (uint)local_18._2_1_;
-      DAT_20007a16 = local_18._2_1_;
+      COMPLEX_DATA_WRITING_STATE_FLAGS = local_18._2_1_;
       if (uVar4 == 0) {
         BLE_DATA_PROCESSING_BUFFER = 8;
         uVar4 = (uStack_14._2_2_ & 0xff) << 8 | (uint)(uStack_14._2_2_ >> 8);
@@ -35,7 +35,7 @@ int handle_complex_data_processing_alt
       else {
         BLE_DATA_PROCESSING_BUFFER = 4;
       }
-      DAT_20007a15 = local_18._1_1_;
+      COMPLEX_DATA_PROCESSING_STATE_FLAGS = local_18._1_1_;
       DAT_20007a14 = (char)local_18;
       COMPLEX_DATA_PROCESSING_ALTERNATIVE_STATE = local_18._3_1_;
       DAT_20007a1a = sVar1;
@@ -46,10 +46,10 @@ int handle_complex_data_processing_alt
           if (local_1c._1_1_ == 0) {
             local_1c._0_1_ = 1;
           }
-          else if ((DAT_20007a15 & 3) == 0) {
+          else if ((COMPLEX_DATA_PROCESSING_STATE_FLAGS & 3) == 0) {
             local_1c._0_1_ = 2;
           }
-          DAT_20007a1c = (undefined1)local_1c;
+          COMPLEX_DATA_PROCESSING_EXTENDED_STATE = (undefined1)local_1c;
           return 0;
         }
         if ((local_1c & 0xff) != 0xfd) break;

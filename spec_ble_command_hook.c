@@ -490,8 +490,8 @@ LAB_0000f82a:
                 jstr_len = compare_string_offsets(&local_520,&CMD_BASE_VALUE_SET,2);
                 if (jstr_len == 0) {
                   fill_memory_buffer(&local_41c,0,0x10);
-                  uVar14 = ATTITUDE_PITCH_VALUE;
-                  *(uint *)(sec + 0x7e8) = ATTITUDE_PITCH_VALUE;
+                  uVar14 = DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE;
+                  *(uint *)(sec + 0x7e8) = DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE;
                   pos = "base: %d";
 LAB_0000f87e:
                   handle_buffer_overflow_condition(&jstr_len,0,0x14,pos,uVar14);
@@ -544,7 +544,7 @@ LAB_0000f932:
                     jstr_len = 0;
                     fill_memory_buffer(&local_41c,0,0x10);
                     pos = "pitch: %d";
-                    uVar14 = ATTITUDE_PITCH_VALUE;
+                    uVar14 = DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE;
                     goto LAB_0000f932;
                   }
                   jstr_len = compare_string_offsets(&local_520,&CMD_VERSION_INFO,2);

@@ -431,7 +431,7 @@ LAB_0003b512:
   animate_framebuffer_with_pattern();
   fill_memory_buffer(&DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY,0,0x28);
 LAB_0003affc:
-  DASHBOARD_LOCK_INFO_STORAGE = DASHBOARD_LOCK_INFO_STORAGE & 0xfffffffd;
+  DISPLAY_DISPATCH_THREAD_TIMING_CONTROL = DISPLAY_DISPATCH_THREAD_TIMING_CONTROL & 0xfffffffd;
   exit_dashboard_burial_point();
   return 0;
 }

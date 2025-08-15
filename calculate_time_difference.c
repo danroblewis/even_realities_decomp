@@ -11,7 +11,7 @@ int calculate_time_difference(void)
   int iVar1;
   
   iVar1 = calculate_ble_connection_timing_with_validation();
-  return iVar1 - DAT_20007a28;
+  return iVar1 - TIMESTAMP_CALCULATION_AND_STORAGE;
 }
 
 

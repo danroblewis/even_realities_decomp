@@ -8,7 +8,7 @@
 undefined4 get_sensor_data_buffer_address(void)
 
 {
-  return DMIC_SENSOR_DATA_BUFFER_ADDRESS;
+  return DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE;
 }
 
 

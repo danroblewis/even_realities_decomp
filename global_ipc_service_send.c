@@ -10,7 +10,8 @@ int global_ipc_service_send(undefined4 param_1,undefined4 param_2)
 {
   int iVar1;
   
-  if (((DAT_20007a80 == 1) && (iVar1 = get_work_mode(), *(char *)(iVar1 + 1) != '\b')) &&
+  if (((SERIALIZATION_INITIALIZATION_STATE == 1) &&
+      (iVar1 = get_work_mode(), *(char *)(iVar1 + 1) != '\b')) &&
      (iVar1 = get_work_mode(), *(char *)(iVar1 + 1) != '\t')) {
     iVar1 = execute_callback_with_pointer_validation(&DAT_20007a78,param_1,param_2);
     if (iVar1 < 0) {

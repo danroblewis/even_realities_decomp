@@ -14,7 +14,7 @@ undefined4 manage_adc_nfc_system_state(undefined4 param_1,uint3 param_2)
   
   uVar3 = (uint)param_2;
   monitor_sensor_status_periodically();
-  if (DAT_200079fc == 0) {
+  if (ADC_NFC_SYSTEM_STATE_MANAGEMENT == 0) {
     iVar1 = handle_state_checking(1);
     if (iVar1 < 0) {
       return 0;
@@ -30,7 +30,7 @@ undefined4 manage_adc_nfc_system_state(undefined4 param_1,uint3 param_2)
     if (iVar1 < 0) {
       return 0;
     }
-    DAT_200079fc = 1;
+    ADC_NFC_SYSTEM_STATE_MANAGEMENT = 1;
   }
   cVar2 = DAT_20002385;
   if (DAT_20002385 == '\x01') {

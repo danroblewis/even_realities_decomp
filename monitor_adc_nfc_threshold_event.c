@@ -14,13 +14,13 @@ undefined4 monitor_adc_nfc_threshold_event(void)
   iVar1 = check_adc_nfc_threshold_exceeded();
   if (iVar1 == 0) {
     iVar1 = calculate_ble_connection_timing_with_validation();
-    if (iVar1 - DAT_20007a10 < 0) {
+    if (iVar1 - ADC_NFC_THRESHOLD_EVENT_MONITORING < 0) {
       calculate_ble_connection_timing_with_validation();
     }
     uVar2 = 0;
   }
   else {
-    DAT_20007a10 = calculate_ble_connection_timing_with_validation();
+    ADC_NFC_THRESHOLD_EVENT_MONITORING = calculate_ble_connection_timing_with_validation();
     uVar2 = 1;
   }
   return uVar2;

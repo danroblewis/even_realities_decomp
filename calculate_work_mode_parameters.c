@@ -20,10 +20,10 @@ int calculate_work_mode_parameters(char *attitude_data)
   work_mode_timing = *(int *)(attitude_data + 0x88);
   bVar1 = attitude_data[0x10];
   cVar2 = attitude_data[0x11];
-  if ((((*(int *)(attitude_data + 0x80) != DAT_20007a9c) || ((uint)DAT_20018c6b != (uint)bVar1)) ||
-      (WORK_MODE_PARAMETER_CALCULATION_EXTENDED != cVar2)) ||
-     ((WORK_MODE_PARAMETER_CALCULATION_ALT != work_mode_timing ||
-      (DAT_20007a98 != *(int *)(attitude_data + 0x84))))) {
+  if ((((*(int *)(attitude_data + 0x80) != DISPLAY_DISPATCH_THREAD_EXTENDED_STATE) ||
+       ((uint)DAT_20018c6b != (uint)bVar1)) || (WORK_MODE_PARAMETER_CALCULATION_EXTENDED != cVar2))
+     || ((WORK_MODE_PARAMETER_CALCULATION_ALT != work_mode_timing ||
+         (DISPLAY_DISPATCH_THREAD_STATE != *(int *)(attitude_data + 0x84))))) {
     if (cVar2 == '\0') {
       iVar3 = -0x15e;
     }
@@ -42,8 +42,8 @@ int calculate_work_mode_parameters(char *attitude_data)
     WORK_MODE_PARAMETER_CALCULATION = (int)(base_timing_value * (uint)bVar1) / work_mode_timing;
     WORK_MODE_PARAMETER_CALCULATION_ALT = work_mode_timing;
     WORK_MODE_PARAMETER_CALCULATION_EXTENDED = cVar2;
-    DAT_20007a98 = *(int *)(attitude_data + 0x84);
-    DAT_20007a9c = *(int *)(attitude_data + 0x80);
+    DISPLAY_DISPATCH_THREAD_STATE = *(int *)(attitude_data + 0x84);
+    DISPLAY_DISPATCH_THREAD_EXTENDED_STATE = *(int *)(attitude_data + 0x80);
     DAT_20018c6b = bVar1;
     get_work_mode();
     work_mode_timing = *(int *)(attitude_data + 0x84);

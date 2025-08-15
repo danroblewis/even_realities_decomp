@@ -65,7 +65,8 @@ LAB_0002ee5a:
             if (iVar6 == iVar8 + iVar5) {
               iVar9 = get_system_ready_state();
               if (iVar9 != 1) {
-                if (DMIC_AUDIO_STREAM_STATE == 0) {
+                if (DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE
+                    == 0) {
                   enqueue_dmic(iVar5);
                 }
                 else {

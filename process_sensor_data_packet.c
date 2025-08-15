@@ -54,7 +54,8 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   }
   cVar10 = '\x05';
   do {
-    iVar9 = (*(code *)SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT[1])(puVar3,uVar12);
+    iVar9 = (*(code *)DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE
+                      [1])(puVar3,uVar12);
     if (-1 < iVar9) break;
     cVar10 = cVar10 + -1;
   } while (cVar10 != -1);
@@ -107,8 +108,9 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   }
   cVar11 = '\x05';
   local_24 = CONCAT31(local_24._1_3_,0x18);
-  while (iVar9 = (*(code *)*SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT)
-                           (&local_24,2,puVar5,cVar10 + '\f'), iVar9 < 0) {
+  while (iVar9 = (*(code *)*
+                           DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE
+                 )(&local_24,2,puVar5,cVar10 + '\f'), iVar9 < 0) {
     cVar11 = cVar11 + -1;
     if (cVar11 == -1) {
       call_data_verification_handler_with_memory_cleanup(puVar5);

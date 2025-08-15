@@ -5168,14 +5168,14 @@ LAB_00020e1e:
           if (*(char *)(*(int *)(iVar17 + 0x101c) + 1) == '\x01') {
             if (1 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
-                DEBUG_PRINT(0x9ba06,0x9e077,ATTITUDE_PITCH_VALUE);
+                DEBUG_PRINT(0x9ba06,0x9e077,DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE);
               }
               else {
                 handle_heartbeat();
               }
             }
             iVar17 = get_work_mode();
-            *(undefined4 *)(iVar17 + 0xf68) = ATTITUDE_PITCH_VALUE;
+            *(undefined4 *)(iVar17 + 0xf68) = DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE;
             iVar17 = get_work_mode();
             *(undefined4 *)(iVar17 + 0x104c) = 0;
             iVar17 = get_work_mode();

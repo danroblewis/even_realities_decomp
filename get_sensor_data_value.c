@@ -8,7 +8,7 @@
 undefined4 get_sensor_data_value(void)
 
 {
-  return SENSOR_DATA_EXCHANGE_VALUE;
+  return DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE;
 }
 
 

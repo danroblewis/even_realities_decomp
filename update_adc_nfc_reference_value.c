@@ -8,8 +8,8 @@
 void update_adc_nfc_reference_value(void)
 
 {
-  run_adc_nfc_and_scale_result(&DAT_20007a34);
-  ADC_NFC_SENSOR_REFERENCE_VALUE = DAT_20007a34;
+  run_adc_nfc_and_scale_result(&ADC_NFC_REFERENCE_VALUE_UPDATE);
+  ADC_NFC_SENSOR_REFERENCE_VALUE = ADC_NFC_REFERENCE_VALUE_UPDATE;
   return;
 }
 

@@ -18,7 +18,7 @@ int handle_complex_data_writing(void)
   
   local_18 = _DAT_20007a14;
   BLE_DATA_PROCESSING_BUFFER = 4;
-  if (DAT_20007a16 == '\0') {
+  if (COMPLEX_DATA_WRITING_STATE_FLAGS == '\0') {
     local_12 = DAT_20007a1a << 8 | DAT_20007a1a >> 8;
     BLE_DATA_PROCESSING_BUFFER = 8;
   }

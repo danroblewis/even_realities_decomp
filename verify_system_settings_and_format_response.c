@@ -37,7 +37,9 @@ verify_system_settings_and_format_response
   puVar4[1] = 1;
   local_b0 = 0;
   fill_memory_buffer(auStack_ac,0,0x10);
-  if ((((SYSTEM_BASE_VALUE_CONFIG == 0 && ATTITUDE_PITCH_VALUE == 0) && SYSTEM_LEVEL_CONFIG == 0) &&
+  if ((((DISPLAY_DISPATCH_THREAD_EXTENDED_OPERATION_STATE == 0 &&
+        DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE == 0) &&
+        DISPLAY_DISPATCH_THREAD_OPERATION_STATE == 0) &&
       (iVar1 = get_work_mode(), *(int *)(iVar1 + 0x107c) == 0)) &&
      (iVar1 = get_work_mode(), *(int *)(iVar1 + 0x1080) == 0)) {
     iVar1 = get_work_mode();
@@ -46,9 +48,9 @@ verify_system_settings_and_format_response
   }
   iVar1 = get_work_mode();
   uVar5 = 0;
-  *(int *)(iVar1 + 0xf64) = ATTITUDE_PITCH_VALUE;
+  *(int *)(iVar1 + 0xf64) = DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE;
 LAB_00031e6e:
-  iVar1 = ATTITUDE_PITCH_VALUE;
+  iVar1 = DISPLAY_DISPATCH_THREAD_FINAL_OPERATION_STATE;
   puVar4[4] = uVar5;
   handle_buffer_overflow_condition(&local_b0,0,0x14,"base: %d",iVar1);
   iVar1 = get_work_mode();

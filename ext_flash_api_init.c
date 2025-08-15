@@ -31,11 +31,13 @@ ext_flash_api_init(undefined4 *read_func_ptr,undefined4 *write_func_ptr,
     *read_func_ptr = 0x2e399;
     *write_func_ptr = 0x2e441;
     *read_func_interface = &LAB_0002e300_1;
-    FLASH_DRIVER_INSTANCE = &FLASH_DRIVER_INTERFACE;
+    DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE =
+         &FLASH_DRIVER_INTERFACE;
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
-        DEBUG_PRINT("%s(): flash init success!\n","ext_flash_api_init",&FLASH_DRIVER_INSTANCE,0,
-                    debug_param);
+        DEBUG_PRINT("%s(): flash init success!\n","ext_flash_api_init",
+                    &DISPLAY_DISPATCH_THREAD_ULTIMATE_EXTENDED_FINAL_COMPREHENSIVE_COMPLETION_STATE,
+                    0,debug_param);
       }
       else {
         handle_heartbeat();

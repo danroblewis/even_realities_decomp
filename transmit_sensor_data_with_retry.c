@@ -23,7 +23,9 @@ undefined4 transmit_sensor_data_with_retry(uint param_1,uint param_2,undefined4 
                        (ushort)((param_2 & 0xff) << 8) | (ushort)(param_2 >> 8) & 0xff);
   uStack_10 = param_3;
   do {
-    iVar1 = (**(code **)(SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT + 4))(&local_18,6);
+    iVar1 = (**(code **)(
+                        DISPLAY_DISPATCH_THREAD_FINAL_EXTENDED_ULTIMATE_COMPREHENSIVE_COMPLETION_STATE
+                        + 4))(&local_18,6);
     if (iVar1 == 0) {
       return 0;
     }
