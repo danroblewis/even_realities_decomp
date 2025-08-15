@@ -36,7 +36,7 @@ void process_data_with_validation_and_parameter_alt(void)
   }
   InstructionSynchronizationBarrier(0xf);
   uStack_28 = in_r3;
-  iVar2 = FUN_00072040(&DAT_2000a2c4);
+  iVar2 = check_connection_state_validity(&DAT_2000a2c4);
   if (iVar2 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -44,9 +44,9 @@ void process_data_with_validation_and_parameter_alt(void)
     uVar8 = 0x72;
   }
   else {
-    FUN_00072078(&DAT_2000a2c4);
+    update_connection_state_flags(&DAT_2000a2c4);
     if (TASK_MANAGEMENT_QUEUE_HEAD == 0) {
-      iVar2 = FUN_0007205c(&DAT_2000a2c4);
+      iVar2 = validate_and_clear_connection_state(&DAT_2000a2c4);
       if (iVar2 != 0) {
         bVar1 = (bool)isCurrentModePrivileged();
         if (bVar1) {
@@ -63,7 +63,7 @@ void process_data_with_validation_and_parameter_alt(void)
       }
       TASK_MANAGEMENT_QUEUE_HEAD = 0;
       TASK_MANAGEMENT_QUEUE_TAIL = 0;
-      iVar2 = FUN_0007205c(&DAT_2000a2c4);
+      iVar2 = validate_and_clear_connection_state(&DAT_2000a2c4);
       if (iVar2 != 0) {
         bVar1 = (bool)isCurrentModePrivileged();
         if (bVar1) {

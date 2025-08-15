@@ -109,7 +109,7 @@ void load_bmp_image_from_flash(uint bitmap_index)
         }
       }
       else {
-        printf_format_string_with_buffer("Unsupported bit depth - %d\r\n");
+        printf_format_string_with_buffer_integration("Unsupported bit depth - %d\r\n");
       }
     }
     else {
@@ -121,7 +121,7 @@ void load_bmp_image_from_flash(uint bitmap_index)
 LAB_0003687c:
     DEBUG_PRINT("[%s-%d] read pic from flash failed !\n","get_demo_image_source",flash_read_result);
   }
-  call_data_verification_handler(memory_buffer);
+  call_data_verification_handler_with_memory_cleanup(memory_buffer);
   return;
 }
 

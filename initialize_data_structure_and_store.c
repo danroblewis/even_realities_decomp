@@ -15,7 +15,7 @@ void initialize_data_structure_and_store
   *param_2 = param_3;
   param_2[1] = param_4;
   *(undefined1 *)(param_2 + 2) = param_5;
-  iVar1 = FUN_0005ee18();
+  iVar1 = calculate_ble_memory_size();
   *(undefined4 **)(&DAT_2000abf8 + iVar1 * 0xc) = param_2;
   return;
 }

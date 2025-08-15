@@ -41,7 +41,7 @@ void validate_and_process_ble_characteristics_with_state_management_and_paramete
       }
       iVar3 = *(int *)(iVar1 + 0x18);
       *(undefined4 *)(iVar1 + 0x18) = 0;
-      FUN_0005f24c();
+      decrement_reference_count_and_cleanup_memory();
       param_2 = extraout_r1;
     } while (iVar3 == 0);
     validate_and_process_ble_characteristics_with_validation_and_state_management(param_1,iVar3);

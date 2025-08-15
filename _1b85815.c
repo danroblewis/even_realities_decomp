@@ -39,7 +39,7 @@ void _1b85815(void)
       handle_heartbeat();
     }
   }
-  schedule_dashboard_lock_task(&DAT_20003700);
+  schedule_dashboard_lock_task_with_ble_integration(&DAT_20003700);
   serialization_init();
   if (1 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
@@ -249,7 +249,7 @@ LAB_000172a6:
     pcVar3[0xfd1] = '\x05';
     pcVar3[0x6de] = pcVar3[0x6de] | 4;
   }
-  FUN_00072908(pcVar3 + 8,extraout_r1,0xffffffff,0xffffffff);
+  manage_ble_connection_state_comprehensive(pcVar3 + 8,extraout_r1,0xffffffff,0xffffffff);
   if (pcVar3[1] == '\x01') {
 LAB_00017372:
     if (1 < LOG_LEVEL) {
@@ -266,17 +266,17 @@ LAB_00017372:
     power_for_panel();
     if (*pcVar3 == '\x01') {
       burial_point_record_info_init();
-      schedule_dashboard_lock_task(&DAT_200036c8);
+      schedule_dashboard_lock_task_with_ble_integration(&DAT_200036c8);
       power_for_imu_and_mic();
       *(undefined ***)(pcVar3 + 0xf00) = &PTR_s_lsm6dso_6b_00087d58;
-      FUN_000622a0();
+      handle_comprehensive_device_configuration();
       register_imu_funsion_context(pcVar3 + 0xee4);
       initialize_data_structure_with_pointers((undefined4 *)(pcVar3 + 0xf80));
     }
     else if (*pcVar3 == '\x02') {
       power_for_imu_and_mic();
       *(undefined ***)(pcVar3 + 0xf00) = &PTR_s_lsm6dso_6b_00087d58;
-      FUN_000622a0();
+      handle_comprehensive_device_configuration();
     }
     initialize_memory_structure_with_allocation(pcVar3 + 0xb6c);
     initialize_system_and_adc_nfc();
@@ -344,7 +344,7 @@ LAB_00017372:
         pcVar8 = "Could not initialise fuel gauge.\n";
       }
       else {
-        iVar2 = FUN_00062644(&PTR_s_charger_00087d70);
+        iVar2 = handle_device_calibration_and_parameters(&PTR_s_charger_00087d70);
         if (-1 < iVar2) {
           DEBUG_PRINT("Initialise charger.\n");
           DEBUG_PRINT("PMIC device ok\n");
@@ -400,7 +400,7 @@ LAB_00017414:
   format_and_send_sensor_data_alt();
   uVar4 = extraout_r1_00;
   do {
-    FUN_00072908(pcVar11,uVar4,0xffffffff,0xffffffff);
+    manage_ble_connection_state_comprehensive(pcVar11,uVar4,0xffffffff,0xffffffff);
     if (DAT_2000ff6e == '\x01') {
       switch_to_dfu_mode(pcVar11);
     }

@@ -22,7 +22,7 @@ int execute_hardware_operation_with_retry
     if (function_result == 0) {
       return 0;
     }
-    get_schedule_timing(0x667,0);
+    calculate_ble_schedule_timing(0x667,0);
     operation_result = operation_result + -1;
   } while (operation_result != 0);
   return function_result;

@@ -34,7 +34,7 @@ int FUN_00084418(int param_1,undefined4 param_2,undefined4 param_3)
         if ((cVar1 != '\0') && (cVar1 != '\x01')) {
           return -0x86;
         }
-        iVar2 = FUN_00062070(iVar2,iVar2,(int)&uStack_1c + 2);
+        iVar2 = validate_ble_connection_request_packet(iVar2,iVar2,(int)&uStack_1c + 2);
         if (iVar2 == -0x16) {
           return -0x16;
         }

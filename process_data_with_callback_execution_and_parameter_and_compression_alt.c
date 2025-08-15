@@ -21,7 +21,7 @@ void process_data_with_callback_execution_and_parameter_and_compression_alt(void
   uint uStack_20;
   uint local_1c;
   
-  iVar4 = FUN_0005f148(&DAT_20002144);
+  iVar4 = remove_ble_connection_from_list(&DAT_20002144);
   if (iVar4 == 0) {
     return;
   }
@@ -36,7 +36,7 @@ void process_data_with_callback_execution_and_parameter_and_compression_alt(void
       }
       software_interrupt(2);
     }
-    puVar7 = (undefined1 *)FUN_0005f594(iVar4 + 0xc,2);
+    puVar7 = (undefined1 *)update_buffer_position_and_size_alt(iVar4 + 0xc,2);
     iVar6 = map_value_category(*puVar7);
     if (-1 < iVar6 << 0x1e) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","bt_hci_evt_get_flags(hdr->evt) & (1UL << (1))",
@@ -60,10 +60,10 @@ void process_data_with_callback_execution_and_parameter_and_compression_alt(void
         }
         software_interrupt(2);
       }
-      puVar5 = (ushort *)FUN_0005f594(iVar4 + 0xc,4);
+      puVar5 = (ushort *)update_buffer_position_and_size_alt(iVar4 + 0xc,4);
       uVar1 = puVar5[1];
       uVar2 = *puVar5;
-      iVar6 = FUN_0005ee18(iVar4);
+      iVar6 = calculate_ble_memory_size(iVar4);
       *(ushort *)(&DAT_2000ff08 + iVar6 * 2) = (ushort)(((uint)uVar2 << 0x14) >> 0x14);
       if ((uint)uVar1 != (uint)*(ushort *)(iVar4 + 0x10)) {
         local_24 = "ACL data length mismatch (%u != %u)";
@@ -73,7 +73,7 @@ void process_data_with_callback_execution_and_parameter_and_compression_alt(void
         call_system_cleanup_alt(&DAT_00088138,0x2040,&local_28);
         goto LAB_0005373c;
       }
-      iVar6 = FUN_0005ee18(iVar4);
+      iVar6 = calculate_ble_memory_size(iVar4);
       iVar6 = bt_connection_state_transition_with_validation
                         (*(undefined2 *)(&DAT_2000ff08 + iVar6 * 2),0xf);
       if (iVar6 != 0) {
@@ -83,7 +83,7 @@ void process_data_with_callback_execution_and_parameter_and_compression_alt(void
                   (iVar6);
         goto LAB_00053792;
       }
-      iVar6 = FUN_0005ee18(iVar4);
+      iVar6 = calculate_ble_memory_size(iVar4);
       uVar8 = (uint)*(ushort *)(&DAT_2000ff08 + iVar6 * 2);
       local_24 = "Unable to find conn for handle %u";
     }
@@ -95,7 +95,7 @@ void process_data_with_callback_execution_and_parameter_and_compression_alt(void
     call_system_cleanup_alt(&DAT_00088138,0x1840,&local_28);
   }
 LAB_0005373c:
-  FUN_0005f24c(iVar4);
+  decrement_reference_count_and_cleanup_memory(iVar4);
 LAB_00053792:
   if ((DAT_20002144 != 0) &&
      (uStack_20 = initialize_accelerometer(&DAT_20005f08,&DAT_20002980), (int)uStack_20 < 0)) {

@@ -44,7 +44,7 @@ int allocate_memory_with_priority_management(uint param_1)
         setBasePriority(0x20);
       }
       InstructionSynchronizationBarrier(0xf);
-      iVar3 = FUN_00072040(&DAT_2000365c);
+      iVar3 = check_connection_state_validity(&DAT_2000365c);
       if (iVar3 == 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                      "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -54,7 +54,7 @@ LAB_0004bd9c:
                     /* WARNING: Subroutine does not return */
         assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar7);
       }
-      FUN_00072078(&DAT_2000365c);
+      update_connection_state_flags(&DAT_2000365c);
       if (local_2c[0] != 0) {
         FUN_0007e4bc(&DAT_20003648,iVar5);
         local_2c[0] = 0;
@@ -81,7 +81,7 @@ LAB_0004bd9c:
         iVar4 = 0;
         iVar3 = iVar5;
       }
-      iVar5 = FUN_0007205c(&DAT_2000365c);
+      iVar5 = validate_and_clear_connection_state(&DAT_2000365c);
       if (iVar5 == 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_unlock_valid(l)",
                      "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0xf0);

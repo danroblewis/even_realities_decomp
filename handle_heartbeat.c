@@ -19,7 +19,7 @@ void handle_heartbeat(undefined4 param_1,undefined4 param_2,undefined4 param_3,u
   uStack_4 = param_4;
   iVar1 = get_bluetooth_manager();
   fill_memory_buffer(local_e8,0,200);
-  FUN_00077c30(local_e8,200,param_1,&uStack_c);
+  printf_format_string_wrapper(local_e8,200,param_1,&uStack_c);
   handle_message_enqueue_alt(local_e8);
   local_e8[0] = 0;
   if ((*(char *)(iVar1 + 0x248) == '\0') && (*(int *)(iVar1 + 0x220) == 0)) {

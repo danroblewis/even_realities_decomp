@@ -26,7 +26,7 @@ uint FUN_0008157a(int param_1,ushort *param_2)
     *puVar1 = *puVar1 | 0x200;
   }
   else {
-    FUN_000813b4(puVar1,0xfffffdff);
+    bt_connection_update_flags(puVar1,0xfffffdff);
     uVar2 = 0xffffff88;
   }
   return uVar2;

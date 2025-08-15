@@ -27,7 +27,8 @@ void touch_key_thread(int param_1)
   iVar9 = 0;
 LAB_0002a0e8:
   do {
-    while ((thunk_FUN_00072908(param_1 + 0xb0), *(char *)(param_1 + 1) == '\x01' ||
+    while ((manage_ble_connection_state_comprehensive(param_1 + 0xb0),
+           *(char *)(param_1 + 1) == '\x01' ||
            (iVar1 = get_work_mode(), *(char *)(iVar1 + 1) == '\b'))) {
       delay_with_timing(5000);
     }

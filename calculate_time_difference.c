@@ -10,7 +10,7 @@ int calculate_time_difference(void)
 {
   int iVar1;
   
-  iVar1 = thunk_FUN_00074f68();
+  iVar1 = calculate_ble_connection_timing_with_validation();
   return iVar1 - DAT_20007a28;
 }
 

@@ -27,7 +27,7 @@ void execute_bluetooth_callback_with_priority_control(int callback_context,byte 
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar4 = FUN_00072040(iVar5);
+  iVar4 = check_connection_state_validity(iVar5);
   if (iVar4 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -35,12 +35,12 @@ void execute_bluetooth_callback_with_priority_control(int callback_context,byte 
     uVar3 = 0x72;
   }
   else {
-    FUN_00072078(iVar5);
+    update_connection_state_flags(iVar5);
     *callback_data = *callback_data | 1;
     uVar3 = FUN_0007e35c(callback_context,*(undefined4 *)(callback_context + 4),uVar3);
     *(undefined4 *)(callback_context + 4) = uVar3;
     FUN_0007e4f2(callback_context);
-    iVar4 = FUN_0007205c(iVar5);
+    iVar4 = validate_and_clear_connection_state(iVar5);
     if (iVar4 != 0) {
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {

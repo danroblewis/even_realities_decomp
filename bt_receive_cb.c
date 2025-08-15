@@ -30,7 +30,7 @@ void bt_receive_cb(undefined4 param_1,byte *param_2,uint param_3)
   local_144 = 0;
   fill_memory_buffer(auStack_140,0,0x1a);
   fill_memory_buffer(&local_124,0,0x101);
-  puVar3 = (undefined1 *)FUN_00081526(param_1);
+  puVar3 = (undefined1 *)get_connection_data_pointer(param_1);
   switch(*puVar3) {
   case 0:
     pcVar5 = "public";
@@ -45,7 +45,7 @@ void bt_receive_cb(undefined4 param_1,byte *param_2,uint param_3)
     pcVar5 = "random-id";
     break;
   default:
-    FUN_0007ddbe(&local_158,10,"0x%02x");
+    format_string_with_variable_arguments(&local_158,10,"0x%02x");
     goto LAB_00017fb6;
   }
   strcpy_safe(&local_158,pcVar5);
@@ -56,8 +56,9 @@ LAB_00017fb6:
   uVar9 = (uint)(byte)puVar3[4];
   uVar10 = (uint)(byte)puVar3[5];
   puVar11 = &local_158;
-  FUN_0007ddbe(&local_144,0x1e,"%02X:%02X:%02X:%02X:%02X:%02X (%s)",puVar3[6],uVar10,uVar9,uVar8,
-               uVar7,uVar6,&local_158);
+  format_string_with_variable_arguments
+            (&local_144,0x1e,"%02X:%02X:%02X:%02X:%02X:%02X (%s)",puVar3[6],uVar10,uVar9,uVar8,uVar7
+             ,uVar6,&local_158);
   if (0 < LOG_LEVEL) {
     uVar10 = (uint)*param_2;
     uVar9 = (uint)param_2[1];
@@ -75,7 +76,7 @@ LAB_00017fb6:
     }
   }
   iVar1 = BLUETOOTH_MANAGER;
-  lVar12 = thunk_FUN_00074f68();
+  lVar12 = calculate_ble_connection_timing_with_validation();
   iVar2 = BLUETOOTH_MANAGER;
   *(uint *)(iVar1 + 0x368) =
        (uint)(lVar12 * 1000) >> 0xf | (int)((ulonglong)(lVar12 * 1000) >> 0x20) * 0x20000;

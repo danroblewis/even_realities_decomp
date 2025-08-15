@@ -88,7 +88,7 @@ void display_dispatch_thread(char *param_1)
 LAB_00028cc8:
   do {
     while ((param_1[1] == '\x01' || (iVar3 = get_work_mode(), *(char *)(iVar3 + 1) == '\b'))) {
-      get_schedule_timing(0x28000,0);
+      calculate_ble_schedule_timing(0x28000,0);
     }
     if ((param_1[0xfe8] == '\0') && (iVar3 = check_work_mode_state_valid(param_1), iVar3 == 0)) {
       if (1 < LOG_LEVEL) {
@@ -109,11 +109,11 @@ LAB_00028cc8:
       }
       if (*param_1 == '\x02') {
         while (*(int *)(param_1 + 0x40) != 0) {
-          thunk_FUN_00072908(param_1 + 0x38,uVar6,0xffffffff,0xffffffff);
+          manage_ble_connection_state_comprehensive(param_1 + 0x38,uVar6,0xffffffff,0xffffffff);
           uVar6 = extraout_r1_00;
         }
         while (*(int *)(param_1 + 0x58) != 0) {
-          thunk_FUN_00072908(param_1 + 0x50,uVar6,0xffffffff,0xffffffff);
+          manage_ble_connection_state_comprehensive(param_1 + 0x50,uVar6,0xffffffff,0xffffffff);
           uVar6 = extraout_r1_01;
         }
       }
@@ -130,11 +130,11 @@ LAB_00028cc8:
           }
         }
         DISPLAY_UI_STATE = 0;
-        thunk_FUN_00072908(param_1 + 0x50);
+        manage_ble_connection_state_comprehensive(param_1 + 0x50);
         if (*param_1 == '\x02') {
           uVar6 = extraout_r1_02;
           while (*(int *)(param_1 + 0x40) != 0) {
-            thunk_FUN_00072908(param_1 + 0x38,uVar6,0xffffffff,0xffffffff);
+            manage_ble_connection_state_comprehensive(param_1 + 0x38,uVar6,0xffffffff,0xffffffff);
             uVar6 = extraout_r1_03;
           }
         }
@@ -143,7 +143,7 @@ LAB_00028cc8:
       else {
 LAB_00028d42:
         while (*(int *)(param_1 + 0x58) != 0) {
-          thunk_FUN_00072908(param_1 + 0x50,uVar6,0xffffffff,0xffffffff);
+          manage_ble_connection_state_comprehensive(param_1 + 0x50,uVar6,0xffffffff,0xffffffff);
           uVar6 = extraout_r1_04;
         }
       }
@@ -558,12 +558,13 @@ LAB_000294ea:
         if ((param_1[0xfe6] == '\0') || (param_1[0xfe6] == '\x05')) goto LAB_00028cc8;
         uVar14 = 0x148;
       }
-      get_schedule_timing((int)uVar14,(int)((ulonglong)uVar14 >> 0x20));
+      calculate_ble_schedule_timing((int)uVar14,(int)((ulonglong)uVar14 >> 0x20));
       goto LAB_00028cc8;
     }
     if ((1 < (byte)param_1[0xfe6] - 1) && ((byte)param_1[0xfe6] != 4)) {
       lVar15 = FUN_0007cb2c();
-      thunk_FUN_00072908(param_1 + 0x38,(int)((ulonglong)lVar15 >> 0x20),0x4000,0);
+      manage_ble_connection_state_comprehensive
+                (param_1 + 0x38,(int)((ulonglong)lVar15 >> 0x20),0x4000,0);
       lVar16 = FUN_0007cb2c();
       if ((int)((ulonglong)(lVar16 - lVar15) >> 0x20) < (int)(uint)((uint)(lVar16 - lVar15) < 500))
       goto LAB_00028eae;

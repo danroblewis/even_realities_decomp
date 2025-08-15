@@ -162,7 +162,7 @@ LAB_0002ac9e:
             DEBUG_PRINT(format_string);
           } while( true );
         }
-        uVar11 = get_schedule_timing(0x28000,0);
+        uVar11 = calculate_ble_schedule_timing(0x28000,0);
         uVar4 = extraout_r2_00;
       }
       if (DAT_2000302c == '\0') {
@@ -217,7 +217,7 @@ LAB_0002ac9e:
     if (DAT_20018d90 == '\0') {
       execute_hardware_operation_with_retry((int)uVar11,(int)((ulonglong)uVar11 >> 0x20),param3,0);
     }
-    get_schedule_timing(0x199a,0);
+    calculate_ble_schedule_timing(0x199a,0);
   } while( true );
 }
 

@@ -193,7 +193,7 @@ LAB_0003b116:
       _reflash_fb_data_to_lcd(uVar8,*(undefined4 *)(iVar5 + 0xeb8),0,0,0x280,199);
     }
     set_work_mode_flag_bit_1();
-    lVar13 = thunk_FUN_00074f68();
+    lVar13 = calculate_ble_connection_timing_with_validation();
     uVar4 = (uint)((ulonglong)(lVar13 * 1000) >> 0x20);
     DAT_20004960 = (uint)(lVar13 * 1000) >> 0xf | uVar4 * 0x20000;
     DAT_20004964 = uVar4 >> 0xf;
@@ -382,7 +382,7 @@ LAB_0003b512:
         return 0;
       }
       iVar3 = FUN_0007d248();
-      lVar13 = thunk_FUN_00074f68();
+      lVar13 = calculate_ble_connection_timing_with_validation();
       uVar10 = (uint)((ulonglong)(lVar13 * 1000) >> 0x20);
       uVar4 = (uint)(lVar13 * 1000) >> 0xf | uVar10 * 0x20000;
       uVar10 = uVar10 >> 0xf;

@@ -9,7 +9,7 @@ void delay_with_timing(int delay_milliseconds)
 
 {
   handle_unsigned_division(delay_milliseconds * 0x8000 + 999,delay_milliseconds >> 0x11,1000,0);
-  get_schedule_timing();
+  calculate_ble_schedule_timing();
   return;
 }
 

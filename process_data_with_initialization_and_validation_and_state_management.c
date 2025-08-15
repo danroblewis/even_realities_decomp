@@ -44,7 +44,7 @@ void process_data_with_initialization_and_validation_and_state_management(int pa
     else {
       iVar3 = process_data_with_initialization_and_store(0x2020,0xe);
       if (iVar3 != 0) {
-        puVar4 = (ushort *)FUN_0005f5d0(iVar3 + 0xc,0xe);
+        puVar4 = (ushort *)ble_memory_allocation_utility(iVar3 + 0xc,0xe);
         *puVar4 = uVar1;
         puVar4[5] = 0;
         puVar4[6] = 0;

@@ -16,7 +16,7 @@ int handle_task_completion_state_transition
   if (uVar1 == 2) {
     param_1[1] = 0;
     if (*param_1 != 0) {
-      FUN_000757b0();
+      manage_ble_connection_list_with_image_processing();
     }
   }
   else {

@@ -53,7 +53,7 @@ bt_connection_disconnect_with_state_management_and_callback_execution_and_parame
     local_2c = "Too small L2CAP signaling PDU";
     goto LAB_00057dc4;
   }
-  pbVar7 = (byte *)FUN_0005f594(param_2 + 0xc,4);
+  pbVar7 = (byte *)update_buffer_position_and_size_alt(param_2 + 0xc,4);
   uVar16 = (uint)*(ushort *)(param_2 + 0x10);
   local_54 = (uint)*(ushort *)(pbVar7 + 2);
   if (uVar16 != local_54) {
@@ -93,10 +93,10 @@ LAB_000581ee:
         if (iVar11 == 0) {
           return 0;
         }
-        puVar12 = (undefined1 *)FUN_0005f5d0(iVar11 + 0xc,2);
+        puVar12 = (undefined1 *)ble_memory_allocation_utility(iVar11 + 0xc,2);
         puVar12[1] = 0;
         *puVar12 = 2;
-        FUN_00083740(iVar11 + 0xc,&local_40,4);
+        ble_memory_copy_utility(iVar11 + 0xc,&local_40,4);
       }
       else {
         iVar11 = bt_connection_disconnect_with_parameter_validation_and_callback_and_state_validation
@@ -104,10 +104,10 @@ LAB_000581ee:
         if (iVar11 == 0) {
           return 0;
         }
-        puVar15 = (undefined2 *)FUN_0005f5d0(iVar11 + 0xc,4);
+        puVar15 = (undefined2 *)ble_memory_allocation_utility(iVar11 + 0xc,4);
         *puVar15 = *(undefined2 *)(iVar8 + 0x14);
         puVar15[1] = *(undefined2 *)(iVar8 + 0x24);
-        FUN_000817b6(iVar8);
+        bt_connection_cleanup_and_notify(iVar8);
       }
       goto LAB_000581ac;
     case 1:
@@ -145,7 +145,7 @@ LAB_000581ee:
         if (iVar11 == 0) {
           return 0;
         }
-        puVar10 = (undefined4 *)FUN_0005f5d0(iVar11 + 0xc,10);
+        puVar10 = (undefined4 *)ble_memory_allocation_utility(iVar11 + 0xc,10);
         *puVar10 = 0;
         puVar10[1] = 0;
         *(undefined2 *)(puVar10 + 2) = 0;
@@ -158,7 +158,8 @@ LAB_00057ed4:
           goto LAB_00057ed6;
         }
         if (*(byte *)(iVar20 + 9) < *(byte *)(puVar15 + 1)) {
-          if ((*(byte *)(iVar20 + 9) < 2) && (iVar8 = FUN_0008145c(iVar20), iVar8 != 0)) {
+          if ((*(byte *)(iVar20 + 9) < 2) && (iVar8 = check_ble_security_level(iVar20), iVar8 != 0))
+          {
             sVar19 = 8;
           }
           else {
@@ -232,7 +233,7 @@ LAB_00057ed6:
         local_58 = 0;
         iVar20 = FUN_00081820(iVar20,5,iVar11);
         if (iVar20 != 0) {
-          FUN_0005f24c(iVar11);
+          decrement_reference_count_and_cleanup_memory(iVar11);
           return 0;
         }
         if (sVar19 != 0) {
@@ -259,7 +260,7 @@ LAB_00057e70:
         if (((uVar2 & 0xfff7) == 0) || (uVar2 == 5)) {
           puVar10 = (undefined4 *)FUN_00081626(iVar20,uVar17,0);
           if (puVar10 == (undefined4 *)0x0) goto LAB_00058032;
-          FUN_00073518(puVar10 + 0x30);
+          acquire_mutex_with_priority_control(puVar10 + 0x30);
           *(undefined1 *)(puVar10 + 0x2e) = 0;
           uVar13 = extraout_r1_00;
           if (uVar2 != 5) goto LAB_0005809c;
@@ -288,7 +289,7 @@ LAB_00058032:
             FUN_00081746(&DAT_00088160,0x1840,&local_60);
             return 0;
           }
-          FUN_00073518(puVar10 + 0x30);
+          acquire_mutex_with_priority_control(puVar10 + 0x30);
           *(undefined1 *)(puVar10 + 0x2e) = 0;
           uVar13 = extraout_r1;
 LAB_0005809c:
@@ -322,7 +323,7 @@ LAB_000580fc:
 LAB_0005812c:
         FUN_00081788(iVar20,puVar10);
 LAB_00058136:
-        FUN_000817b6(puVar10);
+        bt_connection_cleanup_and_notify(puVar10);
         return 0;
       }
       local_2c = "Too small LE conn rsp packet size";
@@ -366,7 +367,7 @@ switchD_00057e38_caseD_2:
     if (iVar11 == 0) {
       return 0;
     }
-    puVar12 = (undefined1 *)FUN_0005f5d0(iVar11 + 0xc,2);
+    puVar12 = (undefined1 *)ble_memory_allocation_utility(iVar11 + 0xc,2);
     *puVar12 = 0;
     puVar12[1] = 0;
 LAB_000581ac:

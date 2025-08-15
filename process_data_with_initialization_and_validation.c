@@ -25,11 +25,11 @@ process_data_with_initialization_and_validation(undefined4 param_1,int param_2,i
   }
   else {
     setup_bluetooth_stack(auStack_38,0,1);
-    iVar2 = FUN_0005ee18(param_2);
+    iVar2 = calculate_ble_memory_size(param_2);
     *(undefined1 **)(&DAT_2000abfc + iVar2 * 0xc) = auStack_38;
-    uVar3 = FUN_0005f2d4(param_2);
-    FUN_0005f200(&DAT_2000214c,uVar3);
-    iVar2 = FUN_00072908(auStack_38,extraout_r1,0x50000,0);
+    uVar3 = increment_counter_in_structure(param_2);
+    initialize_debug_system_with_validation(&DAT_2000214c,uVar3);
+    iVar2 = manage_ble_connection_state_comprehensive(auStack_38,extraout_r1,0x50000,0);
     if (iVar2 != 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err == 0",
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0x152);
@@ -40,11 +40,11 @@ process_data_with_initialization_and_validation(undefined4 param_1,int param_2,i
       }
       software_interrupt(2);
     }
-    iVar2 = FUN_0005ee18(param_2);
+    iVar2 = calculate_ble_memory_size(param_2);
     uVar4 = (uint)(byte)(&DAT_2000abf4)[iVar2 * 0xc];
     if (uVar4 == 0) {
       if (param_3 == (int *)0x0) {
-        FUN_0005f24c(param_2);
+        decrement_reference_count_and_cleanup_memory(param_2);
       }
       else {
         *param_3 = param_2;
@@ -57,7 +57,7 @@ process_data_with_initialization_and_validation(undefined4 param_1,int param_2,i
       uStack_40 = param_1;
       local_3c = uVar4;
       call_system_cleanup_alt(&DAT_00088138,0x2080,&local_48);
-      FUN_0005f24c(param_2);
+      decrement_reference_count_and_cleanup_memory(param_2);
       if (uVar4 == 9) {
         uVar3 = 0xffffff91;
       }

@@ -34,12 +34,12 @@ void process_data_with_validation_and_callback_alt5(int param_1,undefined4 param
         uVar4 = extraout_r1_00;
       }
       else {
-        FUN_0005f200(auStack_34,iVar2);
+        initialize_debug_system_with_validation(auStack_34,iVar2);
         uVar4 = extraout_r1_01;
       }
     }
     while (iVar2 = thunk_FUN_000727ac(auStack_34,uVar4,0,0), iVar2 != 0) {
-      FUN_0005f200(param_1 + 0x10,iVar2);
+      initialize_debug_system_with_validation(param_1 + 0x10,iVar2);
       uVar4 = extraout_r1_02;
     }
     if (*(int *)(param_1 + 0x10) != 0) {

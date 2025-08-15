@@ -44,7 +44,7 @@ resource_mutex_acquire(int *resource_context,int operation_type,int *wait_data,i
   }
   InstructionSynchronizationBarrier(0xf);
   piVar7 = resource_context;
-  iVar3 = FUN_00072040(&DAT_2000b470);
+  iVar3 = check_connection_state_validity(&DAT_2000b470);
   if (iVar3 == 0) {
 LAB_000723fa:
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
@@ -53,7 +53,7 @@ LAB_000723fa:
     uVar5 = 0x72;
   }
   else {
-    FUN_00072078(&DAT_2000b470);
+    update_connection_state_flags(&DAT_2000b470);
     if (resource_context[3] == 0) {
       iVar3 = (int)*(char *)(DMIC_BUFFER_SIZE + 0xe);
 LAB_0007244e:
@@ -61,7 +61,7 @@ LAB_0007244e:
       iVar6 = DMIC_BUFFER_SIZE;
       resource_context[4] = iVar3;
       resource_context[2] = iVar6;
-      iVar3 = FUN_0007205c(&DAT_2000b470);
+      iVar3 = validate_and_clear_connection_state(&DAT_2000b470);
       if (iVar3 != 0) {
         bVar1 = (bool)isCurrentModePrivileged();
         if (bVar1) {
@@ -77,7 +77,7 @@ LAB_0007244e:
         goto LAB_0007244e;
       }
       if (wait_data == (int *)0x0 && wait_length == 0) {
-        iVar3 = FUN_0007205c(&DAT_2000b470);
+        iVar3 = validate_and_clear_connection_state(&DAT_2000b470);
         if (iVar3 != 0) {
           bVar1 = (bool)isCurrentModePrivileged();
           if (bVar1) {
@@ -101,7 +101,8 @@ LAB_0007244e:
           iVar4 = setup_buffer_management();
           iVar6 = extraout_r3;
         }
-        iVar3 = FUN_00073f6c(&DAT_2000b470,uVar5,resource_context,iVar6,wait_data,wait_length);
+        iVar3 = handle_ble_connection_state_transition
+                          (&DAT_2000b470,uVar5,resource_context,iVar6,wait_data,wait_length);
         if (iVar3 == 0) {
           return 0;
         }
@@ -115,11 +116,11 @@ LAB_0007244e:
           setBasePriority(0x20);
         }
         InstructionSynchronizationBarrier(0xf);
-        iVar3 = FUN_00072040(&DAT_2000b470);
+        iVar3 = check_connection_state_validity(&DAT_2000b470);
         piVar7 = wait_data;
         operation_type = wait_length;
         if (iVar3 == 0) goto LAB_000723fa;
-        FUN_00072078(&DAT_2000b470);
+        update_connection_state_flags(&DAT_2000b470);
         piVar7 = wait_data;
         operation_type = wait_length;
         if (resource_context[2] != 0) {
@@ -140,10 +141,10 @@ LAB_0007244e:
         }
         if (iVar4 != 0) {
 LAB_00072504:
-          FUN_000739f0(&DAT_2000b470,uVar5);
+          validate_ble_connection_state_with_priority(&DAT_2000b470,uVar5);
           return 0xfffffff5;
         }
-        iVar3 = FUN_0007205c(&DAT_2000b470);
+        iVar3 = validate_and_clear_connection_state(&DAT_2000b470);
         if (iVar3 != 0) {
           bVar1 = (bool)isCurrentModePrivileged();
           if (bVar1) {

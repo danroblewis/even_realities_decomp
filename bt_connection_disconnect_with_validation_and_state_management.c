@@ -17,7 +17,7 @@ void bt_connection_disconnect_with_validation_and_state_management(int param_1)
   undefined8 uVar7;
   
   if ((*(char *)(param_1 + 0xd) == '\0') &&
-     (iVar2 = FUN_000813b4(param_1 + 4,0xffffffbf), iVar2 << 0x19 < 0)) {
+     (iVar2 = bt_connection_update_flags(param_1 + 4,0xffffffbf), iVar2 << 0x19 < 0)) {
     validate_and_process_ble_characteristics_with_state_management_and_parameter(param_1);
     return;
   }
@@ -31,7 +31,7 @@ void bt_connection_disconnect_with_validation_and_state_management(int param_1)
     }
     software_interrupt(2);
   }
-  uVar7 = FUN_0005f2d4(iVar2);
+  uVar7 = increment_counter_in_structure(iVar2);
   uVar4 = (undefined4)((ulonglong)uVar7 >> 0x20);
   iVar2 = (int)uVar7;
   bVar6 = *(byte *)(iVar2 + 0x1c);
@@ -40,8 +40,8 @@ void bt_connection_disconnect_with_validation_and_state_management(int param_1)
       iVar5 = bt_connection_disconnect_with_state_management_and_parameter
                         (0,uVar4,0xffffffff,0xffffffff);
       if (*(char *)(param_1 + 0xd) != '\a') {
-        FUN_0005f24c();
-        FUN_0005f24c(iVar2);
+        decrement_reference_count_and_cleanup_memory();
+        decrement_reference_count_and_cleanup_memory(iVar2);
         return;
       }
       *(undefined4 *)(iVar5 + 0x18) = 0;
@@ -53,7 +53,7 @@ void bt_connection_disconnect_with_validation_and_state_management(int param_1)
       iVar3 = (int)uVar7;
       if (iVar3 != 0) {
         *(byte *)(iVar2 + 0x1c) = bVar6 & 1;
-        FUN_0005f24c(iVar5);
+        decrement_reference_count_and_cleanup_memory(iVar5);
         goto LAB_000572be;
       }
       bVar6 = 1;
@@ -67,11 +67,11 @@ void bt_connection_disconnect_with_validation_and_state_management(int param_1)
   iVar3 = validate_and_process_ble_characteristics_with_callback_validation_and_parameter
                     (param_1,iVar2,0,uVar4);
 LAB_000572be:
-  FUN_0005f24c(iVar2);
+  decrement_reference_count_and_cleanup_memory(iVar2);
   if (iVar3 == -5) {
     iVar5 = *(int *)(iVar2 + 0x18);
     *(undefined4 *)(iVar2 + 0x18) = 0;
-    FUN_0005f24c(iVar2);
+    decrement_reference_count_and_cleanup_memory(iVar2);
     if (iVar5 != 0) {
       validate_and_process_ble_characteristics_with_validation_and_state_management(param_1,iVar5);
       return;

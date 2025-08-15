@@ -24,7 +24,7 @@ process_ble_characteristic_value_change_with_parameter_validation_and_callback
   short local_26;
   char local_24;
   
-  psVar5 = (short *)FUN_0005f594(param_2 + 0xc,4);
+  psVar5 = (short *)update_buffer_position_and_size_alt(param_2 + 0xc,4);
   sVar2 = *psVar5;
   sVar3 = psVar5[1];
   uVar7 = *(undefined4 *)(param_2 + 0xc);
@@ -49,16 +49,16 @@ process_ble_characteristic_value_change_with_parameter_validation_and_callback
     local_26 = sVar3;
     FUN_00081cee(sVar2,sVar2,&LAB_000588b4_1,&local_34);
     if (local_24 == '\0') {
-      FUN_0005f074(*param_1 + 0x28,local_30);
+      add_ble_connection_to_list(*param_1 + 0x28,local_30);
       local_30 = process_ble_characteristic_value_change_with_validation_and_callback
                            (param_1,0x17,0);
       if (local_30 == 0) {
         return 0x11;
       }
-      psVar5 = (short *)FUN_0005f5d0(local_30 + 0xc,4);
+      psVar5 = (short *)ble_memory_allocation_utility(local_30 + 0xc,4);
       *psVar5 = sVar2;
       psVar5[1] = sVar3;
-      FUN_0005f5d0(local_30 + 0xc,uVar4);
+      ble_memory_allocation_utility(local_30 + 0xc,uVar4);
       memcpy(psVar5 + 2,uVar7,uVar4);
       FUN_000821a4(param_1,local_30);
     }

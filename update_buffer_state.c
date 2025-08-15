@@ -12,7 +12,7 @@ void update_buffer_state(undefined4 param_1,int param_2)
   ushort uVar2;
   bool bVar3;
   
-  iVar1 = FUN_00078598(param_1,(int)*(short *)(param_2 + 0xe));
+  iVar1 = execute_resource_function_with_error_handling(param_1,(int)*(short *)(param_2 + 0xe));
   bVar3 = iVar1 == -1;
   if (bVar3) {
     uVar2 = *(ushort *)(param_2 + 0xc) & 0xefff;

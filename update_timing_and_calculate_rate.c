@@ -14,7 +14,7 @@ void update_timing_and_calculate_rate(int timing_data)
   uint current_time_ms;
   longlong raw_timestamp;
   
-  raw_timestamp = thunk_FUN_00074f68();
+  raw_timestamp = calculate_ble_connection_timing_with_validation();
   current_time_ms =
        (uint)(raw_timestamp * 1000) >> 0xf |
        (int)((ulonglong)(raw_timestamp * 1000) >> 0x20) * 0x20000;

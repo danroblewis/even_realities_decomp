@@ -94,7 +94,7 @@ LAB_0002f1b4:
             }
           }
           else {
-            uVar5 = FUN_0005fb8c(&DAT_00087d40,1);
+            uVar5 = handle_device_operation_by_code(&DAT_00087d40,1);
             if (-1 < (int)uVar5) {
               DMIC_DATA_READY_FLAG = 0;
               DMIC_STREAM_STATE = '\0';
@@ -125,7 +125,8 @@ LAB_0002f2a6:
                   }
                   goto LAB_0002f1c6;
                 }
-                pcVar4 = (char *)FUN_0005fa94(&DAT_00087d40,0,&local_64,&local_60,1000);
+                pcVar4 = (char *)check_device_status_and_handle_timing
+                                           (&DAT_00087d40,0,&local_64,&local_60,1000);
                 if (pcVar4 != (char *)0x0) {
                   if (0 < LOG_LEVEL) {
                     pcVar3 = "%s(): dmic_read failed %d\n";
@@ -134,7 +135,7 @@ LAB_0002f2a6:
 LAB_0002f252:
                   if (local_64 != 0) {
 LAB_0002f258:
-                    FUN_00071cf4(&DAT_20003778);
+                    enqueue_message_to_priority_queue(&DAT_20003778);
                     goto LAB_0002f2a6;
                   }
                   goto LAB_0002f1c6;
@@ -143,7 +144,7 @@ LAB_0002f258:
                 if ((iVar2 == 1) && (iVar2 = get_work_mode(), *(char *)(iVar2 + 0x108c) == '\x01'))
                 {
                   if (DAT_20002404 < 0x410000U - local_60) {
-                    pcVar4 = (char *)FUN_00060f20();
+                    pcVar4 = (char *)write_device_memory_and_manage_states();
                     if (pcVar4 != (char *)0x0) {
                       if (0 < LOG_LEVEL) {
                         pcVar3 = "%s(): Flash write failed! %d\n\n";
@@ -164,7 +165,7 @@ LAB_0002f258:
                   }
 joined_r0x0002f3fa:
                   if (local_64 != 0) {
-                    FUN_00071cf4(&DAT_20003778,local_64);
+                    enqueue_message_to_priority_queue(&DAT_20003778,local_64);
                   }
                 }
                 else if (local_64 != 0) {
@@ -200,7 +201,7 @@ LAB_0002f1c6:
     uVar5 = 1;
   }
 LAB_0002f0dc:
-  iVar1 = FUN_0005fb8c(&DAT_00087d40,0);
+  iVar1 = handle_device_operation_by_code(&DAT_00087d40,0);
   if (iVar1 < 0) {
     if (LOG_LEVEL < 1) goto LAB_0002f104;
     pcVar3 = "%s(): STOP trigger failed\n";

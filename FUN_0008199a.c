@@ -20,7 +20,7 @@ undefined4 FUN_0008199a(int param_1,undefined4 param_2,undefined4 param_3,undefi
     uVar1 = 0xfffffff4;
   }
   else {
-    puVar3 = (undefined2 *)FUN_0005f5d0(iVar2 + 0xc,10);
+    puVar3 = (undefined2 *)ble_memory_allocation_utility(iVar2 + 0xc,10);
     *puVar3 = *(undefined2 *)(param_1 + 0xb6);
     puVar3[1] = *(undefined2 *)(param_1 + 0x14);
     puVar3[2] = *(undefined2 *)(param_1 + 0x16);

@@ -8,7 +8,7 @@
 void short_timing_delay(void)
 
 {
-  get_schedule_timing(0x21,0);
+  calculate_ble_schedule_timing(0x21,0);
   return;
 }
 

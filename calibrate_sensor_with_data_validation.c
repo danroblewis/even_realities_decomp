@@ -119,7 +119,7 @@ LAB_0003095a:
     memcpy(puVar4 + 4,iVar1 + -0xff5d613,0x100);
     iVar5 = process_sensor_data_packet(1,2,puVar4,0x108);
     if (iVar5 != 0) goto LAB_000307c8;
-    call_data_verification_handler(puVar4);
+    call_data_verification_handler_with_memory_cleanup(puVar4);
     iVar1 = iVar1 + 0x100;
     cVar6 = cVar6 + '\x01';
   } while (iVar1 != 0x10003b00);
@@ -133,7 +133,7 @@ LAB_0003095a:
     memcpy(puVar4 + 4,&LAB_000a64ec_1,0x9c);
     iVar1 = process_sensor_data_packet(1,2,puVar4,0xa4);
     if (iVar1 == 0) {
-      call_data_verification_handler(puVar4);
+      call_data_verification_handler_with_memory_cleanup(puVar4);
       DAT_20019dad = 6;
       iVar1 = 10;
       transmit_sensor_data_with_retry(0x4444,0x10000);
@@ -157,7 +157,7 @@ LAB_0003095a:
     }
     else {
 LAB_000307c8:
-      call_data_verification_handler(puVar4);
+      call_data_verification_handler_with_memory_cleanup(puVar4);
     }
   }
 LAB_000307b6:

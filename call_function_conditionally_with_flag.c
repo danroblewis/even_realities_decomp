@@ -9,7 +9,7 @@ void call_function_conditionally_with_flag(void)
 
 {
   if (DAT_2001d446 == '\x01') {
-    FUN_00074554(DAT_2000a09c,0xfffffff2);
+    update_ble_connection_priority_with_magnetometer(DAT_2000a09c,0xfffffff2);
     DAT_2001d446 = '\0';
   }
   return;

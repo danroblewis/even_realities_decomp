@@ -101,7 +101,8 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
                 (iVar6 + 0x1b6,uVar8,iVar10 + 0x240,iVar3 + 0x88,&display_buffer,&DAT_2001c336,2,0xf
                 );
       fill_memory_buffer(&DAT_2001b9ac,0,0x80);
-      FUN_00077914(&DAT_2001b9ac,0x80,"%s %s",param_2 + 0xd,param_2 + 0x25);
+      process_string_with_error_handling_and_validation
+                (&DAT_2001b9ac,0x80,"%s %s",param_2 + 0xd,param_2 + 0x25);
       iVar6 = get_ui_x_offset();
       uVar8 = get_ui_y_offset();
       iVar10 = get_ui_x_offset();
@@ -246,7 +247,8 @@ LAB_0003e644:
       }
     }
     fill_memory_buffer(&DAT_2001b9ac,0,0x80);
-    FUN_00077914(&DAT_2001b9ac,0x80,"%s %s",param_2 + 0xd,param_2 + 0x25);
+    process_string_with_error_handling_and_validation
+              (&DAT_2001b9ac,0x80,"%s %s",param_2 + 0xd,param_2 + 0x25);
     iVar7 = get_ui_x_offset();
     uVar8 = get_ui_y_offset();
     iVar2 = get_ui_x_offset();

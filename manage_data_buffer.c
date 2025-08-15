@@ -32,7 +32,7 @@ uint manage_data_buffer(int buffer_ctx,int data_ptr,uint data_size)
   else if (*(ushort *)(buffer_ctx + 0x44) < data_size) {
     return 0xffffff75;
   }
-  FUN_00083740(*(int *)(buffer_ctx + 0x40) + 0xc,data_ptr,data_size);
+  ble_memory_copy_utility(*(int *)(buffer_ctx + 0x40) + 0xc,data_ptr,data_size);
   data_size = *(ushort *)(buffer_ctx + 0x44) - data_size;
   *(short *)(buffer_ctx + 0x44) = (short)data_size;
   return data_size & 0xffff;

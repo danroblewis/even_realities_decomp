@@ -38,7 +38,8 @@ int bluetooth_hci_command_processing_with_callback_execution(int param_1)
         local_38 = 0;
         uStack_34 = 0;
         local_40 = iVar2;
-        FUN_00071eac(&DAT_20005e30,&DAT_2002bb80,0x400,0x545f1,0,0,0,0xfffffff7);
+        initialize_ble_connection_with_timeout
+                  (&DAT_20005e30,&DAT_2002bb80,0x400,0x545f1,0,0,0,0xfffffff7);
         FUN_00086412(&DAT_20005e30,"BT TX");
         FUN_000730b4(&DAT_20005f08);
         FUN_000730e8(&DAT_20005f08,&DAT_2002bf80,0x898,0xfffffff8,0);

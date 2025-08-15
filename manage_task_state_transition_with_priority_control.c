@@ -35,7 +35,7 @@ uint manage_task_state_transition_with_priority_control(int *param_1,undefined4 
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar4 = FUN_00072040(piVar9);
+  iVar4 = check_connection_state_validity(piVar9);
   if (iVar4 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -43,7 +43,7 @@ uint manage_task_state_transition_with_priority_control(int *param_1,undefined4 
     uVar7 = 0x72;
   }
   else {
-    FUN_00072078(piVar9);
+    update_connection_state_flags(piVar9);
     uVar1 = *(ushort *)(param_1 + 7);
     uVar3 = uVar1 & 7;
     if (*(short *)((int)param_1 + 0x1e) == -1) {
@@ -89,7 +89,7 @@ LAB_0004b9a6:
       }
       *(short *)((int)param_1 + 0x1e) = *(short *)((int)param_1 + 0x1e) + 1;
     }
-    iVar6 = FUN_0007205c(piVar9);
+    iVar6 = validate_and_clear_connection_state(piVar9);
     if (iVar6 != 0) {
       bVar2 = (bool)isCurrentModePrivileged();
       if (bVar2) {

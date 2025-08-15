@@ -22,7 +22,7 @@ void FUN_00080f56(undefined2 param_1,undefined1 param_2)
                ,extraout_r3);
     return;
   }
-  puVar2 = (undefined2 *)FUN_0005f5d0(iVar1 + 0xc,3);
+  puVar2 = (undefined2 *)ble_memory_allocation_utility(iVar1 + 0xc,3);
   *puVar2 = param_1;
   *(undefined1 *)(puVar2 + 1) = param_2;
   process_data_with_initialization_and_callback_validation(0x2021,iVar1);

@@ -166,7 +166,7 @@ LAB_000193e4:
     if (iVar6 == 0) {
       iVar8 = get_work_mode();
       *(undefined1 *)(iVar8 + 0x1058) = 2;
-      uVar12 = thunk_FUN_00074f68();
+      uVar12 = calculate_ble_connection_timing_with_validation();
       lVar5 = (uVar12 & 0xffffffff) * 1000;
       uVar11 = (uint)lVar5;
       uVar10 = (int)(uVar12 >> 0x20) * 1000 + (int)((ulonglong)lVar5 >> 0x20) +

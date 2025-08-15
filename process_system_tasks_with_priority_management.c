@@ -16,7 +16,7 @@ uint process_system_tasks_with_priority_management(int task_mode,int timing_flag
   uint uVar4;
   
   piVar3 = &DAT_000882a0;
-  iVar1 = FUN_0007ee2c(&DAT_2000a0dc);
+  iVar1 = increment_counter(&DAT_2000a0dc);
   if (iVar1 == 0) {
     uVar2 = 0;
     uVar4 = 0;
@@ -50,7 +50,7 @@ uint process_system_tasks_with_priority_management(int task_mode,int timing_flag
     while (uVar2 != 0) {
       uVar2 = process_bit_flags_with_callback_execution(uVar2);
       if (timing_flag != 0) {
-        get_schedule_timing(0x148,0);
+        calculate_ble_schedule_timing(0x148,0);
       }
     }
   }

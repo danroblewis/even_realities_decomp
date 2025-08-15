@@ -30,20 +30,20 @@ undefined4 FUN_0007f7d2(int param_1,undefined4 param_2,uint param_3,undefined4 p
     FUN_000836ec(&local_24,param_1 + 0x28,0x800,uVar3,param_1);
     local_20 = local_20 & 0xffff0000;
     local_24 = local_1c;
-    iVar1 = FUN_00083730(&local_24);
+    iVar1 = calculate_ble_buffer_available_space(&local_24);
     if (iVar1 != 0) {
-      FUN_00083758(&local_24,1);
-      uVar3 = FUN_00083730(&local_24);
+      write_ble_data_with_allocation(&local_24,1);
+      uVar3 = calculate_ble_buffer_available_space(&local_24);
       if (param_3 + 1 <= uVar3) {
-        FUN_00083740(&local_24,param_2,param_3);
-        FUN_00083758(&local_24,0);
+        ble_memory_copy_utility(&local_24,param_2,param_3);
+        write_ble_data_with_allocation(&local_24,0);
         *(undefined4 *)(param_1 + 0x8f8) = 0;
         if (*(char *)(param_1 + 0x8e8) != '\0') {
-          iVar1 = FUN_00083730(&local_24);
+          iVar1 = calculate_ble_buffer_available_space(&local_24);
           if (iVar1 == 0) {
             return 0xfffffff4;
           }
-          FUN_00083758(&local_24,0);
+          write_ble_data_with_allocation(&local_24,0);
           *(int *)(param_1 + 0x8f8) = *(int *)(param_1 + 0x8f8) + 1;
         }
         uVar2 = process_data_with_validation_and_callback_alt(param_1,local_20 & 0xffff,param_4);

@@ -164,7 +164,7 @@ LAB_0003bac4:
       }
       if (param_3 != 2) {
 LAB_0003bd76:
-        lVar15 = thunk_FUN_00074f68();
+        lVar15 = calculate_ble_connection_timing_with_validation();
         uVar9 = (uint)((ulonglong)(lVar15 * 1000) >> 0x20);
         uVar10 = (uint)(lVar15 * 1000) >> 0xf | uVar9 * 0x20000;
         uVar11 = DAT_2000497c + DAT_20004980;
@@ -281,7 +281,7 @@ LAB_0003bb86:
           stop_audio_and_enable_dmic_stream();
         }
         DAT_2000497c = get_font_rendering_flag();
-        lVar15 = thunk_FUN_00074f68();
+        lVar15 = calculate_ble_connection_timing_with_validation();
         uVar11 = (uint)((ulonglong)(lVar15 * 1000) >> 0x20);
         DAT_20004980 = (uint)(lVar15 * 1000) >> 0xf | uVar11 * 0x20000;
         DAT_20004984 = uVar11 >> 0xf;

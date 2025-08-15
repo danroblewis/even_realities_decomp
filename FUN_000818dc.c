@@ -37,7 +37,7 @@ void FUN_000818dc(int param_1,int param_2,undefined4 param_3)
     FUN_00073418(param_1,param_2,0x8000,0);
     return;
   }
-  FUN_0005f24c();
+  decrement_reference_count_and_cleanup_memory();
   return;
 }
 

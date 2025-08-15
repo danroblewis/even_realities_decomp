@@ -15,7 +15,7 @@ void FUN_00083906(int param_1)
   
   iVar1 = *(int *)(param_1 + 0x10);
   FUN_0007ef3e();
-  FUN_00072908(iVar1 + 0x18,extraout_r1,0xffffffff,0xffffffff);
+  manage_ble_connection_state_comprehensive(iVar1 + 0x18,extraout_r1,0xffffffff,0xffffffff);
   if (*(char *)(iVar1 + 0x60) == '\0') {
     _DAT_500055b8 = 0;
   }

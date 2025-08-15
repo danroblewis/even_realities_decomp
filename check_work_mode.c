@@ -173,7 +173,8 @@ LAB_00027844:
     iVar3 = get_work_mode();
     if (*(int *)(iVar3 + 0x9b4) == 2) {
       uVar6 = get_work_mode();
-      thunk_FUN_00072908((int)uVar6 + 0x9ac,(int)((ulonglong)uVar6 >> 0x20),0xffffffff,0xffffffff);
+      manage_ble_connection_state_comprehensive
+                ((int)uVar6 + 0x9ac,(int)((ulonglong)uVar6 >> 0x20),0xffffffff,0xffffffff);
     }
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {

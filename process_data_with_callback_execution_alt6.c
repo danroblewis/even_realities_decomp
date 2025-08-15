@@ -43,7 +43,8 @@ undefined4 process_data_with_callback_execution_alt6(uint param_1,uint param_2)
     if (param_2 - uVar3 < 0x400) {
       uVar4 = param_2 - uVar3;
     }
-    iVar1 = FUN_00079668(0,param_1 + uVar3,uVar4,&uStack_1c,puVar5);
+    iVar1 = check_system_status_with_parameter_validation(0,param_1 + uVar3,uVar4,&uStack_1c,puVar5)
+    ;
     if ((iVar1 != 0) || (uStack_1c != uVar4)) break;
     uVar3 = uVar3 + uVar4;
   }

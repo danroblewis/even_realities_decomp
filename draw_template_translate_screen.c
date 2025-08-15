@@ -28,8 +28,9 @@ undefined4 draw_template_translate_screen(int param_1)
     local_24 = 0;
     uStack_20 = 0;
     local_1c = 0;
-    FUN_00077914(&local_24,10,"%s>%s",*(undefined4 *)(&DAT_200024f4 + (uVar8 - 1) * 4),
-                 *(undefined4 *)(&DAT_200024f4 + uVar9 * 4));
+    process_string_with_error_handling_and_validation
+              (&local_24,10,"%s>%s",*(undefined4 *)(&DAT_200024f4 + (uVar8 - 1) * 4),
+               *(undefined4 *)(&DAT_200024f4 + uVar9 * 4));
     uVar2 = get_ui_x_offset();
     iVar4 = get_ui_y_offset();
     iVar5 = get_ui_x_offset();

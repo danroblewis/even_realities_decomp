@@ -13,7 +13,7 @@ uint setup_uart_communication(int param_1)
   
   uVar1 = initialize_ble_protocol(param_1 + 0xc,3);
   if (uVar1 != 0) {
-    iVar2 = FUN_00074d74(param_1 + 0x10);
+    iVar2 = cleanup_ble_connection_state_with_validation(param_1 + 0x10);
     uVar1 = (uint)(iVar2 == 0);
   }
   return uVar1;

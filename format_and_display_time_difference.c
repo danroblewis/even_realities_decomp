@@ -69,7 +69,7 @@ LAB_0003591e:
             uVar8 = local_28._2_2_;
           }
 LAB_00035920:
-          FUN_0007797c(param_1,pcVar7,uVar8,uVar9);
+          process_string_with_maximum_value_handling(param_1,pcVar7,uVar8,uVar9);
           goto LAB_0003585e;
         }
         pcVar7 = "Vor %d Std.";
@@ -153,7 +153,7 @@ LAB_00035948:
         uVar9 = uVar9 / 0xe10;
       }
 LAB_00035858:
-      FUN_0007797c(param_1,pcVar7,uVar9);
+      process_string_with_maximum_value_handling(param_1,pcVar7,uVar9);
       goto LAB_0003585e;
     }
     pcVar7 = "Now";

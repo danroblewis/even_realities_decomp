@@ -27,7 +27,7 @@ void handle_ble_connection_state_change_with_state_management(void)
   uVar4 = FUN_000826e0(&DAT_2000af04,1);
   uVar2 = (uint)uVar4 & (uint)((ulonglong)uVar4 >> 0x20);
   if (uVar2 == 0) {
-    FUN_00059cb4();
+    update_ble_connection_handle_counter();
     ANCS_CLIENT_LIST_HEAD = uVar2;
     ANCS_CLIENT_LIST_TAIL = uVar2;
     FUN_000732d4(&DAT_200063a0,&LAB_00082cb2_1);
@@ -37,8 +37,8 @@ void handle_ble_connection_state_change_with_state_management(void)
     FUN_000826e0(&DAT_20006448,2);
     FUN_000732d4(&DAT_20006350,0x82fa7);
     bt_connection_disconnect_with_parameter_validation_and_callback(&DAT_200029f8);
-    DAT_200029f4 = DAT_2000ad1c;
-    DAT_2000ad1c = &DAT_200029d4;
+    DAT_200029f4 = BT_CONNECTION_CALLBACK_LIST_HEAD;
+    BT_CONNECTION_CALLBACK_LIST_HEAD = &DAT_200029d4;
     return;
   }
   return;

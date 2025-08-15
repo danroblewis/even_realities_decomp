@@ -19,7 +19,8 @@ int write_literal_text_to_buffer
     if (text_start == puVar2) {
       return 0;
     }
-    iVar1 = write_byte_to_buffer(buffer_ctx,*text_start,format_ctx,text_length,iVar3);
+    iVar1 = write_byte_to_buffer_with_validation_and_mutex
+                      (buffer_ctx,*text_start,format_ctx,text_length,iVar3);
     text_length = iVar1 + 1;
     text_start = text_start + 1;
   } while (text_length != 0);

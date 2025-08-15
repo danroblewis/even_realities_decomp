@@ -8,7 +8,7 @@
 void setup_touch_sensor(void)
 
 {
-  FUN_00074f68();
+  calculate_ble_connection_timing_with_validation();
   return;
 }
 

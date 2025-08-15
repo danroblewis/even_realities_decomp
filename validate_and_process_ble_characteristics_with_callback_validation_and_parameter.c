@@ -29,7 +29,7 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
   if (DAT_20002104 == 0) {
     puVar3 = (undefined *)0x0;
   }
-  uVar9 = FUN_00072908(puVar3,param_2,0,0);
+  uVar9 = manage_ble_connection_state_comprehensive(puVar3,param_2,0,0);
   if ((int)uVar9 == 0) {
     if (param_3 == 0) {
       param_3 = thunk_FUN_000727ac(param_1 + 0x1c,(int)((ulonglong)uVar9 >> 0x20),0,0);
@@ -37,14 +37,14 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
     else {
       local_2c = (uint)DAT_20002104;
       iVar8 = param_3 + 0xc;
-      uVar4 = FUN_00083730(iVar8);
+      uVar4 = calculate_ble_buffer_available_space(iVar8);
       uVar2 = DAT_20002104;
       if (uVar4 <= local_2c) {
-        uVar2 = FUN_00083730(iVar8);
+        uVar2 = calculate_ble_buffer_available_space(iVar8);
       }
       local_2c = (uint)uVar2;
-      FUN_00083740(iVar8,*(undefined4 *)(param_2 + 0xc));
-      FUN_0005f558((undefined4 *)(param_2 + 0xc),local_2c);
+      ble_memory_copy_utility(iVar8,*(undefined4 *)(param_2 + 0xc));
+      update_buffer_position_and_size((undefined4 *)(param_2 + 0xc),local_2c);
     }
     puVar7 = *(undefined4 **)(param_3 + 0x18);
     if (*(char *)((int)param_1 + 0xd) == '\a') {
@@ -86,7 +86,7 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
         setBasePriority(uVar6);
       }
       InstructionSynchronizationBarrier(0xf);
-      puVar5 = (ushort *)FUN_0005f518(param_3 + 0xc,4,uVar6);
+      puVar5 = (ushort *)update_buffer_size_and_offset(param_3 + 0xc,4,uVar6);
       *puVar5 = *param_1 | (param_4 & 0xfd) << 0xc;
       puVar5[1] = *(short *)(param_3 + 0x10) - 4;
       *(undefined1 *)(param_3 + 0x18) = 2;
@@ -96,7 +96,7 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
       }
       local_3c = "Unable to send to driver (err %d)";
       local_40 = 3;
-      FUN_000813ca(&DAT_00088108,0x1840,&local_40);
+      bt_log_connection_error(&DAT_00088108,0x1840,&local_40);
       uVar6 = 0;
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {

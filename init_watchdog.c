@@ -52,7 +52,8 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
         handle_heartbeat();
       }
     }
-    HARDWARE_OPERATION_PARAMETER = FUN_00063984(&HARDWARE_OPERATION_MESSAGE,&uStack_30);
+    HARDWARE_OPERATION_PARAMETER =
+         configure_timer_interrupt_parameters(&HARDWARE_OPERATION_MESSAGE,&uStack_30);
     if (HARDWARE_OPERATION_PARAMETER == -0x86) {
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -63,7 +64,8 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
         }
       }
       local_28 = 0;
-      HARDWARE_OPERATION_PARAMETER = FUN_00063984(&HARDWARE_OPERATION_MESSAGE,&uStack_30);
+      HARDWARE_OPERATION_PARAMETER =
+           configure_timer_interrupt_parameters(&HARDWARE_OPERATION_MESSAGE,&uStack_30);
     }
     if (HARDWARE_OPERATION_PARAMETER < 0) {
       if (LOG_LEVEL < 1) {
@@ -100,7 +102,7 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
           }
           iVar2 = FUN_00084c7e(&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
           if (iVar2 == 0) break;
-          get_schedule_timing(0x667,0);
+          calculate_ble_schedule_timing(0x667,0);
           iVar1 = iVar1 + -1;
         } while (iVar1 != 0);
         if (LOG_LEVEL < 4) {

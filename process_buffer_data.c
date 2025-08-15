@@ -14,7 +14,7 @@ void process_buffer_data(int *param_1,int param_2,undefined4 param_3,undefined4 
   undefined4 unaff_lr;
   
   if ((int)((uint)*(ushort *)(param_2 + 0xc) << 0x17) < 0) {
-    FUN_00078598(param_1,(int)*(short *)(param_2 + 0xe),0,2);
+    execute_resource_function_with_error_handling(param_1,(int)*(short *)(param_2 + 0xe),0,2);
   }
   *(ushort *)(param_2 + 0xc) = *(ushort *)(param_2 + 0xc) & 0xefff;
   MEMORY_ERROR_CODE = 0;

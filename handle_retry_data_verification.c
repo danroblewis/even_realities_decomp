@@ -79,7 +79,7 @@ LAB_00022874:
     if (iVar4 == 0xb) {
       return iVar1;
     }
-    get_schedule_timing(0xccd,0);
+    calculate_ble_schedule_timing(0xccd,0);
   } while( true );
 }
 

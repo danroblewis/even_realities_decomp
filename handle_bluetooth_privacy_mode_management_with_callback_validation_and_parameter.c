@@ -106,7 +106,7 @@ LAB_000557f6:
   if (iVar2 == 0) {
     return -0x69;
   }
-  FUN_00083740(iVar2 + 0xc,&local_50,0xf);
+  ble_memory_copy_utility(iVar2 + 0xc,&local_50,0xf);
   iVar2 = process_data_with_initialization_and_validation(0x2006,iVar2,0);
   if (iVar2 != 0) {
     return iVar2;

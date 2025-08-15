@@ -22,7 +22,7 @@ undefined4 adc_nfc_init(void)
     }
   }
   else {
-    iVar1 = FUN_0005f654(&DRIVER_READY_CHECK_MESSAGE,&DAT_00088a2a);
+    iVar1 = configure_device_parameters_from_data(&DRIVER_READY_CHECK_MESSAGE,&DAT_00088a2a);
     if ((iVar1 < 0) && (0 < LOG_LEVEL)) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): Could not setup channel #%d (%d)\n\n","adc_nfc_init");

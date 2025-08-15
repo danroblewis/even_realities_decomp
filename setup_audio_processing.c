@@ -17,7 +17,8 @@ setup_audio_processing(uint param_1,undefined4 param_2,undefined4 param_3,undefi
   undefined4 *puVar2;
   
   if ((param_1 < 0xfffffffc) &&
-     (puVar1 = (undefined4 *)FUN_000719f4(&DAT_200037d8,4,param_1 + 4,param_4,0,0),
+     (puVar1 = (undefined4 *)
+               manage_ble_memory_with_display_integration(&DAT_200037d8,4,param_1 + 4,param_4,0,0),
      puVar1 != (undefined4 *)0x0)) {
     puVar2 = puVar1 + 1;
     *puVar1 = &DAT_200037d8;

@@ -12,7 +12,7 @@ void FUN_0008295a(undefined4 param_1,int param_2,undefined4 param_3,undefined4 p
   uint uVar1;
   undefined2 local_12 [3];
   
-  uVar1 = FUN_00059c48(param_1,*(undefined4 *)(param_2 + 0xc));
+  uVar1 = validate_ble_attribute_handle(param_1,*(undefined4 *)(param_2 + 0xc));
   if (uVar1 != 0) {
     uVar1 = (uint)*(ushort *)(uVar1 + 8);
   }

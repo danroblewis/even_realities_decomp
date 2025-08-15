@@ -17,8 +17,8 @@ undefined4 process_float_mantissa(int param_1,int param_2)
   int local_30;
   int aiStack_2c [2];
   
-  uVar3 = FUN_00078c44(param_1,&local_30);
-  uVar4 = FUN_00078c44(param_2,aiStack_2c);
+  uVar3 = process_float_formatting_with_precision(param_1,&local_30);
+  uVar4 = process_float_formatting_with_precision(param_2,aiStack_2c);
   iVar1 = (local_30 - aiStack_2c[0]) + (*(int *)(param_1 + 0x10) - *(int *)(param_2 + 0x10)) * 0x20;
   if (iVar1 < 1) {
     iVar2 = extraout_s1_00 + iVar1 * -0x100000;

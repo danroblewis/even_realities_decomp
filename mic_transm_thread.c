@@ -30,7 +30,7 @@ void mic_transm_thread(void)
   setup_bluetooth_stack(&MICROPHONE_THREAD_SYNC,0,1);
   uVar3 = extraout_r1;
   do {
-    FUN_00072908(&MICROPHONE_THREAD_SYNC,uVar3,0xffffffff,0xffffffff);
+    manage_ble_connection_state_comprehensive(&MICROPHONE_THREAD_SYNC,uVar3,0xffffffff,0xffffffff);
     local_f8[0] = 'Z';
     local_f8[1] = -0x5b;
     local_f8[2] = -0xf;

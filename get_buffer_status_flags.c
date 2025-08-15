@@ -15,7 +15,8 @@ undefined4 get_buffer_status_flags(undefined4 param_1,int param_2,undefined4 *pa
   uint local_64;
   
   if ((*(short *)(param_2 + 0xe) < 0) ||
-     (iVar1 = FUN_00077e4c(param_1,(int)*(short *)(param_2 + 0xe),auStack_68), iVar1 < 0)) {
+     (iVar1 = init_float_context_with_error_handling
+                        (param_1,(int)*(short *)(param_2 + 0xe),auStack_68), iVar1 < 0)) {
     uVar2 = 0;
     if ((*(ushort *)(param_2 + 0xc) & 0x80) == 0) {
       uVar3 = 0x400;

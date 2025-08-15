@@ -150,7 +150,7 @@ undefined4 FUN_0005b9cc(int param_1,int *param_2)
         local_34 = "Invalid discovery type: %u";
 switchD_0005ba66_caseD_7:
         local_38 = 3;
-        FUN_00082a42(&DAT_00088128,0x1840,&local_38);
+        ble_data_processing_wrapper(&DAT_00088128,0x1840,&local_38);
         return 0xffffffea;
       }
       uVar4 = FUN_00082aee(param_1,uVar4,param_2,puVar5);

@@ -26,11 +26,11 @@ int process_data_with_initialization_and_callback_validation
       local_28 = 3;
       iStack_20 = iVar1;
       call_system_cleanup_alt(&DAT_00088138,0x1840,&local_28);
-      FUN_0005f24c(param_2);
+      decrement_reference_count_and_cleanup_memory(param_2);
     }
   }
   else {
-    FUN_0005f200(&DAT_2000214c,param_2);
+    initialize_debug_system_with_validation(&DAT_2000214c,param_2);
     iVar1 = 0;
   }
   return iVar1;

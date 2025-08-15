@@ -22,14 +22,14 @@ int FUN_00081adc(undefined4 param_1,undefined4 param_2)
     iVar3 = -0xc;
   }
   else {
-    puVar2 = (undefined2 *)FUN_0005f5d0(iVar1 + 0xc,8);
+    puVar2 = (undefined2 *)ble_memory_allocation_utility(iVar1 + 0xc,8);
     *puVar2 = *puVar4;
     puVar2[1] = puVar4[1];
     puVar2[2] = puVar4[2];
     puVar2[3] = puVar4[3];
     iVar3 = FUN_00081820(param_1,5,iVar1,0,0,param_2);
     if (iVar3 != 0) {
-      FUN_0005f24c(iVar1);
+      decrement_reference_count_and_cleanup_memory(iVar1);
     }
   }
   return iVar3;

@@ -125,7 +125,7 @@ process_for_new_message_come_on
         handle_heartbeat();
       }
     }
-    get_schedule_timing(0x667,0);
+    calculate_ble_schedule_timing(0x667,0);
     if (*work_mode_context == 1) {
       uVar6 = uVar7 * -0x33333333;
       bVar8 = (uVar6 >> 2 | uVar7 * 0x40000000) < 0xccccccd;

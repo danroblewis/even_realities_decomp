@@ -21,7 +21,7 @@ undefined4 FUN_00081820(int param_1,short param_2,int param_3,int param_4,undefi
   undefined4 local_28;
   char *local_24;
   
-  psVar4 = (short *)FUN_0005f518(param_3 + 0xc,4);
+  psVar4 = (short *)update_buffer_size_and_offset(param_3 + 0xc,4);
   sVar1 = *(short *)(param_3 + 0x10);
   psVar4[1] = param_2;
   *psVar4 = sVar1 + -4;
@@ -30,7 +30,7 @@ undefined4 FUN_00081820(int param_1,short param_2,int param_3,int param_4,undefi
     local_44 = "not enough room in user_data %d < %d";
     local_3c = 8;
     local_48 = 4;
-    FUN_000813ca(&DAT_00088108,0x2040,&local_48);
+    bt_log_connection_error(&DAT_00088108,0x2040,&local_48);
     return 0xffffffea;
   }
   if (*(char *)(param_1 + 0xd) == '\a') {
@@ -38,7 +38,7 @@ undefined4 FUN_00081820(int param_1,short param_2,int param_3,int param_4,undefi
       iVar3 = 0;
     }
     else {
-      uVar6 = FUN_000748ac();
+      uVar6 = process_ble_data_with_callback_validation();
       if ((undefined *)uVar6 == &DAT_200068d0) {
         uVar2 = 0;
         uVar5 = 0;
@@ -54,7 +54,7 @@ undefined4 FUN_00081820(int param_1,short param_2,int param_3,int param_4,undefi
       if (*(char *)(param_1 + 0xd) != '\a') {
         local_24 = "Disconnected while allocating context";
         local_28 = 2;
-        FUN_000813ca(&DAT_00088108,0x1080,&local_28);
+        bt_log_connection_error(&DAT_00088108,0x1080,&local_28);
         *(undefined4 *)(iVar3 + 4) = 0;
         *(undefined4 *)(iVar3 + 8) = 0;
         *(undefined4 *)(iVar3 + 0xc) = 0;
@@ -68,12 +68,12 @@ undefined4 FUN_00081820(int param_1,short param_2,int param_3,int param_4,undefi
     *(int *)(param_3 + 0x18) = iVar3;
     uVar2 = 0;
     *(undefined1 *)(param_3 + 0x1c) = 0;
-    FUN_0005f200(param_1 + 0x38,param_3);
+    initialize_debug_system_with_validation(param_1 + 0x38,param_3);
   }
   else {
     local_24 = "not connected!";
     local_28 = 2;
-    FUN_000813ca(&DAT_00088108,0x1040,&local_28);
+    bt_log_connection_error(&DAT_00088108,0x1040,&local_28);
 LAB_0005652c:
     uVar2 = 0xffffff80;
   }

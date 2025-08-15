@@ -30,7 +30,7 @@ void initialize_microphone(int param_1,undefined4 param_2,undefined4 param_3,und
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar3 = FUN_00072040(iVar5);
+  iVar3 = check_connection_state_validity(iVar5);
   if (iVar3 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,param_4);
@@ -38,14 +38,14 @@ void initialize_microphone(int param_1,undefined4 param_2,undefined4 param_3,und
     uVar6 = 0x72;
   }
   else {
-    FUN_00072078(iVar5);
+    update_connection_state_flags(iVar5);
     manage_heap_chunk_with_validation(iVar4,param_1 + -4);
     iVar4 = setup_ambient_light_sensor(iVar4 + 0xc);
     if (iVar4 != 0) {
-      FUN_000739f0(iVar5,uVar6);
+      validate_ble_connection_state_with_priority(iVar5,uVar6);
       return;
     }
-    iVar4 = FUN_0007205c(iVar5);
+    iVar4 = validate_and_clear_connection_state(iVar5);
     if (iVar4 != 0) {
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {

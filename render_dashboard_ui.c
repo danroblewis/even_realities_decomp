@@ -156,7 +156,7 @@ void render_dashboard_ui(int dashboard_data,int system_data,int display_mode,int
                 handle_heartbeat();
               }
             }
-            FUN_00077914(&local_a4,8,"%d",iVar5);
+            process_string_with_error_handling_and_validation(&local_a4,8,"%d",iVar5);
             local_b0 = 0;
             iVar2 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
@@ -182,7 +182,7 @@ void render_dashboard_ui(int dashboard_data,int system_data,int display_mode,int
                 handle_heartbeat();
               }
             }
-            FUN_00077914(&local_a4,8,"%d",iVar2);
+            process_string_with_error_handling_and_validation(&local_a4,8,"%d",iVar2);
             local_b0 = 0;
             iVar2 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
@@ -222,7 +222,7 @@ void render_dashboard_ui(int dashboard_data,int system_data,int display_mode,int
         local_a0 = 0;
         uStack_9f = 0;
         uStack_9e = 0;
-        FUN_00077914(&local_a4,8,pcVar9,iVar2);
+        process_string_with_error_handling_and_validation(&local_a4,8,pcVar9,iVar2);
         iVar2 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         iVar6 = get_ui_x_offset();
@@ -418,7 +418,7 @@ LAB_0003acba:
                 handle_heartbeat();
               }
             }
-            FUN_00077914(&local_b8,8,"%d",iVar5);
+            process_string_with_error_handling_and_validation(&local_b8,8,"%d",iVar5);
             local_80 = 0;
             iVar2 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
@@ -439,7 +439,7 @@ LAB_0003acba:
                 handle_heartbeat();
               }
             }
-            FUN_00077914(&local_b8,8,"%d",iVar2);
+            process_string_with_error_handling_and_validation(&local_b8,8,"%d",iVar2);
             local_80 = 0;
             iVar2 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
@@ -471,7 +471,7 @@ LAB_0003acba:
         }
         local_b8 = 0;
         local_b4 = 0;
-        FUN_00077914(&local_b8,8,pcVar9,iVar2);
+        process_string_with_error_handling_and_validation(&local_b8,8,pcVar9,iVar2);
         iVar2 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         iVar6 = get_ui_x_offset();
@@ -737,7 +737,8 @@ LAB_0003803a:
             else {
               local_80 = 0;
               fill_memory_buffer(local_7c,0,0x1c);
-              FUN_00077914(&local_80,0x20,&LAB_000a9120_1,uVar15 + 1,iVar5);
+              process_string_with_error_handling_and_validation
+                        (&local_80,0x20,&LAB_000a9120_1,uVar15 + 1,iVar5);
               iVar2 = get_ui_x_offset();
               iVar5 = get_ui_y_offset();
               iVar6 = get_ui_x_offset();
@@ -871,7 +872,8 @@ LAB_0003803a:
             if (iVar5 != 0) {
               NEWS_DISPLAY_ACTIVE = '\x01';
               fill_memory_buffer(&local_80,0,0x20);
-              FUN_00077914(&local_80,0x20,&LAB_000a9120_1,CURRENT_NEWS_INDEX + 1,iVar5);
+              process_string_with_error_handling_and_validation
+                        (&local_80,0x20,&LAB_000a9120_1,CURRENT_NEWS_INDEX + 1,iVar5);
               iVar2 = (uint)CURRENT_NEWS_INDEX * 0x159;
               iVar6 = get_ui_x_offset();
               iVar7 = get_ui_y_offset();
@@ -1093,7 +1095,8 @@ LAB_00037e16:
       }
       STOCK_DISPLAY_ACTIVE = '\x01';
       fill_memory_buffer(&local_80,0,0x20);
-      FUN_00077914(&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
+      process_string_with_error_handling_and_validation
+                (&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
       uVar15 = (uint)CURRENT_STOCK_INDEX;
       iVar11 = *(int *)(system_data + 0x1020);
       iVar2 = get_ui_x_offset();
@@ -1382,7 +1385,8 @@ LAB_00038ad4:
       }
       STOCK_DISPLAY_ACTIVE = '\x01';
       fill_memory_buffer(&local_80,0,0x20);
-      FUN_00077914(&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
+      process_string_with_error_handling_and_validation
+                (&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
       uVar15 = (uint)CURRENT_STOCK_INDEX;
       iVar11 = *(int *)(system_data + 0x1020);
       iVar2 = get_ui_x_offset();
@@ -1521,7 +1525,7 @@ LAB_00037d2a:
               handle_heartbeat();
             }
           }
-          FUN_00077914(&local_80,8,"%d",iVar5);
+          process_string_with_error_handling_and_validation(&local_80,8,"%d",iVar5);
           local_b0 = 0;
           iVar2 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
@@ -1543,7 +1547,7 @@ LAB_00037d2a:
               handle_heartbeat();
             }
           }
-          FUN_00077914(&local_80,8,"%d",iVar2);
+          process_string_with_error_handling_and_validation(&local_80,8,"%d",iVar2);
           local_b0 = 0;
           iVar2 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
@@ -1576,7 +1580,7 @@ LAB_00037d2a:
       }
       local_80 = 0;
       local_7c[0] = 0;
-      FUN_00077914(&local_80,8,pcVar9,iVar2);
+      process_string_with_error_handling_and_validation(&local_80,8,pcVar9,iVar2);
       iVar2 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       iVar6 = get_ui_x_offset();
@@ -1707,7 +1711,8 @@ LAB_00039ab6:
           else {
             local_80 = 0;
             fill_memory_buffer(local_7c,0,0x1c);
-            FUN_00077914(&local_80,0x20,&LAB_000a9120_1,uVar15 + 1,iVar5);
+            process_string_with_error_handling_and_validation
+                      (&local_80,0x20,&LAB_000a9120_1,uVar15 + 1,iVar5);
             iVar2 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
             iVar6 = get_ui_x_offset();
@@ -1833,7 +1838,8 @@ LAB_00038220:
             if (iVar5 != 0) {
               NEWS_DISPLAY_ACTIVE = '\x01';
               fill_memory_buffer(&local_80,0,0x20);
-              FUN_00077914(&local_80,0x20,&LAB_000a9120_1,CURRENT_NEWS_INDEX + 1,iVar5);
+              process_string_with_error_handling_and_validation
+                        (&local_80,0x20,&LAB_000a9120_1,CURRENT_NEWS_INDEX + 1,iVar5);
               iVar2 = (uint)CURRENT_NEWS_INDEX * 0x159;
               iVar6 = get_ui_x_offset();
               iVar7 = get_ui_y_offset();
@@ -2032,7 +2038,8 @@ LAB_00037e4a:
     if (iVar5 != 0) {
       STOCK_DISPLAY_ACTIVE = '\x01';
       fill_memory_buffer(&local_80,0,0x20);
-      FUN_00077914(&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
+      process_string_with_error_handling_and_validation
+                (&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
       iVar11 = (uint)CURRENT_STOCK_INDEX * 0x143;
       local_c8 = *(int *)(system_data + 0x1020) + iVar11 + 4;
       iVar2 = get_ui_x_offset();
@@ -2316,7 +2323,8 @@ LAB_00038dfc:
     if (iVar5 != 0) {
       STOCK_DISPLAY_ACTIVE = '\x01';
       fill_memory_buffer(&local_80,0,0x20);
-      FUN_00077914(&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
+      process_string_with_error_handling_and_validation
+                (&local_80,0x20,&LAB_000a9120_1,CURRENT_STOCK_INDEX + 1,iVar5);
       iVar11 = (uint)CURRENT_STOCK_INDEX * 0x143;
       local_c8 = *(int *)(system_data + 0x1020) + iVar11 + 4;
       iVar2 = get_ui_x_offset();

@@ -23,7 +23,7 @@ void update_timing_and_adjust_parameters(undefined4 param_1,int *param_2)
   if (bVar4) {
     *(char *)((int)param_2 + 6) = cVar3;
   }
-  lVar5 = thunk_FUN_00074f68();
+  lVar5 = calculate_ble_connection_timing_with_validation();
   uVar2 = (uint)(lVar5 * 1000) >> 0xf | (int)((ulonglong)(lVar5 * 1000) >> 0x20) * 0x20000;
   uVar1 = uVar2;
   if ((DAT_20009fc0 != 0) && (uVar1 = DAT_20009fc0, 999 < uVar2 - DAT_20009fc0)) {

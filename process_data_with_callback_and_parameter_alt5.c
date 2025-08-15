@@ -52,7 +52,7 @@ LAB_000528e0:
           uVar4 = uVar5 - uVar7 & 0xffff;
         }
         local_5c = (short)uVar4;
-        uVar9 = FUN_0005b754(iVar8,auStack_68);
+        uVar9 = process_ble_characteristic_write_operation(iVar8,auStack_68);
         if ((int)uVar9 == -0xc) {
           if (!bVar2) {
             if (uVar4 < 0x14) {
@@ -61,14 +61,15 @@ LAB_000528e0:
             }
             uVar4 = (uVar4 << 0xf) >> 0x10;
           }
-          FUN_000745c8();
+          manage_ble_connection_priority_with_data_processing();
         }
         else {
           if ((int)uVar9 != 0) goto LAB_000528e0;
           uVar1 = (short)uVar7 + (short)uVar4;
           uVar7 = (uint)uVar1;
           local_60 = *(int *)(param_1 + 0xc) + (uint)uVar1;
-          FUN_00072908(iVar3 + 0x6c,(int)((ulonglong)uVar9 >> 0x20),0xffffffff,0xffffffff);
+          manage_ble_connection_state_comprehensive
+                    (iVar3 + 0x6c,(int)((ulonglong)uVar9 >> 0x20),0xffffffff,0xffffffff);
           bVar2 = true;
         }
       }
@@ -79,7 +80,7 @@ LAB_000528a8:
   uVar6 = 5;
 LAB_000528aa:
   reset_flags(param_1 + 0x18);
-  thunk_FUN_0005f24c(param_1);
+  decrement_reference_count_and_cleanup_memory(param_1);
   return uVar6;
 }
 

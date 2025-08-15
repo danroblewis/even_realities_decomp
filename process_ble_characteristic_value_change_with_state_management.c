@@ -56,7 +56,7 @@ char process_ble_characteristic_value_change_with_state_management
       if (param_3 != 0) {
         bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
                   (*(undefined4 *)(local_2c + 0x18));
-        FUN_0005f24c(local_2c);
+        decrement_reference_count_and_cleanup_memory(local_2c);
         FUN_000821f4(param_1,param_2,param_4,local_1c);
       }
       if (param_2 == 0x18) {

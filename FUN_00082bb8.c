@@ -12,7 +12,7 @@ void FUN_00082bb8(undefined1 *param_1)
   
   iVar1 = FUN_00082b98();
   if (iVar1 != 0) {
-    FUN_00059d24(*param_1,param_1 + 1,1);
+    process_ble_service_discovery_and_handle_assignment(*param_1,param_1 + 1,1);
     return;
   }
   return;

@@ -101,7 +101,7 @@ LAB_00086a70:
   *param_1 = iVar7;
   if (piVar2 != (int *)0x0) {
     if (piVar2 != param_2 + 0x11) {
-      memory_free(param_1);
+      memory_free_with_mutex_protection(param_1);
     }
     param_2[0xd] = 0;
   }

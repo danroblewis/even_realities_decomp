@@ -8,7 +8,7 @@
 void FUN_00085014(undefined4 param_1)
 
 {
-  FUN_00064a88(param_1,1);
+  format_json_value_with_memory_management(param_1,1);
   return;
 }
 

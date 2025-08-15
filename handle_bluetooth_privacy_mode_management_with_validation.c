@@ -42,12 +42,12 @@ void handle_bluetooth_privacy_mode_management_with_validation(int param_1)
       if (DAT_20002120 < DAT_20002121) {
         DAT_20002121 = DAT_20002121 - 1;
         *(byte *)(param_1 + 8) = *(byte *)(param_1 + 8) & 0xfb;
-        FUN_0005e758(2,&LAB_00081034_1,0);
+        handle_ble_attribute_properties(2,&LAB_00081034_1,0);
       }
       else {
         iVar1 = process_data_with_initialization_and_store(0x2028,7);
         if (iVar1 != 0) {
-          uVar2 = FUN_0005f5d0(iVar1 + 0xc,7);
+          uVar2 = ble_memory_allocation_utility(iVar1 + 0xc,7);
           FUN_00080fc4(uVar2,param_1 + 1);
           iVar1 = process_data_with_initialization_and_validation(0x2028,iVar1,0);
           if (iVar1 == 0) {

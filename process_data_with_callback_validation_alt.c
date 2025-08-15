@@ -31,7 +31,7 @@ int process_data_with_callback_validation_alt
       param_1[5] = param_1[1];
       param_1[7] = param_1[7] | 1;
       uStack_18 = param_4;
-      iVar1 = FUN_0005c3c4(*param_1,param_1 + 2);
+      iVar1 = initialize_ble_attribute_data_structure(*param_1,param_1 + 2);
       if (iVar1 != 0) {
         *puVar3 = *puVar3 & 0xfffffffe;
         local_24 = "Subscribe Service Changed failed (err %d)";

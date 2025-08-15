@@ -41,7 +41,7 @@ LAB_0002aed6:
         HARDWARE_OPERATION_PARAMETER = -0x10;
         goto LAB_0002aed6;
       }
-      get_schedule_timing(0x667,0);
+      calculate_ble_schedule_timing(0x667,0);
       iVar2 = iVar2 + -1;
     } while (iVar2 != 0);
   }

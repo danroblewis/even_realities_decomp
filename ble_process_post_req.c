@@ -322,7 +322,8 @@ LAB_000216b4:
           }
           DASHBOARD_LOCK_STATUS = DASHBOARD_LOCK_STATUS | 2;
           DASHBOARD_LOCK_CONTROL = DASHBOARD_LOCK_CONTROL & 0xfffffffd;
-          schedule_dashboard_lock_task(&DASHBOARD_LOCK_CONTEXT,DASHBOARD_LOCK_CONTROL,0x8000,0,0,0);
+          schedule_dashboard_lock_task_with_ble_integration
+                    (&DASHBOARD_LOCK_CONTEXT,DASHBOARD_LOCK_CONTROL,0x8000,0,0,0);
           return 0;
         }
         if (LOG_LEVEL < 1) {

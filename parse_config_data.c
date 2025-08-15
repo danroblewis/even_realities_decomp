@@ -14,7 +14,7 @@ undefined4 parse_config_data(int config_data,undefined1 *output_buffer)
   int iVar4;
   undefined1 *puVar5;
   
-  iVar1 = FUN_0007f1e8(config_data,0);
+  iVar1 = parse_string_until_delimiter(config_data,0);
   if (iVar1 == 0xd) {
     if (*(char *)(config_data + 0xc) == '0') {
       uVar3 = 0;

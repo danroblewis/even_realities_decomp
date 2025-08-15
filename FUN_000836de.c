@@ -8,7 +8,8 @@
 void FUN_000836de(int param_1)
 
 {
-  FUN_0005eeb4(param_1,**(undefined4 **)(*(int *)(param_1 + 0x2c) + 4));
+  process_ble_connection_data_with_framebuffer
+            (param_1,**(undefined4 **)(*(int *)(param_1 + 0x2c) + 4));
   return;
 }
 

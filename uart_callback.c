@@ -77,7 +77,7 @@ void uart_callback(undefined4 param_1,undefined1 *param_2,uint param_3)
     break;
   case 3:
     DEBUG_PRINT("*************alloc new rx buf*************\n");
-    iVar2 = FUN_00071c20(&DAT_200037b8,&local_1c,0,0);
+    iVar2 = process_ble_connection_data(&DAT_200037b8,&local_1c,0,0);
     if (iVar2 == 0) {
       iVar2 = (**(code **)(*(int *)(param_3 + 8) + 0x10))(param_3,local_1c,0x100);
       if (iVar2 == 0) {
@@ -100,7 +100,7 @@ void uart_callback(undefined4 param_1,undefined1 *param_2,uint param_3)
     DEBUG_PRINT(
                "****************************UART_RX_BUF_RELEASED***************************************\n"
                );
-    FUN_00071cf4(&DAT_200037b8,*(undefined4 *)(param_2 + 4));
+    enqueue_message_to_priority_queue(&DAT_200037b8,*(undefined4 *)(param_2 + 4));
     return;
   default:
     return;

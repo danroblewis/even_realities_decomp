@@ -17,7 +17,7 @@ undefined4 FUN_0007d874(undefined4 param_1,undefined4 param_2,undefined4 param_3
   _local_c = CONCAT11((char)param_1,1);
   uStack_8 = param_3;
   display_reflash(&local_c,2,param_3,1,param_1);
-  FUN_000745c8();
+  manage_ble_connection_priority_with_data_processing();
   return 0;
 }
 

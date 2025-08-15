@@ -35,7 +35,7 @@ void bt_connection_state_transition(int conn_handle,char *new_state)
     local_1c = 0x200;
     local_28 = 0x1000003;
 LAB_0005673e:
-    FUN_000813ca(&DAT_00088108,uVar3,&local_28);
+    bt_log_connection_error(&DAT_00088108,uVar3,&local_28);
   }
   else {
     *(char *)(conn_handle + 0xd) = (char)new_state;
@@ -56,11 +56,11 @@ LAB_0005673e:
         if (*(char *)(conn_handle + 2) == '\x01') {
           uVar2 = thunk_FUN_00072e9c(conn_handle + 0x60);
           if ((uVar2 & 0xc) != 0) {
-            FUN_00073518(conn_handle + 0x60);
+            acquire_mutex_with_priority_control(conn_handle + 0x60);
           }
         }
         *(uint *)(conn_handle + 4) = *(uint *)(conn_handle + 4) | 0x40;
-        FUN_000757b0(&DAT_20002990,0);
+        manage_ble_connection_list_with_image_processing(&DAT_20002990,0);
         break;
       case (char *)0x2:
       case (char *)0x5:
@@ -153,7 +153,7 @@ switchD_00056804_caseD_3:
     case 7:
       if (*(char *)(conn_handle + 2) != '\x04') {
         setup_error_handling(conn_handle + 0x38);
-        FUN_000757b0(&DAT_20002990,0);
+        manage_ble_connection_list_with_image_processing(&DAT_20002990,0);
         *(undefined4 *)(conn_handle + 0x54) = 0;
         *(undefined4 *)(conn_handle + 0x58) = 0;
         if (*(char *)(conn_handle + 3) == '\x01') {

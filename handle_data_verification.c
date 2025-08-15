@@ -87,7 +87,7 @@ int handle_data_verification
     }
   }
 LAB_000226a4:
-  call_data_verification_handler(iVar1);
+  call_data_verification_handler_with_memory_cleanup(iVar1);
   return iVar4;
 }
 

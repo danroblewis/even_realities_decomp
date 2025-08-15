@@ -40,10 +40,11 @@ initialize_buffer_structure_with_memory(undefined4 param_1,undefined4 *param_2,u
     }
     if (&UNK_00088327 < ppuVar3) break;
     puVar6 = *ppuVar3;
-    iVar1 = FUN_0007f1a0(param_1,puVar6,&local_24);
+    iVar1 = compare_string_with_pattern(param_1,puVar6,&local_24);
     if (((iVar1 != 0) &&
-        ((ppuVar5 == (undefined **)0x0 || (iVar1 = FUN_0007f1a0(puVar6,*ppuVar5,0), iVar1 != 0))))
-       && (ppuVar5 = ppuVar3, param_2 != (undefined4 *)0x0)) {
+        ((ppuVar5 == (undefined **)0x0 ||
+         (iVar1 = compare_string_with_pattern(puVar6,*ppuVar5,0), iVar1 != 0)))) &&
+       (ppuVar5 = ppuVar3, param_2 != (undefined4 *)0x0)) {
       *param_2 = local_24;
     }
     ppuVar3 = ppuVar3 + 5;
@@ -51,12 +52,12 @@ initialize_buffer_structure_with_memory(undefined4 param_1,undefined4 *param_2,u
   puVar2 = &DAT_2000a10c;
   for (piVar4 = (int *)DAT_2000a10c; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
     uVar7 = piVar4[-5];
-    iVar1 = FUN_0007f1a0(param_1,uVar7,&local_24,puVar2,uVar8);
+    iVar1 = compare_string_with_pattern(param_1,uVar7,&local_24,puVar2,uVar8);
     puVar2 = extraout_r3;
     if ((iVar1 != 0) &&
        (((puVar2 = extraout_r3, ppuVar5 == (undefined **)0x0 ||
-         (iVar1 = FUN_0007f1a0(uVar7,*ppuVar5,0), puVar2 = extraout_r3_00, iVar1 != 0)) &&
-        (ppuVar5 = (undefined **)(piVar4 + -5), param_2 != (undefined4 *)0x0)))) {
+         (iVar1 = compare_string_with_pattern(uVar7,*ppuVar5,0), puVar2 = extraout_r3_00, iVar1 != 0
+         )) && (ppuVar5 = (undefined **)(piVar4 + -5), param_2 != (undefined4 *)0x0)))) {
       *param_2 = local_24;
       puVar2 = local_24;
     }

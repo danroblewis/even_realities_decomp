@@ -1,53 +1,112 @@
 /*
  * Function: handle_ble_connection_state_change
- * Entry:    000593ec
- * Prototype: undefined handle_ble_connection_state_change(undefined param_1, undefined param_2, undefined param_3, undefined param_4, undefined2 param_5)
+ * Entry:    0005daf0
+ * Prototype: undefined handle_ble_connection_state_change()
  */
 
 
-undefined4
-handle_ble_connection_state_change
-          (undefined4 *param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined2 param_5)
+void handle_ble_connection_state_change(int param_1,int param_2)
 
 {
   int iVar1;
-  undefined4 *local_28;
-  undefined2 local_24;
-  int local_20;
-  char local_1c;
+  undefined1 uVar2;
+  uint uVar3;
+  code *pcVar4;
+  int iVar5;
+  int iVar6;
+  undefined4 *puVar7;
+  undefined4 local_20;
+  char *local_1c;
   
-  iVar1 = FUN_00082ec8(*(undefined4 *)*param_1,1);
-  if (iVar1 == 0) {
-    iVar1 = FUN_00082236(param_1 + 0x48,5);
-    if (iVar1 == 0) {
-      return 0x12;
+  iVar5 = *(int *)(param_1 + 0xf0);
+  iVar6 = param_1 + 4;
+  if (*(char *)(iVar5 + 0xd) == '\a') {
+    if (param_2 == 0) {
+      iVar6 = FUN_00082ff6(iVar6,0xd);
+      if (iVar6 != 0) {
+        process_ble_attribute_data(*(undefined4 *)(iVar5 + 0xc0));
+      }
+      if (DAT_2000ad20 != (int *)0x0) {
+        puVar7 = (undefined4 *)*DAT_2000ad20;
+        if (puVar7 != (undefined4 *)0x0) {
+          puVar7 = puVar7 + -3;
+        }
+        pcVar4 = (code *)DAT_2000ad20[-3];
+        if (pcVar4 == (code *)0x0) goto LAB_0005dba4;
+        do {
+          (*pcVar4)(iVar5,iVar6);
+LAB_0005dba4:
+          if (puVar7 == (undefined4 *)0x0) break;
+          do {
+            pcVar4 = (code *)*puVar7;
+            if (puVar7[3] == 0) {
+              puVar7 = (undefined4 *)0x0;
+              if (pcVar4 == (code *)0x0) goto LAB_0005dbba;
+              break;
+            }
+            puVar7 = (undefined4 *)(puVar7[3] + -0xc);
+          } while (pcVar4 == (code *)0x0);
+        } while( true );
+      }
+      goto LAB_0005dbba;
     }
+    uVar3 = param_2 - 1U & 0xff;
+    if (uVar3 < 0xf) goto LAB_0005db1a;
+    uVar3 = 9;
   }
   else {
-    if (param_4 == 0) {
-      return 1;
-    }
-    fill_memory_buffer(&local_28,0,0x10);
-    local_20 = process_ble_characteristic_value_change_with_validation_and_callback
-                         (param_1,param_3,0);
-    if (local_20 == 0) {
-      return 0x11;
-    }
-    local_24 = param_5;
-    local_1c = '\x01';
-    local_28 = param_1;
-    FUN_00081cee(param_4,param_4,&LAB_00081f78_1,&local_28);
-    if (local_1c == '\0') {
-      FUN_000821a4(param_1,local_20);
+    local_1c = "Not connected!";
+    local_20 = 2;
+    FUN_00083074(&DAT_00088180,0x1080,&local_20);
+    uVar3 = 7;
+LAB_0005db1a:
+    uVar3 = (uint)(byte)(&DAT_000f5220)[uVar3];
+  }
+  if ((*(int *)(iVar5 + 0xc0) != 0) &&
+     ((*(char *)(*(int *)(iVar5 + 0xc0) + 0xc) == '\0' ||
+      (iVar1 = FUN_00082ff6(iVar6,2), iVar1 != 0)))) {
+    cleanup_ble_attribute(*(undefined4 *)(iVar5 + 0xc0));
+    *(undefined4 *)(iVar5 + 0xc0) = 0;
+  }
+  iVar1 = FUN_00082ff6(iVar6,2);
+  if (iVar1 == 0) {
+    if (uVar3 < 8) {
+      uVar2 = (&DAT_000f520f)[uVar3];
     }
     else {
-      bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
-                (*(undefined4 *)(local_20 + 0x18));
-      FUN_0005f24c(local_20);
-      FUN_000821f4(param_1,param_2,param_4,local_1c);
+      uVar2 = 0x1f;
+    }
+    bt_connection_disconnect_with_parameter_validation(iVar5,uVar2,uVar3);
+  }
+  iVar6 = FUN_00082ff6(iVar6,3);
+  if ((iVar6 != 0) && (DAT_2000ad20 != (int *)0x0)) {
+    iVar6 = *DAT_2000ad20;
+    if (iVar6 != 0) {
+      iVar6 = iVar6 + -0xc;
+    }
+    pcVar4 = (code *)DAT_2000ad20[-2];
+    if (pcVar4 != (code *)0x0) goto LAB_0005dbf8;
+    while (iVar6 != 0) {
+      do {
+        pcVar4 = *(code **)(iVar6 + 4);
+        if (*(int *)(iVar6 + 0xc) == 0) {
+          iVar6 = 0;
+          if (pcVar4 == (code *)0x0) goto LAB_0005dbba;
+          break;
+        }
+        iVar6 = *(int *)(iVar6 + 0xc) + -0xc;
+      } while (pcVar4 == (code *)0x0);
+LAB_0005dbf8:
+      (*pcVar4)(iVar5,uVar3);
     }
   }
-  return 0;
+LAB_0005dbba:
+  FUN_00083204(param_1);
+  if ((*(char *)(iVar5 + 0xd) == '\a') && (*(char *)(iVar5 + 9) != *(char *)(iVar5 + 10))) {
+    validate_ble_attribute_permissions(iVar5);
+    return;
+  }
+  return;
 }
 
 

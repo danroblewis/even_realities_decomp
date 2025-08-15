@@ -54,7 +54,7 @@ LAB_00012952:
     }
     uVar7 = (uint)*(byte *)(iVar10 + uVar8);
     if (uVar7 == 0x22) {
-      uVar4 = FUN_00064290(param_1,param_2);
+      uVar4 = parse_json_string_with_escape_sequences(param_1,param_2);
       return uVar4;
     }
     if ((uVar7 == 0x2d) || (uVar7 - 0x30 < 10)) {
@@ -173,7 +173,7 @@ LAB_00012c0e:
           }
           param_2[2] = param_2[2] + 1;
           FUN_00084ed8(param_2);
-          iVar10 = FUN_00064290(piVar5,param_2);
+          iVar10 = parse_json_string_with_escape_sequences(piVar5,param_2);
           if (iVar10 == 0) goto LAB_00012c08;
           FUN_00084ed8(param_2);
           iVar10 = piVar5[4];

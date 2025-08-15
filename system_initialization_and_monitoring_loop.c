@@ -53,7 +53,7 @@ LAB_0002a516:
         uVar5 = (undefined4)((ulonglong)uVar9 >> 0x20);
         if ((int)uVar9 != 1) {
           do {
-            iVar4 = thunk_FUN_00072908(&DAT_20007b00,uVar5,0x18000,0);
+            iVar4 = manage_ble_connection_state_comprehensive(&DAT_20007b00,uVar5,0x18000,0);
             cVar2 = DAT_20018d94;
             if (iVar4 != 0) {
               DAT_20018d94 = cVar2;
@@ -100,14 +100,14 @@ LAB_0002a516:
         if (*(char *)(iVar6 + 0x1088) == '\x01') {
           iVar4 = initialize_sensor_system_complete();
         }
-        get_schedule_timing(0x1334,0);
+        calculate_ble_schedule_timing(0x1334,0);
         if (iVar4 == 0) {
           monitor_sensor_status_periodically();
         }
         uVar5 = 0x1334;
       }
     }
-    get_schedule_timing(uVar5,0);
+    calculate_ble_schedule_timing(uVar5,0);
   } while( true );
 }
 

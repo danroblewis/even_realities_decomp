@@ -8,7 +8,7 @@
 void add_json_named_object(void)
 
 {
-  FUN_0006466c();
+  set_json_object_field_with_memory_management();
   return;
 }
 

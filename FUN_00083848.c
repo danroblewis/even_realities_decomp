@@ -8,7 +8,7 @@
 void FUN_00083848(void)
 
 {
-  FUN_000837e8();
+  ble_interrupt_handler_with_priority_control();
   return;
 }
 

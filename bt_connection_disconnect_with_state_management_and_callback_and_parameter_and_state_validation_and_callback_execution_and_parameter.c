@@ -21,11 +21,11 @@ bool bt_connection_disconnect_with_state_management_and_callback_and_parameter_a
   uVar6 = *(undefined4 *)(iVar7 + 8);
   iVar3 = compare_data_structures(*param_1,param_3[1],param_3,param_4,param_1,param_2,param_3);
   if (iVar3 == 0) {
-    iVar3 = FUN_00082cba(uVar6,param_1,0x95);
+    iVar3 = ble_permission_access_validator(uVar6,param_1,0x95);
     *(char *)(param_3 + 5) = (char)iVar3;
     if (iVar3 == 0) {
-      iVar3 = FUN_0005f304(param_3[2]);
-      puVar4 = (undefined2 *)FUN_0005f5d0(iVar3 + 0xc,2);
+      iVar3 = find_last_element_in_linked_list(param_3[2]);
+      puVar4 = (undefined2 *)ble_memory_allocation_utility(iVar3 + 0xc,2);
       param_3[4] = (int)puVar4;
       *puVar4 = (short)param_2;
       uVar5 = FUN_00081e2a(iVar7,param_1,param_3[2],0,0x81bd1,param_3);

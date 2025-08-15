@@ -21,7 +21,7 @@ int initialize_sensor_system_complete(void)
     }
     else {
       DEBUG_PRINT("init_serial_comm is failed\n");
-      get_schedule_timing(0x4000,0);
+      calculate_ble_schedule_timing(0x4000,0);
       iVar1 = -2;
     }
   }

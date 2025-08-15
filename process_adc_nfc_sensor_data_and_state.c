@@ -26,7 +26,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
   FUN_0007c842();
   cVar1 = *(char *)(param_1 + 2);
   if (cVar1 == '\x02') {
-    uVar3 = thunk_FUN_00074f68();
+    uVar3 = calculate_ble_connection_timing_with_validation();
     if ((int)(uint)((uint)uVar3 - DAT_20007a00 < 0xbb9) <=
         (int)((int)((ulonglong)uVar3 >> 0x20) - (uint)((uint)uVar3 < DAT_20007a00))) {
       if (param_2[5] == '\n') {
@@ -36,7 +36,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
         param_2[1] = '\x01';
       }
       param_2[3] = '\x01';
-      DAT_20007a00 = thunk_FUN_00074f68();
+      DAT_20007a00 = calculate_ble_connection_timing_with_validation();
     }
   }
   else {
@@ -63,7 +63,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
       }
       DAT_20018c65 = '\0';
     }
-    DAT_20007a00 = thunk_FUN_00074f68();
+    DAT_20007a00 = calculate_ble_connection_timing_with_validation();
   }
   return;
 }

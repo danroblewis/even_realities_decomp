@@ -28,7 +28,7 @@ void FUN_000819ea(int param_1,int param_2)
       if (((int)(uVar2 << 0x1d) < 0) &&
          ((param_2 != 0 || (iVar1 = FUN_0008199a(puVar3), iVar1 != 0)))) {
         FUN_00081788(*puVar3,puVar3);
-        FUN_000817b6(puVar3);
+        bt_connection_cleanup_and_notify(puVar3);
       }
       if (*(code **)(puVar3[1] + 8) != (code *)0x0) {
         (**(code **)(puVar3[1] + 8))(puVar3,param_2);

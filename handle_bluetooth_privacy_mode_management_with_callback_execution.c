@@ -41,7 +41,7 @@ uint handle_bluetooth_privacy_mode_management_with_callback_execution(int param_
         *(undefined2 *)puVar7 = *(undefined2 *)puVar3;
         puVar4 = (undefined4 *)((int)puVar4 + 0x16);
       }
-      FUN_0005f24c();
+      decrement_reference_count_and_cleanup_memory();
       if (uVar5 != 0) {
         return uVar5;
       }

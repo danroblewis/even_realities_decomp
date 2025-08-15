@@ -28,7 +28,7 @@ int global_ipc_service_send(undefined4 param_1,undefined4 param_2)
             handle_heartbeat();
           }
         }
-        get_schedule_timing(0x4000,0);
+        calculate_ble_schedule_timing(0x4000,0);
         system_fatal_error_handler_with_priority_control(1);
 LAB_00025bf2:
         DEBUG_PRINT("%s(): ipc_service_send data failed with ret %d %d\n","global_ipc_service_send",

@@ -89,7 +89,7 @@ LAB_00017b48:
     if (-1 < iVar2) {
       DAT_20006a14 = 0x1793d;
       DAT_20006a18 = 0x200;
-      iVar2 = FUN_000613c4(&DAT_00087b48,&DAT_20006a10,1);
+      iVar2 = reorder_linked_list_element(&DAT_00087b48,&DAT_20006a10,1);
       if (iVar2 < 0) {
         if (1 < LOG_LEVEL) {
           pcVar3 = "%s(): Unable to configure SW0 GPIO pin!\n\n";
@@ -119,7 +119,7 @@ LAB_00017b48:
     if (iVar2 < 0) goto LAB_00017c40;
     DAT_20006a08 = &LAB_00017818_1;
     DAT_20006a0c = 0x400;
-    iVar2 = FUN_000613c4(&DAT_00087b48,&DAT_20006a04,1);
+    iVar2 = reorder_linked_list_element(&DAT_00087b48,&DAT_20006a04,1);
     if (-1 < iVar2) {
       iVar2 = get_system_byte_3();
       if (iVar2 == 0) {

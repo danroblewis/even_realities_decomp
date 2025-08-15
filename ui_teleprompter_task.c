@@ -188,7 +188,7 @@ LAB_0003cfee:
               _reflash_fb_data_to_lcd(uVar9,*(undefined4 *)(iVar8 + 0xeb8),0,0,0x280,199);
             } while (iVar5 != 4);
             set_work_mode_flag_bit_1();
-            get_schedule_timing(0x1334,0);
+            calculate_ble_schedule_timing(0x1334,0);
             reset_animation_counters();
             uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
           }
@@ -357,7 +357,7 @@ LAB_0003d4ba:
       goto LAB_0003d4ba;
     }
     local_68 = (uint)local_68._3_1_ << 0x18;
-    FUN_00077914(&local_68,3,"%d");
+    process_string_with_error_handling_and_validation(&local_68,3,"%d");
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): upgrade counterdown timer = %s\n","ui_teleprompter_task",&local_68);
@@ -572,7 +572,8 @@ LAB_0003df5c:
     else {
       pcVar7 = "%02d:%02d:%02d";
     }
-    FUN_00077914(&local_68,0x40,pcVar7,DAT_20009ff0,DAT_20009fec,DAT_20009fe8);
+    process_string_with_error_handling_and_validation
+              (&local_68,0x40,pcVar7,DAT_20009ff0,DAT_20009fec,DAT_20009fe8);
     if (((DAT_20009ff0 != DAT_20009fe4) || (DAT_20009fec != DAT_20009fe0)) ||
        (DAT_20009fe8 != DAT_20009fdc)) {
       uVar9 = get_ui_x_offset();

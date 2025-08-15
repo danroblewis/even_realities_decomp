@@ -47,12 +47,13 @@ void ble_work_thread(int ble_context)
   }
   while( true ) {
     while (iVar2 = get_work_mode(), -1 < (int)((uint)*(ushort *)(iVar2 + 0x105c) << 0x18)) {
-      get_schedule_timing(0x8000,0);
+      calculate_ble_schedule_timing(0x8000,0);
     }
     uVar5 = handle_message_dequeue(&local_124);
     if ((int)uVar5 == 0) break;
     *(undefined1 *)(ble_context + 0x248) = 0;
-    FUN_00072908(ble_context + 0x218,(int)((ulonglong)uVar5 >> 0x20),0xffffffff,0xffffffff);
+    manage_ble_connection_state_comprehensive
+              (ble_context + 0x218,(int)((ulonglong)uVar5 >> 0x20),0xffffffff,0xffffffff);
     *(undefined1 *)(ble_context + 0x248) = 1;
     bVar1 = DMIC_DATA_READY_FLAG;
     if ((*(int *)(ble_context + 0x35c) != 0) || (*(int *)(ble_context + 0x358) != 0))

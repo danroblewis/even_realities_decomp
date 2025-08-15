@@ -8,7 +8,7 @@
 void FUN_0007c87a(void)
 
 {
-  get_schedule_timing(0x21,0);
+  calculate_ble_schedule_timing(0x21,0);
   return;
 }
 

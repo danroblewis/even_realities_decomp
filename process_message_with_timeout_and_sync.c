@@ -20,7 +20,7 @@ undefined4 process_message_with_timeout_and_sync(void)
     iVar2 = get_message_state_table_entry(10);
     if ((*(char *)(iVar2 + 0x10) == '\0') || (*(char *)(iVar2 + 0xc) == '\0')) break;
     sVar5 = sVar5 + -1;
-    get_schedule_timing(0x21,0);
+    calculate_ble_schedule_timing(0x21,0);
   } while (sVar5 != 0);
   uVar3 = get_work_mode();
   uVar4 = process_message_and_sync(uVar3,9,0);
@@ -29,7 +29,7 @@ undefined4 process_message_with_timeout_and_sync(void)
     do {
       if (DAT_20018d8d != '\0') goto LAB_0002c446;
       iVar2 = iVar2 + 1;
-      get_schedule_timing(0xccd,0);
+      calculate_ble_schedule_timing(0xccd,0);
     } while (iVar2 != 10);
     if (DAT_20018d8d != '\0') {
 LAB_0002c446:

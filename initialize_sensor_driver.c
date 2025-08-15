@@ -14,7 +14,8 @@ void initialize_sensor_driver(void)
     DEBUG_PRINT("[%s-%d], thread has started !\n","start_aging_mode_thread",0xab8);
     return;
   }
-  iVar1 = FUN_00071eac(&DAT_20004870,&DAT_20027a68,0xc00,&LAB_00032420_1,0,0,0,0xfffffff4,0);
+  iVar1 = initialize_ble_connection_with_timeout
+                    (&DAT_20004870,&DAT_20027a68,0xc00,&LAB_00032420_1,0,0,0,0xfffffff4,0);
   if (iVar1 == 0) {
     DAT_20019ef1 = '\x01';
   }

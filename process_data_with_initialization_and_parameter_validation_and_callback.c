@@ -42,7 +42,7 @@ void process_data_with_initialization_and_parameter_validation_and_callback(int 
   if (iVar3 == 0) {
     iVar3 = process_data_with_initialization_and_store(0x201b,2);
     if (iVar3 == 0) goto LAB_000544a8;
-    puVar8 = (ushort *)FUN_0005f5d0(iVar3 + 0xc,2);
+    puVar8 = (ushort *)ble_memory_allocation_utility(iVar3 + 0xc,2);
     *puVar8 = uVar1;
     uVar4 = 0x201b;
   }
@@ -55,7 +55,7 @@ LAB_000544a8:
       call_system_cleanup_alt(&DAT_00088138,0x1040,&local_20);
       goto LAB_000544be;
     }
-    puVar8 = (ushort *)FUN_0005f5d0(iVar3 + 0xc,0x12);
+    puVar8 = (ushort *)ble_memory_allocation_utility(iVar3 + 0xc,0x12);
     puVar7 = puVar8 + 1;
     *puVar8 = uVar1;
     do {

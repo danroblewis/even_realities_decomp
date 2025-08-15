@@ -21,7 +21,8 @@ handle_configuration_setting
   
   local_24 = param_1;
   if (param_5 != (int *)0x0) {
-    if ((*param_5 != 0) && (iVar1 = FUN_0007f1a0(param_1,*param_5,&local_24), iVar1 == 0)) {
+    if ((*param_5 != 0) &&
+       (iVar1 = compare_string_with_pattern(param_1,*param_5,&local_24), iVar1 == 0)) {
       return 0;
     }
     if ((code *)param_5[1] != (code *)0x0) {

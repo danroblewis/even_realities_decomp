@@ -15,7 +15,7 @@ void ancs_disconnected(undefined4 param_1,undefined4 param_2)
   
   *(undefined1 *)(ANCS_CONNECTION_HANDLE + 0x365) = 0;
   ANCS_CONNECTION_HANDLE = 0;
-  uVar1 = FUN_00081526();
+  uVar1 = get_connection_data_pointer();
   format_status_message(uVar1,auStack_30);
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
@@ -30,7 +30,8 @@ void ancs_disconnected(undefined4 param_1,undefined4 param_2)
     iVar2 = get_work_mode();
     if (*(int *)(iVar2 + 0x9b4) == 0) break;
     uVar3 = get_work_mode();
-    FUN_00072908((int)uVar3 + 0x9ac,(int)((ulonglong)uVar3 >> 0x20),0xffffffff,0xffffffff);
+    manage_ble_connection_state_comprehensive
+              ((int)uVar3 + 0x9ac,(int)((ulonglong)uVar3 >> 0x20),0xffffffff,0xffffffff);
   }
   clear_system_flags();
   return;

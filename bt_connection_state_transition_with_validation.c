@@ -24,7 +24,7 @@ int bt_connection_state_transition_with_validation
     local_24 = "incompatible handle %u";
     local_28 = 3;
     uStack_20 = param_1;
-    FUN_000813ca(&DAT_00088108,0x1880,&local_28);
+    bt_log_connection_error(&DAT_00088108,0x1880,&local_28);
     validate_and_process_ble_characteristics_with_callback_validation_and_state_management(iVar1);
   }
   return 0;

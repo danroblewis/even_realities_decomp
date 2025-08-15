@@ -32,7 +32,7 @@ uint process_memory_allocation_with_priority_control(void)
       setBasePriority(0x20);
     }
     InstructionSynchronizationBarrier(0xf);
-    uVar3 = FUN_00072040(&DAT_2000365c);
+    uVar3 = check_connection_state_validity(&DAT_2000365c);
     if (uVar3 == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                    "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -40,7 +40,7 @@ uint process_memory_allocation_with_priority_control(void)
       uVar8 = 0x72;
       goto LAB_0004bef2;
     }
-    FUN_00072078(&DAT_2000365c);
+    update_connection_state_flags(&DAT_2000365c);
     if (((DAT_20003658 & 8) != 0) || (uVar4 = DAT_2000364c, DAT_2000364c < DAT_20003650)) {
       uVar4 = DAT_2000366c;
     }
@@ -74,7 +74,7 @@ uint process_memory_allocation_with_priority_control(void)
       }
     }
 LAB_0004bf52:
-    iVar5 = FUN_0007205c(&DAT_2000365c);
+    iVar5 = validate_and_clear_connection_state(&DAT_2000365c);
     if (iVar5 == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_unlock_valid(l)",
                    "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0xf0);

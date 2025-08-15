@@ -17,7 +17,7 @@ void slave_display_main_thread(undefined4 param_1)
   do {
     while ((iVar1 = get_work_mode(), *(char *)(iVar1 + 1) == '\x01' ||
            (iVar1 = get_work_mode(), *(char *)(iVar1 + 1) == '\b'))) {
-      get_schedule_timing(0x28000,0);
+      calculate_ble_schedule_timing(0x28000,0);
     }
     pcVar2 = (char *)get_work_mode();
     if (*pcVar2 == '\x01') {

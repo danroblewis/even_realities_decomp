@@ -39,7 +39,7 @@ undefined4 ancs_main(int param_1,undefined4 param_2,undefined4 param_3,undefined
     iVar3 = iVar3 + -1;
     FUN_0007c0a8(1000);
   } while (iVar3 != 0);
-  FUN_0005e6d4(0,0x183e5);
+  handle_ble_attribute_callbacks(0,0x183e5);
   FUN_0007f192();
   iVar3 = ancs_c_init(param_1 + 0x34);
   if (iVar3 == 0) goto LAB_00019a16;
@@ -69,7 +69,7 @@ LAB_00019a16:
           pcVar2 = "Failed to register authorization info callbacks.\n";
           goto LAB_00019a2c;
         }
-        FUN_0005a9d8(&DAT_20002320);
+        enqueue_ble_connection_request(&DAT_20002320);
         iVar3 = copy_data_structure();
         if (iVar3 != 0) {
           pcVar2 = "Failed to init nus.\n";

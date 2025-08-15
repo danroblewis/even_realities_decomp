@@ -17,7 +17,7 @@ bluetooth_hci_command_processing_with_validation_and_callback_and_parameter
   local_c = 0;
   local_10 = param_1;
   uStack_8 = param_3;
-  FUN_0005e758(2,0x54dd9,&local_10);
+  handle_ble_attribute_properties(2,0x54dd9,&local_10);
   return local_c;
 }
 

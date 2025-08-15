@@ -27,7 +27,7 @@ bool FUN_000735cc(int param_1,int param_2)
     uVar5 = 0x412;
   }
   else {
-    iVar4 = FUN_00086406();
+    iVar4 = check_privilege_level();
     if (iVar4 == 0) {
       uVar5 = 0;
       bVar6 = (bool)isCurrentModePrivileged();
@@ -39,7 +39,7 @@ bool FUN_000735cc(int param_1,int param_2)
         setBasePriority(0x20);
       }
       InstructionSynchronizationBarrier(0xf);
-      iVar4 = FUN_00072040(&DAT_2000b480);
+      iVar4 = check_connection_state_validity(&DAT_2000b480);
       if (iVar4 == 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                      "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -47,7 +47,7 @@ bool FUN_000735cc(int param_1,int param_2)
         uVar5 = 0x72;
       }
       else {
-        FUN_00072078(&DAT_2000b480);
+        update_connection_state_flags(&DAT_2000b480);
         bVar6 = (*(uint *)(param_1 + 0xc) & 0xf) != 0;
         if (bVar6) {
           setup_uart_communication(param_1);
@@ -57,7 +57,7 @@ bool FUN_000735cc(int param_1,int param_2)
         else {
           iVar4 = 0;
         }
-        uVar7 = FUN_0007205c(&DAT_2000b480);
+        uVar7 = validate_and_clear_connection_state(&DAT_2000b480);
         if ((int)uVar7 != 0) {
           bVar1 = (bool)isCurrentModePrivileged();
           if (bVar1) {
@@ -65,7 +65,8 @@ bool FUN_000735cc(int param_1,int param_2)
           }
           InstructionSynchronizationBarrier(0xf);
           if (iVar4 != 0) {
-            FUN_00072908(param_2 + 8,(int)((ulonglong)uVar7 >> 0x20),0xffffffff,0xffffffff);
+            manage_ble_connection_state_comprehensive
+                      (param_2 + 8,(int)((ulonglong)uVar7 >> 0x20),0xffffffff,0xffffffff);
           }
           return bVar6;
         }

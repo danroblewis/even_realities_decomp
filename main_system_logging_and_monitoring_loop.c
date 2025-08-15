@@ -29,7 +29,7 @@ void main_system_logging_and_monitoring_loop(void)
     uVar6 = 0x667;
     uVar7 = 0;
   }
-  DAT_2000a0d0 = FUN_000748ac();
+  DAT_2000a0d0 = process_ble_data_with_callback_validation();
   if ((DAT_2000a0d0 != 0) && (9 < DAT_2000a0d8)) {
     z_spin_lock_valid(&DAT_200039f8);
   }
@@ -63,7 +63,7 @@ void main_system_logging_and_monitoring_loop(void)
         piVar5 = piVar5 + 4;
       }
     }
-    FUN_00072908(&DAT_200039f8,uVar3,uVar6,uVar7);
+    manage_ble_connection_state_comprehensive(&DAT_200039f8,uVar3,uVar6,uVar7);
   } while( true );
 }
 

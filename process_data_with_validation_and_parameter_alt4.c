@@ -15,10 +15,12 @@ int process_data_with_validation_and_parameter_alt4(undefined1 *param_1,int para
   
   uVar2 = (uint)*(ushort *)(param_1 + 2);
   uVar3 = (uint)(byte)param_1[1];
-  iVar1 = FUN_00077914(param_2,0x19,"%hu.%hu.%hu",*param_1,uVar3,uVar2);
+  iVar1 = process_string_with_error_handling_and_validation
+                    (param_2,0x19,"%hu.%hu.%hu",*param_1,uVar3,uVar2);
   iVar4 = *(int *)(param_1 + 4);
   if (iVar4 != 0) {
-    iVar4 = FUN_00077914(param_2 + iVar1,0x19 - iVar1,".%u",iVar4,uVar3,uVar2);
+    iVar4 = process_string_with_error_handling_and_validation
+                      (param_2 + iVar1,0x19 - iVar1,".%u",iVar4,uVar3,uVar2);
   }
   return iVar1 + iVar4;
 }

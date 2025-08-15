@@ -23,17 +23,17 @@ void process_data_with_state_management_and_parameter_and_compression_alt
   undefined4 uStack_20;
   
   uStack_20 = param_4;
-  puVar2 = (undefined *)FUN_0005ee08(*(undefined1 *)(param_3 + 10));
+  puVar2 = (undefined *)calculate_ble_memory_offset(*(undefined1 *)(param_3 + 10));
   if (puVar2 == &DAT_20003b4c) {
-    iVar3 = FUN_0005ee18(param_3);
+    iVar3 = calculate_ble_memory_size(param_3);
     if (*(ushort *)(&DAT_2000abf6 + iVar3 * 0xc) == param_1) {
       if (DAT_20002140 != 0) {
-        FUN_0005f24c();
+        decrement_reference_count_and_cleanup_memory();
         DAT_20002140 = 0;
       }
-      iVar3 = FUN_0005ee18(param_3);
+      iVar3 = calculate_ble_memory_size(param_3);
       if ((*(int *)(&DAT_2000abf8 + iVar3 * 0xc) != 0) && (param_2 == 0)) {
-        iVar3 = FUN_0005ee18(param_3);
+        iVar3 = calculate_ble_memory_size(param_3);
         piVar4 = *(int **)(&DAT_2000abf8 + iVar3 * 0xc);
         uVar5 = (uint)piVar4[1] >> 5;
         if ((char)piVar4[2] == '\0') {
@@ -43,16 +43,16 @@ void process_data_with_state_management_and_parameter_and_compression_alt
           set_bits(*piVar4 + uVar5 * 4);
         }
       }
-      iVar3 = FUN_0005ee18(param_3);
+      iVar3 = calculate_ble_memory_size(param_3);
       if (*(int *)(&DAT_2000abfc + iVar3 * 0xc) != 0) {
-        iVar3 = FUN_0005ee18(param_3);
+        iVar3 = calculate_ble_memory_size(param_3);
         (&DAT_2000abf4)[iVar3 * 0xc] = (char)param_2;
-        iVar3 = FUN_0005ee18(param_3);
+        iVar3 = calculate_ble_memory_size(param_3);
         z_spin_lock_valid(*(undefined4 *)(&DAT_2000abfc + iVar3 * 0xc));
       }
     }
     else {
-      iVar3 = FUN_0005ee18(param_3);
+      iVar3 = calculate_ble_memory_size(param_3);
       local_24 = (undefined *)(uint)*(ushort *)(&DAT_2000abf6 + iVar3 * 0xc);
       local_2c = "OpCode 0x%04x completed instead of expected 0x%04x";
       local_30 = 4;
@@ -62,7 +62,7 @@ void process_data_with_state_management_and_parameter_and_compression_alt
   }
   else {
     bVar1 = *(byte *)(param_3 + 10);
-    uStack_28 = FUN_0005ee08((uint)bVar1);
+    uStack_28 = calculate_ble_memory_offset((uint)bVar1);
     local_34 = "opcode 0x%04x pool id %u pool %p != &hci_cmd_pool %p";
     local_24 = &DAT_20003b4c;
     local_38 = 6;

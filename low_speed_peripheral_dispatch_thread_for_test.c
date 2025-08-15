@@ -60,7 +60,7 @@ LAB_000268f2:
       fuel_gauge_update(&PTR_s_charger_00087d70,0);
       uVar1 = 0x8000;
     }
-    get_schedule_timing(uVar1,0);
+    calculate_ble_schedule_timing(uVar1,0);
   } while( true );
 }
 

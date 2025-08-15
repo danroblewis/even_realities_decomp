@@ -14,7 +14,7 @@ void allocate_and_init_whitelist_verification_buffer(void)
   if (iVar1 != 0) {
     fill_memory_buffer(iVar1,0,0x15e3);
     create_whitelist_app_json_structure(iVar1);
-    call_data_verification_handler(iVar1);
+    call_data_verification_handler_with_memory_cleanup(iVar1);
     return;
   }
   if (IS_DEBUG != 0) {

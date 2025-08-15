@@ -48,7 +48,7 @@ LAB_00085b90:
     if (param_3 == 0) {
       return (int *)0x0;
     }
-    get_schedule_timing(0x21,0);
+    calculate_ble_schedule_timing(0x21,0);
     param_3 = param_3 + -1;
   }
   piVar2 = (int *)piVar3[1];

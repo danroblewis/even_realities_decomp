@@ -23,7 +23,7 @@ uint adc_nfc_run(void)
   local_18 = 2;
   local_20 = 8;
   local_14 = 0xc;
-  iVar1 = FUN_0005f760(&DRIVER_READY_CHECK_MESSAGE,auStack_24);
+  iVar1 = manage_comprehensive_device_configuration(&DRIVER_READY_CHECK_MESSAGE,auStack_24);
   if (iVar1 < 0) {
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
@@ -37,7 +37,7 @@ uint adc_nfc_run(void)
   else {
     uVar2 = (uint)local_2a;
     local_28 = uVar2 * 600;
-    iVar1 = FUN_0005f60c(0,&local_28);
+    iVar1 = apply_scaling_factor_from_lookup_table(0,&local_28);
     if (iVar1 == 0) {
       uVar2 = local_28 >> 0xc;
     }

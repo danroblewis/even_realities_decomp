@@ -12,7 +12,7 @@ void switch_to_dfu_mode(undefined4 param_1)
   int extraout_r1;
   
   DAT_2000ff6e = 1;
-  iVar1 = FUN_00086406();
+  iVar1 = check_privilege_level();
   if (iVar1 != 0) {
     z_spin_lock_valid(param_1);
     return;

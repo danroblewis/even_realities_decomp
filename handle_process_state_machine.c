@@ -30,7 +30,7 @@ void handle_process_state_machine(undefined4 param_1,undefined4 param_2,int para
     *(undefined1 *)(param_3 + 2) = 0;
     return;
   case 2:
-    get_schedule_timing(0x667,0);
+    calculate_ble_schedule_timing(0x667,0);
 LAB_0000fd36:
     uVar5 = 3;
     break;
@@ -85,7 +85,7 @@ LAB_0000fd3e:
   case 9:
     if (*(char *)(param_3 + 7) == '\0') {
       uVar3 = int_to_float_64bit_signed(*(byte *)(param_3 + 0xb) + 3);
-      uVar3 = FUN_00075acc(0,param_2,uVar3);
+      uVar3 = handle_complex_mathematical_function(0,param_2,uVar3);
       float_add_64bit(uVar3,extraout_s1,0,0x40490000);
       DAT_20007a04 = (float)complex_float_conversion();
     }

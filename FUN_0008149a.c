@@ -17,10 +17,10 @@ int FUN_0008149a(int param_1,byte param_2,undefined4 param_3,undefined4 param_4)
       *puVar1 = *puVar1 | 0x800;
     }
     else {
-      FUN_000813b4(puVar1,0xfffff7ff,param_3,(uint)param_2 << 0x18,param_4);
+      bt_connection_update_flags(puVar1,0xfffff7ff,param_3,(uint)param_2 << 0x18,param_4);
     }
     *(byte *)(param_1 + 10) = param_2 & 0x7f;
-    iVar2 = FUN_0005d964(param_1);
+    iVar2 = validate_ble_attribute_permissions(param_1);
     if (iVar2 != 0) {
       *(undefined1 *)(param_1 + 10) = *(undefined1 *)(param_1 + 9);
     }

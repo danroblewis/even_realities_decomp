@@ -71,7 +71,8 @@ void process_and_compress_data_with_validation
       }
     }
   }
-  FUN_0007ee74(iVar1,local_48,param_2 & 0xfff001ff | uVar3 << 9,local_4c);
+  bt_connection_data_processing_and_callback
+            (iVar1,local_48,param_2 & 0xfff001ff | uVar3 << 9,local_4c);
   return;
 }
 

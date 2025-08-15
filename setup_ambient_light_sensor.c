@@ -13,7 +13,7 @@ undefined4 setup_ambient_light_sensor(int *param_1)
   
   uVar1 = 0;
   while ((piVar2 = (int *)*param_1, param_1 != piVar2 && (piVar2 != (int *)0x0))) {
-    FUN_000742b4(piVar2);
+    cleanup_ble_connection_state_complete(piVar2);
     FUN_000738d4(piVar2);
     uVar1 = 1;
   }

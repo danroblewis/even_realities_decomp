@@ -20,7 +20,7 @@ int bt_connection_disconnect_with_state_validation_and_callback(void)
     puVar2 = puVar2 + 0x10;
   } while (iVar1 != 10);
   handle_ble_connection_state_change_with_state_management();
-  iVar1 = FUN_0005e5b8();
+  iVar1 = validate_ble_characteristics_and_process();
   if (iVar1 == 0) {
     bt_connection_disconnect_with_validation_and_callback_and_parameter_and_state_validation();
   }

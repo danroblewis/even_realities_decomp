@@ -28,7 +28,7 @@ int process_data_with_callback_execution_alt
       *(undefined2 *)((int)param_1 + 0x856) = *(undefined2 *)(param_1 + 4);
       param_1[0x217] = param_1[0x217] | 1;
       param_1[0x219] = param_2;
-      iVar1 = FUN_0005c3c4(*param_1,param_1 + 0x212);
+      iVar1 = initialize_ble_attribute_data_structure(*param_1,param_1 + 0x212);
       if (iVar1 != 0) {
         FUN_0007f5d8(param_1 + 1,1);
         local_2c = "Subscribe Data Source failed (err %d)";

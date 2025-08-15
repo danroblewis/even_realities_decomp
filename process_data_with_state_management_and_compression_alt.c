@@ -40,7 +40,7 @@ process_data_with_state_management_and_compression_alt
       setBasePriority(0x20);
     }
     InstructionSynchronizationBarrier(0xf);
-    iVar4 = FUN_00072040(&DAT_2000b480);
+    iVar4 = check_connection_state_validity(&DAT_2000b480);
     if (iVar4 == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                    "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,puVar7);
@@ -48,7 +48,7 @@ process_data_with_state_management_and_compression_alt
       uVar6 = 0x72;
     }
     else {
-      FUN_00072078(&DAT_2000b480);
+      update_connection_state_flags(&DAT_2000b480);
       if ((*(uint *)(param_1 + 0xc) & 0xe) == 0) {
         if (param_4 == 0 && param_3 == 0) {
           uVar5 = FUN_00072cd4(param_1,&local_1c);
@@ -56,14 +56,15 @@ process_data_with_state_management_and_compression_alt
         else {
           *(uint *)(param_1 + 0xc) = *(uint *)(param_1 + 0xc) | 8;
           *(undefined **)(param_1 + 0x28) = local_1c;
-          FUN_00074bf4(param_1 + 0x10,&LAB_00072dac_1,param_3,param_4);
+          schedule_ble_connection_timeout_with_priority
+                    (param_1 + 0x10,&LAB_00072dac_1,param_3,param_4);
           uVar5 = 1;
         }
       }
       else {
         uVar5 = 0;
       }
-      iVar4 = FUN_0007205c(&DAT_2000b480);
+      iVar4 = validate_and_clear_connection_state(&DAT_2000b480);
       if (iVar4 != 0) {
         bVar1 = (bool)isCurrentModePrivileged();
         if (bVar1) {

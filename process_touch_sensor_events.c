@@ -34,8 +34,9 @@ LAB_00028a32:
       if ((int)uVar8 == 1) {
         return;
       }
-      thunk_FUN_00072908(sensor_data + 0xb0,(int)((ulonglong)uVar8 >> 0x20),0x4000,0,iVar9,
-                         timing_param,additional_param);
+      manage_ble_connection_state_comprehensive
+                (sensor_data + 0xb0,(int)((ulonglong)uVar8 >> 0x20),0x4000,0,iVar9,timing_param,
+                 additional_param);
       if ((*(char *)(sensor_data + 1) != '\x01') &&
          (iVar1 = get_work_mode(), *(char *)(iVar1 + 1) != '\b')) break;
       delay_with_timing(5000);

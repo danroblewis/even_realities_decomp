@@ -8,7 +8,7 @@
 void FUN_00081320(int param_1)
 
 {
-  FUN_00073518(param_1 + 0x18);
+  acquire_mutex_with_priority_control(param_1 + 0x18);
   return;
 }
 

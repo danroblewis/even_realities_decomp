@@ -29,15 +29,16 @@ void configure_sensor_timing_and_interrupts
   }
   else {
     uVar6 = (sensor_flags << 0x10) >> 0x18;
-    iVar2 = FUN_000635d8(uVar6);
+    iVar2 = get_timer_interrupt_value(uVar6);
     uVar7 = sensor_flags & 0xff;
     manage_sensor_interrupt_configuration(uVar7,uVar6,sensor_flags >> 0x18,0);
-    uVar3 = FUN_00063570(uVar6);
+    uVar3 = configure_timer_interrupt_settings(uVar6);
     uVar5 = (sensor_flags << 8) >> 0x18;
     if (uVar5 < 0x10) {
       *(uint *)((uVar5 & 0x3f) * 4 + 0x5002a080) = uVar7 | 0x80000000;
       FUN_00064f48(uVar7,uVar3);
-      FUN_00063778(uVar6,extraout_r1,(iVar2 + 0x32) * 2,0,&LAB_0004c38c_1,sensor_flags);
+      handle_timer_interrupt_callback
+                (uVar6,extraout_r1,(iVar2 + 0x32) * 2,0,&LAB_0004c38c_1,sensor_flags);
       return;
     }
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","index < 16",

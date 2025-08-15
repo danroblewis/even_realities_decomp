@@ -51,7 +51,7 @@ void handle_whitelist_app_from_app
     *(undefined1 *)(response_buffer + 1) = 0xca;
   }
 LAB_0003570e:
-  call_data_verification_handler(DAT_20009fbc);
+  call_data_verification_handler_with_memory_cleanup(DAT_20009fbc);
   DAT_20009fbc = 0;
 LAB_00035718:
                     /* WARNING: Could not recover jumptable at 0x00035722. Too many branches */

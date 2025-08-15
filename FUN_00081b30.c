@@ -24,7 +24,7 @@ undefined4 FUN_00081b30(int *param_1,undefined4 param_2,undefined4 param_3,undef
       uVar1 = 0xfffffff4;
     }
     else {
-      puVar3 = (undefined2 *)FUN_0005f5d0(iVar2 + 0xc,4);
+      puVar3 = (undefined2 *)ble_memory_allocation_utility(iVar2 + 0xc,4);
       *puVar3 = (short)param_1[9];
       puVar3[1] = (short)param_1[5];
       FUN_00081962(param_1,iVar2,0x10000,0,param_4);

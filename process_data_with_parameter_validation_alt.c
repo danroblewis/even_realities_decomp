@@ -25,7 +25,7 @@ int process_data_with_parameter_validation_alt(undefined4 *param_1,int param_2)
       *(undefined2 *)((int)param_1 + 0x836) = *(undefined2 *)(param_1 + 3);
       param_1[0x20f] = param_1[0x20f] | 1;
       param_1[0x211] = param_2;
-      iVar1 = FUN_0005c3c4(*param_1,param_1 + 0x20a);
+      iVar1 = initialize_ble_attribute_data_structure(*param_1,param_1 + 0x20a);
       if (iVar1 != 0) {
         FUN_0007f5d8(param_1 + 1,0);
         local_24 = "Subscribe Notification Source failed (err %d)";

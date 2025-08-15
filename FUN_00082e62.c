@@ -12,7 +12,7 @@ void FUN_00082e62(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
   int *piVar2;
   int *piVar3;
   
-  iVar1 = FUN_00059c70();
+  iVar1 = find_ble_characteristic_by_handle();
   if ((iVar1 == 0) || (piVar2 = *(int **)(iVar1 + 8), piVar2 == (int *)0x0)) {
     return;
   }
@@ -25,7 +25,7 @@ void FUN_00082e62(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
   do {
     if ((*(byte *)((int)piVar2 + 0x12) <= *(byte *)(param_1 + 9)) &&
        (iVar1 = (*(code *)*piVar2)(param_1,piVar2,param_3,param_4), iVar1 == 0)) {
-      FUN_0005c4f0(param_1,piVar2);
+      manage_ble_attribute_data_operations(param_1,piVar2);
     }
 LAB_00082eb8:
     if (piVar3 == (int *)0x0) {

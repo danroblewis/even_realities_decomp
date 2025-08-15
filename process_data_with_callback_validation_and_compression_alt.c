@@ -17,7 +17,7 @@ void process_data_with_callback_validation_and_compression_alt
   iVar1 = bt_connection_disconnect_with_validation_and_callback();
   if (iVar1 == 0) {
 LAB_000533a0:
-    iVar2 = FUN_0005e938(param_1,param_2);
+    iVar2 = find_ble_uuid_in_table(param_1,param_2);
     if (iVar2 == 0) goto LAB_000533ac;
   }
   else {
@@ -32,9 +32,9 @@ LAB_000533a0:
     validate_and_process_ble_characteristics_with_callback_validation_and_state_management(iVar1);
     if (iVar2 == 0) goto LAB_000533a0;
   }
-  FUN_0005ea18(iVar2);
+  cleanup_ble_attribute(iVar2);
 LAB_000533ac:
-  FUN_0005c8d8(param_1,param_2);
+  handle_ble_descriptor_discovery(param_1,param_2);
   if (DAT_2000ad20 == (int *)0x0) {
     return;
   }

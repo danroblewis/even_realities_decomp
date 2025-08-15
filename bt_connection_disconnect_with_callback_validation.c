@@ -25,7 +25,7 @@ int bt_connection_disconnect_with_callback_validation(void)
     local_1c = "Found valid connection in %s state";
     local_14 = 0x200;
     local_20 = 0x1000003;
-    FUN_000813ca(&DAT_00088108,0x1c80,&local_20);
+    bt_log_connection_error(&DAT_00088108,0x1c80,&local_20);
     validate_and_process_ble_characteristics_with_callback_validation_and_state_management(iVar1);
     iVar1 = 1;
   }

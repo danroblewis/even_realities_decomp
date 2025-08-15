@@ -10,7 +10,7 @@ int erase_audio_buffer(void)
 {
   int iVar1;
   
-  iVar1 = FUN_00060dd0(&FLASH_DRIVER_INTERFACE,0x400000,0x10000);
+  iVar1 = manage_device_memory_and_state_changes(&FLASH_DRIVER_INTERFACE,0x400000,0x10000);
   if (iVar1 == 0) {
     DAT_20002404 = 0x400000;
     if (2 < LOG_LEVEL) {

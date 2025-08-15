@@ -156,7 +156,7 @@ LAB_0000c546:
     local_270 = local_1d0;
     iVar15 = 0;
     do {
-      fVar25 = (float)FUN_00075c90(*local_270);
+      fVar25 = (float)handle_voltage_regulation_with_validation(*local_270);
       iVar15 = iVar15 + 1;
       *local_270 = fVar25;
       local_270 = local_270 + 1;
@@ -309,7 +309,8 @@ LAB_0000c72a:
   local_200[iVar15] = 1.0 - local_1d0[0];
   local_200[iVar18] = 1.0 - fVar35;
   local_200[7] = fVar35;
-  fVar32 = (float)FUN_00075c90(-((fVar32 * 0.0 * param_4) / local_23c[0]));
+  fVar32 = (float)handle_voltage_regulation_with_validation
+                            (-((fVar32 * 0.0 * param_4) / local_23c[0]));
   local_1a0[0] = local_200[0];
   local_1a0[1] = local_200[1];
   local_190[0] = local_200[0] * 0.0;
@@ -674,7 +675,7 @@ LAB_0000cc1a:
   param_5[0x5d8] = local_150[2];
   param_5[0x5d9] = local_150[3];
   *param_6 = local_150[iVar15];
-  fVar25 = (float)FUN_00075dc8(param_5[(int)param_5[0x5d5] * 5 + -3]);
+  fVar25 = (float)handle_power_management_with_validation(param_5[(int)param_5[0x5d5] * 5 + -3]);
   *param_7 = fVar25 * 3.0;
   param_5[0x17] = param_1;
   param_5[0x5db] = local_23c[6];

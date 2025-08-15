@@ -29,7 +29,7 @@ process_data_with_parameter_validation_alt7
       process_and_compress_data_with_validation(&DAT_00088178,0x1040,&local_28,0);
       return 0xfffffffe;
     }
-    uVar2 = FUN_0007f1e8(param_1,auStack_3c);
+    uVar2 = parse_string_until_delimiter(param_1,auStack_3c);
     iVar3 = compare_string_offsets(param_1,"id",uVar2);
     if (iVar3 == 0) {
       uVar5 = DAT_200020d4 << 0x1c;

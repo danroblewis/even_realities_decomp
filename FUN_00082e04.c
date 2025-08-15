@@ -29,7 +29,7 @@ void FUN_00082e04(undefined4 param_1,int param_2,int param_3,int param_4,undefin
     local_24 = "Incorrect length, canceling write";
 LAB_0005c326:
     local_28 = 2;
-    FUN_00082a42(&DAT_00088128,0x1040,&local_28);
+    ble_data_processing_wrapper(&DAT_00088128,0x1040,&local_28);
     uVar3 = 0x8278b;
   }
   else {
@@ -44,7 +44,7 @@ LAB_0005c326:
     param_5[2] = iVar6 + uVar5;
     *(short *)(param_5 + 3) = (short)uVar4;
     if ((uVar4 & 0xffff) != 0) {
-      iVar2 = FUN_0005c22c(param_1,param_5);
+      iVar2 = handle_ble_characteristic_read_request(param_1,param_5);
       goto LAB_0005c34c;
     }
     uVar3 = 0x8279d;

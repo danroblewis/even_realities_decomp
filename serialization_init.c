@@ -38,7 +38,8 @@ undefined4 serialization_init(void)
     }
     uVar2 = execute_callback_with_context_validation(&DAT_00087c08,&DAT_20007a78,&DAT_200023dc);
     if (-1 < (int)uVar2) {
-      FUN_00072908(&DAT_200039c8,(int)((ulonglong)uVar2 >> 0x20),0xffffffff,0xffffffff);
+      manage_ble_connection_state_comprehensive
+                (&DAT_200039c8,(int)((ulonglong)uVar2 >> 0x20),0xffffffff,0xffffffff);
       DAT_20007a80 = 1;
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {

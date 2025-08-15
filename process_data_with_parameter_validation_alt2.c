@@ -49,7 +49,7 @@ LAB_00051506:
     local_38 = CONCAT22(uVar2,(short)uVar5);
     uVar10 = (uVar11 & 0xff) << 8 | uVar11 >> 8 & 0xff;
     _local_34 = CONCAT22((short)(uVar11 >> 0x10),(short)uVar10);
-    FUN_0005f558(param_2 + 0xc,8);
+    update_buffer_position_and_size(param_2 + 0xc,8);
     uVar3 = local_38;
     if (*(ushort *)(param_2 + 0x10) < uVar2) {
       uVar11 = 9;
@@ -155,7 +155,7 @@ LAB_000515aa:
 LAB_00051594:
     uVar11 = (**(code **)(*param_1 + 0x2c))(iVar4);
     if (uVar11 != 0) goto LAB_000515f8;
-    FUN_0005f558(param_2 + 0xc,uVar2);
+    update_buffer_position_and_size(param_2 + 0xc,uVar2);
   } while( true );
 }
 

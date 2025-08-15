@@ -37,23 +37,23 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
       *puVar6 = *puVar6 | 2;
       uVar5 = extraout_r1;
       if (param_1[0x20] != 0) {
-        FUN_0005f24c();
+        decrement_reference_count_and_cleanup_memory();
         param_1[0x20] = 0;
         *(undefined2 *)(param_1 + 0x21) = 0;
         uVar5 = extraout_r1_00;
       }
       if (param_1[0x13] != 0) {
-        FUN_0005f24c();
+        decrement_reference_count_and_cleanup_memory();
         param_1[0x13] = 0;
         uVar5 = extraout_r1_01;
       }
       while (uVar7 = thunk_FUN_000727ac(param_1 + 0xc,uVar5,0,0),
             uVar5 = (undefined4)((ulonglong)uVar7 >> 0x20), (int)uVar7 != 0) {
-        FUN_0005f24c();
+        decrement_reference_count_and_cleanup_memory();
         uVar5 = extraout_r1_02;
       }
       while (iVar2 = thunk_FUN_000727ac(param_1 + 0x26,uVar5,0,0), iVar2 != 0) {
-        FUN_0005f24c();
+        decrement_reference_count_and_cleanup_memory();
         uVar5 = extraout_r1_03;
       }
       if (*(code **)(param_1[1] + 0x1c) != (code *)0x0) {
@@ -68,7 +68,7 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
     if (iVar3 == 0) {
       uVar5 = *extraout_r3;
       *extraout_r3 = param_2;
-      puVar4 = (undefined2 *)FUN_0005f5d0(iVar2 + 0xc,4,uVar5);
+      puVar4 = (undefined2 *)ble_memory_allocation_utility(iVar2 + 0xc,4,uVar5);
       uVar1 = *(undefined2 *)(param_1 + 5);
       puVar4[1] = (short)param_2;
       *puVar4 = uVar1;

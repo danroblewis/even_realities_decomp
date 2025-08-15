@@ -96,7 +96,7 @@ void process_encoded_data_from_flash(void)
         }
       }
       else {
-        printf_format_string_with_buffer("Unsupported bit depth - %d\r\n");
+        printf_format_string_with_buffer_integration("Unsupported bit depth - %d\r\n");
       }
     }
     else {
@@ -108,7 +108,7 @@ void process_encoded_data_from_flash(void)
 LAB_00036630:
     DEBUG_PRINT("[%s-%d] read pic from flash failed !\n","get_demo_image_source_from_flash",uVar3);
   }
-  call_data_verification_handler(puVar1);
+  call_data_verification_handler_with_memory_cleanup(puVar1);
   return;
 }
 

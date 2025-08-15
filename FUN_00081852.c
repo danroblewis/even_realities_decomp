@@ -38,13 +38,13 @@ LAB_0008188e:
     }
     for (; (int)param_3 < iVar3; param_3 = param_3 + uVar1 & 0xffff) {
       if (*(short *)(iVar2 + 0x10) == 0) {
-        iVar2 = FUN_0005f3d8(0,iVar2);
+        iVar2 = remove_element_from_linked_list(0,iVar2);
       }
       uVar1 = bt_connection_disconnect_with_validation_and_state_management_and_callback_execution
                         (param_1,iVar2,0);
       if ((int)uVar1 < 0) goto LAB_0008188e;
     }
-    FUN_0005f24c(iVar2);
+    decrement_reference_count_and_cleanup_memory(iVar2);
   }
   return param_3;
 }

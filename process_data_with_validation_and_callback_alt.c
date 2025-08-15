@@ -17,7 +17,7 @@ int process_data_with_validation_and_callback_alt
   *(undefined2 *)(param_1 + 6) = *(undefined2 *)(param_1 + 2);
   *(undefined2 *)((int)param_1 + 0x1a) = 0;
   param_1[7] = param_1 + 10;
-  iVar1 = FUN_0005c22c(*param_1,param_1 + 5,param_3,param_1 + 10,param_4);
+  iVar1 = handle_ble_characteristic_read_request(*param_1,param_1 + 5,param_3,param_1 + 10,param_4);
   if (iVar1 != 0) {
     FUN_0007f5d8(param_1 + 1,2);
   }

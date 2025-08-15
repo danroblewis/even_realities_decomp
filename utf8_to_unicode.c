@@ -34,10 +34,10 @@ LAB_000477f4:
       uVar2 = (uVar2 << 0x1b) >> 0x1d;
       goto LAB_000477f4;
     }
-    FUN_000778d4("length error!");
+    calculate_string_length_with_buffer_processing("length error!");
   }
   else {
-    printf_format_string_with_buffer("maybe [%x] not unicode ?\n");
+    printf_format_string_with_buffer_integration("maybe [%x] not unicode ?\n");
   }
   return 0;
 }

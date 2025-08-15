@@ -20,7 +20,7 @@ undefined4 initialize_system_and_adc_nfc(void)
   if ((((SYSTEM_CONFIGURATION_PARAMETER != 0) && (*(int *)(SYSTEM_CONFIGURATION_PARAMETER + 4) != 0)
        ) && (*(int *)(SYSTEM_CONFIGURATION_PARAMETER + 0x10) != 0)) &&
      (*(int *)(SYSTEM_CONFIGURATION_PARAMETER + 8) != 0)) {
-    get_schedule_timing(0x290,0);
+    calculate_ble_schedule_timing(0x290,0);
     (**(code **)(*(int *)(SYSTEM_CONFIGURATION_PARAMETER + 8) + 8))();
     FUN_0007c932(SYSTEM_CONFIGURATION_PARAMETER,&local_10);
     DEBUG_PRINT("UUID = %02X %02X %02X %02X %02X %02X %02X %02X.\n",local_10 & 0xff,

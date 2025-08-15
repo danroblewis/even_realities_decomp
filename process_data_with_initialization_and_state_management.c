@@ -17,7 +17,7 @@ process_data_with_initialization_and_state_management
     if ((param_2 == 0) ||
        (iVar1 = memcmp_byte_arrays(param_2,&DAT_000f2b3a,7,param_4,0,
                                    CONCAT13((char)param_1,(int3)param_2)), iVar1 == 0)) {
-      FUN_0005e6d4(0,&LAB_00080e80_1,&stack0xffffffef);
+      handle_ble_attribute_callbacks(0,&LAB_00080e80_1,&stack0xffffffef);
     }
     else {
       process_data_with_callback_validation_and_compression_alt(0,param_2);

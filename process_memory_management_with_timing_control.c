@@ -39,7 +39,7 @@ int process_memory_management_with_timing_control(void)
     process_memory_deallocation_with_priority_control(iVar1);
   }
   if (0 < DAT_2000a0d4) {
-    lVar6 = thunk_FUN_00074f68();
+    lVar6 = calculate_ble_connection_timing_with_validation();
     uVar2 = (uint)((ulonglong)(lVar6 * 1000) >> 0x20);
     uVar3 = (uint)(lVar6 * 1000) >> 0xf | uVar2 * 0x20000;
     uVar2 = ((uVar2 >> 0xf) - DAT_200056a4) - (uint)(uVar3 < DAT_200056a0);

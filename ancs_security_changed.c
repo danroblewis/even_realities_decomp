@@ -13,7 +13,7 @@ void ancs_security_changed(undefined4 param_1,undefined4 param_2,int param_3)
   int iVar3;
   undefined1 auStack_38 [32];
   
-  uVar1 = FUN_00081526();
+  uVar1 = get_connection_data_pointer();
   format_status_message(uVar1,auStack_38);
   if (param_3 == 0) {
     if (2 < LOG_LEVEL) {
@@ -24,10 +24,10 @@ void ancs_security_changed(undefined4 param_1,undefined4 param_2,int param_3)
         handle_heartbeat("%s(): %s level %u\n\n","ancs_security_changed",auStack_38,param_2);
       }
     }
-    uVar2 = FUN_000814e2(param_1);
+    uVar2 = get_ble_property_value(param_1);
     if (1 < uVar2) {
       DAT_20006ab4 = 0;
-      uVar1 = FUN_00081526(param_1);
+      uVar1 = get_connection_data_pointer(param_1);
       iVar3 = get_system_ready_state();
       if (iVar3 == 0) {
         iVar3 = get_work_mode();

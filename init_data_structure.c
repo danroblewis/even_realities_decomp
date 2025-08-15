@@ -13,11 +13,11 @@ void init_data_structure(int *struct_ptr,int data_ptr,undefined4 unused)
   int iVar3;
   
   iVar3 = data_ptr;
-  FUN_0005ee6c(data_ptr);
+  initialize_ble_memory_structure(data_ptr);
   *struct_ptr = data_ptr;
   *(undefined2 *)(data_ptr + 0x10) = 8;
   iVar2 = *(int *)(data_ptr + 0xc);
-  uVar1 = FUN_00083730((int *)(data_ptr + 0xc));
+  uVar1 = calculate_ble_buffer_available_space((int *)(data_ptr + 0xc));
   thunk_FUN_00085cf2(struct_ptr + 1,2,iVar2 + 8,uVar1,0,iVar3,unused);
   return;
 }

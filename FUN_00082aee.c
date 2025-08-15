@@ -22,16 +22,16 @@ int FUN_00082aee(undefined4 param_1,undefined4 param_2,undefined4 param_3,code *
     iVar2 = process_ble_characteristic_value_change_with_callback_execution(param_1,param_5,param_6)
     ;
     if (iVar2 != 0) {
-      FUN_000825ac(iVar2,0,0,1);
+      update_ble_connection_state(iVar2,0,0,1);
       *(int *)(iVar1 + 8) = iVar2;
       iVar2 = (*param_4)(iVar2,param_6,param_3);
-      if ((iVar2 == 0) && (iVar2 = FUN_00059a90(param_1,iVar1), iVar2 == 0)) {
+      if ((iVar2 == 0) && (iVar2 = enqueue_ble_connection_request(param_1,iVar1), iVar2 == 0)) {
         return 0;
       }
-      FUN_00059708(iVar1);
+      cleanup_ble_connection_and_free_memory(iVar1);
       return iVar2;
     }
-    FUN_00059708(iVar1);
+    cleanup_ble_connection_and_free_memory(iVar1);
   }
   return -0xc;
 }

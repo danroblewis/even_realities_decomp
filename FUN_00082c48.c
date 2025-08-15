@@ -20,7 +20,7 @@ void FUN_00082c48(undefined4 param_1,int param_2,undefined4 param_3,undefined4 p
   
   puVar4 = *(undefined4 **)(param_2 + 0xc);
   local_24 = *(undefined1 *)((int)puVar4 + 6);
-  local_23 = FUN_00082c0e(param_2);
+  local_23 = map_ble_handle_to_index_with_validation(param_2);
   pcVar5 = (char *)*puVar4;
   if (*pcVar5 == '\0') {
     local_21[0]._0_2_ = *(undefined2 *)(pcVar5 + 2);

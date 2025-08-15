@@ -15,7 +15,7 @@ uint process_state_machine(undefined4 state_data,undefined1 *output_state)
   undefined4 extraout_r3;
   
   uVar1 = shift_left_by_one();
-  uVar2 = thunk_FUN_00064134(state_data);
+  uVar2 = lookup_timer_interrupt_data_from_table(state_data);
   if (3 < uVar1) {
     process_data_with_state_management_alt4();
     uVar2 = extraout_r3;

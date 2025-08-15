@@ -20,7 +20,7 @@ void bt_connection_disconnect_with_state_management_and_callback_validation_and_
   uVar5 = param_1;
   local_14 = param_2;
   while( true ) {
-    if (&DAT_00087fec < puVar4) {
+    if (&BT_CONNECTION_CALLBACK_LIST_START < puVar4) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","fchan <= _bt_l2cap_fixed_chan_list_end",
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x185,uVar5);
       DEBUG_PRINT2("\tunexpected list end location\n");

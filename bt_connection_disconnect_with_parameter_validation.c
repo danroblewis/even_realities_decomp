@@ -15,15 +15,15 @@ void bt_connection_disconnect_with_parameter_validation
   
   *(undefined1 *)(param_1 + 10) = *(undefined1 *)(param_1 + 9);
   FUN_000819ea();
-  for (iVar3 = DAT_2000ad1c; iVar3 != 0; iVar3 = *(int *)(iVar3 + 0x20)) {
+  for (iVar3 = BT_CONNECTION_CALLBACK_LIST_HEAD; iVar3 != 0; iVar3 = *(int *)(iVar3 + 0x20)) {
     pcVar1 = *(code **)(iVar3 + 0x14);
     if (pcVar1 != (code *)0x0) {
       (*pcVar1)(param_1,*(undefined1 *)(param_1 + 9),param_3,pcVar1,param_4);
     }
   }
-  puVar2 = &DAT_00087fec;
+  puVar2 = &BT_CONNECTION_CALLBACK_LIST_START;
   while( true ) {
-    if (&DAT_00088058 < puVar2) {
+    if (&BT_CONNECTION_CALLBACK_LIST_END < puVar2) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","cb <= _bt_conn_cb_list_end",
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x8ca);
       DEBUG_PRINT2("\tunexpected list end location\n");

@@ -31,7 +31,7 @@ int flash_settings_read(undefined4 param_1,undefined4 param_2,undefined4 param_3
       DEBUG_PRINT("Flash read failed! %d\n",iVar1);
     }
     if (iVar4 == 10) break;
-    get_schedule_timing(0xccd,0);
+    calculate_ble_schedule_timing(0xccd,0);
     iVar4 = iVar4 + 1;
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {

@@ -22,7 +22,7 @@ undefined4 display_reflash(int param_1,uint param_2)
   
   fill_memory_buffer(&local_30,0,0x18);
   if (param_2 < 0xb) {
-    lVar6 = thunk_FUN_00074f68();
+    lVar6 = calculate_ble_connection_timing_with_validation();
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): send reflash command......\n","display_reflash");
@@ -47,7 +47,7 @@ undefined4 display_reflash(int param_1,uint param_2)
           handle_heartbeat();
         }
       }
-      lVar7 = thunk_FUN_00074f68();
+      lVar7 = calculate_ble_connection_timing_with_validation();
       if (2 < LOG_LEVEL) {
         uVar4 = (uint)((ulonglong)(lVar7 * 1000) >> 0x20);
         uVar2 = (uint)((ulonglong)(lVar6 * 1000) >> 0x20);

@@ -50,7 +50,7 @@ void process_framebuffer_with_ui_overlay(int param_1,undefined4 param_2,int para
           } while (iVar3 != 0x140);
           uVar4 = uVar4 + 1;
         } while (uVar4 != 199);
-        get_schedule_timing(0xa4,0);
+        calculate_ble_schedule_timing(0xa4,0);
         iVar3 = get_work_mode();
         uVar2 = *(undefined4 *)(iVar3 + 0xeb4);
         iVar3 = get_work_mode();

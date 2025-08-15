@@ -144,7 +144,7 @@ void FUN_0006c778(int param_1,int param_2,float *param_3,int param_4,int *param_
   pfVar9 = local_168;
   do {
     uVar19 = FPMaxNum(uVar36,*pfVar9);
-    fVar16 = (float)FUN_000759b8(uVar19,local_268);
+    fVar16 = (float)normalize_float_number(uVar19,local_268);
     *pfVar9 = (((float)(longlong)(int)local_268[0] - 3.5056736) +
               fVar16 * (fVar16 * (fVar16 * (fVar16 * -1.2947968 + 5.11769) + -8.422953) + 8.105579))
               * 0.5;

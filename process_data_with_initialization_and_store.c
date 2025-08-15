@@ -19,15 +19,15 @@ int process_data_with_initialization_and_store(undefined2 param_1,undefined4 par
                     /* WARNING: Subroutine does not return */
     assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0x10a);
   }
-  FUN_0005f4d4(iVar1 + 0xc,1);
+  calculate_buffer_offset(iVar1 + 0xc,1);
   *(undefined1 *)(iVar1 + 0x18) = 0;
-  iVar2 = FUN_0005ee18(iVar1);
+  iVar2 = calculate_ble_memory_size(iVar1);
   *(undefined2 *)(&DAT_2000abf6 + iVar2 * 0xc) = param_1;
-  iVar2 = FUN_0005ee18(iVar1);
+  iVar2 = calculate_ble_memory_size(iVar1);
   *(undefined4 *)(&DAT_2000abfc + iVar2 * 0xc) = 0;
-  iVar2 = FUN_0005ee18(iVar1);
+  iVar2 = calculate_ble_memory_size(iVar1);
   *(undefined4 *)(&DAT_2000abf8 + iVar2 * 0xc) = 0;
-  puVar3 = (undefined2 *)FUN_0005f5d0(iVar1 + 0xc,3);
+  puVar3 = (undefined2 *)ble_memory_allocation_utility(iVar1 + 0xc,3);
   *puVar3 = param_1;
   *(char *)(puVar3 + 1) = (char)param_2;
   return iVar1;

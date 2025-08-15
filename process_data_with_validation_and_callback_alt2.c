@@ -39,8 +39,9 @@ int process_data_with_validation_and_callback_alt2(void)
     else {
       uVar1 = *(uint *)(local_64 + 8) & 3;
       if (uVar1 != 0) {
-        FUN_00076a94("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/src/zephyr_img_mgmt.c",0x43
-                     ,"img_mgmt_flash_check_empty_inner","fa->fa_size % 4 == 0");
+        process_data_loop_with_validation_and_retry
+                  ("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/src/zephyr_img_mgmt.c",0x43,
+                   "img_mgmt_flash_check_empty_inner","fa->fa_size % 4 == 0");
       }
       iVar2 = FUN_0007f012(iVar5);
       iVar7 = *(int *)(iVar5 + 8);

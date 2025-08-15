@@ -18,9 +18,9 @@ undefined4 allocate_and_initialize_att_connection_context(undefined4 param_1,und
   undefined4 *local_20;
   undefined4 *local_1c;
   
-  local_1c = (undefined4 *)FUN_00071c20(&DAT_20003738,&local_20,0,0);
+  local_1c = (undefined4 *)process_ble_connection_data(&DAT_20003738,&local_20,0,0);
   if (local_1c == (undefined4 *)0x0) {
-    DAT_2000ae9c = FUN_000748ac();
+    DAT_2000ae9c = process_ble_data_with_callback_validation();
     puVar1 = local_20;
     fill_memory_buffer(local_20 + 1,0,0x34);
     *puVar1 = param_1;
@@ -28,7 +28,7 @@ undefined4 allocate_and_initialize_att_connection_context(undefined4 param_1,und
     local_20[2] = 0;
     local_20[0xc] = 0;
     local_20[0xd] = 0;
-    iVar2 = FUN_00071c20(&DAT_20003758,&local_1c,0,0);
+    iVar2 = process_ble_connection_data(&DAT_20003758,&local_1c,0,0);
     if (iVar2 == 0) {
       iVar2 = fill_memory_buffer(local_1c,0,0x198);
       *(undefined **)(iVar2 + 0xc) = &DAT_200029ac;

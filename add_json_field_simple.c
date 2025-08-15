@@ -12,7 +12,7 @@ undefined4 add_json_field_simple(undefined4 json_obj,undefined4 field_value)
   int iVar2;
   
   uVar1 = create_json_number_value();
-  iVar2 = FUN_0006466c(json_obj,field_value,uVar1,0);
+  iVar2 = set_json_object_field_with_memory_management(json_obj,field_value,uVar1,0);
   if (iVar2 == 0) {
     cleanup_json_node(uVar1);
     uVar1 = 0;

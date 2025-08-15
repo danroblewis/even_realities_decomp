@@ -23,7 +23,7 @@ void FUN_00073960(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar3 = FUN_00072040(&DAT_2000b490);
+  iVar3 = check_connection_state_validity(&DAT_2000b490);
   if (iVar3 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,param_4);
@@ -31,11 +31,11 @@ void FUN_00073960(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     uVar4 = 0x72;
   }
   else {
-    FUN_00072078(&DAT_2000b490);
+    update_connection_state_flags(&DAT_2000b490);
     if (*(int *)(param_1 + 8) != 0) {
-      FUN_00074274(param_1);
+      remove_ble_connection_from_active_list(param_1);
     }
-    iVar3 = FUN_0007205c(&DAT_2000b490);
+    iVar3 = validate_and_clear_connection_state(&DAT_2000b490);
     if (iVar3 != 0) {
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {

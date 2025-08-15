@@ -18,7 +18,7 @@ int request_ancs_attr_ext(undefined4 param_1,uint param_2,undefined4 param_3)
   do {
     if ((((DAT_20006aa4 == 0) && ((ushort)DAT_20006aa0 != 0)) && (*DAT_20006aa8 != '\0')) &&
        (*(char *)(iVar1 + 0x44) != '\0')) goto LAB_0001925a;
-    get_schedule_timing(0x21,0);
+    calculate_ble_schedule_timing(0x21,0);
     uVar3 = uVar3 + 1 & 0xffff;
   } while (uVar3 != 0x3e9);
   if (0 < LOG_LEVEL) {
@@ -45,7 +45,7 @@ LAB_0001925a:
       for (; uVar3 < 200; uVar3 = uVar3 + 1 & 0xffff) {
         iVar2 = thunk_FUN_0007f7d2(&DAT_20006ae8,DAT_20006aa8,(ushort)DAT_20006aa0,&LAB_0001827c_1);
         if (iVar2 == 0) goto LAB_00019286;
-        get_schedule_timing(0xa4,0);
+        calculate_ble_schedule_timing(0xa4,0);
       }
       if (iVar2 != 0) {
         DEBUG_PRINT("Failed requesting attributes for a given app (err: %d)\n",iVar2);

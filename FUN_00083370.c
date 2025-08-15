@@ -54,10 +54,10 @@ LAB_00083462:
     else {
       if (*(int *)(param_1 + 0xc0) == 0) {
 LAB_000833f0:
-        iVar3 = FUN_0005e7c8(0x20,*(undefined1 *)(param_1 + 8),param_1 + 0x90);
+        iVar3 = find_ble_attribute_by_properties(0x20,*(undefined1 *)(param_1 + 8),param_1 + 0x90);
         *(int *)(param_1 + 0xc0) = iVar3;
         if (iVar3 == 0) {
-          uVar4 = FUN_0005e7c8(1,*(undefined1 *)(param_1 + 8),param_1 + 0x90);
+          uVar4 = find_ble_attribute_by_properties(1,*(undefined1 *)(param_1 + 8),param_1 + 0x90);
           *(undefined4 *)(param_1 + 0xc0) = uVar4;
         }
         if ((sVar1 == 0) && (local_28 == 0 && iStack_24 == 0)) goto LAB_00083462;

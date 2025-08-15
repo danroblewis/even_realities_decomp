@@ -25,7 +25,7 @@ void FUN_000821f4(undefined4 param_1,int param_2,undefined2 param_3,undefined1 p
                  extraout_r2,extraout_r3);
     return;
   }
-  puVar2 = (undefined1 *)FUN_0005f5d0(iVar1 + 0xc,4);
+  puVar2 = (undefined1 *)ble_memory_allocation_utility(iVar1 + 0xc,4);
   *puVar2 = (char)param_2;
   *(undefined2 *)(puVar2 + 1) = param_3;
   puVar2[3] = param_4;

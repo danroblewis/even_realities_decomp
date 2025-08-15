@@ -71,7 +71,8 @@ void float_to_string_ieee754(undefined4 output_buffer,uint float_value,int unuse
       }
     }
   }
-  FUN_0007ee74(iVar1,uStack_48,float_value & 0xfff001ff | uVar3 << 9,uStack_4c);
+  bt_connection_data_processing_and_callback
+            (iVar1,uStack_48,float_value & 0xfff001ff | uVar3 << 9,uStack_4c);
   return;
 }
 

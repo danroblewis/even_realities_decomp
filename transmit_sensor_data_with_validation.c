@@ -29,9 +29,9 @@ transmit_sensor_data_with_validation(int param_1,int param_2,undefined1 *param_3
     else {
       iVar2 = (**(code **)(*(int *)(param_2 + 8) + 4))();
       if (iVar2 == 0) {
-        get_schedule_timing(0x4000,0);
+        calculate_ble_schedule_timing(0x4000,0);
         (**(code **)(*(int *)(param_2 + 8) + 0x1c))(param_2,*param_3);
-        get_schedule_timing(0xccd,0);
+        calculate_ble_schedule_timing(0xccd,0);
         uVar3 = 0;
       }
       else {

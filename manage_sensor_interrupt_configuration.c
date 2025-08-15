@@ -18,7 +18,7 @@ void manage_sensor_interrupt_configuration
                     /* WARNING: Subroutine does not return */
     assertion_failure("WEST_TOPDIR/modules/hal/nordic/nrfx/hal/nrf_ipc.h",0x1e7);
   }
-  uVar1 = FUN_000635a4(sensor_config);
+  uVar1 = manage_timer_interrupt_state(sensor_config);
   puVar2 = (uint *)(sensor_index * 4 + 0x5002a180);
   if (enable_flag == 0) {
     FUN_00064fd4(interrupt_mask,uVar1);

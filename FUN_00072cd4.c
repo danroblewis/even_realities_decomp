@@ -43,7 +43,7 @@ LAB_00072d58:
       goto LAB_00072d34;
     }
     if (DMIC_BUFFER_SIZE == iVar2) {
-      iVar1 = FUN_00086406();
+      iVar1 = check_privilege_level();
       iVar3 = *(int *)(iVar2 + 0xf0);
       if (iVar1 != 0) goto LAB_00072d28;
       if (iVar3 << 0x1f < 0) {

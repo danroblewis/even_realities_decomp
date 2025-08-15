@@ -16,14 +16,16 @@ void handle_buffer_overflow_condition
   undefined8 uVar5;
   
   if ((int)param_3 < 0) {
-    FUN_00077c78(param_1,param_4,&stack0x00000000);
+    process_string_with_maximum_value_and_validation(param_1,param_4,&stack0x00000000);
   }
   else {
-    uVar1 = FUN_00077c30(param_1,param_3,param_4,&stack0x00000000,param_1,&stack0x00000000,param_3);
+    uVar1 = printf_format_string_wrapper
+                      (param_1,param_3,param_4,&stack0x00000000,param_1,&stack0x00000000,param_3);
     if ((-1 < (int)uVar1) && (param_3 <= uVar1)) {
       uVar5 = handle_buffer_overflow();
       iVar3 = (int)((ulonglong)uVar5 >> 0x20);
-      iVar2 = FUN_00079528((int)uVar5,(int)*(short *)(iVar3 + 0xe));
+      iVar2 = execute_resource_function_with_mutex_protection
+                        ((int)uVar5,(int)*(short *)(iVar3 + 0xe));
       bVar4 = -1 < iVar2;
       if (bVar4) {
         uVar1 = *(int *)(iVar3 + 0x54) + iVar2;

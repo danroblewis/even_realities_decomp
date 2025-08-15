@@ -26,7 +26,7 @@ undefined4 FUN_00072674(uint *param_1,uint *param_2,uint *param_3,int param_4,ch
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar2 = FUN_00072040(puVar5);
+  iVar2 = check_connection_state_validity(puVar5);
   if (iVar2 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -36,11 +36,11 @@ LAB_000726b6:
                     /* WARNING: Subroutine does not return */
     assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar6);
   }
-  FUN_00072078(puVar5);
+  update_connection_state_flags(puVar5);
   if (param_5 != '\0') {
     param_2 = (uint *)param_1[1];
   }
-  iVar2 = FUN_000744a4(param_1 + 3);
+  iVar2 = process_ble_connection_list_with_cleanup(param_1 + 3);
   if (iVar2 != 0) {
     *(uint **)(iVar2 + 0x14) = param_3;
     *(undefined4 *)(iVar2 + 0x90) = 0;
@@ -51,9 +51,9 @@ LAB_000726b6:
     *param_3 = 0;
   }
   else {
-    puVar3 = (uint *)FUN_00075944(0,8);
+    puVar3 = (uint *)allocate_ble_memory_with_alignment_and_validation(0,8);
     if (puVar3 == (uint *)0x0) {
-      iVar2 = FUN_0007205c(puVar5);
+      iVar2 = validate_and_clear_connection_state(puVar5);
       if (iVar2 != 0) {
         bVar1 = (bool)isCurrentModePrivileged();
         if (bVar1) {
@@ -97,7 +97,7 @@ LAB_00072748:
   }
   initialize_audio_system(param_1 + 5,4);
 LAB_000726e2:
-  FUN_000739f0(puVar5,uVar6);
+  validate_ble_connection_state_with_priority(puVar5,uVar6);
   return 0;
 }
 

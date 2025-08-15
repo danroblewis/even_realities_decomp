@@ -26,7 +26,7 @@ undefined4 process_for_message_show(char *param_1,int param_2,byte *param_3,unde
     iVar3 = get_data_by_index_offset(*(byte *)(iVar3 + 0xdd) - 1);
     if (iVar3 == 4) break;
     sVar7 = sVar7 + -1;
-    get_schedule_timing(0x21,0);
+    calculate_ble_schedule_timing(0x21,0);
   } while (sVar7 != 0);
   uVar8 = 0;
   *(undefined1 *)(param_2 + 8) = 0;
@@ -98,7 +98,7 @@ undefined4 process_for_message_show(char *param_1,int param_2,byte *param_3,unde
         }
       }
 LAB_0002c894:
-      get_schedule_timing(0x667,0);
+      calculate_ble_schedule_timing(0x667,0);
     }
     if ((*(char *)(param_2 + 1) == '\x06') ||
        ((*(char *)(param_2 + 1) != '\x06' && (*param_3 == 2)))) {
@@ -131,7 +131,7 @@ LAB_0002c894:
     else if (*(char *)(param_2 + 1) == '\x04') goto LAB_0002c894;
     control_timer_operation(5);
     if (*param_1 == '\x01') {
-      get_schedule_timing(0x4000,0);
+      calculate_ble_schedule_timing(0x4000,0);
     }
     iVar3 = get_system_status_value();
   } while (iVar3 == 4);

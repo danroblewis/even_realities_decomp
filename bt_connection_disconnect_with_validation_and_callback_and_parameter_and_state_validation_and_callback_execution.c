@@ -58,7 +58,7 @@ bt_connection_disconnect_with_validation_and_callback_and_parameter_and_state_va
       return 0;
     }
   }
-  puVar4 = (undefined2 *)FUN_0005f5d0(param_3[2] + 0xc,4);
+  puVar4 = (undefined2 *)ble_memory_allocation_utility(param_3[2] + 0xc,4);
   param_3[4] = (int)puVar4;
   *puVar4 = uVar1;
   *(undefined2 *)(param_3[4] + 2) = uVar1;

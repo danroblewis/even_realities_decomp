@@ -37,7 +37,7 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
       }
       else {
         FUN_0008504c(iVar4,"enable",((uint)DAT_2001a22c << 0x1b) >> 0x1f);
-        iVar5 = FUN_00064c8c();
+        iVar5 = create_json_array_value();
         if (iVar5 == 0) {
           uVar7 = 0x20e;
           pcVar2 = "[%s-%d]appListInfoJson is null \n";
@@ -58,7 +58,7 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
               }
               strcpy_safe(param_1,uVar7);
               uVar1 = calculate_string_length(uVar7);
-              call_data_verification_handler(uVar7);
+              call_data_verification_handler_with_memory_cleanup(uVar7);
               cleanup_json_node(iVar3);
               return uVar1;
             }

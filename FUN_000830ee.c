@@ -17,10 +17,10 @@ undefined4 FUN_000830ee(int param_1,undefined4 param_2,undefined4 param_3,undefi
     uVar3 = 8;
   }
   else {
-    puVar2 = (undefined4 *)FUN_0005f5d0(iVar1 + 0xc,6);
+    puVar2 = (undefined4 *)ble_memory_allocation_utility(iVar1 + 0xc,6);
     *puVar2 = *(undefined4 *)(param_1 + 0x11);
     *(undefined2 *)(puVar2 + 1) = *(undefined2 *)(param_1 + 0x15);
-    FUN_0005cb38(param_1,iVar1,0);
+    update_ble_connection_state_with_error_handling(param_1,iVar1,0);
     uVar3 = 0;
   }
   return uVar3;

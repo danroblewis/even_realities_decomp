@@ -13,7 +13,7 @@ int FUN_00083bf0(int param_1,uint param_2,int param_3)
   int iVar3;
   
   iVar3 = *(int *)(param_1 + 4);
-  iVar1 = FUN_00086406();
+  iVar1 = check_privilege_level();
   if (iVar1 != 0) {
     return -0xb;
   }

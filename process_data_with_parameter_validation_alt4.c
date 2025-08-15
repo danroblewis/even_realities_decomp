@@ -84,7 +84,7 @@ LAB_00051de4:
   uVar1 = process_data_with_state_management_alt3(param_1);
   iVar5 = setup_device_buffer_with_validation(uVar1,&local_24);
   if (iVar5 == 0) {
-    iVar5 = FUN_000641e4(local_24,uVar2 == param_1,param_2);
+    iVar5 = process_timer_interrupt_data_by_type(local_24,uVar2 == param_1,param_2);
     if (iVar5 != 0) {
       local_3c = "Faled boot_set_next with code %d, for slot %d, with active slot %d and confirm %d"
       ;

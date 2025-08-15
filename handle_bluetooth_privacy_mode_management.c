@@ -58,7 +58,7 @@ void handle_bluetooth_privacy_mode_management(undefined1 *param_1)
         local_29 = 1;
         iVar1 = process_data_with_initialization_and_store(0x204e,8);
         if (iVar1 != 0) {
-          FUN_00083740(iVar1 + 0xc,auStack_30,8);
+          ble_memory_copy_utility(iVar1 + 0xc,auStack_30,8);
           iVar1 = process_data_with_initialization_and_validation(0x204e,iVar1,0);
           if (iVar1 == 0) goto LAB_00054f5c;
         }

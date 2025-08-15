@@ -34,7 +34,7 @@ int format_string_with_printf
     local_78[0] = param_2;
     local_68 = param_2;
     local_64 = local_70;
-    iVar1 = FUN_00078d90(param_1,local_78,param_4,param_5);
+    iVar1 = process_printf_format_comprehensive(param_1,local_78,param_4,param_5);
     if (iVar1 + 1 < 0 != SCARRY4(iVar1,1)) {
       *param_1 = 0x8b;
     }

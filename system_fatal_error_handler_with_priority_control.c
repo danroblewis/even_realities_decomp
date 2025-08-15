@@ -20,7 +20,7 @@ void system_fatal_error_handler_with_priority_control(undefined4 error_code)
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  FUN_00063954();
+  initialize_timer_interrupt_settings();
   process_data_with_validation_and_callback_alt5(error_code);
   DEBUG_PRINT("Failed to reboot: spinning endlessly...\n");
   do {

@@ -50,7 +50,7 @@ int fuel_gauge_update(undefined4 param_1)
       uVar10 = FUN_0007ceda();
       goto LAB_00010c00;
     }
-    get_schedule_timing(0xa4,0);
+    calculate_ble_schedule_timing(0xa4,0);
   }
   if (fVar8 <= 0.0) {
     return 0;

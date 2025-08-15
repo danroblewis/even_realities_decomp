@@ -28,7 +28,7 @@ LAB_00047886:
 LAB_00047876:
       *(short *)(param_3 + iVar3 * 2) = (short)uVar1;
       if (param_4 + -1 == iVar3) {
-        printf_format_string_with_buffer("maybe array overflow!(k=%d)\n",iVar3);
+        printf_format_string_with_buffer_integration("maybe array overflow!(k=%d)\n",iVar3);
         goto LAB_00047886;
       }
       iVar3 = iVar3 + 1;

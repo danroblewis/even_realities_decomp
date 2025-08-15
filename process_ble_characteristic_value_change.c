@@ -28,7 +28,7 @@ int process_ble_characteristic_value_change(undefined4 *param_1,int param_2)
       FUN_00081ddc(&DAT_00088100,0x1040,&local_28);
       bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
                 (*(undefined4 *)(param_2 + 0x18));
-      FUN_0005f24c(param_2);
+      decrement_reference_count_and_cleanup_memory(param_2);
     }
     else {
       uVar2 = FUN_00083728(param_2 + 0xc);

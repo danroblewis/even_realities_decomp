@@ -8,7 +8,7 @@
 void FUN_0007cb66(void)
 
 {
-  FUN_00071eac();
+  initialize_ble_connection_with_timeout();
   return;
 }
 

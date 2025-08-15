@@ -25,7 +25,7 @@ set_device_sn_info(int param_1,undefined4 param_2,undefined4 *param_3,undefined1
     param_1 = param_1 + 4;
     puVar4 = (undefined1 *)*param_3;
     call_function_with_parameters(param_1);
-    printf_format_string_with_buffer("The string is: %s\n",param_1);
+    printf_format_string_with_buffer_integration("The string is: %s\n",param_1);
     uVar1 = get_work_mode();
     prepare_system_settings_for_verification(uVar1,0);
     if (2 < LOG_LEVEL) {

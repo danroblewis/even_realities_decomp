@@ -888,8 +888,9 @@ switchD_0003f438_caseD_4:
             local_34 = 0;
             local_30 = 0;
             local_2c = local_2c & 0xffff0000;
-            FUN_00077914(&local_34,10,"%s>%s",*(undefined4 *)(&DAT_200024f4 + (uVar15 - 1) * 4),
-                         *(undefined4 *)(&DAT_200024f4 + uVar13 * 4));
+            process_string_with_error_handling_and_validation
+                      (&local_34,10,"%s>%s",*(undefined4 *)(&DAT_200024f4 + (uVar15 - 1) * 4),
+                       *(undefined4 *)(&DAT_200024f4 + uVar13 * 4));
             if (3 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): draw translate type content\n","ui_translate_task");
@@ -1051,8 +1052,9 @@ LAB_00040162:
           local_34 = 0;
           local_30 = 0;
           local_2c = local_2c & 0xffff0000;
-          FUN_00077914(&local_34,10,"%s>%s",*(undefined4 *)(&DAT_200024f4 + (uVar15 - 1) * 4),
-                       *(undefined4 *)(&DAT_200024f4 + uVar13 * 4));
+          process_string_with_error_handling_and_validation
+                    (&local_34,10,"%s>%s",*(undefined4 *)(&DAT_200024f4 + (uVar15 - 1) * 4),
+                     *(undefined4 *)(&DAT_200024f4 + uVar13 * 4));
           if (3 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): draw translate type content\n","ui_translate_task");

@@ -37,13 +37,13 @@ void process_ble_characteristic_value_change_with_callback(int *param_1)
     process_data_with_callback_and_parameter_alt6(auStack_34,0x24,"ccc",iVar1 + 0x90);
     initialize_buffer_structure_with_validation(auStack_34,0x5af8d);
   }
-  FUN_00082c9c(1,0xffff,0x5b555,&local_3c);
-  uVar3 = FUN_000814e2(iVar1);
+  ble_handle_mapping_utility(1,0xffff,0x5b555,&local_3c);
+  uVar3 = get_ble_property_value(iVar1);
   if ((uVar3 < local_38) &&
      (local_48 = (undefined1 *)FUN_0008149a(iVar1), local_48 != (undefined1 *)0x0)) {
     local_4c = "Failed to set security for bonded peer (%d)";
     local_50 = 3;
-    FUN_00082a42(&DAT_00088128,0x1880,&local_50);
+    ble_data_processing_wrapper(&DAT_00088128,0x1880,&local_50);
   }
   return;
 }

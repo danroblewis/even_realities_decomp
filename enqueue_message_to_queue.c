@@ -40,7 +40,7 @@ undefined4 enqueue_message_to_queue(int param_1,undefined4 param_2,int param_3,i
     iVar8 = param_1;
     uVar9 = param_2;
     iVar10 = param_3;
-    iVar2 = FUN_00072040(iVar6);
+    iVar2 = check_connection_state_validity(iVar6);
     if (iVar2 == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                    "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,iVar8,uVar9,iVar10);
@@ -48,15 +48,15 @@ undefined4 enqueue_message_to_queue(int param_1,undefined4 param_2,int param_3,i
       uVar3 = 0x72;
     }
     else {
-      FUN_00072078(iVar6);
+      update_connection_state_flags(iVar6);
       iVar2 = DMIC_BUFFER_SIZE;
       if (*(uint *)(param_1 + 0x24) < *(uint *)(param_1 + 0x10)) {
-        iVar2 = FUN_000744a4(param_1);
+        iVar2 = process_ble_connection_list_with_cleanup(param_1);
         if (iVar2 != 0) {
           memcpy(*(undefined4 *)(iVar2 + 0x14),param_2,*(undefined4 *)(param_1 + 0xc));
           *(undefined4 *)(iVar2 + 0x90) = 0;
           FUN_000738d4(iVar2);
-          FUN_000739f0(iVar6,uVar3);
+          validate_ble_connection_state_with_priority(iVar6,uVar3);
           return 0;
         }
         uVar4 = *(uint *)(param_1 + 0x20);
@@ -84,12 +84,12 @@ undefined4 enqueue_message_to_queue(int param_1,undefined4 param_2,int param_3,i
       else {
         if (param_3 != 0 || param_4 != 0) {
           *(undefined4 *)(DMIC_BUFFER_SIZE + 0x14) = param_2;
-          uVar3 = FUN_00073f6c(iVar6,uVar3,param_1,iVar2,param_3,param_4);
+          uVar3 = handle_ble_connection_state_transition(iVar6,uVar3,param_1,iVar2,param_3,param_4);
           return uVar3;
         }
         uVar5 = 0xffffffdd;
       }
-      iVar2 = FUN_0007205c(iVar6);
+      iVar2 = validate_and_clear_connection_state(iVar6);
       if (iVar2 != 0) {
         bVar7 = (bool)isCurrentModePrivileged();
         if (bVar7) {

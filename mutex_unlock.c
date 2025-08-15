@@ -43,7 +43,7 @@ undefined4 mutex_unlock(int mutex)
         setBasePriority(0x20);
       }
       InstructionSynchronizationBarrier(0xf);
-      iVar4 = FUN_00072040(&DAT_2000b470);
+      iVar4 = check_connection_state_validity(&DAT_2000b470);
       if (iVar4 == 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                      "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
@@ -51,19 +51,19 @@ undefined4 mutex_unlock(int mutex)
         uVar3 = 0x72;
       }
       else {
-        FUN_00072078(&DAT_2000b470);
+        update_connection_state_flags(&DAT_2000b470);
         setup_buffer_management(*(undefined4 *)(mutex + 8),*(undefined4 *)(mutex + 0x10));
-        iVar4 = FUN_000744a4(mutex);
+        iVar4 = process_ble_connection_list_with_cleanup(mutex);
         *(int *)(mutex + 8) = iVar4;
         if (iVar4 != 0) {
           *(int *)(mutex + 0x10) = (int)*(char *)(iVar4 + 0xe);
           *(undefined4 *)(iVar4 + 0x90) = 0;
           FUN_000738d4();
-          FUN_000739f0(&DAT_2000b470,uVar3);
+          validate_ble_connection_state_with_priority(&DAT_2000b470,uVar3);
           return 0;
         }
         *(undefined4 *)(mutex + 0xc) = 0;
-        iVar4 = FUN_0007205c(&DAT_2000b470);
+        iVar4 = validate_and_clear_connection_state(&DAT_2000b470);
         if (iVar4 != 0) {
           bVar1 = (bool)isCurrentModePrivileged();
           if (bVar1) {

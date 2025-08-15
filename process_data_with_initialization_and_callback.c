@@ -32,7 +32,7 @@ int process_data_with_initialization_and_callback(int param_1,uint param_2,undef
         return iVar2;
       }
       memcpy(param_1,*(int *)(local_1c + 0xc) + 1,uVar3);
-      FUN_0005f24c(uVar1);
+      decrement_reference_count_and_cleanup_memory(uVar1);
       param_1 = param_1 + uVar3;
       iVar2 = extraout_r3;
     }

@@ -15,7 +15,7 @@ int bt_connection_disconnect_with_validation_and_callback(undefined4 param_1,und
                     (&DAT_20006138);
   if (iVar1 != 0) {
     if ((*(char *)(iVar1 + 2) == '\x01') &&
-       (iVar2 = FUN_000814e6(iVar1,param_1,param_2), iVar2 != 0)) {
+       (iVar2 = ble_uuid_comparison_handler(iVar1,param_1,param_2), iVar2 != 0)) {
       return iVar1;
     }
     validate_and_process_ble_characteristics_with_callback_validation_and_state_management(iVar1);

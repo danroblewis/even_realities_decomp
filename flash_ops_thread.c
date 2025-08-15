@@ -19,7 +19,7 @@ void flash_ops_thread(void)
     }
   }
   do {
-    FUN_00072908(&DAT_200079e4);
+    manage_ble_connection_state_comprehensive(&DAT_200079e4);
     while (iVar1 = get_sensor_data_buffer_address_alt(), iVar1 != 0) {
       audioStreamFileManagerHandler();
     }

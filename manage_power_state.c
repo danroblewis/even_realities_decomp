@@ -20,7 +20,7 @@ void manage_power_state(undefined4 power_data)
     FUN_0007350c(iVar1 + 0x38,(int)((ulonglong)uVar2 >> 0x20),0x8000,0);
     return;
   }
-  FUN_00073518(iVar1 + 0x38);
+  acquire_mutex_with_priority_control(iVar1 + 0x38);
   return;
 }
 

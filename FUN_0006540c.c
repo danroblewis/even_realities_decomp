@@ -8,7 +8,7 @@
 void FUN_0006540c(undefined4 param_1)
 
 {
-  FUN_00064eb8(&DAT_20002bbc,param_1);
+  process_bit_flags_and_return_value(&DAT_20002bbc,param_1);
   return;
 }
 

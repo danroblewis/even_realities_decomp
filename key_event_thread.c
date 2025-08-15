@@ -32,7 +32,8 @@ LAB_0002956e:
   if (*(char *)(iVar3 + 1) == '\x01') goto LAB_00029578;
   uVar10 = get_work_mode();
   if (*(char *)((int)uVar10 + 1) == '\b') goto LAB_00029578;
-  iVar3 = thunk_FUN_00072908(&DAT_20007b1c,(int)((ulonglong)uVar10 >> 0x20),0xffffffff,0xffffffff);
+  iVar3 = manage_ble_connection_state_comprehensive
+                    (&DAT_20007b1c,(int)((ulonglong)uVar10 >> 0x20),0xffffffff,0xffffffff);
   if (iVar3 != 0) goto switchD_000297f8_caseD_5;
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
@@ -251,7 +252,7 @@ LAB_00029654:
               }
             }
             display_DelayClose(10000);
-            thunk_FUN_000745c8();
+            manage_ble_connection_priority_with_data_processing();
             break;
           }
           if (1 < LOG_LEVEL) {
@@ -660,7 +661,7 @@ switchD_000297f8_caseD_5:
   DAT_20007b18 = 0;
   goto LAB_0002956e;
 LAB_00029578:
-  get_schedule_timing(0x28000,0);
+  calculate_ble_schedule_timing(0x28000,0);
   goto LAB_0002956e;
 LAB_0002a04c:
   if (2 < LOG_LEVEL) {
@@ -674,7 +675,7 @@ LAB_0002a04c:
   }
   display_DelayClose(10000);
 LAB_00029786:
-  thunk_FUN_000745c8();
+  manage_ble_connection_priority_with_data_processing();
   goto switchD_000297f8_caseD_5;
 LAB_00029a02:
   if (0 < LOG_LEVEL) {

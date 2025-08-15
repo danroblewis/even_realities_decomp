@@ -18,7 +18,7 @@ int verify_whitelist_app_chunked_data(void)
       allocate_and_init_whitelist_verification_buffer();
       break;
     }
-    get_schedule_timing(0xa4,0);
+    calculate_ble_schedule_timing(0xa4,0);
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("write to flash failed, should retry ! \n");
     }

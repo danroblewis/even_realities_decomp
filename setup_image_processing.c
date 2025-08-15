@@ -22,7 +22,7 @@ undefined4 setup_image_processing(int param_1,uint param_2)
         *pbVar3 = 0;
         return 0xfffffff5;
       }
-      FUN_000742b4(pbVar3 + -0x60);
+      cleanup_ble_connection_state_complete(pbVar3 + -0x60);
       if (param_2 == 8) {
         uVar2 = 0xfffffffc;
       }
@@ -43,7 +43,7 @@ LAB_00086846:
       if (*pbVar3 == 0) goto LAB_000867f8;
       iVar4 = *(int *)(pbVar3 + -4);
       if (iVar4 != 0) {
-        FUN_00074d74(pbVar3 + 0x14);
+        cleanup_ble_connection_state_with_validation(pbVar3 + 0x14);
         pbVar3[0x2c] = 0;
         pbVar3[0x2d] = 0;
         pbVar3[0x2e] = 0;

@@ -12,7 +12,8 @@ undefined4 setup_memory_pools(int param_1,uint param_2,uint param_3,undefined4 p
   undefined4 uVar2;
   
   if ((int)((ulonglong)param_2 * (ulonglong)param_3 >> 0x20) == 0) {
-    iVar1 = FUN_00075944(0,(int)((ulonglong)param_2 * (ulonglong)param_3),param_3,param_4,param_4);
+    iVar1 = allocate_ble_memory_with_alignment_and_validation
+                      (0,(int)((ulonglong)param_2 * (ulonglong)param_3),param_3,param_4,param_4);
     if (iVar1 == 0) {
       uVar2 = 0xfffffff4;
     }

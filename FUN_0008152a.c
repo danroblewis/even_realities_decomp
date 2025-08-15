@@ -15,7 +15,7 @@ FUN_0008152a(undefined2 *param_1,undefined2 *param_2,undefined4 param_3,undefine
   
   iVar1 = process_data_with_initialization_and_store(0x2013,0xe);
   if (iVar1 != 0) {
-    puVar2 = (undefined2 *)FUN_0005f5d0(iVar1 + 0xc,0xe);
+    puVar2 = (undefined2 *)ble_memory_allocation_utility(iVar1 + 0xc,0xe);
     fill_memory_buffer(puVar2,0,0xe);
     *puVar2 = *param_1;
     puVar2[1] = *param_2;

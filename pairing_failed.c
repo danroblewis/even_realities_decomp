@@ -11,7 +11,7 @@ void pairing_failed(undefined4 param_1,undefined4 param_2)
   undefined4 uVar1;
   undefined1 auStack_30 [36];
   
-  uVar1 = FUN_00081526();
+  uVar1 = get_connection_data_pointer();
   format_status_message(uVar1,auStack_30);
   DEBUG_PRINT("Pairing failed conn: %s, reason %d\n",auStack_30,param_2);
   if (0 < LOG_LEVEL) {

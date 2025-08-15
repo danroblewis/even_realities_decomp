@@ -30,14 +30,14 @@ process_ble_characteristic_value_change_with_parameter_validation(int param_1,in
     FUN_00081ddc(&DAT_00088100,0x1040,&local_30);
   }
   else {
-    pbVar2 = (byte *)FUN_0005f594(param_2 + 0xc,1);
+    pbVar2 = (byte *)update_buffer_position_and_size_alt(param_2 + 0xc,1);
     if (*(int *)(param_1 + -8) != 0) {
       iVar6 = 0;
       do {
         if ((&DAT_0008b2b4)[iVar6 * 8] == *pbVar2) {
           local_44 = *(int *)(param_1 + 0x13c);
           if (local_44 != 0) goto LAB_00058dbc;
-          uVar3 = FUN_0005f2d4(param_2);
+          uVar3 = increment_counter_in_structure(param_2);
           cVar1 = (&DAT_0008b2b6)[iVar6 * 8];
           *(undefined4 *)(param_1 + 0x13c) = uVar3;
           if (cVar1 == '\x01') {
@@ -80,7 +80,7 @@ LAB_00058dbc:
                     /* WARNING: Subroutine does not return */
         assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0xb54);
       }
-      uVar3 = FUN_0005f2d4(param_2);
+      uVar3 = increment_counter_in_structure(param_2);
       *(undefined4 *)(param_1 + 0x13c) = uVar3;
       uStack_50 = (uint)*pbVar2;
       local_54 = "Unhandled ATT code 0x%02x";
@@ -95,7 +95,7 @@ LAB_00058e12:
         FUN_000821f4(param_1 + -8,uVar5,0,iVar6);
       }
 LAB_00058d9c:
-      FUN_0005f24c(*(undefined4 *)(param_1 + 0x13c));
+      decrement_reference_count_and_cleanup_memory(*(undefined4 *)(param_1 + 0x13c));
       *(undefined4 *)(param_1 + 0x13c) = 0;
     }
   }

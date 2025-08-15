@@ -20,15 +20,15 @@ undefined4 FUN_000832f0(int param_1)
     iVar3 = *(int *)(param_1 + 0xf0);
     iVar1 = FUN_000830b0(uVar2,3);
     if (iVar1 != 0) {
-      uVar2 = FUN_0005f5d0(iVar1 + 0xc,0x10);
+      uVar2 = ble_memory_allocation_utility(iVar1 + 0xc,0x10);
       iVar3 = FUN_0008323a(param_1 + 0x47,param_1 + 0x27,param_1 + 9,param_1 + 0x10,iVar3 + 0x97,
                            iVar3 + 0x9e,uVar2);
       if (iVar3 == 0) {
-        FUN_0005cb38(param_1,iVar1,0);
+        update_ble_connection_state_with_error_handling(param_1,iVar1,0);
         FUN_0008304c(iVar4,0);
         goto LAB_00083362;
       }
-      FUN_0005f24c(iVar1);
+      decrement_reference_count_and_cleanup_memory(iVar1);
     }
     uVar2 = 8;
   }

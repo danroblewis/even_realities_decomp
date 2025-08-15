@@ -22,7 +22,7 @@ initialize_display_controller(longlong *param_1,undefined4 param_2,uint param_3,
     iVar1 = (-1 - param_4) - (uint)(0xfffffffe < param_3);
     lVar2 = CONCAT44(iVar1,-2 - param_3);
     if (iVar1 < 0) {
-      lVar2 = FUN_00074f68();
+      lVar2 = calculate_ble_connection_timing_with_validation();
       lVar2 = lVar2 + CONCAT44(param_4,param_3);
     }
   }

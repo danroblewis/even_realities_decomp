@@ -20,7 +20,7 @@ int process_data_with_parameter_validation_alt6(undefined4 param_1,int param_2)
       iVar1 = -0x16;
     }
     else {
-      thunk_FUN_0005f24c();
+      decrement_reference_count_and_cleanup_memory();
       iVar1 = 0;
       DAT_2000abf0 = 0;
       DAT_2000abec = 0;

@@ -58,7 +58,7 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
     if (-1 < iVar9) break;
     cVar10 = cVar10 + -1;
   } while (cVar10 != -1);
-  call_data_verification_handler(puVar3);
+  call_data_verification_handler_with_memory_cleanup(puVar3);
   if (cVar10 == -1) {
     return 0xffffffff;
   }
@@ -110,7 +110,7 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   while (iVar9 = (*(code *)*DAT_20007bc0)(&local_24,2,puVar5,cVar10 + '\f'), iVar9 < 0) {
     cVar11 = cVar11 + -1;
     if (cVar11 == -1) {
-      call_data_verification_handler(puVar5);
+      call_data_verification_handler_with_memory_cleanup(puVar5);
       return 0xffffffff;
     }
   }
@@ -129,7 +129,7 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   if (*(int *)(puVar5 + 6) != 0) {
     return 0xffffffff;
   }
-  call_data_verification_handler(puVar5);
+  call_data_verification_handler_with_memory_cleanup(puVar5);
   return 0;
 }
 

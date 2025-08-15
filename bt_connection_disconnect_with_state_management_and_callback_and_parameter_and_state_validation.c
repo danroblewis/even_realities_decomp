@@ -39,8 +39,9 @@ void bt_connection_disconnect_with_state_management_and_callback_and_parameter_a
     local_48 = 0;
     local_44 = (char *)0x0;
     local_3c = param_1;
-    sVar3 = FUN_0005f450(*(undefined4 *)(param_1 + 0x80),*(undefined2 *)(param_2 + 0x10),
-                         *(undefined4 *)(param_2 + 0xc));
+    sVar3 = process_ble_data_stream_in_chunks
+                      (*(undefined4 *)(param_1 + 0x80),*(undefined2 *)(param_2 + 0x10),
+                       *(undefined4 *)(param_2 + 0xc));
     if (*(short *)(param_2 + 0x10) == sVar3) {
       uVar8 = *(undefined4 *)(param_1 + 0x80);
       uVar4 = FUN_00081616(uVar8);
@@ -66,7 +67,7 @@ void bt_connection_disconnect_with_state_management_and_callback_and_parameter_a
               bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation
                         (param_1,1);
             }
-            FUN_0005f24c(uVar8);
+            decrement_reference_count_and_cleanup_memory(uVar8);
             return;
           }
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","atomic_get(&chan->rx.credits) == 0",

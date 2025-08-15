@@ -72,7 +72,7 @@ void handle_attitude_trigger(char *param_1)
     local_a4 = 0;
     while (param_1[0x15] != '\0') {
       while ((param_1[-0xee3] == '\x01' || (param_1[-0xee3] == '\b'))) {
-        get_schedule_timing(0x28000,0);
+        calculate_ble_schedule_timing(0x28000,0);
       }
       iVar1 = get_system_ready_state();
       if (iVar1 == 0) {
@@ -82,7 +82,7 @@ void handle_attitude_trigger(char *param_1)
         else {
           if (param_1[0x106] != '\f') {
             if ((int)((uint)*(ushort *)(param_1 + 0x178) << 0x1a) < 0) {
-              lVar16 = thunk_FUN_00074f68();
+              lVar16 = calculate_ble_connection_timing_with_validation();
               local_a4 = (uint)(lVar16 * 1000) >> 0xf |
                          (int)((ulonglong)(lVar16 * 1000) >> 0x20) * 0x20000;
               if (1000 < local_a4 - DAT_20007a94) {
@@ -268,7 +268,7 @@ LAB_00010544:
               DISPLAY_UI_STATE = 0;
 LAB_0001027a:
               if ((*param_1 == '\x01') && ((int)SYSTEM_NAVIGATION_CONFIG < 1)) {
-                thunk_FUN_00074f68();
+                calculate_ble_connection_timing_with_validation();
                 DAT_20007a88 = iVar13;
               }
             }
@@ -277,7 +277,7 @@ LAB_0001027a:
                 SYSTEM_LEVEL_CONFIG = iVar15;
                 SYSTEM_BASE_VALUE_CONFIG = iVar14;
                 ATTITUDE_PITCH_VALUE = iVar13;
-                thunk_FUN_00074f68();
+                calculate_ble_connection_timing_with_validation();
                 SYSTEM_NAVIGATION_CONFIG = SYSTEM_NAVIGATION_CONFIG + 1;
                 if (1 < (int)SYSTEM_NAVIGATION_CONFIG) {
                   SYSTEM_NAVIGATION_CONFIG = 0xfffffffd;
@@ -296,7 +296,7 @@ LAB_0001027a:
                     iVar1 = 0x65;
                     while (((iVar14 = get_work_mode(), *(char *)(iVar14 + 0x108f) == '\0' &&
                             (DISPLAY_UI_CONFIG != '\0')) && (iVar1 = iVar1 + -1, iVar1 != 0))) {
-                      get_schedule_timing(0x148,0);
+                      calculate_ble_schedule_timing(0x148,0);
                     }
                     send_event_status(2);
                     if (((((param_1[-0xe0f] == '\t') || (param_1[-0xe0f] == '\f')) ||
@@ -496,7 +496,7 @@ LAB_000103ea:
         }
       }
 LAB_0000ff38:
-      get_schedule_timing(uVar2,0);
+      calculate_ble_schedule_timing(uVar2,0);
     }
   }
   else if (1 < LOG_LEVEL) {

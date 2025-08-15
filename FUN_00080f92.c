@@ -10,7 +10,7 @@ uint FUN_00080f92(void)
 {
   uint uVar1;
   
-  uVar1 = FUN_0005e938();
+  uVar1 = find_ble_uuid_in_table();
   if ((uVar1 != 0) && (uVar1 = (uint)*(ushort *)(uVar1 + 0xe), uVar1 != 0)) {
     uVar1 = 1;
   }

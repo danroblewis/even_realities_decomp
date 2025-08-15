@@ -36,7 +36,7 @@ void process_data_with_initialization_and_validation_and_callback(int param_1)
     *(char *)(iVar2 + 0xb) = cVar5;
     if (*(char *)(iVar2 + 2) == '\x01') {
       if (cVar5 != '\0') {
-        FUN_0005e47c();
+        initialize_ble_attribute_with_properties();
       }
       iVar4 = determine_priority_level(iVar2);
       if (iVar4 == 0) {

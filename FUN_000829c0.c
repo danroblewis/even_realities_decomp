@@ -13,7 +13,7 @@ void FUN_000829c0(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
   undefined1 local_14 [8];
   
   local_14[0] = 0;
-  iVar1 = FUN_00059c04();
+  iVar1 = find_ble_attribute_by_handle();
   if (iVar1 != 0) {
     local_14[0] = *(undefined1 *)(iVar1 + 8);
   }

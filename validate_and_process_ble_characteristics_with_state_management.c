@@ -19,7 +19,7 @@ int validate_and_process_ble_characteristics_with_state_management(void)
   
   iVar1 = process_data_with_initialization_and_callback(auStack_30,0x20);
   if (iVar1 == 0) {
-    lVar3 = thunk_FUN_00074f68();
+    lVar3 = calculate_ble_connection_timing_with_validation();
     uStack_4c = (uint)((ulonglong)(lVar3 * 1000) >> 0x20);
     local_50 = (uint)(lVar3 * 1000) >> 0xf | uStack_4c * 0x20000;
     uStack_4c = uStack_4c >> 0xf;

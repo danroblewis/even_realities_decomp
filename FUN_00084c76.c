@@ -8,7 +8,7 @@
 void FUN_00084c76(void)
 
 {
-  FUN_00063610();
+  get_high_resolution_timer();
   return;
 }
 

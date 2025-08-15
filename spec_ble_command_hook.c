@@ -140,14 +140,14 @@ undefined4 spec_ble_command_hook(undefined4 param_1,undefined4 tx_data_len)
               handle_heartbeat();
             }
           }
-          sec = initialize_thermal_management(&local_5c0);
+          sec = initialize_thermal_management_with_string_parsing(&local_5c0);
           sec = sec * 0x3c + 0xe1a;
           local_520 = 7;
           uStack_51f = (undefined1)sec;
           cStack_51e = (char)((uint)sec >> 8);
           uStack_51d = (undefined1)((uint)sec >> 0x10);
           uStack_51c = (undefined1)((uint)sec >> 0x18);
-          enabled = initialize_thermal_management(&value);
+          enabled = initialize_thermal_management_with_string_parsing(&value);
           local_51b = (undefined1)enabled;
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
@@ -191,7 +191,7 @@ undefined4 spec_ble_command_hook(undefined4 param_1,undefined4 tx_data_len)
             }
           }
           validate_memory_bounds(&cmd_type,pos,(int)pcVar13 - (int)pos,4);
-          sec = initialize_thermal_management(&cmd_type);
+          sec = initialize_thermal_management_with_string_parsing(&cmd_type);
           if (LOG_LEVEL < 3) {
             if (sec == 4) goto LAB_0000f2fc;
             if (sec == 9) goto LAB_0000f39a;
@@ -349,7 +349,7 @@ LAB_0000effe:
             return enabled;
           }
           local_520 = (undefined1)sec;
-          uStack_51f = initialize_thermal_management(&value);
+          uStack_51f = initialize_thermal_management_with_string_parsing(&value);
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): **cmd_type:%s, value=%s, tx_len=%d\n\n","spec_ble_command_hook",
@@ -371,7 +371,8 @@ LAB_0000effe:
           do {
             uVar15 = (**(code **)(sec + 0xc))(&local_5c0,0x14);
             if ((int)uVar15 == 0) {
-              FUN_00072908(sec + 0x230,(int)((ulonglong)uVar15 >> 0x20),0xffffffff,0xffffffff);
+              manage_ble_connection_state_comprehensive
+                        (sec + 0x230,(int)((ulonglong)uVar15 >> 0x20),0xffffffff,0xffffffff);
               DEBUG_PRINT("\n*****start upload audio*****\n");
               pos = (char *)&jstr_len;
               jstr_len = (int)uVar15;
@@ -392,7 +393,7 @@ LAB_0000effe:
                 memcpy((int)&value + 3,pos,0x68);
                 while (iVar8 = (**(code **)(sec + 0xc))(&value,0x6b), iVar8 != 0) {
                   uVar14 = uVar14 + 1 & 0xffff;
-                  get_schedule_timing(0x148,0);
+                  calculate_ble_schedule_timing(0x148,0);
                   if ((*(char *)(sec + 0x365) == '\0') || (*(char *)(sec + 0x366) == '\0')) {
                     if (LOG_LEVEL < 1) {
                       return 0;
@@ -412,7 +413,7 @@ LAB_0000effe:
                 }
               } while( true );
             }
-            get_schedule_timing(0x148,0);
+            calculate_ble_schedule_timing(0x148,0);
           } while ((*(char *)(sec + 0x365) != '\0') && (*(char *)(sec + 0x366) != '\0'));
           if (LOG_LEVEL < 1) {
             return 0;
@@ -430,7 +431,7 @@ LAB_0000f660:
         }
         iVar3 = compare_string_offsets(&local_520,&CMD_ESB_CHANNEL_SET,2);
         if (iVar3 == 0) {
-          bVar1 = initialize_thermal_management(&cStack_51e);
+          bVar1 = initialize_thermal_management_with_string_parsing(&cStack_51e);
           *(byte *)(sec + -0x77a) = bVar1;
           DEBUG_PRINT("\n*****test set esb channel***** %d\n",(uint)bVar1);
 LAB_0000f6c2:
@@ -474,7 +475,7 @@ LAB_0000f9d4:
                                     );
                   }
                   do {
-                    get_schedule_timing(0x4000,0);
+                    calculate_ble_schedule_timing(0x4000,0);
                     pos = (char *)system_fatal_error_handler_with_priority_control(1);
 LAB_0000f82a:
                     DEBUG_PRINT(pos);
@@ -482,7 +483,7 @@ LAB_0000f82a:
                 }
                 iVar3 = compare_string_offsets(&local_520,&CMD_DEBUG_MODE_TOGGLE,2);
                 if (iVar3 == 0) {
-                  sec = initialize_thermal_management(&cStack_51e);
+                  sec = initialize_thermal_management_with_string_parsing(&cStack_51e);
                   IS_DEBUG = (uint)(sec != 1);
                   return 0;
                 }
@@ -502,14 +503,14 @@ LAB_0000f87e:
                   fill_memory_buffer(&local_41c,0,0x10);
                   iVar3 = opt3007_get_max_lux();
                   if (cStack_51e != '\0') {
-                    uVar14 = initialize_thermal_management(&cStack_51e);
+                    uVar14 = initialize_thermal_management_with_string_parsing(&cStack_51e);
                     if (uVar14 < 2) {
-                      uVar2 = initialize_thermal_management(&cStack_51e);
+                      uVar2 = initialize_thermal_management_with_string_parsing(&cStack_51e);
                       *(undefined1 *)(sec + 0x81c) = uVar2;
                     }
                     else {
                       *(undefined1 *)(sec + 0x81c) = 0;
-                      uVar2 = initialize_thermal_management(&cStack_51e);
+                      uVar2 = initialize_thermal_management_with_string_parsing(&cStack_51e);
                       *(undefined1 *)(sec + 0x759) = uVar2;
                     }
                   }
@@ -532,7 +533,7 @@ LAB_0000f932:
                   jstr_len = compare_string_offsets(&local_520,&CMD_LEVEL_SET,2);
                   if (jstr_len == 0) {
                     fill_memory_buffer(&local_41c,0,0x10);
-                    bVar1 = initialize_thermal_management(&cStack_51e);
+                    bVar1 = initialize_thermal_management_with_string_parsing(&cStack_51e);
                     *(byte *)(sec + 0x778) = bVar1;
                     uVar14 = (uint)bVar1;
                     pos = "level: %d";
@@ -579,7 +580,7 @@ LAB_0000fa4a:
                   jstr_len = compare_string_offsets(&local_520,&CMD_FLASH_CONTROL,2);
                   if (jstr_len == 0) {
                     fill_memory_buffer(&local_41c,0,0x10);
-                    iVar3 = initialize_thermal_management(&cStack_51e);
+                    iVar3 = initialize_thermal_management_with_string_parsing(&cStack_51e);
                     if (iVar3 == 1) {
                       (**(code **)(sec + 0x394))();
                       (**(code **)(sec + 0x3b8))(sec + 0x3b4);
@@ -600,7 +601,7 @@ LAB_0000fa4a:
                         return 0xffffffff;
                       }
                       fill_memory_buffer(&local_41c,0,0x3c);
-                      iVar3 = initialize_thermal_management(&cStack_51e);
+                      iVar3 = initialize_thermal_management_with_string_parsing(&cStack_51e);
                       if (iVar3 == 1) {
                         enabled = 0x19;
                       }
@@ -632,7 +633,7 @@ LAB_0000fa4a:
                       enabled = 7;
                     }
                     else {
-                      enabled = initialize_thermal_management(&cStack_51e);
+                      enabled = initialize_thermal_management_with_string_parsing(&cStack_51e);
                     }
                     change_work_mode_to(enabled);
                   }
@@ -650,7 +651,7 @@ LAB_0000f750:
             iVar3 = -0x714;
             goto LAB_0000f742;
           }
-          bVar1 = initialize_thermal_management(&cStack_51e);
+          bVar1 = initialize_thermal_management_with_string_parsing(&cStack_51e);
           *(byte *)(sec + 0x86e) = bVar1;
           DEBUG_PRINT("\n*****display mode***** %d\n",(uint)bVar1);
           if (*(char *)(sec + 0x86e) == '\v') {
@@ -673,7 +674,7 @@ LAB_0000f742:
         return 0;
       }
       iVar3 = iVar3 + 3;
-      sec = initialize_thermal_management(iVar3);
+      sec = initialize_thermal_management_with_string_parsing(iVar3);
       if (2 < sec) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): pos:%s, new log_level_set=%d\n\n","spec_ble_command_hook",iVar3,sec);
@@ -688,7 +689,7 @@ LAB_0000f742:
     }
     else {
       iVar3 = iVar3 + 3;
-      enabled = initialize_thermal_management(iVar3);
+      enabled = initialize_thermal_management_with_string_parsing(iVar3);
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): pos:%s, new screen_id=%d\n\n","spec_ble_command_hook",iVar3,enabled);
@@ -704,7 +705,7 @@ LAB_0000f742:
   }
   else {
     iVar3 = iVar3 + 3;
-    sec = initialize_thermal_management(iVar3);
+    sec = initialize_thermal_management_with_string_parsing(iVar3);
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT(&DEBUG_MSG_LOG_LEVEL_CMD,"spec_ble_command_hook",iVar3,sec);

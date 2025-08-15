@@ -12,7 +12,7 @@ void handle_status_update(undefined4 param_1,undefined4 param_2)
   int iVar2;
   undefined1 auStack_38 [36];
   
-  puVar1 = (undefined4 *)FUN_00081526();
+  puVar1 = (undefined4 *)get_connection_data_pointer();
   format_status_message(puVar1,auStack_38);
   iVar2 = get_work_mode();
   if (*(char *)(iVar2 + 0x1071) != '\0') {

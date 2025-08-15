@@ -54,7 +54,7 @@ void display_thread_handler(int param_1)
           handle_heartbeat();
         }
       }
-      get_schedule_timing(0x28000,0);
+      calculate_ble_schedule_timing(0x28000,0);
     }
     fill_memory_buffer(local_40,0,0x18);
     bVar2 = false;

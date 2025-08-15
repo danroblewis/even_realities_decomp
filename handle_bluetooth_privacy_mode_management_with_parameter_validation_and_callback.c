@@ -27,7 +27,7 @@ handle_bluetooth_privacy_mode_management_with_parameter_validation_and_callback
   if (iVar1 == 0) {
     return 0xffffff97;
   }
-  puVar2 = (undefined1 *)FUN_0005f5d0(iVar1 + 0xc,0x20);
+  puVar2 = (undefined1 *)ble_memory_allocation_utility(iVar1 + 0xc,0x20);
   fill_memory_buffer(puVar2,0,0x20);
   uVar7 = 0;
   puVar9 = param_2 + param_3 * 2;
@@ -43,7 +43,7 @@ handle_bluetooth_privacy_mode_management_with_parameter_validation_and_callback
           local_2c = "Too big advertising data";
           local_30 = 2;
           process_and_compress_data_with_validation(&DAT_000880f8,0x1040,&local_30,0);
-          FUN_0005f24c(iVar1);
+          decrement_reference_count_and_cleanup_memory(iVar1);
           return 0xffffffea;
         }
         cVar10 = '\b';

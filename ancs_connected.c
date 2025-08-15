@@ -15,7 +15,7 @@ void ancs_connected(int param_1,int param_2)
   uint uVar5;
   undefined1 auStack_38 [32];
   
-  uVar3 = FUN_00081526();
+  uVar3 = get_connection_data_pointer();
   format_status_message(uVar3,auStack_38);
   bVar1 = *(byte *)(param_1 + 2);
   bVar2 = *(byte *)(param_1 + 3);

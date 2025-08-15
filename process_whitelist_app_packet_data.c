@@ -71,7 +71,7 @@ void process_whitelist_app_packet_data(int param_1,int param_2)
       pcVar7 = *(code **)(param_1 + 0xc);
     }
     (*pcVar7)(param_2,iVar4);
-    call_data_verification_handler(iVar1);
+    call_data_verification_handler_with_memory_cleanup(iVar1);
     return;
   }
   if (IS_DEBUG != 0) {

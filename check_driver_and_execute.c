@@ -17,7 +17,7 @@ undefined4 check_driver_and_execute(void)
     uVar2 = 0xffffffff;
   }
   else {
-    FUN_00060dd0(&FLASH_DRIVER_INTERFACE,0,0x130000);
+    manage_device_memory_and_state_changes(&FLASH_DRIVER_INTERFACE,0,0x130000);
     DEBUG_PRINT("erase_dfu_flash done.\n");
     uVar2 = 0;
   }

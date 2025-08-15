@@ -30,7 +30,7 @@ void FUN_000828e8(undefined4 param_1,int param_2,undefined4 *param_3,undefined4 
   if (*(int *)(param_2 + 8) != 0) {
     return;
   }
-  FUN_00059e78(param_2);
+  initialize_ble_characteristic_value_buffer(param_2);
   return;
 }
 

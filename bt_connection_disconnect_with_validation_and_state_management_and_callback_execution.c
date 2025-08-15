@@ -38,9 +38,9 @@ int bt_connection_disconnect_with_validation_and_state_management_and_callback_e
      (*(int *)(param_2 + 4) == 0)) {
     if (param_3 != 0) {
       uVar2 = FUN_00081616(param_2);
-      FUN_000836f8(iVar4,uVar2);
+      write_ble_data_uint16(iVar4,uVar2);
     }
-    iVar7 = FUN_0005f2d4(param_2);
+    iVar7 = increment_counter_in_structure(param_2);
     if (iVar7 == 0) {
 LAB_000575f6:
       *piVar10 = *piVar10 + 1;
@@ -48,7 +48,7 @@ LAB_000575f6:
     }
     goto LAB_0005769a;
   }
-  uVar12 = FUN_0005ee08(*(undefined1 *)(param_2 + 10));
+  uVar12 = calculate_ble_memory_offset(*(undefined1 *)(param_2 + 10));
   if (*(code **)(param_1[1] + 0xc) == (code *)0x0) {
     iVar7 = FUN_000836de((int)uVar12,(int)((ulonglong)uVar12 >> 0x20),0,0);
     if (iVar7 != 0) goto LAB_00057644;
@@ -64,16 +64,16 @@ LAB_000575f6:
       assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x70d);
     }
 LAB_00057644:
-    FUN_0005f4d4(iVar7 + 0xc,9);
+    calculate_buffer_offset(iVar7 + 0xc,9);
   }
   iVar11 = iVar7 + 0xc;
   if (param_3 != 0) {
     uVar2 = FUN_00081616(param_2);
-    FUN_00083766(iVar11,uVar2);
+    write_ble_data_uint16_with_allocation(iVar11,uVar2);
   }
-  uVar6 = FUN_00083730(iVar11);
+  uVar6 = calculate_ble_buffer_available_space(iVar11);
   if (uVar6 < (uint)*(ushort *)(param_1 + 10) - param_3) {
-    uVar3 = FUN_00083730(iVar11);
+    uVar3 = calculate_ble_buffer_available_space(iVar11);
   }
   else {
     uVar3 = (ushort)((uint)*(ushort *)(param_1 + 10) - param_3);
@@ -82,8 +82,8 @@ LAB_00057644:
   if (uVar3 <= *(ushort *)(param_2 + 0x10)) {
     uVar8 = uVar3;
   }
-  FUN_00083740(iVar11,*(undefined4 *)(param_2 + 0xc));
-  FUN_0005f558(iVar4,uVar8);
+  ble_memory_copy_utility(iVar11,*(undefined4 *)(param_2 + 0xc));
+  update_buffer_position_and_size(iVar4,uVar8);
 LAB_0005769a:
   uVar3 = *(ushort *)(iVar7 + 0x10);
   if ((param_2 == iVar7) || (*(short *)(param_2 + 0x10) == 0)) {
@@ -96,7 +96,7 @@ LAB_0005769a:
                        *(undefined4 *)(param_2 + 0x18));
   if (iVar4 != 0) {
     *piVar10 = *piVar10 + 1;
-    FUN_0005f24c(iVar7);
+    decrement_reference_count_and_cleanup_memory(iVar7);
     if (iVar4 == -0x69) {
       *(ushort *)(param_2 + 0x10) = uVar1;
       *(uint *)(param_2 + 0xc) = *(int *)(param_2 + 0x14) + (uVar5 & 0xffff);

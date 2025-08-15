@@ -65,7 +65,7 @@ void render_ui_data_entry_display(undefined4 param_1,undefined4 *param_2)
     break;
   case 2:
     fill_memory_buffer(&local_18c,0,0x48);
-    FUN_00077914(&local_18c,0x48,&DAT_000a8c37,puVar7);
+    process_string_with_error_handling_and_validation(&local_18c,0x48,&DAT_000a8c37,puVar7);
     uVar4 = get_ui_x_offset();
     iVar1 = get_ui_y_offset();
     iVar5 = get_ui_x_offset();
@@ -75,7 +75,8 @@ void render_ui_data_entry_display(undefined4 param_1,undefined4 *param_2)
     iVar1 = get_ui_y_offset();
     gui_bmp_bitmap_draw(0x36,uVar4,iVar1 + 0x3a,0,0,0);
     fill_memory_buffer(&local_144,0,0x123);
-    FUN_00077914(&local_144,0x123,&DAT_000a8c37,param_2 + 0x14);
+    process_string_with_error_handling_and_validation(&local_144,0x123,&DAT_000a8c37,param_2 + 0x14)
+    ;
     if ((local_144 & 0xff) == 0) {
       return;
     }
@@ -91,7 +92,8 @@ void render_ui_data_entry_display(undefined4 param_1,undefined4 *param_2)
     gui_bmp_bitmap_draw(0x3a,uVar4,iVar5 + 4,0,0,0);
     fill_memory_buffer(&local_18c,0,0x48);
 LAB_00035cba:
-    FUN_00077914(&local_18c,0x48,"%s | %s",param_2 + 0xc,param_2 + 0x1c);
+    process_string_with_error_handling_and_validation
+              (&local_18c,0x48,"%s | %s",param_2 + 0xc,param_2 + 0x1c);
     goto LAB_00035cc4;
   case 4:
     uVar4 = get_ui_x_offset();
@@ -110,7 +112,7 @@ LAB_00035e0a:
     puVar6 = param_2 + 0xc;
     if (*(char *)(param_2 + 0x1c) != '\0') goto LAB_00035cba;
   }
-  FUN_00077914(&local_18c,0x48,&DAT_000a8c37,puVar6);
+  process_string_with_error_handling_and_validation(&local_18c,0x48,&DAT_000a8c37,puVar6);
 LAB_00035cc4:
   iVar5 = get_ui_x_offset();
   uVar4 = get_ui_y_offset();
@@ -137,15 +139,17 @@ LAB_00035cc4:
   gui_utf_draw(0,&local_1b4,0,iVar5 + 0x22c,uVar4,iVar2 + 0x244,iVar3 + 0x1b,1,0,0,0,0);
   fill_memory_buffer(&local_144,0,0x123);
   if (iVar1 == 1) {
-    FUN_00077914(&local_144,0x123,&DAT_000a8c37,param_2 + 0x14);
+    process_string_with_error_handling_and_validation(&local_144,0x123,&DAT_000a8c37,param_2 + 0x14)
+    ;
   }
   else {
     if (iVar1 != 4) {
       if (*(char *)(param_2 + 0x14) == '\0') {
-        FUN_00077914(&local_144,0x123,&DAT_000a8c37,puVar7);
+        process_string_with_error_handling_and_validation(&local_144,0x123,&DAT_000a8c37,puVar7);
       }
       else {
-        FUN_00077914(&local_144,0x123,"%s - %s",param_2 + 0x14,puVar7);
+        process_string_with_error_handling_and_validation
+                  (&local_144,0x123,"%s - %s",param_2 + 0x14,puVar7);
       }
       if ((local_144 & 0xff) == 0) {
         return;
@@ -156,7 +160,8 @@ LAB_00035cc4:
       iVar2 = get_ui_y_offset();
       goto LAB_00035de8;
     }
-    FUN_00077914(&local_144,0x123,&DAT_000a8c34,param_2 + 0x14,puVar7);
+    process_string_with_error_handling_and_validation
+              (&local_144,0x123,&DAT_000a8c34,param_2 + 0x14,puVar7);
   }
   if ((local_144 & 0xff) == 0) {
     return;

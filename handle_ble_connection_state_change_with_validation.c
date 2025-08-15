@@ -25,7 +25,7 @@ undefined4 handle_ble_connection_state_change_with_validation(undefined4 param_1
   if ((uVar5 != 2) && (uVar5 != 0x10)) {
     return 4;
   }
-  puVar2 = (ushort *)FUN_0005f594(param_2 + 0xc,4);
+  puVar2 = (ushort *)update_buffer_position_and_size_alt(param_2 + 0xc,4);
   uVar6 = *puVar2;
   uVar1 = puVar2[1];
   iVar3 = format_data_by_size(auStack_44,puVar2 + 2,uVar5);
@@ -44,7 +44,7 @@ undefined4 handle_ble_connection_state_change_with_validation(undefined4 param_1
       }
       local_30 = param_1;
       puStack_2c = auStack_44;
-      local_24 = (undefined1 *)FUN_0005f5d0(local_28 + 0xc,1);
+      local_24 = (undefined1 *)ble_memory_allocation_utility(local_28 + 0xc,1);
       *local_24 = 0;
       local_1c = '\n';
       FUN_00081cee(uVar6,uVar1,0x58809,&local_30);
@@ -54,7 +54,7 @@ undefined4 handle_ble_connection_state_change_with_validation(undefined4 param_1
       }
       bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
                 (*(undefined4 *)(local_28 + 0x18));
-      FUN_0005f24c(local_28);
+      decrement_reference_count_and_cleanup_memory(local_28);
       cVar4 = local_1c;
       goto LAB_000594e8;
     }

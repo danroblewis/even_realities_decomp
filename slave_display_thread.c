@@ -48,12 +48,12 @@ void slave_display_thread(int param_1,undefined4 param_2,undefined4 param_3,unde
       *(undefined1 *)(param_1 + 0xd5) = uVar8;
       goto LAB_00027dd4;
     }
-    thunk_FUN_00072908(param_1 + 0x20);
+    manage_ble_connection_state_comprehensive(param_1 + 0x20);
     while ((*(char *)(param_1 + 1) == '\x01' ||
            (iVar4 = get_work_mode(), *(char *)(iVar4 + 1) == '\b'))) {
       uVar5 = 0x28000;
 LAB_00027dd4:
-      get_schedule_timing(uVar5,0);
+      calculate_ble_schedule_timing(uVar5,0);
     }
     if ((*(char *)(param_1 + 0xed7) != *(char *)(param_1 + 0xcb)) ||
        (*(char *)(param_1 + 0xed5) != *(char *)(param_1 + 0xed7))) {
@@ -117,7 +117,7 @@ LAB_00027dd4:
         z_spin_lock_valid(param_1 + 0x38);
       }
       else {
-        get_schedule_timing(0xa3e,0);
+        calculate_ble_schedule_timing(0xa3e,0);
       }
       if (2 < LOG_LEVEL) {
         pcVar6 = "%s(): ****SUSPEND end****\n";
@@ -261,7 +261,7 @@ LAB_000285bc:
           uVar10 = (uint)(bVar2 >> 4);
           set_system_parameter_and_byte(uVar10);
           display_inputEvent(0,1);
-          thunk_FUN_000745c8();
+          manage_ble_connection_priority_with_data_processing();
           if (LOG_LEVEL < 3) break;
           if (IS_DEBUG != 0) {
             uVar5 = get_work_mode_timestamp();
@@ -302,7 +302,7 @@ LAB_000281ca:
           set_system_parameter_with_logging(uVar10);
 LAB_00028260:
           display_inputEvent(0,1);
-          thunk_FUN_000745c8();
+          manage_ble_connection_priority_with_data_processing();
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               uVar5 = get_work_mode_timestamp();
@@ -472,7 +472,7 @@ LAB_00027e20:
 LAB_00028342:
           display_MasterSendClose();
 LAB_0002812a:
-          thunk_FUN_000745c8();
+          manage_ble_connection_priority_with_data_processing();
         }
         else if (0 < LOG_LEVEL) {
           pcVar6 = 

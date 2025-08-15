@@ -21,7 +21,7 @@ int FUN_00083954(undefined4 param_1,int param_2)
   }
   uStack_10 = 0;
   local_c = 0;
-  iVar1 = FUN_00060ab0(param_1,&local_14,0,local_14,param_1);
+  iVar1 = validate_device_properties_and_state(param_1,&local_14,0,local_14,param_1);
   if (iVar1 != 0) {
     iVar1 = -5;
   }

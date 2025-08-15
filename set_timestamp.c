@@ -8,7 +8,7 @@
 void set_timestamp(void)
 
 {
-  DAT_20007a28 = thunk_FUN_00074f68();
+  DAT_20007a28 = calculate_ble_connection_timing_with_validation();
   return;
 }
 

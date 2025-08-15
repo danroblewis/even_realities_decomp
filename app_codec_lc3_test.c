@@ -87,7 +87,8 @@ LAB_0002ee5a:
                 goto LAB_0002eeb6;
               }
               if (0x40ffff < DAT_20002404) goto LAB_0002eeb6;
-              pcVar7 = (char *)FUN_00060f20(&FLASH_DRIVER_INTERFACE,DAT_20002404,iVar5,iVar8);
+              pcVar7 = (char *)write_device_memory_and_manage_states
+                                         (&FLASH_DRIVER_INTERFACE,DAT_20002404,iVar5,iVar8);
               if (pcVar7 != (char *)0x0) {
                 if (LOG_LEVEL < 1) goto LAB_0002eeb6;
                 format_string = "%s(): Flash write failed! %d\n\n";
@@ -115,12 +116,12 @@ LAB_0002ee5a:
           }
         }
 LAB_0002eeb6:
-        call_data_verification_handler(iVar3);
-        call_data_verification_handler(iVar4);
+        call_data_verification_handler_with_memory_cleanup(iVar3);
+        call_data_verification_handler_with_memory_cleanup(iVar4);
         goto LAB_0002edce;
       }
       if (LOG_LEVEL < 1) {
-        call_data_verification_handler(iVar3);
+        call_data_verification_handler_with_memory_cleanup(iVar3);
         iVar5 = iVar4;
         goto LAB_0002edce;
       }
@@ -131,18 +132,18 @@ LAB_0002ee16:
       else {
         handle_heartbeat();
       }
-      call_data_verification_handler(iVar3);
+      call_data_verification_handler_with_memory_cleanup(iVar3);
       goto LAB_0002edf8;
     }
     if (0 < LOG_LEVEL) goto LAB_0002ee16;
 LAB_0002ede2:
-    call_data_verification_handler(iVar3);
+    call_data_verification_handler_with_memory_cleanup(iVar3);
   }
   if (iVar5 == 0) {
     return;
   }
 LAB_0002edce:
-  call_data_verification_handler(iVar5);
+  call_data_verification_handler_with_memory_cleanup(iVar5);
   return;
 }
 

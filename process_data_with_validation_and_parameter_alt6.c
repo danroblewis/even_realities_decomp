@@ -47,14 +47,14 @@ LAB_0005ad5c:
     uVar6 = 0x672;
     goto LAB_0005ad5c;
   }
-  iVar3 = FUN_0008270c(&DAT_2000af04);
-  if ((iVar3 << 0x1f < 0) && (iVar3 = FUN_0008270c(&DAT_20006448), -1 < iVar3 << 0x1d)) {
+  iVar3 = get_ble_handle_value(&DAT_2000af04);
+  if ((iVar3 << 0x1f < 0) && (iVar3 = get_ble_handle_value(&DAT_20006448), -1 < iVar3 << 0x1d)) {
     local_2c = "Can\'t register service after init and before settings are loaded.";
     local_30 = 2;
-    FUN_00082a42(&DAT_00088128,0x1040,&local_30);
+    ble_data_processing_wrapper(&DAT_00088128,0x1040,&local_30);
     return 0xffffffea;
   }
-  FUN_00059cb4();
+  update_ble_connection_handle_counter();
   local_44[0] = 0;
   local_42 = 0x1800;
   iVar3 = compare_data_structures(*DAT_200028b8,local_44);
@@ -67,7 +67,7 @@ LAB_0005ad5c:
   if (iVar3 == 0) {
     return 0xffffff88;
   }
-  FUN_00073b1c();
+  process_ble_connection_state();
   puVar7 = DAT_200028b8;
   uVar2 = DAT_200028bc;
   if (DAT_2000af08 == (undefined4 *)0x0) {
@@ -83,14 +83,14 @@ LAB_0005aeb8:
         }
         else if (uVar5 <= uVar11) {
           local_40 = 0;
-          FUN_00082c9c(uVar5,uVar5,&LAB_000825ba_1,&local_40);
+          ble_handle_mapping_utility(uVar5,uVar5,&LAB_000825ba_1,&local_40);
           uVar5 = uVar11;
           if (local_40 != 0) {
             uStack_50 = (uint)*(ushort *)(puVar7 + 4);
             local_54 = "Unable to register handle 0x%04x";
             local_58 = 3;
-            FUN_00082a42(&DAT_00088128,0x1840,&local_58);
-            FUN_00073bf4();
+            ble_data_processing_wrapper(&DAT_00088128,0x1840,&local_58);
+            finalize_ble_connection_with_magnetometer();
             return 0xffffffea;
           }
         }
@@ -149,13 +149,14 @@ LAB_0005af16:
     DAT_2000af0c = &DAT_200028c0;
   }
 LAB_0005ae3a:
-  iVar3 = FUN_0008270c(&DAT_2000af04);
+  iVar3 = get_ble_handle_value(&DAT_2000af04);
   if (iVar3 << 0x1f < 0) {
-    FUN_0005a570(*(undefined2 *)(DAT_200028b8 + 4),
-                 *(undefined2 *)(DAT_200028b8 + DAT_200028bc * 5 + -1));
-    FUN_0005a6b0();
+    update_ble_attribute_handle_range
+              (*(undefined2 *)(DAT_200028b8 + 4),
+               *(undefined2 *)(DAT_200028b8 + DAT_200028bc * 5 + -1));
+    cleanup_and_validate_ble_connections();
   }
-  FUN_00073bf4();
+  finalize_ble_connection_with_magnetometer();
   return 0;
 }
 

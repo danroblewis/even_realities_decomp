@@ -31,7 +31,7 @@ void FUN_00071684(uint param_1,int param_2)
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar3 = FUN_000748ac();
+  iVar3 = process_ble_data_with_callback_validation();
   if (param_1 < 5) {
     local_44 = (&PTR_s_CPU_exception_00098658)[param_1];
   }
@@ -58,7 +58,7 @@ void FUN_00071684(uint param_1,int param_2)
   local_50 = 0x1000004;
   uStack_48 = iVar3;
   process_and_compress_data_with_validation(&DAT_00088258,0x2440,&local_50,0);
-  FUN_00063b7c(param_1,param_2);
+  handle_timer_interrupt_task_and_memory(param_1,param_2);
   if (param_1 != 4) {
     bVar1 = (bool)isCurrentModePrivileged();
     if (bVar1) {

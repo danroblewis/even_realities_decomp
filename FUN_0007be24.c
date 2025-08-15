@@ -43,7 +43,7 @@ int FUN_0007be24(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
   if (0xff0 < param_8) {
     return 0xf1000f;
   }
-  FUN_0007b644();
+  copy_sha256_state_with_memory_operations();
   local_e0 = FUN_0007bf44(param_3,param_4,param_5,param_6,&local_a4,&local_13c,param_8);
   if (local_e0 != 0) {
     return 0xf1000e;
@@ -57,12 +57,14 @@ int FUN_0007be24(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
   local_e8 = param_2;
   local_d8 = param_1;
   FUN_0007a3d4(auStack_118,0x10);
-  iVar1 = FUN_0007b130(&local_a4,local_13c,auStack_138,&local_128,0x10,auStack_130);
+  iVar1 = process_sha256_block_with_parameter_management
+                    (&local_a4,local_13c,auStack_138,&local_128,0x10,auStack_130);
   iVar4 = iVar1;
   if (iVar1 == 0) {
     do {
       local_a4 = CONCAT31(local_a4._1_3_,cVar2);
-      iVar1 = FUN_0007b9cc(auStack_118,auStack_138,auStack_130,local_13c);
+      iVar1 = process_sha256_context_with_special_case_handling
+                        (auStack_118,auStack_138,auStack_130,local_13c);
       if (iVar1 != 0) goto LAB_0007bf0c;
       uVar3 = param_8;
       if (0xf < param_8) {
@@ -77,8 +79,8 @@ int FUN_0007be24(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
     iVar1 = 0;
   }
 LAB_0007bf0c:
-  fill_memory_buffer(auStack_118,0,0x74);
-  FUN_0007b644();
+  fill_memory_buffer_utility(auStack_118,0,0x74);
+  copy_sha256_state_with_memory_operations();
   return iVar1;
 }
 

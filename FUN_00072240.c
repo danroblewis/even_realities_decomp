@@ -40,7 +40,7 @@ int FUN_00072240(int param_1,undefined4 param_2,int param_3,int param_4)
     iVar6 = param_1;
     uVar9 = param_2;
     iVar10 = param_3;
-    iVar2 = FUN_00072040(iVar7);
+    iVar2 = check_connection_state_validity(iVar7);
     if (iVar2 == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                    "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,iVar6,uVar9,iVar10);
@@ -48,12 +48,12 @@ int FUN_00072240(int param_1,undefined4 param_2,int param_3,int param_4)
       uVar4 = 0x72;
     }
     else {
-      FUN_00072078(iVar7);
+      update_connection_state_flags(iVar7);
       iVar2 = DMIC_BUFFER_SIZE;
       if (*(int *)(param_1 + 0x24) == 0) {
         if (param_3 != 0 || param_4 != 0) {
           *(undefined4 *)(DMIC_BUFFER_SIZE + 0x14) = param_2;
-          iVar7 = FUN_00073f6c(iVar7,uVar4,param_1,iVar2,param_3,param_4);
+          iVar7 = handle_ble_connection_state_transition(iVar7,uVar4,param_1,iVar2,param_3,param_4);
           return iVar7;
         }
         iVar2 = -0x23;
@@ -70,7 +70,7 @@ int FUN_00072240(int param_1,undefined4 param_2,int param_3,int param_4)
           *(int *)(param_1 + 0x1c) = iVar2;
         }
         *(int *)(param_1 + 0x24) = *(int *)(param_1 + 0x24) + -1;
-        iVar2 = FUN_000744a4(param_1);
+        iVar2 = process_ble_connection_list_with_cleanup(param_1);
         if (iVar2 != 0) {
           uVar5 = *(uint *)(param_1 + 0x20);
           if ((*(uint *)(param_1 + 0x14) <= uVar5) && (uVar5 < *(uint *)(param_1 + 0x18))) {
@@ -87,7 +87,7 @@ int FUN_00072240(int param_1,undefined4 param_2,int param_3,int param_4)
             *(int *)(param_1 + 0x24) = *(int *)(param_1 + 0x24) + 1;
             *(undefined4 *)(iVar2 + 0x90) = 0;
             FUN_000738d4(iVar2);
-            FUN_000739f0(iVar7,uVar4);
+            validate_ble_connection_state_with_priority(iVar7,uVar4);
             return 0;
           }
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n",
@@ -97,7 +97,7 @@ int FUN_00072240(int param_1,undefined4 param_2,int param_3,int param_4)
           goto LAB_0007226c;
         }
       }
-      iVar3 = FUN_0007205c(iVar7);
+      iVar3 = validate_and_clear_connection_state(iVar7);
       if (iVar3 != 0) {
         bVar8 = (bool)isCurrentModePrivileged();
         if (bVar8) {

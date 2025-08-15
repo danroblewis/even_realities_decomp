@@ -470,7 +470,7 @@ LAB_000480f4:
                 }
               }
               display_powerEvent(cVar12);
-              FUN_000745c8();
+              manage_ble_connection_priority_with_data_processing();
               break;
             }
             if (1 < LOG_LEVEL) {
@@ -647,7 +647,7 @@ LAB_000480f4:
     }
     uVar2 = 0x28000;
 LAB_00047c86:
-    get_schedule_timing(uVar2,0);
+    calculate_ble_schedule_timing(uVar2,0);
   } while( true );
 switchD_00047ccc_caseD_8:
   if (0 < LOG_LEVEL) goto code_r0x0004880a;

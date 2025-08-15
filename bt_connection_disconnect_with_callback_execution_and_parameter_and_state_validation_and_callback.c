@@ -56,7 +56,7 @@ LAB_00057bc6:
       local_1c = "Too short data packet";
     }
     else {
-      uVar7 = FUN_00083718(param_2 + 0xc);
+      uVar7 = read_ble_data_uint16(param_2 + 0xc);
       if (*(ushort *)(param_1 + 0x16) < uVar7) {
         local_1c = "Invalid SDU length";
       }
@@ -85,12 +85,12 @@ LAB_00057bc6:
         if (iVar2 != 0) {
           *(short *)(param_1 + 0x84) = (short)uVar7;
           uVar1 = *(ushort *)(param_2 + 0x10);
-          uVar3 = FUN_00083730(iVar2 + 0xc);
+          uVar3 = calculate_ble_buffer_available_space(iVar2 + 0xc);
           if (uVar7 - uVar1 < uVar3) {
             iVar2 = uVar7 - *(ushort *)(param_2 + 0x10);
           }
           else {
-            iVar2 = FUN_00083730(*(int *)(param_1 + 0x80) + 0xc);
+            iVar2 = calculate_ble_buffer_available_space(*(int *)(param_1 + 0x80) + 0xc);
           }
           if ((((*(ushort *)(param_1 + 0x18) - 1) + iVar2) / (uint)*(ushort *)(param_1 + 0x18) &
               0xffff) != 0) {

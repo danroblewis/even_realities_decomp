@@ -27,7 +27,7 @@ undefined4 bluetooth_hci_command_processing_with_callback(int param_1)
     local_1c = "Invalid buf type %u";
     local_20 = 3;
     call_system_cleanup_alt(&DAT_00088138,0x1840,&local_20);
-    FUN_0005f24c(param_1);
+    decrement_reference_count_and_cleanup_memory(param_1);
     return 0xffffffea;
   }
   process_data_with_parameter_validation_and_compression_alt(param_1);

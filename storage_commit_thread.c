@@ -37,7 +37,8 @@ void storage_commit_thread(int param_1,int param_2,undefined4 param_3)
   uVar6 = extraout_r1;
 LAB_0002385e:
   do {
-    FUN_00072908(param_1 + 0x80,uVar6,0xffffffff,0xffffffff,iVar16,param_2,param_3);
+    manage_ble_connection_state_comprehensive
+              (param_1 + 0x80,uVar6,0xffffffff,0xffffffff,iVar16,param_2,param_3);
     bVar4 = false;
     uVar6 = extraout_r1_00;
     while (DAT_200079c4 != 0) {
@@ -99,7 +100,7 @@ LAB_0002385e:
     iVar7 = param_1 + 0xef4;
     break;
   case 0x11:
-    get_schedule_timing(0x50000,0);
+    calculate_ble_schedule_timing(0x50000,0);
     change_work_mode_to(7);
     goto switchD_00023894_caseD_4;
   case 0x16:
@@ -135,10 +136,10 @@ LAB_0002385e:
   (*pcVar9)(pcVar2,iVar7,uVar6);
 LAB_000238ee:
   do {
-    uVar13 = thunk_FUN_00074f68();
+    uVar13 = calculate_ble_connection_timing_with_validation();
     param_2 = (int)(uVar13 >> 0x20);
-    FUN_00072908(param_1 + 0x80,param_2,0x28000,0);
-    lVar14 = thunk_FUN_00074f68();
+    manage_ble_connection_state_comprehensive(param_1 + 0x80,param_2,0x28000,0);
+    lVar14 = calculate_ble_connection_timing_with_validation();
     lVar1 = (uVar13 & 0xffffffff) * 1000;
     uVar3 = (uint)((ulonglong)(lVar14 * 1000) >> 0x20);
     uVar11 = (uint)lVar1 >> 0xf | (param_2 * 1000 + (int)((ulonglong)lVar1 >> 0x20)) * 0x20000;

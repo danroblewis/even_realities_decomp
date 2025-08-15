@@ -45,9 +45,9 @@ int bt_connection_disconnect_with_callback_and_parameter_and_state_validation_an
                     /* WARNING: Subroutine does not return */
         assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0x2cd);
       }
-      iVar1 = FUN_0005f2d4();
-      FUN_0005ee6c();
-      FUN_0005f4d4(iVar1 + 0xc,9);
+      iVar1 = increment_counter_in_structure();
+      initialize_ble_memory_structure();
+      calculate_buffer_offset(iVar1 + 0xc,9);
       goto LAB_000586ce;
     }
     local_44 = "already processing a REQ/RSP on chan %p";
@@ -65,7 +65,7 @@ LAB_000586e2:
     }
     iVar1 = FUN_0008181a(0,0,uVar5,uVar4);
     if (iVar1 != 0) {
-      uVar6 = FUN_000748ac();
+      uVar6 = process_ble_data_with_callback_validation();
       if ((undefined *)uVar6 == &DAT_200068d0) {
         uVar5 = 0;
         uVar4 = 0;
@@ -75,13 +75,13 @@ LAB_000586e2:
         local_24 = "Unable to allocate ATT TX meta";
         local_28 = 2;
         FUN_00081ddc(&DAT_00088100,0x1080,&local_28);
-        FUN_0005f24c(iVar1);
+        decrement_reference_count_and_cleanup_memory(iVar1);
         return 0;
       }
 LAB_000586ce:
       *puVar3 = param_1;
       *(uint **)(iVar1 + 0x18) = puVar3;
-      puVar2 = (undefined1 *)FUN_0005f5d0(iVar1 + 0xc,1);
+      puVar2 = (undefined1 *)ble_memory_allocation_utility(iVar1 + 0xc,1);
       *puVar2 = (char)param_2;
       return iVar1;
     }

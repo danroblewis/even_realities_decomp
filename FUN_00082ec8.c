@@ -13,10 +13,10 @@ undefined4 FUN_00082ec8(undefined4 param_1,int param_2)
   int iVar3;
   int iVar4;
   
-  iVar1 = FUN_00059c04();
+  iVar1 = find_ble_attribute_by_handle();
   if ((iVar1 != 0) && ((int)((uint)*(byte *)(iVar1 + 8) << 0x1f) < 0)) {
     iVar4 = iVar1 + 0xc;
-    uVar2 = FUN_0008270c(iVar4);
+    uVar2 = get_ble_handle_value(iVar4);
     if ((uVar2 & 1) == 0) {
       if (param_2 == 0) {
         return 0;

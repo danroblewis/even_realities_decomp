@@ -14,7 +14,7 @@ undefined4 process_data_with_callback_and_compression_alt(undefined1 *param_1,in
   undefined1 auStack_34 [40];
   
   if (param_2 == 0) {
-    iVar2 = FUN_0007ddbe(auStack_34,0x24,"bt/%s","keys");
+    iVar2 = format_string_with_variable_arguments(auStack_34,0x24,"bt/%s","keys");
     if (iVar2 < 0) {
       return 0xffffffea;
     }

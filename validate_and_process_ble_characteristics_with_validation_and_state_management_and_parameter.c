@@ -24,16 +24,17 @@ void validate_and_process_ble_characteristics_with_validation_and_state_manageme
     if (*(int *)(param_1 + 0x10) != 0) {
       uVar1 = *(ushort *)(param_2 + 0x10);
       if (uVar1 != 0) {
-        uVar2 = FUN_00083730(*(int *)(param_1 + 0x10) + 0xc);
+        uVar2 = calculate_ble_buffer_available_space(*(int *)(param_1 + 0x10) + 0xc);
         if (uVar1 <= uVar2) {
-          FUN_00083740(*(int *)(param_1 + 0x10) + 0xc,*(undefined4 *)(param_2 + 0xc),
-                       *(undefined2 *)(param_2 + 0x10));
-          FUN_0005f24c(param_2);
+          ble_memory_copy_utility
+                    (*(int *)(param_1 + 0x10) + 0xc,*(undefined4 *)(param_2 + 0xc),
+                     *(undefined2 *)(param_2 + 0x10));
+          decrement_reference_count_and_cleanup_memory(param_2);
           goto LAB_000563ce;
         }
         local_1c = "Not enough buffer space for L2CAP data";
         local_20 = 2;
-        FUN_000813ca(&DAT_00088108,0x1040,&local_20);
+        bt_log_connection_error(&DAT_00088108,0x1040,&local_20);
         bt_connection_disconnect_with_validation_and_callback_execution_and_parameter_and_state_validation
                   (param_1,*(undefined4 *)(param_1 + 0x10),0);
         *(undefined4 *)(param_1 + 0x10) = 0;
@@ -42,14 +43,14 @@ void validate_and_process_ble_characteristics_with_validation_and_state_manageme
     }
     local_1c = "Unexpected L2CAP continuation";
     local_20 = 2;
-    FUN_000813ca(&DAT_00088108,0x1040,&local_20);
+    bt_log_connection_error(&DAT_00088108,0x1040,&local_20);
   }
   else {
     if (param_3 == 2) {
       if (*(int *)(param_1 + 0x10) != 0) {
         local_1c = "Unexpected first L2CAP frame";
         local_20 = param_3;
-        FUN_000813ca(&DAT_00088108,0x1040,&local_20);
+        bt_log_connection_error(&DAT_00088108,0x1040,&local_20);
         FUN_000813d6(param_1);
       }
       *(int *)(param_1 + 0x10) = param_2;
@@ -66,7 +67,7 @@ LAB_000563ce:
       if (local_34 < uStack_38) {
         local_3c = "ACL len mismatch (%u > %u)";
         local_40 = 4;
-        FUN_000813ca(&DAT_00088108,0x2040,&local_40);
+        bt_log_connection_error(&DAT_00088108,0x2040,&local_40);
         FUN_000813d6(param_1);
         return;
       }
@@ -78,11 +79,11 @@ LAB_000563ce:
     local_3c = "Unexpected ACL flags (0x%02x)";
     local_40 = 3;
     uStack_38 = param_3;
-    FUN_000813ca(&DAT_00088108,0x1840,&local_40);
+    bt_log_connection_error(&DAT_00088108,0x1840,&local_40);
   }
   FUN_000813d6(param_1);
 LAB_00056432:
-  FUN_0005f24c(param_2);
+  decrement_reference_count_and_cleanup_memory(param_2);
   return;
 }
 

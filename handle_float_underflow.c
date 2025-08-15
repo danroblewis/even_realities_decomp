@@ -23,7 +23,7 @@ undefined4 handle_float_underflow(undefined4 *param_1,int *param_2,undefined4 pa
         uVar3 = uVar2;
       }
       if ((int)(short)param_2[3] << 0x15 < 0) {
-        iVar1 = memory_allocate(param_1,uVar3);
+        iVar1 = memory_allocate_with_mutex_protection(param_1,uVar3);
         if (iVar1 == 0) {
 LAB_000877d8:
           *param_1 = 0xc;
@@ -36,7 +36,7 @@ LAB_000877d8:
       else {
         iVar1 = process_float_overflow(param_1,param_2[4],uVar3);
         if (iVar1 == 0) {
-          memory_free(param_1,param_2[4]);
+          memory_free_with_mutex_protection(param_1,param_2[4]);
           goto LAB_000877d8;
         }
       }

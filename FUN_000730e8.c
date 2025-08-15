@@ -36,11 +36,12 @@ void FUN_000730e8(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
         }
       }
       *(undefined4 *)(param_1 + 0xf0) = uVar1;
-      FUN_00071eac(param_1,param_2,param_3,&LAB_00072ab0_1,param_1,0,0,param_4,0);
+      initialize_ble_connection_with_timeout
+                (param_1,param_2,param_3,&LAB_00072ab0_1,param_1,0,0,param_4,0);
       if ((param_5 != (int *)0x0) && (*param_5 != 0)) {
         FUN_00086412(param_1);
       }
-      FUN_00073a78(param_1);
+      update_ble_connection_state_flags(param_1);
       return;
     }
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n",

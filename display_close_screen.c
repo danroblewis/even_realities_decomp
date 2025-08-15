@@ -28,7 +28,7 @@ undefined4 display_close_screen(int param_1,undefined4 param_2)
       set_framebuffer_processing_flag();
     }
     display_close(&local_c,2);
-    FUN_000745c8();
+    manage_ble_connection_priority_with_data_processing();
     iVar1 = get_work_mode();
     fill_memory_buffer(iVar1 + 0xef,0,0x5dc);
   }

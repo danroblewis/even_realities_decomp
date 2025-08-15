@@ -73,7 +73,7 @@ LAB_000656ca:
           uVar8 = 0;
         }
         else {
-          iVar5 = FUN_00064eb8(&DAT_20002c34,(int)&uStack_1c + 3);
+          iVar5 = process_bit_flags_and_return_value(&DAT_20002c34,(int)&uStack_1c + 3);
           if (iVar5 != 0xbad0000) {
             return iVar5;
           }

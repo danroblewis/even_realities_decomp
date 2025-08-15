@@ -28,7 +28,7 @@ int handle_configuration_setting_with_validation
       assertion_failure("WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0xf4);
     }
     if (&UNK_00088327 < ppuVar3) break;
-    if (((param_1 != 0) && (iVar1 = FUN_0007f1a0(*ppuVar3,param_1,0), iVar1 == 0)) ||
+    if (((param_1 != 0) && (iVar1 = compare_string_with_pattern(*ppuVar3,param_1,0), iVar1 == 0)) ||
        (((code *)ppuVar3[3] == (code *)0x0 || (iVar1 = (*(code *)ppuVar3[3])(), iVar5 != 0)))) {
       iVar1 = iVar5;
     }
@@ -38,9 +38,9 @@ int handle_configuration_setting_with_validation
   pcVar2 = (code *)&DAT_2000a10c;
   for (piVar4 = (int *)DAT_2000a10c; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
     if ((((param_1 == 0) ||
-         (iVar1 = FUN_0007f1a0(piVar4[-5],param_1,0,pcVar2,param_4), pcVar2 = extraout_r3,
-         iVar1 != 0)) && (pcVar2 = (code *)piVar4[-2], pcVar2 != (code *)0x0)) &&
-       (iVar1 = (*pcVar2)(), pcVar2 = extraout_r3_00, iVar5 == 0)) {
+         (iVar1 = compare_string_with_pattern(piVar4[-5],param_1,0,pcVar2,param_4),
+         pcVar2 = extraout_r3, iVar1 != 0)) && (pcVar2 = (code *)piVar4[-2], pcVar2 != (code *)0x0))
+       && (iVar1 = (*pcVar2)(), pcVar2 = extraout_r3_00, iVar5 == 0)) {
       iVar5 = iVar1;
     }
   }

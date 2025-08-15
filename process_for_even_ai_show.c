@@ -80,7 +80,7 @@ undefined4 process_for_even_ai_show(char *param_1,byte *param_2)
           iVar9 = 100;
           do {
             if (param_1[0xfe6] == '\x01') break;
-            get_schedule_timing(0x148,0);
+            calculate_ble_schedule_timing(0x148,0);
             iVar9 = iVar9 + -1;
           } while (iVar9 != 0);
         }
@@ -124,7 +124,7 @@ LAB_0002e012:
       cVar3 = compare_and_update_sensor_data();
       if (cVar3 != '\0') {
 LAB_0002df66:
-        get_schedule_timing(0x667,0);
+        calculate_ble_schedule_timing(0x667,0);
         goto LAB_0002df4c;
       }
       if ((param_1[0xfea] == '\f') && (**(int **)(param_1 + 0x1054) != 7)) goto LAB_0002e040;
@@ -258,7 +258,7 @@ LAB_0002cd00:
           trigger_screen_state_change("BLE:wakeup:persist_task",param_1,1);
           goto LAB_0002ce1c;
         }
-        get_schedule_timing(0x667,0);
+        calculate_ble_schedule_timing(0x667,0);
       }
       uVar8 = 0;
 LAB_0002cb9a:
@@ -294,7 +294,7 @@ LAB_0002cb9a:
             update_persist_task_status_to_idle(param_1);
           }
           if (*param_1 == '\x01') {
-            get_schedule_timing(0x4000,0);
+            calculate_ble_schedule_timing(0x4000,0);
           }
           local_2c[0] = "countdown:trigger-off-imm";
           goto LAB_0002ce1c;
@@ -348,7 +348,7 @@ LAB_0002cb9a:
           pcVar6 = "process_for_countdown_show";
           goto LAB_0002cffe;
         }
-        get_schedule_timing(0x667,0);
+        calculate_ble_schedule_timing(0x667,0);
       }
       if (param_1[0xdd] == '\0') {
         update_temp_task_status(param_1,6);
@@ -370,7 +370,7 @@ LAB_0002cb9a:
       update_persist_task_status(param_1,**(undefined4 **)(param_1 + 0x1054),3);
       break;
     default:
-      get_schedule_timing(0x8000,0);
+      calculate_ble_schedule_timing(0x8000,0);
       goto LAB_0002ca3c;
     case '\x04':
       if (2 < LOG_LEVEL) {
@@ -522,7 +522,7 @@ LAB_0002ca3c:
         }
         if (param_1[0xd5] == '\x04') {
           if (*param_1 == '\x02') {
-            get_schedule_timing(0x1334,0);
+            calculate_ble_schedule_timing(0x1334,0);
           }
           pcVar6 = "goto message show task becasse screen id is E_ID_SCREEN_ANCS_NOTIFICATION!";
           goto LAB_0002cd00;
@@ -545,7 +545,7 @@ LAB_0002ca3c:
         }
         if ((DAT_20018d9e != '\0') && (iVar9 = count_active_system_entries(), iVar9 != 0)) break;
         get_work_mode();
-        get_schedule_timing(0x667,0);
+        calculate_ble_schedule_timing(0x667,0);
       }
       set_message_processing_active_flag();
       control_timer_operation(6);
@@ -579,7 +579,7 @@ LAB_0002cd8c:
       uVar2 = calculate_next_timeout_message_state();
       *(undefined1 *)(iVar9 + 0xdd) = uVar2;
       while ((*param_2 != 1 || (param_1[0xfea] != '\n'))) {
-        get_schedule_timing(0x667,0);
+        calculate_ble_schedule_timing(0x667,0);
       }
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -727,7 +727,7 @@ LAB_0002dd2a:
       handle_heartbeat(&DAT_000a3619);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002dd2a;
 LAB_0002dd30:
   if (2 < LOG_LEVEL) {
@@ -822,7 +822,7 @@ LAB_0002dc06:
       ((uVar10 * -0x33333333 >> 2 | uVar10 * 0x40000000) < 0xccccccd)))) {
     param_1[0xdb] = param_1[0xdb] + -1;
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002dac0;
 LAB_0002d998:
   if ((param_1[1] == '\x01') || (iVar9 = get_work_mode(), *(char *)(iVar9 + 1) == '\b'))
@@ -872,7 +872,7 @@ LAB_0002d9f0:
       handle_heartbeat(&DAT_000a34a2);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d998;
 LAB_0002d99e:
   if (2 < LOG_LEVEL) {
@@ -944,7 +944,7 @@ LAB_0002d7ee:
       handle_heartbeat(&DAT_000a33de);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d7ee;
 LAB_0002d7f4:
   if (2 < LOG_LEVEL) {
@@ -1015,7 +1015,7 @@ LAB_0002d1b4:
       handle_heartbeat(&DAT_000a3071);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d1b4;
 LAB_0002d1ba:
   if (2 < LOG_LEVEL) {
@@ -1078,7 +1078,7 @@ LAB_0002d5b8:
       handle_heartbeat(&DAT_000a3244);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d4ce;
 LAB_0002d4d4:
   if (2 < LOG_LEVEL) {
@@ -1148,7 +1148,7 @@ LAB_0002d46a:
       handle_heartbeat(&DAT_000a318d);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d37c;
 LAB_0002d382:
   if (2 < LOG_LEVEL) {
@@ -1189,7 +1189,7 @@ LAB_0002d0b4:
       update_persist_task_status_to_idle(param_1);
 LAB_0002d3ec:
       if (*param_1 == '\x01') {
-        get_schedule_timing(0x4000,0);
+        calculate_ble_schedule_timing(0x4000,0);
       }
       uVar5 = 0x2667;
     }
@@ -1213,7 +1213,7 @@ LAB_0002d118:
       uVar5 = 0x4000;
     }
 LAB_0002cd18:
-    get_schedule_timing(uVar5,0);
+    calculate_ble_schedule_timing(uVar5,0);
     goto LAB_0002ce1c;
   }
   if (param_1[0xd5] == '\x01') {
@@ -1245,7 +1245,7 @@ LAB_0002caae:
       handle_heartbeat(&DAT_000a2f08);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d03e;
 LAB_0002d044:
   if (2 < LOG_LEVEL) {
@@ -1309,7 +1309,7 @@ LAB_0002d71c:
       handle_heartbeat(&DAT_000a3325);
     }
   }
-  get_schedule_timing(0x667,0);
+  calculate_ble_schedule_timing(0x667,0);
   goto LAB_0002d6ce;
 LAB_0002d6d4:
   if (2 < LOG_LEVEL) {

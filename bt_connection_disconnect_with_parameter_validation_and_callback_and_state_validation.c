@@ -25,7 +25,7 @@ int bt_connection_disconnect_with_parameter_validation_and_callback_and_state_va
     FUN_00081746(&DAT_00088160,0x1840,&local_18);
     return 0;
   }
-  puVar3 = (undefined1 *)FUN_0005f5d0(iVar2 + 0xc,4);
+  puVar3 = (undefined1 *)ble_memory_allocation_utility(iVar2 + 0xc,4);
   *puVar3 = (char)param_1;
   puVar3[1] = param_2;
   *(undefined2 *)(puVar3 + 2) = param_3;

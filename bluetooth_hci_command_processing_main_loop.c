@@ -29,7 +29,8 @@ void bluetooth_hci_command_processing_main_loop(void)
     iVar2 = validate_and_process_ble_characteristics_with_callback_execution_and_state_management
                       (&DAT_20002958);
     iVar2 = iVar2 + 1;
-    uVar8 = FUN_000755f8(&DAT_20002944,iVar2,0xffffffff,0xffffffff);
+    uVar8 = process_ble_connection_states_with_transition_handling
+                      (&DAT_20002944,iVar2,0xffffffff,0xffffffff);
     if ((int)uVar8 != 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err == 0",
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0xade);
@@ -59,15 +60,15 @@ void bluetooth_hci_command_processing_main_loop(void)
               software_interrupt(2);
               uVar5 = extraout_r1_00;
             }
-            FUN_00072908(&DAT_20002128,uVar5,0xffffffff,0xffffffff);
+            manage_ble_connection_state_comprehensive(&DAT_20002128,uVar5,0xffffffff,0xffffffff);
             if (DAT_20002140 != 0) {
               local_2c = "Uncleared pending sent_cmd";
               local_30 = 2;
               call_system_cleanup_alt(&DAT_00088138,0x1040,&local_30);
-              FUN_0005f24c(DAT_20002140);
+              decrement_reference_count_and_cleanup_memory(DAT_20002140);
               DAT_20002140 = 0;
             }
-            DAT_20002140 = FUN_0005f2d4(iVar3);
+            DAT_20002140 = increment_counter_in_structure(iVar3);
             uVar8 = process_data_with_initialization_and_state_validation(iVar3);
             if ((uint)uVar8 != 0) {
               local_4c = "Unable to send to driver (err %d)";
@@ -75,10 +76,10 @@ void bluetooth_hci_command_processing_main_loop(void)
               uStack_48 = (uint)uVar8;
               call_system_cleanup_alt(&DAT_00088138,0x1840,&local_50);
               z_spin_lock_valid(&DAT_20002128);
-              iVar4 = FUN_0005ee18(iVar3);
+              iVar4 = calculate_ble_memory_size(iVar3);
               process_data_with_state_management_and_parameter_and_compression_alt
                         (*(undefined2 *)(&DAT_2000abf6 + iVar4 * 0xc),0x1f,iVar3);
-              uVar8 = FUN_0005f24c(iVar3);
+              uVar8 = decrement_reference_count_and_cleanup_memory(iVar3);
             }
           }
           else if (puVar7[0xc] == '\x01') {
@@ -95,7 +96,7 @@ void bluetooth_hci_command_processing_main_loop(void)
       }
       puVar7 = puVar7 + 0x14;
     }
-    FUN_000745c8((int)uVar8);
+    manage_ble_connection_priority_with_data_processing((int)uVar8);
   } while( true );
 }
 

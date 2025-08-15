@@ -46,7 +46,7 @@ int initialize_system_device(void)
       uVar10 = DAT_200020d4;
       DAT_200020d4 = DAT_200020d4 & 9;
     }
-    FUN_0005f24c(local_30[0],uVar10);
+    decrement_reference_count_and_cleanup_memory(local_30[0],uVar10);
   }
   iVar1 = process_data_with_initialization_and_validation(0x1003,0,local_30);
   if (iVar1 != 0) {
@@ -55,7 +55,7 @@ int initialize_system_device(void)
   DAT_20002078 = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 1);
   DAT_2000207c = *(uint *)(*(int *)(local_30[0] + 0xc) + 5);
   puVar11 = &DAT_20002080;
-  FUN_0005f24c(local_30[0]);
+  decrement_reference_count_and_cleanup_memory(local_30[0]);
   iVar1 = process_data_with_initialization_and_validation(0x1001,0,local_30);
   if (iVar1 != 0) {
     return iVar1;
@@ -66,7 +66,7 @@ int initialize_system_device(void)
   DAT_20002071 = *(undefined1 *)(iVar1 + 4);
   DAT_20002074 = *(undefined2 *)(iVar1 + 7);
   DAT_20002076 = *(undefined2 *)(iVar1 + 5);
-  FUN_0005f24c();
+  decrement_reference_count_and_cleanup_memory();
   iVar1 = process_data_with_initialization_and_validation(0x1002,0,local_30);
   if (iVar1 != 0) {
     return iVar1;
@@ -81,7 +81,7 @@ int initialize_system_device(void)
     puVar11[1] = uVar6;
     puVar11 = puVar11 + 2;
   } while (puVar9 != (undefined4 *)(iVar1 + 0x41));
-  FUN_0005f24c(local_30[0]);
+  decrement_reference_count_and_cleanup_memory(local_30[0]);
   iVar1 = validate_and_process_ble_characteristics_with_parameter_validation();
   if (iVar1 != 0) {
     return iVar1;
@@ -98,7 +98,7 @@ int initialize_system_device(void)
   }
   DAT_200020d8 = *(uint *)(*(int *)(local_30[0] + 0xc) + 1);
   DAT_200020dc = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 5);
-  FUN_0005f24c(local_30[0]);
+  decrement_reference_count_and_cleanup_memory(local_30[0]);
   iVar3 = process_data_with_initialization_and_validation(0x2002,0,local_30);
   iVar1 = local_30[0];
   if (iVar3 != 0) {
@@ -109,14 +109,14 @@ int initialize_system_device(void)
     DAT_20002104 = *(short *)(iVar3 + 1);
     setup_bluetooth_stack(&DAT_20002108,*(undefined1 *)(iVar3 + 3));
   }
-  FUN_0005f24c(iVar1);
+  decrement_reference_count_and_cleanup_memory(iVar1);
   uVar10 = DAT_2000207c & 0x20;
   if ((DAT_2000207c & 0x20) == 0) {
     iVar1 = process_data_with_initialization_and_store(0xc6d,2);
     if (iVar1 == 0) {
       return -0x69;
     }
-    puVar4 = (undefined1 *)FUN_0005f5d0(iVar1 + 0xc,2);
+    puVar4 = (undefined1 *)ble_memory_allocation_utility(iVar1 + 0xc,2);
     *puVar4 = 1;
     puVar4[1] = (char)uVar10;
     iVar1 = process_data_with_initialization_and_validation(0xc6d,iVar1,uVar10);
@@ -131,7 +131,7 @@ int initialize_system_device(void)
     }
     DAT_200020e0 = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 1);
     DAT_200020e4 = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 5);
-    FUN_0005f24c();
+    decrement_reference_count_and_cleanup_memory();
   }
   if ((int)(DAT_200020d8 << 0x19) < 0) {
     iVar1 = process_data_with_initialization_and_validation(0x202a,0,local_30);
@@ -139,13 +139,13 @@ int initialize_system_device(void)
       return iVar1;
     }
     DAT_20002120 = *(undefined1 *)(*(int *)(local_30[0] + 0xc) + 1);
-    FUN_0005f24c();
+    decrement_reference_count_and_cleanup_memory();
   }
   iVar1 = process_data_with_initialization_and_store(0x2001,8);
   if (iVar1 == 0) {
     return -0x69;
   }
-  uVar2 = FUN_0005f5d0(iVar1 + 0xc,8);
+  uVar2 = ble_memory_allocation_utility(iVar1 + 0xc,8);
   uVar7 = DAT_200020d8 & 0xff;
   uVar10 = 0x202;
   if ((DAT_200020d8 & 0x40) == 0) {
@@ -191,13 +191,13 @@ int initialize_system_device(void)
       DAT_20002104 = *(short *)(*(int *)(local_30[0] + 0xc) + 1);
       setup_bluetooth_stack(&DAT_20002108,*(undefined2 *)(*(int *)(local_30[0] + 0xc) + 4));
     }
-    FUN_0005f24c(local_30[0]);
+    decrement_reference_count_and_cleanup_memory(local_30[0]);
   }
   iVar1 = process_data_with_initialization_and_store(0xc01,8);
   if (iVar1 == 0) {
     return -0x69;
   }
-  uVar2 = FUN_0005f5d0(iVar1 + 0xc,8);
+  uVar2 = ble_memory_allocation_utility(iVar1 + 0xc,8);
   if ((int)(DAT_200020d8 << 0x1f) < 0) {
     uVar5 = 0x2008890;
     uVar6 = 0x20008000;
@@ -254,16 +254,16 @@ int initialize_system_device(void)
     local_54 = "Firmware: %s (0x%02x) Version %u.%u Build %u";
     local_58 = 0x1000007;
     call_system_cleanup_alt(&DAT_00088138,0x3cc0,&local_58);
-    FUN_0005f24c(local_34);
+    decrement_reference_count_and_cleanup_memory(local_34);
     iVar1 = process_data_with_initialization_and_validation(0xfc02,0,&local_34);
     if (iVar1 == 0) {
       _DAT_200020c1 = *(undefined2 *)(*(int *)(local_34 + 0xc) + 1);
-      FUN_0005f24c();
+      decrement_reference_count_and_cleanup_memory();
       if (-1 < (int)((uint)DAT_200020c1 << 0x1d)) goto LAB_000123fe;
       iVar1 = process_data_with_initialization_and_validation(0xfc03,0,&local_34);
       if (iVar1 == 0) {
         DAT_200020c0 = *(undefined1 *)(*(int *)(local_34 + 0xc) + 1);
-        FUN_0005f24c();
+        decrement_reference_count_and_cleanup_memory();
         goto LAB_000123fe;
       }
       local_1c = "Failed to read supported vendor features";

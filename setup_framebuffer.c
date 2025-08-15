@@ -20,7 +20,7 @@ undefined8 setup_framebuffer(int *param_1,int param_2,uint param_3,uint param_4)
   }
   else {
     if (param_4 != 0 || param_3 != 0) {
-      uVar5 = FUN_00074f68();
+      uVar5 = calculate_ble_connection_timing_with_validation();
       uVar2 = (uint)((ulonglong)uVar5 >> 0x20);
       uVar1 = (uint)uVar5;
       param_2 = (uVar2 - param_4) - (uint)(param_3 > uVar1);

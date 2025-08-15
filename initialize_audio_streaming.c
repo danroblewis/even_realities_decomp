@@ -10,10 +10,10 @@ float initialize_audio_streaming(float param_1,float param_2)
 {
   int iVar1;
   
-  iVar1 = FUN_00075980();
+  iVar1 = classify_float_number();
   if ((iVar1 == 0) ||
-     ((iVar1 = FUN_00075980(param_2), iVar1 != 0 && (-1 < (int)((uint)(param_1 < param_2) << 0x1f)))
-     )) {
+     ((iVar1 = classify_float_number(param_2), iVar1 != 0 &&
+      (-1 < (int)((uint)(param_1 < param_2) << 0x1f))))) {
     param_1 = param_2;
   }
   return param_1;

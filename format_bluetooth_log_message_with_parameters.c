@@ -14,7 +14,7 @@ undefined4 format_bluetooth_log_message_with_parameters(undefined1 *param_1,int 
   undefined1 auStack_34 [40];
   
   if (param_2 == 0) {
-    iVar2 = FUN_0007ddbe(auStack_34,0x24,"bt/%s","sc");
+    iVar2 = format_string_with_variable_arguments(auStack_34,0x24,"bt/%s","sc");
     if (iVar2 < 0) {
       return 0xffffffea;
     }

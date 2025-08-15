@@ -22,7 +22,7 @@ void ble_ancs_data_req_thread(int param_1,undefined4 param_2,undefined4 param_3,
   setup_bluetooth_stack(param_1 + 0x1e8,0,10);
   init_msgq_ancs();
   init_msgq_uid();
-  get_schedule_timing(0x28000,0);
+  calculate_ble_schedule_timing(0x28000,0);
 LAB_00019768:
   do {
     iVar1 = get_work_mode();
@@ -40,7 +40,7 @@ LAB_00019768:
               handle_heartbeat();
             }
           }
-          FUN_00072908(param_1 + 0x200);
+          manage_ble_connection_state_comprehensive(param_1 + 0x200);
           iVar1 = dequeue_uid(&DAT_20006aac);
           if (iVar1 == 0) {
             if (0 < LOG_LEVEL) {
@@ -64,7 +64,7 @@ LAB_00019768:
                   handle_heartbeat();
                 }
               }
-              FUN_00072908(param_1 + 0x1e8);
+              manage_ble_connection_state_comprehensive(param_1 + 0x1e8);
             }
             else {
               *(undefined4 *)(param_1 + 0x1e4) = 2;
@@ -103,7 +103,7 @@ LAB_00019768:
         goto LAB_00019768;
       }
     }
-    get_schedule_timing(0x28000,0);
+    calculate_ble_schedule_timing(0x28000,0);
   } while( true );
 }
 

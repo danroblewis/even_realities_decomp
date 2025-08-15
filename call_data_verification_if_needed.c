@@ -9,7 +9,7 @@ void call_data_verification_if_needed(void)
 
 {
   if (BMP_PROCESSED_DATA != 0) {
-    call_data_verification_handler();
+    call_data_verification_handler_with_memory_cleanup();
     BMP_PROCESSED_DATA = 0;
   }
   return;

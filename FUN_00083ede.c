@@ -86,12 +86,12 @@ LAB_00083fb0:
       if (uVar4 != 0xffffffff) {
         if ((int)(*param_1 << 0x11) < 0) {
 LAB_00083fc0:
-          iVar1 = FUN_00061f64(local_2c);
+          iVar1 = validate_device_interrupt_state(local_2c);
           *(int *)(iVar1 + 8) = 1 << (local_2c[0] & 0xff);
         }
         else {
 LAB_00083f8e:
-          iVar1 = FUN_00061f64(local_2c);
+          iVar1 = validate_device_interrupt_state(local_2c);
           *(int *)(iVar1 + 0xc) = 1 << (local_2c[0] & 0xff);
         }
         uVar7 = 1;
@@ -129,7 +129,7 @@ LAB_00083ff4:
         uVar7 = 0;
       }
       local_2c[0] = uVar4;
-      iVar1 = FUN_00061f64(local_2c);
+      iVar1 = validate_device_interrupt_state(local_2c);
       iVar1 = iVar1 + local_2c[0] * 4;
       *(uint *)(iVar1 + 0x200) =
            uVar5 << 8 | ((uVar3 << 0x17) >> 0x1e) << 2 | uVar7 |

@@ -13,7 +13,7 @@ int bt_connection_state_transition_with_callback_execution
   undefined4 local_20;
   char *local_1c;
   
-  iVar1 = FUN_00086406();
+  iVar1 = check_privilege_level();
   if (iVar1 != 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!k_is_in_isr()",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x55f);
@@ -27,10 +27,10 @@ int bt_connection_state_transition_with_callback_execution
   if (iVar1 == 0) {
     local_1c = "Unable to allocate buffer within timeout";
     local_20 = 2;
-    FUN_000813ca(&DAT_00088108,0x1080,&local_20);
+    bt_log_connection_error(&DAT_00088108,0x1080,&local_20);
   }
   else {
-    FUN_0005f4d4(iVar1 + 0xc,param_2 + 5);
+    calculate_buffer_offset(iVar1 + 0xc,param_2 + 5);
   }
   return iVar1;
 }

@@ -213,7 +213,7 @@ LAB_00026156:
         }
         iVar6 = iVar6 + 1;
         if (iVar6 == 0x15) break;
-        get_schedule_timing(0xa4,0);
+        calculate_ble_schedule_timing(0xa4,0);
       }
       return 0xfffffffc;
     }
@@ -229,7 +229,7 @@ LAB_00026156:
     }
     iVar6 = iVar6 + 1;
     if (iVar6 == 0x15) break;
-    get_schedule_timing(0xa4,0);
+    calculate_ble_schedule_timing(0xa4,0);
   }
   return 0xfffffffd;
 }

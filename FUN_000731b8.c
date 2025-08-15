@@ -24,7 +24,7 @@ undefined4 FUN_000731b8(int param_1,int param_2,undefined4 param_3,undefined4 pa
   else {
     iVar6 = param_1;
     iVar7 = param_2;
-    iVar3 = FUN_00086406();
+    iVar3 = check_privilege_level();
     if (iVar3 == 0) {
       uVar4 = 0;
       bVar1 = (bool)isCurrentModePrivileged();
@@ -36,7 +36,7 @@ undefined4 FUN_000731b8(int param_1,int param_2,undefined4 param_3,undefined4 pa
         setBasePriority(0x20);
       }
       InstructionSynchronizationBarrier(0xf);
-      iVar3 = FUN_00072040(&DAT_2000b480);
+      iVar3 = check_connection_state_validity(&DAT_2000b480);
       if (iVar3 == 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                      "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,iVar6,iVar7,param_3,param_4
@@ -47,12 +47,12 @@ LAB_00073220:
         pcVar2 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
         goto LAB_000731d4;
       }
-      FUN_00072078(&DAT_2000b480);
+      update_connection_state_flags(&DAT_2000b480);
       uVar5 = *(uint *)(param_1 + 0xf0);
       if ((uVar5 & 6) == 0) {
         if (param_2 != 0) goto LAB_00073236;
         if (*(int *)(param_1 + 0xd8) == 0) {
-          iVar3 = FUN_0007205c(&DAT_2000b480);
+          iVar3 = validate_and_clear_connection_state(&DAT_2000b480);
           if (iVar3 != 0) {
             bVar1 = (bool)isCurrentModePrivileged();
             if (bVar1) {
@@ -79,7 +79,8 @@ LAB_00073236:
       *(uint *)(param_1 + 0xf0) = uVar5;
 LAB_0007323e:
       initialize_serial_ports(param_1);
-      uVar4 = FUN_00074b10(&DAT_2000b480,uVar4,param_1 + 0xe8,0xffffffff,0xffffffff,0xffffffff,0);
+      uVar4 = handle_ble_connection_state_transition_with_data
+                        (&DAT_2000b480,uVar4,param_1 + 0xe8,0xffffffff,0xffffffff,0xffffffff,0);
       return uVar4;
     }
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!k_is_in_isr()","WEST_TOPDIR/zephyr/kernel/work.c"

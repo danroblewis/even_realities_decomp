@@ -82,7 +82,7 @@ void post_notification_cmd_process(int param_1,undefined1 *param_2,int param_3)
           *(undefined2 *)(puVar3 + 2) = 0x1b4;
           spi_master_transaction_debug(param_1,auStack_a0,8);
           local_b4._0_2_ = CONCAT11(0xc9,(undefined1)local_b4);
-          call_data_verification_handler(DAT_20007da8);
+          call_data_verification_handler_with_memory_cleanup(DAT_20007da8);
           DAT_20007da8 = 0;
         }
       }

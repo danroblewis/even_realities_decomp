@@ -12,7 +12,7 @@ void cleanup_with_callback(int data_ptr,int ctx)
     if (*(code **)(ctx + 0x38) != (code *)0x0) {
       (**(code **)(ctx + 0x38))(data_ptr + 0x18);
     }
-    FUN_0005f24c(data_ptr);
+    decrement_reference_count_and_cleanup_memory(data_ptr);
     return;
   }
   return;

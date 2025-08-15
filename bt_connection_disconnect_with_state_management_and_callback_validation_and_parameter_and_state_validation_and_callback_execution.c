@@ -55,7 +55,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
   if (uVar2 < 4) {
     return 0;
   }
-  iVar1 = FUN_0005f304((int)((ulonglong)uVar7 >> 0x20));
+  iVar1 = find_last_element_in_linked_list((int)((ulonglong)uVar7 >> 0x20));
   iVar3 = FUN_00081bc0(param_3[1]);
   if ((uint)*(ushort *)(iVar6 + 0x1e) < (uint)*(ushort *)(iVar6 + 0x2e)) {
     uVar2 = (uint)*(ushort *)(iVar6 + 0x1e) - iVar3;
@@ -63,7 +63,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
   else {
     uVar2 = (uint)*(ushort *)(iVar6 + 0x2e) - iVar3;
   }
-  uVar4 = FUN_00083730(iVar1 + 0xc);
+  uVar4 = calculate_ble_buffer_available_space(iVar1 + 0xc);
   if (uVar2 < uVar4) {
     iVar3 = FUN_00081bc0(param_3[1]);
     if ((uint)*(ushort *)(iVar6 + 0x1e) < (uint)*(ushort *)(iVar6 + 0x2e)) {
@@ -74,15 +74,15 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
     }
   }
   else {
-    iVar3 = FUN_00083730(iVar1 + 0xc);
+    iVar3 = calculate_ble_buffer_available_space(iVar1 + 0xc);
   }
   if (iVar3 == 0) {
-    uVar7 = FUN_0005ee08(*(undefined1 *)(param_3[1] + 10));
+    uVar7 = calculate_ble_memory_offset(*(undefined1 *)(param_3[1] + 10));
     iVar1 = FUN_000836de((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),0,0);
     if (iVar1 == 0) {
       return 0;
     }
-    FUN_0005f390(param_3[1],iVar1);
+    append_linked_list_to_another(param_3[1],iVar1);
   }
   local_70 = 0;
   uVar2 = (*(code *)param_1[1])(local_64,param_1,auStack_60,0x10);
@@ -92,7 +92,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
 LAB_00058534:
     if (iVar6 == 0) {
       *(undefined1 *)((int)param_3 + 0x11) = 0;
-      puVar5 = (undefined2 *)FUN_0005f5d0(iVar1 + 0xc,4);
+      puVar5 = (undefined2 *)ble_memory_allocation_utility(iVar1 + 0xc,4);
       param_3[2] = (int)puVar5;
       *puVar5 = (short)param_2;
       iVar1 = param_3[2];

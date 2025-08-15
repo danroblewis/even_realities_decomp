@@ -48,7 +48,7 @@ int send_dmic_msg(int param_1)
     DAT_2000755c = DAT_2000755c + 1;
     if (99 < DAT_2000755c) {
       DAT_2000755c = 0;
-      uVar6 = thunk_FUN_00074f68();
+      uVar6 = calculate_ble_connection_timing_with_validation();
       DAT_20007560 = DAT_20007560 + 1;
       if (0 < LOG_LEVEL) {
         lVar1 = (uVar6 & 0xffffffff) * 1000;

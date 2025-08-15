@@ -174,7 +174,7 @@ LAB_0006f712:
     fVar20 = 0.0;
   }
   else {
-    fVar14 = (float)FUN_00075d5c(SQRT(fVar14) * 3.0517927e-05);
+    fVar14 = (float)handle_mathematical_function_with_validation(SQRT(fVar14) * 3.0517927e-05);
     iVar10 = local_78;
     iVar12 = local_84;
     puVar11 = local_8c;

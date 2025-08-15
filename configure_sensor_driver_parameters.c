@@ -8,7 +8,8 @@
 void configure_sensor_driver_parameters(void)
 
 {
-  FUN_00071eac(&DAT_20004798,&DAT_20027668,0x400,0x324bd,0,0,0,0xfffffff4,0);
+  initialize_ble_connection_with_timeout
+            (&DAT_20004798,&DAT_20027668,0x400,0x324bd,0,0,0,0xfffffff4,0);
   return;
 }
 

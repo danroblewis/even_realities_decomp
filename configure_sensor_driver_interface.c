@@ -15,7 +15,7 @@ undefined4 configure_sensor_driver_interface(int param_1,undefined4 param_2,unde
   if (param_1 != 0) {
     local_14 = param_2;
     uStack_10 = param_3;
-    iVar1 = FUN_00071c20(&DAT_200037b8,&local_14,0,0,param_1);
+    iVar1 = process_ble_connection_data(&DAT_200037b8,&local_14,0,0,param_1);
     if (iVar1 == 0) {
       if (((code *)**(undefined4 **)(param_1 + 8) != (code *)0x0) &&
          (iVar1 = (*(code *)**(undefined4 **)(param_1 + 8))(param_1,0x33385,param_1), iVar1 == 0)) {

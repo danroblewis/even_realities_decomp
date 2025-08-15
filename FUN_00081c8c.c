@@ -12,7 +12,7 @@ undefined4 FUN_00081c8c(int param_1,undefined4 param_2,undefined4 *param_3,undef
   int iVar2;
   uint uVar3;
   
-  iVar2 = FUN_00082cba(*param_3,param_1,0x12a,param_4,param_1,param_2);
+  iVar2 = ble_permission_access_validator(*param_3,param_1,0x12a,param_4,param_1,param_2);
   *(char *)(param_3 + 5) = (char)iVar2;
   if (iVar2 != 0) {
     return 0;

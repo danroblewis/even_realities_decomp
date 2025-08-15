@@ -22,7 +22,7 @@ undefined4 FUN_00081d24(int *param_1,undefined2 param_2,int *param_3,undefined4 
   
   iVar9 = *param_3;
   if (param_3[2] == 0) {
-    puVar1 = (undefined1 *)FUN_0005f5d0(param_3[1] + 0xc,1,param_3,0,param_4);
+    puVar1 = (undefined1 *)ble_memory_allocation_utility(param_3[1] + 0xc,1,param_3,0,param_4);
     param_3[2] = (int)puVar1;
     if (*(char *)*param_1 == '\0') {
       uVar7 = 1;
@@ -34,7 +34,7 @@ undefined4 FUN_00081d24(int *param_1,undefined2 param_2,int *param_3,undefined4 
   }
   if (*(char *)param_3[2] == '\x01') {
     if (*(char *)*param_1 == '\0') {
-      puVar2 = (undefined2 *)FUN_0005f5d0(param_3[1] + 0xc,4);
+      puVar2 = (undefined2 *)ble_memory_allocation_utility(param_3[1] + 0xc,4);
       param_3[3] = (int)puVar2;
       *puVar2 = param_2;
       *(undefined2 *)(param_3[3] + 2) = *(undefined2 *)(*param_1 + 2);
@@ -50,7 +50,7 @@ undefined4 FUN_00081d24(int *param_1,undefined2 param_2,int *param_3,undefined4 
     }
   }
   else if ((*(char *)param_3[2] == '\x02') && (*(char *)*param_1 == '\x02')) {
-    puVar2 = (undefined2 *)FUN_0005f5d0(param_3[1] + 0xc,0x12);
+    puVar2 = (undefined2 *)ble_memory_allocation_utility(param_3[1] + 0xc,0x12);
     param_3[3] = (int)puVar2;
     *puVar2 = param_2;
     iVar8 = *param_1;
