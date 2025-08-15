@@ -47,7 +47,7 @@ void process_ancs_data(undefined4 param_1)
       uVar2 = 2;
     }
     local_1c8._0_2_ = CONCAT11(uVar2,(undefined1)local_1c8);
-    if (DAT_20006ab2 == '\x02') {
+    if (ANCS_DATA_PROCESSING_STATE == '\x02') {
       safe_string_copy_with_padding(local_1b4,"com.apple.mobilephone_missed",0x20);
     }
     format_string_with_byte_patterns(auStack_34);

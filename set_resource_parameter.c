@@ -8,7 +8,7 @@
 void set_resource_parameter(undefined4 param_1)
 
 {
-  DAT_200027c8 = param_1;
+  RESOURCE_PARAMETER_SETTING_FLAG = param_1;
   return;
 }
 

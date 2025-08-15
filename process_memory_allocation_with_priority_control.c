@@ -65,14 +65,14 @@ uint process_memory_allocation_with_priority_control(void)
             *(byte *)(MEMORY_ALLOCATION_PRIORITY_CONTROL +
                      MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE * 4) = bVar1 | 2;
             uVar3 = MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE;
-            uVar6 = (*DAT_20003664)(uVar9);
+            uVar6 = (*MEMORY_ALLOCATION_PROCESSING_WITH_PRIORITY_CONTROL)(uVar9);
             MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE =
                  calculate_buffer_offset_with_wrapping
                            (&MEMORY_ALLOCATION_BUFFER_MANAGER,uVar3,uVar6);
             uVar4 = 0;
             goto LAB_0004bf52;
           }
-          uVar4 = (*DAT_20003664)(uVar9);
+          uVar4 = (*MEMORY_ALLOCATION_PROCESSING_WITH_PRIORITY_CONTROL)(uVar9);
           uVar7 = extraout_r3;
         }
         MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE =

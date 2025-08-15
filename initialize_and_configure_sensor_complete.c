@@ -18,7 +18,7 @@ int initialize_and_configure_sensor_complete(int *param_1)
     DAT_20007bc8 = 0;
     SENSOR_INITIALIZATION_STATE = 0;
     SENSOR_CALIBRATION_DATA_BUFFER = 0;
-    DAT_20003030 = 1;
+    SENSOR_INITIALIZATION_AND_CONFIGURATION_COMPLETE_STATE = 1;
     SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT = param_1;
     iVar1 = check_sensor_status_and_validate();
     if ((iVar1 != -1) &&

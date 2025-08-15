@@ -32,7 +32,7 @@ int bluetooth_hci_command_processing_with_callback_execution(int param_1)
     else {
       iVar2 = process_data_with_validation_and_parameter_alt7();
       if (iVar2 == 0) {
-        DAT_2000ac6c = param_1;
+        BLUETOOTH_HCI_COMMAND_PROCESSING_CALLBACK_EXECUTION_STATE = param_1;
         setup_bluetooth_stack(&DAT_20002128,1);
         setup_error_handling(&DAT_2000214c);
         local_38 = 0;

@@ -21,8 +21,8 @@ float process_imu_attitude_data(undefined4 param_1,int param_2,undefined4 *param
     puVar1 = (undefined4 *)&DAT_20002d10;
   }
   else {
-    puVar2 = &DAT_20002d14;
-    puVar1 = &DAT_20002d18;
+    puVar2 = &IMU_SENSOR_DATA_PROCESSING_WRAPPER;
+    puVar1 = &IMU_SENSOR_DATA_PROCESSING_WRAPPER_ALT;
   }
   DAT_2000b4f0 = *puVar2;
   DAT_2000b4ec = *puVar1;

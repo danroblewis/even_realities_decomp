@@ -26,7 +26,7 @@ uint calculate_ble_permissions_based_on_state(int param_1,uint param_2)
   }
   puVar2 = (uint *)(param_1 + 0x23c);
   if (*puVar2 == 0xffffffff) {
-    *puVar2 = (uint)DAT_200035ae;
+    *puVar2 = (uint)BLE_PERMISSIONS_CALCULATION_STATE;
   }
   if (*puVar2 == 0) {
     param_2 = param_2 & 0xfe;

@@ -257,7 +257,7 @@ LAB_00064840:
     }
     else {
 LAB_000647a8:
-      strcpy_safe(&local_44,&DAT_000f6977);
+      strcpy_safe(&local_44,&JSON_VALUE_FORMATTING_AND_PARSING_BY_TYPE);
       iVar6 = 4;
     }
     puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6 + 1);

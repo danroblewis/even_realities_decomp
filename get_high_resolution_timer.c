@@ -19,7 +19,8 @@ undefined8 get_high_resolution_timer(void)
   uVar2 = (HIGH_RESOLUTION_TIMER_DATA >> 8) +
           (uint)CARRY4(_DAT_50015504,HIGH_RESOLUTION_TIMER_DATA * 0x1000000);
   if ((_DAT_50015504 < 0x100000) &&
-     (uVar2 <= DAT_200066bc && (uint)(DAT_200066b8 <= uVar1) <= uVar2 - DAT_200066bc)) {
+     (uVar2 <= DAT_200066bc && (uint)(HIGH_RESOLUTION_TIMER_STATE <= uVar1) <= uVar2 - DAT_200066bc)
+     ) {
     bVar3 = 0xfeffffff < uVar1;
     uVar1 = uVar1 + 0x1000000;
     uVar2 = uVar2 + bVar3;

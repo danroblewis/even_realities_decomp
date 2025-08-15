@@ -11,8 +11,8 @@ void bt_connection_disconnect_with_callback_and_parameter_and_state_validation_a
 {
   int *piVar1;
   
-  for (piVar1 = (int *)DAT_2000ad2c; (piVar1 != (int *)0x0 && (*(ushort *)(piVar1 + -2) != param_1))
-      ; piVar1 = (int *)*piVar1) {
+  for (piVar1 = (int *)BT_CONNECTION_DISCONNECT_CALLBACK_AND_PARAMETER_STATE_1;
+      (piVar1 != (int *)0x0 && (*(ushort *)(piVar1 + -2) != param_1)); piVar1 = (int *)*piVar1) {
   }
   return;
 }

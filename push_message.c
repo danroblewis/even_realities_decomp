@@ -78,8 +78,8 @@ LAB_00033fb2:
         } while (iVar7 != 0x13);
         memcpy(&DAT_20009e08,param_1,0x1b4);
         SYSTEM_MESSAGE_QUEUE = '\x14';
-        DAT_20009e14 = 0x13;
-        DAT_20009e16 = 0;
+        MESSAGE_PUSH_STATE_1 = 0x13;
+        MESSAGE_PUSH_STATE_2 = 0;
       }
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("[csh_debug_msg]push_message g_msg_num_push is %d \n");

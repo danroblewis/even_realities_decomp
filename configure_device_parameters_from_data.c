@@ -92,7 +92,7 @@ LAB_0005f6f8:
        uVar3 << 8 | (((uint)param_2[4] << 0x1a) >> 0x1f) << 0x14 | iVar5 << 0xc | iVar2 << 0x10;
   *(uint *)(uVar4 * 0x10 + 0x5000e514) = (uint)param_2[6];
   *(undefined4 *)(uVar4 * 0x10 + 0x5000e510) = 0;
-  (&DAT_20002230)[uVar4] = param_2[5];
+  (&COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT_AND_PARAMETER_CONFIGURATION)[uVar4] = param_2[5];
   return 0;
 }
 

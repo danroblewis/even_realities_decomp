@@ -53,7 +53,7 @@ undefined4 manage_dashboard_ui_operations(int framebuffer_ptr,undefined4 param_2
       fill_memory_buffer(&DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY,0,0x28);
       goto LAB_0003affc;
     }
-    if ((operation_mode != 1) || (DAT_20004959 != '\0')) goto LAB_0003b198;
+    if ((operation_mode != 1) || (DASHBOARD_UI_OPERATIONS_MANAGEMENT != '\0')) goto LAB_0003b198;
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT(&LAB_000a9292,&LAB_000a957c_1);
@@ -65,7 +65,7 @@ undefined4 manage_dashboard_ui_operations(int framebuffer_ptr,undefined4 param_2
     send_event_status(0x1e);
     fill_memory_buffer(&DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY,0,0x28);
     gui_screen_clear();
-    DAT_20004959 = '\x01';
+    DASHBOARD_UI_OPERATIONS_MANAGEMENT = '\x01';
     DASHBOARD_WIDGET_MODE = *(undefined1 *)(iVar3 + 0x155);
     uVar4 = (uint)WORK_MODE_FLAGS;
     CURRENT_STOCK_INDEX = SYSTEM_PARAMETER_AND_WORK_MODE_STATUS;

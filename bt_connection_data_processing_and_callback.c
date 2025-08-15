@@ -29,7 +29,7 @@ void bt_connection_data_processing_and_callback(uint *param_1,uint param_2,uint 
   }
   *param_1 = param_3;
   param_1[1] = param_2;
-  uVar3 = (*DAT_200027f8)();
+  uVar3 = (*BT_CONNECTION_DATA_PROCESSING_STATE)();
   param_1[2] = uVar3;
   uVar6 = execute_bluetooth_callback_with_priority_control
                     (&MEMORY_ALLOCATION_BUFFER_MANAGER,param_1);

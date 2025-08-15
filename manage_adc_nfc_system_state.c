@@ -42,17 +42,17 @@ undefined4 manage_adc_nfc_system_state(undefined4 param_1,uint3 param_2)
     DAT_20002390 = &LAB_000500fe_2;
     DAT_20002394 = 0;
     DAT_2000239c = 0x200;
-    DAT_200023ae = 0x101;
-    DAT_200023b0 = 0xa0a;
-    DAT_200023b4 = 0xf000000;
+    ADC_NFC_SYSTEM_STATE_FLAG_6 = 0x101;
+    ADC_NFC_SYSTEM_STATE_FLAG_7 = 0xa0a;
+    ADC_NFC_SYSTEM_STATE_FLAG_8 = 0xf000000;
     DAT_20002398 = 0;
-    DAT_2000239e = 0;
-    DAT_200023a5 = 0;
-    DAT_200023a7 = 0;
-    DAT_200023a8 = 0;
-    DAT_200023ac = 0;
-    DAT_200023b8 = 0;
-    DAT_200023ba = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_1 = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_2 = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_3 = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_4 = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_5 = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_9 = 0;
+    ADC_NFC_SYSTEM_STATE_FLAG_10 = 0;
     DAT_20002380 = 1;
   }
   process_adc_nfc_sensor_data_and_state

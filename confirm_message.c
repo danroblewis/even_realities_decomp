@@ -104,9 +104,9 @@ void confirm_message(int param_1)
     }
     fill_memory_buffer(&MESSAGE_BUFFER_MANAGEMENT_SYSTEM,0,0x1b4);
     for (uVar6 = 10; uVar6 < SYSTEM_MESSAGE_QUEUE; uVar6 = uVar6 + 1 & 0xff) {
-      if ((&DAT_20007f70)[uVar6 * 0x1b4] == '\0') goto LAB_00034640;
+      if ((&TIMEOUT_MESSAGE_STATES_DEBUG_LOGGING_STATE_3)[uVar6 * 0x1b4] == '\0') goto LAB_00034640;
       iVar5 = memcpy(&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + uVar6 * 0x6d,
-                     &DAT_20007f60 + uVar6 * 0x6d,0x1b4);
+                     &TIMEOUT_MESSAGE_STATES_DEBUG_LOGGING_STATE_2 + uVar6 * 0x6d,0x1b4);
       *(char *)(iVar5 + 0xc) = (char)uVar6;
       *(undefined1 *)(iVar5 + 0xd) = 0;
     }

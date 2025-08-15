@@ -16,7 +16,7 @@ int enqueue_ancs(undefined4 param_1)
     iVar1 = 1;
   }
   else {
-    if (DAT_20006a90 == 10) {
+    if (ANCS_ENQUEUE_STATE == 10) {
       manage_ble_connection_state_comprehensive(&DAT_20006a6c,auStack_1bc,0,0);
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("enqueue ancs drop package! \n");

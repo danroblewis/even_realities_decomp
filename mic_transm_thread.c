@@ -55,7 +55,7 @@ LAB_00032570:
       if (*(int *)(iVar2 + 0x1030) != 0) {
         uVar6 = 0;
         while( true ) {
-          uVar7 = uVar6 * 200 + DAT_20002420;
+          uVar7 = uVar6 * 200 + MICROPHONE_TRANSMISSION_THREAD_STATE;
           DEBUG_PRINT("start send mic data,flash address:0x%x,seq:%d\n",uVar7,uVar6);
           iVar2 = dispatch_function_pointer_from_structure_alt
                             (&FLASH_DRIVER_INTERFACE,uVar7,local_f2,200);

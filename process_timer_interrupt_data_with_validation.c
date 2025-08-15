@@ -18,7 +18,7 @@ int process_timer_interrupt_data_with_validation(int param_1)
   puVar5 = local_28;
   iVar2 = *(int *)(param_1 + 8);
   call_function_pointer_and_return_byte();
-  pcVar4 = (char *)&DAT_0009907c;
+  pcVar4 = (char *)&TIMER_INTERRUPT_DATA_VALIDATION_AND_PROCESSING;
   do {
     uVar1 = *(undefined4 *)pcVar4;
     uVar3 = *(undefined4 *)(pcVar4 + 4);

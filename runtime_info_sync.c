@@ -15,7 +15,8 @@ undefined4 runtime_info_sync(undefined2 *param_1)
   local_18 = CONCAT22(*param_1,1);
   local_14 = (uint)*(uint3 *)(param_1 + 1);
   uVar1 = global_ipc_service_send(&local_18,8);
-  if ((DAT_20002fe0 != '\0') && (DAT_20002fe0 = '\0', 1 < LOG_LEVEL)) {
+  if ((RUNTIME_INFO_SYNCHRONIZATION != '\0') && (RUNTIME_INFO_SYNCHRONIZATION = '\0', 1 < LOG_LEVEL)
+     ) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): --role:%d --mode:%d, esb_channel %d --ret:%d esb_master_addr %02X esb_slave_addr %02X\n"
                   ,"runtime_info_sync",local_18 >> 0x10 & 0xff,local_18 >> 0x18,local_14 & 0xff,

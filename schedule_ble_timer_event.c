@@ -30,8 +30,8 @@ void schedule_ble_timer_event(int param_1,undefined4 param_2,undefined4 param_3,
   }
   manage_hardware_timer
             (0,&LAB_000634dc_1,uVar2 + BLE_TIMER_EVENT_SCHEDULING,
-             DAT_200066b4 + (uint)CARRY4(uVar2,BLE_TIMER_EVENT_SCHEDULING),&LAB_000634dc_1,0,0,
-             param_4);
+             BLE_TIMER_EVENT_SCHEDULING_STATE + (uint)CARRY4(uVar2,BLE_TIMER_EVENT_SCHEDULING),
+             &LAB_000634dc_1,0,0,param_4);
   return;
 }
 

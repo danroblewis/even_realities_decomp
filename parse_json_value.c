@@ -203,7 +203,7 @@ LAB_00012c0e:
     pbVar6 = (byte *)(param_2[2] + 1);
   }
   else {
-    iVar3 = compare_string_offsets(iVar10 + uVar8,&DAT_000f6977,4);
+    iVar3 = compare_string_offsets(iVar10 + uVar8,&JSON_VALUE_FORMATTING_AND_PARSING_BY_TYPE,4);
     if (iVar3 == 0) {
       *(undefined4 *)(param_1 + 0xc) = 4;
     }

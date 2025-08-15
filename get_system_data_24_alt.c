@@ -8,7 +8,7 @@
 undefined4 get_system_data_24_alt(void)
 
 {
-  return DAT_20003984;
+  return MESSAGE_PROCESSING_HANDLING_AND_SYSTEM_DATA_RETRIEVAL;
 }
 
 

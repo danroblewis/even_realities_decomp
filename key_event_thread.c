@@ -329,7 +329,7 @@ LAB_00029aac:
             }
           }
           else {
-            atomic_set_bit_1(&DAT_20007b34);
+            atomic_set_bit_1(&KEY_EVENT_THREAD_STATE);
             do {
               iVar6 = sync_to_slave(param_1,8,&local_30,2);
               if (iVar6 < 5000) {

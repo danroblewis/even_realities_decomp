@@ -13,10 +13,10 @@ undefined4 * allocate_buffer_block_with_mutex_protection(undefined4 *param_1)
   int *piVar3;
   
   acquire_buffer_allocation_mutex();
-  if (DAT_20002d3c == 0) {
+  if (BUFFER_BLOCK_ALLOCATION_MUTEX_PROTECTION_STATE == 0) {
     initialize_buffer_structure_with_mutex_protection(&DAT_20002d24);
   }
-  piVar3 = &DAT_20002d6c;
+  piVar3 = &BUFFER_BLOCK_ALLOCATION_MUTEX_PROTECTION_STATE_2;
   do {
     iVar1 = piVar3[1];
     puVar2 = (undefined4 *)piVar3[2];

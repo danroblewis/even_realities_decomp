@@ -62,7 +62,8 @@ LAB_0005e8aa:
     }
     *(undefined4 *)((int)&DAT_2000af86 + iVar2) = *(undefined4 *)(param_2 + 1);
     puVar1 = &BLE_ATTRIBUTE_TABLE + iVar2;
-    *(undefined2 *)((int)&DAT_2000af8a + iVar2) = *(undefined2 *)(param_2 + 5);
+    *(undefined2 *)((int)&BLE_ATTRIBUTE_FINDING_BY_PROPERTIES_STATE_2 + iVar2) =
+         *(undefined2 *)(param_2 + 5);
   }
   else {
 LAB_0005e85e:

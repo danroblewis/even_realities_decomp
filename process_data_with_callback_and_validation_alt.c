@@ -40,7 +40,7 @@ int process_data_with_callback_and_validation_alt
       else {
         DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT = (undefined *)0x0;
       }
-      DAT_2000a160 = 0x4ea79;
+      DATA_CALLBACK_AND_VALIDATION_ALTERNATIVE_STATE = 0x4ea79;
       DATA_PROCESSING_STATE_MANAGEMENT_1 = 1;
       DATA_PROCESSING_STATE_MANAGEMENT_2 = 0xffff;
       DATA_PROCESSING_STATE_MANAGEMENT_3 = 0;

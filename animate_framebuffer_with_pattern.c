@@ -27,7 +27,8 @@ animate_framebuffer_with_pattern(undefined4 param_1,undefined4 param_2,undefined
         iVar7 = *(int *)(iVar2 + uVar5 * 4);
         bVar1 = *(byte *)(iVar7 + iVar3);
         if (bVar1 != 0) {
-          *(byte *)(iVar7 + iVar3) = bVar1 & (&DAT_000ab6e0)[iVar3 + (uVar5 % 0x1a) * 0xa00 + iVar4]
+          *(byte *)(iVar7 + iVar3) =
+               bVar1 & (&FRAMEBUFFER_ANIMATION_WITH_PATTERN)[iVar3 + (uVar5 % 0x1a) * 0xa00 + iVar4]
           ;
         }
         iVar3 = iVar3 + 1;

@@ -38,7 +38,7 @@ int manage_comprehensive_device_configuration(undefined4 param_1,int *param_2)
         *(undefined4 *)(&DAT_5000e000 + (uVar4 + 0x51) * 0x10) = 0;
       }
       else {
-        bVar1 = (&DAT_20002230)[uVar4];
+        bVar1 = (&COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT_AND_PARAMETER_CONFIGURATION)[uVar4];
         if (bVar1 == 0) {
           local_3c = "Channel %u not configured";
           local_38._0_4_ = uVar4;
@@ -94,7 +94,7 @@ LAB_0005f874:
         goto LAB_0005f7d6;
       }
       _DAT_5000e62c = param_2[2];
-      DAT_20002204 = (undefined4 *)*param_2;
+      COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT_EXTENDED = (undefined4 *)*param_2;
       DAT_20002208 = param_2[1];
       DAT_2000220c = param_2[2];
       DAT_20002210 = param_2[3];
@@ -104,7 +104,7 @@ LAB_0005f874:
       _DAT_5000e630 = uVar6;
       if (puVar7 == (uint *)0x0) {
 LAB_0005f948:
-        initialize_device_configuration_flags(&DAT_20002190);
+        initialize_device_configuration_flags(&COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT);
         uVar5 = extraout_r1_00;
       }
       else {
@@ -112,10 +112,10 @@ LAB_0005f948:
         DAT_2000221c = puVar7[1];
         DAT_20002220 = puVar7[2];
         DAT_20002224 = puVar7[3];
-        DAT_20002204 = &DAT_20002218;
+        COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT_EXTENDED = &DAT_20002218;
         DAT_20002228 = 0;
         if (DAT_20002218 == 0) goto LAB_0005f948;
-        DAT_20002190 = 0;
+        COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT = 0;
         lVar2 = (ulonglong)DAT_20002218 * 0x8000 + 999999;
         local_38 = handle_unsigned_division((int)lVar2,(int)((ulonglong)lVar2 >> 0x20),"size",0);
         schedule_dashboard_lock_task_with_ble_integration

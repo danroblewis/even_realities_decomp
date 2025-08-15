@@ -8,7 +8,7 @@
 void set_system_byte_69(undefined1 param_1)
 
 {
-  DAT_2007fc69 = param_1;
+  SYSTEM_STATIC_INFO_RESET_8 = param_1;
   return;
 }
 

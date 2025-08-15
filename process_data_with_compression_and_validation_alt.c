@@ -8,7 +8,7 @@
 void process_data_with_compression_and_validation_alt(undefined4 param_1)
 
 {
-  DAT_2000286c = param_1;
+  DATA_COMPRESSION_AND_VALIDATION_STATE = param_1;
   return;
 }
 

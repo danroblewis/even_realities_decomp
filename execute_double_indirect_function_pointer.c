@@ -8,7 +8,7 @@
 undefined4 execute_double_indirect_function_pointer(undefined4 *param_1)
 
 {
-  (*DAT_20002f10)(*(undefined4 *)*param_1);
+  (*SYSTEM_STATE_TRANSITION_HANDLING_WITH_CALLBACK_EXECUTION)(*(undefined4 *)*param_1);
   return 0;
 }
 

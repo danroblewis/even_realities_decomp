@@ -79,7 +79,7 @@ LAB_0004bd9c:
         MEMORY_ALLOCATION_BUFFER_MANAGER =
              calculate_buffer_offset_with_wrapping
                        (&MEMORY_ALLOCATION_BUFFER_MANAGER,MEMORY_ALLOCATION_BUFFER_MANAGER,param_1);
-        if (MEMORY_ALLOCATION_BUFFER_MANAGER == DAT_20003654) {
+        if (MEMORY_ALLOCATION_BUFFER_MANAGER == MEMORY_ALLOCATION_PRIORITY_MANAGEMENT_STATE) {
           DAT_20003658 = DAT_20003658 | 8;
         }
         iVar4 = 0;
@@ -99,8 +99,8 @@ LAB_0004bd9c:
       }
       InstructionSynchronizationBarrier(0xf);
       if (local_34 != 0) {
-        if (DAT_20003660 != (code *)0x0) {
-          (*DAT_20003660)(&MEMORY_ALLOCATION_BUFFER_MANAGER);
+        if (MEMORY_ALLOCATION_WITH_PRIORITY_MANAGEMENT != (code *)0x0) {
+          (*MEMORY_ALLOCATION_WITH_PRIORITY_MANAGEMENT)(&MEMORY_ALLOCATION_BUFFER_MANAGER);
         }
         local_34 = 0;
       }

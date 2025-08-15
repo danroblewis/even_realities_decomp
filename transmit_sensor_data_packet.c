@@ -23,7 +23,8 @@ int transmit_sensor_data_packet
   uStack_1c = param_2;
   local_14 = param_3;
   uStack_10 = param_4;
-  iVar1 = (**(code **)(*(int *)(DAT_20002418 + 8) + 8))(DAT_20002418,&local_20,2,0x12);
+  iVar1 = (**(code **)(*(int *)(SENSOR_DATA_PACKET_TRANSMISSION + 8) + 8))
+                    (SENSOR_DATA_PACKET_TRANSMISSION,&local_20,2,0x12);
   if (iVar1 != 0) {
     iVar1 = 1;
   }

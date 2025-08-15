@@ -37,7 +37,7 @@ void handle_ble_connection_state_change_with_state_management(void)
     set_bits_in_value(&DAT_20006448,2);
     initialize_data_structure_with_buffer_setup(&DAT_20006350,0x82fa7);
     bt_connection_disconnect_with_parameter_validation_and_callback(&DAT_200029f8);
-    DAT_200029f4 = BT_CONNECTION_CALLBACK_LIST_HEAD;
+    BLE_CONNECTION_STATE_CHANGE_HANDLER_STATE_2 = BT_CONNECTION_CALLBACK_LIST_HEAD;
     BT_CONNECTION_CALLBACK_LIST_HEAD = &DAT_200029d4;
     return;
   }

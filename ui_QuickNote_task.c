@@ -168,8 +168,8 @@ LAB_0003bd76:
         uVar9 = (uint)((ulonglong)(lVar15 * 1000) >> 0x20);
         uVar10 = (uint)(lVar15 * 1000) >> 0xf | uVar9 * 0x20000;
         uVar11 = DAT_2000497c + DAT_20004980;
-        iVar2 = DAT_20004984 + ((int)DAT_2000497c >> 0x1f) + (uint)CARRY4(DAT_2000497c,DAT_20004980)
-        ;
+        iVar2 = UI_QUICKNOTE_TASK_MANAGEMENT +
+                ((int)DAT_2000497c >> 0x1f) + (uint)CARRY4(DAT_2000497c,DAT_20004980);
         uVar9 = uVar9 >> 0xf;
         if ((int)((iVar2 - uVar9) - (uint)(uVar11 < uVar10)) < 0 !=
             (SBORROW4(iVar2,uVar9) != SBORROW4(iVar2 - uVar9,(uint)(uVar11 < uVar10)))) {
@@ -284,7 +284,7 @@ LAB_0003bb86:
         lVar15 = calculate_ble_connection_timing_with_validation();
         uVar11 = (uint)((ulonglong)(lVar15 * 1000) >> 0x20);
         DAT_20004980 = (uint)(lVar15 * 1000) >> 0xf | uVar11 * 0x20000;
-        DAT_20004984 = uVar11 >> 0xf;
+        UI_QUICKNOTE_TASK_MANAGEMENT = uVar11 >> 0xf;
         gui_screen_clear();
         UI_QUICKNOTE_TASK_STATE_DATA = 2;
         DAT_2001b817 = 0;

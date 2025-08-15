@@ -54,7 +54,7 @@ int initialize_system_device(void)
   }
   DAT_20002078 = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 1);
   SYSTEM_DEVICE_INITIALIZATION_STATE = *(uint *)(*(int *)(local_30[0] + 0xc) + 5);
-  puVar11 = &DAT_20002080;
+  puVar11 = &BLUETOOTH_HCI_COMMAND_PROCESSING_WITH_VALIDATION_AND_CALLBACK;
   decrement_reference_count_and_cleanup_memory(local_30[0]);
   iVar1 = process_data_with_initialization_and_validation(0x1001,0,local_30);
   if (iVar1 != 0) {
@@ -62,10 +62,10 @@ int initialize_system_device(void)
   }
   iVar1 = *(int *)(local_30[0] + 0xc);
   DAT_20002070 = *(undefined1 *)(iVar1 + 1);
-  DAT_20002072 = *(undefined2 *)(iVar1 + 2);
-  DAT_20002071 = *(undefined1 *)(iVar1 + 4);
-  DAT_20002074 = *(undefined2 *)(iVar1 + 7);
-  DAT_20002076 = *(undefined2 *)(iVar1 + 5);
+  BLUETOOTH_HCI_COMMAND_PROCESSING_WITH_STATE_MANAGEMENT_ALT = *(undefined2 *)(iVar1 + 2);
+  BLUETOOTH_HCI_COMMAND_PROCESSING_WITH_STATE_MANAGEMENT = *(undefined1 *)(iVar1 + 4);
+  BLUETOOTH_HCI_COMMAND_PROCESSING_WITH_STATE_MANAGEMENT_EXTENDED = *(undefined2 *)(iVar1 + 7);
+  BLUETOOTH_HCI_COMMAND_PROCESSING_WITH_STATE_MANAGEMENT_BASE = *(undefined2 *)(iVar1 + 5);
   decrement_reference_count_and_cleanup_memory();
   iVar1 = process_data_with_initialization_and_validation(0x1002,0,local_30);
   if (iVar1 != 0) {
@@ -257,9 +257,9 @@ int initialize_system_device(void)
     decrement_reference_count_and_cleanup_memory(local_34);
     iVar1 = process_data_with_initialization_and_validation(0xfc02,0,&local_34);
     if (iVar1 == 0) {
-      _DAT_200020c1 = *(undefined2 *)(*(int *)(local_34 + 0xc) + 1);
+      _SYSTEM_DEVICE_INITIALIZATION = *(undefined2 *)(*(int *)(local_34 + 0xc) + 1);
       decrement_reference_count_and_cleanup_memory();
-      if (-1 < (int)((uint)DAT_200020c1 << 0x1d)) goto LAB_000123fe;
+      if (-1 < (int)((uint)SYSTEM_DEVICE_INITIALIZATION << 0x1d)) goto LAB_000123fe;
       iVar1 = process_data_with_initialization_and_validation(0xfc03,0,&local_34);
       if (iVar1 == 0) {
         DAT_200020c0 = *(undefined1 *)(*(int *)(local_34 + 0xc) + 1);

@@ -33,7 +33,7 @@ int bluetooth_hci_command_processing_with_validation_and_callback(void)
       clear_bit_in_bitmap(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION,0xfffffffb);
       iVar1 = (**(code **)(BLUETOOTH_HCI_COMMAND_STATE + 0x10))();
       if (iVar1 == 0) {
-        fill_memory_buffer(&DAT_20002080,0,0x40);
+        fill_memory_buffer(&BLUETOOTH_HCI_COMMAND_PROCESSING_WITH_VALIDATION_AND_CALLBACK,0,0x40);
         copy_data_structure(&DAT_20002068,&DAT_000f2b3a);
         handle_bluetooth_privacy_mode_management_with_state_validation();
         validate_and_process_ble_characteristics_with_parameter_validation_and_callback();

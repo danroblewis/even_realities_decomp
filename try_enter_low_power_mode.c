@@ -96,7 +96,7 @@ LAB_00026d96:
           POWER_MANAGEMENT_STATE = 2;
           while (DAT_20018d81 == '\0') {
             lVar8 = calculate_mathematical_operation_with_bit_shifting();
-            lVar8 = lVar8 - CONCAT44(DAT_200040c4,DAT_200040c0);
+            lVar8 = lVar8 - CONCAT44(LOW_POWER_MODE_ENTRY_STATE_2,LOW_POWER_MODE_ENTRY_STATE_1);
             iVar2 = (int)((ulonglong)lVar8 >> 0x20);
             bVar7 = (uint)lVar8 < 300000;
             if ((uint)bVar7 <= (uint)-iVar2) break;

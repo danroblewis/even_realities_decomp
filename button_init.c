@@ -87,8 +87,8 @@ LAB_00017b48:
   else {
     iVar2 = handle_event_processing(&DAT_000889d0,0x10000);
     if (-1 < iVar2) {
-      DAT_20006a14 = 0x1793d;
-      DAT_20006a18 = 0x200;
+      BUTTON_INITIALIZATION_STATE_5 = 0x1793d;
+      BUTTON_INITIALIZATION_STATE_6 = 0x200;
       iVar2 = reorder_linked_list_element(&DAT_00087b48,&DAT_20006a10,1);
       if (iVar2 < 0) {
         if (1 < LOG_LEVEL) {
@@ -117,8 +117,8 @@ LAB_00017b48:
   else {
     iVar2 = handle_event_processing(&DAT_000889e0,0x10000);
     if (iVar2 < 0) goto LAB_00017c40;
-    DAT_20006a08 = &LAB_00017818_1;
-    DAT_20006a0c = 0x400;
+    BUTTON_INITIALIZATION_STATE_2 = &LAB_00017818_1;
+    BUTTON_INITIALIZATION_STATE_3 = 0x400;
     iVar2 = reorder_linked_list_element(&DAT_00087b48,&DAT_20006a04,1);
     if (-1 < iVar2) {
       iVar2 = get_system_byte_3();

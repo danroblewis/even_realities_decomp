@@ -12,12 +12,13 @@ undefined * initialize_driver_context(void)
   char *debug_message;
   undefined *puVar1;
   
-  DAT_20007a50 = &PTR_send_control_message_with_retry_and_mutex_1_00088a38;
-  DAT_200023d0 = 0x53;
-  DAT_200023d4 = 0x53;
-  DAT_200023d8 = 0x1000;
-  DAT_20007a58 = &DAT_20007a60;
-  DAT_20007a4c = &DAT_200023cc;
+  DRIVER_CONTEXT_INITIALIZATION_PARAMETER_3 =
+       &PTR_send_control_message_with_retry_and_mutex_1_00088a38;
+  DRIVER_CONTEXT_INITIALIZATION_FLAG_1 = 0x53;
+  DRIVER_CONTEXT_INITIALIZATION_FLAG_2 = 0x53;
+  DRIVER_CONTEXT_INITIALIZATION_FLAG_3 = 0x1000;
+  DRIVER_CONTEXT_INITIALIZATION_PARAMETER_4 = &DAT_20007a60;
+  DRIVER_CONTEXT_INITIALIZATION_PARAMETER_2 = &DAT_200023cc;
   init_mutex();
   driver_context = check_driver_ready(DAT_200023cc);
   if (driver_context == 0) {

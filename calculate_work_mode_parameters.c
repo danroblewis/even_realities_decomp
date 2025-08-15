@@ -21,8 +21,9 @@ int calculate_work_mode_parameters(char *attitude_data)
   bVar1 = attitude_data[0x10];
   cVar2 = attitude_data[0x11];
   if ((((*(int *)(attitude_data + 0x80) != DAT_20007a9c) || ((uint)DAT_20018c6b != (uint)bVar1)) ||
-      (DAT_20003024 != cVar2)) ||
-     ((DAT_200023f8 != work_mode_timing || (DAT_20007a98 != *(int *)(attitude_data + 0x84))))) {
+      (WORK_MODE_PARAMETER_CALCULATION_EXTENDED != cVar2)) ||
+     ((WORK_MODE_PARAMETER_CALCULATION_ALT != work_mode_timing ||
+      (DAT_20007a98 != *(int *)(attitude_data + 0x84))))) {
     if (cVar2 == '\0') {
       iVar3 = -0x15e;
     }
@@ -38,9 +39,9 @@ int calculate_work_mode_parameters(char *attitude_data)
     else {
       base_timing_value = 4000;
     }
-    DAT_200023f4 = (int)(base_timing_value * (uint)bVar1) / work_mode_timing;
-    DAT_200023f8 = work_mode_timing;
-    DAT_20003024 = cVar2;
+    WORK_MODE_PARAMETER_CALCULATION = (int)(base_timing_value * (uint)bVar1) / work_mode_timing;
+    WORK_MODE_PARAMETER_CALCULATION_ALT = work_mode_timing;
+    WORK_MODE_PARAMETER_CALCULATION_EXTENDED = cVar2;
     DAT_20007a98 = *(int *)(attitude_data + 0x84);
     DAT_20007a9c = *(int *)(attitude_data + 0x80);
     DAT_20018c6b = bVar1;
@@ -57,7 +58,7 @@ int calculate_work_mode_parameters(char *attitude_data)
       *(int *)(attitude_data + 0xc) = (work_mode_timing + -0x1194) - iVar3;
     }
   }
-  return DAT_200023f4;
+  return WORK_MODE_PARAMETER_CALCULATION;
 }
 
 

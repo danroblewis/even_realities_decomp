@@ -15,7 +15,7 @@ validate_and_process_ble_characteristics_with_callback_execution_and_state_manag
   
   setup_audio_codec(&DAT_20002990);
   set_ble_connection_state_flags_with_validation(param_1,1,0,&DAT_20002990);
-  if (DAT_20006208 != 0) {
+  if (BLE_CHARACTERISTIC_VALIDATION_AND_PROCESSING_STATE_2 != 0) {
     if ((DAT_20006145 == '\0') &&
        (iVar1 = bt_connection_update_flags(&DAT_2000613c,0xffffffbf), iVar1 << 0x19 < 0)) {
       validate_and_process_ble_characteristics_with_state_management_and_parameter(&DAT_20006138);

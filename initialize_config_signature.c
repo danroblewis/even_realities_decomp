@@ -8,7 +8,7 @@
 void initialize_config_signature(void)
 
 {
-  DAT_2007fc64 = 0x12345678;
+  SYSTEM_STATIC_INFO_RESET_7 = 0x12345678;
   return;
 }
 

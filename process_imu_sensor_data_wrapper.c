@@ -50,8 +50,8 @@ undefined4 process_imu_sensor_data_wrapper(undefined4 *param_1,undefined4 *param
       uStack_20 = 0;
       uStack_1c = 0x3951b717;
       process_imu_sensor_data
-                (*param_1,param_1[1],param_1[2],DAT_20002d18,DAT_20002d14,&local_58,param_1[3],
-                 &DAT_2000b4a4,&local_5c);
+                (*param_1,param_1[1],param_1[2],IMU_SENSOR_DATA_PROCESSING_WRAPPER_ALT,
+                 IMU_SENSOR_DATA_PROCESSING_WRAPPER,&local_58,param_1[3],&DAT_2000b4a4,&local_5c);
       if (param_2 != (undefined4 *)0x0) {
         *param_2 = local_5c;
       }

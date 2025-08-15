@@ -16,7 +16,7 @@ bt_connection_disconnect_with_validation_and_state_management_and_callback_and_s
     uVar1 = bt_connection_disconnect_with_state_management_and_callback_and_state_validation();
     return uVar1;
   }
-  DAT_20006214 = &DAT_0008b264;
+  BT_CONNECTION_DISCONNECT_VALIDATION_AND_STATE_MANAGEMENT_STATE = &DAT_0008b264;
   *param_2 = &DAT_20006210;
   return 0;
 }

@@ -37,7 +37,7 @@ int handle_complex_data_processing_alt
       }
       DAT_20007a15 = local_18._1_1_;
       DAT_20007a14 = (char)local_18;
-      DAT_20007a17 = local_18._3_1_;
+      COMPLEX_DATA_PROCESSING_ALTERNATIVE_STATE = local_18._3_1_;
       DAT_20007a1a = sVar1;
       while ((iVar2 = send_control_message_with_retry_and_mutex
                                 (SYSTEM_CONFIGURATION_PARAMETER,BLE_DATA_PROCESSING_BUFFER,&local_1c

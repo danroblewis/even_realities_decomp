@@ -37,7 +37,7 @@ process_ble_characteristic_value_change_with_callback_validation(int *param_1,in
     iVar4 = remove_ble_connection_from_list(*param_1 + 0x28);
     DAT_200029a4 = 0;
     sVar3 = *(short *)(iVar4 + 0x18);
-    DAT_200029a0 = DAT_200029a8;
+    DAT_200029a0 = BLE_CHARACTERISTIC_VALUE_CHANGE_CALLBACK_STATE_2;
     ble_memory_copy_utility
               (&DAT_200029a0,*(undefined4 *)(iVar4 + 0xc),*(undefined2 *)(iVar4 + 0x10));
     iVar6 = *param_1;
@@ -57,7 +57,8 @@ LAB_000590a6:
             ;
             return 0;
           }
-          if ((uint)DAT_200029a6 < (uint)DAT_200029a4 + (uint)*(ushort *)(puVar7 + 4)) {
+          if ((uint)BLE_CHARACTERISTIC_VALUE_CHANGE_CALLBACK_STATE_1 <
+              (uint)DAT_200029a4 + (uint)*(ushort *)(puVar7 + 4)) {
             uVar5 = 0xd;
             goto LAB_000590a6;
           }

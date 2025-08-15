@@ -20,7 +20,7 @@ void process_data_with_callback_execution_and_compression_alt(char *param_1,char
   cVar1 = *param_1;
   if (cVar1 == '\x01') {
     pcVar3 = param_2;
-    puVar6 = &DAT_000f2cc8;
+    puVar6 = &DATA_PROCESSING_CALLBACK_EXECUTION_AND_COMPRESSION_ALT;
     do {
       puVar7 = puVar6 + 1;
       pcVar5 = pcVar3 + 4;
@@ -48,7 +48,7 @@ void process_data_with_callback_execution_and_compression_alt(char *param_1,char
   }
   else if (cVar1 == '\0') {
     pcVar3 = param_2;
-    puVar6 = &DAT_000f2cc8;
+    puVar6 = &DATA_PROCESSING_CALLBACK_EXECUTION_AND_COMPRESSION_ALT;
     do {
       puVar7 = puVar6 + 1;
       pcVar5 = pcVar3 + 4;

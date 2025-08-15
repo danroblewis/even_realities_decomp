@@ -25,7 +25,8 @@ void bluetooth_hci_command_processing_main_loop(void)
   char *local_2c;
   
   do {
-    DAT_20002950 = DAT_20002950 & 0xffe03fff;
+    BLUETOOTH_HCI_COMMAND_PROCESSING_MAIN_LOOP_ALT =
+         BLUETOOTH_HCI_COMMAND_PROCESSING_MAIN_LOOP_ALT & 0xffe03fff;
     iVar2 = validate_and_process_ble_characteristics_with_callback_execution_and_state_management
                       (&DAT_20002958);
     iVar2 = iVar2 + 1;

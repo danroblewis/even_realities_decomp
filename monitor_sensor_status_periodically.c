@@ -27,7 +27,7 @@ void monitor_sensor_status_periodically(void)
     if (uVar2 == 10) {
       DAT_20019ef0 = DAT_20019ef0 + 1;
       if (3 < DAT_20019ef0) {
-        DAT_20003031 = 0;
+        SENSOR_STATUS_PERIODIC_MONITORING = 0;
         SENSOR_STATUS_MONITORING_DATA = iVar1;
         DAT_20019ef0 = 3;
         return;
@@ -36,7 +36,7 @@ void monitor_sensor_status_periodically(void)
     else {
       DAT_20019ef0 = 0;
     }
-    DAT_20003031 = 1;
+    SENSOR_STATUS_PERIODIC_MONITORING = 1;
     SENSOR_STATUS_MONITORING_DATA = iVar1;
   }
   return;

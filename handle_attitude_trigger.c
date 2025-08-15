@@ -428,9 +428,9 @@ LAB_000103ea:
                 ATTITUDE_TRIGGER_STATE = ATTITUDE_TRIGGER_STATE + 1;
                 if (4 < ATTITUDE_TRIGGER_STATE) {
                   ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\x02';
-                  DAT_20007ae4 = local_a0[6];
-                  DAT_20007ae8 = local_a0[7];
-                  DAT_20007aec = local_a0[8];
+                  ATTITUDE_TRIGGER_HANDLER_STATE_5 = local_a0[6];
+                  ATTITUDE_TRIGGER_HANDLER_STATE_6 = local_a0[7];
+                  ATTITUDE_TRIGGER_HANDLER_STATE_7 = local_a0[8];
                 }
               }
             }
@@ -438,8 +438,8 @@ LAB_000103ea:
               ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS = 0;
               ATTITUDE_TRIGGER_STATE = 0;
               DAT_20007ac0 = 0;
-              DAT_20007ac4 = 0;
-              DAT_20007ac8 = 0;
+              ATTITUDE_TRIGGER_HANDLER_STATE_1 = 0;
+              ATTITUDE_TRIGGER_HANDLER_STATE_2 = 0;
               ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\0';
             }
             else if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\0') {
@@ -472,8 +472,8 @@ LAB_000103ea:
               if (iVar1 != 0) {
                 if (ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS == 0) {
                   DAT_20007ad8 = local_a0[0];
-                  DAT_20007adc = local_a0[1];
-                  DAT_20007ae0 = local_a0[2];
+                  ATTITUDE_TRIGGER_HANDLER_STATE_3 = local_a0[1];
+                  ATTITUDE_TRIGGER_HANDLER_STATE_4 = local_a0[2];
                   ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS = 1;
                 }
                 else {

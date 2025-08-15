@@ -59,21 +59,38 @@ void apply_audio_filter_with_bias_and_scaling
     pfVar3 = pfVar3 + 1;
   } while (pfVar2 != (float *)&DAT_0008d24c);
   *param_6 = (float)(&DAT_00090850)[param_1 * 8] + fVar4 * *param_6;
-  param_6[1] = (float)(&DAT_00090854)[param_1 * 8] + fVar4 * param_6[1];
-  param_6[2] = (float)(&DAT_00090858)[param_1 * 8] + fVar4 * param_6[2];
-  param_6[3] = (float)(&DAT_0009085c)[param_1 * 8] + fVar4 * param_6[3];
-  param_6[4] = (float)(&DAT_00090860)[param_1 * 8] + fVar4 * param_6[4];
-  param_6[5] = (float)(&DAT_00090864)[param_1 * 8] + fVar4 * param_6[5];
-  param_6[6] = (float)(&DAT_00090868)[param_1 * 8] + fVar4 * param_6[6];
-  param_6[7] = (float)(&DAT_0009086c)[param_1 * 8] + param_6[7] * fVar4;
+  param_6[1] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE)
+                      [param_1 * 8] + fVar4 * param_6[1];
+  param_6[2] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE_ALT)
+                      [param_1 * 8] + fVar4 * param_6[2];
+  param_6[3] = (float)(&
+                      AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE_EXTENDED
+                      )[param_1 * 8] + fVar4 * param_6[3];
+  param_6[4] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE_BASE
+                      )[param_1 * 8] + fVar4 * param_6[4];
+  param_6[5] = (float)(&
+                      AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE_OFFSET
+                      )[param_1 * 8] + fVar4 * param_6[5];
+  param_6[6] = (float)(&
+                      AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE_PRIORITY
+                      )[param_1 * 8] + fVar4 * param_6[6];
+  param_6[7] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_COMPREHENSIVE_TYPE
+                      )[param_1 * 8] + param_6[7] * fVar4;
   param_6[8] = (float)(&DAT_00090450)[param_2 * 8] + fVar4 * param_6[8];
-  param_6[9] = (float)(&DAT_00090454)[param_2 * 8] + param_6[9] * fVar4;
-  param_6[10] = (float)(&DAT_00090458)[param_2 * 8] + fVar4 * param_6[10];
-  param_6[0xb] = (float)(&DAT_0009045c)[param_2 * 8] + fVar4 * param_6[0xb];
-  param_6[0xc] = (float)(&DAT_00090460)[param_2 * 8] + fVar4 * param_6[0xc];
-  param_6[0xd] = (float)(&DAT_00090464)[param_2 * 8] + fVar4 * param_6[0xd];
-  param_6[0xe] = (float)(&DAT_00090468)[param_2 * 8] + fVar4 * param_6[0xe];
-  param_6[0xf] = (float)(&DAT_0009046c)[param_2 * 8] + param_6[0xf] * fVar4;
+  param_6[9] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_EXTENDED)
+                      [param_2 * 8] + param_6[9] * fVar4;
+  param_6[10] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_BASE)
+                       [param_2 * 8] + fVar4 * param_6[10];
+  param_6[0xb] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_OFFSET)
+                        [param_2 * 8] + fVar4 * param_6[0xb];
+  param_6[0xc] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_PRIORITY)
+                        [param_2 * 8] + fVar4 * param_6[0xc];
+  param_6[0xd] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_TYPE)
+                        [param_2 * 8] + fVar4 * param_6[0xd];
+  param_6[0xe] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_MASK)
+                        [param_2 * 8] + fVar4 * param_6[0xe];
+  param_6[0xf] = (float)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX_ENABLE)
+                        [param_2 * 8] + param_6[0xf] * fVar4;
   return;
 }
 

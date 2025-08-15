@@ -30,7 +30,8 @@ void handle_ble_attribute_callbacks(uint param_1,code *param_2,undefined4 param_
   if ((BLE_ATTRIBUTE_PROPERTIES_AND_CALLBACK_MANAGEMENT != 0) &&
      (BLE_ATTRIBUTE_TABLE_MANAGEMENT_STATE == param_1)) {
     local_20 = DAT_2000afa9;
-    local_1c._0_3_ = CONCAT12(DAT_2000afaf,DAT_2000afad);
+    local_1c._0_3_ =
+         CONCAT12(BLE_ATTRIBUTE_TABLE_MANAGEMENT_STATE_2,BLE_ATTRIBUTE_TABLE_MANAGEMENT_STATE_1);
     (*param_2)(&local_20,param_3);
   }
   return;

@@ -15,7 +15,7 @@ undefined4 initialize_hardware_state_and_memory_buffers(void)
   uint uVar3;
   
   if (DAT_20002c38 == '\0') {
-    fill_memory_buffer(&DAT_20002bd0,0,0x60);
+    fill_memory_buffer(&CALLBACK_STATE_AND_BITMAP_UPDATE_FLAG,0,0x60);
     uVar3 = 0;
     do {
       iVar1 = validate_index_and_calculate_offset(uVar3 & 0xff);

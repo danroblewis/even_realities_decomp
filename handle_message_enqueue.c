@@ -13,7 +13,7 @@ int handle_message_enqueue(undefined4 param_1,undefined1 param_2)
   undefined1 auStack_113 [263];
   
   fill_memory_buffer(&local_114,0,0x101);
-  if (DAT_2000391c == 0x30) {
+  if (MESSAGE_ENQUEUE_HANDLER_STATE == 0x30) {
     manage_ble_connection_state_comprehensive(&DAT_200038f8,&local_114,0,0);
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("enqueue_bt_data drop package! \n");

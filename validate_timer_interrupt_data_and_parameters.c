@@ -19,7 +19,7 @@ undefined4 validate_timer_interrupt_data_and_parameters(int param_1,undefined1 *
   if (-1 < iVar1) {
     iVar1 = validate_buffer_all_bytes_match(param_1,auStack_20,0x10);
     if (iVar1 == 0) {
-      iVar1 = memcmp_byte_arrays(auStack_20,&DAT_0009907c,0x10);
+      iVar1 = memcmp_byte_arrays(auStack_20,&TIMER_INTERRUPT_DATA_VALIDATION_AND_PROCESSING,0x10);
       if (iVar1 == 0) {
         uVar3 = 1;
       }

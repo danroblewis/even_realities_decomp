@@ -36,7 +36,7 @@ int handle_ble_descriptor_discovery(uint param_1,undefined4 param_2,undefined4 p
         if (((byte)puVar5[-1] == param_1) &&
            (iVar2 = compare_byte_arrays_7_bytes(param_2,puVar5), iVar2 != 0)) {
           puVar4 = &DAT_2000af18 + iVar1;
-          piVar3 = *(int **)((int)&DAT_2000af20 + iVar1);
+          piVar3 = *(int **)((int)&BLE_DESCRIPTOR_DISCOVERY_HANDLING_STATE_2 + iVar1);
           if (piVar3 != (int *)0x0) {
             iVar1 = *piVar3;
             if (iVar1 != 0) {

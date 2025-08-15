@@ -8,7 +8,7 @@
 undefined4 get_system_data_24(void)
 
 {
-  return DAT_200039b8;
+  return SYSTEM_DATA_24_BYTE_ACCESS_STATE;
 }
 
 

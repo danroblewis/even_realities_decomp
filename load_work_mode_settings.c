@@ -21,9 +21,9 @@ void load_work_mode_settings(void)
   DAT_2007fc04._0_1_ = *(undefined1 *)(puVar4 + 1);
   DAT_2007fc04._1_1_ = *(undefined1 *)((int)puVar4 + 5);
   SYSTEM_STATIC_INFO_RESET_2 = *(undefined4 *)((int)puVar4 + 10);
-  DAT_2007fc5f = *(undefined1 *)((int)puVar4 + 0x5d);
+  SYSTEM_STATIC_INFO_RESET_5 = *(undefined1 *)((int)puVar4 + 0x5d);
   DAT_2007fc60._0_1_ = *(undefined1 *)((int)puVar4 + 0x5e);
-  DAT_2007fc62 = *(undefined1 *)((int)puVar4 + 0x61);
+  SYSTEM_STATIC_INFO_RESET_6 = *(undefined1 *)((int)puVar4 + 0x61);
   DAT_2007fc60._1_1_ = *(undefined1 *)(puVar4 + 0x18);
   puVar2 = &SYSTEM_STATIC_INFO_RESET_3;
   puVar5 = (undefined4 *)((int)puVar4 + 0xe);

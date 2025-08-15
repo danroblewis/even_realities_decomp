@@ -15,7 +15,7 @@ void initialize_cryptographic_context_with_parameter_setup(undefined4 *param_1)
   param_1[0x3e] = 0;
   fill_memory_buffer(param_1 + 0x3f,0,0x14);
   fill_memory_buffer(puVar2,0,8);
-  (*DAT_20002f5c)(puVar2);
+  (*SHA256_CONTEXT_INITIALIZATION_WITH_DEFAULT_VALUES_AND_CRYPTOGRAPHIC_CONTEXT_SETUP)(puVar2);
   *param_1 = 0;
   reset_sha256_context_with_error_handling(param_1 + 1);
   iVar1 = (*DAT_20002f58)(puVar2);

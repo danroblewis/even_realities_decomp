@@ -24,13 +24,13 @@ void copy_system_data(void)
   iVar2 = *(int *)(iVar1 + 0xfec);
   *(undefined4 *)(iVar2 + 6) = SYSTEM_STATIC_INFO_RESET_1;
   *(undefined4 *)(iVar2 + 10) = uVar3;
-  *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x5d) = DAT_2007fc5f;
+  *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x5d) = SYSTEM_STATIC_INFO_RESET_5;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x5e) = (undefined1)DAT_2007fc60;
-  *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x61) = DAT_2007fc62;
+  *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x61) = SYSTEM_STATIC_INFO_RESET_6;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x60) = DAT_2007fc60._1_1_;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 99) = DAT_2007fc68;
-  if (DAT_2007fc69 < 4) {
-    SYSTEM_PARAMETER_AND_WORK_MODE_STATUS = DAT_2007fc69;
+  if (SYSTEM_STATIC_INFO_RESET_8 < 4) {
+    SYSTEM_PARAMETER_AND_WORK_MODE_STATUS = SYSTEM_STATIC_INFO_RESET_8;
   }
   puVar4 = (undefined4 *)(*(int *)(iVar1 + 0xfec) + 0xe);
   puVar6 = &SYSTEM_STATIC_INFO_RESET_3;

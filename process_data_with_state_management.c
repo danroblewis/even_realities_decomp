@@ -145,7 +145,7 @@ LAB_0004eb88:
   else if (bVar1 == 5) {
     if (param_2 == (undefined4 *)0x0) {
       if (CONFIGURATION_SETTING_AND_DATA_PROCESSING_STATE < 2) goto LAB_0004ebe6;
-      DATA_PROCESSING_STATE_MANAGEMENT_1 = DAT_2000a174 + 1;
+      DATA_PROCESSING_STATE_MANAGEMENT_1 = DATA_STATE_MANAGEMENT_PROCESSING_STATE + 1;
       DATA_PROCESSING_STATE_MANAGEMENT_3 = 3;
       uVar7 = process_ble_characteristic_operation_by_type
                         (param_1,&DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT);

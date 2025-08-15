@@ -36,10 +36,10 @@ int handle_configuration_setting_with_flags
         }
         uVar3 = uVar3 + 1;
       } while (uVar3 != 8);
-      DAT_2000a128 = (undefined2)local_14;
-      DAT_2000a12a = (undefined2)uVar3;
-      DAT_2000a11c = *(undefined4 *)(local_20[0] + 4);
-      DAT_2000a150 = *(undefined4 *)(local_20[0] + 0xc);
+      CONFIGURATION_SETTING_WITH_FLAGS_STATE_2 = (undefined2)local_14;
+      CONFIGURATION_SETTING_WITH_FLAGS_STATE_3 = (undefined2)uVar3;
+      CONFIGURATION_SETTING_WITH_FLAGS_STATE_1 = *(undefined4 *)(local_20[0] + 4);
+      CONFIGURATION_SETTING_WITH_FLAGS_STATE_4 = *(undefined4 *)(local_20[0] + 0xc);
       iVar1 = initialize_and_process_complex_data_structure(&DAT_2000a114);
       if (iVar1 == 0) {
         DAT_2000a118 = &DAT_200027fc;

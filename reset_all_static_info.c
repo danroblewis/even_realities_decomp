@@ -21,13 +21,13 @@ void reset_all_static_info
   SYSTEM_STATIC_INFO_RESET_2 = 0;
   DAT_2007fc00 = 0;
   DAT_2007fc04 = 0;
-  DAT_2007fc5f = 0;
+  SYSTEM_STATIC_INFO_RESET_5 = 0;
   DAT_2007fc60 = 0;
-  DAT_2007fc62 = 0;
+  SYSTEM_STATIC_INFO_RESET_6 = 0;
   DAT_2007fc68 = 0;
   fill_memory_buffer(&SYSTEM_STATIC_INFO_RESET_3,0,0x25);
   fill_memory_buffer(&SYSTEM_STATIC_INFO_RESET_4,0,0x25);
-  DAT_2007fc64 = 0;
+  SYSTEM_STATIC_INFO_RESET_7 = 0;
   return;
 }
 
