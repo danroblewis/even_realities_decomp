@@ -27,7 +27,7 @@ void navigation_panoramic_map_display(undefined4 param_1,int param_2)
   undefined4 uVar14;
   byte local_30 [12];
   
-  if (DAT_20004bbc == '\0') {
+  if (NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER == '\0') {
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): reflash panoramic map to lcd\n","navigation_panoramic_map_display");
@@ -104,7 +104,7 @@ void navigation_panoramic_map_display(undefined4 param_1,int param_2)
         iVar10 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         gui_utf_draw(0,param_2 + 0x25,0,uVar11,iVar8 + 0x6d,iVar10 + 0x4c,iVar5 + 0x88,1,0,0,0,0);
-        DAT_2001ba2c = '\x01';
+        NAVIGATION_PANORAMIC_MAP_DISPLAY_BUFFER = '\x01';
       }
       else {
         iVar8 = get_system_byte_1_alt();
@@ -139,7 +139,7 @@ void navigation_panoramic_map_display(undefined4 param_1,int param_2)
           iVar8 = iVar8 + 0xda;
         }
         gui_utf_draw(0,pcVar9,0,iVar8,iVar5 + 0x52,iVar10,iVar7 + 0x6d,1,0,0,0,0);
-        DAT_2001ba2c = '\0';
+        NAVIGATION_PANORAMIC_MAP_DISPLAY_BUFFER = '\0';
       }
       iVar8 = get_work_mode();
       iVar8 = *(byte *)(*(int *)(iVar8 + 0xfec) + 0x5e) - 1;
@@ -237,7 +237,7 @@ void navigation_panoramic_map_display(undefined4 param_1,int param_2)
           handle_heartbeat();
         }
       }
-      if (DAT_2001ba2c != '\0') goto LAB_0003ed90;
+      if (NAVIGATION_PANORAMIC_MAP_DISPLAY_BUFFER != '\0') goto LAB_0003ed90;
       uVar11 = get_ui_x_offset();
       iVar12 = get_ui_y_offset();
       iVar4 = get_ui_x_offset();
@@ -376,9 +376,9 @@ LAB_0003ed90:
     NAVIGATION_MAP_DISPLAY_STATE_DATA = 1;
     mutex_unlock(&WORK_MODE_CONTEXT);
   }
-  DAT_20004bbc = 1;
-  DAT_20004bbd = 0;
-  DAT_20004bcd = 0;
+  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER = 1;
+  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_2 = 0;
+  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_3 = 0;
   return;
 }
 

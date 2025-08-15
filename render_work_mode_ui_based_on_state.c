@@ -24,10 +24,10 @@ void render_work_mode_ui_based_on_state(void)
   byte local_30 [12];
   
   iVar2 = get_work_mode();
-  if (DAT_2001cdd3 == '\0') {
+  if (WORK_MODE_STATE_VALIDATION_AND_UPDATE_BUFFER == '\0') {
     return;
   }
-  DAT_2001cdd3 = 0;
+  WORK_MODE_STATE_VALIDATION_AND_UPDATE_BUFFER = 0;
   gui_screen_clear();
   iVar3 = get_work_mode();
   if ((((((*(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\0') &&

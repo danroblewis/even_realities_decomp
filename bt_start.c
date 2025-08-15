@@ -26,14 +26,14 @@ int bt_start(void)
   undefined4 uStack_28;
   undefined4 local_24;
   
-  while (DAT_2000ff72 != '\0') {
+  while (BLUETOOTH_START_BUFFER != '\0') {
     calculate_ble_schedule_timing_with_division_alt(1);
   }
-  DAT_2000ff72 = 1;
+  BLUETOOTH_START_BUFFER = 1;
   iVar6 = get_work_mode();
   if ((*(char *)(iVar6 + 0x1058) == '\x02') ||
      (iVar6 = get_work_mode(), *(char *)(iVar6 + 0x1058) == '\0')) {
-    DAT_2000ff72 = 0;
+    BLUETOOTH_START_BUFFER = 0;
     return 0;
   }
   DAT_20002360 = 0x14ff;
@@ -183,7 +183,7 @@ LAB_000193e4:
       handle_heartbeat();
     }
   }
-  DAT_2000ff72 = 0;
+  BLUETOOTH_START_BUFFER = 0;
   return iVar6;
 }
 

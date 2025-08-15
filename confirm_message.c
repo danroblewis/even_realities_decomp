@@ -23,7 +23,7 @@ void confirm_message(int param_1)
   iVar5 = MESSAGE_CONFIRMATION_STATE;
   if (((MESSAGE_BUFFER_SYSTEM_STATUS_DATA != '\0') && (MESSAGE_CONFIRMATION_STATE == param_1)) &&
      (MESSAGE_BUFFER_CONFIRMATION_DATA == '\x04')) {
-    uVar11 = DAT_20009064 & 0xff;
+    uVar11 = MESSAGE_CONFIRMATION_STATE_BUFFER_2 & 0xff;
     pcVar3 = (char *)get_work_mode();
     if (((*pcVar3 == '\x01') && (uVar11 == 0)) &&
        (iVar4 = validate_data_entry_exists(10,iVar5), iVar4 != 0)) {
@@ -44,7 +44,7 @@ void confirm_message(int param_1)
       clear_timeout_message(0);
     }
     uVar6 = count_active_system_entries();
-    if (DAT_20009064 == 0) {
+    if (MESSAGE_CONFIRMATION_STATE_BUFFER_2 == 0) {
       if (uVar6 == 10) {
         iVar5 = 0;
         puVar9 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY;
@@ -70,7 +70,7 @@ void confirm_message(int param_1)
         (&TIMEOUT_MESSAGE_STATE_TABLE)[uVar6 * 0x6d] = uVar7;
       }
     }
-    else if (DAT_20009064 == 2) {
+    else if (MESSAGE_CONFIRMATION_STATE_BUFFER_2 == 2) {
       if (uVar6 != 0) {
         bVar1 = false;
         bVar10 = 0;
@@ -89,7 +89,7 @@ void confirm_message(int param_1)
         }
       }
     }
-    else if ((DAT_20009064 == 1) && (uVar6 != 0)) {
+    else if ((MESSAGE_CONFIRMATION_STATE_BUFFER_2 == 1) && (uVar6 != 0)) {
       puVar9 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY;
       uVar8 = 0;
       do {

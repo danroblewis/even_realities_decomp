@@ -13,7 +13,8 @@ int process_data_with_parameter_validation_alt3
   
   if ((param_1 == 0) &&
      (iVar1 = setup_device_buffer_with_validation_and_initialization
-                        (&DAT_2000a954,(undefined1)DAT_2000ab7c), iVar1 != 0)) {
+                        (&DAT_2000a954,(undefined1)DATA_PROCESSING_WITH_VALIDATION_BUFFER),
+     iVar1 != 0)) {
     iVar1 = 10;
   }
   else {

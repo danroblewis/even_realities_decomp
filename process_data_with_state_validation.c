@@ -21,8 +21,8 @@ process_data_with_state_validation(undefined4 param_1,int data_value,undefined4 
     process_data_with_parameter_validation_alt4(0x2a);
     uVar1 = 0xbad0000;
     DAT_2000b328 = '\x01';
-    DAT_2000b324 = data_value;
-    DAT_2000b32c = additional_data;
+    DATA_STATE_VALIDATION_PROCESSING_STATE_1 = data_value;
+    DATA_STATE_VALIDATION_PROCESSING_STATE_2 = additional_data;
   }
   else {
     uVar1 = 0xbad000c;

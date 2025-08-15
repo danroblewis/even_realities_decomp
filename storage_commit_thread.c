@@ -41,7 +41,7 @@ LAB_0002385e:
               (param_1 + 0x80,uVar6,0xffffffff,0xffffffff,iVar16,param_2,param_3);
     bVar4 = false;
     uVar6 = extraout_r1_00;
-    while (DAT_200079c4 != 0) {
+    while (FILE_ENQUEUING_AND_STORAGE_COMMIT_THREAD_OPERATIONS != 0) {
       try_to_save_file(param_1);
       bVar4 = true;
       uVar6 = extraout_r1_01;

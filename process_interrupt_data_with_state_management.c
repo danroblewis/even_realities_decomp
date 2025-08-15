@@ -28,7 +28,7 @@ undefined4 process_interrupt_data_with_state_management(int param_1,int param_2)
       uVar1 = 0;
     }
     else {
-      uVar1 = ~(uint)(byte)DAT_2000b342 & 1;
+      uVar1 = ~(uint)(byte)INTERRUPT_CONFIGURATION_STRUCTURE_INITIALIZATION_STATE & 1;
     }
     if ((&DAT_2000b334)[uVar1] == 0) {
       *(short *)(&DAT_2000b33c + uVar1 * 2) = (short)param_2;

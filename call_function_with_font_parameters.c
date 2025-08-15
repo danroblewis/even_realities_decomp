@@ -10,7 +10,8 @@ void call_function_with_font_parameters
 
 {
   update_ble_connection_priority_with_magnetometer
-            (DAT_2000a09c,0xfffffff0,param_3,&DAT_2000a09c,param_4);
+            (FONT_PARAMETER_PROCESSING_BUFFER,0xfffffff0,param_3,&FONT_PARAMETER_PROCESSING_BUFFER,
+             param_4);
   FONT_PARAMETER_FUNCTION_CALLS = 1;
   return;
 }

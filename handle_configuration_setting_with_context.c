@@ -22,8 +22,8 @@ int handle_configuration_setting_with_context
                     /* WARNING: Subroutine does not return */
     trigger_system_service_call("WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",0x5b);
   }
-  puVar3 = DAT_2000a2a4;
-  if ((DAT_2000a2a4 == (undefined4 *)0x0) ||
+  puVar3 = CONFIGURATION_SETTING_CONTEXT_BUFFER_1;
+  if ((CONFIGURATION_SETTING_CONTEXT_BUFFER_1 == (undefined4 *)0x0) ||
      (puVar3 = (undefined4 *)(CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT + uVar4),
      &DAT_00000074 < puVar3)) {
     puVar3 = (undefined4 *)initialize_speaker(1,0x78,param_3,puVar3,param_4);
@@ -32,18 +32,18 @@ int handle_configuration_setting_with_context
     }
     *puVar3 = 0;
     puVar1 = puVar3;
-    if (DAT_2000a2a8 != (undefined4 *)0x0) {
-      *DAT_2000a2a8 = puVar3;
-      puVar1 = DAT_2000a2a4;
+    if (CONFIGURATION_SETTING_CONTEXT_BUFFER_2 != (undefined4 *)0x0) {
+      *CONFIGURATION_SETTING_CONTEXT_BUFFER_2 = puVar3;
+      puVar1 = CONFIGURATION_SETTING_CONTEXT_BUFFER_1;
     }
-    DAT_2000a2a4 = puVar1;
+    CONFIGURATION_SETTING_CONTEXT_BUFFER_1 = puVar1;
     CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT = 0;
-    DAT_2000a2a8 = puVar3;
+    CONFIGURATION_SETTING_CONTEXT_BUFFER_2 = puVar3;
   }
   iVar2 = CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT + 4;
   CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT =
        uVar4 + CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT;
-  return (int)DAT_2000a2a8 + iVar2;
+  return (int)CONFIGURATION_SETTING_CONTEXT_BUFFER_2 + iVar2;
 }
 
 

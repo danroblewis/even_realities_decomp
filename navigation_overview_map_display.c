@@ -26,7 +26,7 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
   int iVar10;
   byte local_30 [12];
   
-  if (DAT_20004bbd == '\0') {
+  if (NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_2 == '\0') {
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): reflash overview map && text\n","navigation_overview_map_display");
@@ -282,9 +282,9 @@ LAB_0003e644:
     navigation_direction_img_display(*(undefined1 *)(param_2 + 1));
     NAVIGATION_ACTIVE = '\0';
   }
-  DAT_20004bbc = 0;
-  DAT_20004bbd = 1;
-  DAT_20004bcd = 0;
+  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER = 0;
+  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_2 = 1;
+  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_3 = 0;
   return;
 }
 

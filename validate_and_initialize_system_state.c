@@ -19,10 +19,10 @@ validate_and_initialize_system_state
     trigger_system_service_call
               ("WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_clock.c",0x115);
   }
-  if (DAT_2000b320 == '\0') {
+  if (HARDWARE_REGISTER_INITIALIZATION_BUFFER == '\0') {
     uVar1 = 0xbad0000;
-    DAT_2000b320 = '\x01';
-    DAT_2000b31c = initialization_value;
+    HARDWARE_REGISTER_INITIALIZATION_BUFFER = '\x01';
+    SYSTEM_STATE_VALIDATION_AND_INITIALIZATION_STATE = initialization_value;
   }
   else {
     uVar1 = 0xbad000c;

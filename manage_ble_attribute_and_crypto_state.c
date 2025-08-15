@@ -29,7 +29,7 @@ void manage_ble_attribute_and_crypto_state
       }
     }
   }
-  safe_memory_copy_with_bounds_check(param_3,param_4,param_5,&DAT_20006380);
+  safe_memory_copy_with_bounds_check(param_3,param_4,param_5,&BLE_LOG_MESSAGE_FORMATTING_BUFFER);
   return;
 }
 

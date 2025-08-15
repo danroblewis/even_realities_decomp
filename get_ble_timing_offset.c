@@ -10,7 +10,7 @@ int get_ble_timing_offset(void)
 {
   int iVar1;
   
-  if (DAT_2000b494 == 0) {
+  if (BLE_TIMING_OFFSET_MANAGEMENT_STATE == 0) {
     iVar1 = get_high_resolution_timer();
     return iVar1 - BLE_TIMER_EVENT_SCHEDULING;
   }

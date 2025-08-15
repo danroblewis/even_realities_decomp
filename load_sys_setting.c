@@ -67,7 +67,7 @@ undefined4 load_sys_setting(int param_1)
   *(undefined4 *)(param_1 + 0xf94) = local_8c;
   *(undefined1 *)(param_1 + 0xed4) = local_88;
   if (local_87[0] != -1) {
-    puVar2 = &DAT_20003003;
+    puVar2 = &SYSTEM_SETTINGS_LOADING_BUFFER;
     pcVar7 = local_87;
     do {
       pcVar6 = pcVar7 + 4;
@@ -77,7 +77,7 @@ undefined4 load_sys_setting(int param_1)
     } while (pcVar6 != acStack_77);
   }
   if (local_67[0] != -1) {
-    puVar2 = &DAT_20002fe3;
+    puVar2 = &SYSTEM_SETTINGS_VERIFICATION_BUFFER;
     pcVar7 = local_67;
     do {
       pcVar6 = pcVar7 + 4;

@@ -749,7 +749,7 @@ LAB_0001439c:
       if ((int)(uVar21 & 0xfffffff0) < 0x135) {
         bVar22 = false;
         iVar19 = (int)uVar21 >> 4;
-        puVar20 = &DAT_000888e0;
+        puVar20 = &FLOAT_FORMATTING_LOOKUP_TABLE_2;
         local_88 = 0;
         uVar27 = uVar25;
         while( true ) {
@@ -767,7 +767,7 @@ LAB_0001439c:
           uVar25 = uVar27;
         }
         uVar26 = float_multiply_64bit_alt
-                           ((&DAT_000888e0)[local_88 * 2],
+                           ((&FLOAT_FORMATTING_LOOKUP_TABLE_2)[local_88 * 2],
                             (&FLOAT_FORMATTING_CONSTANTS_6)[local_88 * 2],(int)uVar25,
                             (int)(uVar25 >> 0x20) + -0x3500000);
         uVar21 = (uint)((ulonglong)uVar26 >> 0x20);

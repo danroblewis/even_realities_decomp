@@ -21,7 +21,7 @@ int send_dmic_msg(int param_1)
   fill_memory_buffer(auStack_e0,0,199);
   local_e4 = CONCAT31(local_e4._1_3_,0xf1);
   do {
-    local_e4._0_2_ = CONCAT11(DAT_20010321,(undefined1)local_e4);
+    local_e4._0_2_ = CONCAT11(DMIC_MESSAGE_SEND_BUFFER_2,(undefined1)local_e4);
     iVar2 = get_sensor_data_buffer_address();
     if (iVar2 == 0) {
       return 0;
@@ -48,9 +48,9 @@ int send_dmic_msg(int param_1)
       DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT = 0;
       return iVar2;
     }
-    DAT_2000755c = DAT_2000755c + 1;
-    if (99 < DAT_2000755c) {
-      DAT_2000755c = 0;
+    DMIC_MESSAGE_SEND_BUFFER = DMIC_MESSAGE_SEND_BUFFER + 1;
+    if (99 < DMIC_MESSAGE_SEND_BUFFER) {
+      DMIC_MESSAGE_SEND_BUFFER = 0;
       uVar6 = calculate_ble_connection_timing_with_validation();
       DAT_20007560 = DAT_20007560 + 1;
       if (0 < LOG_LEVEL) {
@@ -68,8 +68,8 @@ int send_dmic_msg(int param_1)
         }
       }
     }
-    DAT_20010321 = DAT_20010321 + 1;
-  } while ((DAT_20010321 & 3) != 0);
+    DMIC_MESSAGE_SEND_BUFFER_2 = DMIC_MESSAGE_SEND_BUFFER_2 + 1;
+  } while ((DMIC_MESSAGE_SEND_BUFFER_2 & 3) != 0);
   return 0;
 }
 

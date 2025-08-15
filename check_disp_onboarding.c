@@ -18,10 +18,11 @@ void check_disp_onboarding(int param_1,undefined4 param_2,undefined4 param_3)
   
   local_14 = param_2;
   uStack_10 = param_3;
-  if (((param_1 == 0) && (DAT_20018d93 != '\0')) &&
+  if (((param_1 == 0) && (WORK_MODE_CHECK_BUFFER_3 != '\0')) &&
      ((iVar2 = check_work_mode_status_with_byte_array_comparison(), iVar2 == 0 ||
       (iVar2 = get_work_mode(), *(char *)(*(int *)(iVar2 + 0x1014) + 2) != '\0')))) {
-    if ((((DAT_20018d93 != '\0') && (iVar2 = get_work_mode(), **(int **)(iVar2 + 0x1054) == 0)) &&
+    if ((((WORK_MODE_CHECK_BUFFER_3 != '\0') &&
+         (iVar2 = get_work_mode(), **(int **)(iVar2 + 0x1054) == 0)) &&
         (iVar2 = get_work_mode(), *(char *)(iVar2 + 0xd5) == '\0')) &&
        (pcVar1 = (char *)get_work_mode(), *pcVar1 == '\x01')) {
       iVar2 = check_work_mode_status_with_byte_array_comparison();

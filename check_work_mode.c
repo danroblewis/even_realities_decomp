@@ -52,7 +52,7 @@ void check_work_mode(int param_1,int param_2,int param_3)
   }
   if (BATTERY_VOLTAGE_LEVEL < 0x33) {
     if (BATTERY_VOLTAGE_LEVEL < 0x28) {
-      DAT_20018d86 = '\0';
+      WORK_MODE_CHECK_BUFFER = '\0';
       get_work_mode();
       iVar3 = check_work_mode_state_valid();
       if (iVar3 == 0) {
@@ -69,8 +69,8 @@ void check_work_mode(int param_1,int param_2,int param_3)
       }
       DAT_20018d87 = DAT_20018d87 + 1;
       if (bVar5 <= DAT_20018d87) {
-        DAT_20018d93 = 0;
-        DAT_20018d92 = '\0';
+        WORK_MODE_CHECK_BUFFER_3 = 0;
+        WORK_MODE_CHECK_BUFFER_2 = '\0';
         DAT_20018d87 = bVar5;
         check_and_clear_burial_point_flag();
         if (param_1 == 0) {
@@ -113,7 +113,7 @@ LAB_00027964:
     bVar1 = false;
   }
   else {
-    DAT_20018d93 = 1;
+    WORK_MODE_CHECK_BUFFER_3 = 1;
     enter_wear_burial_point();
     if (uVar2 - 2 < 2) {
       get_work_mode();
@@ -138,19 +138,19 @@ LAB_0002782c:
         }
       }
     }
-    pbVar4 = (byte *)&DAT_20018d92;
+    pbVar4 = (byte *)&WORK_MODE_CHECK_BUFFER_2;
     DAT_20018d87 = 0;
-    bVar5 = DAT_20018d92 + 1;
+    bVar5 = WORK_MODE_CHECK_BUFFER_2 + 1;
     if (bVar5 < 2) {
 LAB_00027844:
       *pbVar4 = bVar5;
     }
     else {
-      DAT_20018d92 = '\x02';
-      pbVar4 = (byte *)&DAT_20018d86;
-      bVar5 = DAT_20018d86 + 1;
+      WORK_MODE_CHECK_BUFFER_2 = '\x02';
+      pbVar4 = (byte *)&WORK_MODE_CHECK_BUFFER;
+      bVar5 = WORK_MODE_CHECK_BUFFER + 1;
       if (bVar5 < 10) goto LAB_00027844;
-      DAT_20018d86 = '\0';
+      WORK_MODE_CHECK_BUFFER = '\0';
       iVar3 = check_sensor_status_and_validate();
       if (iVar3 != 0) {
         initialize_sensor_system();

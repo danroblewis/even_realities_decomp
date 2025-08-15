@@ -27,8 +27,9 @@ int calculate_sha256_hash_with_padding_and_processing(int param_1,undefined4 par
   if (param_3 < 0x181) {
     fill_memory_buffer(&DAT_2000ce00,0,0x1a0);
     initialize_sha256_context_with_error_handling(auStack_9c);
-    DAT_2000ce17 = 0x30;
-    DAT_2000ce12 = (ushort)((param_3 & 0xff) << 8) | (ushort)(param_3 >> 8) & 0xff;
+    SHA256_HASH_PADDING_AND_PROCESSING_STATE_2 = 0x30;
+    SHA256_HASH_PADDING_AND_PROCESSING_STATE_1 =
+         (ushort)((param_3 & 0xff) << 8) | (ushort)(param_3 >> 8) & 0xff;
     _DAT_2000ce10 = 0;
     memcpy(&DAT_2000ce18,param_2,param_3);
     iVar1 = 0;

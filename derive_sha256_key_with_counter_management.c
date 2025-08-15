@@ -25,7 +25,7 @@ int derive_sha256_key_with_counter_management
   }
   fill_memory_buffer(auStack_58,0,0x30);
   pcVar4 = param_1 + 0x9c;
-  iVar2 = (*DAT_20002f58)(pcVar4);
+  iVar2 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER_2)(pcVar4);
   if (iVar2 != 0) {
     return iVar2;
   }

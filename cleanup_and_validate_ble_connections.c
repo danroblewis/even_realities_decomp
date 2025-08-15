@@ -17,7 +17,7 @@ void cleanup_and_validate_ble_connections
   clear_bits_in_value(&DAT_20006448,0xfffffff7,param_3,param_4,param_4);
   process_data_with_parameter_validation_and_compression_alt(&DAT_200063a0,extraout_r1,0x148,0);
   iVar3 = 0;
-  puVar2 = &DAT_2000aed4;
+  puVar2 = &BLE_ATTRIBUTE_SEARCH_AND_LOG_BUFFER;
   do {
     iVar1 = compare_byte_arrays_7_bytes(puVar2 + 1,&DAT_000f2b3a);
     if ((iVar1 == 0) && ((int)((uint)(byte)puVar2[8] << 0x1f) < 0)) {

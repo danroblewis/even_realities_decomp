@@ -67,10 +67,10 @@ uint process_ble_characteristic_operation_comprehensive(int param_1,int param_2)
   }
   iVar4 = extract_bit_from_value(iVar11,5);
   if (iVar4 == 0) {
-    puVar9 = &DAT_2001d533;
+    puVar9 = &BLE_CHARACTERISTIC_OPERATION_COMPREHENSIVE_STATE_2;
   }
   else {
-    puVar9 = &DAT_2001d534;
+    puVar9 = &BLE_CHARACTERISTIC_OPERATION_COMPREHENSIVE_STATE_3;
   }
   *(undefined1 *)(param_1 + 0x12) = *puVar9;
   if (((int)((uint)*(byte *)(param_1 + 0x13) << 0x1a) < 0) && ((int)((uint)pbVar13[2] << 0x1a) < 0))

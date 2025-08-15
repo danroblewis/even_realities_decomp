@@ -17,7 +17,7 @@ int finalize_sha256_hash_with_key_derivation
   undefined1 auStack_40 [32];
   
   fill_memory_buffer(auStack_40,0,0x20);
-  iVar1 = (*DAT_20002f58)(param_1 + 0x9c);
+  iVar1 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER_2)(param_1 + 0x9c);
   if (iVar1 != 0) {
     return iVar1;
   }

@@ -8,7 +8,7 @@
 void update_connection_state_flags(uint *param_1)
 
 {
-  *param_1 = DMIC_BUFFER_SIZE | DAT_2000b458;
+  *param_1 = DMIC_BUFFER_SIZE | CONNECTION_STATE_VALIDATION_BUFFER;
   return;
 }
 

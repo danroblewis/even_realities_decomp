@@ -40,7 +40,7 @@ undefined4 prepare_system_settings_for_verification(int param_1)
   local_7c = *(undefined4 *)(param_1 + 0xf94);
   local_78 = *(undefined1 *)(param_1 + 0xed4);
   puVar1 = auStack_77;
-  puVar3 = &DAT_20003003;
+  puVar3 = &SYSTEM_SETTINGS_LOADING_BUFFER;
   do {
     puVar2 = puVar3 + 1;
     *puVar1 = *puVar3;
@@ -48,7 +48,7 @@ undefined4 prepare_system_settings_for_verification(int param_1)
     puVar3 = puVar2;
   } while (puVar2 != (undefined4 *)0x20003013);
   puVar1 = auStack_57;
-  puVar3 = &DAT_20002fe3;
+  puVar3 = &SYSTEM_SETTINGS_VERIFICATION_BUFFER;
   do {
     puVar2 = puVar3 + 1;
     *puVar1 = *puVar3;

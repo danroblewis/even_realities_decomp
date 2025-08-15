@@ -41,7 +41,7 @@ undefined4 ui_even_ai_task(int param_1,undefined4 param_2,int param_3)
   uVar12 = extraout_r2;
   if (bVar21) {
     uVar12 = 0xffffffff;
-    puVar13 = &DAT_200024ec;
+    puVar13 = &UI_EVEN_AI_TASK_STATE_BUFFER;
   }
   uVar5 = iVar4 - 1U & 0xff;
   if (bVar21) {
@@ -87,13 +87,13 @@ undefined4 ui_even_ai_task(int param_1,undefined4 param_2,int param_3)
       UI_EVEN_AI_TASK_STATE_DATA = 0;
       reset_animation_counters();
       DAT_2000a054 = 0x80;
-      DAT_2000a040 = 0;
-      DAT_2000a044 = 0;
+      UI_TASK_ROUTING_PARAMETER_3 = 0;
+      UI_TASK_ROUTING_PARAMETER_4 = 0;
       DAT_2000a038 = &DAT_2001cdd7;
-      DAT_2000a04c = 0;
-      DAT_2000a050 = 0;
-      DAT_2000a03c = 0;
-      DAT_2000a048 = 0;
+      UI_TASK_ROUTING_PARAMETER_6 = 0;
+      UI_TASK_ROUTING_PARAMETER_7 = 0;
+      UI_TASK_ROUTING_PARAMETER_2 = 0;
+      UI_TASK_ROUTING_PARAMETER_5 = 0;
       DAT_2001b9a8 = 0x101;
       reset_animation_counters();
       uVar12 = clear_work_mode_flag_bit_1();
@@ -197,12 +197,12 @@ LAB_0003c204:
 LAB_0003c2be:
     configure_advanced_utf_drawing();
     DAT_2001b9a8 = 0;
-    DAT_2000a050 = 0;
-    DAT_2000a04c = 0;
-    DAT_2000a048 = 0;
-    DAT_2000a044 = 0;
-    DAT_2000a040 = 0;
-    DAT_2000a03c = 0;
+    UI_TASK_ROUTING_PARAMETER_7 = 0;
+    UI_TASK_ROUTING_PARAMETER_6 = 0;
+    UI_TASK_ROUTING_PARAMETER_5 = 0;
+    UI_TASK_ROUTING_PARAMETER_4 = 0;
+    UI_TASK_ROUTING_PARAMETER_3 = 0;
+    UI_TASK_ROUTING_PARAMETER_2 = 0;
     return 0;
   }
   if ((char)DAT_2001b9a8 != '\x01') {
@@ -234,8 +234,8 @@ LAB_0003c2be:
   uVar12 = mutex_unlock(&DAT_20007b3c);
   uVar5 = (uint)*(byte *)(iVar3 + 0xef);
   if (uVar5 == 7) {
-    if ((DAT_200024ec == 0xffffffff) && (cVar1 == '\x03')) {
-      DAT_200024ec = (uint)*(byte *)(iVar3 + 0xf5);
+    if ((UI_EVEN_AI_TASK_STATE_BUFFER == 0xffffffff) && (cVar1 == '\x03')) {
+      UI_EVEN_AI_TASK_STATE_BUFFER = (uint)*(byte *)(iVar3 + 0xf5);
       iVar4 = 0;
       clear_work_mode_flag_bit_1();
       do {
@@ -289,14 +289,14 @@ LAB_0003c2be:
 LAB_0003ca06:
       fill_memory_buffer(&DAT_2001b818,0,400);
       validate_memory_bounds(&DAT_2001b818,iVar3 + 0xf6,*(undefined2 *)(iVar3 + 0x286),400);
-      if ((*(byte *)(iVar3 + 0xef) - 8 < 2) || (DAT_20009fd4 == 0)) {
+      if ((*(byte *)(iVar3 + 0xef) - 8 < 2) || (UI_EVEN_AI_TASK_STATE_BUFFER_2 == 0)) {
         iVar4 = get_ui_x_offset();
         uVar12 = get_ui_y_offset();
         iVar16 = get_ui_x_offset();
         iVar6 = get_ui_y_offset();
         gui_utf_draw(0,&DAT_2001b818,0,iVar4 + 0x58,uVar12,iVar16 + 0x230,iVar6 + 0x88,5,0,0,0,0);
-        if (DAT_20009fd4 == 0) {
-          DAT_20009fd4 = 1;
+        if (UI_EVEN_AI_TASK_STATE_BUFFER_2 == 0) {
+          UI_EVEN_AI_TASK_STATE_BUFFER_2 = 1;
         }
       }
       else {
@@ -369,7 +369,7 @@ LAB_0003ca06:
           iVar16 = get_ui_x_offset();
           iVar6 = get_ui_y_offset();
           gui_utf_draw(0," ",0,iVar3 + 0x58,iVar4 + 0x36,iVar16 + 0x230,iVar6 + 0x87,5,0,0,0,0);
-          DAT_20009fd4 = 0;
+          UI_EVEN_AI_TASK_STATE_BUFFER_2 = 0;
           UI_EVEN_AI_TASK_STATE_DATA = 1;
           return 0;
         }
@@ -391,7 +391,7 @@ LAB_0003ca06:
     gui_utf_draw(0,puVar15,0,iVar16,iVar6,iVar3,iVar4,uVar12,0,0,0,0);
     return 0;
   }
-  DAT_200024ec = (uint)*(byte *)(iVar3 + 0xf5);
+  UI_EVEN_AI_TASK_STATE_BUFFER = (uint)*(byte *)(iVar3 + 0xf5);
   iVar16 = 0x640;
   iVar6 = get_work_mode();
   while( true ) {

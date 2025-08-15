@@ -294,7 +294,7 @@ LAB_00014dc8:
         iVar12 = 2;
       }
       else {
-        puVar19 = &DAT_000888e0;
+        puVar19 = &FLOAT_FORMATTING_LOOKUP_TABLE_2;
         iVar12 = 2;
         uVar21 = -(int)puVar3 & 0xf;
         iVar5 = -(int)puVar3 >> 4;
@@ -328,7 +328,7 @@ LAB_00014dc8:
       else {
         iVar12 = 2;
       }
-      puVar19 = &DAT_000888e0;
+      puVar19 = &FLOAT_FORMATTING_LOOKUP_TABLE_2;
       while( true ) {
         if (uVar21 == 0) break;
         if ((int)(uVar21 << 0x1f) < 0) {

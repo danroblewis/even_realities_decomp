@@ -25,7 +25,7 @@ find_ble_descriptor_by_uuid(uint param_1,undefined4 param_2,undefined4 param_3,u
       return (undefined1 *)0x0;
     }
   }
-  return &DAT_2000ff18 + iVar2;
+  return &BLE_DESCRIPTOR_DISCOVERY_HANDLER_STATE_6 + iVar2;
 }
 
 

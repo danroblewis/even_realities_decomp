@@ -56,7 +56,8 @@ LAB_00060086:
     }
     else {
       iVar1 = process_interrupt_data_with_state_management
-                        (local_30[0],(uint)(DAT_2000b020 << 0xf) >> 0x10);
+                        (local_30[0],
+                         (uint)(DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE_1 << 0xf) >> 0x10);
       if (iVar1 == 0xbad0000) {
         iVar1 = *(int *)(param_1 + 4);
         if (DAT_2000b05a != '\0') {

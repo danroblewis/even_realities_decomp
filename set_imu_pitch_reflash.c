@@ -17,9 +17,9 @@ undefined4 set_imu_pitch_reflash(void)
   
   iVar1 = get_work_mode();
   if (*(byte *)(iVar1 + 0xf0) < 2) {
-    if (DAT_2001cf91 != *(byte *)(iVar1 + 0xf0)) {
+    if (IMU_PITCH_REFLASH_BUFFER != *(byte *)(iVar1 + 0xf0)) {
       gui_screen_clear();
-      DAT_2001cf91 = *(byte *)(iVar1 + 0xf0);
+      IMU_PITCH_REFLASH_BUFFER = *(byte *)(iVar1 + 0xf0);
     }
     if (*(char *)(iVar1 + 0xf0) == '\x01') {
       iVar1 = get_ui_x_offset();

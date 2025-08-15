@@ -20,7 +20,7 @@ int handle_state_validated_event(uint param_1,uint param_2,undefined4 param_3)
     iVar1 = extract_nested_data_structure_value
                       (&DAT_00087b60,&local_14,param_3,(undefined *)0x83b1b,param_1);
     if (iVar1 == 0) {
-      if (((local_14 ^ DAT_2000b178) & uVar2) == 0) {
+      if (((local_14 ^ STATE_VALIDATED_EVENT_HANDLER_STATE) & uVar2) == 0) {
         iVar1 = 0;
       }
       else {

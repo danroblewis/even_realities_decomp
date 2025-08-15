@@ -11,19 +11,19 @@ void switch_to_dfu_mode(undefined4 param_1)
   int iVar1;
   int extraout_r1;
   
-  DAT_2000ff6e = 1;
+  DFU_MODE_SWITCH_BUFFER = 1;
   iVar1 = check_privilege_level();
   if (iVar1 != 0) {
     z_spin_lock_valid(param_1);
     return;
   }
-  iVar1 = (**(code **)(WORK_MODE + 0x1040))("runtime_mode",&DAT_2000ff6e,1);
+  iVar1 = (**(code **)(WORK_MODE + 0x1040))("runtime_mode",&DFU_MODE_SWITCH_BUFFER,1);
   if (iVar1 == 0) {
     if (0 < LOG_LEVEL) {
       iVar1 = IS_DEBUG;
       if (IS_DEBUG == 0) goto LAB_00015930;
       handle_heartbeat("%s(): sys reboot because system reset %d, %d\n","switch_to_dfu_mode",0,
-                       DAT_2000ff6e);
+                       DFU_MODE_SWITCH_BUFFER);
     }
     do {
       calculate_ble_schedule_timing_with_division(500);

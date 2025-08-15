@@ -8,7 +8,7 @@
 undefined4 * get_system_data_alt(void)
 
 {
-  return &DAT_20002fe3;
+  return &SYSTEM_SETTINGS_VERIFICATION_BUFFER;
 }
 
 

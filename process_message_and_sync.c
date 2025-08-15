@@ -42,7 +42,7 @@ uint process_message_and_sync
     *(undefined2 *)(work_mode_context + 0x6dc) = *(undefined2 *)(work_mode_context + 0xfe4);
     *(undefined1 *)(work_mode_context + 0x6d0) = *(undefined1 *)(work_mode_context + 0xfc0);
     if (message_type - 0xbU < 2) {
-      DAT_20018c6f = 4;
+      MESSAGE_AND_SYNC_PROCESSING_BUFFER = 4;
       puVar4 = puVar9;
       puVar7 = &MESSAGE_SYNC_PROCESSING_DATA;
       do {
@@ -66,13 +66,13 @@ uint process_message_and_sync
         memcpy(work_mode_context + 0x6df,message_data,data_length);
       }
       if (message_type == 1) {
-        DAT_20018d80 = *(undefined1 *)(work_mode_context + 0x6e1);
+        MESSAGE_PROCESSING_AND_SYNC_STATE_2 = *(undefined1 *)(work_mode_context + 0x6e1);
         iVar1 = memcmp_byte_arrays(&MESSAGE_SYNC_PROCESSING_PARAMETERS,puVar9,0x16);
         if (iVar1 == 0) {
           MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
           return uVar8;
         }
-        DAT_20018c6f = 4;
+        MESSAGE_AND_SYNC_PROCESSING_BUFFER = 4;
         puVar4 = puVar9;
         puVar7 = &MESSAGE_SYNC_PROCESSING_DATA;
         do {
@@ -84,7 +84,7 @@ uint process_message_and_sync
         } while (puVar3 != (undefined4 *)(work_mode_context + 0x6e0));
       }
       else {
-        DAT_20018c6f = 4;
+        MESSAGE_AND_SYNC_PROCESSING_BUFFER = 4;
         puVar4 = puVar9;
         puVar7 = &MESSAGE_SYNC_PROCESSING_DATA;
         do {
@@ -100,7 +100,7 @@ uint process_message_and_sync
       *(undefined1 *)(work_mode_context + 0x105a) = 1;
       pcVar5 = *(code **)(work_mode_context + 0x774);
     }
-    (*pcVar5)(&DAT_20018c6f,uVar2);
+    (*pcVar5)(&MESSAGE_AND_SYNC_PROCESSING_BUFFER,uVar2);
     while (*(char *)(work_mode_context + 0x105a) != '\x02') {
       uVar8 = uVar8 + 1 & 0xffff;
       if (uVar8 == 2000) {

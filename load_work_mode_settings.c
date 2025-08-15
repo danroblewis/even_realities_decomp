@@ -16,7 +16,7 @@ void load_work_mode_settings(void)
   undefined4 *puVar6;
   
   puVar4 = *(undefined4 **)(WORK_MODE + 0xfec);
-  DAT_2007fc00 = *puVar4;
+  WORK_MODE_TIMESTAMP_OPERATIONS_BUFFER = *puVar4;
   SYSTEM_STATIC_INFO_RESET_1 = *(undefined4 *)((int)puVar4 + 6);
   DAT_2007fc04._0_1_ = *(undefined1 *)(puVar4 + 1);
   DAT_2007fc04._1_1_ = *(undefined1 *)((int)puVar4 + 5);

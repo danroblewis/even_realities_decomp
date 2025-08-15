@@ -41,7 +41,7 @@ void ancs_security_changed(undefined4 param_1,undefined4 param_2,int param_3)
       }
     }
     *(undefined1 *)(ANCS_CONNECTION_HANDLE + 0x367) = 0;
-    DAT_20006a34 = 0;
+    ANCS_SECURITY_CHANGED_BUFFER = 0;
   }
   else {
     if (2 < LOG_LEVEL) {
@@ -50,8 +50,8 @@ void ancs_security_changed(undefined4 param_1,undefined4 param_2,int param_3)
                        auStack_38,param_2,param_3);
     }
     while( true ) {
-      DAT_20006a34 = DAT_20006a34 + 1;
-      if (DAT_20006a34 < 10) break;
+      ANCS_SECURITY_CHANGED_BUFFER = ANCS_SECURITY_CHANGED_BUFFER + 1;
+      if (ANCS_SECURITY_CHANGED_BUFFER < 10) break;
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): reboot because Security failed exceed 10 times, so reboot\r\n\n",

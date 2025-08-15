@@ -31,7 +31,7 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
       configure_advanced_utf_drawing();
       gui_screen_clear();
       reset_animation_counters();
-      DAT_2001cf91 = cVar2;
+      IMU_PITCH_REFLASH_BUFFER = cVar2;
       IMU_PITCH_TASK_DATA._0_1_ = cVar2;
       IMU_PITCH_TASK_DATA._1_1_ = 1;
       reset_animation_counters();
@@ -115,7 +115,7 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
     animate_framebuffer_with_pattern();
   }
   configure_advanced_utf_drawing();
-  DAT_2001cf91 = 0;
+  IMU_PITCH_REFLASH_BUFFER = 0;
   IMU_PITCH_TASK_DATA = 0;
   return 0;
 }

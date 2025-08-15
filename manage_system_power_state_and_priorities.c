@@ -18,9 +18,9 @@ void manage_system_power_state_and_priorities(int param_1)
   iVar3 = DAT_2000b094;
   DAT_2000b094 = 1;
   if (iVar3 == 0) {
-    DAT_2000b088 = iVar3;
-    DAT_2000b090 = iVar3;
-    DAT_2000b08c = 1;
+    SYSTEM_POWER_STATE_AND_PRIORITIES_MANAGEMENT_STATE_1 = iVar3;
+    SYSTEM_POWER_STATE_AND_PRIORITIES_MANAGEMENT_STATE_3 = iVar3;
+    SYSTEM_POWER_STATE_AND_PRIORITIES_MANAGEMENT_STATE_2 = 1;
     iVar3 = manage_task_state_transition_with_priority_control(&DAT_2000b0b8);
     if (iVar3 < 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err >= 0",

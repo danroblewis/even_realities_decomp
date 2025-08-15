@@ -13,7 +13,7 @@ void execute_timer_interrupt_callback_with_validation(void)
   undefined4 local_18;
   char *local_14;
   
-  if (DAT_2001d563 == '\0') {
+  if (TIMER_INTERRUPT_CALLBACK_STATE_BUFFER == '\0') {
     iVar1 = dispatch_timer_interrupt_callbacks(0);
     if (iVar1 != 0) {
       local_14 = "System power down";

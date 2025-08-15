@@ -18,7 +18,7 @@ void handle_work_mode_timestamp_operations(int param_1,undefined4 param_2)
   if (*(int *)(*(int *)(param_1 + 0xff4) + 0x164) != 0) {
     *(undefined4 *)(*(int *)(param_1 + 0xff4) + 0x164) = **(undefined4 **)(param_1 + 0xfec);
   }
-  DAT_2007fc00 = **(undefined4 **)(param_1 + 0xfec);
+  WORK_MODE_TIMESTAMP_OPERATIONS_BUFFER = **(undefined4 **)(param_1 + 0xfec);
   return;
 }
 

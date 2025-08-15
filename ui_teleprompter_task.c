@@ -403,15 +403,15 @@ LAB_0003d4ba:
     cVar2 = TELEPROMPTER_UI_TASK_STATE;
     if (TELEPROMPTER_UI_TASK_STATE == '\x01') {
       uVar6 = UI_TELEPROMPTER_TASK_STATUS_FLAGS;
-      if (DAT_200049a4 == '\0') {
+      if (UI_TELEPROMPTER_TASK_STATE_BUFFER_2 == '\0') {
         iVar8 = calculate_ble_connection_timing_with_scaling_alt();
         UI_TELEPROMPTER_TASK_STATUS_FLAGS =
              (UI_TELEPROMPTER_TASK_STATUS_FLAGS - UI_TELEPROMPTER_TASK_STATE_DATA) + iVar8;
-        DAT_200049a4 = cVar2;
+        UI_TELEPROMPTER_TASK_STATE_BUFFER_2 = cVar2;
         uVar6 = UI_TELEPROMPTER_TASK_STATUS_FLAGS;
       }
     }
-    else if (DAT_200049a4 == '\0') {
+    else if (UI_TELEPROMPTER_TASK_STATE_BUFFER_2 == '\0') {
       iVar8 = calculate_ble_connection_timing_with_scaling_alt();
       uVar6 = (iVar8 - UI_TELEPROMPTER_TASK_STATE_DATA) + UI_TELEPROMPTER_TASK_STATUS_FLAGS;
     }
@@ -419,7 +419,7 @@ LAB_0003d4ba:
       UI_TELEPROMPTER_TASK_STATE_DATA = calculate_ble_connection_timing_with_scaling_alt();
       UI_TELEPROMPTER_TASK_STATE_AND_DATA = 0;
       TELEPROMPTER_UI_STATE_BUFFER = UI_TELEPROMPTER_TASK_STATUS_FLAGS;
-      DAT_200049a4 = '\0';
+      UI_TELEPROMPTER_TASK_STATE_BUFFER_2 = '\0';
       uVar6 = TELEPROMPTER_UI_STATE_BUFFER;
     }
     TELEPROMPTER_UI_STATE_BUFFER = uVar6;

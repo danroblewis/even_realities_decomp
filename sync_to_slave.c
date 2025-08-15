@@ -105,13 +105,13 @@ LAB_000270b8:
           if (param_1[0xd5] == '\x06') {
             if (param_2 != 1) goto LAB_00027148;
             bVar5 = bVar3;
-            if (499 < DAT_2000f6e6) goto LAB_000270da;
+            if (499 < SLAVE_SYNC_BUFFER) goto LAB_000270da;
           }
           else {
             bVar17 = param_2 == 1;
 LAB_000270e0:
             if (!bVar17) goto LAB_00027148;
-            if (499 < DAT_2000f6e6) goto LAB_0002709c;
+            if (499 < SLAVE_SYNC_BUFFER) goto LAB_0002709c;
           }
 LAB_000270ec:
           if (0 < LOG_LEVEL) {
@@ -125,7 +125,7 @@ LAB_000270ec:
           if (param_2 == 0) goto LAB_0002709c;
           if (uVar13 == param_2) {
             if ((param_2 != 7) && (4 < param_2 - 0xc)) {
-              if (DAT_2000f6e6 < 500) goto LAB_000270ec;
+              if (SLAVE_SYNC_BUFFER < 500) goto LAB_000270ec;
               goto LAB_00027148;
             }
             SLAVE_SYNCHRONIZATION_STATE_DATA = 1;
@@ -325,7 +325,7 @@ LAB_00027298:
     uVar13 = 5000;
   }
 LAB_00026fa0:
-  DAT_2000f6e6 = (short)uVar13;
+  SLAVE_SYNC_BUFFER = (short)uVar13;
   SLAVE_SYNCHRONIZATION_STATE_DATA = 0;
   return uVar13;
 }

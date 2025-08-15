@@ -10,7 +10,7 @@ bool validate_and_clear_connection_state(uint *param_1)
 {
   bool bVar1;
   
-  bVar1 = *param_1 == (DMIC_BUFFER_SIZE | DAT_2000b458);
+  bVar1 = *param_1 == (DMIC_BUFFER_SIZE | CONNECTION_STATE_VALIDATION_BUFFER);
   if (bVar1) {
     *param_1 = 0;
   }

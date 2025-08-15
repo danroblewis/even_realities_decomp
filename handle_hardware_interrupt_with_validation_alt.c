@@ -53,8 +53,8 @@ int handle_hardware_interrupt_with_validation_alt
               _DAT_5002b100 = HARDWARE_INTERRUPT_CONFIG_REGISTER;
               _DAT_5002b304 = 1;
               HARDWARE_INTERRUPT_CONFIG_REGISTER = param_1;
-              DAT_2000b358 = param_2;
-              DAT_2000b360 = param_3;
+              HARDWARE_INTERRUPT_VALIDATION_BUFFER = param_2;
+              HARDWARE_INTERRUPT_VALIDATION_BUFFER_2 = param_3;
               if (HARDWARE_INTERRUPT_TRIGGER_REGISTER == '\0') {
                 trigger_hardware_interrupt_operation(0);
                 uVar1 = HARDWARE_INTERRUPT_STATUS_REGISTER;

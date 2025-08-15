@@ -14,7 +14,7 @@ int generate_cryptographic_key_with_validation(int param_1,undefined4 param_2,ui
   undefined1 auStack_40 [32];
   
   if (param_3 < 0x21) {
-    iVar1 = (*DAT_20002f58)(param_1 + 0x110);
+    iVar1 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER_2)(param_1 + 0x110);
     if (iVar1 == 0) {
       iVar3 = 0x101;
       iVar1 = *(int *)(param_1 + 0xf8);

@@ -13,7 +13,7 @@ void check_and_log_ble_characteristic_status(void)
   int iVar3;
   
   iVar3 = 0;
-  puVar2 = &DAT_2000aed4;
+  puVar2 = &BLE_ATTRIBUTE_SEARCH_AND_LOG_BUFFER;
   do {
     iVar1 = compare_byte_arrays_7_bytes(puVar2 + 1,&DAT_000f2b3a);
     if (iVar1 == 0) {

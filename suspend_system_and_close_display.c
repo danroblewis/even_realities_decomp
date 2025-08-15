@@ -18,7 +18,7 @@ void suspend_system_and_close_display(void)
   display_close_screen(3);
   work_mode_ptr = get_work_mode();
   *(undefined1 *)(work_mode_ptr + 0xd5) = 0;
-  DAT_20018d8b = 0;
+  SYSTEM_SUSPEND_AND_DISPLAY_CLOSE_BUFFER = 0;
   return;
 }
 

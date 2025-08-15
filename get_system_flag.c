@@ -8,7 +8,7 @@
 undefined4 get_system_flag(void)
 
 {
-  return DAT_200069f8;
+  return SYSTEM_FLAG_STATUS_BUFFER;
 }
 
 

@@ -10,7 +10,7 @@ void handle_system_event_with_function_pointer_execution(void)
 {
   int iVar1;
   
-  iVar1 = (*DAT_20002f14)(SYSTEM_REFERENCE_COUNTER_AND_EVENT_MANAGEMENT);
+  iVar1 = (*SYSTEM_EVENT_FUNCTION_POINTER_TABLE_3)(SYSTEM_REFERENCE_COUNTER_AND_EVENT_MANAGEMENT);
   if (iVar1 != 0) {
     (*DAT_20002ef4)("Could not lock power save mutex");
   }

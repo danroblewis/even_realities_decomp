@@ -27,13 +27,13 @@ undefined4 process_message_with_timeout_and_sync(void)
   if ((uVar4 < 2000) && (iVar2 = get_work_mode(), *(char *)(iVar2 + 0x105a) == '\x02')) {
     iVar2 = 0;
     do {
-      if (DAT_20018d8d != '\0') goto LAB_0002c446;
+      if (SLAVE_DISPLAY_THREAD_BUFFER != '\0') goto LAB_0002c446;
       iVar2 = iVar2 + 1;
       calculate_ble_schedule_timing(0xccd,0);
     } while (iVar2 != 10);
-    if (DAT_20018d8d != '\0') {
+    if (SLAVE_DISPLAY_THREAD_BUFFER != '\0') {
 LAB_0002c446:
-      DAT_20018d8d = 0;
+      SLAVE_DISPLAY_THREAD_BUFFER = 0;
       iVar2 = get_work_mode();
       uVar1 = calculate_next_timeout_message_state();
       *(undefined1 *)(iVar2 + 0xdd) = uVar1;

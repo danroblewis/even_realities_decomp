@@ -64,7 +64,7 @@ undefined4 onboarding_ble_process(int param_1,int param_2,undefined2 *param_3,un
     goto LAB_00042b1c;
   case 3:
     *(undefined4 *)(puVar6 + 0x1b) = 0x362f34;
-    DAT_2001cdcf = 0;
+    ONBOARDING_BLE_PROCESS_STATE = 0;
     WORK_MODE_STATE_AND_UI_CONFIGURATION = 0;
     *(undefined1 *)(*(int *)(param_1 + 0x1014) + 3) = 0;
     *(undefined1 *)(*(int *)(param_1 + 0x1014) + 0xd) = 0;

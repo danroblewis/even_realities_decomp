@@ -131,7 +131,7 @@ LAB_0003606c:
   case 5:
     iVar11 = get_work_mode(iVar11,task_param);
     y_offset = get_system_status_value();
-    cVar2 = DAT_2001b813;
+    cVar2 = UI_TASK_ROUTING_PARAMETER_9;
     if (y_offset != 4) {
       if (operation_mode == 2) {
         if (IS_DEBUG == 0) {
@@ -141,12 +141,12 @@ LAB_0003606c:
           handle_heartbeat();
         }
         gui_screen_clear();
-        DAT_2001b813 = '\0';
+        UI_TASK_ROUTING_PARAMETER_9 = '\0';
         DAT_2001b812 = '\0';
       }
       else if (operation_mode != 0) {
-        if (DAT_2001b813 == '\0') {
-          DAT_2001b813 = '\x01';
+        if (UI_TASK_ROUTING_PARAMETER_9 == '\0') {
+          UI_TASK_ROUTING_PARAMETER_9 = '\x01';
           set_work_mode_parameter(ui_context_ptr + 0xb90);
           set_work_mode_flag_bit_1();
           gui_screen_clear();
@@ -431,7 +431,7 @@ LAB_0003fc46:
             }
             if (((UI_TASK_ROUTING_AND_EXECUTION_STATE == '\x01') && (OVERVIEW_MAP_ACTIVE == '\x01'))
                && (uVar15 = (uint)PANORAMIC_MAP_ACTIVE, PANORAMIC_MAP_ACTIVE == 1)) {
-              DAT_2001ba2c = 0;
+              NAVIGATION_PANORAMIC_MAP_DISPLAY_BUFFER = 0;
               UI_TASK_ROUTING_STATE_MANAGEMENT = uVar15;
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -559,7 +559,7 @@ joined_r0x0003fa68:
                       (uVar12,uVar14,y_offset + 2,iVar7 + 0x4c,iVar8 + 0x1d,3,iVar11);
             uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
             DAT_20004bd0 = 5000;
-            DAT_20004bd4 = 0;
+            UI_TASK_ROUTING = 0;
           }
           else {
             if (UI_TASK_ROUTING_PARAMETER == 1) {
@@ -581,9 +581,9 @@ joined_r0x0003fa68:
                     handle_heartbeat();
                   }
                 }
-                if (DAT_20004bcd == '\0') {
+                if (NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_3 == '\0') {
                   gui_screen_clear();
-                  DAT_20004bcd = '\x01';
+                  NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_3 = '\x01';
                 }
                 y_offset = get_ui_x_offset();
                 uVar12 = get_ui_y_offset();
@@ -605,8 +605,8 @@ joined_r0x0003fa68:
                 iVar10 = get_ui_y_offset();
                 gui_utf_draw(0,iVar11 + 0x1a4,0,iVar7 + y_offset,iVar8 + 0x3c,iVar9 + 0x1e4,
                              iVar10 + 0x57,2,0,0,0,0);
-                DAT_20004bbc = 0;
-                DAT_20004bbd = 1;
+                NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER = 0;
+                NAVIGATION_OVERVIEW_MAP_DISPLAY_BUFFER_2 = 1;
                 sVar3 = DAT_20004bc6;
                 uVar4 = DAT_20004bc8;
                 goto LAB_0003f994;
@@ -842,7 +842,7 @@ LAB_0003f5aa:
         }
         uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
         iVar11 = (int)((ulonglong)uVar22 >> 0x20);
-        y_offset = DAT_20004bd4 +
+        y_offset = UI_TASK_ROUTING +
                    UI_TASK_ROUTING_AND_EXECUTION_CONTROL +
                    (uint)CARRY4(DAT_20004bd0,UI_TASK_ROUTING_CONFIGURATION);
         bVar20 = DAT_20004bd0 + UI_TASK_ROUTING_CONFIGURATION < (uint)uVar22;
@@ -896,7 +896,7 @@ switchD_0003f438_caseD_4:
             handle_heartbeat();
           }
         }
-        if (DAT_2000f6ed != '\0') {
+        if (UI_TASK_ROUTING_STATE_2 != '\0') {
           return 0;
         }
         if (2 < LOG_LEVEL) {
@@ -913,13 +913,13 @@ switchD_0003f438_caseD_4:
         fill_memory_buffer(&UI_TASK_ROUTING_STATE,0,0x10);
         y_offset = 0;
         DAT_2000a054 = 0x80;
-        DAT_2000a040 = 0;
-        DAT_2000a044 = 0;
+        UI_TASK_ROUTING_PARAMETER_3 = 0;
+        UI_TASK_ROUTING_PARAMETER_4 = 0;
         DAT_2000a038 = &DAT_2001cdd7;
-        DAT_2000a04c = 0;
-        DAT_2000a050 = 0;
-        DAT_2000a03c = 0;
-        DAT_2000a048 = 0;
+        UI_TASK_ROUTING_PARAMETER_6 = 0;
+        UI_TASK_ROUTING_PARAMETER_7 = 0;
+        UI_TASK_ROUTING_PARAMETER_2 = 0;
+        UI_TASK_ROUTING_PARAMETER_5 = 0;
         _DAT_2000f6ec = 0x101;
         reset_animation_counters();
         clear_work_mode_flag_bit_1();
@@ -1011,12 +1011,12 @@ switchD_0003f438_caseD_4:
       gui_screen_clear();
 LAB_00040162:
       configure_advanced_utf_drawing();
-      DAT_2000a040 = 0;
-      DAT_2000a044 = 0;
-      DAT_2000a04c = 0;
-      DAT_2000a050 = 0;
-      DAT_2000a03c = 0;
-      DAT_2000a048 = 0;
+      UI_TASK_ROUTING_PARAMETER_3 = 0;
+      UI_TASK_ROUTING_PARAMETER_4 = 0;
+      UI_TASK_ROUTING_PARAMETER_6 = 0;
+      UI_TASK_ROUTING_PARAMETER_7 = 0;
+      UI_TASK_ROUTING_PARAMETER_2 = 0;
+      UI_TASK_ROUTING_PARAMETER_5 = 0;
       fill_memory_buffer(&DAT_2000f6ec,0,0x12);
       return 0;
     }

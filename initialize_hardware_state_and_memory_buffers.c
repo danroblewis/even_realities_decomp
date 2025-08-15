@@ -14,7 +14,7 @@ undefined4 initialize_hardware_state_and_memory_buffers(void)
   undefined4 uVar2;
   uint uVar3;
   
-  if (DAT_20002c38 == '\0') {
+  if (HARDWARE_STATE_AND_MEMORY_BUFFER == '\0') {
     fill_memory_buffer(&CALLBACK_STATE_AND_BITMAP_UPDATE_FLAG,0,0x60);
     uVar3 = 0;
     do {
@@ -28,7 +28,7 @@ undefined4 initialize_hardware_state_and_memory_buffers(void)
     process_data_with_parameter_validation_alt4(0xd);
     _DAT_5000d304 = 0x80000000;
     uVar2 = 0xbad0000;
-    DAT_20002c38 = '\x01';
+    HARDWARE_STATE_AND_MEMORY_BUFFER = '\x01';
     DAT_20002c34 = 1;
   }
   else {

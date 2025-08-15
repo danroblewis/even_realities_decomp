@@ -18,7 +18,7 @@ void initialize_cryptographic_context_with_parameter_setup(undefined4 *param_1)
   (*SHA256_CONTEXT_INITIALIZATION_WITH_DEFAULT_VALUES_AND_CRYPTOGRAPHIC_CONTEXT_SETUP)(puVar2);
   *param_1 = 0;
   reset_sha256_context_with_error_handling(param_1 + 1);
-  iVar1 = (*DAT_20002f58)(puVar2);
+  iVar1 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER_2)(puVar2);
   if (iVar1 == 0) {
     iVar1 = param_1[0x3e];
     if (iVar1 < 1) {

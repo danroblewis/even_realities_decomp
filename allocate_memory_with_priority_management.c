@@ -80,7 +80,8 @@ LAB_0004bd9c:
              calculate_buffer_offset_with_wrapping
                        (&MEMORY_ALLOCATION_BUFFER_MANAGER,MEMORY_ALLOCATION_BUFFER_MANAGER,param_1);
         if (MEMORY_ALLOCATION_BUFFER_MANAGER == MEMORY_ALLOCATION_PRIORITY_MANAGEMENT_STATE) {
-          DAT_20003658 = DAT_20003658 | 8;
+          MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER_2 =
+               MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER_2 | 8;
         }
         iVar4 = 0;
         iVar3 = iVar5;

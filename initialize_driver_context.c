@@ -18,9 +18,9 @@ undefined * initialize_driver_context(void)
   DRIVER_CONTEXT_INITIALIZATION_FLAG_2 = 0x53;
   DRIVER_CONTEXT_INITIALIZATION_FLAG_3 = 0x1000;
   DRIVER_CONTEXT_INITIALIZATION_PARAMETER_4 = &DAT_20007a60;
-  DRIVER_CONTEXT_INITIALIZATION_PARAMETER_2 = &DAT_200023cc;
+  DRIVER_CONTEXT_INITIALIZATION_PARAMETER_2 = &DRIVER_CONTEXT_INITIALIZATION_BUFFER;
   init_mutex();
-  driver_context = check_driver_ready(DAT_200023cc);
+  driver_context = check_driver_ready(DRIVER_CONTEXT_INITIALIZATION_BUFFER);
   if (driver_context == 0) {
     debug_message = "parent bus device not ready\r\n";
   }
@@ -28,10 +28,10 @@ undefined * initialize_driver_context(void)
     debug_message = "eeprom_st25dv_init ready\r\n";
   }
   DEBUG_PRINT(debug_message);
-  driver_context = check_driver_ready(DAT_200023cc);
+  driver_context = check_driver_ready(DRIVER_CONTEXT_INITIALIZATION_BUFFER);
   if (driver_context == 0) {
     DEBUG_PRINT("\nError: Device \"%s\" is not ready; check the driver initialization logs for errors.\n"
-                ,*DAT_200023cc);
+                ,*DRIVER_CONTEXT_INITIALIZATION_BUFFER);
     puVar1 = (undefined *)0x0;
   }
   else {

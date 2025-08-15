@@ -16,7 +16,7 @@ void on_triple_click(void)
   else {
     handle_heartbeat();
   }
-  if (DAT_20018d8b == '\0') {
+  if (SYSTEM_SUSPEND_AND_DISPLAY_CLOSE_BUFFER == '\0') {
     if (DISPLAY_UPDATE_FLAG != '\0') {
       DISPLAY_UPDATE_FLAG = '\0';
     }
@@ -29,7 +29,7 @@ void on_triple_click(void)
     *(undefined1 *)(iVar1 + 0xd5) = 3;
     iVar1 = get_work_mode();
     display_refresh_wrapper_with_parameters(*(undefined1 *)(iVar1 + 0xd5));
-    DAT_20018d8b = 1;
+    SYSTEM_SUSPEND_AND_DISPLAY_CLOSE_BUFFER = 1;
     return;
   }
   call_data_verification_if_needed();
@@ -40,7 +40,7 @@ void on_triple_click(void)
   display_close_screen(3);
   iVar1 = get_work_mode();
   *(undefined1 *)(iVar1 + 0xd5) = 0;
-  DAT_20018d8b = 0;
+  SYSTEM_SUSPEND_AND_DISPLAY_CLOSE_BUFFER = 0;
   return;
 }
 

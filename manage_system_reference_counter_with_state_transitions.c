@@ -12,7 +12,7 @@ undefined4 manage_system_reference_counter_with_state_transitions(int param_1)
 {
   int iVar1;
   
-  iVar1 = (*DAT_20002f14)(SYSTEM_REFERENCE_COUNTER_AND_EVENT_MANAGEMENT);
+  iVar1 = (*SYSTEM_EVENT_FUNCTION_POINTER_TABLE_3)(SYSTEM_REFERENCE_COUNTER_AND_EVENT_MANAGEMENT);
   if (iVar1 != 0) {
     return 0xffff8fe9;
   }

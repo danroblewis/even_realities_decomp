@@ -13,7 +13,7 @@ void manage_ble_connection_priority
   
   if (((undefined4 **)DMIC_BUFFER_POINTER == &DMIC_BUFFER_POINTER) ||
      (puVar1 = DMIC_BUFFER_POINTER, DMIC_BUFFER_POINTER == (undefined4 *)0x0)) {
-    puVar1 = DAT_2000b454;
+    puVar1 = BLE_CONNECTION_PRIORITY_MANAGEMENT_STATE;
   }
   if (param_1 == 0) {
     if (DMIC_BUFFER_SIZE == (undefined4 *)0x0) {

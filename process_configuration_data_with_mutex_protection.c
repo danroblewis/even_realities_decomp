@@ -18,7 +18,8 @@ undefined4 process_configuration_data_with_mutex_protection(undefined4 param_1,u
   uStack_14 = 0;
   local_1c = 0;
   resource_mutex_acquire(&DAT_20003868,param_2,0xffffffff,0xffffffff);
-  for (piVar2 = (int *)DAT_2000a104; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
+  for (piVar2 = (int *)BUFFER_STRUCTURE_INITIALIZATION_BUFFER; piVar2 != (int *)0x0;
+      piVar2 = (int *)*piVar2) {
     (**(code **)piVar2[1])(piVar2,&local_1c);
   }
   uVar1 = handle_configuration_setting_with_validation(0);

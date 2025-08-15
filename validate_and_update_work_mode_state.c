@@ -21,7 +21,7 @@ void validate_and_update_work_mode_state(void)
     WORK_MODE_ANIMATION_STATE = 0;
     WORK_MODE_STATE_VALIDATION_FLAGS = 0;
   }
-  DAT_2001cdd3 = 1;
+  WORK_MODE_STATE_VALIDATION_AND_UPDATE_BUFFER = 1;
   iVar1 = get_work_mode();
   DAT_200034f5 = *(undefined1 *)(*(int *)(iVar1 + 0x1014) + 2);
   return;

@@ -16,14 +16,19 @@ validate_and_process_ble_characteristics_with_callback_execution_and_state_manag
   setup_audio_codec(&DAT_20002990);
   set_ble_connection_state_flags_with_validation(param_1,1,0,&DAT_20002990);
   if (BLE_CHARACTERISTIC_VALIDATION_AND_PROCESSING_STATE_2 != 0) {
-    if ((DAT_20006145 == '\0') &&
+    if ((BLE_CHARACTERISTICS_VALIDATION_AND_PROCESSING_WITH_CALLBACK_EXECUTION_AND_STATE_MANAGEMENT
+         == '\0') &&
        (iVar1 = bt_connection_update_flags(&DAT_2000613c,0xffffffbf), iVar1 << 0x19 < 0)) {
       validate_and_process_ble_characteristics_with_state_management_and_parameter(&DAT_20006138);
     }
-    else if ((DAT_20006145 == '\a') && (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION != 0)) {
-      if ((DAT_20006170 == 0) || (DAT_20002110 != 0)) {
+    else if ((BLE_CHARACTERISTICS_VALIDATION_AND_PROCESSING_WITH_CALLBACK_EXECUTION_AND_STATE_MANAGEMENT
+              == '\a') && (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION != 0)) {
+      if ((BLE_CHARACTERISTICS_VALIDATION_AND_PROCESSING_WITH_CALLBACK_EXECUTION_AND_STATE_MANAGEMENT_ALT
+           == 0) || (DAT_20002110 != 0)) {
         uVar2 = 4;
-        puVar3 = &DAT_20006170;
+        puVar3 = &
+                 BLE_CHARACTERISTICS_VALIDATION_AND_PROCESSING_WITH_CALLBACK_EXECUTION_AND_STATE_MANAGEMENT_ALT
+        ;
       }
       else {
         uVar2 = 2;

@@ -9,8 +9,8 @@ void handle_system_state_transition_with_callback_execution(undefined4 *param_1,
 
 {
   SYSTEM_STATE_TRANSITION_HANDLING_WITH_CALLBACK_EXECUTION = param_1[1];
-  DAT_20002f0c = (code *)*param_1;
-  DAT_20002f14 = param_1[2];
+  SYSTEM_EVENT_FUNCTION_POINTER_TABLE_2 = (code *)*param_1;
+  SYSTEM_EVENT_FUNCTION_POINTER_TABLE_3 = param_1[2];
   SYSTEM_EVENT_FUNCTION_POINTER_TABLE = param_1[3];
   SYSTEM_STATE_TRANSITION_CALLBACK_EXECUTION_STATE_1 = *param_2;
   SYSTEM_STATE_TRANSITION_CALLBACK_EXECUTION_STATE_2 = param_2[1];
@@ -21,11 +21,11 @@ void handle_system_state_transition_with_callback_execution(undefined4 *param_1,
     DAT_2000cd44 = 0;
     DAT_2000cde8 = 0;
     DAT_2000cd48 = 0xa95c5f2c;
-    DAT_2000cdec = 0xa95c5f2c;
-    (*DAT_20002f0c)(&DAT_2000cd44);
+    SYSTEM_STATE_TRANSITION_CALLBACK_EXECUTION_STATE_5 = 0xa95c5f2c;
+    (*SYSTEM_EVENT_FUNCTION_POINTER_TABLE_2)(&DAT_2000cd44);
                     /* WARNING: Could not recover jumptable at 0x000797dc. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*DAT_20002f0c)(&DAT_2000cde8);
+    (*SYSTEM_EVENT_FUNCTION_POINTER_TABLE_2)(&DAT_2000cde8);
     return;
   }
   return;

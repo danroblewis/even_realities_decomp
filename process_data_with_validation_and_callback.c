@@ -20,7 +20,7 @@ void process_data_with_validation_and_callback
   if ((iVar1 == 0) && (uStack_c._3_1_ == '\x01')) {
     process_data_with_callback_and_parameter(&DAT_00087bc0);
   }
-  DAT_2001d44e = 1;
+  DATA_VALIDATION_AND_CALLBACK_PROCESSING_STATE_1 = 1;
   execute_callbacks_and_clear_reference(&DATA_PROCESSING_VALIDATION_AND_CALLBACK);
   return;
 }

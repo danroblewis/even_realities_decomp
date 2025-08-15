@@ -14,12 +14,12 @@ void change_work_mode_to(uint param_1)
   undefined1 auStack_4c [60];
   
   iVar2 = 3000;
-  while ((DAT_2000ff4b != '\0' && (iVar2 = iVar2 + -1, iVar2 != 0))) {
+  while ((WORK_MODE_CHANGE_BUFFER != '\0' && (iVar2 = iVar2 + -1, iVar2 != 0))) {
     calculate_ble_schedule_timing_with_division(1);
   }
-  DAT_2000ff4b = 1;
+  WORK_MODE_CHANGE_BUFFER = 1;
   if (*(byte *)(WORK_MODE + 1) == param_1) {
-    DAT_2000ff4b = 0;
+    WORK_MODE_CHANGE_BUFFER = 0;
     return;
   }
   *(char *)(WORK_MODE + 1) = (char)param_1;
@@ -122,7 +122,7 @@ LAB_00016b0e:
     handle_system_flags_and_work_mode(uVar1,0x400);
     handle_system_flags_and_work_mode(1,0x800);
   }
-  DAT_2000ff4b = 0;
+  WORK_MODE_CHANGE_BUFFER = 0;
   return;
 }
 

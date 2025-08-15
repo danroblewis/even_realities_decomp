@@ -38,7 +38,7 @@ int bluetooth_hci_command_processing_with_validation_and_callback(void)
         handle_bluetooth_privacy_mode_management_with_state_validation();
         validate_and_process_ble_characteristics_with_parameter_validation_and_callback();
         bt_connection_state_transition_with_state_management();
-        DAT_2000ff06 = 0;
+        BLUETOOTH_HCI_COMMAND_PROCESSING_VALIDATION_AND_CALLBACK_STATE = 0;
         process_data_with_callback_validation_alt5(&DAT_20005e30);
         process_data_with_callback_validation_alt5(&DAT_20005f08);
         clear_bit_in_bitmap(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION,0xfffffffe);

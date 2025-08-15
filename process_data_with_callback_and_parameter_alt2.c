@@ -41,7 +41,8 @@ undefined4 process_data_with_callback_and_parameter_alt2(int *param_1,uint *para
     if (0x20 < uVar3) {
       return 0x18;
     }
-    if ((((uVar3 != 0) && (DAT_2000ab7c != 0xffffffff)) && (uVar3 == DAT_2000ab88)) &&
+    if ((((uVar3 != 0) && (DATA_PROCESSING_WITH_VALIDATION_BUFFER != 0xffffffff)) &&
+        (uVar3 == DAT_2000ab88)) &&
        (iVar1 = memcmp_byte_arrays(&DAT_2000ab89,param_1[5]), iVar1 == 0)) {
       return 0;
     }
@@ -102,7 +103,7 @@ undefined4 process_data_with_callback_and_parameter_alt2(int *param_1,uint *para
     uVar2 = 9;
   }
   else {
-    param_2[3] = DAT_2000ab7c;
+    param_2[3] = DATA_PROCESSING_WITH_VALIDATION_BUFFER;
     *param_2 = uVar3;
     param_2[1] = 0;
     if (param_1[1] == BLE_CONNECTION_DATA_BUFFER) {

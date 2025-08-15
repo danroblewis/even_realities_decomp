@@ -17,7 +17,7 @@ void configure_hardware_mode_with_register_setup(undefined4 hardware_mode,undefi
   int iVar5;
   undefined4 uStack_14;
   
-  if (DAT_2000b320 == '\0') {
+  if (HARDWARE_REGISTER_INITIALIZATION_BUFFER == '\0') {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","m_clock_cb.module_initialized",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_clock.c",0x1ad);
                     /* WARNING: Subroutine does not return */

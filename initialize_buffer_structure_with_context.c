@@ -38,13 +38,13 @@ undefined4 initialize_buffer_structure_with_context(undefined4 *param_1,undefine
       param_1[5] = 0;
       param_1 = param_1 + 5;
       puVar3 = param_1;
-      if (DAT_2000a110 != (undefined4 *)0x0) {
-        *DAT_2000a110 = param_1;
+      if (BUFFER_STRUCTURE_CONTEXT_BUFFER != (undefined4 *)0x0) {
+        *BUFFER_STRUCTURE_CONTEXT_BUFFER = param_1;
         puVar3 = BUFFER_STRUCTURE_CALLBACK_CONFIGURATION;
       }
       BUFFER_STRUCTURE_CALLBACK_CONFIGURATION = puVar3;
       uVar4 = 0;
-      DAT_2000a110 = param_1;
+      BUFFER_STRUCTURE_CONTEXT_BUFFER = param_1;
 LAB_0004e502:
       mutex_unlock(&DAT_20003868);
       return uVar4;

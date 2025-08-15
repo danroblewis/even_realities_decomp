@@ -47,14 +47,14 @@ LAB_00019768:
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): !!!!!!!!!!!!!!get -> ancs_get_attr_req_sem %d evt_id %d\n",
                             "ble_ancs_data_req_thread",ANCS_DATA_SOURCE_HANDLER_STATE,
-                            (uint)DAT_20006ab0);
+                            (uint)BT_ANCS_DATA_SOURCE_HANDLER_BUFFER);
               }
               else {
                 handle_heartbeat("%s(): !!!!!!!!!!!!!!get -> ancs_get_attr_req_sem %d evt_id %d\n",
                                  "ble_ancs_data_req_thread");
               }
             }
-            if (DAT_20006ab0 < 2) {
+            if (BT_ANCS_DATA_SOURCE_HANDLER_BUFFER < 2) {
               request_ancs_attr_ext();
               if (0 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {

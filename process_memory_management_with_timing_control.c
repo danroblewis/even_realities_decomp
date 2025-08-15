@@ -20,7 +20,7 @@ int process_memory_management_with_timing_control(void)
   }
   iVar1 = process_memory_allocation_with_priority_control();
   if (iVar1 != 0) {
-    DAT_2000a0d8 = DAT_2000a0d8 + -1;
+    MEMORY_MANAGEMENT_TIMING_CONTROL_3 = MEMORY_MANAGEMENT_TIMING_CONTROL_3 + -1;
     puVar4 = &SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE;
     while( true ) {
       if (&BUFFER_STRUCTURE_INITIALIZATION_CONFIG < puVar4) {
@@ -38,21 +38,23 @@ int process_memory_management_with_timing_control(void)
     }
     process_memory_deallocation_with_priority_control(iVar1);
   }
-  if (0 < DAT_2000a0d4) {
+  if (0 < SYSTEM_FLAG_GET_AND_RESET_BUFFER) {
     lVar6 = calculate_ble_connection_timing_with_validation();
     uVar2 = (uint)((ulonglong)(lVar6 * 1000) >> 0x20);
     uVar3 = (uint)(lVar6 * 1000) >> 0xf | uVar2 * 0x20000;
-    uVar2 = ((uVar2 >> 0xf) - DAT_200056a4) - (uint)(uVar3 < MEMORY_MANAGEMENT_TIMING_CONTROL);
+    uVar2 = ((uVar2 >> 0xf) - MEMORY_MANAGEMENT_TIMING_CONTROL_2) -
+            (uint)(uVar3 < MEMORY_MANAGEMENT_TIMING_CONTROL);
     bVar5 = 1000 < uVar3 - MEMORY_MANAGEMENT_TIMING_CONTROL;
     if (uVar2 != 0 || uVar2 < bVar5) {
-      process_system_callbacks_with_flag_reset(DAT_200056a4,uVar2 - !bVar5);
+      process_system_callbacks_with_flag_reset(MEMORY_MANAGEMENT_TIMING_CONTROL_2,uVar2 - !bVar5);
     }
   }
   bVar5 = 0xfffffc17 < MEMORY_MANAGEMENT_TIMING_CONTROL;
   MEMORY_MANAGEMENT_TIMING_CONTROL = MEMORY_MANAGEMENT_TIMING_CONTROL + 1000;
-  DAT_200056a4 = DAT_200056a4 + (uint)bVar5;
-  if ((DAT_20003658 << 0x1c < 0) ||
-     (uVar2 = DAT_2000364c, DAT_2000364c < MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE)) {
+  MEMORY_MANAGEMENT_TIMING_CONTROL_2 = MEMORY_MANAGEMENT_TIMING_CONTROL_2 + (uint)bVar5;
+  if ((MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER_2 << 0x1c < 0) ||
+     (uVar2 = MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER,
+     MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER < MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE)) {
     uVar2 = DAT_2000366c;
   }
   iVar1 = uVar2 - MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE;

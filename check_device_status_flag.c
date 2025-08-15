@@ -10,8 +10,8 @@ char check_device_status_flag(void)
 {
   char cVar1;
   
-  cVar1 = DAT_20002c38;
-  if (DAT_20002c38 != '\0') {
+  cVar1 = HARDWARE_STATE_AND_MEMORY_BUFFER;
+  if (HARDWARE_STATE_AND_MEMORY_BUFFER != '\0') {
     cVar1 = '\x01';
   }
   return cVar1;

@@ -13,7 +13,7 @@ undefined1 * find_ble_attribute_by_handle(int param_1)
   int iVar3;
   
   iVar3 = 0;
-  puVar2 = &DAT_2000aed4;
+  puVar2 = &BLE_ATTRIBUTE_SEARCH_AND_LOG_BUFFER;
   while( true ) {
     if (param_1 == 0) {
       iVar1 = compare_byte_arrays_7_bytes(puVar2 + 1,&DAT_000f2b3a);

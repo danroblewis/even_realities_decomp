@@ -53,7 +53,7 @@ int integrate_ble_connection_with_touch_sensor(uint param_1,int param_2)
     }
     else {
       update_connection_state_flags(&DAT_2000b490);
-      DAT_2000b484 = DMIC_BUFFER_SIZE;
+      BLE_CONNECTION_TOUCH_SENSOR_INTEGRATION_STATE = DMIC_BUFFER_SIZE;
       validate_ble_connection_state();
       schedule_ble_connection_timeout_with_priority
                 (DMIC_BUFFER_SIZE + 0x18,&LAB_00086660_1,param_1,param_2);

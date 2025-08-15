@@ -63,10 +63,10 @@ LAB_0002f50e:
         pcVar2 = (char *)(*pcVar5)(uVar4,0x400000,0x1000);
         iVar3 = LOG_LEVEL;
         if (pcVar2 == (char *)0x0) {
-          DAT_20018dab = 0xaa;
+          VOICE_BLOCK_DELETION_STATE_1 = 0xaa;
           DAT_20018daa = 0x5a;
-          DAT_20018dac = 0xa5;
-          DAT_20018dad = 0x5a;
+          VOICE_BLOCK_DELETION_STATE_2 = 0xa5;
+          VOICE_BLOCK_DELETION_STATE_3 = 0x5a;
           DAT_20018dae = 0;
           DAT_20018daf = 0;
           DAT_20018db0 = 0;

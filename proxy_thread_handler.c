@@ -132,7 +132,8 @@ LAB_00047c76:
             iVar3 = (*pcVar10)(uVar2,0x400000,&PROXY_THREAD_BUFFER_2,0xe6);
             if (iVar3 == 0) {
               if ((PROXY_THREAD_BUFFER_2 == 0x5aa5aa5a) &&
-                 ((&DAT_2001d353)[(uint)PROXY_THREAD_DATA_PROCESSING_STATE * 5] == 2)) {
+                 ((&PROXY_THREAD_HANDLER_BUFFER_3)[(uint)PROXY_THREAD_DATA_PROCESSING_STATE * 5] ==
+                  2)) {
                 PROXY_THREAD_HANDLER_DATA_BUFFER =
                      (&DAT_2001d357)[(uint)PROXY_THREAD_DATA_PROCESSING_STATE * 5];
                 PROXY_THREAD_HANDLER_STATE_AND_DATA =
@@ -219,7 +220,7 @@ LAB_00047c76:
                     }
                   }
                 }
-                DAT_2001d262 = '\x01';
+                PROXY_THREAD_HANDLER_BUFFER_2 = '\x01';
                 PROXY_THREAD_STATE_BUFFER = PROXY_THREAD_STATE_BUFFER + iVar5;
                 exchange_sensor_data_value(PROXY_THREAD_DATA_PROCESSING_STATE);
                 goto LAB_00048054;
@@ -234,7 +235,7 @@ LAB_00047e22:
             goto LAB_00047c76;
           }
           if (local_3c != '\x01') goto LAB_00047c76;
-          if (DAT_2001d262 == '\0') {
+          if (PROXY_THREAD_HANDLER_BUFFER_2 == '\0') {
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): error packet order,can\'t send any audio data to app\n",
@@ -289,7 +290,7 @@ LAB_00048082:
                 }
               }
 LAB_0004820e:
-              DAT_2001d262 = '\0';
+              PROXY_THREAD_HANDLER_BUFFER_2 = '\0';
               goto LAB_00048082;
             }
             validate_memory_bounds(&DAT_2001d26e,&PROXY_THREAD_BUFFER_2,iVar3,0xdc);
@@ -343,7 +344,7 @@ LAB_00048054:
             send_audio_stream_file_to_app(1,0);
             goto LAB_00047c76;
           }
-          DAT_2001d262 = '\0';
+          PROXY_THREAD_HANDLER_BUFFER_2 = '\0';
           PROXY_THREAD_HANDLER_COMMUNICATION_STATE = 0;
           PROXY_THREAD_HANDLER_STATE_EXTENDED = 0;
           PROXY_THREAD_STATE_BUFFER = 0;
@@ -408,7 +409,7 @@ LAB_00047de2:
                 iVar7 = (&DAT_2001d357)[iVar3 * 5];
                 if (IS_DEBUG == 0) {
                   puVar8 = &UNK_000ef077;
-                  if ((&DAT_2001d353)[iVar3 * 5] != 2) {
+                  if ((&PROXY_THREAD_HANDLER_BUFFER_3)[iVar3 * 5] != 2) {
                     puVar8 = &UNK_000ef07c;
                   }
                   DEBUG_PRINT("%s(): voice %d %s, timestamp = %d,crc32 = 0x%x start addr = %d,end addr = %d,total audio stream size = %d\n"
@@ -419,7 +420,7 @@ LAB_00047de2:
                 }
                 else {
                   puVar8 = &UNK_000ef077;
-                  if ((&DAT_2001d353)[iVar3 * 5] != 2) {
+                  if ((&PROXY_THREAD_HANDLER_BUFFER_3)[iVar3 * 5] != 2) {
                     puVar8 = &UNK_000ef07c;
                   }
                   handle_heartbeat("%s(): voice %d %s, timestamp = %d,crc32 = 0x%x start addr = %d,end addr = %d,total audio stream size = %d\n"
@@ -430,7 +431,7 @@ LAB_00047de2:
                 }
               }
               puVar11 = puVar4;
-              if ((&DAT_2001d353)[iVar3 * 5] == 2) {
+              if ((&PROXY_THREAD_HANDLER_BUFFER_3)[iVar3 * 5] == 2) {
                 *puVar4 = (char)iVar5;
                 uVar2 = (&PROXY_THREAD_HANDLER_READ_DATA_1)[iVar3 * 5];
                 cVar12 = cVar12 + '\x01';

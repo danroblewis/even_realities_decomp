@@ -30,7 +30,7 @@ void main_system_logging_and_monitoring_loop(void)
     uVar7 = 0;
   }
   MAIN_SYSTEM_LOGGING_DATA = process_ble_data_with_callback_validation();
-  if ((MAIN_SYSTEM_LOGGING_DATA != 0) && (9 < DAT_2000a0d8)) {
+  if ((MAIN_SYSTEM_LOGGING_DATA != 0) && (9 < MEMORY_MANAGEMENT_TIMING_CONTROL_3)) {
     z_spin_lock_valid(&DAT_200039f8);
   }
   iVar2 = 0;

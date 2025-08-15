@@ -17,7 +17,7 @@ void copy_system_data(void)
   undefined4 *puVar5;
   
   iVar1 = WORK_MODE;
-  **(int **)(WORK_MODE + 0xfec) = DAT_2007fc00 + 1;
+  **(int **)(WORK_MODE + 0xfec) = WORK_MODE_TIMESTAMP_OPERATIONS_BUFFER + 1;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 4) = (undefined1)DAT_2007fc04;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 5) = DAT_2007fc04._1_1_;
   uVar3 = SYSTEM_STATIC_INFO_RESET_2;

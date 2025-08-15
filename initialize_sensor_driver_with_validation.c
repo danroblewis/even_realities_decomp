@@ -12,8 +12,8 @@ undefined4 initialize_sensor_driver_with_validation(void)
   int iVar2;
   undefined4 in_r3;
   
-  cVar1 = DAT_2001a127;
-  if (DAT_2001a127 == '\0') {
+  cVar1 = SENSOR_DRIVER_INITIALIZATION_BUFFER;
+  if (SENSOR_DRIVER_INITIALIZATION_BUFFER == '\0') {
     iVar2 = check_driver_ready(&DAT_00087bc0);
     if (iVar2 == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","device_is_ready(lpuart)",
@@ -24,11 +24,11 @@ undefined4 initialize_sensor_driver_with_validation(void)
     }
     iVar2 = configure_sensor_driver_interface(&DAT_00087bc0);
     if (iVar2 != 0) {
-      DAT_2001a127 = cVar1;
+      SENSOR_DRIVER_INITIALIZATION_BUFFER = cVar1;
       DEBUG_PRINT("init_serial_port is failed\n");
       return 0xffffffff;
     }
-    DAT_2001a127 = '\x01';
+    SENSOR_DRIVER_INITIALIZATION_BUFFER = '\x01';
   }
   return 0;
 }

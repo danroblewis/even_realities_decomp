@@ -16,18 +16,18 @@ void update_ble_attribute_handle_range
   uVar2 = set_bits_in_value(&DAT_20006448,1,param_3,param_4,param_4);
   uVar1 = (ushort)param_1;
   if ((uVar2 & 1) != 0) {
-    if (param_1 < DAT_20006410) {
-      DAT_20006410 = uVar1;
+    if (param_1 < BLE_ATTRIBUTE_HANDLE_RANGE_UPDATE_BUFFER) {
+      BLE_ATTRIBUTE_HANDLE_RANGE_UPDATE_BUFFER = uVar1;
       if (param_2 <= DAT_20006412) goto LAB_0005a58a;
     }
     else {
-      uVar1 = DAT_20006410;
+      uVar1 = BLE_ATTRIBUTE_HANDLE_RANGE_UPDATE_BUFFER;
       if (param_2 <= DAT_20006412) {
         return;
       }
     }
   }
-  DAT_20006410 = uVar1;
+  BLE_ATTRIBUTE_HANDLE_RANGE_UPDATE_BUFFER = uVar1;
   DAT_20006412 = (ushort)param_2;
 LAB_0005a58a:
   uVar3 = get_ble_handle_value(&DAT_20006448);

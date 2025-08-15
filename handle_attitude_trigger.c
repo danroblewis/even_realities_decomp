@@ -195,9 +195,9 @@ LAB_0001021e:
             if (DAT_20007ab0 == '\0') {
               if (DAT_20007ab4 < 0xc9) goto LAB_0001021e;
               DAT_20007ab0 = '\x01';
-              DAT_20007acc = local_a0[0];
-              DAT_20007ad0 = local_a0[1];
-              DAT_20007ad4 = local_a0[2];
+              ATTITUDE_TRIGGER_STATE_BUFFER_2 = local_a0[0];
+              ATTITUDE_TRIGGER_STATE_BUFFER_3 = local_a0[1];
+              ATTITUDE_TRIGGER_STATE_BUFFER_4 = local_a0[2];
             }
             calculate_work_mode_parameters(param_1);
             if ((byte)param_1[-0xe0f] == 0) {
@@ -388,9 +388,9 @@ LAB_00010734:
             }
 LAB_000103ea:
             iVar1 = 0;
-            local_a0[3] = local_a0[0] - DAT_20007acc;
-            local_a0[4] = local_a0[1] - DAT_20007ad0;
-            local_a0[5] = local_a0[2] - DAT_20007ad4;
+            local_a0[3] = local_a0[0] - ATTITUDE_TRIGGER_STATE_BUFFER_2;
+            local_a0[4] = local_a0[1] - ATTITUDE_TRIGGER_STATE_BUFFER_3;
+            local_a0[5] = local_a0[2] - ATTITUDE_TRIGGER_STATE_BUFFER_4;
             local_a0[6] = 0.0;
             local_a0[7] = 0.0;
             local_a0[8] = 0.0;
@@ -419,9 +419,9 @@ LAB_000103ea:
                 pfVar12 = pfVar12 + 1;
                 pfVar9 = pfVar9 + 1;
               } while (iVar1 != 3);
-              if (((0.1 < ABS(local_a0[0] - DAT_20007acc)) ||
-                  (0.1 < ABS(local_a0[1] - DAT_20007ad0))) ||
-                 (0.1 < ABS(local_a0[2] - DAT_20007ad4))) {
+              if (((0.1 < ABS(local_a0[0] - ATTITUDE_TRIGGER_STATE_BUFFER_2)) ||
+                  (0.1 < ABS(local_a0[1] - ATTITUDE_TRIGGER_STATE_BUFFER_3))) ||
+                 (0.1 < ABS(local_a0[2] - ATTITUDE_TRIGGER_STATE_BUFFER_4))) {
                 ATTITUDE_TRIGGER_STATE = 0;
               }
               else {
@@ -485,9 +485,9 @@ LAB_000103ea:
                 }
               }
             }
-            DAT_20007acc = local_a0[0];
-            DAT_20007ad0 = local_a0[1];
-            DAT_20007ad4 = local_a0[2];
+            ATTITUDE_TRIGGER_STATE_BUFFER_2 = local_a0[0];
+            ATTITUDE_TRIGGER_STATE_BUFFER_3 = local_a0[1];
+            ATTITUDE_TRIGGER_STATE_BUFFER_4 = local_a0[2];
             if (*param_1 == '\x02') {
               uVar2 = 0x4de;
             }

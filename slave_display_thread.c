@@ -562,7 +562,7 @@ LAB_0002850c:
         control_timer_operation(cVar3);
         break;
       case 3:
-        DAT_20018d8d = 1;
+        SLAVE_DISPLAY_THREAD_BUFFER = 1;
         iVar4 = get_work_mode();
         if (((*(char *)(iVar4 + 0x108f) != '\0') &&
             (iVar4 = calculate_next_timeout_message_state(), iVar4 != 0)) &&

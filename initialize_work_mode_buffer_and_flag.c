@@ -12,7 +12,7 @@ undefined4 initialize_work_mode_buffer_and_flag(void)
   
   iVar1 = get_work_mode();
   fill_memory_buffer(*(undefined4 *)(iVar1 + 0x1014),0,0x21);
-  DAT_2001cdd3 = 1;
+  WORK_MODE_STATE_VALIDATION_AND_UPDATE_BUFFER = 1;
   return 0;
 }
 

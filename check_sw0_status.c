@@ -20,8 +20,8 @@ void check_sw0_status(void)
         handle_heartbeat();
       }
     }
-    DAT_20007af0 = DAT_20007af0 + 1;
-    if (3 < DAT_20007af0) {
+    SW0_STATUS_CHECK_BUFFER = SW0_STATUS_CHECK_BUFFER + 1;
+    if (3 < SW0_STATUS_CHECK_BUFFER) {
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): interrupt line abnormal, now reset\n","check_sw0_status");
@@ -35,7 +35,7 @@ void check_sw0_status(void)
     }
   }
   else {
-    DAT_20007af0 = 0;
+    SW0_STATUS_CHECK_BUFFER = 0;
   }
   return;
 }

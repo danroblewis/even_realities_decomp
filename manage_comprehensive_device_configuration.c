@@ -108,15 +108,16 @@ LAB_0005f948:
         uVar5 = extraout_r1_00;
       }
       else {
-        DAT_20002218 = *puVar7;
+        DEVICE_CONFIGURATION_MANAGEMENT_BUFFER = *puVar7;
         DAT_2000221c = puVar7[1];
         DAT_20002220 = puVar7[2];
         DAT_20002224 = puVar7[3];
-        COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT_EXTENDED = &DAT_20002218;
+        COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT_EXTENDED =
+             &DEVICE_CONFIGURATION_MANAGEMENT_BUFFER;
         DAT_20002228 = 0;
-        if (DAT_20002218 == 0) goto LAB_0005f948;
+        if (DEVICE_CONFIGURATION_MANAGEMENT_BUFFER == 0) goto LAB_0005f948;
         COMPREHENSIVE_DEVICE_CONFIGURATION_MANAGEMENT = 0;
-        lVar2 = (ulonglong)DAT_20002218 * 0x8000 + 999999;
+        lVar2 = (ulonglong)DEVICE_CONFIGURATION_MANAGEMENT_BUFFER * 0x8000 + 999999;
         local_38 = handle_unsigned_division((int)lVar2,(int)((ulonglong)lVar2 >> 0x20),"size",0);
         schedule_dashboard_lock_task_with_ble_integration
                   (&DAT_20002198,(int)((ulonglong)local_38 >> 0x20),0,0);

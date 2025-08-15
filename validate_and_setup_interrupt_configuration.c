@@ -54,7 +54,7 @@ validate_and_setup_interrupt_configuration
 LAB_00067370:
     if (param_2[1] >> sVar5 == 0) {
       if (((param_3 & 8) == 0) || ((&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar8 * 9] == -1)) {
-        if ((&DAT_2000b3a1)[uVar8 * 0x24] != '\0') {
+        if ((&INTERRUPT_CONFIGURATION_VALIDATION_BUFFER)[uVar8 * 0x24] != '\0') {
           return 0xbad000b;
         }
         iVar6 = (&INTERRUPT_CONFIGURATION_STRUCTURE)[uVar8 * 9];
@@ -64,7 +64,7 @@ LAB_00067370:
             iVar6 = 1;
           }
           if (bVar9) {
-            (&DAT_2000b3a1)[uVar8 * 0x24] = (char)iVar6;
+            (&INTERRUPT_CONFIGURATION_VALIDATION_BUFFER)[uVar8 * 0x24] = (char)iVar6;
           }
         }
         uVar3 = param_2[1];
@@ -86,7 +86,7 @@ LAB_00067370:
         iVar6 = *param_1;
         if (((*param_2 != 0) && ((*param_2 & 0xe0000000) != 0x20000000)) ||
            ((param_2[2] != 0 && ((param_2[2] & 0xe0000000) != 0x20000000)))) {
-          (&DAT_2000b3a1)[uVar8 * 0x24] = 0;
+          (&INTERRUPT_CONFIGURATION_VALIDATION_BUFFER)[uVar8 * 0x24] = 0;
           return 0xbad000a;
         }
         uVar3 = param_3 & 1;

@@ -108,7 +108,7 @@ undefined4 process_data_with_parameter_validation_alt5(int param_1)
       uVar3 = process_data_with_state_management_alt5(*(undefined4 *)(param_1 + 8));
       return uVar3;
     }
-    DAT_2000ab7c = local_e4;
+    DATA_PROCESSING_WITH_VALIDATION_BUFFER = local_e4;
     DAT_2000ab84 = local_f0[0];
     if (local_d4[0] == 0) {
       BLE_CONNECTION_DATA_BUFFER = local_d4[0];

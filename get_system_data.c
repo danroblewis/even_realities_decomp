@@ -8,7 +8,7 @@
 undefined4 * get_system_data(void)
 
 {
-  return &DAT_20003003;
+  return &SYSTEM_SETTINGS_LOADING_BUFFER;
 }
 
 

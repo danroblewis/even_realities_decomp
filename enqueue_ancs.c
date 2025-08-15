@@ -12,7 +12,7 @@ int enqueue_ancs(undefined4 param_1)
   undefined1 auStack_1bc [436];
   
   fill_memory_buffer(auStack_1bc,0,0x1b4);
-  if (DAT_20006a7c == 0) {
+  if (ANCS_ENQUEUING_AND_DEQUEUING == 0) {
     iVar1 = 1;
   }
   else {

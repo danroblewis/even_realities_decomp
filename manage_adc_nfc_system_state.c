@@ -53,13 +53,14 @@ undefined4 manage_adc_nfc_system_state(undefined4 param_1,uint3 param_2)
     ADC_NFC_SYSTEM_STATE_FLAG_5 = 0;
     ADC_NFC_SYSTEM_STATE_FLAG_9 = 0;
     ADC_NFC_SYSTEM_STATE_FLAG_10 = 0;
-    DAT_20002380 = 1;
+    ADC_NFC_SYSTEM_STATE_BUFFER = 1;
   }
   process_adc_nfc_sensor_data_and_state
-            (&DAT_20007a2c,&DAT_20002380,cVar2,&DAT_20002380,param_1,uVar3);
+            (&DAT_20007a2c,&ADC_NFC_SYSTEM_STATE_BUFFER,cVar2,&ADC_NFC_SYSTEM_STATE_BUFFER,param_1,
+             uVar3);
   iVar1 = get_system_ready_state();
   if ((iVar1 != 0) || (iVar1 = get_work_mode(), 0x1d < *(byte *)(iVar1 + 0xfc0))) {
-    handle_process_state_machine(&DAT_20002380);
+    handle_process_state_machine(&ADC_NFC_SYSTEM_STATE_BUFFER);
   }
   return 0;
 }

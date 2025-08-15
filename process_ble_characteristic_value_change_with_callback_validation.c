@@ -35,11 +35,13 @@ process_ble_characteristic_value_change_with_callback_validation(int *param_1,in
       return 0;
     }
     iVar4 = remove_ble_connection_from_list(*param_1 + 0x28);
-    DAT_200029a4 = 0;
+    BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_3 = 0;
     sVar3 = *(short *)(iVar4 + 0x18);
-    DAT_200029a0 = BLE_CHARACTERISTIC_VALUE_CHANGE_CALLBACK_STATE_2;
+    BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_2 =
+         BLE_CHARACTERISTIC_VALUE_CHANGE_CALLBACK_STATE_2;
     ble_memory_copy_utility
-              (&DAT_200029a0,*(undefined4 *)(iVar4 + 0xc),*(undefined2 *)(iVar4 + 0x10));
+              (&BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_2,*(undefined4 *)(iVar4 + 0xc),
+               *(undefined2 *)(iVar4 + 0x10));
     iVar6 = *param_1;
     uVar2 = *(ushort *)(iVar4 + 0x1a);
     puVar7 = *(undefined4 **)(iVar6 + 0x28);
@@ -50,7 +52,8 @@ process_ble_characteristic_value_change_with_callback_validation(int *param_1,in
         puVar10 = puVar7;
         if (*(short *)(puVar7 + 6) == sVar3) {
           if (*(ushort *)((int)puVar7 + 0x1a) == 0) break;
-          if ((uint)*(ushort *)((int)puVar7 + 0x1a) != (uint)uVar2 + (uint)DAT_200029a4) {
+          if ((uint)*(ushort *)((int)puVar7 + 0x1a) !=
+              (uint)uVar2 + (uint)BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_3) {
             uVar5 = 7;
 LAB_000590a6:
             handle_ble_characteristic_value_change_with_callback_and_debug(param_1,0x18,sVar3,uVar5)
@@ -58,11 +61,12 @@ LAB_000590a6:
             return 0;
           }
           if ((uint)BLE_CHARACTERISTIC_VALUE_CHANGE_CALLBACK_STATE_1 <
-              (uint)DAT_200029a4 + (uint)*(ushort *)(puVar7 + 4)) {
+              (uint)BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_3 + (uint)*(ushort *)(puVar7 + 4))
+          {
             uVar5 = 0xd;
             goto LAB_000590a6;
           }
-          ble_memory_copy_utility(&DAT_200029a0,puVar7[3]);
+          ble_memory_copy_utility(&BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_2,puVar7[3]);
           uVar5 = *puVar7;
           if (puVar9 == (undefined4 *)0x0) {
             *(undefined4 *)(iVar6 + 0x28) = uVar5;
@@ -89,8 +93,9 @@ LAB_000590a6:
     }
     if (cVar1 == '\x01') {
       iVar6 = process_ble_characteristic_value_change_with_state_management
-                        (param_1,0x18,0,sVar3,*(undefined2 *)(iVar4 + 0x1a),DAT_200029a0,
-                         DAT_200029a4);
+                        (param_1,0x18,0,sVar3,*(undefined2 *)(iVar4 + 0x1a),
+                         BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_2,
+                         BLUETOOTH_CONNECTION_STATE_TRANSITION_BUFFER_3);
       if (iVar6 != 0) {
         handle_ble_characteristic_value_change_with_callback_and_debug
                   (param_1,0x18,*(undefined2 *)(iVar4 + 0x18),iVar6);

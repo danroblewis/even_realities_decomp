@@ -31,11 +31,11 @@ void derive_and_process_crypto_keys(void)
   }
   else {
     ble_handle_mapping_utility(1,0xffff,0x8260d,auStack_118);
-    iVar2 = sha256_finalize_and_reset(&DAT_20006380,auStack_118);
+    iVar2 = sha256_finalize_and_reset(&BLE_LOG_MESSAGE_FORMATTING_BUFFER,auStack_118);
     if (iVar2 != 0) {
       iVar2 = 0;
       puVar3 = &DAT_20006390;
-      puVar4 = &DAT_20006380;
+      puVar4 = &BLE_LOG_MESSAGE_FORMATTING_BUFFER;
       do {
         uVar1 = *puVar4;
         puVar3 = puVar3 + -1;

@@ -30,7 +30,7 @@ undefined4 enter_into_long_trip(undefined4 param_1)
     local_28 = 0;
     local_24 = 0;
     local_20 = &DAT_20019ff5;
-    local_1c[0] = &DAT_2001a0f5;
+    local_1c[0] = &LONG_TRIP_ENTRY_STATE;
     set_sensor_system_status();
     iVar1 = SENSOR_SYSTEM_STATUS_AND_CONFIGURATION;
     if (SENSOR_CONFIGURATION_PARAMETERS != '\0') {

@@ -136,7 +136,7 @@ int handle_complex_data_processing_and_writing(undefined1 *param_1,char *param_2
   local_148 = (undefined4 *)0x0;
   local_144 = 0;
   local_140 = 0;
-  DAT_20018c6a = 0;
+  COMPLEX_DATA_PROCESSING_AND_WRITING_STATE = 0;
   do {
     uVar2 = manage_linked_list_with_flags_and_counters(&local_148,local_88 + iVar4 * 7);
     iVar4 = iVar4 + 1;

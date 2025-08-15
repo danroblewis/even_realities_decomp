@@ -15,7 +15,7 @@ void generate_lookup_table(void)
   uint uVar5;
   
   uVar3 = 0;
-  puVar1 = &DAT_200075a0;
+  puVar1 = &CRC32_CALCULATION_AND_LOOKUP_TABLE_GENERATION;
   do {
     iVar2 = 8;
     uVar4 = uVar3;

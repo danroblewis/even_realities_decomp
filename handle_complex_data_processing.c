@@ -38,7 +38,7 @@ undefined4 handle_complex_data_processing(int param_1,byte *param_2,uint param_3
       uVar8 = (uint)param_2[1];
       bVar1 = param_2[2];
       if (bVar2 == 0) {
-        DAT_2000d6f2 = (ushort)bVar2;
+        COMPLEX_DATA_PROCESSING_BUFFER = (ushort)bVar2;
         DAT_2000d6f0 = (ushort)param_2[1];
         DAT_2001031f = *param_2;
       }
@@ -46,10 +46,10 @@ undefined4 handle_complex_data_processing(int param_1,byte *param_2,uint param_3
       if (uVar5 == uVar7) {
         uVar5 = (uint)DAT_2000d6f0;
         if (uVar8 == uVar5) {
-          sVar3 = DAT_2000d6f2 - 4;
-          memcpy(param_1 + (uint)DAT_2000d6f2,param_2 + 4,param_3 - 4,uVar8,param_1,param_2,param_3)
-          ;
-          DAT_2000d6f2 = (short)param_3 + sVar3;
+          sVar3 = COMPLEX_DATA_PROCESSING_BUFFER - 4;
+          memcpy(param_1 + (uint)COMPLEX_DATA_PROCESSING_BUFFER,param_2 + 4,param_3 - 4,uVar8,
+                 param_1,param_2,param_3);
+          COMPLEX_DATA_PROCESSING_BUFFER = (short)param_3 + sVar3;
           if ((uint)bVar2 != bVar1 - 1) {
             return 0xcb;
           }

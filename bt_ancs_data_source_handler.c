@@ -49,13 +49,14 @@ void bt_ancs_data_source_handler(undefined4 param_1,byte *param_2,undefined4 par
                 if ((*(char *)(iVar2 + 0xd5) != '\x10') &&
                    (iVar2 = get_work_mode(), *(char *)(iVar2 + 0xd5) != '\x0e')) {
                   ANCS_DATA_SOURCE_HANDLER = ANCS_DATA_SOURCE_HANDLER_STATE;
-                  *(uint *)(iVar1 + 0x1e4) = (uint)DAT_20006ab0;
+                  *(uint *)(iVar1 + 0x1e4) = (uint)BT_ANCS_DATA_SOURCE_HANDLER_BUFFER;
                   enqueue_ancs(iVar1 + 0x34);
                   if (0 < LOG_LEVEL) {
                     if (IS_DEBUG == 0) {
                       DEBUG_PRINT("%s(): =========================>bt_ancs_get_attr_data_sem %d evt_id %d action %d\n"
                                   ,"bt_ancs_data_source_handler",ANCS_DATA_SOURCE_HANDLER_STATE,
-                                  (uint)DAT_20006ab0,*(undefined4 *)(iVar1 + 0x1e4));
+                                  (uint)BT_ANCS_DATA_SOURCE_HANDLER_BUFFER,
+                                  *(undefined4 *)(iVar1 + 0x1e4));
                     }
                     else {
                       handle_heartbeat(

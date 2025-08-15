@@ -201,14 +201,14 @@ void _1b85815(void)
   pcVar3[0xb2c] = '\v';
   pcVar3[0xb2d] = ' ';
   initialize_attitude_data_structure_with_defaults(pcVar3 + 0xb10);
-  DAT_200069f8 = button_init();
+  SYSTEM_FLAG_STATUS_BUFFER = button_init();
   cVar1 = ext_flash_api_init(pcVar3 + 0x1030,pcVar3 + 0x1034,pcVar3 + 0x1038);
   pcVar3[0x1089] = cVar1;
   pcVar3[1] = '\0';
   sett_init(pcVar3 + 0x103c);
   load_system_settings_and_initialize_work_mode(pcVar3);
   iVar2 = LOG_LEVEL;
-  if (DAT_200069f8 == 0) {
+  if (SYSTEM_FLAG_STATUS_BUFFER == 0) {
     *pcVar3 = '\x01';
     if (0 < iVar2) {
       pcVar8 = "%s(): Master!------\n";
@@ -221,7 +221,7 @@ LAB_000172a6:
       }
     }
   }
-  else if (DAT_200069f8 == 1) {
+  else if (SYSTEM_FLAG_STATUS_BUFFER == 1) {
     *pcVar3 = '\x02';
     if (0 < LOG_LEVEL) {
       pcVar8 = "%s(): Slave!------\n";
@@ -387,7 +387,7 @@ LAB_00017372:
           pcVar3[0x107a] = '\0';
           pcVar3[0x107b] = '\0';
           read_sensor_data_and_scale_by_1024(pcVar3 + 0x1078);
-          set_sensor_status_bits(DAT_2007fc70);
+          set_sensor_status_bits(SYSTEM_FUNCTION_CALL_STATE_3);
           goto LAB_00017414;
         }
         pcVar8 = "Could not initialise charger.\n";
@@ -401,7 +401,7 @@ LAB_00017414:
   uVar4 = extraout_r1_00;
   do {
     manage_ble_connection_state_comprehensive(pcVar11,uVar4,0xffffffff,0xffffffff);
-    if (DAT_2000ff6e == '\x01') {
+    if (DFU_MODE_SWITCH_BUFFER == '\x01') {
       switch_to_dfu_mode(pcVar11);
     }
     while( true ) {

@@ -59,7 +59,7 @@ LAB_0000fd68:
       if (*(char *)(param_3 + 1) != '\0') {
         *(undefined1 *)(param_3 + 1) = 0;
       }
-      DAT_20007a04 = 150.0;
+      PROCESS_STATE_MACHINE_BUFFER = 150.0;
 switchD_0000fd08_caseD_e:
       set_timestamp();
       return;
@@ -69,7 +69,7 @@ LAB_0000fd3e:
     break;
   case 4:
     uVar4 = calculate_time_difference();
-    if ((float)uVar4 <= DAT_20007a04) {
+    if ((float)uVar4 <= PROCESS_STATE_MACHINE_BUFFER) {
       return;
     }
     if (*(char *)(param_3 + 7) == '\0') {
@@ -87,7 +87,7 @@ LAB_0000fd3e:
       uVar3 = int_to_float_64bit_signed(*(byte *)(param_3 + 0xb) + 3);
       uVar3 = handle_complex_mathematical_function(0,param_2,uVar3);
       float_add_64bit(uVar3,extraout_s1,0,0x40490000);
-      DAT_20007a04 = (float)complex_float_conversion();
+      PROCESS_STATE_MACHINE_BUFFER = (float)complex_float_conversion();
     }
     set_timestamp();
     uVar5 = 10;
@@ -96,7 +96,7 @@ LAB_0000fd3e:
     goto switchD_0000fd08_caseD_8;
   case 10:
     if ((*(char *)(param_3 + 1) == '\0') &&
-       (uVar4 = calculate_time_difference(), (float)uVar4 < DAT_20007a04)) {
+       (uVar4 = calculate_time_difference(), (float)uVar4 < PROCESS_STATE_MACHINE_BUFFER)) {
       return;
     }
     uVar5 = 0xb;

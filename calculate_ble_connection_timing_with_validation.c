@@ -36,7 +36,7 @@ undefined8 calculate_ble_connection_timing_with_validation(void)
     update_connection_state_flags(&DAT_2000b498);
     uVar3 = get_ble_timing_offset();
     iVar4 = uVar3 + BLE_CONNECTION_TIMEOUT_SCHEDULING;
-    iVar5 = DAT_200069e4 +
+    iVar5 = BLE_CONNECTION_TIMEOUT_SCHEDULING_WITH_PRIORITY_AND_TIMING_CALCULATION_WITH_VALIDATION +
             ((int)uVar3 >> 0x1f) + (uint)CARRY4(uVar3,BLE_CONNECTION_TIMEOUT_SCHEDULING);
     iVar2 = validate_and_clear_connection_state(&DAT_2000b498);
     if (iVar2 != 0) {

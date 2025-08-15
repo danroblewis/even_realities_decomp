@@ -11,7 +11,7 @@ call_function_with_parameters
 
 {
   process_string_with_error_handling_and_validation
-            (&DAT_20003003,0x10,&DAT_000a8c37,param_1,param_4);
+            (&SYSTEM_SETTINGS_LOADING_BUFFER,0x10,&DAT_000a8c37,param_1,param_4);
   return 0;
 }
 

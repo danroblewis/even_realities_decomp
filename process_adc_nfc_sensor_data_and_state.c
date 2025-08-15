@@ -27,8 +27,9 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
   cVar1 = *(char *)(param_1 + 2);
   if (cVar1 == '\x02') {
     uVar3 = calculate_ble_connection_timing_with_validation();
-    if ((int)(uint)((uint)uVar3 - DAT_20007a00 < 0xbb9) <=
-        (int)((int)((ulonglong)uVar3 >> 0x20) - (uint)((uint)uVar3 < DAT_20007a00))) {
+    if ((int)(uint)((uint)uVar3 - ADC_NFC_SENSOR_DATA_PROCESSING_BUFFER < 0xbb9) <=
+        (int)((int)((ulonglong)uVar3 >> 0x20) -
+             (uint)((uint)uVar3 < ADC_NFC_SENSOR_DATA_PROCESSING_BUFFER))) {
       if (param_2[5] == '\n') {
         if (*param_2 == '\0') {
           param_2[0xc] = '\x06';
@@ -36,7 +37,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
         param_2[1] = '\x01';
       }
       param_2[3] = '\x01';
-      DAT_20007a00 = calculate_ble_connection_timing_with_validation();
+      ADC_NFC_SENSOR_DATA_PROCESSING_BUFFER = calculate_ble_connection_timing_with_validation();
     }
   }
   else {
@@ -63,7 +64,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
       }
       ADC_NFC_SENSOR_DATA_AND_STATE = '\0';
     }
-    DAT_20007a00 = calculate_ble_connection_timing_with_validation();
+    ADC_NFC_SENSOR_DATA_PROCESSING_BUFFER = calculate_ble_connection_timing_with_validation();
   }
   return;
 }

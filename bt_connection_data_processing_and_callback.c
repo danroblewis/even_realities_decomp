@@ -21,7 +21,7 @@ void bt_connection_data_processing_and_callback(uint *param_1,uint param_2,uint 
   undefined8 uVar6;
   
   if (param_1 == (uint *)0x0) {
-    increment_counter(&DAT_2000a0d4);
+    increment_counter(&SYSTEM_FLAG_GET_AND_RESET_BUFFER);
     return;
   }
   if (param_4 != 0) {
@@ -33,7 +33,7 @@ void bt_connection_data_processing_and_callback(uint *param_1,uint param_2,uint 
   param_1[2] = uVar3;
   uVar6 = execute_bluetooth_callback_with_priority_control
                     (&MEMORY_ALLOCATION_BUFFER_MANAGER,param_1);
-  uVar5 = increment_counter(&DAT_2000a0d8);
+  uVar5 = increment_counter(&MEMORY_MANAGEMENT_TIMING_CONTROL_3);
   if (SYSTEM_TASKS_AND_MEMORY_MANAGEMENT == '\0') {
     if (MAIN_SYSTEM_LOGGING_DATA != 0) {
       if ((int)uVar5 == 0) {

@@ -8,7 +8,7 @@
 void set_sensor_debug_flag(undefined1 param_1)
 
 {
-  DAT_20019ef2 = param_1;
+  SYSTEM_READY_AND_SETTINGS_STATE_2 = param_1;
   return;
 }
 

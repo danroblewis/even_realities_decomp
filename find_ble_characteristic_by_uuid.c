@@ -26,7 +26,7 @@ find_ble_characteristic_by_uuid
       return (undefined1 *)0x0;
     }
   }
-  return &DAT_2000aed4 + iVar2;
+  return &BLE_ATTRIBUTE_SEARCH_AND_LOG_BUFFER + iVar2;
 }
 
 

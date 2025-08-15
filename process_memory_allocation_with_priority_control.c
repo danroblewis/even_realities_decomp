@@ -41,8 +41,9 @@ uint process_memory_allocation_with_priority_control(void)
       goto LAB_0004bef2;
     }
     update_connection_state_flags(&DAT_2000365c);
-    if (((DAT_20003658 & 8) != 0) ||
-       (uVar4 = DAT_2000364c, DAT_2000364c < MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE)) {
+    if (((MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER_2 & 8) != 0) ||
+       (uVar4 = MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER,
+       MEMORY_ALLOCATION_PRIORITY_CONTROL_BUFFER < MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE)) {
       uVar4 = DAT_2000366c;
     }
     if (uVar4 == MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE) {

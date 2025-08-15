@@ -62,11 +62,11 @@ LAB_0002a516:
                  (iVar4 = get_work_mode(), *(char *)(iVar4 + 1) != '\b')) {
                 uVar9 = calculate_mathematical_operation_with_bit_shifting();
                 uVar7 = SYSTEM_TIMESTAMP_AND_MONITORING_DATA;
-                uVar1 = DAT_200040c8;
+                uVar1 = TIMESTAMP_CALCULATION_AND_STORAGE_BUFFER;
                 uVar10 = calculate_mathematical_operation_with_bit_shifting();
                 uVar8 = (uint)((ulonglong)uVar10 >> 0x20);
                 if ((SYSTEM_TIMESTAMP_AND_MONITORING_DATA <= uVar8 &&
-                     (uint)((uint)uVar10 <= DAT_200040c8) <=
+                     (uint)((uint)uVar10 <= TIMESTAMP_CALCULATION_AND_STORAGE_BUFFER) <=
                      SYSTEM_TIMESTAMP_AND_MONITORING_DATA - uVar8) &&
                    (uVar7 = (int)((ulonglong)uVar9 >> 0x20) - uVar7,
                    uVar8 = (uint)((uint)uVar9 < uVar1),
@@ -82,8 +82,8 @@ LAB_0002a516:
             uVar9 = calculate_mathematical_operation_with_bit_shifting();
             uVar7 = (uint)((ulonglong)uVar9 >> 0x20);
             if (SYSTEM_TIMESTAMP_AND_MONITORING_DATA <= uVar7 &&
-                (uint)((uint)uVar9 <= DAT_200040c8) <= SYSTEM_TIMESTAMP_AND_MONITORING_DATA - uVar7)
-            {
+                (uint)((uint)uVar9 <= TIMESTAMP_CALCULATION_AND_STORAGE_BUFFER) <=
+                SYSTEM_TIMESTAMP_AND_MONITORING_DATA - uVar7) {
               calculate_and_store_timestamp_with_offset(0);
             }
             retry_nfc_operation_with_backoff((int)&uStack_2c + 3);

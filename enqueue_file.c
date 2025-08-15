@@ -12,7 +12,7 @@ int enqueue_file(undefined4 param_1,undefined4 param_2)
   undefined1 auStack_dc [200];
   undefined1 local_14;
   
-  if ((DAT_200079c4 == 0x1e) &&
+  if ((FILE_ENQUEUING_AND_STORAGE_COMMIT_THREAD_OPERATIONS == 0x1e) &&
      (manage_ble_connection_state_comprehensive(&DAT_200079a0,auStack_dc,0,0), 0 < LOG_LEVEL)) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): enqueue_file is full\n","enqueue_file");

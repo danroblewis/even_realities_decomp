@@ -40,12 +40,15 @@ LAB_00050eb8:
         trigger_system_service_call("WEST_TOPDIR/zephyr/arch/arm/core/aarch32/mpu/arm_mpu.c",299);
       }
       *piVar3 = iVar1;
-      if ((iVar1 == -0x16) || ((int)(uint)DAT_2001d450 <= iVar1)) goto LAB_00050eb8;
+      if ((iVar1 == -0x16) || ((int)(uint)DATA_VALIDATION_AND_COMPRESSION_PROCESSING_STATE <= iVar1)
+         ) goto LAB_00050eb8;
       iVar5 = iVar4 * 0x14;
       _DAT_e000ed98 = iVar1;
-      (&DAT_2000a800)[iVar5] = (&DAT_2000a800)[iVar5] & 0xe0 | (byte)_DAT_e000ed9c & 0x1f;
-      (&DAT_2000a800)[iVar5] = (&DAT_2000a800)[iVar5] & 0x1f | (byte)((_DAT_e000eda0 >> 1 & 7) << 5)
-      ;
+      (&DATA_VALIDATION_AND_COMPRESSION_BUFFER)[iVar5] =
+           (&DATA_VALIDATION_AND_COMPRESSION_BUFFER)[iVar5] & 0xe0 | (byte)_DAT_e000ed9c & 0x1f;
+      (&DATA_VALIDATION_AND_COMPRESSION_BUFFER)[iVar5] =
+           (&DATA_VALIDATION_AND_COMPRESSION_BUFFER)[iVar5] & 0x1f |
+           (byte)((_DAT_e000eda0 >> 1 & 7) << 5);
       piVar3[1] = _DAT_e000ed9c & 0xffffffe0;
       piVar3[4] = _DAT_e000eda0 & 0xffffffe0;
     }

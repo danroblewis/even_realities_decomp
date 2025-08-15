@@ -493,7 +493,7 @@ LAB_00029cf8:
     goto LAB_0002956e;
   case 4:
     if (**(char **)(param_1 + 0x1014) == '\0') {
-      DAT_20018d95 = 1;
+      KEY_EVENT_THREAD_BUFFER = 1;
       if (*param_1 != '\x01') {
         if (((DISPLAY_UI_STATE == '\0') && (iVar3 = check_work_mode_and_ancs_status(), iVar3 != 0))
            && ((iVar3 = is_panoramic_mode_active(), iVar3 != 0 ||
@@ -583,7 +583,7 @@ LAB_00029906:
     }
     goto LAB_0002956e;
   case 5:
-    DAT_20018d95 = 0;
+    KEY_EVENT_THREAD_BUFFER = 0;
     cVar2 = *param_1;
     if (cVar2 == '\x01') {
       if (param_1[0xd5] == '\f') {
@@ -616,7 +616,7 @@ LAB_00029906:
     }
     else {
 LAB_0002a062:
-      DAT_20018d95 = 0;
+      KEY_EVENT_THREAD_BUFFER = 0;
       if (((cVar2 == '\x02') && (param_1[0xd5] == '\x10')) &&
          (iVar3 = get_work_mode(), **(char **)(iVar3 + 0x100c) == '\x04')) {
         iVar3 = get_work_mode();
@@ -625,7 +625,7 @@ LAB_0002a062:
     }
     break;
   case 6:
-    DAT_20018d95 = 0;
+    KEY_EVENT_THREAD_BUFFER = 0;
     cVar2 = *param_1;
     if ((KEY_EVENT_AND_TOUCH_KEY_THREAD_DATA != '\0') || (cVar2 != '\x01')) goto LAB_0002a062;
     if (param_1[0xd5] == '\f') {

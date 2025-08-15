@@ -11,7 +11,7 @@ int check_connection_state_validity(uint *param_1)
   int iVar1;
   
   if (*param_1 != 0) {
-    iVar1 = (*param_1 & 3) - (uint)DAT_2000b458;
+    iVar1 = (*param_1 & 3) - (uint)CONNECTION_STATE_VALIDATION_BUFFER;
     if (iVar1 != 0) {
       iVar1 = 1;
     }

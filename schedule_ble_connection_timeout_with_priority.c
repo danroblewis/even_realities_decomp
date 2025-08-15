@@ -54,8 +54,10 @@ void schedule_ble_connection_timeout_with_priority
       }
       else {
         iVar10 = (-BLE_CONNECTION_TIMEOUT_SCHEDULING - 2) - param_3;
-        iVar4 = (((-1 - DAT_200069e4) - (uint)(0xfffffffe < BLE_CONNECTION_TIMEOUT_SCHEDULING)) -
-                param_4) - (uint)(-BLE_CONNECTION_TIMEOUT_SCHEDULING - 2 < param_3);
+        iVar4 = (((-1 - 
+                  BLE_CONNECTION_TIMEOUT_SCHEDULING_WITH_PRIORITY_AND_TIMING_CALCULATION_WITH_VALIDATION
+                  ) - (uint)(0xfffffffe < BLE_CONNECTION_TIMEOUT_SCHEDULING)) - param_4) -
+                (uint)(-BLE_CONNECTION_TIMEOUT_SCHEDULING - 2 < param_3);
         if (iVar4 < (int)(uint)(iVar10 == 0)) {
           iVar10 = 1;
           iVar4 = 0;
