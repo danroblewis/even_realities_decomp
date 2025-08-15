@@ -12,9 +12,10 @@ int opt3001_read_lux_value(undefined4 param_1,undefined4 param_2,undefined4 para
   undefined4 uStack_c;
   undefined4 uStack_8;
   
-  if ((DAT_20018da1 == '\0') ||
+  if ((OPT3001_AMBIENT_LIGHT_SENSOR_STATE == '\0') ||
      (uStack_c = param_2, uStack_8 = param_3,
-     iVar1 = opt3001_reg_read(0,(int)&uStack_c + 2,param_3,DAT_20018da1,param_1), iVar1 != 0)) {
+     iVar1 = opt3001_reg_read(0,(int)&uStack_c + 2,param_3,OPT3001_AMBIENT_LIGHT_SENSOR_STATE,
+                              param_1), iVar1 != 0)) {
     iVar1 = -1;
   }
   else {

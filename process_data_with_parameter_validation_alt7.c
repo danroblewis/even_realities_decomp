@@ -22,7 +22,7 @@ process_data_with_parameter_validation_alt7
   undefined4 local_28;
   char *local_24;
   
-  if (DAT_200020d4 << 0x1f < 0) {
+  if (BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x1f < 0) {
     if (param_1 == 0) {
       local_24 = "Insufficient number of arguments";
       local_28 = 2;
@@ -32,26 +32,26 @@ process_data_with_parameter_validation_alt7
     uVar2 = parse_string_until_delimiter(param_1,auStack_3c);
     iVar3 = compare_string_offsets(param_1,"id",uVar2);
     if (iVar3 == 0) {
-      uVar5 = DAT_200020d4 << 0x1c;
-      if (DAT_200020d4 << 0x1c < 0) {
+      uVar5 = BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x1c;
+      if (BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x1c < 0) {
         local_24 = "Ignoring identities stored in flash";
         local_28 = 2;
         process_and_compress_data_with_validation(&DAT_00088178,0x1080,&local_28);
       }
       else {
-        uVar4 = (*param_3)(param_4,&DAT_20002000,7);
+        uVar4 = (*param_3)(param_4,&BLUETOOTH_HCI_COMMAND_BUFFER,7);
         if (uVar4 < 7) {
           local_24 = "Invalid length ID address in storage";
           local_28 = 2;
           process_and_compress_data_with_validation(&DAT_00088178,0x1040,&local_28,uVar5 >> 0x1f);
           bVar1 = (byte)(uVar5 >> 0x18);
-          DAT_20002007 = bVar1 >> 7;
-          DAT_20002000._0_3_ = (uint3)(uVar5 >> 0x1f);
-          DAT_20002000._3_1_ = bVar1 >> 7;
+          BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE = bVar1 >> 7;
+          BLUETOOTH_HCI_COMMAND_BUFFER._0_3_ = (uint3)(uVar5 >> 0x1f);
+          BLUETOOTH_HCI_COMMAND_BUFFER._3_1_ = bVar1 >> 7;
           uRam20002004 = 0;
         }
         else {
-          DAT_20002007 = (byte)(uVar4 / 7);
+          BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE = (byte)(uVar4 / 7);
         }
       }
     }
@@ -60,14 +60,14 @@ process_data_with_parameter_validation_alt7
       if (iVar3 != 0) {
         return 0xfffffffe;
       }
-      iStack_48 = (*param_3)(param_4,&DAT_2000216c,0x1c);
+      iStack_48 = (*param_3)(param_4,&BLUETOOTH_HCI_COMMAND_PROCESSING_STATE,0x1c);
       if (iStack_48 < 0) {
         local_4c = "Failed to read device name from storage (err %zd)";
         local_50 = 3;
         process_and_compress_data_with_validation(&DAT_00088178,0x1840,&local_50,0);
       }
       else {
-        (&DAT_2000216c)[iStack_48] = 0;
+        (&BLUETOOTH_HCI_COMMAND_PROCESSING_STATE)[iStack_48] = 0;
       }
     }
   }

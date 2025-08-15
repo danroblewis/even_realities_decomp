@@ -20,7 +20,9 @@ undefined4 enter_into_long_trip(undefined4 param_1)
   undefined *local_20;
   byte *local_1c [2];
   
-  if (((DAT_20002424 == 0) || (DAT_20002428 == 0)) || (DAT_2000242c == '\x02')) {
+  if (((SENSOR_SYSTEM_STATUS_AND_CONFIGURATION == 0) ||
+      (SENSOR_CONFIGURATION_PARAMETER_STORAGE == 0)) || (SENSOR_CONFIGURATION_PARAMETERS == '\x02'))
+  {
     DEBUG_PRINT("comm para is error\n");
     uVar4 = 0xffffffff;
   }
@@ -30,21 +32,23 @@ undefined4 enter_into_long_trip(undefined4 param_1)
     local_20 = &DAT_20019ff5;
     local_1c[0] = &DAT_2001a0f5;
     set_sensor_system_status();
-    iVar1 = DAT_20002424;
-    if (DAT_2000242c != '\0') {
-      iVar1 = DAT_20002428;
+    iVar1 = SENSOR_SYSTEM_STATUS_AND_CONFIGURATION;
+    if (SENSOR_CONFIGURATION_PARAMETERS != '\0') {
+      iVar1 = SENSOR_CONFIGURATION_PARAMETER_STORAGE;
     }
-    iVar1 = process_data_with_operation_mode_and_validation(DAT_2000242c,iVar1,&local_20,&local_24);
+    iVar1 = process_data_with_operation_mode_and_validation
+                      (SENSOR_CONFIGURATION_PARAMETERS,iVar1,&local_20,&local_24);
     if (iVar1 == 0) {
       iVar1 = route_command_to_handler
-                        (DAT_2000242c,&DAT_20019ff5,local_24 & 0xff,local_1c,&local_28,param_1);
+                        (SENSOR_CONFIGURATION_PARAMETERS,&DAT_20019ff5,local_24 & 0xff,local_1c,
+                         &local_28,param_1);
       if (iVar1 == 0) {
-        iVar1 = DAT_20002424;
-        if (DAT_2000242c != '\0') {
-          iVar1 = DAT_20002428;
+        iVar1 = SENSOR_SYSTEM_STATUS_AND_CONFIGURATION;
+        if (SENSOR_CONFIGURATION_PARAMETERS != '\0') {
+          iVar1 = SENSOR_CONFIGURATION_PARAMETER_STORAGE;
         }
-        iVar1 = transmit_sensor_data_with_validation(DAT_2000242c,iVar1,local_1c[0],local_28 & 0xff)
-        ;
+        iVar1 = transmit_sensor_data_with_validation
+                          (SENSOR_CONFIGURATION_PARAMETERS,iVar1,local_1c[0],local_28 & 0xff);
         if (iVar1 == 0) {
           reset_sensor_system_status();
           if (local_1c[0][9] == 0x80) {
@@ -52,11 +56,12 @@ undefined4 enter_into_long_trip(undefined4 param_1)
             local_1c[0][9] = 0;
             set_sensor_system_status();
             transmit_sensor_data_with_validation
-                      (DAT_2000242c,DAT_20002424,local_1c[0],local_28 & 0xff);
+                      (SENSOR_CONFIGURATION_PARAMETERS,SENSOR_SYSTEM_STATUS_AND_CONFIGURATION,
+                       local_1c[0],local_28 & 0xff);
             reset_sensor_system_status();
           }
           pbVar3 = local_1c[0];
-          if (DAT_2000242c != '\0') {
+          if (SENSOR_CONFIGURATION_PARAMETERS != '\0') {
             pbVar3 = local_1c[0] + 4;
           }
           uVar2 = (uint)*pbVar3;
@@ -117,7 +122,7 @@ LAB_0003325a:
               } while( true );
             }
             if (pbVar3[2] == 2) {
-              DAT_20018d94 = 1;
+              POWER_MANAGEMENT_STATE = 1;
               set_sensor_enable_state(1);
               calculate_and_store_timestamp_with_offset(10000);
             }

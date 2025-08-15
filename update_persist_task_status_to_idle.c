@@ -8,10 +8,10 @@
 void update_persist_task_status_to_idle(int param_1)
 
 {
-  while (DAT_20018d9c != '\0') {
+  while (PERSISTENT_TASK_STATUS_MANAGER != '\0') {
     short_timing_delay();
   }
-  DAT_20018d9c = 1;
+  PERSISTENT_TASK_STATUS_MANAGER = 1;
   if ((*(char *)(param_1 + 0xd5) != '\0') || (*(char *)(*(int *)(param_1 + 0x1054) + 4) != '\x01'))
   {
     if ((*(char *)(param_1 + 0xd5) != '\0') && (*(char *)(param_1 + 0xd5) != '\x01')) {
@@ -31,7 +31,7 @@ void update_persist_task_status_to_idle(int param_1)
     *(undefined1 *)(param_1 + 0xd5) = 0;
     *(undefined1 *)(*(int *)(param_1 + 0x1054) + 4) = 1;
   }
-  DAT_20018d9c = 0;
+  PERSISTENT_TASK_STATUS_MANAGER = 0;
   return;
 }
 

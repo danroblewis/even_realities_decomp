@@ -12,23 +12,23 @@ uint update_temp_task_status(int param_1,uint param_2,uint param_3)
   uint uVar1;
   undefined1 *puVar2;
   
-  while (DAT_20018d9c != '\0') {
+  while (PERSISTENT_TASK_STATUS_MANAGER != '\0') {
     short_timing_delay();
   }
-  DAT_20018d9c = 1;
+  PERSISTENT_TASK_STATUS_MANAGER = 1;
   if (**(uint **)(param_1 + 0x1054) == param_2) {
     uVar1 = (uint)(byte)(*(uint **)(param_1 + 0x1054))[1];
     if (uVar1 == 1) {
-      DAT_20018d9c = 0;
+      PERSISTENT_TASK_STATUS_MANAGER = 0;
       return param_3;
     }
     if (uVar1 == param_3) {
-      DAT_20018d9c = 0;
+      PERSISTENT_TASK_STATUS_MANAGER = 0;
       return param_3;
     }
   }
   if (*(byte *)(param_1 + 0xd5) == param_2) {
-    DAT_20018d9c = 0;
+    PERSISTENT_TASK_STATUS_MANAGER = 0;
     return param_3;
   }
   if ((*(char *)(param_1 + 0xd5) == '\0') || (*(char *)(param_1 + 0xd5) == '\x01')) {
@@ -47,7 +47,7 @@ LAB_0002c08a:
     display_close_screen(*(undefined1 *)(param_1 + 0xd5));
     if (param_3 != 2) goto LAB_0002c08a;
     if ((param_2 & 0xfffffffd) != 4) {
-      DAT_20018d9c = 0;
+      PERSISTENT_TASK_STATUS_MANAGER = 0;
       return 2;
     }
 LAB_0002c052:
@@ -68,7 +68,7 @@ LAB_0002c05a:
   puVar2[2] = 0;
   puVar2[3] = 0;
   *(undefined1 *)(*(int *)(param_1 + 0x1054) + 4) = 1;
-  DAT_20018d9c = 0;
+  PERSISTENT_TASK_STATUS_MANAGER = 0;
   return param_3;
 }
 

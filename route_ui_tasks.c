@@ -64,8 +64,8 @@ route_ui_tasks(int ui_context_ptr,int screen_id,undefined4 task_param,uint opera
       else {
         handle_heartbeat();
       }
-      DAT_200033d3 = 0xff;
-      DAT_200033d2 = 0xff;
+      UI_TASK_ROUTING_AND_STATE_MANAGEMENT = 0xff;
+      UI_TASK_ROUTING_STATE = 0xff;
       if (DAT_2001b80f == '\0') {
         gui_screen_clear();
       }
@@ -74,20 +74,20 @@ route_ui_tasks(int ui_context_ptr,int screen_id,undefined4 task_param,uint opera
         DAT_2001b80f = '\0';
       }
 LAB_0003606c:
-      DAT_20018d9f = 0;
+      MESSAGE_CONFIRMATION_FLAG = 0;
     }
     else {
       if (operation_mode == 0) {
         return 0;
       }
-      if (DAT_200033d3 == 0xff) {
+      if (UI_TASK_ROUTING_AND_STATE_MANAGEMENT == 0xff) {
         set_work_mode_parameter(ui_context_ptr + 0xb90);
         set_work_mode_flag_bit_1();
         gui_screen_clear();
       }
       uVar15 = get_system_initialization_flag();
       uVar13 = calculate_next_timeout_message_state();
-      if ((DAT_200033d3 == uVar15) && (DAT_200033d2 == uVar13)) {
+      if ((UI_TASK_ROUTING_AND_STATE_MANAGEMENT == uVar15) && (UI_TASK_ROUTING_STATE == uVar13)) {
         return 0;
       }
       uVar5 = pull_message(&local_24);
@@ -98,8 +98,8 @@ LAB_0003606c:
         else {
           handle_heartbeat();
         }
-        DAT_200033d2 = 0xff;
-        DAT_200033d3 = 0xff;
+        UI_TASK_ROUTING_STATE = 0xff;
+        UI_TASK_ROUTING_AND_STATE_MANAGEMENT = 0xff;
         return 0;
       }
       if (*(char *)(local_24 + 0xf) == '\0') {
@@ -112,14 +112,14 @@ LAB_0003606c:
             DAT_2001b80e = '\0';
           }
           render_ui_data_entry_display(uVar13,local_24);
-          DAT_200033d3 = (byte)uVar15;
-          DAT_200033d2 = (byte)uVar13;
+          UI_TASK_ROUTING_AND_STATE_MANAGEMENT = (byte)uVar15;
+          UI_TASK_ROUTING_STATE = (byte)uVar13;
           goto LAB_0003606c;
         }
         pcVar6 = "message has not confirm!\r\n";
       }
-      DAT_200033d3 = 0xff;
-      DAT_200033d2 = 0xff;
+      UI_TASK_ROUTING_AND_STATE_MANAGEMENT = 0xff;
+      UI_TASK_ROUTING_STATE = 0xff;
       if (IS_DEBUG == 0) {
         DEBUG_PRINT(pcVar6);
       }
@@ -298,8 +298,9 @@ LAB_0003606c:
     y_offset = iVar11 + 0xef;
     set_work_mode_parameter(ui_context_ptr + 0xb90);
     set_work_mode_flag_bit_1();
-    uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
-    switch(DAT_20004bb8) {
+    uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                      HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
+    switch(UI_TASK_ROUTING_STATE_MANAGEMENT) {
     case 0:
       if (LOG_LEVEL < 3) {
         if (operation_mode != 2) goto LAB_0003fbee;
@@ -314,7 +315,7 @@ LAB_0003606c:
         if (operation_mode != 2) {
 LAB_0003fbee:
           if (operation_mode == 0) {
-            if (DAT_20004bbe == '\x01') {
+            if (UI_TASK_ROUTING_AND_EXECUTION_STATE == '\x01') {
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT(&LAB_000aa0f4_1,"ui_navigation_task");
@@ -329,65 +330,75 @@ LAB_0003fbee:
               goto LAB_0003fc32;
             }
             pcVar6 = (char *)get_work_mode();
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
             if (*pcVar6 != '\x01') goto switchD_0003f438_caseD_4;
 LAB_0003f586:
-            if (DAT_20004bbe != '\x01') goto LAB_0003f58e;
+            if (UI_TASK_ROUTING_AND_EXECUTION_STATE != '\x01') goto LAB_0003f58e;
 LAB_0003fc46:
-            if ((0 < SYNC_PACKET_COUNTER) && (SYNC_PACKET_COUNTER = 0, DAT_20004be5 < 0x14)) {
-              DAT_20004be5 = 0x13;
+            if ((0 < SYNC_PACKET_COUNTER) && (SYNC_PACKET_COUNTER = 0, UI_TASK_ROUTING_STATE < 0x14)
+               ) {
+              UI_TASK_ROUTING_STATE = 0x13;
             }
             uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
             uVar21 = subtract_64bit_with_borrow_handling
-                               ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,
-                                DAT_20004bec);
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                               ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),
+                                HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY,
+                                HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
             if ((int)((ulonglong)uVar21 >> 0x20) < (int)(uint)((uint)uVar21 < 0x3e9))
             goto switchD_0003f438_caseD_4;
             uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
-            DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-            DAT_20004be8 = (undefined4)uVar22;
-            DAT_20004be5 = DAT_20004be5 - 1;
+            HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
+            UI_TASK_ROUTING_STATE = UI_TASK_ROUTING_STATE - 1;
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): DECETED TIMEOUT ...... _tpm_thread_prv_data.sync_cnt = %d\n",
-                            "ui_navigation_task",(uint)DAT_20004be5);
-                uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                            "ui_navigation_task",(uint)UI_TASK_ROUTING_STATE);
+                uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
               }
               else {
                 handle_heartbeat();
-                uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
               }
             }
-            DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-            DAT_20004be8 = (undefined4)uVar22;
-            if (DAT_20004be5 != 0) goto switchD_0003f438_caseD_4;
+            HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
+            if (UI_TASK_ROUTING_STATE != 0) goto switchD_0003f438_caseD_4;
             if (1 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): There is a disconnection between the AR Glasses and the Bluetooth application!\n"
                             ,"ui_navigation_task");
-                uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
               }
               else {
                 handle_heartbeat();
-                uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
               }
             }
-            DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-            DAT_20004be8 = (undefined4)uVar22;
+            HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): bluetooth connect is break,Send Stop Navigation command to slave.\n"
                             ,"ui_navigation_task");
-                uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
               }
               else {
                 handle_heartbeat();
-                uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
               }
             }
-            DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-            DAT_20004be8 = (undefined4)uVar22;
+            HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
             local_34 = CONCAT22(local_34._2_2_,0x106);
             uVar12 = get_work_mode();
             iVar11 = sync_to_slave(uVar12,6,&local_34,2);
@@ -398,7 +409,7 @@ LAB_0003fc46:
             if (*pcVar6 == '\x01') {
               enqueue_message_to_queue_with_work_mode_check();
             }
-            if ((DAT_20004bbe == '\0') &&
+            if ((UI_TASK_ROUTING_AND_EXECUTION_STATE == '\0') &&
                (iVar7 = get_work_mode(), **(char **)(iVar7 + 0x1000) == '\x01')) {
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -409,19 +420,19 @@ LAB_0003fc46:
                 }
               }
               clear_memory_buffer_0x38();
-              DAT_20004bbe = '\x01';
+              UI_TASK_ROUTING_AND_EXECUTION_STATE = '\x01';
               uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
-              DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-              DAT_20004be8 = (undefined4)uVar22;
-              DAT_20004be5 = 10;
+              HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
+              UI_TASK_ROUTING_STATE = 10;
               gui_screen_clear();
               reset_animation_counters();
               render_ui_text_alt_based_on_system_mode();
             }
-            if (((DAT_20004bbe == '\x01') && (OVERVIEW_MAP_ACTIVE == '\x01')) &&
-               (uVar15 = (uint)PANORAMIC_MAP_ACTIVE, PANORAMIC_MAP_ACTIVE == 1)) {
+            if (((UI_TASK_ROUTING_AND_EXECUTION_STATE == '\x01') && (OVERVIEW_MAP_ACTIVE == '\x01'))
+               && (uVar15 = (uint)PANORAMIC_MAP_ACTIVE, PANORAMIC_MAP_ACTIVE == 1)) {
               DAT_2001ba2c = 0;
-              DAT_20004bb8 = uVar15;
+              UI_TASK_ROUTING_STATE_MANAGEMENT = uVar15;
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT(&LAB_000aa138,"ui_navigation_task");
@@ -431,25 +442,28 @@ LAB_0003fc46:
                 }
               }
               gui_screen_clear();
-              DAT_2001ba2d = 0;
-              DAT_20004be5 = 10;
+              NAVIGATION_MAP_DISPLAY_STATE_DATA = 0;
+              UI_TASK_ROUTING_STATE = 10;
               uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
-              DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-              DAT_20004be8 = (undefined4)uVar22;
+              HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
               navigation_overview_map_display(iVar11,y_offset);
             }
 LAB_0003fc32:
             pcVar6 = (char *)get_work_mode();
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
             if ((*pcVar6 != '\x01') ||
-               (uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8), DAT_20004bbe != '\x01'))
-            goto switchD_0003f438_caseD_4;
+               (uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                  HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY),
+               UI_TASK_ROUTING_AND_EXECUTION_STATE != '\x01')) goto switchD_0003f438_caseD_4;
             goto LAB_0003fc46;
           }
           pcVar6 = (char *)get_work_mode();
           if (*pcVar6 == '\x01') goto LAB_0003f586;
 LAB_0003f58e:
-          uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+          uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
 joined_r0x0003fa68:
           if (operation_mode != 5) goto switchD_0003f438_caseD_4;
           if (2 < LOG_LEVEL) {
@@ -484,8 +498,8 @@ joined_r0x0003fa68:
             uVar22 = get_work_mode();
             uVar12 = (undefined4)((ulonglong)uVar22 >> 0x20);
             if (*(char *)(*(int *)((int)uVar22 + 0x1000) + 6) == '\x01') {
-              if (DAT_20004be5 < 0x14) {
-                DAT_20004be5 = 0x13;
+              if (UI_TASK_ROUTING_STATE < 0x14) {
+                UI_TASK_ROUTING_STATE = 0x13;
               }
               uVar22 = get_work_mode();
               uVar12 = (undefined4)((ulonglong)uVar22 >> 0x20);
@@ -493,20 +507,21 @@ joined_r0x0003fa68:
             }
           }
           resource_mutex_acquire(&DAT_20007b3c,uVar12,0xffffffff,0xffffffff);
-          DAT_20004bcc = *(byte *)(iVar11 + 0x19d);
+          UI_TASK_ROUTING_PARAMETER = *(byte *)(iVar11 + 0x19d);
           DAT_20004be0 = *(char *)(iVar11 + 0xf6);
           mutex_unlock(&DAT_20007b3c);
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): arrived status = %d,  nav->imu_action_status = %d\n",
-                          "ui_navigation_task",(uint)DAT_20004bcc,(uint)*(byte *)(iVar11 + 0xf6));
+                          "ui_navigation_task",(uint)UI_TASK_ROUTING_PARAMETER,
+                          (uint)*(byte *)(iVar11 + 0xf6));
             }
             else {
               handle_heartbeat("%s(): arrived status = %d,  nav->imu_action_status = %d\n",
-                               "ui_navigation_task",DAT_20004bcc);
+                               "ui_navigation_task",UI_TASK_ROUTING_PARAMETER);
             }
           }
-          if (DAT_20004bcc == 2) {
+          if (UI_TASK_ROUTING_PARAMETER == 2) {
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): received arrived complte command\n","ui_navigation_task");
@@ -515,7 +530,7 @@ joined_r0x0003fa68:
                 handle_heartbeat();
               }
             }
-            DAT_20004bb8 = 3;
+            UI_TASK_ROUTING_STATE_MANAGEMENT = 3;
             gui_screen_clear();
             y_offset = get_system_byte_1_alt();
             if (y_offset == 6) {
@@ -547,7 +562,7 @@ joined_r0x0003fa68:
             DAT_20004bd4 = 0;
           }
           else {
-            if (DAT_20004bcc == 1) {
+            if (UI_TASK_ROUTING_PARAMETER == 1) {
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): received arrived command,draw arrived page\n",
@@ -621,7 +636,8 @@ LAB_0003f896:
                   }
                 }
                 navigation_overview_map_display(iVar11,y_offset);
-                uVar22 = CONCAT44(DAT_20004bdc,DAT_20004bd8);
+                uVar22 = CONCAT44(UI_TASK_ROUTING_AND_EXECUTION_CONTROL,
+                                  UI_TASK_ROUTING_CONFIGURATION);
                 goto LAB_0003f794;
               }
               if (2 < LOG_LEVEL) {
@@ -630,13 +646,14 @@ LAB_0003f896:
               }
             }
             navigation_panoramic_map_display(iVar11,y_offset);
-            uVar22 = CONCAT44(DAT_20004bdc,DAT_20004bd8);
+            uVar22 = CONCAT44(UI_TASK_ROUTING_AND_EXECUTION_CONTROL,UI_TASK_ROUTING_CONFIGURATION);
           }
 LAB_0003f794:
-          DAT_20004bdc = (int)((ulonglong)uVar22 >> 0x20);
-          DAT_20004bd8 = (uint)uVar22;
+          UI_TASK_ROUTING_AND_EXECUTION_CONTROL = (int)((ulonglong)uVar22 >> 0x20);
+          UI_TASK_ROUTING_CONFIGURATION = (uint)uVar22;
           pcVar6 = (char *)get_work_mode();
-          uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+          uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           if (*pcVar6 != '\x01') goto switchD_0003f438_caseD_4;
         }
         else {
@@ -646,7 +663,7 @@ LAB_0003f794:
             local_2c = operation_mode;
             uVar12 = get_work_mode_timestamp();
             unix_timestamp_to_datetime(uVar12,&local_34);
-            uVar22 = CONCAT44(DAT_20004bdc,DAT_20004bd8);
+            uVar22 = CONCAT44(UI_TASK_ROUTING_AND_EXECUTION_CONTROL,UI_TASK_ROUTING_CONFIGURATION);
             sVar3 = local_30._2_2_;
             uVar4 = (ushort)local_2c;
             if (((uint)DAT_20004bc8 != (local_2c & 0xffff)) || (local_30._2_2_ != DAT_20004bc6)) {
@@ -665,97 +682,112 @@ LAB_0003f994:
               iVar8 = get_ui_y_offset();
               EVEN_DASHBOARD_CLOCK_32x_TTF
                         (uVar12,uVar14,y_offset + 2,iVar7 + 0x4c,iVar8 + 0x1d,3,iVar11);
-              uVar22 = CONCAT44(DAT_20004bdc,DAT_20004bd8);
+              uVar22 = CONCAT44(UI_TASK_ROUTING_AND_EXECUTION_CONTROL,UI_TASK_ROUTING_CONFIGURATION)
+              ;
             }
             goto LAB_0003f794;
           }
           pcVar6 = (char *)get_work_mode();
-          uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+          uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           if (*pcVar6 != '\x01') goto joined_r0x0003fa68;
         }
-        if ((0 < SYNC_PACKET_COUNTER) && (SYNC_PACKET_COUNTER = 0, DAT_20004be5 < 0x14)) {
-          DAT_20004be5 = 0x13;
+        if ((0 < SYNC_PACKET_COUNTER) && (SYNC_PACKET_COUNTER = 0, UI_TASK_ROUTING_STATE < 0x14)) {
+          UI_TASK_ROUTING_STATE = 0x13;
         }
         uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
         uVar21 = subtract_64bit_with_borrow_handling
-                           ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,DAT_20004bec);
-        uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                           ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),
+                            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY,
+                            HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY);
+        uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                          HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
         if ((int)((ulonglong)uVar21 >> 0x20) < (int)(uint)((uint)uVar21 < 0x3e9))
         goto switchD_0003f438_caseD_4;
         uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
-        DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-        DAT_20004be8 = (undefined4)uVar22;
-        DAT_20004be5 = DAT_20004be5 - 1;
+        HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+        HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
+        UI_TASK_ROUTING_STATE = UI_TASK_ROUTING_STATE - 1;
         if (2 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
             DEBUG_PRINT("%s(): DECETED TIMEOUT ...... _tpm_thread_prv_data.sync_cnt = %d\n",
-                        "ui_navigation_task",(uint)DAT_20004be5);
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+                        "ui_navigation_task",(uint)UI_TASK_ROUTING_STATE);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           }
           else {
             handle_heartbeat();
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           }
         }
-        DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-        DAT_20004be8 = (undefined4)uVar22;
-        if (DAT_20004be5 != 0) goto switchD_0003f438_caseD_4;
+        HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+        HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
+        if (UI_TASK_ROUTING_STATE != 0) goto switchD_0003f438_caseD_4;
         if (1 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
             DEBUG_PRINT("%s(): There is a disconnection between the AR Glasses and the Bluetooth application!\n"
                         ,"ui_navigation_task");
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           }
           else {
             handle_heartbeat();
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           }
         }
-        DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-        DAT_20004be8 = (undefined4)uVar22;
+        HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+        HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
         if (2 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
             DEBUG_PRINT("%s(): bluetooth connect is break,Send Stop Navigation command to slave.\n",
                         "ui_navigation_task");
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           }
           else {
             handle_heartbeat();
-            uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+            uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                              HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           }
         }
-        DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-        DAT_20004be8 = (undefined4)uVar22;
+        HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+        HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
         local_34 = CONCAT22(local_34._2_2_,0x106);
         uVar12 = get_work_mode();
         iVar11 = sync_to_slave(uVar12,6,&local_34,2);
 joined_r0x0003f84c:
         if (4999 < iVar11) {
-          uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+          uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
           if (0 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): SYNC TO Slave failed...,don\'t exec Navigation exit action,master auto exit...\n"
                           ,"ui_navigation_task");
-              uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+              uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
             }
             else {
               handle_heartbeat();
-              uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+              uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                                HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
             }
           }
           goto switchD_0003f438_caseD_4;
         }
 LAB_0003f5aa:
-        DAT_20004bb8 = 2;
+        UI_TASK_ROUTING_STATE_MANAGEMENT = 2;
         uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
-        DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-        DAT_20004be8 = (undefined4)uVar22;
+        HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+        HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
         gui_screen_clear();
         uVar12 = get_ui_x_offset();
         iVar11 = get_ui_y_offset();
         gui_bmp_bitmap_draw(0x3f,uVar12,iVar11 + 0x3a,0,0,0);
         render_ui_text_based_on_system_mode();
-        uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+        uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                          HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
         goto switchD_0003f438_caseD_4;
       }
       break;
@@ -771,7 +803,9 @@ LAB_0003f5aa:
       }
       uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
       uVar22 = subtract_64bit_with_borrow_handling
-                         ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,DAT_20004bec);
+                         ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),
+                          HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY,
+                          HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY);
       if ((int)(uint)((uint)uVar22 < 0x1f41) <= (int)((ulonglong)uVar22 >> 0x20)) {
         if (1 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
@@ -783,13 +817,14 @@ LAB_0003f5aa:
           }
         }
         animate_framebuffer_with_pattern();
-        fill_memory_buffer(&DAT_20004bb8,0,0x38);
+        fill_memory_buffer(&UI_TASK_ROUTING_STATE_MANAGEMENT,0,0x38);
         fill_memory_buffer(&display_buffer,0,0x1210);
-        DAT_2001ba2d = 0;
+        NAVIGATION_MAP_DISPLAY_STATE_DATA = 0;
         iVar11 = get_work_mode();
         **(undefined1 **)(iVar11 + 0x1000) = 0;
       }
-      uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+      uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                        HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
       if (operation_mode != 2) goto switchD_0003f438_caseD_4;
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -807,9 +842,12 @@ LAB_0003f5aa:
         }
         uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
         iVar11 = (int)((ulonglong)uVar22 >> 0x20);
-        y_offset = DAT_20004bd4 + DAT_20004bdc + (uint)CARRY4(DAT_20004bd0,DAT_20004bd8);
-        bVar20 = DAT_20004bd0 + DAT_20004bd8 < (uint)uVar22;
-        uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+        y_offset = DAT_20004bd4 +
+                   UI_TASK_ROUTING_AND_EXECUTION_CONTROL +
+                   (uint)CARRY4(DAT_20004bd0,UI_TASK_ROUTING_CONFIGURATION);
+        bVar20 = DAT_20004bd0 + UI_TASK_ROUTING_CONFIGURATION < (uint)uVar22;
+        uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                          HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
         if ((int)((y_offset - iVar11) - (uint)bVar20) < 0 !=
             (SBORROW4(y_offset,iVar11) != SBORROW4(y_offset - iVar11,(uint)bVar20))) {
           if (2 < LOG_LEVEL) {
@@ -823,8 +861,9 @@ LAB_0003f5aa:
           iVar11 = get_work_mode();
           **(undefined1 **)(iVar11 + 0x1000) = 0;
           animate_framebuffer_with_pattern();
-          fill_memory_buffer(&DAT_20004bb8,0,0x38);
-          uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+          fill_memory_buffer(&UI_TASK_ROUTING_STATE_MANAGEMENT,0,0x38);
+          uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                            HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
         }
         goto switchD_0003f438_caseD_4;
       }
@@ -834,13 +873,14 @@ LAB_0003f5aa:
     }
     animate_framebuffer_with_pattern();
 LAB_0003f47e:
-    fill_memory_buffer(&DAT_20004bb8,0,0x38);
+    fill_memory_buffer(&UI_TASK_ROUTING_STATE_MANAGEMENT,0,0x38);
     fill_memory_buffer(&display_buffer,0,0x1210);
-    DAT_2001ba2d = 0;
-    uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
+    NAVIGATION_MAP_DISPLAY_STATE_DATA = 0;
+    uVar22 = CONCAT44(HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY,
+                      HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY);
 switchD_0003f438_caseD_4:
-    DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
-    DAT_20004be8 = (undefined4)uVar22;
+    HARDWARE_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)((ulonglong)uVar22 >> 0x20);
+    HARDWARE_INTERRUPT_CONTROL_REGISTERS_ARRAY = (undefined4)uVar22;
     return 0;
   case 0xb:
     iVar11 = get_work_mode(iVar11,task_param);
@@ -870,7 +910,7 @@ switchD_0003f438_caseD_4:
         configure_advanced_utf_drawing();
         gui_screen_clear();
         reset_animation_counters();
-        fill_memory_buffer(&DAT_2000f6ee,0,0x10);
+        fill_memory_buffer(&UI_TASK_ROUTING_STATE,0,0x10);
         y_offset = 0;
         DAT_2000a054 = 0x80;
         DAT_2000a040 = 0;
@@ -985,7 +1025,7 @@ LAB_00040162:
     }
     if (operation_mode != 1) {
       if (operation_mode == 0) {
-        if (DAT_2000f6ee == '\0') {
+        if (UI_TASK_ROUTING_STATE == '\0') {
           uVar12 = get_ui_x_offset();
           iVar11 = get_ui_y_offset();
           gui_bmp_dynamic_bitmap_draw(1,uVar12,iVar11 + 0x36,0,0,0,0);
@@ -1029,11 +1069,11 @@ LAB_00040162:
     }
     fill_memory_buffer(&DAT_2001cc3e,0,400);
     resource_mutex_acquire(&DAT_20007b3c,extraout_r1,0xffffffff,0xffffffff);
-    DAT_2000f6ee = *(char *)(iVar11 + 0xf1);
+    UI_TASK_ROUTING_STATE = *(char *)(iVar11 + 0xf1);
     bVar1 = *(byte *)(iVar11 + 0xf2);
     memcpy(&DAT_2001cc3e,iVar11 + 0xf5,400);
     mutex_unlock(&DAT_20007b3c);
-    if (DAT_2000f6ee == '\x01') {
+    if (UI_TASK_ROUTING_STATE == '\x01') {
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): suspend_en is 1, reflash suspend icon\n","ui_translate_task");
@@ -1121,7 +1161,7 @@ LAB_0004027a:
       iVar7 = get_ui_x_offset();
       iVar8 = get_ui_y_offset();
       _clean_fb_data(y_offset + 0xb90,0,iVar11 + 0x58,uVar12,iVar7 + 0x240,iVar8 + 0x88);
-      if (DAT_2000f6ee == '\0') {
+      if (UI_TASK_ROUTING_STATE == '\0') {
         uVar12 = get_ui_x_offset();
         iVar11 = get_ui_y_offset();
         gui_bmp_dynamic_bitmap_draw(1,uVar12,iVar11 + 0x36,0,0,0,0);
@@ -1163,7 +1203,7 @@ LAB_0004027a:
         iVar11 = 3;
       }
       set_work_mode_flag_bit_1();
-      if (DAT_2000f6ee == '\0') {
+      if (UI_TASK_ROUTING_STATE == '\0') {
         uVar12 = get_ui_x_offset();
         iVar11 = get_ui_y_offset();
         gui_bmp_dynamic_bitmap_draw(1,uVar12,iVar11 + 0x36,0,0,0,0);

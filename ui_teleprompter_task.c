@@ -37,8 +37,8 @@ undefined4 ui_teleprompter_task(int param_1,undefined4 param_2,int param_3)
   param_1 = param_1 + 0x24;
   set_work_mode_parameter(param_1);
   set_work_mode_flag_bit_1();
-  uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
-  switch(DAT_20004988) {
+  uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
+  switch(UI_TELEPROMPTER_TASK_BUFFER) {
   case 0:
     if (LOG_LEVEL < 3) {
       if (param_3 != 2) goto LAB_0003cfee;
@@ -64,12 +64,16 @@ undefined4 ui_teleprompter_task(int param_1,undefined4 param_2,int param_3)
           }
         }
 LAB_0003cfee:
-        uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+        uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY
+                         );
         if (param_3 == 1) {
           iVar8 = get_work_mode();
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
           if ((*(char *)(*(int *)(iVar8 + 0xffc) + 1) == '\x01') &&
-             (uVar19 = CONCAT44(DAT_20004994,DAT_20004990), *(char *)(iVar5 + 0xf0) == '\x01')) {
+             (uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                                SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY),
+             *(char *)(iVar5 + 0xf0) == '\x01')) {
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): setp1: received teleprompter command.\n","ui_teleprompter_task");
@@ -92,20 +96,20 @@ LAB_0003cfee:
               }
             }
             gui_screen_clear();
-            fill_memory_buffer(&DAT_20004988,0,0x230);
-            DAT_20004988 = 1;
+            fill_memory_buffer(&UI_TELEPROMPTER_TASK_BUFFER,0,0x230);
+            UI_TELEPROMPTER_TASK_BUFFER = 1;
             uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-            DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-            DAT_20004990 = (undefined4)uVar19;
+            SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
             uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-            DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
-            DAT_20004998 = (int)uVar19;
-            DAT_200049a0 = 0;
-            DAT_20004989 = '\n';
-            DAT_200049ad = *(undefined1 *)(iVar5 + 0xfb);
-            DAT_20009ff0 = 0;
-            DAT_20009fec = 0;
-            DAT_20009fe8 = 0;
+            UI_TELEPROMPTER_TASK_STATE_AND_DATA = (undefined4)((ulonglong)uVar19 >> 0x20);
+            UI_TELEPROMPTER_TASK_STATE_DATA = (int)uVar19;
+            UI_TELEPROMPTER_TASK_STATUS_FLAGS = 0;
+            UI_TELEPROMPTER_TASK_EXTENDED_STATUS = '\n';
+            UI_TELEPROMPTER_TASK_CONTROL_FLAGS = *(undefined1 *)(iVar5 + 0xfb);
+            TELEPROMPTER_UI_CONTROL_FLAGS = 0;
+            TELEPROMPTER_UI_STATE_FLAGS = 0;
+            UI_TELEPROMPTER_TASK_EXTENDED_STATE = 0;
             DAT_20009fe4 = 0;
             DAT_20009fe0 = 0;
             DAT_20009fdc = 0;
@@ -114,20 +118,21 @@ LAB_0003cfee:
             memcpy(&DAT_200049b8,iVar5 + 0x106,0x200);
             uVar1 = *(undefined1 *)(iVar5 + 0xfc);
             uVar4 = *(undefined2 *)(iVar5 + 0xfd);
-            DAT_200049ac = *(byte *)(iVar5 + 0xef);
-            DAT_200049ad = *(byte *)(iVar5 + 0xfb);
+            UI_TELEPROMPTER_STATE_DATA = *(byte *)(iVar5 + 0xef);
+            UI_TELEPROMPTER_TASK_CONTROL_FLAGS = *(byte *)(iVar5 + 0xfb);
             mutex_unlock(&DAT_20007b3c);
             uVar19 = calculate_ble_connection_timing_with_scaling_alt();
             uVar14 = *(char *)(iVar5 + 0xfb) * 1000;
             uVar6 = uVar14 + (uint)uVar19;
-            DAT_200049b0 = uVar6 - 0x15e;
-            DAT_200049b4 = (int)((ulonglong)uVar19 >> 0x20) +
-                           ((int)uVar14 >> 0x1f) + (uint)CARRY4(uVar14,(uint)uVar19) + -1 +
-                           (uint)(0x15d < uVar6);
+            TELEPROMPTER_UI_TASK_PARAMETER_1 = uVar6 - 0x15e;
+            TELEPROMPTER_UI_TASK_PARAMETER_2 =
+                 (int)((ulonglong)uVar19 >> 0x20) +
+                 ((int)uVar14 >> 0x1f) + (uint)CARRY4(uVar14,(uint)uVar19) + -1 +
+                 (uint)(0x15d < uVar6);
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): teleprompter work mode = %d\n","ui_teleprompter_task",
-                            (uint)DAT_200049ac);
+                            (uint)UI_TELEPROMPTER_STATE_DATA);
               }
               else {
                 handle_heartbeat();
@@ -190,7 +195,8 @@ LAB_0003cfee:
             set_work_mode_flag_bit_1();
             calculate_ble_schedule_timing(0x1334,0);
             reset_animation_counters();
-            uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+            uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                              SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
           }
         }
         goto switchD_0003cf6c_caseD_4;
@@ -198,8 +204,8 @@ LAB_0003cfee:
     }
 LAB_0003cf98:
     gui_screen_clear();
-    fill_memory_buffer(&DAT_20004988,0,0x230);
-    uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+    fill_memory_buffer(&UI_TELEPROMPTER_TASK_BUFFER,0,0x230);
+    uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
     goto switchD_0003cf6c_caseD_4;
   case 1:
     if (param_3 == 2) goto LAB_0003cf98;
@@ -214,24 +220,24 @@ LAB_0003cf98:
       }
       if (*(byte *)(iVar5 + 0xf9) - 2 < 2) {
         uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-        DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-        DAT_20004990 = (undefined4)uVar19;
-        DAT_20004988 = 2;
+        SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+        SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
+        UI_TELEPROMPTER_TASK_BUFFER = 2;
         uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-        DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
-        DAT_20004998 = (int)uVar19;
+        UI_TELEPROMPTER_TASK_STATE_AND_DATA = (undefined4)((ulonglong)uVar19 >> 0x20);
+        UI_TELEPROMPTER_TASK_STATE_DATA = (int)uVar19;
         uVar9 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         iVar8 = get_ui_x_offset();
         iVar11 = get_ui_y_offset();
         _clean_fb_data(param_1,0,uVar9,iVar5 + 0x36,iVar8 + 0x24,iVar11 + 0x52);
-        if (DAT_200049ac == 1) {
+        if (UI_TELEPROMPTER_STATE_DATA == 1) {
           uVar9 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           uVar10 = 0x1a;
         }
         else {
-          if (DAT_200049ac != 0) goto LAB_0003d394;
+          if (UI_TELEPROMPTER_STATE_DATA != 0) goto LAB_0003d394;
           uVar9 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           uVar10 = 0x19;
@@ -240,14 +246,15 @@ LAB_0003cf98:
       }
 LAB_0003d394:
       pcVar7 = (char *)get_work_mode();
-      uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+      uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
       if (*pcVar7 == '\x01') {
         enqueue_message_to_queue_with_work_mode_check();
-        uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+        uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY
+                         );
       }
       goto switchD_0003cf6c_caseD_4;
     }
-    uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+    uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
     if (param_3 != 0) goto switchD_0003cf6c_caseD_4;
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
@@ -261,9 +268,11 @@ LAB_0003d394:
     uVar19 = calculate_ble_connection_timing_with_scaling_alt();
     iVar5 = (int)((ulonglong)uVar19 >> 0x20);
     uVar6 = (uint)uVar19;
-    if ((int)((iVar5 - DAT_200049b4) - (uint)(uVar6 < DAT_200049b0)) < 0 ==
-        (SBORROW4(iVar5,DAT_200049b4) != SBORROW4(iVar5 - DAT_200049b4,(uint)(uVar6 < DAT_200049b0))
-        )) {
+    if ((int)((iVar5 - TELEPROMPTER_UI_TASK_PARAMETER_2) -
+             (uint)(uVar6 < TELEPROMPTER_UI_TASK_PARAMETER_1)) < 0 ==
+        (SBORROW4(iVar5,TELEPROMPTER_UI_TASK_PARAMETER_2) !=
+        SBORROW4(iVar5 - TELEPROMPTER_UI_TASK_PARAMETER_2,
+                 (uint)(uVar6 < TELEPROMPTER_UI_TASK_PARAMETER_1)))) {
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): counter down timeout . exit counter down status ,switch TEXT DISPLAY \n"
@@ -274,12 +283,12 @@ LAB_0003d394:
         }
       }
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004998 = (int)uVar19;
-      DAT_20004988 = 2;
+      UI_TELEPROMPTER_TASK_STATE_AND_DATA = (undefined4)((ulonglong)uVar19 >> 0x20);
+      UI_TELEPROMPTER_TASK_STATE_DATA = (int)uVar19;
+      UI_TELEPROMPTER_TASK_BUFFER = 2;
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
       uVar9 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       iVar8 = get_ui_x_offset();
@@ -297,31 +306,34 @@ LAB_0003d394:
       iVar8 = iVar8 + 0x1e;
 LAB_0003d4ba:
       _reflash_fb_data_to_lcd(uVar10,uVar15,uVar9,iVar5 + 0x36,iVar8,iVar11);
-      if (DAT_200049ac == 1) {
+      if (UI_TELEPROMPTER_STATE_DATA == 1) {
         uVar9 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         uVar10 = 0x1a;
       }
       else {
-        uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
-        if (DAT_200049ac != 0) goto switchD_0003cf6c_caseD_4;
+        uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY
+                         );
+        if (UI_TELEPROMPTER_STATE_DATA != 0) goto switchD_0003cf6c_caseD_4;
         uVar9 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         uVar10 = 0x19;
       }
       gui_bmp_bitmap_draw(uVar10,uVar9,iVar5 + 0x36,0,0,0);
-      uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+      uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
       goto switchD_0003cf6c_caseD_4;
     }
     lVar17 = handle_signed_division
-                       (DAT_200049b0 - uVar6,(DAT_200049b4 - iVar5) - (uint)(DAT_200049b0 < uVar6),
-                        1000,0);
+                       (TELEPROMPTER_UI_TASK_PARAMETER_1 - uVar6,
+                        (TELEPROMPTER_UI_TASK_PARAMETER_2 - iVar5) -
+                        (uint)(TELEPROMPTER_UI_TASK_PARAMETER_1 < uVar6),1000,0);
     iVar5 = (int)((ulonglong)lVar17 >> 0x20);
-    bVar16 = (uint)(int)(char)DAT_200049ad < (uint)lVar17;
-    iVar8 = (int)((uint)DAT_200049ad << 0x18) >> 0x1f;
+    bVar16 = (uint)(int)(char)UI_TELEPROMPTER_TASK_CONTROL_FLAGS < (uint)lVar17;
+    iVar8 = (int)((uint)UI_TELEPROMPTER_TASK_CONTROL_FLAGS << 0x18) >> 0x1f;
     if ((int)((iVar8 - iVar5) - (uint)bVar16) < 0 !=
         (SBORROW4(iVar8,iVar5) != SBORROW4(iVar8 - iVar5,(uint)bVar16))) {
-      lVar17 = CONCAT44((int)((uint)DAT_200049ad << 0x18) >> 0x1f,(int)(char)DAT_200049ad);
+      lVar17 = CONCAT44((int)((uint)UI_TELEPROMPTER_TASK_CONTROL_FLAGS << 0x18) >> 0x1f,
+                        (int)(char)UI_TELEPROMPTER_TASK_CONTROL_FLAGS);
     }
     if (lVar17 == 0) {
       if (2 < LOG_LEVEL) {
@@ -333,12 +345,12 @@ LAB_0003d4ba:
         }
       }
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004998 = (int)uVar19;
+      UI_TELEPROMPTER_TASK_STATE_AND_DATA = (undefined4)((ulonglong)uVar19 >> 0x20);
+      UI_TELEPROMPTER_TASK_STATE_DATA = (int)uVar19;
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
-      DAT_20004988 = 2;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
+      UI_TELEPROMPTER_TASK_BUFFER = 2;
       uVar9 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       iVar8 = get_ui_x_offset();
@@ -388,28 +400,29 @@ LAB_0003d4ba:
       }
       if (param_3 == 2) goto joined_r0x0003dcc8;
     }
-    cVar2 = DAT_200049a5;
-    if (DAT_200049a5 == '\x01') {
-      uVar6 = DAT_200049a0;
+    cVar2 = TELEPROMPTER_UI_TASK_STATE;
+    if (TELEPROMPTER_UI_TASK_STATE == '\x01') {
+      uVar6 = UI_TELEPROMPTER_TASK_STATUS_FLAGS;
       if (DAT_200049a4 == '\0') {
         iVar8 = calculate_ble_connection_timing_with_scaling_alt();
-        DAT_200049a0 = (DAT_200049a0 - DAT_20004998) + iVar8;
+        UI_TELEPROMPTER_TASK_STATUS_FLAGS =
+             (UI_TELEPROMPTER_TASK_STATUS_FLAGS - UI_TELEPROMPTER_TASK_STATE_DATA) + iVar8;
         DAT_200049a4 = cVar2;
-        uVar6 = DAT_200049a0;
+        uVar6 = UI_TELEPROMPTER_TASK_STATUS_FLAGS;
       }
     }
     else if (DAT_200049a4 == '\0') {
       iVar8 = calculate_ble_connection_timing_with_scaling_alt();
-      uVar6 = (iVar8 - DAT_20004998) + DAT_200049a0;
+      uVar6 = (iVar8 - UI_TELEPROMPTER_TASK_STATE_DATA) + UI_TELEPROMPTER_TASK_STATUS_FLAGS;
     }
     else {
-      DAT_20004998 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_2000499c = 0;
-      DAT_200049a8 = DAT_200049a0;
+      UI_TELEPROMPTER_TASK_STATE_DATA = calculate_ble_connection_timing_with_scaling_alt();
+      UI_TELEPROMPTER_TASK_STATE_AND_DATA = 0;
+      TELEPROMPTER_UI_STATE_BUFFER = UI_TELEPROMPTER_TASK_STATUS_FLAGS;
       DAT_200049a4 = '\0';
-      uVar6 = DAT_200049a8;
+      uVar6 = TELEPROMPTER_UI_STATE_BUFFER;
     }
-    DAT_200049a8 = uVar6;
+    TELEPROMPTER_UI_STATE_BUFFER = uVar6;
     iVar8 = get_work_mode();
     iVar8 = *(byte *)(*(int *)(iVar8 + 0xfec) + 0x5e) - 1;
     if (iVar8 != 0) {
@@ -434,8 +447,8 @@ LAB_0003d4ba:
           }
         }
         enqueue_message_to_queue_with_work_mode_check();
-        if (DAT_20004989 < '\x14') {
-          DAT_20004989 = '\x13';
+        if (UI_TELEPROMPTER_TASK_EXTENDED_STATUS < '\x14') {
+          UI_TELEPROMPTER_TASK_EXTENDED_STATUS = '\x13';
         }
       }
       fill_memory_buffer(&DAT_200049b8,0,0x200);
@@ -490,15 +503,15 @@ LAB_0003d4ba:
         uVar9 = get_ui_x_offset();
         iVar8 = get_ui_y_offset();
         gui_bmp_bitmap_draw(0x1b,uVar9,iVar8 + 0x36,0,0,0);
-        DAT_200049a5 = '\x01';
-        DAT_200049a0 = iVar5 * 1000;
-        DAT_20004998 = calculate_ble_connection_timing_with_scaling_alt();
-        DAT_2000499c = 0;
+        TELEPROMPTER_UI_TASK_STATE = '\x01';
+        UI_TELEPROMPTER_TASK_STATUS_FLAGS = iVar5 * 1000;
+        UI_TELEPROMPTER_TASK_STATE_DATA = calculate_ble_connection_timing_with_scaling_alt();
+        UI_TELEPROMPTER_TASK_STATE_AND_DATA = 0;
         if (LOG_LEVEL < 3) goto LAB_0003df5c;
         pcVar7 = "%s(): suspend enable...\n";
       }
       else {
-        DAT_200049a5 = '\0';
+        TELEPROMPTER_UI_TASK_STATE = '\0';
         if (SYSTEM_FLAGS_REGISTER << 0x1e < 0) {
           uVar9 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
@@ -517,14 +530,14 @@ LAB_0003d4ba:
           iVar11 = get_ui_y_offset();
           _reflash_fb_data_to_lcd(uVar10,uVar15,uVar9,iVar5 + 0x36,iVar8 + 0x24,iVar11 + 0x52);
         }
-        if (DAT_200049ac == 1) {
+        if (UI_TELEPROMPTER_STATE_DATA == 1) {
           uVar9 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           uVar10 = 0x1a;
 LAB_0003d7bc:
           gui_bmp_bitmap_draw(uVar10,uVar9,iVar5 + 0x36,0,0,0);
         }
-        else if (DAT_200049ac == 0) {
+        else if (UI_TELEPROMPTER_STATE_DATA == 0) {
           uVar9 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           uVar10 = 0x19;
@@ -541,127 +554,141 @@ LAB_0003d7bc:
       }
     }
 LAB_0003df5c:
-    if ((DAT_200049ac == 2) && (DAT_200049a5 == '\0')) {
+    if ((UI_TELEPROMPTER_STATE_DATA == 2) && (TELEPROMPTER_UI_TASK_STATE == '\0')) {
       uVar9 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       gui_bmp_dynamic_bitmap_draw(1,uVar9,iVar5 + 0x36,0,0,0,0);
     }
-    DAT_200049a8 = DAT_200049a8 / 1000;
-    if (DAT_200049a8 < 0x3c) {
-      DAT_20009fe8 = DAT_200049a8 % 0x3c;
+    TELEPROMPTER_UI_STATE_BUFFER = TELEPROMPTER_UI_STATE_BUFFER / 1000;
+    if (TELEPROMPTER_UI_STATE_BUFFER < 0x3c) {
+      UI_TELEPROMPTER_TASK_EXTENDED_STATE = TELEPROMPTER_UI_STATE_BUFFER % 0x3c;
     }
-    else if (DAT_200049a8 < 0xe10) {
-      DAT_20009fe8 = DAT_200049a8 % 0x3c;
-      DAT_20009fec = DAT_200049a8 / 0x3c;
+    else if (TELEPROMPTER_UI_STATE_BUFFER < 0xe10) {
+      UI_TELEPROMPTER_TASK_EXTENDED_STATE = TELEPROMPTER_UI_STATE_BUFFER % 0x3c;
+      TELEPROMPTER_UI_STATE_FLAGS = TELEPROMPTER_UI_STATE_BUFFER / 0x3c;
     }
-    else if (DAT_200049a8 < 360000) {
-      DAT_20009ff0 = DAT_200049a8 / 0xe10;
-      DAT_20009fec = (DAT_200049a8 % 0xe10) / 0x3c;
-      DAT_20009fe8 = (DAT_200049a8 % 0xe10) % 0x3c;
+    else if (TELEPROMPTER_UI_STATE_BUFFER < 360000) {
+      TELEPROMPTER_UI_CONTROL_FLAGS = TELEPROMPTER_UI_STATE_BUFFER / 0xe10;
+      TELEPROMPTER_UI_STATE_FLAGS = (TELEPROMPTER_UI_STATE_BUFFER % 0xe10) / 0x3c;
+      UI_TELEPROMPTER_TASK_EXTENDED_STATE = (TELEPROMPTER_UI_STATE_BUFFER % 0xe10) % 0x3c;
     }
     else {
-      DAT_20009ff0 = 99;
-      DAT_20009fe8 = 0x3b;
-      DAT_20009fec = 0x3b;
+      TELEPROMPTER_UI_CONTROL_FLAGS = 99;
+      UI_TELEPROMPTER_TASK_EXTENDED_STATE = 0x3b;
+      TELEPROMPTER_UI_STATE_FLAGS = 0x3b;
     }
     local_68 = 0;
     fill_memory_buffer(auStack_64);
-    if ((int)DAT_20009ff0 < 10) {
+    if ((int)TELEPROMPTER_UI_CONTROL_FLAGS < 10) {
       pcVar7 = "%d:%02d:%02d";
     }
     else {
       pcVar7 = "%02d:%02d:%02d";
     }
     process_string_with_error_handling_and_validation
-              (&local_68,0x40,pcVar7,DAT_20009ff0,DAT_20009fec,DAT_20009fe8);
-    if (((DAT_20009ff0 != DAT_20009fe4) || (DAT_20009fec != DAT_20009fe0)) ||
-       (DAT_20009fe8 != DAT_20009fdc)) {
+              (&local_68,0x40,pcVar7,TELEPROMPTER_UI_CONTROL_FLAGS,TELEPROMPTER_UI_STATE_FLAGS,
+               UI_TELEPROMPTER_TASK_EXTENDED_STATE);
+    if (((TELEPROMPTER_UI_CONTROL_FLAGS != DAT_20009fe4) ||
+        (TELEPROMPTER_UI_STATE_FLAGS != DAT_20009fe0)) ||
+       (UI_TELEPROMPTER_TASK_EXTENDED_STATE != DAT_20009fdc)) {
       uVar9 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       iVar8 = get_ui_x_offset();
       iVar11 = get_ui_y_offset();
       gui_utf_draw(0,&local_68,0,uVar9,iVar5 + 0x6e,iVar8 + 0x50,iVar11 + 0x88,1,0,0,0,0);
-      DAT_20009fe4 = DAT_20009ff0;
-      DAT_20009fe0 = DAT_20009fec;
-      DAT_20009fdc = DAT_20009fe8;
+      DAT_20009fe4 = TELEPROMPTER_UI_CONTROL_FLAGS;
+      DAT_20009fe0 = TELEPROMPTER_UI_STATE_FLAGS;
+      DAT_20009fdc = UI_TELEPROMPTER_TASK_EXTENDED_STATE;
     }
     pcVar7 = (char *)get_work_mode();
     if (*pcVar7 == '\x01') {
-      if ((0 < HEARTBEAT_SEQ) && (HEARTBEAT_SEQ = 0, DAT_20004989 < '\x14')) {
-        DAT_20004989 = '\x13';
+      if ((0 < HEARTBEAT_SEQ) && (HEARTBEAT_SEQ = 0, UI_TELEPROMPTER_TASK_EXTENDED_STATUS < '\x14'))
+      {
+        UI_TELEPROMPTER_TASK_EXTENDED_STATUS = '\x13';
       }
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       uVar18 = subtract_64bit_with_borrow_handling
-                         ((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),DAT_20004990,DAT_20004994);
-      uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+                         ((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),
+                          SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY,SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY
+                         );
+      uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
       if ((int)((ulonglong)uVar18 >> 0x20) < (int)(uint)((uint)uVar18 < 0x3e9))
       goto switchD_0003cf6c_caseD_4;
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
-      DAT_20004989 = DAT_20004989 + -1;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
+      UI_TELEPROMPTER_TASK_EXTENDED_STATUS = UI_TELEPROMPTER_TASK_EXTENDED_STATUS + -1;
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): DECETED TIMEOUT ...... _tpm_thread_prv_data.sync_cnt = %d\n",
-                      "ui_teleprompter_task",(int)DAT_20004989);
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+                      "ui_teleprompter_task",(int)UI_TELEPROMPTER_TASK_EXTENDED_STATUS);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
         }
         else {
           handle_heartbeat();
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
         }
       }
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
-      if ('\0' < DAT_20004989) goto switchD_0003cf6c_caseD_4;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
+      if ('\0' < UI_TELEPROMPTER_TASK_EXTENDED_STATUS) goto switchD_0003cf6c_caseD_4;
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): There is a disconnection between the AR Glasses and the Bluetooth application!\n"
                       ,"ui_teleprompter_task");
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
         }
         else {
           handle_heartbeat();
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
         }
       }
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): bluetooth connect is break,Send Stop Teleprompter command to slave.\n",
                       "ui_teleprompter_task");
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
         }
         else {
           handle_heartbeat();
-          uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+          uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                            SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
         }
       }
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
       local_6c[0] = 0x103;
       uVar9 = get_work_mode();
       iVar5 = sync_to_slave(uVar9,6,local_6c,2);
       if (4999 < iVar5) {
-        uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+        uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY
+                         );
         if (0 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
             DEBUG_PRINT("%s(): SYNC TO Slave failed...,don\'t exec teleprompter exit action,master auto exit...\n"
                         ,"ui_teleprompter_task");
-            uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+            uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                              SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
           }
           else {
             handle_heartbeat();
-            uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+            uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,
+                              SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
           }
         }
         goto switchD_0003cf6c_caseD_4;
       }
-      DAT_20004988 = 3;
+      UI_TELEPROMPTER_TASK_BUFFER = 3;
       uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-      DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-      DAT_20004990 = (undefined4)uVar19;
+      SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+      SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
       gui_screen_clear();
       uVar9 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
@@ -696,7 +723,7 @@ LAB_0003df5c:
       gui_utf_draw(0,pcVar7,0,iVar5,iVar8,iVar12 + 0x23a,iVar11,1,0,0,0,0);
       goto LAB_0003d68e;
     }
-    uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+    uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
     if (param_3 != 5) goto switchD_0003cf6c_caseD_4;
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
@@ -707,10 +734,10 @@ LAB_0003df5c:
         handle_heartbeat();
       }
     }
-    DAT_20004988 = 3;
+    UI_TELEPROMPTER_TASK_BUFFER = 3;
     uVar19 = calculate_ble_connection_timing_with_scaling_alt();
-    DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-    DAT_20004990 = (undefined4)uVar19;
+    SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+    SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
     gui_screen_clear();
     uVar9 = get_ui_x_offset();
     iVar5 = get_ui_y_offset();
@@ -757,7 +784,8 @@ LAB_0003df5c:
     }
     uVar19 = calculate_ble_connection_timing_with_scaling_alt();
     uVar19 = subtract_64bit_with_borrow_handling
-                       ((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),DAT_20004990,DAT_20004994);
+                       ((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),
+                        SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY,SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY);
     if ((int)(uint)((uint)uVar19 < 0x1f41) <= (int)((ulonglong)uVar19 >> 0x20)) {
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -773,9 +801,9 @@ LAB_0003df5c:
       animate_framebuffer_with_pattern();
       iVar5 = get_work_mode();
       *(undefined1 *)(*(int *)(iVar5 + 0xffc) + 1) = 0;
-      fill_memory_buffer(&DAT_20004988,0,0x230);
+      fill_memory_buffer(&UI_TELEPROMPTER_TASK_BUFFER,0,0x230);
     }
-    uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+    uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
     if (param_3 != 2) goto switchD_0003cf6c_caseD_4;
 joined_r0x0003dcc8:
     if (2 < LOG_LEVEL) {
@@ -788,22 +816,24 @@ joined_r0x0003dcc8:
     }
 LAB_0003d67e:
     animate_framebuffer_with_pattern();
-    fill_memory_buffer(&DAT_20004988,0,0x230);
+    fill_memory_buffer(&UI_TELEPROMPTER_TASK_BUFFER,0,0x230);
 LAB_0003d68e:
     pcVar7 = (char *)get_work_mode();
-    uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
-    if ((*pcVar7 == '\x01') && (uVar19 = CONCAT44(DAT_20004994,DAT_20004990), DAT_200049ac == 2)) {
+    uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
+    if ((*pcVar7 == '\x01') &&
+       (uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY
+                         ), UI_TELEPROMPTER_STATE_DATA == 2)) {
       enable_dmic_stream();
-      uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+      uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
     }
   default:
     goto switchD_0003cf6c_caseD_4;
   }
   gui_utf_draw(0,pcVar7,0,iVar5,iVar8,iVar11,iVar12,1,0,0,0,0);
-  uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
+  uVar19 = CONCAT44(SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY,SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY);
 switchD_0003cf6c_caseD_4:
-  DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
-  DAT_20004990 = (undefined4)uVar19;
+  SENSOR_INTERRUPT_PRIORITY_LEVELS_ARRAY = (undefined4)((ulonglong)uVar19 >> 0x20);
+  SENSOR_INTERRUPT_ENABLE_FLAGS_ARRAY = (undefined4)uVar19;
   return 0;
 }
 

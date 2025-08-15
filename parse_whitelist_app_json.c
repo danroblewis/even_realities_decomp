@@ -31,35 +31,39 @@ parse_whitelist_app_json(undefined4 json_buffer,undefined4 user_data1,undefined4
     }
   }
   else {
-    fill_memory_buffer(&DAT_2001a22c,0,0x15e2);
+    fill_memory_buffer(&WHITELIST_APP_JSON_DATA_BUFFER,0,0x15e2);
     iVar2 = search_linked_list_by_string_value(iVar1,"call_enable");
     if (iVar2 == 0) {
       pcVar3 = "callEnable is NULL !\n";
     }
     else {
       bVar9 = *(int *)(iVar2 + 0xc) == 2;
-      DAT_2001a22c = DAT_2001a22c & 0xfe | bVar9;
+      WHITELIST_APP_JSON_DATA_BUFFER = WHITELIST_APP_JSON_DATA_BUFFER & 0xfe | bVar9;
       iVar2 = search_linked_list_by_string_value
-                        (iVar1,"msg_enable",DAT_2001a22c,bVar9,uVar10,user_data1,user_data2);
+                        (iVar1,"msg_enable",WHITELIST_APP_JSON_DATA_BUFFER,bVar9,uVar10,user_data1,
+                         user_data2);
       if (iVar2 == 0) {
         pcVar3 = "msgEnable is NULL !\n";
       }
       else {
         bVar9 = *(int *)(iVar2 + 0xc) == 2;
-        DAT_2001a22c = DAT_2001a22c & 0xfd | bVar9 << 1;
+        WHITELIST_APP_JSON_DATA_BUFFER = WHITELIST_APP_JSON_DATA_BUFFER & 0xfd | bVar9 << 1;
         iVar2 = search_linked_list_by_string_value
-                          (iVar1,"calendar_enable",DAT_2001a22c,bVar9,uVar10,user_data1,user_data2);
+                          (iVar1,"calendar_enable",WHITELIST_APP_JSON_DATA_BUFFER,bVar9,uVar10,
+                           user_data1,user_data2);
         if (iVar2 == 0) {
           pcVar3 = "jsonCaledarEnable is NULL !\n";
         }
         else {
-          DAT_2001a22c = DAT_2001a22c & 0xf7 | (*(int *)(iVar2 + 0xc) == 2) << 3;
+          WHITELIST_APP_JSON_DATA_BUFFER =
+               WHITELIST_APP_JSON_DATA_BUFFER & 0xf7 | (*(int *)(iVar2 + 0xc) == 2) << 3;
           iVar2 = search_linked_list_by_string_value(iVar1,"ios_mail_enable");
           if (iVar2 == 0) {
             pcVar3 = "jsonIosMailEnable is NULL !\n";
           }
           else {
-            DAT_2001a22c = DAT_2001a22c & 0xfb | (*(int *)(iVar2 + 0xc) == 2) << 2;
+            WHITELIST_APP_JSON_DATA_BUFFER =
+                 WHITELIST_APP_JSON_DATA_BUFFER & 0xfb | (*(int *)(iVar2 + 0xc) == 2) << 2;
             iVar2 = search_linked_list_by_string_value(iVar1,"app");
             if (iVar2 == 0) {
               pcVar3 = "appJson is NULL !\n";
@@ -70,18 +74,19 @@ parse_whitelist_app_json(undefined4 json_buffer,undefined4 user_data1,undefined4
                 pcVar3 = "appEnableJson is NULL !\n";
               }
               else {
-                DAT_2001a22c = DAT_2001a22c & 0xef | (*(int *)(iVar4 + 0xc) == 2) << 4;
+                WHITELIST_APP_JSON_DATA_BUFFER =
+                     WHITELIST_APP_JSON_DATA_BUFFER & 0xef | (*(int *)(iVar4 + 0xc) == 2) << 4;
                 iVar2 = search_linked_list_by_string_value(iVar2,"list");
                 if (iVar2 != 0) {
                   iVar4 = check_character_is_space();
                   if (iVar4 != 0) {
-                    DAT_2001a22d = count_linked_list_elements(iVar2);
+                    WHITELIST_APP_DATA_BUFFER = count_linked_list_elements(iVar2);
                     bVar8 = 0;
-                    if (99 < DAT_2001a22d) {
-                      DAT_2001a22d = 100;
+                    if (99 < WHITELIST_APP_DATA_BUFFER) {
+                      WHITELIST_APP_DATA_BUFFER = 100;
                     }
                     uVar7 = 0;
-                    for (; bVar8 < DAT_2001a22d; bVar8 = bVar8 + 1) {
+                    for (; bVar8 < WHITELIST_APP_DATA_BUFFER; bVar8 = bVar8 + 1) {
                       iVar4 = get_linked_list_element_at_index(iVar2);
                       if (iVar4 == 0) {
                         pcVar3 = "singleAppJson is NULL !\n";

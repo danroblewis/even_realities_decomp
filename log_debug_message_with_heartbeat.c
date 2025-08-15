@@ -14,7 +14,7 @@ void log_debug_message_with_heartbeat(undefined4 param_1)
   else {
     handle_heartbeat();
   }
-  DAT_20019ef3 = (char)param_1;
+  SYSTEM_READY_AND_SETTINGS_STATE = (char)param_1;
   return;
 }
 

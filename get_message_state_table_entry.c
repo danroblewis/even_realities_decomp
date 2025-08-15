@@ -8,7 +8,7 @@
 undefined4 * get_message_state_table_entry(int message_index)
 
 {
-  return &DAT_20007dac + message_index * 0x6d;
+  return &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + message_index * 0x6d;
 }
 
 

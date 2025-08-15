@@ -15,7 +15,7 @@ validate_and_process_ble_characteristics
   int iVar2;
   
   uVar1 = handle_bluetooth_privacy_mode_management_with_callback_validation_and_parameter
-                    (&DAT_20002018,param_1,param_2,param_3,param_4,param_5);
+                    (&BLE_CHARACTERISTIC_VALIDATION_BUFFER,param_1,param_2,param_3,param_4,param_5);
   iVar2 = 0;
   while( true ) {
     if (param_3 == iVar2) {

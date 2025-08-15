@@ -54,7 +54,7 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   }
   cVar10 = '\x05';
   do {
-    iVar9 = (*(code *)DAT_20007bc0[1])(puVar3,uVar12);
+    iVar9 = (*(code *)SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT[1])(puVar3,uVar12);
     if (-1 < iVar9) break;
     cVar10 = cVar10 + -1;
   } while (cVar10 != -1);
@@ -70,7 +70,7 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   if (iVar9 != 0) {
     return 0xffffffff;
   }
-  uVar8 = DAT_20019dad - 1 & 0xff;
+  uVar8 = SENSOR_CALIBRATION_DATA_BUFFER - 1 & 0xff;
   if (uVar8 < 5) {
     cVar10 = (&UNK_000a49a0)[uVar8];
     uVar2 = (&UNK_000a499b)[uVar8];
@@ -81,7 +81,7 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   }
   call_sensor_callback_function(uVar2);
   local_24 = 0;
-  if (DAT_20019dad == 3) {
+  if (SENSOR_CALIBRATION_DATA_BUFFER == 3) {
     iVar9 = 100;
   }
   else {
@@ -107,7 +107,8 @@ undefined4 process_sensor_data_packet(uint param_1,uint param_2,byte *param_3,ui
   }
   cVar11 = '\x05';
   local_24 = CONCAT31(local_24._1_3_,0x18);
-  while (iVar9 = (*(code *)*DAT_20007bc0)(&local_24,2,puVar5,cVar10 + '\f'), iVar9 < 0) {
+  while (iVar9 = (*(code *)*SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT)
+                           (&local_24,2,puVar5,cVar10 + '\f'), iVar9 < 0) {
     cVar11 = cVar11 + -1;
     if (cVar11 == -1) {
       call_data_verification_handler_with_memory_cleanup(puVar5);

@@ -19,16 +19,17 @@ int initialize_sensor_registers(void)
     uVar1 = puVar2[1];
     if (*puVar2 != 0x4414) {
       transmit_sensor_data_with_retry(*puVar2 & 0xffff);
-      uVar1 = DAT_20007bc4;
+      uVar1 = SENSOR_INITIALIZATION_STATE;
     }
-    DAT_20007bc4 = uVar1;
+    SENSOR_INITIALIZATION_STATE = uVar1;
     iVar3 = iVar3 + 2;
     puVar2 = puVar2 + 2;
   } while (iVar3 != 0x58);
   iVar3 = transmit_sensor_data_with_retry(0x4408,1);
   if (iVar3 == 0) {
     DAT_20007bc8 = 1;
-    iVar3 = transmit_sensor_data_with_retry(0x4414,DAT_20007bc4,1,&DAT_20007bc4,in_r3);
+    iVar3 = transmit_sensor_data_with_retry
+                      (0x4414,SENSOR_INITIALIZATION_STATE,1,&SENSOR_INITIALIZATION_STATE,in_r3);
     if (iVar3 != 0) {
       iVar3 = 1;
     }

@@ -26,7 +26,7 @@ void ancs_security_changed(undefined4 param_1,undefined4 param_2,int param_3)
     }
     uVar2 = get_ble_property_value(param_1);
     if (1 < uVar2) {
-      DAT_20006ab4 = 0;
+      ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS = 0;
       uVar1 = get_connection_data_pointer(param_1);
       iVar3 = get_system_ready_state();
       if (iVar3 == 0) {

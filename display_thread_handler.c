@@ -43,7 +43,7 @@ void display_thread_handler(int param_1)
   }
   initialize_graphics_engine(&DAT_20004ce0,&LAB_0007d86c_1,0);
   set_work_mode_parameter(param_1 + 0xb90);
-  _DAT_2001d447 = 0;
+  _DISPLAY_THREAD_HANDLER_STATE_DATA = 0;
   do {
     while ((*(char *)(param_1 + 1) == '\x01' || (*(char *)(param_1 + 1) == '\b'))) {
       if (2 < LOG_LEVEL) {
@@ -69,7 +69,7 @@ void display_thread_handler(int param_1)
     else if ((iVar4 == -0x23) || (iVar4 == -0xb)) {
       bVar2 = false;
     }
-    if (DAT_2001d447 == '\x01') {
+    if (DISPLAY_THREAD_HANDLER_STATE_DATA == '\x01') {
       if (!bVar2) {
         if (*(char *)(param_1 + 0xd5) != '\0') {
           uVar7 = 0;
@@ -161,7 +161,7 @@ LAB_00049270:
               handle_heartbeat();
             }
           }
-          _DAT_2001d447 = CONCAT11(DAT_2001d448,2);
+          _DISPLAY_THREAD_HANDLER_STATE_DATA = CONCAT11(DISPLAY_REFRESH_BUFFER,2);
           if (local_3e == 0) {
             if (3 < LOG_LEVEL) {
               pcVar5 = "%s(): received command without screen ID\n";
@@ -273,7 +273,7 @@ LAB_000492ee:
       }
     }
     else {
-      if (DAT_2001d447 == '\x02') {
+      if (DISPLAY_THREAD_HANDLER_STATE_DATA == '\x02') {
 LAB_00049488:
         if (2 < LOG_LEVEL) {
           pcVar5 = "%s(): display thread switch display close ,release resouce...\n";
@@ -281,7 +281,7 @@ LAB_00049488:
         }
       }
       else {
-        if (DAT_2001d447 == '\0') {
+        if (DISPLAY_THREAD_HANDLER_STATE_DATA == '\0') {
           if (bVar2) {
             if (local_40[0] == 2) {
               if ((*(char *)(param_1 + 0xd5) == '\x10') &&
@@ -307,10 +307,10 @@ LAB_00049488:
                   }
                 }
                 uVar6 = *(undefined1 *)(param_1 + 0xd5);
-                DAT_2001d448 = *(undefined1 *)(param_1 + 0xd5);
+                DISPLAY_REFRESH_BUFFER = *(undefined1 *)(param_1 + 0xd5);
 LAB_00049204:
                 display_reflash_handler(param_1,uVar6,iVar8,1);
-                _DAT_2001d447 = CONCAT11(DAT_2001d448,1);
+                _DISPLAY_THREAD_HANDLER_STATE_DATA = CONCAT11(DISPLAY_REFRESH_BUFFER,1);
               }
               else if (local_3e == 2) {
                 if ((local_3c & 0xff) == 1) {
@@ -323,7 +323,7 @@ LAB_00049204:
                       handle_heartbeat();
                     }
                   }
-                  DAT_2001d448 = local_3c._1_1_;
+                  DISPLAY_REFRESH_BUFFER = local_3c._1_1_;
                   uVar6 = local_3c._1_1_;
                   goto LAB_00049204;
                 }
@@ -343,7 +343,7 @@ LAB_00049204:
                   handle_heartbeat();
                 }
               }
-              _DAT_2001d447 = 0;
+              _DISPLAY_THREAD_HANDLER_STATE_DATA = 0;
               if (local_3e == 0) {
                 if (3 < LOG_LEVEL) {
                   pcVar5 = "%s(): exit .received command without screen ID\n";
@@ -396,7 +396,7 @@ LAB_000492ac:
 LAB_000495ba:
       initialize_jbd_display_system_with_memory_and_commands(0);
       setup_font_rendering_system();
-      _DAT_2001d447 = 0;
+      _DISPLAY_THREAD_HANDLER_STATE_DATA = 0;
     }
 switchD_00049404_caseD_6:
     call_function_conditionally_with_flag();

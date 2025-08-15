@@ -56,7 +56,7 @@ uint initialize_thermal_management_with_string_parsing(byte *param_1)
         if (0x19 < uVar3 - 0x61) {
 LAB_00077af6:
           if (iVar2 == -1) {
-            *DAT_20002d20 = 0x22;
+            *STRING_PROCESSING_AND_PRINTF_CONFIGURATION = 0x22;
             uVar1 = uVar7;
           }
           else if (uVar5 != 0) {

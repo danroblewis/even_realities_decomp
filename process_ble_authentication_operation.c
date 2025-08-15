@@ -34,7 +34,8 @@ undefined4 process_ble_authentication_operation(int param_1)
   iVar1 = handle_ble_connection_memory_allocation(param_1,3);
   if (iVar1 != 0) {
     local_20 = ble_memory_allocation_utility(iVar1 + 0xc,0x10);
-    iVar2 = ble_authentication_hash(DAT_2000af48,param_1 + 0x57,param_1 + 0x27,uVar3);
+    iVar2 = ble_authentication_hash
+                      (BLE_PAIRING_AND_AUTHENTICATION_DATA,param_1 + 0x57,param_1 + 0x27,uVar3);
     if (iVar2 == 0) {
       update_ble_connection_state_with_error_handling(param_1,iVar1,0);
       clear_bit_in_value(param_1 + 4,0);

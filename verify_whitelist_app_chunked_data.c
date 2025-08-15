@@ -13,7 +13,7 @@ int verify_whitelist_app_chunked_data(void)
   
   cVar2 = '\x03';
   do {
-    iVar1 = handle_chunked_data_verification(0x131000,&DAT_2001a22c,0x15e2);
+    iVar1 = handle_chunked_data_verification(0x131000,&WHITELIST_APP_JSON_DATA_BUFFER,0x15e2);
     if (iVar1 == 0) {
       allocate_and_init_whitelist_verification_buffer();
       break;

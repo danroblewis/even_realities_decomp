@@ -26,7 +26,7 @@ undefined4 process_ble_characteristic_write_operation(int param_1,int *param_2)
   }
   else {
     if ((param_2[1] != 0) || (*param_2 != 0)) {
-      iVar1 = get_ble_handle_value(&DAT_200020d4);
+      iVar1 = get_ble_handle_value(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION);
       if (-1 < iVar1 << 0x1d) {
         return 0xfffffff5;
       }

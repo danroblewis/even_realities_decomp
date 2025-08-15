@@ -411,7 +411,7 @@ LAB_00027e20:
         *(undefined1 *)(*(int *)(param_1 + 0x1014) + 2) = *(undefined1 *)(param_1 + 0xe6);
         *(undefined1 *)(*(int *)(param_1 + 0x1014) + 3) = *(undefined1 *)(param_1 + 0xe7);
         check_work_mode_state_conditions();
-        DAT_2001cdce = *(char *)(param_1 + 0xe7);
+        WORK_MODE_STATE_AND_UI_CONFIGURATION = *(char *)(param_1 + 0xe7);
         cVar3 = *(char *)(param_1 + 0xe8);
         reset_animation_counters();
         validate_and_update_work_mode_state();
@@ -422,7 +422,7 @@ LAB_00027e20:
             (*(char *)(*(int *)(param_1 + 0x1014) + 1) == '\0')))) {
           cVar1 = *(char *)(*(int *)(param_1 + 0x1014) + 2);
           if (cVar1 == '\x03') {
-            if (DAT_2001cdce == '\x12') {
+            if (WORK_MODE_STATE_AND_UI_CONFIGURATION == '\x12') {
               *(char *)(*(int *)(param_1 + 0x1014) + 0xc) = cVar3;
               *(undefined1 *)(*(int *)(param_1 + 0x1014) + 0xd) = 3;
               *(undefined1 *)(*(int *)(param_1 + 0x1014) + 0xe) = 3;
@@ -453,10 +453,10 @@ LAB_00027e20:
             handle_heartbeat();
           }
         }
-        DAT_2001b9ab = *(undefined1 *)(param_1 + 0xe6);
-        *(undefined1 *)(*(int *)(param_1 + 0x1010) + 2) = DAT_2001b9ab;
+        WORK_MODE_STATUS_UI_ANIMATION_BUFFER = *(undefined1 *)(param_1 + 0xe6);
+        *(undefined1 *)(*(int *)(param_1 + 0x1010) + 2) = WORK_MODE_STATUS_UI_ANIMATION_BUFFER;
         iVar4 = get_work_mode();
-        *(undefined1 *)(iVar4 + 0xcd) = DAT_2001b9ab;
+        *(undefined1 *)(iVar4 + 0xcd) = WORK_MODE_STATUS_UI_ANIMATION_BUFFER;
         reset_audio_stream_flag();
         **(undefined1 **)(param_1 + 0x1010) = 1;
         update_persist_task_status(param_1,7,2);
@@ -533,7 +533,7 @@ LAB_0002812a:
             handle_heartbeat();
           }
         }
-        atomic_set_bit_1(&DAT_20007b38);
+        atomic_set_bit_1(&PROXY_THREAD_MUTEX);
       }
       break;
     case 7:
@@ -543,7 +543,7 @@ LAB_0002812a:
         pcVar6 = "BLE:wakeup:new-unread_msg";
         goto LAB_0002850c;
       case 1:
-        DAT_20018d9f = 1;
+        MESSAGE_CONFIRMATION_FLAG = 1;
         clear_timeout_message(0);
         check_timeout_message_states_and_set_flag();
         advance_timeout_message_state();

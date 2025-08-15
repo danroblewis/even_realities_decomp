@@ -34,24 +34,25 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation
   else {
     if (param_2 << 0x1f < 0) {
       if (param_3 == 0) {
-        bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
+        bVar2 = *(byte *)((int)&BLUETOOTH_HCI_COMMAND_BUFFER + uVar3 * 7);
         if (bVar2 != 1) goto LAB_000554d8;
 LAB_000554dc:
         iVar1 = handle_bluetooth_address_update_with_hci_command(param_1,uVar3 * 7 + 0x20002001);
         if (iVar1 != 0) {
           return iVar1;
         }
-        bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
+        bVar2 = *(byte *)((int)&BLUETOOTH_HCI_COMMAND_BUFFER + uVar3 * 7);
         *param_4 = bVar2;
         if (param_3 == 0) {
           return 0;
         }
       }
       else {
-        if ((param_2 << 0x1a < 0) && (-1 < (int)((uint)(byte)DAT_200020d8 << 0x19))) {
+        if ((param_2 << 0x1a < 0) &&
+           (-1 < (int)((uint)(byte)BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x19))) {
           return -0x86;
         }
-        bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
+        bVar2 = *(byte *)((int)&BLUETOOTH_HCI_COMMAND_BUFFER + uVar3 * 7);
         if (bVar2 == 1) goto LAB_000554dc;
         *param_4 = bVar2;
       }
@@ -64,11 +65,11 @@ LAB_000554d8:
       return 0;
     }
     if (param_2 << 0x1d < 0) {
-      bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
+      bVar2 = *(byte *)((int)&BLUETOOTH_HCI_COMMAND_BUFFER + uVar3 * 7);
       if (bVar2 != 1) goto LAB_000554d8;
       iVar1 = handle_bluetooth_address_update_with_hci_command
                         (param_1,(short)(ushort)*param_1 * 7 + 0x20002001);
-      bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
+      bVar2 = *(byte *)((int)&BLUETOOTH_HCI_COMMAND_BUFFER + uVar3 * 7);
       goto LAB_0005551e;
     }
     iVar1 = validate_and_update_bluetooth_address();

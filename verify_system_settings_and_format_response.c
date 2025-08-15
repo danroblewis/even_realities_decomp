@@ -26,7 +26,7 @@ verify_system_settings_and_format_response
     DEBUG_PRINT("set_imu_base para is NULL\n");
     return 0xffffffff;
   }
-  if (DAT_20019ef3 != '\x01') {
+  if (SYSTEM_READY_AND_SETTINGS_STATE != '\x01') {
     DEBUG_PRINT("warning: not test mode,disable setting\n");
     return 0xfffffffe;
   }

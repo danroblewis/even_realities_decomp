@@ -20,12 +20,15 @@ void handle_conditional_operation(undefined4 param_1,int param_2)
   
   pcVar1 = (char *)get_work_mode();
   if (((*pcVar1 == '\x02') && (iVar2 = get_system_ready_state(), iVar2 != 1)) &&
-     (uVar5 = DAT_20006ab4 | 1, iVar2 = DAT_20006ab4 << 0x1f, DAT_20006ab4 = uVar5, -1 < iVar2)) {
+     (uVar5 = ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS | 1,
+     iVar2 = ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS << 0x1f,
+     ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS = uVar5, -1 < iVar2)) {
     if (((int)(uVar5 << 0x1e) < 0) ||
        ((param_2 != 0 &&
-        (iVar2 = clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffb), -1 < iVar2 << 0x1d))
-       )) {
-      clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
+        (iVar2 = clear_system_flags_with_bitwise_and
+                           (&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffb),
+        -1 < iVar2 << 0x1d)))) {
+      clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffe);
       return;
     }
     puVar7 = &DAT_00088388;
@@ -43,7 +46,7 @@ void handle_conditional_operation(undefined4 param_1,int param_2)
                       (param_1,local_2c,&PTR_handle_multi_step_operation_1_00088a0c,&DAT_20006ae8);
     if (iVar2 != 0) {
       DEBUG_PRINT("Failed to start discovery for ANCS (err %d)\n",iVar2);
-      clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
+      clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffe);
     }
   }
   return;

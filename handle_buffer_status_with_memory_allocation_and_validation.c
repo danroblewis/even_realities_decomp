@@ -14,9 +14,10 @@ handle_buffer_status_with_memory_allocation_and_validation(undefined4 *param_1,u
   int iVar3;
   uint uVar4;
   
-  iVar3 = DAT_20002d20;
-  if ((DAT_20002d20 != 0) && (*(int *)(DAT_20002d20 + 0x18) == 0)) {
-    initialize_buffer_structure_with_mutex_protection(DAT_20002d20);
+  iVar3 = STRING_PROCESSING_AND_PRINTF_CONFIGURATION;
+  if ((STRING_PROCESSING_AND_PRINTF_CONFIGURATION != 0) &&
+     (*(int *)(STRING_PROCESSING_AND_PRINTF_CONFIGURATION + 0x18) == 0)) {
+    initialize_buffer_structure_with_mutex_protection(STRING_PROCESSING_AND_PRINTF_CONFIGURATION);
   }
   if (param_2 == (undefined4 *)&DAT_0009871c) {
     param_2 = *(undefined4 **)(iVar3 + 4);

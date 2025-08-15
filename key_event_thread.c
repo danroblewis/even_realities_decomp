@@ -37,13 +37,14 @@ LAB_0002956e:
   if (iVar3 != 0) goto switchD_000297f8_caseD_5;
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
-      DEBUG_PRINT("%s(): key event trigger, type %d\n\n","key_event_thread",DAT_20007b18);
+      DEBUG_PRINT("%s(): key event trigger, type %d\n\n","key_event_thread",
+                  KEY_EVENT_THREAD_STATE_DATA);
     }
     else {
       handle_heartbeat();
     }
   }
-  if (DAT_20007b18 == 1) {
+  if (KEY_EVENT_THREAD_STATE_DATA == 1) {
     if (**(char **)(param_1 + 0x1014) == '\0') {
       if ((**(byte **)(param_1 + 0x100c) - 7 < 5) || (**(char **)(param_1 + 0x101c) != '\0')) {
         uVar5 = 1;
@@ -170,7 +171,7 @@ LAB_000296bc:
     }
     goto LAB_0002956e;
   }
-  switch(DAT_20007b18) {
+  switch(KEY_EVENT_THREAD_STATE_DATA) {
   case 2:
     if (**(char **)(param_1 + 0x1014) != '\0') {
       uVar5 = 0x19;
@@ -310,7 +311,7 @@ LAB_00029aac:
                         handle_heartbeat();
                       }
                     }
-                    atomic_set_bit_1(&DAT_20007b38);
+                    atomic_set_bit_1(&PROXY_THREAD_MUTEX);
                     break;
                   }
                   if (1 < LOG_LEVEL) {
@@ -658,7 +659,7 @@ LAB_0002a062:
     }
   }
 switchD_000297f8_caseD_5:
-  DAT_20007b18 = 0;
+  KEY_EVENT_THREAD_STATE_DATA = 0;
   goto LAB_0002956e;
 LAB_00029578:
   calculate_ble_schedule_timing(0x28000,0);
@@ -686,7 +687,7 @@ LAB_00029a02:
       handle_heartbeat();
     }
   }
-  atomic_set_bit_1(&DAT_20007b38);
+  atomic_set_bit_1(&PROXY_THREAD_MUTEX);
   goto LAB_0002956e;
 }
 

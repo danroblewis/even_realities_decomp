@@ -20,7 +20,7 @@ undefined4 calculate_string_length_with_buffer_processing(undefined4 param_1)
   undefined *local_18;
   undefined4 local_14;
   
-  iVar2 = DAT_20002d20;
+  iVar2 = STRING_PROCESSING_AND_PRINTF_CONFIGURATION;
   iStack_1c = calculate_string_length(param_1);
   local_18 = &DAT_000f5400;
   local_14 = 1;

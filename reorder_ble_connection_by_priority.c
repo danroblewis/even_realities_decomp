@@ -36,12 +36,12 @@ void reorder_ble_connection_by_priority(undefined4 *param_1)
       puVar2[1] = param_1;
       goto LAB_00073d90;
     }
-    if (DAT_2000b468 == puVar2) break;
+    if (BLE_CONNECTION_PRIORITY_MANAGER == puVar2) break;
   }
   *param_1 = &DMIC_BUFFER_POINTER;
-  param_1[1] = DAT_2000b468;
-  *DAT_2000b468 = param_1;
-  DAT_2000b468 = param_1;
+  param_1[1] = BLE_CONNECTION_PRIORITY_MANAGER;
+  *BLE_CONNECTION_PRIORITY_MANAGER = param_1;
+  BLE_CONNECTION_PRIORITY_MANAGER = param_1;
 LAB_00073d90:
   manage_ble_connection_priority(DMIC_BUFFER_SIZE == param_1);
   return;

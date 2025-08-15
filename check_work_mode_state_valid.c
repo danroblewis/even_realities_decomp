@@ -8,7 +8,7 @@
 bool check_work_mode_state_valid(int work_mode_context)
 
 {
-  while (DAT_20018d9c != '\0') {
+  while (PERSISTENT_TASK_STATUS_MANAGER != '\0') {
     short_timing_delay();
   }
   return 1 < *(byte *)(work_mode_context + 0xd5);

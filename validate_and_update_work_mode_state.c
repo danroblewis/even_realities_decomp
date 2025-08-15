@@ -18,8 +18,8 @@ void validate_and_update_work_mode_state(void)
         (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 2) != '\x13')) &&
        (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 2) != '\x14')) &&
       (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 2) != '\x15')))) {
-    DAT_2001cdd2 = 0;
-    DAT_2001cdd1 = 0;
+    WORK_MODE_ANIMATION_STATE = 0;
+    WORK_MODE_STATE_VALIDATION_FLAGS = 0;
   }
   DAT_2001cdd3 = 1;
   iVar1 = get_work_mode();

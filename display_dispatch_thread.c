@@ -237,12 +237,14 @@ LAB_00028eae:
       case '\x03':
         iVar7 = calculate_mathematical_operation_with_bit_shifting();
         iVar3 = iVar7;
-        if ((DAT_20007afc != 0) && (iVar3 = DAT_20007afc, 9999 < (uint)(iVar7 - DAT_20007afc))) {
+        if ((DISPLAY_DISPATCH_THREAD_STATE_MANAGEMENT != 0) &&
+           (iVar3 = DISPLAY_DISPATCH_THREAD_STATE_MANAGEMENT,
+           9999 < (uint)(iVar7 - DISPLAY_DISPATCH_THREAD_STATE_MANAGEMENT))) {
           DAT_20007af8 = (DAT_20007af8 + 1) % 7;
-          DAT_20007afc = 0;
-          iVar3 = DAT_20007afc;
+          DISPLAY_DISPATCH_THREAD_STATE_MANAGEMENT = 0;
+          iVar3 = DISPLAY_DISPATCH_THREAD_STATE_MANAGEMENT;
         }
-        DAT_20007afc = iVar3;
+        DISPLAY_DISPATCH_THREAD_STATE_MANAGEMENT = iVar3;
         iVar3 = DAT_20007af8;
         DAT_20007af4 = DAT_20007af4 + 1;
         param_1[0xe6] = (char)DAT_20007af4;

@@ -18,7 +18,7 @@ void handle_bluetooth_privacy_mode_management_with_parameter_validation
   uStack_c = param_2;
   uStack_8 = param_3;
   iVar1 = handle_bluetooth_privacy_mode_management_with_state_management(&uStack_10);
-  DAT_20002007 = (undefined1)iVar1;
+  BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE = (undefined1)iVar1;
   if (iVar1 != 0) {
     bluetooth_hci_command_processing_with_state_management_and_parameter(0,&uStack_10);
   }

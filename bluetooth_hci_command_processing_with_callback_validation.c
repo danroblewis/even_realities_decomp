@@ -8,7 +8,7 @@
 uint bluetooth_hci_command_processing_with_callback_validation(void)
 
 {
-  return (uint)(DAT_200020d4 << 0x1d) >> 0x1f;
+  return (uint)(BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x1d) >> 0x1f;
 }
 
 

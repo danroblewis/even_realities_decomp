@@ -26,7 +26,7 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
   uint local_2c;
   
   puVar3 = &DAT_20002108;
-  if (DAT_20002104 == 0) {
+  if (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION == 0) {
     puVar3 = (undefined *)0x0;
   }
   uVar9 = manage_ble_connection_state_comprehensive(puVar3,param_2,0,0);
@@ -36,10 +36,10 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
                           (param_1 + 0x1c,(int)((ulonglong)uVar9 >> 0x20),0,0);
     }
     else {
-      local_2c = (uint)DAT_20002104;
+      local_2c = (uint)SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION;
       iVar8 = param_3 + 0xc;
       uVar4 = calculate_ble_buffer_available_space(iVar8);
-      uVar2 = DAT_20002104;
+      uVar2 = SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION;
       if (uVar4 <= local_2c) {
         uVar2 = calculate_ble_buffer_available_space(iVar8);
       }
@@ -131,7 +131,7 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
       uVar6 = 0xffffff80;
     }
     puVar3 = &DAT_20002108;
-    if (DAT_20002104 == 0) {
+    if (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION == 0) {
       puVar3 = (undefined *)0x0;
     }
     z_spin_lock_valid(puVar3);

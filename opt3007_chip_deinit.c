@@ -9,9 +9,9 @@ void opt3007_chip_deinit(undefined4 param_1,undefined4 param_2,undefined4 param_
                         )
 
 {
-  if (DAT_20007b6c != 0) {
+  if (OPT3007_LIGHT_SENSOR_STATE != 0) {
     param_3 = 0;
-    *(undefined4 *)(DAT_20007b6c + 0x10) = 0;
+    *(undefined4 *)(OPT3007_LIGHT_SENSOR_STATE + 0x10) = 0;
   }
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
@@ -21,7 +21,7 @@ void opt3007_chip_deinit(undefined4 param_1,undefined4 param_2,undefined4 param_
       handle_heartbeat();
     }
   }
-  DAT_20018da1 = 0;
+  OPT3001_AMBIENT_LIGHT_SENSOR_STATE = 0;
   return;
 }
 

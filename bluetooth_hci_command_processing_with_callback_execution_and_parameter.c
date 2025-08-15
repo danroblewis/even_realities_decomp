@@ -8,7 +8,7 @@
 undefined1 * bluetooth_hci_command_processing_with_callback_execution_and_parameter(void)
 
 {
-  return &DAT_2000216c;
+  return &BLUETOOTH_HCI_COMMAND_PROCESSING_STATE;
 }
 
 

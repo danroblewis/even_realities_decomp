@@ -12,7 +12,7 @@ void format_bluetooth_log_message_with_validation(void)
   char *local_1c;
   int local_18;
   
-  local_18 = (uint)DAT_20002007 * 7;
+  local_18 = (uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE * 7;
   local_18 = format_bluetooth_log_message("id",0);
   if (local_18 != 0) {
     local_1c = "Failed to save ID (err %d)";

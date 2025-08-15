@@ -84,7 +84,7 @@ undefined4 ui_even_ai_task(int param_1,undefined4 param_2,int param_3)
         gui_screen_clear();
       }
       iVar4 = 0;
-      DAT_20009fd8 = 0;
+      UI_EVEN_AI_TASK_STATE_DATA = 0;
       reset_animation_counters();
       DAT_2000a054 = 0x80;
       DAT_2000a040 = 0;
@@ -316,14 +316,14 @@ LAB_0003ca06:
                   (iVar4 + 0x23c,uVar12,iVar16 + 0x23c,iVar6 + 0x88,1,*(undefined1 *)(iVar3 + 0xf3),
                    0);
       }
-      DAT_20009fd8 = 1;
+      UI_EVEN_AI_TASK_STATE_DATA = 1;
       return 0;
     }
   }
   else if (cVar1 != '\x04') {
     if (uVar5 < 5) {
-      if (DAT_20009fd8 != 0) {
-        DAT_20009fd8 = 0;
+      if (UI_EVEN_AI_TASK_STATE_DATA != 0) {
+        UI_EVEN_AI_TASK_STATE_DATA = 0;
         gui_screen_clear();
       }
       uVar12 = get_ui_x_offset();
@@ -334,8 +334,8 @@ LAB_0003ca06:
       return 0;
     }
     if (uVar5 == 0xb) {
-      if (DAT_20009fd8 != 0) {
-        DAT_20009fd8 = 0;
+      if (UI_EVEN_AI_TASK_STATE_DATA != 0) {
+        UI_EVEN_AI_TASK_STATE_DATA = 0;
         gui_screen_clear();
       }
       uVar12 = get_ui_x_offset();
@@ -370,7 +370,7 @@ LAB_0003ca06:
           iVar6 = get_ui_y_offset();
           gui_utf_draw(0," ",0,iVar3 + 0x58,iVar4 + 0x36,iVar16 + 0x230,iVar6 + 0x87,5,0,0,0,0);
           DAT_20009fd4 = 0;
-          DAT_20009fd8 = 1;
+          UI_EVEN_AI_TASK_STATE_DATA = 1;
           return 0;
         }
         goto LAB_0003ca06;
@@ -526,7 +526,7 @@ LAB_0003c446:
   } while (iVar3 != 8);
   set_work_mode_flag_bit_1();
   handle_display_mode_change(iVar4);
-  DAT_20009fd8 = 1;
+  UI_EVEN_AI_TASK_STATE_DATA = 1;
   return 0;
 }
 

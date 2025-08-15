@@ -39,7 +39,8 @@ void process_hardware_interrupt_and_set_priority(uint interrupt_source,uint enab
     }
     if (enable_flag != 0) {
       iVar1 = calculate_bit_offset_with_lookup(interrupt_source);
-      uVar2 = ((uint)*(ushort *)((int)&DAT_20002bc0 + (iVar1 + 8) * 2) << 0x1b) >> 0x1d;
+      uVar2 = ((uint)*(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar1 + 8) * 2) <<
+              0x1b) >> 0x1d;
       if (uVar2 == 4) {
         iVar1 = 3;
       }

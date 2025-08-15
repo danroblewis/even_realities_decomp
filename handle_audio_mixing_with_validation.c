@@ -13,7 +13,7 @@ undefined1 * handle_audio_mixing_with_validation(float param_1)
   float extraout_s0;
   
   puVar1 = (undefined1 *)calculate_mathematical_function_with_audio_power_integration();
-  if ((DAT_200035af != -1) && (!NAN(param_1))) {
+  if ((VOLTAGE_REGULATION_AND_AUDIO_MIXING_PARAMETERS != -1) && (!NAN(param_1))) {
     puVar1 = (undefined1 *)setup_audio_mixing(param_1);
     if (1.0 < extraout_s0) {
       puVar2 = (undefined4 *)calculate_data_structure_offset();

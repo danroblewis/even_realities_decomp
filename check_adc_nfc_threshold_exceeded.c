@@ -9,7 +9,7 @@ bool check_adc_nfc_threshold_exceeded(void)
 
 {
   update_adc_nfc_reference_value();
-  return 0x13ec < DAT_20007a24;
+  return 0x13ec < ADC_NFC_SENSOR_REFERENCE_VALUE;
 }
 
 

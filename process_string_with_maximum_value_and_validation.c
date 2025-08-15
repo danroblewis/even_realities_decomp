@@ -20,7 +20,8 @@ void process_string_with_maximum_value_and_validation
   local_64 = 0xffff0208;
   local_70[0] = param_1;
   local_60 = param_1;
-  process_printf_format_comprehensive(DAT_20002d20,local_70,param_2,param_3);
+  process_printf_format_comprehensive
+            (STRING_PROCESSING_AND_PRINTF_CONFIGURATION,local_70,param_2,param_3);
   *local_70[0] = 0;
   return;
 }

@@ -30,7 +30,7 @@ void copy_system_data(void)
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x60) = DAT_2007fc60._1_1_;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 99) = DAT_2007fc68;
   if (DAT_2007fc69 < 4) {
-    DAT_2001b816 = DAT_2007fc69;
+    SYSTEM_PARAMETER_AND_WORK_MODE_STATUS = DAT_2007fc69;
   }
   puVar4 = (undefined4 *)(*(int *)(iVar1 + 0xfec) + 0xe);
   puVar6 = &DAT_2007fc10;

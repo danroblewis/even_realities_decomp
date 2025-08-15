@@ -23,12 +23,12 @@ int send_data_packet_with_validation_and_retry(uint param_1,undefined4 param_2)
   else {
     iVar3 = 4;
   }
-  if ((uint)(((iVar1 - DAT_20007a20) + -1) - iVar3) < param_1) {
+  if ((uint)(((iVar1 - BLE_DATA_PROCESSING_BUFFER) + -1) - iVar3) < param_1) {
     iVar1 = -2;
   }
   else {
     iVar3 = handle_complex_data_processing_alt();
-    iVar1 = DAT_20007a20;
+    iVar1 = BLE_DATA_PROCESSING_BUFFER;
     if (iVar3 == 0) {
       if (param_1 < 0xff) {
         iVar3 = 2;
@@ -39,7 +39,8 @@ int send_data_packet_with_validation_and_retry(uint param_1,undefined4 param_2)
         local_1c = CONCAT22((ushort)((param_1 & 0xff) << 8) | (ushort)(param_1 >> 8) & 0xff,0xff03);
       }
       iVar2 = send_data_packet_with_retry_and_mutex
-                        (SYSTEM_CONFIGURATION_PARAMETER,DAT_20007a20,&local_1c,iVar3,uVar4);
+                        (SYSTEM_CONFIGURATION_PARAMETER,BLE_DATA_PROCESSING_BUFFER,&local_1c,iVar3,
+                         uVar4);
       if (iVar2 == 0) {
         iVar2 = send_data_packet_with_retry_and_mutex
                           (SYSTEM_CONFIGURATION_PARAMETER,iVar3 + iVar1,param_2,param_1);

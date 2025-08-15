@@ -85,11 +85,11 @@ void low_speed_peripheral_dispatch_thread(char *param_1)
       if (((iVar1 == 0) || (param_1[0xae3] != '\0')) || (*(int *)(param_1 + 0x9b4) == 0)) {
         check_bind_status(param_1,uVar6,uVar2);
         if (*param_1 != '\x01') {
-          if (DAT_20018d91 == '\0') {
+          if (ANCS_STATUS_AND_WORK_MODE_FLAGS == '\0') {
             param_1[0x6de] = param_1[0x6de] & 0xfe;
           }
           else {
-            DAT_20018d91 = DAT_20018d91 + -1;
+            ANCS_STATUS_AND_WORK_MODE_FLAGS = ANCS_STATUS_AND_WORK_MODE_FLAGS + -1;
           }
           uVar9 = 0;
           goto LAB_0002abb8;
@@ -98,11 +98,11 @@ void low_speed_peripheral_dispatch_thread(char *param_1)
         uVar8 = 0;
 LAB_0002ab84:
         uVar9 = uVar8;
-        if (DAT_20018d91 == '\0') {
+        if (ANCS_STATUS_AND_WORK_MODE_FLAGS == '\0') {
           param_1[0xe4] = param_1[0xe4] & 0xfc;
         }
         else {
-          DAT_20018d91 = DAT_20018d91 + -1;
+          ANCS_STATUS_AND_WORK_MODE_FLAGS = ANCS_STATUS_AND_WORK_MODE_FLAGS + -1;
         }
 LAB_0002a9de:
         iVar3 = sync_to_slave(param_1,0xc,0);
@@ -119,12 +119,12 @@ LAB_0002a9fc:
           uVar8 = 1;
           if ((param_1[0x6de] & 1U) == 0) goto LAB_0002ab84;
           param_1[0xe4] = param_1[0xe4] | 3;
-          DAT_20018d91 = '\x03';
+          ANCS_STATUS_AND_WORK_MODE_FLAGS = '\x03';
           uVar9 = (byte)param_1[0x6de] & 1;
           goto LAB_0002a9de;
         }
         uVar9 = 1;
-        DAT_20018d91 = '\x03';
+        ANCS_STATUS_AND_WORK_MODE_FLAGS = '\x03';
         param_1[0x6de] = param_1[0x6de] | 1;
 LAB_0002abb8:
         if ((int)((uint)(byte)(param_1[0xe4] ^ param_1[0x6de]) << 0x1f) < 0) {

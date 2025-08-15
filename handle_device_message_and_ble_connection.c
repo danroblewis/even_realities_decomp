@@ -30,12 +30,12 @@ LAB_0005ffbe:
     }
     if (iVar1 == 0) {
 LAB_00060032:
-      if (DAT_2000b059 == '\0') {
+      if (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE == '\0') {
         return;
       }
-      DAT_2000b059 = 0;
+      DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = 0;
       if (-1 < (int)((uint)DAT_2000b058 << 0x1f)) {
-        DAT_2000b059 = 0;
+        DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = 0;
         return;
       }
       manage_task_state_decrement_with_priority_control(DAT_2000b008);
@@ -43,7 +43,8 @@ LAB_00060032:
     }
 LAB_00060086:
     enqueue_message_to_priority_queue(DAT_2000b01c);
-    if ((DAT_2000b059 != '\0') && (DAT_2000b059 = '\0', (int)((uint)DAT_2000b058 << 0x1f) < 0)) {
+    if ((DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE != '\0') &&
+       (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = '\0', (int)((uint)DAT_2000b058 << 0x1f) < 0)) {
       manage_task_state_decrement_with_priority_control(DAT_2000b008);
     }
   }
@@ -72,7 +73,8 @@ LAB_00060086:
     if (DAT_2000b05a != '\0') {
       cVar2 = DAT_2000b05a;
       if (*(int *)(param_1 + 4) == 0) {
-        if ((DAT_2000b059 != '\0') && (DAT_2000b059 = '\0', (int)((uint)DAT_2000b058 << 0x1f) < 0))
+        if ((DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE != '\0') &&
+           (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = '\0', (int)((uint)DAT_2000b058 << 0x1f) < 0))
         {
           manage_task_state_decrement_with_priority_control(DAT_2000b008);
         }

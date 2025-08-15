@@ -11,7 +11,7 @@ undefined4 * handle_mathematical_function_with_validation(float param_1)
   undefined4 *puVar1;
   
   puVar1 = (undefined4 *)calculate_natural_logarithm_function();
-  if ((DAT_200035af != -1) && (param_1 <= 0.0)) {
+  if ((VOLTAGE_REGULATION_AND_AUDIO_MIXING_PARAMETERS != -1) && (param_1 <= 0.0)) {
     if (param_1 != 0.0) {
       puVar1 = (undefined4 *)calculate_data_structure_offset();
       *puVar1 = 0x21;

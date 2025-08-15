@@ -11,7 +11,7 @@ void handle_bluetooth_privacy_mode_management_with_validation_and_callback_execu
 {
                     /* WARNING: Could not recover jumptable at 0x00055714. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)(&DAT_20002018);
+  (*UNRECOVERED_JUMPTABLE)(&BLE_CHARACTERISTIC_VALIDATION_BUFFER);
   return;
 }
 

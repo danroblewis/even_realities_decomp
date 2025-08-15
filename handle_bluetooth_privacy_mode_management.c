@@ -18,28 +18,30 @@ void handle_bluetooth_privacy_mode_management(undefined1 *param_1)
   if (param_1 == (undefined1 *)0x0) {
     return;
   }
-  if ((DAT_20002120 == 0) || (DAT_20002120 < DAT_20002121)) {
-    DAT_20002121 = DAT_20002121 + 1;
+  if ((BLUETOOTH_PRIVACY_MODE_STATE == 0) ||
+     (BLUETOOTH_PRIVACY_MODE_STATE < BLUETOOTH_PRIVACY_MODE_CURRENT_STATE)) {
+    BLUETOOTH_PRIVACY_MODE_CURRENT_STATE = BLUETOOTH_PRIVACY_MODE_CURRENT_STATE + 1;
     param_1[8] = param_1[8] | 4;
     return;
   }
   iVar1 = bt_connection_disconnect_with_parameter_validation_and_callback(0,0,6);
   if (iVar1 != 0) {
-    DAT_200020d4 = DAT_200020d4 | 0x8000;
+    BLUETOOTH_PRIVACY_MODE_CONFIGURATION = BLUETOOTH_PRIVACY_MODE_CONFIGURATION | 0x8000;
     param_1[8] = param_1[8] | 1;
     validate_and_process_ble_characteristics_with_callback_validation_and_state_management();
     return;
   }
   handle_bluetooth_privacy_mode_management_with_validation_and_callback_execution(&LAB_000810aa_1,0)
   ;
-  if ((DAT_20002121 == 0) || (iVar1 = process_bluetooth_hci_command_202d(0), iVar1 == 0)) {
-    if (DAT_20002121 == DAT_20002120) {
+  if ((BLUETOOTH_PRIVACY_MODE_CURRENT_STATE == 0) ||
+     (iVar1 = process_bluetooth_hci_command_202d(0), iVar1 == 0)) {
+    if (BLUETOOTH_PRIVACY_MODE_CURRENT_STATE == BLUETOOTH_PRIVACY_MODE_STATE) {
       local_1c = "Resolving list size exceeded. Switching to host.";
       local_20 = 2;
       execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1080,&local_20);
       iVar1 = process_data_with_initialization_and_validation(0x2029,0);
       if (iVar1 == 0) {
-        DAT_20002121 = DAT_20002121 + 1;
+        BLUETOOTH_PRIVACY_MODE_CURRENT_STATE = BLUETOOTH_PRIVACY_MODE_CURRENT_STATE + 1;
         param_1[8] = param_1[8] | 4;
         goto LAB_00054f5c;
       }
@@ -49,7 +51,7 @@ void handle_bluetooth_privacy_mode_management(undefined1 *param_1)
       iVar1 = process_bluetooth_hci_command_with_memory_allocation
                         (*param_1,param_1 + 1,param_1 + 0x2a);
       if (iVar1 == 0) {
-        DAT_20002121 = DAT_20002121 + 1;
+        BLUETOOTH_PRIVACY_MODE_CURRENT_STATE = BLUETOOTH_PRIVACY_MODE_CURRENT_STATE + 1;
         param_1[8] = param_1[8] | 4;
         if (-1 < (int)((uint)DAT_200020a7 << 0x1d)) {
           local_1c = "Set privacy mode command is not supported";

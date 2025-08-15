@@ -59,15 +59,15 @@ undefined4 calibrate_sensor_with_data_validation(int param_1)
           uVar2 = calculate_data_checksum_in_4byte_chunks(&DAT_000a49ed,0x1b9c,0x37f8);
           local_48 = uVar2 << 0x18 | (uVar2 >> 8 & 0xff) << 0x10 | (uVar2 >> 0x10 & 0xff) << 8 |
                      uVar2 >> 0x18;
-          DAT_20019dad = 1;
+          SENSOR_CALIBRATION_DATA_BUFFER = 1;
           iVar1 = process_sensor_data_packet(1,1,0,0);
           if (iVar1 == 0) {
             local_38 = 0x803f0010;
-            DAT_20019dad = 2;
+            SENSOR_CALIBRATION_DATA_BUFFER = 2;
             uVar3 = process_sensor_data_packet(2,2,&local_38,4);
             uVar2 = local_48;
             if (uVar3 == 0) {
-              DAT_20019dad = 4;
+              SENSOR_CALIBRATION_DATA_BUFFER = 4;
               local_30 = 0x22202220;
               local_34 = 0xf83f0010;
               local_2c = local_48;
@@ -101,13 +101,13 @@ undefined4 calibrate_sensor_with_data_validation(int param_1)
   while (uVar2 = uVar2 + 0x80, uVar2 != 0x10003f80) {
 LAB_0003095a:
     local_38 = CONCAT22((ushort)((uVar2 & 0xff) << 8) | (ushort)(uVar2 >> 8) & 0xff,0x10);
-    DAT_20019dad = 2;
+    SENSOR_CALIBRATION_DATA_BUFFER = 2;
     iVar1 = process_sensor_data_packet(2,2,&local_38,4);
     if (iVar1 != 0) goto LAB_000307b6;
   }
   cVar6 = '\x01';
   iVar1 = 0x10002000;
-  DAT_20019dad = 3;
+  SENSOR_CALIBRATION_DATA_BUFFER = 3;
   do {
     puVar4 = (undefined2 *)malloc_maybe(0x108);
     if (puVar4 == (undefined2 *)0x0) goto LAB_000307b6;
@@ -136,7 +136,7 @@ LAB_0003095a:
     iVar1 = process_sensor_data_packet(1,2,puVar4,0xa4);
     if (iVar1 == 0) {
       call_data_verification_handler_with_memory_cleanup(puVar4);
-      DAT_20019dad = 6;
+      SENSOR_CALIBRATION_DATA_BUFFER = 6;
       iVar1 = 10;
       transmit_sensor_data_with_retry(0x4444,0x10000);
       transmit_sensor_data_with_retry(0xff20,0x3c00ffff);

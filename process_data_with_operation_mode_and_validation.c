@@ -50,7 +50,7 @@ process_data_with_operation_mode_and_validation
         uVar2 = 0xffffffff;
       }
       else {
-        if (DAT_2001a128 != 0) {
+        if (UART_CALLBACK_AND_OPERATION_MODE_DATA != 0) {
           uVar6 = 0;
           do {
             if (((((&DAT_2001a129)[uVar6] == 'Z') && ((&DAT_2001a12a)[uVar6] == -0x5b)) &&
@@ -75,18 +75,19 @@ process_data_with_operation_mode_and_validation
                   DEBUG_PRINT("%02x ",(uint)*pbVar7);
                 }
                 DEBUG_PRINT(&DAT_000f5400);
-                if ((int)uVar6 <= (int)(0x100 - (uint)DAT_2001a128)) {
-                  DAT_2001a128 = 0;
+                if ((int)uVar6 <= (int)(0x100 - (uint)UART_CALLBACK_AND_OPERATION_MODE_DATA)) {
+                  UART_CALLBACK_AND_OPERATION_MODE_DATA = 0;
                   return 0;
                 }
 LAB_000335f6:
-                DAT_2001a128 = 0;
+                UART_CALLBACK_AND_OPERATION_MODE_DATA = 0;
                 DEBUG_PRINT("Err:serial recv data does not meet the protocol\n");
                 return 0xfffffffd;
               }
             }
             uVar6 = uVar6 + 1 & 0xffff;
-            if ((int)(0x100 - (uint)DAT_2001a128) < (int)uVar6) goto LAB_000335f6;
+            if ((int)(0x100 - (uint)UART_CALLBACK_AND_OPERATION_MODE_DATA) < (int)uVar6)
+            goto LAB_000335f6;
           } while( true );
         }
         uVar2 = 0xfffffffe;

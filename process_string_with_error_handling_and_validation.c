@@ -18,10 +18,10 @@ int process_string_with_error_handling_and_validation
   undefined1 *local_70;
   int local_6c;
   
-  puVar1 = DAT_20002d20;
+  puVar1 = STRING_PROCESSING_AND_PRINTF_CONFIGURATION;
   if (param_2 < 0) {
     iVar2 = -1;
-    *DAT_20002d20 = 0x8b;
+    *STRING_PROCESSING_AND_PRINTF_CONFIGURATION = 0x8b;
   }
   else {
     local_74 = 0x208;
@@ -35,7 +35,8 @@ int process_string_with_error_handling_and_validation
     local_80[0] = param_1;
     local_70 = param_1;
     local_6c = local_78;
-    iVar2 = process_printf_format_comprehensive(DAT_20002d20,local_80,param_3);
+    iVar2 = process_printf_format_comprehensive
+                      (STRING_PROCESSING_AND_PRINTF_CONFIGURATION,local_80,param_3);
     if (iVar2 + 1 < 0 != SCARRY4(iVar2,1)) {
       *puVar1 = 0x8b;
     }

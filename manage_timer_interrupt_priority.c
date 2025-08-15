@@ -13,13 +13,13 @@ uint manage_timer_interrupt_priority(void)
   uint uVar3;
   
   do {
-    if (DAT_2000b2d4 == 0) {
+    if (TIMER_INTERRUPT_FLAG_AND_PRIORITY == 0) {
       return 0xfffffff4;
     }
-    uVar1 = 0x1f - LZCOUNT(DAT_2000b2d4);
-    uVar3 = DAT_2000b2d4 & ~(1 << (uVar1 & 0xff));
-    uVar2 = DAT_2000b2d4 >> (uVar1 & 0xff);
-    DAT_2000b2d4 = uVar3;
+    uVar1 = 0x1f - LZCOUNT(TIMER_INTERRUPT_FLAG_AND_PRIORITY);
+    uVar3 = TIMER_INTERRUPT_FLAG_AND_PRIORITY & ~(1 << (uVar1 & 0xff));
+    uVar2 = TIMER_INTERRUPT_FLAG_AND_PRIORITY >> (uVar1 & 0xff);
+    TIMER_INTERRUPT_FLAG_AND_PRIORITY = uVar3;
   } while (-1 < (int)(uVar2 << 0x1f));
   return uVar1;
 }

@@ -54,24 +54,25 @@ LAB_0002a516:
         if ((int)uVar9 != 1) {
           do {
             iVar4 = manage_ble_connection_state_comprehensive(&DAT_20007b00,uVar5,0x18000,0);
-            cVar2 = DAT_20018d94;
+            cVar2 = POWER_MANAGEMENT_STATE;
             if (iVar4 != 0) {
-              DAT_20018d94 = cVar2;
-              if ((DAT_20018d94 == '\0') && (iVar4 = get_work_mode(), *(char *)(iVar4 + 1) != '\b'))
-              {
+              POWER_MANAGEMENT_STATE = cVar2;
+              if ((POWER_MANAGEMENT_STATE == '\0') &&
+                 (iVar4 = get_work_mode(), *(char *)(iVar4 + 1) != '\b')) {
                 uVar9 = calculate_mathematical_operation_with_bit_shifting();
-                uVar7 = DAT_200040cc;
+                uVar7 = SYSTEM_TIMESTAMP_AND_MONITORING_DATA;
                 uVar1 = DAT_200040c8;
                 uVar10 = calculate_mathematical_operation_with_bit_shifting();
                 uVar8 = (uint)((ulonglong)uVar10 >> 0x20);
-                if ((DAT_200040cc <= uVar8 &&
-                     (uint)((uint)uVar10 <= DAT_200040c8) <= DAT_200040cc - uVar8) &&
+                if ((SYSTEM_TIMESTAMP_AND_MONITORING_DATA <= uVar8 &&
+                     (uint)((uint)uVar10 <= DAT_200040c8) <=
+                     SYSTEM_TIMESTAMP_AND_MONITORING_DATA - uVar8) &&
                    (uVar7 = (int)((ulonglong)uVar9 >> 0x20) - uVar7,
                    uVar8 = (uint)((uint)uVar9 < uVar1),
                    uVar7 != uVar8 || uVar7 - uVar8 < (uint)(3000 < (uint)uVar9 - uVar1))) {
                   set_sensor_enable_state(0,0);
                   set_sensor_enable_state(1,0);
-                  DAT_20018d94 = cVar2;
+                  POWER_MANAGEMENT_STATE = cVar2;
                 }
               }
               goto LAB_0002a516;
@@ -79,8 +80,9 @@ LAB_0002a516:
             uStack_2c = uStack_2c & 0xffffff;
             uVar9 = calculate_mathematical_operation_with_bit_shifting();
             uVar7 = (uint)((ulonglong)uVar9 >> 0x20);
-            if (DAT_200040cc <= uVar7 && (uint)((uint)uVar9 <= DAT_200040c8) <= DAT_200040cc - uVar7
-               ) {
+            if (SYSTEM_TIMESTAMP_AND_MONITORING_DATA <= uVar7 &&
+                (uint)((uint)uVar9 <= DAT_200040c8) <= SYSTEM_TIMESTAMP_AND_MONITORING_DATA - uVar7)
+            {
               calculate_and_store_timestamp_with_offset(0);
             }
             retry_nfc_operation_with_backoff((int)&uStack_2c + 3);

@@ -31,7 +31,7 @@ undefined4 process_data_with_validation_and_parameter_alt6(void)
   undefined4 local_30;
   char *local_2c;
   
-  if (DAT_200028b8 == (undefined4 *)0x0) {
+  if (DATA_PROCESSING_BUFFER_POINTERS == (undefined4 *)0x0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","svc->attrs",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x671);
     DEBUG_PRINT2("\tinvalid parameters\n\n");
@@ -57,21 +57,21 @@ LAB_0005ad5c:
   update_ble_connection_handle_counter();
   local_44[0] = 0;
   local_42 = 0x1800;
-  iVar3 = compare_data_structures(*DAT_200028b8,local_44);
+  iVar3 = compare_data_structures(*DATA_PROCESSING_BUFFER_POINTERS,local_44);
   if (iVar3 == 0) {
     return 0xffffff88;
   }
   local_40._0_2_ = (ushort)local_40 & 0xff00;
   local_40 = CONCAT22(0x1801,(ushort)local_40);
-  iVar3 = compare_data_structures(*DAT_200028b8,&local_40);
+  iVar3 = compare_data_structures(*DATA_PROCESSING_BUFFER_POINTERS,&local_40);
   if (iVar3 == 0) {
     return 0xffffff88;
   }
   process_ble_connection_state();
-  puVar7 = DAT_200028b8;
+  puVar7 = DATA_PROCESSING_BUFFER_POINTERS;
   uVar2 = DAT_200028bc;
-  if (DAT_2000af08 == (undefined4 *)0x0) {
-    if (DAT_200028b8 != (undefined4 *)0x0) {
+  if (BLE_HANDLE_MAPPING_PROCESSING_STATE == (undefined4 *)0x0) {
+    if (DATA_PROCESSING_BUFFER_POINTERS != (undefined4 *)0x0) {
       uVar11 = DAT_2000ff3c;
       uVar10 = 0;
 LAB_0005aeb8:
@@ -101,32 +101,34 @@ LAB_0005aeb8:
     }
   }
   else {
-    if (DAT_2000af0c == (undefined4 *)0x0) {
+    if (BLE_DATA_VALIDATION_AND_PROCESSING_STATE == (undefined4 *)0x0) {
                     /* WARNING: Does not return */
       pcVar1 = (code *)software_udf(0xff,0x5af50);
       (*pcVar1)();
     }
-    uVar11 = *(ushort *)(DAT_2000af0c[-1] * 0x14 + DAT_2000af0c[-2] + -4);
+    uVar11 = *(ushort *)
+              (BLE_DATA_VALIDATION_AND_PROCESSING_STATE[-1] * 0x14 +
+               BLE_DATA_VALIDATION_AND_PROCESSING_STATE[-2] + -4);
     uVar10 = uVar11;
-    if (DAT_200028b8 != (undefined4 *)0x0) goto LAB_0005aeb8;
+    if (DATA_PROCESSING_BUFFER_POINTERS != (undefined4 *)0x0) goto LAB_0005aeb8;
 LAB_0005ae66:
-    if ((uVar10 != 0) && (*(ushort *)(DAT_200028b8 + 4) <= uVar10)) {
-      puVar7 = DAT_2000af08;
-      if (DAT_2000af08 != (undefined4 *)0x0) {
+    if ((uVar10 != 0) && (*(ushort *)(DATA_PROCESSING_BUFFER_POINTERS + 4) <= uVar10)) {
+      puVar7 = BLE_HANDLE_MAPPING_PROCESSING_STATE;
+      if (BLE_HANDLE_MAPPING_PROCESSING_STATE != (undefined4 *)0x0) {
         piVar8 = (int *)0x0;
-        puVar4 = DAT_2000af08;
+        puVar4 = BLE_HANDLE_MAPPING_PROCESSING_STATE;
         do {
           piVar9 = puVar4 + -2;
-          if (*(ushort *)(DAT_200028b8 + 4) < *(ushort *)(*piVar9 + 0x10)) {
+          if (*(ushort *)(DATA_PROCESSING_BUFFER_POINTERS + 4) < *(ushort *)(*piVar9 + 0x10)) {
             if (piVar8 == (int *)0x0) {
-              DAT_2000af08 = &DAT_200028c0;
-              DAT_200028c0 = puVar7;
-              if (DAT_2000af0c == (undefined4 *)0x0) goto LAB_0005af16;
+              BLE_HANDLE_MAPPING_PROCESSING_STATE = &DATA_PROCESSING_BUFFER_METADATA;
+              DATA_PROCESSING_BUFFER_METADATA = puVar7;
+              if (BLE_DATA_VALIDATION_AND_PROCESSING_STATE == (undefined4 *)0x0) goto LAB_0005af16;
             }
             else {
-              DAT_200028c0 = (undefined4 *)piVar8[2];
-              if (DAT_200028c0 == (undefined4 *)0x0) goto LAB_0005ae30;
-              piVar8[2] = (int)&DAT_200028c0;
+              DATA_PROCESSING_BUFFER_METADATA = (undefined4 *)piVar8[2];
+              if (DATA_PROCESSING_BUFFER_METADATA == (undefined4 *)0x0) goto LAB_0005ae30;
+              piVar8[2] = (int)&DATA_PROCESSING_BUFFER_METADATA;
             }
             break;
           }
@@ -137,23 +139,23 @@ LAB_0005ae66:
       goto LAB_0005ae3a;
     }
   }
-  DAT_200028c0 = (undefined4 *)0x0;
+  DATA_PROCESSING_BUFFER_METADATA = (undefined4 *)0x0;
 LAB_0005ae30:
-  if (DAT_2000af0c == (undefined4 *)0x0) {
-    DAT_2000af08 = &DAT_200028c0;
-    DAT_2000af0c = &DAT_200028c0;
+  if (BLE_DATA_VALIDATION_AND_PROCESSING_STATE == (undefined4 *)0x0) {
+    BLE_HANDLE_MAPPING_PROCESSING_STATE = &DATA_PROCESSING_BUFFER_METADATA;
+    BLE_DATA_VALIDATION_AND_PROCESSING_STATE = &DATA_PROCESSING_BUFFER_METADATA;
   }
   else {
-    *DAT_2000af0c = &DAT_200028c0;
+    *BLE_DATA_VALIDATION_AND_PROCESSING_STATE = &DATA_PROCESSING_BUFFER_METADATA;
 LAB_0005af16:
-    DAT_2000af0c = &DAT_200028c0;
+    BLE_DATA_VALIDATION_AND_PROCESSING_STATE = &DATA_PROCESSING_BUFFER_METADATA;
   }
 LAB_0005ae3a:
   iVar3 = get_ble_handle_value(&DAT_2000af04);
   if (iVar3 << 0x1f < 0) {
     update_ble_attribute_handle_range
-              (*(undefined2 *)(DAT_200028b8 + 4),
-               *(undefined2 *)(DAT_200028b8 + DAT_200028bc * 5 + -1));
+              (*(undefined2 *)(DATA_PROCESSING_BUFFER_POINTERS + 4),
+               *(undefined2 *)(DATA_PROCESSING_BUFFER_POINTERS + DAT_200028bc * 5 + -1));
     cleanup_and_validate_ble_connections();
   }
   finalize_ble_connection_with_magnetometer();

@@ -8,7 +8,7 @@
 undefined1 get_system_ready_state(void)
 
 {
-  return DAT_20019ef3;
+  return SYSTEM_READY_AND_SETTINGS_STATE;
 }
 
 

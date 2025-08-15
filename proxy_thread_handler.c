@@ -122,18 +122,21 @@ LAB_00047c76:
             }
           }
           if (local_3c == '\0') {
-            DAT_2001d34a = local_3b - 1;
+            PROXY_THREAD_DATA_PROCESSING_STATE = local_3b - 1;
             iVar3 = check_driver_ready(&FLASH_DRIVER_INTERFACE);
             if (iVar3 == 0) goto LAB_00047de2;
-            fill_memory_buffer(&DAT_2001d34b,0,0xe6);
+            fill_memory_buffer(&PROXY_THREAD_BUFFER_2,0,0xe6);
             iVar3 = get_work_mode();
             pcVar10 = *(code **)(iVar3 + 0x1030);
             uVar2 = get_work_mode();
-            iVar3 = (*pcVar10)(uVar2,0x400000,&DAT_2001d34b,0xe6);
+            iVar3 = (*pcVar10)(uVar2,0x400000,&PROXY_THREAD_BUFFER_2,0xe6);
             if (iVar3 == 0) {
-              if ((DAT_2001d34b == 0x5aa5aa5a) && ((&DAT_2001d353)[(uint)DAT_2001d34a * 5] == 2)) {
-                DAT_2000a08c = (&DAT_2001d357)[(uint)DAT_2001d34a * 5];
-                DAT_2000a088 = (&DAT_2001d35b)[(uint)DAT_2001d34a * 5];
+              if ((PROXY_THREAD_BUFFER_2 == 0x5aa5aa5a) &&
+                 ((&DAT_2001d353)[(uint)PROXY_THREAD_DATA_PROCESSING_STATE * 5] == 2)) {
+                PROXY_THREAD_HANDLER_DATA_BUFFER =
+                     (&DAT_2001d357)[(uint)PROXY_THREAD_DATA_PROCESSING_STATE * 5];
+                PROXY_THREAD_HANDLER_STATE_AND_DATA =
+                     (&DAT_2001d35b)[(uint)PROXY_THREAD_DATA_PROCESSING_STATE * 5];
               }
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -144,43 +147,51 @@ LAB_00047c76:
                   handle_heartbeat();
                 }
               }
-              fill_memory_buffer(&DAT_2001d34b,0,0xe6);
+              fill_memory_buffer(&PROXY_THREAD_BUFFER_2,0,0xe6);
               iVar3 = get_work_mode();
               pcVar10 = *(code **)(iVar3 + 0x1030);
               uVar2 = get_work_mode();
-              iVar3 = (*pcVar10)(uVar2,DAT_2000a08c,&DAT_2001d34b,0xbe);
+              iVar3 = (*pcVar10)(uVar2,PROXY_THREAD_HANDLER_DATA_BUFFER,&PROXY_THREAD_BUFFER_2,0xbe)
+              ;
               if (iVar3 == 0) {
-                DAT_2000a084 = (DAT_2000a088 - DAT_2000a08c) / 0xbe;
-                if (DAT_2000a088 - DAT_2000a08c != ((DAT_2000a088 - DAT_2000a08c) / 0xbe) * 0xbe) {
-                  DAT_2000a084 = DAT_2000a084 + 1;
+                PROXY_THREAD_HANDLER_COMMUNICATION_STATE =
+                     (PROXY_THREAD_HANDLER_STATE_AND_DATA - PROXY_THREAD_HANDLER_DATA_BUFFER) / 0xbe
+                ;
+                if (PROXY_THREAD_HANDLER_STATE_AND_DATA - PROXY_THREAD_HANDLER_DATA_BUFFER !=
+                    ((PROXY_THREAD_HANDLER_STATE_AND_DATA - PROXY_THREAD_HANDLER_DATA_BUFFER) / 0xbe
+                    ) * 0xbe) {
+                  PROXY_THREAD_HANDLER_COMMUNICATION_STATE =
+                       PROXY_THREAD_HANDLER_COMMUNICATION_STATE + 1;
                 }
-                DAT_2000a080 = DAT_2000a088 - DAT_2000a08c;
-                DAT_2001d263 = '\0';
-                DAT_2000a07c = 0;
-                DAT_2000a078 = 0;
-                fill_memory_buffer(&DAT_2001d264,0,0xe6);
-                DAT_2001d264 = 0x1e;
+                PROXY_THREAD_HANDLER_STATE_EXTENDED =
+                     PROXY_THREAD_HANDLER_STATE_AND_DATA - PROXY_THREAD_HANDLER_DATA_BUFFER;
+                PROXY_THREAD_BUFFER_1 = '\0';
+                PROXY_THREAD_HANDLER_STATE = 0;
+                PROXY_THREAD_STATE_BUFFER = 0;
+                fill_memory_buffer(&PROXY_THREAD_DATA_BUFFER,0,0xe6);
+                PROXY_THREAD_DATA_BUFFER = 0x1e;
                 DAT_2001d266 = 0;
-                DAT_2001d267 = DAT_2001d263;
-                DAT_2001d263 = DAT_2001d263 + '\x01';
+                DAT_2001d267 = PROXY_THREAD_BUFFER_1;
+                PROXY_THREAD_BUFFER_1 = PROXY_THREAD_BUFFER_1 + '\x01';
                 DAT_2001d268 = 2;
                 iVar3 = 3;
-                DAT_2001d269 = (char)DAT_2000a084;
-                DAT_2001d26a = (undefined1)((uint)DAT_2000a084 >> 8);
-                DAT_2000a07c = DAT_2000a07c + 1;
-                DAT_2001d26b = (undefined1)DAT_2000a07c;
-                DAT_2001d26c = (undefined1)((uint)DAT_2000a07c >> 8);
-                DAT_2001d26d = DAT_2001d34a + 1;
-                if (DAT_2000a080 - DAT_2000a078 < 0xbe) {
-                  iVar5 = DAT_2000a080 - DAT_2000a078;
+                DAT_2001d269 = (char)PROXY_THREAD_HANDLER_COMMUNICATION_STATE;
+                DAT_2001d26a = (undefined1)((uint)PROXY_THREAD_HANDLER_COMMUNICATION_STATE >> 8);
+                PROXY_THREAD_HANDLER_STATE = PROXY_THREAD_HANDLER_STATE + 1;
+                DAT_2001d26b = (undefined1)PROXY_THREAD_HANDLER_STATE;
+                DAT_2001d26c = (undefined1)((uint)PROXY_THREAD_HANDLER_STATE >> 8);
+                DAT_2001d26d = PROXY_THREAD_DATA_PROCESSING_STATE + 1;
+                if (PROXY_THREAD_HANDLER_STATE_EXTENDED - PROXY_THREAD_STATE_BUFFER < 0xbe) {
+                  iVar5 = PROXY_THREAD_HANDLER_STATE_EXTENDED - PROXY_THREAD_STATE_BUFFER;
                 }
                 else {
                   iVar5 = 0xbe;
                 }
-                validate_memory_bounds(&DAT_2001d26e,&DAT_2001d34b,iVar5,0xdc);
-                DAT_2001d265 = (char)iVar5 + 10;
-                while (iVar7 = (**(code **)(param_1 + 0x788))(&DAT_2001d264,DAT_2001d265), iVar7 < 0
-                      ) {
+                validate_memory_bounds(&DAT_2001d26e,&PROXY_THREAD_BUFFER_2,iVar5,0xdc);
+                PROXY_THREAD_COMMUNICATION_STATE = (char)iVar5 + 10;
+                while (iVar7 = (**(code **)(param_1 + 0x788))
+                                         (&PROXY_THREAD_DATA_BUFFER,PROXY_THREAD_COMMUNICATION_STATE
+                                         ), iVar7 < 0) {
                   if (1 < LOG_LEVEL) {
                     if (IS_DEBUG == 0) {
                       DEBUG_PRINT("%s(): Failed to send data over BLE connection: ret = %d \n",
@@ -208,8 +219,8 @@ LAB_00047c76:
                   }
                 }
                 DAT_2001d262 = '\x01';
-                DAT_2000a078 = DAT_2000a078 + iVar5;
-                exchange_sensor_data_value(DAT_2001d34a);
+                PROXY_THREAD_STATE_BUFFER = PROXY_THREAD_STATE_BUFFER + iVar5;
+                exchange_sensor_data_value(PROXY_THREAD_DATA_PROCESSING_STATE);
                 goto LAB_00048054;
               }
             }
@@ -236,34 +247,35 @@ LAB_00048082:
             get_and_reset_sensor_data_value();
             goto LAB_00047c76;
           }
-          if (DAT_2000a078 < DAT_2000a080) {
-            fill_memory_buffer(&DAT_2001d264,0,0xe6);
-            if (DAT_2000a080 - DAT_2000a078 < 0xbe) {
+          if (PROXY_THREAD_STATE_BUFFER < PROXY_THREAD_HANDLER_STATE_EXTENDED) {
+            fill_memory_buffer(&PROXY_THREAD_DATA_BUFFER,0,0xe6);
+            if (PROXY_THREAD_HANDLER_STATE_EXTENDED - PROXY_THREAD_STATE_BUFFER < 0xbe) {
               iVar3 = 0;
-              if (DAT_2000a080 - DAT_2000a078 < 0xbe) {
-                iVar3 = DAT_2000a080 - DAT_2000a078;
+              if (PROXY_THREAD_HANDLER_STATE_EXTENDED - PROXY_THREAD_STATE_BUFFER < 0xbe) {
+                iVar3 = PROXY_THREAD_HANDLER_STATE_EXTENDED - PROXY_THREAD_STATE_BUFFER;
               }
             }
             else {
               iVar3 = 0xbe;
             }
-            DAT_2001d264 = 0x1e;
-            DAT_2001d265 = (char)iVar3 + 10;
+            PROXY_THREAD_DATA_BUFFER = 0x1e;
+            PROXY_THREAD_COMMUNICATION_STATE = (char)iVar3 + 10;
             DAT_2001d266 = 0;
-            DAT_2001d267 = DAT_2001d263;
-            DAT_2001d263 = DAT_2001d263 + '\x01';
+            DAT_2001d267 = PROXY_THREAD_BUFFER_1;
+            PROXY_THREAD_BUFFER_1 = PROXY_THREAD_BUFFER_1 + '\x01';
             DAT_2001d268 = 2;
-            DAT_2001d269 = (char)DAT_2000a084;
-            DAT_2001d26a = (undefined1)((uint)DAT_2000a084 >> 8);
-            DAT_2000a07c = DAT_2000a07c + 1;
-            DAT_2001d26b = (undefined1)DAT_2000a07c;
-            DAT_2001d26c = (undefined1)((uint)DAT_2000a07c >> 8);
-            DAT_2001d26d = DAT_2001d34a + 1;
-            fill_memory_buffer(&DAT_2001d34b,0,0xe6);
+            DAT_2001d269 = (char)PROXY_THREAD_HANDLER_COMMUNICATION_STATE;
+            DAT_2001d26a = (undefined1)((uint)PROXY_THREAD_HANDLER_COMMUNICATION_STATE >> 8);
+            PROXY_THREAD_HANDLER_STATE = PROXY_THREAD_HANDLER_STATE + 1;
+            DAT_2001d26b = (undefined1)PROXY_THREAD_HANDLER_STATE;
+            DAT_2001d26c = (undefined1)((uint)PROXY_THREAD_HANDLER_STATE >> 8);
+            DAT_2001d26d = PROXY_THREAD_DATA_PROCESSING_STATE + 1;
+            fill_memory_buffer(&PROXY_THREAD_BUFFER_2,0,0xe6);
             iVar5 = get_work_mode();
             pcVar10 = *(code **)(iVar5 + 0x1030);
             uVar2 = get_work_mode();
-            iVar5 = (*pcVar10)(uVar2,DAT_2000a078 + DAT_2000a08c,&DAT_2001d34b,iVar3);
+            iVar5 = (*pcVar10)(uVar2,PROXY_THREAD_STATE_BUFFER + PROXY_THREAD_HANDLER_DATA_BUFFER,
+                               &PROXY_THREAD_BUFFER_2,iVar3);
             if (iVar5 != 0) {
               if (0 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -278,9 +290,11 @@ LAB_0004820e:
               DAT_2001d262 = '\0';
               goto LAB_00048082;
             }
-            validate_memory_bounds(&DAT_2001d26e,&DAT_2001d34b,iVar3,0xdc);
+            validate_memory_bounds(&DAT_2001d26e,&PROXY_THREAD_BUFFER_2,iVar3,0xdc);
             iVar5 = 3;
-            while (iVar7 = (**(code **)(param_1 + 0x788))(&DAT_2001d264,DAT_2001d265), iVar7 < 0) {
+            while (iVar7 = (**(code **)(param_1 + 0x788))
+                                     (&PROXY_THREAD_DATA_BUFFER,PROXY_THREAD_COMMUNICATION_STATE),
+                  iVar7 < 0) {
               if (1 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): Failed to send data over BLE connection: ret = %d \n",
@@ -312,15 +326,15 @@ LAB_0004820e:
                 }
               }
             }
-            DAT_2000a078 = DAT_2000a078 + iVar3;
+            PROXY_THREAD_STATE_BUFFER = PROXY_THREAD_STATE_BUFFER + iVar3;
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): send %d byte data to app,total send data length = %d\n",
-                            "proxy_thread_handler",iVar3,DAT_2000a078);
+                            "proxy_thread_handler",iVar3,PROXY_THREAD_STATE_BUFFER);
               }
               else {
                 handle_heartbeat("%s(): send %d byte data to app,total send data length = %d\n",
-                                 "proxy_thread_handler",iVar3,DAT_2000a078);
+                                 "proxy_thread_handler",iVar3,PROXY_THREAD_STATE_BUFFER);
               }
             }
 LAB_00048054:
@@ -328,13 +342,13 @@ LAB_00048054:
             goto LAB_00047c76;
           }
           DAT_2001d262 = '\0';
-          DAT_2000a084 = 0;
-          DAT_2000a080 = 0;
-          DAT_2000a078 = 0;
-          DAT_2001d263 = '\0';
-          DAT_2000a07c = 0;
-          DAT_2000a088 = 0;
-          DAT_2000a08c = 0;
+          PROXY_THREAD_HANDLER_COMMUNICATION_STATE = 0;
+          PROXY_THREAD_HANDLER_STATE_EXTENDED = 0;
+          PROXY_THREAD_STATE_BUFFER = 0;
+          PROXY_THREAD_BUFFER_1 = '\0';
+          PROXY_THREAD_HANDLER_STATE = 0;
+          PROXY_THREAD_HANDLER_STATE_AND_DATA = 0;
+          PROXY_THREAD_HANDLER_DATA_BUFFER = 0;
           get_and_reset_sensor_data_value();
           if (LOG_LEVEL < 1) goto LAB_00047c76;
           if (IS_DEBUG == 0) {
@@ -365,13 +379,13 @@ LAB_00047de2:
             format_string = "%s():  [%s] device not ready.\n\n";
           }
           else {
-            fill_memory_buffer(&DAT_2001d34b,0,0xe6);
+            fill_memory_buffer(&PROXY_THREAD_BUFFER_2,0,0xe6);
             iVar3 = get_work_mode();
             pcVar10 = *(code **)(iVar3 + 0x1030);
             uVar2 = get_work_mode();
-            iVar3 = (*pcVar10)(uVar2,0x400000,&DAT_2001d34b,0xe6);
+            iVar3 = (*pcVar10)(uVar2,0x400000,&PROXY_THREAD_BUFFER_2,0xe6);
             if (iVar3 != 0) goto LAB_00047e22;
-            puVar4 = (undefined1 *)fill_memory_buffer(&DAT_2001d264,0,0xe6);
+            puVar4 = (undefined1 *)fill_memory_buffer(&PROXY_THREAD_DATA_BUFFER,0,0xe6);
             if (local_3c == '\0') {
               uVar6 = 0x1e;
             }
@@ -381,8 +395,8 @@ LAB_00047de2:
             *puVar4 = uVar6;
             puVar4[2] = 0;
             cVar12 = '\0';
-            puVar4[3] = DAT_2001d263;
-            DAT_2001d263 = DAT_2001d263 + '\x01';
+            puVar4[3] = PROXY_THREAD_BUFFER_1;
+            PROXY_THREAD_BUFFER_1 = PROXY_THREAD_BUFFER_1 + '\x01';
             puVar4[4] = 1;
             iVar3 = 0;
             puVar4 = &DAT_2001d26a;
@@ -430,21 +444,23 @@ LAB_00047de2:
               iVar3 = iVar5;
               puVar4 = puVar11;
             } while (iVar5 != 4);
-            DAT_2001d265 = cVar12 * '\t' + 6;
+            PROXY_THREAD_COMMUNICATION_STATE = cVar12 * '\t' + 6;
             DAT_2001d269 = cVar12;
-            for (iVar3 = 0; iVar3 < (int)(uint)DAT_2001d265; iVar3 = iVar3 + 1) {
+            for (iVar3 = 0; iVar3 < (int)(uint)PROXY_THREAD_COMMUNICATION_STATE; iVar3 = iVar3 + 1)
+            {
               if (3 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): audio_response_packet_buf[%d] = %d\n\n","proxy_thread_handler",
-                              iVar3,(uint)(byte)(&DAT_2001d264)[iVar3]);
+                              iVar3,(uint)(byte)(&PROXY_THREAD_DATA_BUFFER)[iVar3]);
                 }
                 else {
                   handle_heartbeat("%s(): audio_response_packet_buf[%d] = %d\n\n",
-                                   "proxy_thread_handler",iVar3,(&DAT_2001d264)[iVar3]);
+                                   "proxy_thread_handler",iVar3,(&PROXY_THREAD_DATA_BUFFER)[iVar3]);
                 }
               }
             }
-            pcVar1 = (char *)(**(code **)(param_1 + 0x788))(&DAT_2001d264,DAT_2001d265);
+            pcVar1 = (char *)(**(code **)(param_1 + 0x788))
+                                       (&PROXY_THREAD_DATA_BUFFER,PROXY_THREAD_COMMUNICATION_STATE);
             if ((-1 < (int)pcVar1) || (LOG_LEVEL < 2)) goto LAB_00047c76;
             format_string = "%s(): Failed to send data over BLE connection: ret = %d \n";
           }
@@ -588,7 +604,7 @@ LAB_000480f4:
                     handle_heartbeat();
                   }
                 }
-                DAT_20007b38 = DAT_20007b38 | 2;
+                PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX | 2;
                 break;
               }
               if (1 < LOG_LEVEL) {
@@ -623,7 +639,7 @@ LAB_000480f4:
                     handle_heartbeat();
                   }
                 }
-                DAT_20007b38 = DAT_20007b38 | 2;
+                PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX | 2;
                 break;
               }
               if (1 < LOG_LEVEL) {

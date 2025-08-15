@@ -24,9 +24,10 @@ undefined4 compare_string_data_arrays(int param_1,int param_2,undefined4 param_3
     }
   }
   else {
-    uVar2 = (uint)DAT_2001a22d;
+    uVar2 = (uint)WHITELIST_APP_DATA_BUFFER;
     iVar3 = uVar2 * 7;
-    for (puVar4 = &DAT_2001a22c; puVar4 != &DAT_2001a22c + uVar2 * 0x38; puVar4 = puVar4 + 0x38) {
+    for (puVar4 = &WHITELIST_APP_JSON_DATA_BUFFER;
+        puVar4 != &WHITELIST_APP_JSON_DATA_BUFFER + uVar2 * 0x38; puVar4 = puVar4 + 0x38) {
       iVar1 = compare_string_offsets(puVar4 + 2,param_1,0x28,iVar3,param_4);
       iVar3 = extraout_r3;
       if ((iVar1 == 0) &&

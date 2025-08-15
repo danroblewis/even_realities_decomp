@@ -35,8 +35,8 @@ void bt_connection_disconnect_with_validation_and_state_management(int param_1)
   uVar4 = (undefined4)((ulonglong)uVar7 >> 0x20);
   iVar2 = (int)uVar7;
   bVar6 = *(byte *)(iVar2 + 0x1c);
-  if ((DAT_20002104 < *(ushort *)(iVar2 + 0x10)) || (bVar6 != 0)) {
-    while (DAT_20002104 < *(ushort *)(iVar2 + 0x10)) {
+  if ((SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION < *(ushort *)(iVar2 + 0x10)) || (bVar6 != 0)) {
+    while (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION < *(ushort *)(iVar2 + 0x10)) {
       iVar5 = bt_connection_disconnect_with_state_management_and_parameter
                         (0,uVar4,0xffffffff,0xffffffff);
       if (*(char *)(param_1 + 0xd) != '\a') {

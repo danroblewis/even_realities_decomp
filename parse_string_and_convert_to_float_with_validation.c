@@ -55,7 +55,7 @@ uint parse_string_and_convert_to_float_with_validation(byte *param_1,undefined4 
   int local_34;
   uint local_30 [3];
   
-  puVar3 = DAT_20002d20;
+  puVar3 = STRING_PROCESSING_AND_PRINTF_CONFIGURATION;
   local_38 = 0;
   uVar21 = 0;
   iVar4 = calculate_string_length(&LAB_000aa08e_1);
@@ -320,14 +320,14 @@ LAB_000142f2:
       if ((int)uVar5 < 1) {
         if ((int)(uVar5 + 0x16) < 0 == SCARRY4(uVar5,0x16)) {
           uVar21 = float_multiply_64bit
-                             (uVar21,uVar24,(&DAT_00088908)[(iVar6 - iVar4) * 2],
-                              (&DAT_0008890c)[(iVar6 - iVar4) * 2]);
+                             (uVar21,uVar24,(&FLOAT_FORMATTING_LOOKUP_TABLE)[(iVar6 - iVar4) * 2],
+                              (&FLOAT_FORMATTING_AND_CONVERSION_CONSTANTS)[(iVar6 - iVar4) * 2]);
           goto LAB_00014036;
         }
         goto LAB_00014346;
       }
       if ((int)uVar5 < 0x17) {
-        uVar26 = *(undefined8 *)(&DAT_00088908 + uVar5 * 2);
+        uVar26 = *(undefined8 *)(&FLOAT_FORMATTING_LOOKUP_TABLE + uVar5 * 2);
       }
       else {
         if (0x25 - iVar16 < (int)uVar5) {
@@ -336,8 +336,9 @@ LAB_000142f2:
         }
         iVar16 = 0xf - iVar16;
         uVar26 = float_multiply_64bit_alt
-                           ((&DAT_00088908)[iVar16 * 2],(&DAT_0008890c)[iVar16 * 2],uVar21,uVar24);
-        uVar25 = *(ulonglong *)(&DAT_00088908 + (uVar5 - iVar16) * 2);
+                           ((&FLOAT_FORMATTING_LOOKUP_TABLE)[iVar16 * 2],
+                            (&FLOAT_FORMATTING_AND_CONVERSION_CONSTANTS)[iVar16 * 2],uVar21,uVar24);
+        uVar25 = *(ulonglong *)(&FLOAT_FORMATTING_LOOKUP_TABLE + (uVar5 - iVar16) * 2);
       }
       uVar21 = float_multiply_64bit_alt
                          ((int)uVar26,(int)((ulonglong)uVar26 >> 0x20),(int)uVar25,
@@ -363,8 +364,9 @@ LAB_00014498:
         uVar11 = -uVar21 & 0xf;
         if (uVar11 != 0) {
           uVar25 = float_multiply_64bit
-                             ((int)uVar25,(int)(uVar25 >> 0x20),(&DAT_00088908)[uVar11 * 2],
-                              (&DAT_0008890c)[uVar11 * 2]);
+                             ((int)uVar25,(int)(uVar25 >> 0x20),
+                              (&FLOAT_FORMATTING_LOOKUP_TABLE)[uVar11 * 2],
+                              (&FLOAT_FORMATTING_AND_CONVERSION_CONSTANTS)[uVar11 * 2]);
         }
         uVar21 = (int)-uVar21 >> 4;
         if (uVar21 == 0) goto LAB_00014498;
@@ -739,7 +741,8 @@ LAB_0001439c:
       uVar11 = uVar21 & 0xf;
       if (uVar11 != 0) {
         uVar25 = float_multiply_64bit_alt
-                           ((&DAT_00088908)[uVar11 * 2],(&DAT_0008890c)[uVar11 * 2],(int)uVar25,
+                           ((&FLOAT_FORMATTING_LOOKUP_TABLE)[uVar11 * 2],
+                            (&FLOAT_FORMATTING_AND_CONVERSION_CONSTANTS)[uVar11 * 2],(int)uVar25,
                             (int)(uVar25 >> 0x20));
       }
       if ((uVar21 & 0xfffffff0) == 0) goto LAB_00014498;

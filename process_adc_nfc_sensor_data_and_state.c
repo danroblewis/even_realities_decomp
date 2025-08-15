@@ -13,7 +13,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
   undefined8 uVar3;
   
   run_adc_nfc_and_scale_result(param_1 + 8);
-  DAT_20007a24 = *(undefined4 *)(param_1 + 8);
+  ADC_NFC_SENSOR_REFERENCE_VALUE = *(undefined4 *)(param_1 + 8);
   iVar2 = get_work_mode();
   param_2[0x15] = (char)(*(byte *)(iVar2 + 0xfc4) + 200 >> 8);
   iVar2 = get_work_mode();

@@ -9,7 +9,7 @@ void log_system_status(void)
 
 {
   CURRENT_STOCK_ID = 0;
-  DAT_2001b815 = 0;
+  SYSTEM_PARAMETER_LOGGING_BUFFER = 0;
   if (LOG_LEVEL < 3) {
     return;
   }

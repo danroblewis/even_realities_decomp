@@ -10,7 +10,7 @@
 void reset_hardware_interrupt_registers(void)
 
 {
-  DAT_2000b380 = 0;
+  HARDWARE_INTERRUPT_TRIGGER_REGISTER = 0;
   _DAT_5002b308 = 1;
   _DAT_5002b010 = 1;
   _DAT_5002b500 = 0;

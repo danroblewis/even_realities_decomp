@@ -62,14 +62,14 @@ void bluetooth_hci_command_processing_main_loop(void)
               uVar5 = extraout_r1_00;
             }
             manage_ble_connection_state_comprehensive(&DAT_20002128,uVar5,0xffffffff,0xffffffff);
-            if (DAT_20002140 != 0) {
+            if (BLUETOOTH_HCI_COMMAND_PROCESSING_BUFFER != 0) {
               local_2c = "Uncleared pending sent_cmd";
               local_30 = 2;
               call_system_cleanup_alt(&DAT_00088138,0x1040,&local_30);
-              decrement_reference_count_and_cleanup_memory(DAT_20002140);
-              DAT_20002140 = 0;
+              decrement_reference_count_and_cleanup_memory(BLUETOOTH_HCI_COMMAND_PROCESSING_BUFFER);
+              BLUETOOTH_HCI_COMMAND_PROCESSING_BUFFER = 0;
             }
-            DAT_20002140 = increment_counter_in_structure(iVar3);
+            BLUETOOTH_HCI_COMMAND_PROCESSING_BUFFER = increment_counter_in_structure(iVar3);
             uVar8 = process_data_with_initialization_and_state_validation(iVar3);
             if ((uint)uVar8 != 0) {
               local_4c = "Unable to send to driver (err %d)";

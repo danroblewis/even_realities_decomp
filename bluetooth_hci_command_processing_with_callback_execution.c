@@ -17,14 +17,14 @@ int bluetooth_hci_command_processing_with_callback_execution(int param_1)
   undefined4 local_20;
   char *local_1c;
   
-  if (DAT_20002168 == 0) {
+  if (BLUETOOTH_HCI_COMMAND_STATE == 0) {
     iVar2 = -0x13;
     local_1c = "No HCI driver registered";
     local_20 = 2;
     call_system_cleanup_alt(&DAT_00088138,0x1040,&local_20);
   }
   else {
-    uVar1 = clear_bit_in_bitmap(&DAT_200020d4,0xfffffffd);
+    uVar1 = clear_bit_in_bitmap(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION,0xfffffffd);
     iVar2 = set_bits(uVar1,1);
     if (iVar2 << 0x1f < 0) {
       iVar2 = -0x78;
@@ -45,7 +45,7 @@ int bluetooth_hci_command_processing_with_callback_execution(int param_1)
         initialize_ble_connection_with_timeout_and_state_management
                   (&DAT_20005f08,&DAT_2002bf80,0x898,0xfffffff8,0);
         get_ble_uart_protocol_error_code(&DAT_20005f08,"BT RX");
-        iVar2 = (**(code **)(DAT_20002168 + 0xc))();
+        iVar2 = (**(code **)(BLUETOOTH_HCI_COMMAND_STATE + 0xc))();
         if (iVar2 == 0) {
           if (param_1 == 0) {
             iVar2 = initialize_system_device();

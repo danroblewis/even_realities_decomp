@@ -20,7 +20,7 @@ validate_and_process_ble_characteristics_with_callback_execution_and_state_manag
        (iVar1 = bt_connection_update_flags(&DAT_2000613c,0xffffffbf), iVar1 << 0x19 < 0)) {
       validate_and_process_ble_characteristics_with_state_management_and_parameter(&DAT_20006138);
     }
-    else if ((DAT_20006145 == '\a') && (DAT_20002104 != 0)) {
+    else if ((DAT_20006145 == '\a') && (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION != 0)) {
       if ((DAT_20006170 == 0) || (DAT_20002110 != 0)) {
         uVar2 = 4;
         puVar3 = &DAT_20006170;

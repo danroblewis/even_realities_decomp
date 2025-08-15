@@ -11,10 +11,10 @@ void update_persist_task_status_to_wait_blow_head
 {
   undefined1 *puVar1;
   
-  while (DAT_20018d9c != '\0') {
+  while (PERSISTENT_TASK_STATUS_MANAGER != '\0') {
     short_timing_delay();
   }
-  DAT_20018d9c = 1;
+  PERSISTENT_TASK_STATUS_MANAGER = 1;
   if ((*(char *)(param_1 + 0xd5) != '\0') && (*(char *)(param_1 + 0xd5) != '\x01')) {
     display_close_screen(*(undefined1 *)(param_1 + 0xd5));
   }
@@ -33,7 +33,7 @@ void update_persist_task_status_to_wait_blow_head
   puVar1[1] = 0;
   puVar1[2] = 0;
   puVar1[3] = 0;
-  DAT_20018d9c = 0;
+  PERSISTENT_TASK_STATUS_MANAGER = 0;
   *(undefined1 *)(*(int *)(param_1 + 0x1054) + 4) = 1;
   return;
 }

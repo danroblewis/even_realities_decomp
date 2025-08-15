@@ -77,11 +77,11 @@ LAB_00027396:
     }
 LAB_00027008:
     uVar15 = 0x1f5;
-    while ((uVar11 = (ushort)DAT_20018d9c, DAT_20018d9c != 0 &&
+    while ((uVar11 = (ushort)PERSISTENT_TASK_STATUS_MANAGER, PERSISTENT_TASK_STATUS_MANAGER != 0 &&
            (uVar15 = uVar15 - 1, uVar11 = uVar15, uVar15 != 0))) {
       delay_with_timing(1);
     }
-    while (DAT_20018d8f != '\0') {
+    while (SLAVE_SYNCHRONIZATION_STATE_DATA != '\0') {
       delay_with_timing(1);
       uVar11 = uVar11 + 1;
     }
@@ -128,12 +128,12 @@ LAB_000270ec:
               if (DAT_2000f6e6 < 500) goto LAB_000270ec;
               goto LAB_00027148;
             }
-            DAT_20018d8f = 1;
+            SLAVE_SYNCHRONIZATION_STATE_DATA = 1;
           }
           else {
 LAB_00027148:
-            DAT_20018d8f = 1;
-            bVar5 = DAT_20018d8f;
+            SLAVE_SYNCHRONIZATION_STATE_DATA = 1;
+            bVar5 = SLAVE_SYNCHRONIZATION_STATE_DATA;
             if ((int)param_2 < 3) goto LAB_000270da;
           }
           goto LAB_00027156;
@@ -165,10 +165,10 @@ LAB_0002707a:
         goto LAB_0002708e;
       }
 LAB_0002709c:
-      DAT_20018d8f = 1;
-      bVar5 = DAT_20018d8f;
+      SLAVE_SYNCHRONIZATION_STATE_DATA = 1;
+      bVar5 = SLAVE_SYNCHRONIZATION_STATE_DATA;
 LAB_000270da:
-      DAT_20018d8f = bVar5;
+      SLAVE_SYNCHRONIZATION_STATE_DATA = bVar5;
       DAT_2000302b = bVar3;
 LAB_00027156:
       cVar1 = param_1[0xda];
@@ -326,7 +326,7 @@ LAB_00027298:
   }
 LAB_00026fa0:
   DAT_2000f6e6 = (short)uVar13;
-  DAT_20018d8f = 0;
+  SLAVE_SYNCHRONIZATION_STATE_DATA = 0;
   return uVar13;
 }
 

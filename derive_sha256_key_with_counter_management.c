@@ -31,7 +31,7 @@ int derive_sha256_key_with_counter_management
   }
   if ((*(int *)(param_1 + 0x1c) < *(int *)(param_1 + 0x10)) || (*(int *)(param_1 + 0x14) != 0)) {
     iVar2 = update_sha256_hash_with_buffer_management(param_1,param_4,param_5,0);
-    if ((iVar2 != 0) && (iVar2 = (*DAT_20002f54)(pcVar4), iVar2 != 0)) {
+    if ((iVar2 != 0) && (iVar2 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER)(pcVar4), iVar2 != 0)) {
       return iVar2;
     }
   }
@@ -80,7 +80,7 @@ int derive_sha256_key_with_counter_management
     *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
   }
 LAB_00079e32:
-  iVar3 = (*DAT_20002f54)(pcVar4);
+  iVar3 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER)(pcVar4);
   if (iVar3 != 0) {
     iVar2 = iVar3;
   }

@@ -17,7 +17,8 @@ validate_and_process_ble_characteristics_comprehensive
   iVar1 = validate_and_process_ble_characteristics_with_callback_execution(param_1 + 0x27,0x10);
   if (iVar1 == 0) {
     set_bit_in_value(param_1,5);
-    DAT_2000af48 = validate_and_process_ble_characteristics_with_state_management_and_callback();
+    BLE_PAIRING_AND_AUTHENTICATION_DATA =
+         validate_and_process_ble_characteristics_with_state_management_and_callback();
     uVar2 = 0;
   }
   else {

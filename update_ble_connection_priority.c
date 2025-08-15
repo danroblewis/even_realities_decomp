@@ -64,12 +64,12 @@ int update_ble_connection_priority
           puVar8[1] = param_1;
           goto LAB_00074138;
         }
-        if (DAT_2000b468 == puVar8) break;
+        if (BLE_CONNECTION_PRIORITY_MANAGER == puVar8) break;
       }
       *param_1 = &DMIC_BUFFER_POINTER;
-      param_1[1] = DAT_2000b468;
-      *DAT_2000b468 = param_1;
-      DAT_2000b468 = param_1;
+      param_1[1] = BLE_CONNECTION_PRIORITY_MANAGER;
+      *BLE_CONNECTION_PRIORITY_MANAGER = param_1;
+      BLE_CONNECTION_PRIORITY_MANAGER = param_1;
 LAB_00074138:
       manage_ble_connection_priority(1);
     }

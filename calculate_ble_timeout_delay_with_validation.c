@@ -13,8 +13,9 @@ uint calculate_ble_timeout_delay_with_validation(void)
   int iVar3;
   uint uVar4;
   
-  puVar1 = DAT_20002cfc;
-  if ((undefined4 **)DAT_20002cfc == &DAT_20002cfc) {
+  puVar1 = BLE_CONNECTION_TIMEOUT_CONFIGURATION;
+  if ((undefined4 **)BLE_CONNECTION_TIMEOUT_CONFIGURATION == &BLE_CONNECTION_TIMEOUT_CONFIGURATION)
+  {
     get_ble_timing_offset();
   }
   else {

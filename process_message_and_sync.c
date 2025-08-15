@@ -22,15 +22,15 @@ uint process_message_and_sync
   iVar1 = get_system_ready_state();
   uVar8 = 0;
   if (iVar1 != 1) {
-    while (DAT_20018d8c != '\0') {
+    while (MESSAGE_PROCESSING_AND_SYNC_STATE != '\0') {
       uVar8 = uVar8 + 1;
       if (uVar8 == 2000) {
-        DAT_20018d8c = 0;
+        MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
         return 2000;
       }
       delay_with_timing(1);
     }
-    DAT_20018d8c = 1;
+    MESSAGE_PROCESSING_AND_SYNC_STATE = 1;
     uVar8 = uVar8 & 0xffff;
     *(char *)(work_mode_context + 0x6e1) = *(char *)(work_mode_context + 0x6e1) + '\x01';
     *(byte *)(work_mode_context + 0x6cc) = (byte)message_type & 0x3f | 0x80;
@@ -69,7 +69,7 @@ uint process_message_and_sync
         DAT_20018d80 = *(undefined1 *)(work_mode_context + 0x6e1);
         iVar1 = memcmp_byte_arrays(&DAT_20018d6b,puVar9,0x16);
         if (iVar1 == 0) {
-          DAT_20018d8c = 0;
+          MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
           return uVar8;
         }
         DAT_20018c6f = 4;
@@ -105,11 +105,11 @@ uint process_message_and_sync
       uVar8 = uVar8 + 1 & 0xffff;
       if (uVar8 == 2000) {
         if (message_type != 1) {
-          DAT_20018d8c = 0;
+          MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
           return 2000;
         }
         fill_memory_buffer(&DAT_20018d6b,0,0x16);
-        DAT_20018d8c = 0;
+        MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
         return 2000;
       }
       delay_with_timing(1);
@@ -126,7 +126,7 @@ uint process_message_and_sync
       *(undefined2 *)puVar7 = *(undefined2 *)puVar3;
     }
   }
-  DAT_20018d8c = 0;
+  MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
   return uVar8;
 }
 

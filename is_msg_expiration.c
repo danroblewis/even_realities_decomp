@@ -23,11 +23,13 @@ uint is_msg_expiration(undefined4 param_1,undefined4 param_2,undefined4 param_3)
       set_work_mode_timestamp(**(undefined4 **)(iVar1 + 0xfec));
     }
   }
-  uVar4 = (uint)(byte)(&DAT_20007dbb)[(uint)TIMEOUT_MESSAGE_STATE * 0x1b4];
-  if ((uVar4 != 0) && (uVar4 = (&DAT_20007db0)[(uint)TIMEOUT_MESSAGE_STATE * 0x6d], uVar4 != 0)) {
+  uVar4 = (uint)(byte)(&TIMEOUT_MESSAGE_STATE_AND_EXPIRATION_MANAGEMENT)
+                      [(uint)TIMEOUT_MESSAGE_STATE * 0x1b4];
+  if ((uVar4 != 0) &&
+     (uVar4 = (&TIMEOUT_MESSAGE_STATE_TABLE)[(uint)TIMEOUT_MESSAGE_STATE * 0x6d], uVar4 != 0)) {
     uVar4 = get_work_mode_timestamp();
     uVar5 = (uint)TIMEOUT_MESSAGE_STATE;
-    iVar1 = (&DAT_20007db0)[uVar5 * 0x6d];
+    iVar1 = (&TIMEOUT_MESSAGE_STATE_TABLE)[uVar5 * 0x6d];
     if (iVar1 + 10U < uVar4) {
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -47,7 +49,7 @@ uint is_msg_expiration(undefined4 param_1,undefined4 param_2,undefined4 param_3)
       uVar4 = 1;
     }
   }
-  uVar6 = (&DAT_20007db0)[(uint)TIMEOUT_MESSAGE_STATE * 0x6d];
+  uVar6 = (&TIMEOUT_MESSAGE_STATE_TABLE)[(uint)TIMEOUT_MESSAGE_STATE * 0x6d];
   uVar5 = get_work_mode_timestamp();
   if (uVar5 < uVar6) {
     if (IS_DEBUG == 0) {

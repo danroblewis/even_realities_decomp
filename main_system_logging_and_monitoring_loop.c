@@ -46,9 +46,9 @@ void main_system_logging_and_monitoring_loop(void)
       iVar2 = (int)uVar8;
     } while (iVar2 != 0);
     if (iVar4 != 0) {
-      piVar5 = &DAT_000882a0;
+      piVar5 = &SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE;
       while( true ) {
-        if (&DAT_000882b0 < piVar5) {
+        if (&BUFFER_STRUCTURE_INITIALIZATION_CONFIG < piVar5) {
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","backend <= _log_backend_list_end",
                        "WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x350);
           DEBUG_PRINT2("\tunexpected list end location\n");

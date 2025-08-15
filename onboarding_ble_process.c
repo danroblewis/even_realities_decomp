@@ -30,13 +30,13 @@ undefined4 onboarding_ble_process(int param_1,int param_2,undefined2 *param_3,un
     uVar7 = 3;
     *param_4 = *param_3;
     *(undefined1 *)(param_4 + 1) = 0xca;
-    uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+    uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
     goto LAB_00042a96;
   }
-  DAT_20004bf0 = 0;
+  ONBOARDING_UI_TASK_STATE = 0;
   uVar8 = calculate_ble_connection_timing_with_scaling_alt3();
-  DAT_20004bfc = (undefined4)((ulonglong)uVar8 >> 0x20);
-  DAT_20004bf8 = (undefined4)uVar8;
+  ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar8 >> 0x20);
+  ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar8;
   if (*(char *)((int)param_3 + 1) == '\x12') goto LAB_00042b26;
   validate_and_update_work_mode_state();
   **(undefined1 **)(param_1 + 0x1014) = 1;
@@ -65,7 +65,7 @@ undefined4 onboarding_ble_process(int param_1,int param_2,undefined2 *param_3,un
   case 3:
     *(undefined4 *)(puVar6 + 0x1b) = 0x362f34;
     DAT_2001cdcf = 0;
-    DAT_2001cdce = 0;
+    WORK_MODE_STATE_AND_UI_CONFIGURATION = 0;
     *(undefined1 *)(*(int *)(param_1 + 0x1014) + 3) = 0;
     *(undefined1 *)(*(int *)(param_1 + 0x1014) + 0xd) = 0;
     *(undefined1 *)(*(int *)(param_1 + 0x1014) + 0xe) = 0;
@@ -90,8 +90,8 @@ undefined4 onboarding_ble_process(int param_1,int param_2,undefined2 *param_3,un
   case 5:
   case 6:
     *(undefined4 *)(puVar6 + 0x1b) = 0x362f33;
-    DAT_2001cdd2 = 0;
-    DAT_2001cdce = 0;
+    WORK_MODE_ANIMATION_STATE = 0;
+    WORK_MODE_STATE_AND_UI_CONFIGURATION = 0;
     iVar2 = get_work_mode();
     *(undefined1 *)(*(int *)(param_1 + 0x1014) + 3) = *(undefined1 *)(iVar2 + 0xee4);
     if (*(char *)(*(int *)(param_1 + 0x1014) + 2) == '\x06') {
@@ -124,15 +124,15 @@ LAB_00042b1c:
     *(undefined1 *)(*(int *)(iVar4 + 0x1014) + 3) = *(undefined1 *)(iVar2 + 0xee4);
   }
   reset_animation_counters();
-  uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+  uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
 LAB_00042b26:
-  DAT_20004bfc = (undefined4)((ulonglong)uVar8 >> 0x20);
-  DAT_20004bf8 = (undefined4)uVar8;
+  ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar8 >> 0x20);
+  ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar8;
   if (*(short *)(param_2 + 2) == 2) {
     uVar7 = 3;
     *param_4 = *param_3;
     *(undefined1 *)(param_4 + 1) = 0xc9;
-    uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+    uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
   }
   else if (*(short *)(param_2 + 2) == 3) {
     *param_4 = *param_3;
@@ -142,20 +142,20 @@ LAB_00042b26:
     if (**(char **)(param_1 + 0x1014) != '\0') {
       *(undefined1 *)(param_1 + 0xcd) = uVar1;
     }
-    uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+    uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
     uVar7 = 4;
   }
   else {
     uVar7 = 0;
   }
-  DAT_20004bfc = (undefined4)((ulonglong)uVar8 >> 0x20);
-  DAT_20004bf8 = (undefined4)uVar8;
+  ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar8 >> 0x20);
+  ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar8;
   if (*(char *)((int)param_3 + 1) != '\x12') {
     iVar2 = get_work_mode();
-    uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+    uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
     if (**(int **)(iVar2 + 0x1054) != 0xe) {
       iVar2 = compare_and_update_sensor_data();
-      uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+      uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
       if (iVar2 == 0) {
         uVar3 = get_work_mode();
         update_persist_task_status(uVar3,0xe,2);
@@ -164,13 +164,13 @@ LAB_00042b26:
         *(undefined1 *)(*(int *)(iVar4 + 0x1014) + 0x20) = *(undefined1 *)(iVar2 + 0xed5);
         iVar2 = get_work_mode();
         *(undefined1 *)(iVar2 + 0xed5) = 0x2a;
-        uVar8 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+        uVar8 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
       }
     }
   }
 LAB_00042a96:
-  DAT_20004bfc = (undefined4)((ulonglong)uVar8 >> 0x20);
-  DAT_20004bf8 = (undefined4)uVar8;
+  ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar8 >> 0x20);
+  ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar8;
   return uVar7;
 }
 

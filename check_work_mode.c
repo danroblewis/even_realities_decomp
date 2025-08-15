@@ -160,13 +160,13 @@ LAB_00027844:
   }
   if (param_3 == 0) {
     DAT_20003025 = 0xff;
-    DAT_20003026 = 0xff;
+    WORK_MODE_STATUS_AND_CONFIGURATION = 0xff;
     DAT_20003027 = 0xff;
     LAST_BOX_CHARGING_STATUS = 0xff;
-    DAT_20003029 = 0xff;
+    WORK_MODE_STATUS_FLAG = 0xff;
     DAT_2000302a = 0xff;
-    DAT_20018d84 = 4;
-    DAT_20018d85 = 4;
+    WORK_MODE_CONFIGURATION_FLAGS = 4;
+    WORK_MODE_CHECK_STATE = 4;
     return;
   }
   if ((DAT_2000302a == -1) || (iVar3 = get_work_mode(), *(int *)(iVar3 + 0x9b4) == 2)) {
@@ -211,10 +211,10 @@ LAB_00027844:
       }
       event_id = 0x7;
     }
-    DAT_20003029 = 0xff;
+    WORK_MODE_STATUS_FLAG = 0xff;
     LAST_BOX_CHARGING_STATUS = 0xff;
-    DAT_20018d85 = '\x04';
-    DAT_20018d84 = '\x04';
+    WORK_MODE_CHECK_STATE = '\x04';
+    WORK_MODE_CONFIGURATION_FLAGS = '\x04';
   }
   else if (param_2 == 0) {
     if (0 < LOG_LEVEL) {
@@ -259,18 +259,18 @@ LAB_00027844:
     goto LAB_00027af8;
   }
   if (param_1 == 0) {
-    if (DAT_20003026 != 0) {
+    if (WORK_MODE_STATUS_AND_CONFIGURATION != 0) {
 LAB_00027b70:
       uVar2 = 0;
 LAB_00027b72:
-      if ((byte)(DAT_20018d84 + 1) < 5) {
-        DAT_20018d84 = DAT_20018d84 + 1;
+      if ((byte)(WORK_MODE_CONFIGURATION_FLAGS + 1) < 5) {
+        WORK_MODE_CONFIGURATION_FLAGS = WORK_MODE_CONFIGURATION_FLAGS + 1;
         return;
       }
-      DAT_20018d84 = 0;
+      WORK_MODE_CONFIGURATION_FLAGS = 0;
       iVar3 = get_work_mode();
-      DAT_20003026 = (byte)uVar2;
-      *(byte *)(iVar3 + 0x794) = DAT_20003026;
+      WORK_MODE_STATUS_AND_CONFIGURATION = (byte)uVar2;
+      *(byte *)(iVar3 + 0x794) = WORK_MODE_STATUS_AND_CONFIGURATION;
       send_event_status(9);
       if (LOG_LEVEL < 1) {
         return;
@@ -282,23 +282,23 @@ LAB_00027b72:
       handle_heartbeat();
       return;
     }
-    DAT_20018d84 = '\0';
+    WORK_MODE_CONFIGURATION_FLAGS = '\0';
   }
   else {
     uVar2 = compare_and_update_sensor_data_alt2();
     if (uVar2 == 0) {
-      if (DAT_20003026 != 0) goto LAB_00027b70;
+      if (WORK_MODE_STATUS_AND_CONFIGURATION != 0) goto LAB_00027b70;
     }
     else {
-      DAT_20018d84 = '\x04';
-      if (DAT_20003026 != uVar2) goto LAB_00027b72;
+      WORK_MODE_CONFIGURATION_FLAGS = '\x04';
+      if (WORK_MODE_STATUS_AND_CONFIGURATION != uVar2) goto LAB_00027b72;
     }
-    DAT_20018d84 = '\0';
+    WORK_MODE_CONFIGURATION_FLAGS = '\0';
     new_box_charging_status = get_glassbox_charge_status();
     if (LAST_BOX_CHARGING_STATUS != new_box_charging_status) {
-      DAT_20018d85 = DAT_20018d85 + 1;
-      if (4 < DAT_20018d85) {
-        DAT_20018d85 = 0;
+      WORK_MODE_CHECK_STATE = WORK_MODE_CHECK_STATE + 1;
+      if (4 < WORK_MODE_CHECK_STATE) {
+        WORK_MODE_CHECK_STATE = 0;
         LAST_BOX_CHARGING_STATUS = (byte)new_box_charging_status;
         if (0 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
@@ -323,10 +323,10 @@ LAB_00027b72:
                        "check_work_mode",(uint)LAST_BOX_CHARGING_STATUS,new_box_charging_status);
       return;
     }
-    DAT_20018d85 = '\0';
+    WORK_MODE_CHECK_STATE = '\0';
     uVar2 = get_glassbox_charge_percent();
-    if ((DAT_20003029 != uVar2) && (uVar2 < 0x65)) {
-      DAT_20003029 = (byte)uVar2;
+    if ((WORK_MODE_STATUS_FLAG != uVar2) && (uVar2 < 0x65)) {
+      WORK_MODE_STATUS_FLAG = (byte)uVar2;
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): EVENT_GLASS_BOX_SOC %d\n","check_work_mode",uVar2,uVar2);
@@ -340,8 +340,8 @@ LAB_00027b72:
     }
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
-        DEBUG_PRINT("%s(): last_box_soc is %d, box_soc is %d\n","check_work_mode",(uint)DAT_20003029
-                    ,uVar2);
+        DEBUG_PRINT("%s(): last_box_soc is %d, box_soc is %d\n","check_work_mode",
+                    (uint)WORK_MODE_STATUS_FLAG,uVar2);
       }
       else {
         handle_heartbeat("%s(): last_box_soc is %d, box_soc is %d\n","check_work_mode");

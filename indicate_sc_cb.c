@@ -13,7 +13,7 @@ void indicate_sc_cb(undefined4 *param_1,undefined4 param_2,int param_3)
   }
   DAT_2000ff70 = DAT_2000ff70 + 1;
   if (DAT_2000ff70 < 5) {
-    DAT_20006ab4 = DAT_20006ab4 | 4;
+    ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS = ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS | 4;
     handle_conditional_operation(*param_1,1);
     return;
   }

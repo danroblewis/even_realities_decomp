@@ -15,13 +15,14 @@ void printf_format_string_with_buffer_integration
   undefined4 uStack_8;
   undefined4 uStack_4;
   
-  iVar1 = DAT_20002d20;
+  iVar1 = STRING_PROCESSING_AND_PRINTF_CONFIGURATION;
   uVar2 = format_string;
   uStack_c = arg1;
   uStack_8 = arg2;
   uStack_4 = arg3;
-  if ((DAT_20002d20 != 0) && (*(int *)(DAT_20002d20 + 0x18) == 0)) {
-    initialize_buffer_structure_with_mutex_protection(DAT_20002d20);
+  if ((STRING_PROCESSING_AND_PRINTF_CONFIGURATION != 0) &&
+     (*(int *)(STRING_PROCESSING_AND_PRINTF_CONFIGURATION + 0x18) == 0)) {
+    initialize_buffer_structure_with_mutex_protection(STRING_PROCESSING_AND_PRINTF_CONFIGURATION);
   }
   printf_format_string_processor
             (iVar1,*(undefined4 *)(iVar1 + 8),format_string,&uStack_c,uVar2,&uStack_c);

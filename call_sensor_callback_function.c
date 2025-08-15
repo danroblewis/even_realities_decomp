@@ -10,7 +10,7 @@ void call_sensor_callback_function(void)
 {
                     /* WARNING: Could not recover jumptable at 0x00030172. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(code **)(DAT_20007bc0 + 0xc))();
+  (**(code **)(SENSOR_DATA_TRANSMISSION_AND_CALLBACK_MANAGEMENT + 0xc))();
   return;
 }
 

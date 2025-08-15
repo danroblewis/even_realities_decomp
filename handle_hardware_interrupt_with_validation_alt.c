@@ -20,7 +20,7 @@ int handle_hardware_interrupt_with_validation_alt
   int iVar3;
   undefined4 uVar4;
   
-  if (DAT_2000b378 == '\0') {
+  if (HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\0') {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x7a);
     uVar4 = 0x7a;
@@ -28,13 +28,15 @@ int handle_hardware_interrupt_with_validation_alt
   else {
     if (param_1 != 0) {
       if (((param_1 & 0xe0000000) == 0x20000000) && ((param_1 & 3) == 0)) {
-        if ((DAT_2000b378 == '\x01') || ((DAT_2000b378 == '\x03' && (DAT_2000b380 != '\0')))) {
-          DAT_2000b381 = 0;
+        if ((HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\x01') ||
+           ((HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\x03' &&
+            (HARDWARE_INTERRUPT_TRIGGER_REGISTER != '\0')))) {
+          HARDWARE_INTERRUPT_FLAG_REGISTER = 0;
           _DAT_5002b504 = param_3;
           _DAT_5002b508 = param_1;
           _DAT_5002b50c = param_2;
-          if (DAT_2000b348 == 0) {
-            if ((DAT_2000b380 != '\0') ||
+          if (HARDWARE_CONFIGURATION_AND_INTERRUPT_HANDLING_MANAGER == 0) {
+            if ((HARDWARE_INTERRUPT_TRIGGER_REGISTER != '\0') ||
                (iVar3 = trigger_hardware_interrupt_operation(1), iVar3 != 0xbad0007)) {
               _DAT_5002b100 = 0;
               _DAT_5002b004 = 1;
@@ -46,29 +48,29 @@ int handle_hardware_interrupt_with_validation_alt
             uVar1 = param_1;
             uVar4 = param_2;
             uVar2 = param_3;
-            if (DAT_2000b350 == 0) {
-              DAT_2000b378 = '\x03';
-              _DAT_5002b100 = DAT_2000b350;
+            if (HARDWARE_INTERRUPT_CONFIG_REGISTER == 0) {
+              HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER = '\x03';
+              _DAT_5002b100 = HARDWARE_INTERRUPT_CONFIG_REGISTER;
               _DAT_5002b304 = 1;
-              DAT_2000b350 = param_1;
+              HARDWARE_INTERRUPT_CONFIG_REGISTER = param_1;
               DAT_2000b358 = param_2;
               DAT_2000b360 = param_3;
-              if (DAT_2000b380 == '\0') {
+              if (HARDWARE_INTERRUPT_TRIGGER_REGISTER == '\0') {
                 trigger_hardware_interrupt_operation(0);
-                uVar1 = DAT_2000b354;
-                uVar4 = DAT_2000b35c;
-                uVar2 = DAT_2000b364;
+                uVar1 = HARDWARE_INTERRUPT_STATUS_REGISTER;
+                uVar4 = HARDWARE_INTERRUPT_CONFIGURATION;
+                uVar2 = INTERRUPT_CONFIGURATION_COPY_BUFFER;
               }
               else {
                 _DAT_5002b004 = 1;
-                uVar1 = DAT_2000b354;
-                uVar4 = DAT_2000b35c;
-                uVar2 = DAT_2000b364;
+                uVar1 = HARDWARE_INTERRUPT_STATUS_REGISTER;
+                uVar4 = HARDWARE_INTERRUPT_CONFIGURATION;
+                uVar2 = INTERRUPT_CONFIGURATION_COPY_BUFFER;
               }
             }
-            DAT_2000b364 = uVar2;
-            DAT_2000b35c = uVar4;
-            DAT_2000b354 = uVar1;
+            INTERRUPT_CONFIGURATION_COPY_BUFFER = uVar2;
+            HARDWARE_INTERRUPT_CONFIGURATION = uVar4;
+            HARDWARE_INTERRUPT_STATUS_REGISTER = uVar1;
             iVar3 = 0xbad0000;
           }
         }

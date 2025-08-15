@@ -76,7 +76,7 @@ LAB_00077b62:
     pbVar4 = pbVar4 + 1;
   } while( true );
   if (iVar5 == -1) {
-    *DAT_20002d20 = 0x22;
+    *STRING_PROCESSING_AND_PRINTF_CONFIGURATION = 0x22;
     uVar1 = 0xffffffff;
     if (param_2 == (undefined4 *)0x0) {
       return 0xffffffff;

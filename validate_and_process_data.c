@@ -13,7 +13,8 @@ undefined4 validate_and_process_data(undefined4 param_1)
   undefined4 uVar3;
   
   uVar3 = calculate_exponential_function();
-  if ((DAT_200035af != -1) && (iVar1 = check_high_bit_set(param_1), iVar1 != 0)) {
+  if ((VOLTAGE_REGULATION_AND_AUDIO_MIXING_PARAMETERS != -1) &&
+     (iVar1 = check_high_bit_set(param_1), iVar1 != 0)) {
     iVar1 = float_compare_boolean_inverted_swapped();
     if (iVar1 == 0) {
       iVar1 = float_compare_boolean_inverted();

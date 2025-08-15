@@ -15,7 +15,7 @@ int opt3007_get_max_lux(undefined4 luminance_curve_b0,undefined4 luminance_curve
   undefined4 uVar4;
   undefined8 uVar5;
   
-  if (DAT_20018da1 == '\0') {
+  if (OPT3001_AMBIENT_LIGHT_SENSOR_STATE == '\0') {
     iVar2 = -1;
   }
   else {

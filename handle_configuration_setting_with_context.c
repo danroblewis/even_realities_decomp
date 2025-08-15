@@ -24,7 +24,8 @@ int handle_configuration_setting_with_context
   }
   puVar3 = DAT_2000a2a4;
   if ((DAT_2000a2a4 == (undefined4 *)0x0) ||
-     (puVar3 = (undefined4 *)(DAT_2000a2ac + uVar4), &DAT_00000074 < puVar3)) {
+     (puVar3 = (undefined4 *)(CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT + uVar4),
+     &DAT_00000074 < puVar3)) {
     puVar3 = (undefined4 *)initialize_speaker(1,0x78,param_3,puVar3,param_4);
     if (puVar3 == (undefined4 *)0x0) {
       return 0;
@@ -36,11 +37,12 @@ int handle_configuration_setting_with_context
       puVar1 = DAT_2000a2a4;
     }
     DAT_2000a2a4 = puVar1;
-    DAT_2000a2ac = 0;
+    CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT = 0;
     DAT_2000a2a8 = puVar3;
   }
-  iVar2 = DAT_2000a2ac + 4;
-  DAT_2000a2ac = uVar4 + DAT_2000a2ac;
+  iVar2 = CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT + 4;
+  CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT =
+       uVar4 + CONFIGURATION_SETTING_CONTEXT_AND_STATE_MANAGEMENT;
   return (int)DAT_2000a2a8 + iVar2;
 }
 

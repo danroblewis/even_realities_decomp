@@ -28,7 +28,7 @@ int fuel_gauge_update(undefined4 param_1)
   fVar8 = 0.0;
   while( true ) {
     iVar2 = get_sensor_system_status();
-    uVar10 = CONCAT44(DAT_20004794,DAT_20004790);
+    uVar10 = CONCAT44(FUEL_GAUGE_UPDATE_STATE_DATA,IMU_SENSOR_DATA_AND_TEMPERATURE_STATE);
     if (iVar2 != 0) break;
     cleanup_sensor_system();
     iVar2 = read_sensor_temperature_data(param_1,&local_44,&local_40,local_3c);
@@ -38,7 +38,7 @@ int fuel_gauge_update(undefined4 param_1)
       return iVar2;
     }
     lVar9 = calculate_scaled_ble_connection_timing_with_bit_shifting();
-    lVar9 = lVar9 - CONCAT44(DAT_20004794,DAT_20004790);
+    lVar9 = lVar9 - CONCAT44(FUEL_GAUGE_UPDATE_STATE_DATA,IMU_SENSOR_DATA_AND_TEMPERATURE_STATE);
     if ((int)((ulonglong)lVar9 >> 0x20) < (int)(uint)((uint)lVar9 < 1000)) {
       return -1;
     }
@@ -56,8 +56,8 @@ int fuel_gauge_update(undefined4 param_1)
     return 0;
   }
 LAB_00010c00:
-  DAT_20004794 = (undefined4)((ulonglong)uVar10 >> 0x20);
-  DAT_20004790 = (undefined4)uVar10;
+  FUEL_GAUGE_UPDATE_STATE_DATA = (undefined4)((ulonglong)uVar10 >> 0x20);
+  IMU_SENSOR_DATA_AND_TEMPERATURE_STATE = (undefined4)uVar10;
   if (0 < LOG_LEVEL) {
     uVar10 = float_divide_64bit_complex(local_44);
     uVar5 = (undefined4)((ulonglong)uVar10 >> 0x20);
@@ -67,15 +67,15 @@ LAB_00010c00:
       DEBUG_PRINT("%s(): V: %.3f, I: %.3f, T: %.2f\n","fuel_gauge_update",(int)uVar10,uVar5,
                   (int)uVar11,(int)((ulonglong)uVar11 >> 0x20),(int)uVar12,
                   (int)((ulonglong)uVar12 >> 0x20));
-      uVar10 = CONCAT44(DAT_20004794,DAT_20004790);
+      uVar10 = CONCAT44(FUEL_GAUGE_UPDATE_STATE_DATA,IMU_SENSOR_DATA_AND_TEMPERATURE_STATE);
     }
     else {
       handle_heartbeat("%s(): V: %.3f, I: %.3f, T: %.2f\n","fuel_gauge_update",(int)uVar10,uVar5);
-      uVar10 = CONCAT44(DAT_20004794,DAT_20004790);
+      uVar10 = CONCAT44(FUEL_GAUGE_UPDATE_STATE_DATA,IMU_SENSOR_DATA_AND_TEMPERATURE_STATE);
     }
   }
-  DAT_20004794 = (undefined4)((ulonglong)uVar10 >> 0x20);
-  DAT_20004790 = (undefined4)uVar10;
+  FUEL_GAUGE_UPDATE_STATE_DATA = (undefined4)((ulonglong)uVar10 >> 0x20);
+  IMU_SENSOR_DATA_AND_TEMPERATURE_STATE = (undefined4)uVar10;
   iVar2 = calculate_scaled_ble_connection_timing_with_bit_shifting();
   iVar6 = iVar2;
   fVar7 = fVar8;

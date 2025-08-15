@@ -53,9 +53,9 @@ void schedule_ble_connection_timeout_with_priority
                 ((int)uVar7 >> 0x1f) + (uint)CARRY4(param_3 + 1,uVar7);
       }
       else {
-        iVar10 = (-DAT_200069e0 - 2) - param_3;
-        iVar4 = (((-1 - DAT_200069e4) - (uint)(0xfffffffe < DAT_200069e0)) - param_4) -
-                (uint)(-DAT_200069e0 - 2 < param_3);
+        iVar10 = (-BLE_CONNECTION_TIMEOUT_SCHEDULING - 2) - param_3;
+        iVar4 = (((-1 - DAT_200069e4) - (uint)(0xfffffffe < BLE_CONNECTION_TIMEOUT_SCHEDULING)) -
+                param_4) - (uint)(-BLE_CONNECTION_TIMEOUT_SCHEDULING - 2 < param_3);
         if (iVar4 < (int)(uint)(iVar10 == 0)) {
           iVar10 = 1;
           iVar4 = 0;
@@ -65,8 +65,8 @@ void schedule_ble_connection_timeout_with_priority
       param_1[5] = iVar4;
       piVar2 = DAT_20002d00;
       piVar11 = (int *)0x0;
-      if ((int **)DAT_20002cfc != &DAT_20002cfc) {
-        piVar11 = DAT_20002cfc;
+      if ((int **)BLE_CONNECTION_TIMEOUT_CONFIGURATION != &BLE_CONNECTION_TIMEOUT_CONFIGURATION) {
+        piVar11 = BLE_CONNECTION_TIMEOUT_CONFIGURATION;
       }
       for (; piVar11 != (int *)0x0; piVar11 = (int *)*piVar11) {
         uVar7 = piVar11[4];
@@ -88,12 +88,13 @@ void schedule_ble_connection_timeout_with_priority
         param_1[5] = (iVar4 - iVar10) - (uint)(uVar8 < uVar7);
         if (piVar11 == piVar2) break;
       }
-      *param_1 = (int)&DAT_20002cfc;
+      *param_1 = (int)&BLE_CONNECTION_TIMEOUT_CONFIGURATION;
       param_1[1] = (int)piVar2;
       *piVar2 = (int)param_1;
       DAT_20002d00 = param_1;
 LAB_00074cf0:
-      if (((int **)DAT_20002cfc != &DAT_20002cfc) && (param_1 == DAT_20002cfc)) {
+      if (((int **)BLE_CONNECTION_TIMEOUT_CONFIGURATION != &BLE_CONNECTION_TIMEOUT_CONFIGURATION) &&
+         (param_1 == BLE_CONNECTION_TIMEOUT_CONFIGURATION)) {
         uVar5 = calculate_ble_timeout_delay_with_validation();
         schedule_ble_timer_event(uVar5,0);
       }

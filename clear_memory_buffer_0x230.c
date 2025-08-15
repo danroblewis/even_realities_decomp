@@ -8,7 +8,7 @@
 void clear_memory_buffer_0x230(void)
 
 {
-  fill_memory_buffer(&DAT_20004988,0,0x230);
+  fill_memory_buffer(&UI_TELEPROMPTER_TASK_BUFFER,0,0x230);
   return;
 }
 

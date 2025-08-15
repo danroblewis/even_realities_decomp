@@ -43,8 +43,8 @@ LAB_000656ca:
       iVar9 = (int)((ulonglong)uVar12 >> 0x20);
       if ((int)uVar12 == 0) {
         iVar11 = iVar4 + 8;
-        uVar7 = *(ushort *)((int)&DAT_20002bc0 + iVar11 * 2) & 0x1fdf;
-        *(ushort *)((int)&DAT_20002bc0 + iVar11 * 2) = uVar7;
+        uVar7 = *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + iVar11 * 2) & 0x1fdf;
+        *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + iVar11 * 2) = uVar7;
         if (iVar9 != 0) {
           if (3 < uVar10) goto LAB_000656e2;
           bVar1 = **(byte **)(param_3 + 4);
@@ -58,20 +58,22 @@ LAB_000656ca:
             *(uint *)(iVar9 + 0x5000d510) = *(uint *)(iVar9 + 0x5000d510) & 0xfffcc0ff;
             *(uint *)(iVar9 + 0x5000d510) =
                  (param_1 & 0x3f) << 8 | *(uint *)(iVar9 + 0x5000d510) | (uint)uVar10 << 0x10;
-            *(ushort *)((int)&DAT_20002bc0 + iVar11 * 2) = uVar7 | (ushort)bVar1 << 0xd | 0x20;
+            *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + iVar11 * 2) =
+                 uVar7 | (ushort)bVar1 << 0xd | 0x20;
           }
         }
       }
       else if (iVar9 != 0) goto LAB_000656e2;
-      *(ushort *)((int)&DAT_20002bc0 + (iVar4 + 8) * 2) =
-           *(ushort *)((int)&DAT_20002bc0 + (iVar4 + 8) * 2) & 0xffe3 | uVar10 << 2;
+      *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar4 + 8) * 2) =
+           *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar4 + 8) * 2) & 0xffe3 |
+           uVar10 << 2;
     }
     if (param_4 != (int *)0x0) {
       iVar11 = *param_4;
       iVar9 = param_4[1];
       clear_callback_state_and_update_bitmap(param_1);
       if (iVar11 != 0) {
-        if ((iVar11 == DAT_20002bc0) && (iVar9 == DAT_20002bc4)) {
+        if ((iVar11 == INTERRUPT_CONFIGURATION_BITMAP_ARRAY) && (iVar9 == DAT_20002bc4)) {
           uVar8 = 0;
         }
         else {
@@ -82,9 +84,10 @@ LAB_000656ca:
           uVar8 = (uint)uStack_1c >> 0x18;
         }
         (&DAT_20002bc4)[uVar8 * 2] = iVar9;
-        uVar10 = *(ushort *)((int)&DAT_20002bc0 + (iVar4 + 8) * 2);
-        (&DAT_20002bc0)[uVar8 * 2] = iVar11;
-        *(ushort *)((int)&DAT_20002bc0 + (iVar4 + 8) * 2) = uVar10 | (ushort)(uVar8 << 9) | 0x100;
+        uVar10 = *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar4 + 8) * 2);
+        (&INTERRUPT_CONFIGURATION_BITMAP_ARRAY)[uVar8 * 2] = iVar11;
+        *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar4 + 8) * 2) =
+             uVar10 | (ushort)(uVar8 << 9) | 0x100;
       }
     }
     iVar4 = 0xbad0000;
@@ -97,9 +100,10 @@ LAB_000656ca:
       param_2 = uVar3;
       configure_hardware_registers_with_bit_manipulation
                 (param_1,(int)&uStack_1c + 2,(int)&uStack_1c + 3,iVar9,0,0,pbVar13);
-      puVar6 = &DAT_20002bc0;
-      uVar8 = *(ushort *)((int)&DAT_20002bc0 + (iVar4 + 8) * 2) & 0xfffffffd | 1;
-      *(short *)((int)&DAT_20002bc0 + (iVar4 + 8) * 2) = (short)uVar8;
+      puVar6 = &INTERRUPT_CONFIGURATION_BITMAP_ARRAY;
+      uVar8 = *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar4 + 8) * 2) & 0xfffffffd
+              | 1;
+      *(short *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar4 + 8) * 2) = (short)uVar8;
       goto LAB_000656ca;
     }
 LAB_000656e2:

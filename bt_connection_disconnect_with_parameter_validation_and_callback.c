@@ -18,9 +18,9 @@ undefined4 bt_connection_disconnect_with_parameter_validation_and_callback(int p
   iVar1 = param_1;
   if (DAT_2000ad24 != (int *)0x0) {
     *DAT_2000ad24 = param_1;
-    iVar1 = DAT_2000ad20;
+    iVar1 = BLE_CONNECTION_STATE_BUFFER;
   }
-  DAT_2000ad20 = iVar1;
+  BLE_CONNECTION_STATE_BUFFER = iVar1;
   DAT_2000ad24 = (int *)param_1;
   return 0;
 }

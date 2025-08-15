@@ -41,7 +41,7 @@ void process_imu_sensor_data
   memcpy(param_8 + 2,param_6,0x40);
   param_8[0x12] = param_4;
   param_8[0x13] = param_5;
-  uVar12 = DAT_20002d1c;
+  uVar12 = IMU_ATTITUDE_CALCULATION_DATA;
   param_8[0x15] = 0;
   param_8[0x14] = 0x40a00000;
   param_8[0x16] = 0;

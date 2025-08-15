@@ -18,7 +18,7 @@ handle_complex_mathematical_function
   undefined4 extraout_s1_00;
   
   uVar3 = calculate_complex_mathematical_function_comprehensive();
-  if (DAT_200035af == -1) {
+  if (VOLTAGE_REGULATION_AND_AUDIO_MIXING_PARAMETERS == -1) {
     return uVar3;
   }
   iVar1 = check_float_nan(param_3,param_4,param_3,param_4,in_r3);

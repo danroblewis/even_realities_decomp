@@ -8,7 +8,7 @@
 void control_timer_operation(int param_1)
 
 {
-  DAT_2001a229 = (undefined1)param_1;
+  SYSTEM_STATUS_AND_TIMER_CONTROL = (undefined1)param_1;
   if (param_1 == 0) {
     decrement_timer_counter();
     return;

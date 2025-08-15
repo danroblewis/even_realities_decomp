@@ -28,7 +28,7 @@ set_brightness_lum_base(int param_1,undefined4 param_2,undefined4 *param_3,undef
     DEBUG_PRINT("set_brightness_lum_base para is NULL\n");
     uVar4 = 0xffffffff;
   }
-  else if (DAT_20019ef3 == '\x01') {
+  else if (SYSTEM_READY_AND_SETTINGS_STATE == '\x01') {
     puVar9 = (undefined1 *)*param_3;
     *puVar9 = 0x36;
     puVar9[2] = 3;

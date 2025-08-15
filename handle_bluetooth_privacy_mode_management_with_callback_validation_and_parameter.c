@@ -38,7 +38,7 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation_and_parame
     iVar6 = 1;
   }
   local_54 = 0;
-  uVar9 = get_ble_characteristic_value(&DAT_200020d4);
+  uVar9 = get_ble_characteristic_value(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION);
   puVar3 = (undefined1 *)((ulonglong)uVar9 >> 0x20);
   if (-1 < (int)uVar9 << 0x1d) {
     return -0xb;
@@ -61,7 +61,7 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation_and_parame
   local_50 = (undefined2)*(undefined4 *)(puVar3 + 8);
   local_4e = (undefined2)*(undefined4 *)(puVar3 + 0xc);
   uStack_43 = calculate_bluetooth_privacy_flags(*(undefined4 *)(puVar3 + 4),0xffffdfff);
-  apply_bitwise_and_mask(&DAT_200020d4);
+  apply_bitwise_and_mask(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION);
   DAT_2000206f = *puVar3;
   *param_1 = DAT_2000206f;
   iVar6 = handle_bluetooth_privacy_mode_management_with_callback_validation

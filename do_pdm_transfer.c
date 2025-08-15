@@ -39,7 +39,7 @@ uint do_pdm_transfer(void)
         handle_heartbeat();
       }
     }
-    iVar2 = check_driver_ready(&DAT_00087d40);
+    iVar2 = check_driver_ready(&PDM_TRANSFER_CONFIGURATION_TABLE);
     if (iVar2 == 0) {
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -86,7 +86,7 @@ LAB_0002f1b4:
           }
         }
         else {
-          uVar5 = configure_device(&DAT_00087d40,&local_50);
+          uVar5 = configure_device(&PDM_TRANSFER_CONFIGURATION_TABLE,&local_50);
           if ((int)uVar5 < 0) {
             if (0 < LOG_LEVEL) {
               pcVar3 = "%s(): Failed to configure the driver: %d\n";
@@ -94,7 +94,7 @@ LAB_0002f1b4:
             }
           }
           else {
-            uVar5 = handle_device_operation_by_code(&DAT_00087d40,1);
+            uVar5 = handle_device_operation_by_code(&PDM_TRANSFER_CONFIGURATION_TABLE,1);
             if (-1 < (int)uVar5) {
               DMIC_DATA_READY_FLAG = 0;
               DMIC_STREAM_STATE = '\0';
@@ -126,7 +126,8 @@ LAB_0002f2a6:
                   goto LAB_0002f1c6;
                 }
                 pcVar4 = (char *)check_device_status_and_handle_timing
-                                           (&DAT_00087d40,0,&local_64,&local_60,1000);
+                                           (&PDM_TRANSFER_CONFIGURATION_TABLE,0,&local_64,&local_60,
+                                            1000);
                 if (pcVar4 != (char *)0x0) {
                   if (0 < LOG_LEVEL) {
                     pcVar3 = "%s(): dmic_read failed %d\n";
@@ -143,7 +144,7 @@ LAB_0002f258:
                 iVar2 = get_system_ready_state();
                 if ((iVar2 == 1) && (iVar2 = get_work_mode(), *(char *)(iVar2 + 0x108c) == '\x01'))
                 {
-                  if (DAT_20002404 < 0x410000U - local_60) {
+                  if (AUDIO_STREAM_BUFFER < 0x410000U - local_60) {
                     pcVar4 = (char *)write_device_memory_and_manage_states();
                     if (pcVar4 != (char *)0x0) {
                       if (0 < LOG_LEVEL) {
@@ -155,13 +156,13 @@ LAB_0002f258:
                     if (0 < LOG_LEVEL) {
                       if (IS_DEBUG == 0) {
                         DEBUG_PRINT("%s(): Flash write to addr 0x%x\n\n","do_pdm_transfer",
-                                    DAT_20002404);
+                                    AUDIO_STREAM_BUFFER);
                       }
                       else {
                         handle_heartbeat();
                       }
                     }
-                    DAT_20002404 = DAT_20002404 + local_60;
+                    AUDIO_STREAM_BUFFER = AUDIO_STREAM_BUFFER + local_60;
                   }
 joined_r0x0002f3fa:
                   if (local_64 != 0) {
@@ -201,7 +202,7 @@ LAB_0002f1c6:
     uVar5 = 1;
   }
 LAB_0002f0dc:
-  iVar1 = handle_device_operation_by_code(&DAT_00087d40,0);
+  iVar1 = handle_device_operation_by_code(&PDM_TRANSFER_CONFIGURATION_TABLE,0);
   if (iVar1 < 0) {
     if (LOG_LEVEL < 1) goto LAB_0002f104;
     pcVar3 = "%s(): STOP trigger failed\n";
@@ -218,7 +219,7 @@ LAB_0002f0dc:
   }
 LAB_0002f104:
   clean_dmic_msgq();
-  DAT_20002404 = 0x400000;
+  AUDIO_STREAM_BUFFER = 0x400000;
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): Exiting\n","dmic_stream_start");

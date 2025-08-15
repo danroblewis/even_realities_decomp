@@ -9,7 +9,7 @@ void call_conditional_operation_one(undefined4 param_1)
 
 {
   DEBUG_PRINT("The discovery procedure for ANCS failed, err %d\n");
-  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
+  clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffe);
   handle_conditional_operation(param_1,1);
   return;
 }

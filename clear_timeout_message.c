@@ -19,10 +19,10 @@ void clear_timeout_message(int param_1)
   iVar6 = 0;
   iVar7 = 0;
   iVar5 = 0;
-  DAT_20018d8e = 1;
+  TIMEOUT_MESSAGE_COUNTER = 1;
 LAB_00033d76:
-  iVar2 = (&DAT_20007dac)[iVar5 * 0x6d];
-  iVar4 = (&DAT_20007db0)[iVar5 * 0x6d];
+  iVar2 = (&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY)[iVar5 * 0x6d];
+  iVar4 = (&TIMEOUT_MESSAGE_STATE_TABLE)[iVar5 * 0x6d];
   if (iVar2 == 0) {
     if (iVar6 == 0) goto LAB_00033dc2;
     if (iVar7 == 0) {
@@ -31,16 +31,17 @@ LAB_00033d76:
         iVar4 = iVar5 + 1;
         goto joined_r0x00033edc;
       }
-      if ((&DAT_20007dbb)[iVar5 * 0x1b4] == '\0') goto LAB_00033daa;
+      if ((&TIMEOUT_MESSAGE_STATE_AND_EXPIRATION_MANAGEMENT)[iVar5 * 0x1b4] == '\0')
+      goto LAB_00033daa;
 LAB_00033de4:
       if (param_1 == 0) {
 LAB_00033de8:
         uVar3 = get_work_mode_timestamp();
-        if (uVar3 <= (&DAT_20007db0)[iVar5 * 0x6d] + 10) goto LAB_00033daa;
+        if (uVar3 <= (&TIMEOUT_MESSAGE_STATE_TABLE)[iVar5 * 0x6d] + 10) goto LAB_00033daa;
       }
     }
     else {
-      if ((&DAT_20007dbb)[iVar5 * 0x1b4] == '\0') {
+      if ((&TIMEOUT_MESSAGE_STATE_AND_EXPIRATION_MANAGEMENT)[iVar5 * 0x1b4] == '\0') {
 LAB_00033d92:
         iVar4 = iVar5 + iVar7;
 joined_r0x00033edc:
@@ -55,9 +56,9 @@ joined_r0x00033edc:
     }
     iVar7 = iVar7 + 1;
     iVar4 = iVar7 + iVar5;
-    fill_memory_buffer(&DAT_20007dac + iVar5 * 0x6d,0);
+    fill_memory_buffer(&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + iVar5 * 0x6d,0);
     if (9 < iVar4) goto LAB_00033e3e;
-    if ((&DAT_20007dac)[iVar5 * 0x6d] != 0) {
+    if ((&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY)[iVar5 * 0x6d] != 0) {
       iVar5 = iVar5 + 1;
       goto LAB_00033d76;
     }
@@ -76,14 +77,16 @@ LAB_00033e8a:
       }
       goto LAB_00033dc8;
     }
-    if ((&DAT_20007dbb)[iVar5 * 0x1b4] != '\0') goto LAB_00033de4;
+    if ((&TIMEOUT_MESSAGE_STATE_AND_EXPIRATION_MANAGEMENT)[iVar5 * 0x1b4] != '\0')
+    goto LAB_00033de4;
     if ((iVar2 != 0) &&
-       (uVar3 = get_work_mode_timestamp(), (&DAT_20007db0)[iVar5 * 0x6d] + 5 < uVar3)) {
+       (uVar3 = get_work_mode_timestamp(), (&TIMEOUT_MESSAGE_STATE_TABLE)[iVar5 * 0x6d] + 5 < uVar3)
+       ) {
       iVar7 = iVar7 + 1;
       iVar4 = iVar7 + iVar5;
-      fill_memory_buffer(&DAT_20007dac + iVar5 * 0x6d,0,0x1b4);
+      fill_memory_buffer(&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + iVar5 * 0x6d,0,0x1b4);
       if (iVar4 < 10) {
-        if ((&DAT_20007dac)[iVar5 * 0x6d] != 0) goto LAB_00033e8a;
+        if ((&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY)[iVar5 * 0x6d] != 0) goto LAB_00033e8a;
         goto LAB_00033e98;
       }
       goto LAB_00033e3e;
@@ -91,15 +94,17 @@ LAB_00033e8a:
 LAB_00033daa:
     iVar4 = iVar7 + iVar5;
     if (9 < iVar4) goto LAB_00033e3e;
-    if (((&DAT_20007dac)[iVar5 * 0x6d] != 0) || (iVar7 == 0)) goto LAB_00033dc8;
+    if (((&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY)[iVar5 * 0x6d] != 0) || (iVar7 == 0))
+    goto LAB_00033dc8;
   }
 LAB_00033e98:
   if ((&DAT_20007dbc)[iVar4 * 0x1b4] == '\0') {
     iVar7 = iVar7 + 1;
     goto LAB_00033d76;
   }
-  memcpy(&DAT_20007dac + iVar5 * 0x6d,&DAT_20007dac + iVar4 * 0x6d);
-  fill_memory_buffer(&DAT_20007dac + iVar4 * 0x6d,0,0x1b4);
+  memcpy(&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + iVar5 * 0x6d,
+         &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + iVar4 * 0x6d);
+  fill_memory_buffer(&TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + iVar4 * 0x6d,0,0x1b4);
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): ######clear_timeout_message copy data from %d to  i %d\n",
@@ -117,7 +122,7 @@ LAB_00033e3e:
     iVar7 = get_work_mode();
     uVar1 = calculate_next_timeout_message_state();
     *(undefined1 *)(iVar7 + 0xdd) = uVar1;
-    DAT_20018d8e = 0;
+    TIMEOUT_MESSAGE_COUNTER = 0;
     return;
   }
   goto LAB_00033d76;

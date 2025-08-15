@@ -84,7 +84,7 @@ LAB_0002a222:
           }
         }
         iVar7 = 0;
-        DAT_20007b18 = 6;
+        KEY_EVENT_THREAD_STATE_DATA = 6;
         validate_spin_lock_if_enabled();
         iVar4 = 0;
         iVar9 = iVar7;
@@ -124,7 +124,7 @@ LAB_0002a24e:
           handle_heartbeat();
         }
       }
-      DAT_20007b18 = 4;
+      KEY_EVENT_THREAD_STATE_DATA = 4;
       validate_spin_lock_if_enabled();
       goto LAB_0002a222;
     }
@@ -146,7 +146,7 @@ LAB_0002a174:
         handle_heartbeat();
       }
     }
-    DAT_20007b18 = 1;
+    KEY_EVENT_THREAD_STATE_DATA = 1;
     goto LAB_0002a282;
   }
   goto LAB_0002a0e8;
@@ -178,7 +178,7 @@ LAB_0002a260:
         handle_heartbeat();
       }
     }
-    DAT_20007b18 = 5;
+    KEY_EVENT_THREAD_STATE_DATA = 5;
     goto LAB_0002a282;
   }
   switch(iVar5) {
@@ -192,7 +192,7 @@ LAB_0002a260:
         handle_heartbeat();
       }
     }
-    DAT_20007b18 = 2;
+    KEY_EVENT_THREAD_STATE_DATA = 2;
     goto LAB_0002a282;
   case 3:
     if (0 < LOG_LEVEL) {
@@ -204,7 +204,7 @@ LAB_0002a260:
         handle_heartbeat();
       }
     }
-    DAT_20007b18 = 3;
+    KEY_EVENT_THREAD_STATE_DATA = 3;
 LAB_0002a282:
     validate_spin_lock_if_enabled();
     break;

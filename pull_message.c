@@ -24,7 +24,7 @@ byte pull_message(undefined4 *param_1,undefined4 param_2,undefined4 param_3,unde
   else {
     iVar1 = get_work_mode();
     if (*(byte *)(iVar1 + 0xdd) < 0xb) {
-      *param_1 = &DAT_20007dac + (uint)TIMEOUT_MESSAGE_STATE * 0x6d;
+      *param_1 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY + (uint)TIMEOUT_MESSAGE_STATE * 0x6d;
       if (IS_DEBUG != 0) {
         handle_heartbeat();
         return TIMEOUT_MESSAGE_STATE;

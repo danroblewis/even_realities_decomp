@@ -9,10 +9,10 @@ undefined4 set_sensor_configuration_parameter_alt(int param_1)
 
 {
   if (param_1 != 0) {
-    if (DAT_20002424 != param_1) {
-      DAT_20002424 = param_1;
+    if (SENSOR_SYSTEM_STATUS_AND_CONFIGURATION != param_1) {
+      SENSOR_SYSTEM_STATUS_AND_CONFIGURATION = param_1;
     }
-    DAT_2000242c = 0;
+    SENSOR_CONFIGURATION_PARAMETERS = 0;
     return 0;
   }
   return 0xffffffff;

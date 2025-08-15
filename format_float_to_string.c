@@ -190,8 +190,8 @@ LAB_00014b9c:
   }
   if (puVar3 < (undefined4 *)0x17) {
     iVar9 = float_compare_boolean_inverted
-                      (iVar6,local_80._4_4_,(&DAT_00088908)[(int)puVar3 * 2],
-                       (&DAT_0008890c)[(int)puVar3 * 2]);
+                      (iVar6,local_80._4_4_,(&FLOAT_FORMATTING_LOOKUP_TABLE)[(int)puVar3 * 2],
+                       (&FLOAT_FORMATTING_AND_CONVERSION_CONSTANTS)[(int)puVar3 * 2]);
     if (iVar9 == 0) {
       bVar25 = false;
     }
@@ -299,8 +299,8 @@ LAB_00014dc8:
         uVar21 = -(int)puVar3 & 0xf;
         iVar5 = -(int)puVar3 >> 4;
         local_80 = float_multiply_64bit_alt
-                             (iVar6,local_80._4_4_,(&DAT_00088908)[uVar21 * 2],
-                              (&DAT_0008890c)[uVar21 * 2]);
+                             (iVar6,local_80._4_4_,(&FLOAT_FORMATTING_LOOKUP_TABLE)[uVar21 * 2],
+                              (&FLOAT_FORMATTING_AND_CONVERSION_CONSTANTS)[uVar21 * 2]);
         bVar1 = false;
         uVar30 = local_80;
         while( true ) {
@@ -319,7 +319,7 @@ LAB_00014dc8:
     }
     else {
       uVar21 = (int)puVar3 >> 4;
-      local_48 = *(undefined8 *)(&DAT_00088908 + ((uint)puVar3 & 0xf) * 2);
+      local_48 = *(undefined8 *)(&FLOAT_FORMATTING_LOOKUP_TABLE + ((uint)puVar3 & 0xf) * 2);
       if ((int)puVar3 << 0x17 < 0) {
         uVar21 = uVar21 & 0xf;
         iVar12 = 3;
@@ -434,7 +434,7 @@ LAB_00014eb8:
                          (uVar7,uVar10,(int)uVar28,(int)((ulonglong)uVar28 >> 0x20));
       if (iVar12 != 0) goto LAB_000152e2;
       if ((local_2c[0] < 0) || (0xe < (int)puVar3)) goto LAB_00014f60;
-      local_70 = *(undefined8 *)(&DAT_00088908 + (int)puVar3 * 2);
+      local_70 = *(undefined8 *)(&FLOAT_FORMATTING_LOOKUP_TABLE + (int)puVar3 * 2);
       if ((-1 < (int)local_50) || (pcVar15 != (char *)0x0)) goto LAB_00015338;
 LAB_000153fa:
       uVar28 = float_multiply_64bit_alt((undefined4)local_70,local_70._4_4_,0,0x40140000);
@@ -677,7 +677,7 @@ LAB_000156c8:
   }
   else {
 LAB_000153dc:
-    local_70 = *(undefined8 *)(&DAT_00088908 + (int)puVar3 * 2);
+    local_70 = *(undefined8 *)(&FLOAT_FORMATTING_LOOKUP_TABLE + (int)puVar3 * 2);
     if ((-1 < (int)local_50) || (0 < (int)pcVar15)) goto LAB_00015338;
     if (pcVar15 == (char *)0x0) goto LAB_000153fa;
 LAB_00015180:

@@ -21,16 +21,17 @@ void schedule_ble_timer_event(int param_1,undefined4 param_2,undefined4 param_3,
     param_1 = 0x7fffff;
   }
   iVar1 = get_high_resolution_timer();
-  if (0x7fffff < iVar1 - DAT_200066b0) {
+  if (0x7fffff < iVar1 - BLE_TIMER_EVENT_SCHEDULING) {
     param_1 = 0;
   }
-  uVar2 = param_1 + (iVar1 - DAT_200066b0);
+  uVar2 = param_1 + (iVar1 - BLE_TIMER_EVENT_SCHEDULING);
   if (0x7ffffe < uVar2) {
     uVar2 = 0x7fffff;
   }
   manage_hardware_timer
-            (0,&LAB_000634dc_1,uVar2 + DAT_200066b0,DAT_200066b4 + (uint)CARRY4(uVar2,DAT_200066b0),
-             &LAB_000634dc_1,0,0,param_4);
+            (0,&LAB_000634dc_1,uVar2 + BLE_TIMER_EVENT_SCHEDULING,
+             DAT_200066b4 + (uint)CARRY4(uVar2,BLE_TIMER_EVENT_SCHEDULING),&LAB_000634dc_1,0,0,
+             param_4);
   return;
 }
 

@@ -19,8 +19,8 @@ int validate_and_process_ble_characteristics_with_callback_validation(int *param
       iVar3 = -0x16;
     }
     else {
-      piVar2 = DAT_2000ac74;
-      if (DAT_2000ac74 != (int *)0x0) {
+      piVar2 = BLE_CHARACTERISTIC_VALIDATION_STATE;
+      if (BLE_CHARACTERISTIC_VALIDATION_STATE != (int *)0x0) {
         do {
           if (piVar2 + -1 == param_1) {
             local_1c = "Callback already registered";
@@ -31,32 +31,34 @@ int validate_and_process_ble_characteristics_with_callback_validation(int *param
           piVar2 = (int *)*piVar2;
         } while (piVar2 != (int *)0x0);
       }
-      param_1[1] = (int)DAT_2000ac74;
-      DAT_2000ac74 = param_1 + 1;
+      param_1[1] = (int)BLE_CHARACTERISTIC_VALIDATION_STATE;
+      BLE_CHARACTERISTIC_VALIDATION_STATE = param_1 + 1;
       if (DAT_2000ac78 == (int *)0x0) {
-        DAT_2000ac78 = DAT_2000ac74;
+        DAT_2000ac78 = BLE_CHARACTERISTIC_VALIDATION_STATE;
       }
-      uVar1 = DAT_200020d4 | 0x20;
-      if ((DAT_200020d4 & 0x20) == 0) {
-        DAT_200020d4 = DAT_200020d4 & 0xffffffef | 0x20;
+      uVar1 = BLUETOOTH_PRIVACY_MODE_CONFIGURATION | 0x20;
+      if ((BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0x20) == 0) {
+        BLUETOOTH_PRIVACY_MODE_CONFIGURATION =
+             BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0xffffffef | 0x20;
         iVar3 = process_data_with_initialization_and_validation(0x2025,0,0);
-        uVar1 = DAT_200020d4;
+        uVar1 = BLUETOOTH_PRIVACY_MODE_CONFIGURATION;
         if (iVar3 != 0) {
           local_1c = "Sending LE P256 Public Key command failed";
           local_20 = 2;
           process_and_compress_data_with_validation(&DAT_00088120,0x1040,&local_20,0);
-          DAT_200020d4 = DAT_200020d4 & 0xffffffdf;
-          for (piVar2 = DAT_2000ac74; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
+          BLUETOOTH_PRIVACY_MODE_CONFIGURATION = BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0xffffffdf;
+          for (piVar2 = BLE_CHARACTERISTIC_VALIDATION_STATE; piVar2 != (int *)0x0;
+              piVar2 = (int *)*piVar2) {
             if ((code *)piVar2[-1] != (code *)0x0) {
               (*(code *)piVar2[-1])(0);
             }
           }
-          DAT_2000ac74 = (int *)0x0;
+          BLE_CHARACTERISTIC_VALIDATION_STATE = (int *)0x0;
           DAT_2000ac78 = (int *)0x0;
           return iVar3;
         }
       }
-      DAT_200020d4 = uVar1;
+      BLUETOOTH_PRIVACY_MODE_CONFIGURATION = uVar1;
       iVar3 = 0;
     }
   }

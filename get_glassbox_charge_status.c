@@ -11,13 +11,13 @@ byte get_glassbox_charge_status(void)
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): bIsCharging is :%d \n\n","get_glassbox_charge_status",
-                  (uint)(DAT_20019ef4 >> 7));
+                  (uint)(GLASSBOX_CHARGE_STATUS_AND_SENSOR_BITS >> 7));
     }
     else {
       handle_heartbeat();
     }
   }
-  return DAT_20019ef4 >> 7;
+  return GLASSBOX_CHARGE_STATUS_AND_SENSOR_BITS >> 7;
 }
 
 

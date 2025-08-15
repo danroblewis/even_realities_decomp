@@ -27,9 +27,9 @@ undefined4 ui_QuickNote_task(int param_1,undefined4 param_2,int param_3)
   
   set_work_mode_parameter(param_1 + 0x24);
   set_work_mode_flag_bit_1();
-  if (DAT_20004978 != '\x01') {
-    if (DAT_20004978 != '\x02') {
-      if (DAT_20004978 != '\0') {
+  if (UI_QUICKNOTE_TASK_STATE_DATA != '\x01') {
+    if (UI_QUICKNOTE_TASK_STATE_DATA != '\x02') {
+      if (UI_QUICKNOTE_TASK_STATE_DATA != '\0') {
         return 0;
       }
       if (2 < LOG_LEVEL) {
@@ -40,7 +40,7 @@ undefined4 ui_QuickNote_task(int param_1,undefined4 param_2,int param_3)
           handle_heartbeat();
         }
       }
-      fill_memory_buffer(&DAT_20004978,0,0x10);
+      fill_memory_buffer(&UI_QUICKNOTE_TASK_STATE_DATA,0,0x10);
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           iVar2 = get_work_mode();
@@ -65,7 +65,7 @@ undefined4 ui_QuickNote_task(int param_1,undefined4 param_2,int param_3)
           }
         }
         gui_screen_clear();
-        DAT_20004978 = 1;
+        UI_QUICKNOTE_TASK_STATE_DATA = 1;
         reset_animation_counters();
         iVar2 = get_system_byte_1_alt();
         iVar13 = 0;
@@ -184,7 +184,7 @@ LAB_0003bd76:
           animate_framebuffer_with_pattern();
           iVar2 = get_work_mode();
           **(undefined1 **)(iVar2 + 0x1020) = 0;
-          fill_memory_buffer(&DAT_20004978,0,0x10);
+          fill_memory_buffer(&UI_QUICKNOTE_TASK_STATE_DATA,0,0x10);
           DAT_2001b817 = 0;
           return 0;
         }
@@ -286,7 +286,7 @@ LAB_0003bb86:
         DAT_20004980 = (uint)(lVar15 * 1000) >> 0xf | uVar11 * 0x20000;
         DAT_20004984 = uVar11 >> 0xf;
         gui_screen_clear();
-        DAT_20004978 = 2;
+        UI_QUICKNOTE_TASK_STATE_DATA = 2;
         DAT_2001b817 = 0;
         reset_animation_counters();
         if (LOG_LEVEL < 3) {
@@ -324,7 +324,7 @@ LAB_0003bacc:
 LAB_0003bade:
   iVar2 = get_work_mode();
   **(undefined1 **)(iVar2 + 0x1020) = 0;
-  fill_memory_buffer(&DAT_20004978,0,0x10);
+  fill_memory_buffer(&UI_QUICKNOTE_TASK_STATE_DATA,0,0x10);
   return 0;
 }
 

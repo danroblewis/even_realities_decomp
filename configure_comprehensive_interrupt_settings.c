@@ -90,11 +90,11 @@ LAB_00066ef2:
   uVar8 = (uint)*(byte *)(param_1 + 1);
   cVar2 = *(char *)((int)param_2 + 0x21);
   if ((uVar8 == 0) || (cVar2 == '\0')) {
-    (&DAT_2000b3a4)[uVar13 * 9] = param_2[3];
+    (&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar13 * 9] = param_2[3];
     (&DAT_2000b3a3)[uVar13 * 0x24] = *(undefined1 *)(param_2 + 4);
   }
   else {
-    (&DAT_2000b3a4)[uVar13 * 9] = 0xffffffff;
+    (&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar13 * 9] = 0xffffffff;
   }
   uVar13 = (uint)*(byte *)((int)param_2 + 0x19);
   bVar3 = *(byte *)((int)param_2 + 0x12);
@@ -166,7 +166,7 @@ LAB_00066ef2:
     }
     *(uint *)(iVar10 + 0x560) = (uint)bVar6;
   }
-  if ((&DAT_2000b384)[(uint)*(byte *)(param_1 + 1) * 9] == 0) {
+  if ((&INTERRUPT_CONFIGURATION_STRUCTURE)[(uint)*(byte *)(param_1 + 1) * 9] == 0) {
     return;
   }
   process_data_with_parameter_validation_alt4((*param_1 << 0xc) >> 0x18);

@@ -56,10 +56,10 @@ void manage_complex_work_mode_animations_and_states(void)
     iVar4 = get_work_mode();
     iVar5 = get_work_mode();
     *(undefined1 *)(*(int *)(iVar5 + 0x1014) + 3) = *(undefined1 *)(iVar4 + 0xee4);
-    if (5 < DAT_2001cdd0) {
+    if (5 < WORK_MODE_UI_RENDERING_STATE) {
       return;
     }
-    if (DAT_2001cdd0 != 0) {
+    if (WORK_MODE_UI_RENDERING_STATE != 0) {
       uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar4 = get_work_mode();
       uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
@@ -83,9 +83,10 @@ void manage_complex_work_mode_animations_and_states(void)
     iVar4 = get_work_mode();
     iVar5 = get_work_mode();
     *(undefined1 *)(*(int *)(iVar5 + 0x1014) + 3) = *(undefined1 *)(iVar4 + 0xee4);
-    if (DAT_2001cdce == '\x01') {
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION == '\x01') {
       iVar4 = get_work_mode();
-      if ((*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x05') && (DAT_2001cdd1 == '\0')) {
+      if ((*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x05') &&
+         (WORK_MODE_STATE_VALIDATION_FLAGS == '\0')) {
         uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
         iVar4 = get_work_mode();
         uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
@@ -121,7 +122,7 @@ void manage_complex_work_mode_animations_and_states(void)
       gui_utf_draw(0,uVar12,0,iVar4,iVar6 + 0x6d,iVar5 + 0x240,iVar7 + 0x88,1,0,0,0,0);
       return;
     }
-    if (DAT_2001cdce != '\x02') {
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION != '\x02') {
       return;
     }
     uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
@@ -130,9 +131,9 @@ void manage_complex_work_mode_animations_and_states(void)
     uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
     uVar2 = (uint)((uint)uVar18 < uVar16);
     if ((uVar1 != uVar2 || uVar1 - uVar2 < (uint)(2000 < (uint)uVar18 - uVar16)) ||
-       (DAT_2001cdd1 != '\0')) {
-      if (DAT_2001cdd2 == '\0') {
-        DAT_2001cdd2 = '\x01';
+       (WORK_MODE_STATE_VALIDATION_FLAGS != '\0')) {
+      if (WORK_MODE_ANIMATION_STATE == '\0') {
+        WORK_MODE_ANIMATION_STATE = '\x01';
         uVar12 = get_data_by_index_and_type(0x14);
         uVar8 = get_ui_x_offset();
         uVar9 = get_ui_y_offset();
@@ -404,7 +405,7 @@ LAB_00041f72:
 LAB_00041f76:
     iVar4 = get_work_mode();
     if (*(char *)(*(int *)(iVar4 + 0x1014) + 3) == '\x01') {
-      DAT_2001cdd1 = '\x01';
+      WORK_MODE_STATE_VALIDATION_FLAGS = '\x01';
     }
     break;
   case 6:
@@ -412,9 +413,9 @@ LAB_00041f76:
     iVar4 = get_work_mode();
     iVar5 = get_work_mode();
     *(undefined1 *)(*(int *)(iVar5 + 0x1014) + 3) = *(undefined1 *)(iVar4 + 0xee4);
-    cVar3 = DAT_2001cdce;
-    if (DAT_2001cdce != '\x01') {
-      if (DAT_2001cdce != '\x02') {
+    cVar3 = WORK_MODE_STATE_AND_UI_CONFIGURATION;
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION != '\x01') {
+      if (WORK_MODE_STATE_AND_UI_CONFIGURATION != '\x02') {
         return;
       }
       uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
@@ -423,9 +424,9 @@ LAB_00041f76:
       uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
       uVar2 = (uint)((uint)uVar18 < uVar16);
       if ((uVar1 == uVar2 && (uint)(2000 < (uint)uVar18 - uVar16) <= uVar1 - uVar2) &&
-         (DAT_2001cdd1 == '\0')) goto LAB_00041f76;
-      if (DAT_2001cdd2 == '\0') {
-        DAT_2001cdd2 = '\x01';
+         (WORK_MODE_STATE_VALIDATION_FLAGS == '\0')) goto LAB_00041f76;
+      if (WORK_MODE_ANIMATION_STATE == '\0') {
+        WORK_MODE_ANIMATION_STATE = '\x01';
         iVar4 = get_work_mode();
         if (-1 < (int)((uint)*(byte *)(*(int *)(iVar4 + 0x1014) + 0x1f) << 0x1d)) {
           send_event_status(0x15);
@@ -600,8 +601,8 @@ LAB_000422ba:
       if (uVar1 == uVar2 && (uint)(2000 < (uint)uVar18 - uVar16) <= uVar1 - uVar2) {
         return;
       }
-      if (DAT_2001cdd2 == '\0') {
-        DAT_2001cdd2 = cVar3;
+      if (WORK_MODE_ANIMATION_STATE == '\0') {
+        WORK_MODE_ANIMATION_STATE = cVar3;
         reset_animation_counters();
         uVar12 = get_ui_x_offset();
         iVar4 = get_ui_y_offset();
@@ -700,10 +701,10 @@ LAB_000418a6:
     }
     break;
   case 0x17:
-    if (5 < DAT_2001cdd0) {
+    if (5 < WORK_MODE_UI_RENDERING_STATE) {
       return;
     }
-    if (DAT_2001cdd0 != 0) {
+    if (WORK_MODE_UI_RENDERING_STATE != 0) {
       uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar4 = get_work_mode();
       uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
@@ -715,7 +716,7 @@ LAB_000418a6:
     }
     uVar12 = 0x14;
 LAB_000418d2:
-    DAT_2001cdd0 = DAT_2001cdd0 + 1;
+    WORK_MODE_UI_RENDERING_STATE = WORK_MODE_UI_RENDERING_STATE + 1;
     send_event_status(uVar12);
     uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
     iVar4 = get_work_mode();

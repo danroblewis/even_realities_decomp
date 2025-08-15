@@ -30,7 +30,7 @@ void initialize_cryptographic_context_with_parameter_setup(undefined4 *param_1)
     }
                     /* WARNING: Could not recover jumptable at 0x0007a048. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*DAT_20002f54)(puVar2);
+    (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER)(puVar2);
     return;
   }
   return;

@@ -19,7 +19,7 @@ uint calculate_next_timeout_message_state(void)
   uVar3 = 0;
   bVar1 = false;
   uVar5 = 0;
-  puVar6 = &DAT_20007dac;
+  puVar6 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY;
   do {
     uVar2 = uVar3 & 0xff;
     if (*(char *)(puVar6 + 4) == '\0') {

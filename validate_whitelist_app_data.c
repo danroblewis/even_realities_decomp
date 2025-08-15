@@ -45,7 +45,7 @@ LAB_00035088:
     }
   }
   else {
-    if ((bool)(DAT_2001a22c & 1) != (*(int *)(iVar3 + 0xc) == 2)) {
+    if ((bool)(WHITELIST_APP_JSON_DATA_BUFFER & 1) != (*(int *)(iVar3 + 0xc) == 2)) {
       pcVar4 = "callEnable is not the same !\n";
       goto LAB_00035088;
     }
@@ -54,7 +54,8 @@ LAB_00035088:
       pcVar4 = "msgEnable is NULL !\n";
       goto LAB_00035088;
     }
-    if (((uint)DAT_2001a22c << 0x1e) >> 0x1f != (uint)(*(int *)(iVar3 + 0xc) == 2)) {
+    if (((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1e) >> 0x1f != (uint)(*(int *)(iVar3 + 0xc) == 2)
+       ) {
       pcVar4 = "msgEnable is not the same !\n";
       goto LAB_00035088;
     }
@@ -63,7 +64,8 @@ LAB_00035088:
       pcVar4 = "jsonCalendarEnable is NULL !\n";
       goto LAB_00035088;
     }
-    if (((uint)DAT_2001a22c << 0x1c) >> 0x1f != (uint)(*(int *)(iVar3 + 0xc) == 2)) {
+    if (((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1c) >> 0x1f != (uint)(*(int *)(iVar3 + 0xc) == 2)
+       ) {
       pcVar4 = "calendarEnable is not the same !\n";
       goto LAB_00035088;
     }
@@ -72,7 +74,8 @@ LAB_00035088:
       pcVar4 = "iosMailEnableJson is NULL !\n";
       goto LAB_00035088;
     }
-    if (((uint)DAT_2001a22c << 0x1d) >> 0x1f != (uint)(*(int *)(iVar3 + 0xc) == 2)) {
+    if (((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1d) >> 0x1f != (uint)(*(int *)(iVar3 + 0xc) == 2)
+       ) {
       pcVar4 = "iosMailEnable is not the same !\n";
       goto LAB_00035088;
     }
@@ -86,7 +89,8 @@ LAB_00035088:
       pcVar4 = "appEnableJson is NULL !\n";
       goto LAB_00035088;
     }
-    if (((uint)DAT_2001a22c << 0x1b) >> 0x1f != (uint)(*(int *)(iVar5 + 0xc) == 2)) {
+    if (((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1b) >> 0x1f != (uint)(*(int *)(iVar5 + 0xc) == 2)
+       ) {
       pcVar4 = "appEnable is not the same !\n";
       goto LAB_00035088;
     }
@@ -99,7 +103,7 @@ LAB_00035088:
     if (iVar5 != 0) {
       bVar1 = count_linked_list_elements(iVar3);
       uVar8 = (uint)bVar1;
-      if (DAT_2001a22d != uVar8) {
+      if (WHITELIST_APP_DATA_BUFFER != uVar8) {
         pcVar4 = "appCounts is not the same !\n";
         goto LAB_00035088;
       }

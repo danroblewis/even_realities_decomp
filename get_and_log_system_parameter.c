@@ -8,7 +8,7 @@
 undefined1 get_and_log_system_parameter(void)
 
 {
-  CURRENT_STOCK_ID = DAT_2001b815;
+  CURRENT_STOCK_ID = SYSTEM_PARAMETER_LOGGING_BUFFER;
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT(&LAB_000a8ff2_1,&LAB_000a95d8);

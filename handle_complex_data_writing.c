@@ -17,21 +17,21 @@ int handle_complex_data_writing(void)
   ushort local_12;
   
   local_18 = _DAT_20007a14;
-  DAT_20007a20 = 4;
+  BLE_DATA_PROCESSING_BUFFER = 4;
   if (DAT_20007a16 == '\0') {
     local_12 = DAT_20007a1a << 8 | DAT_20007a1a >> 8;
-    DAT_20007a20 = 8;
+    BLE_DATA_PROCESSING_BUFFER = 8;
   }
   sVar1 = handle_data_writing_alt2(&local_18);
   iVar2 = (int)sVar1;
   if (iVar2 == 0) {
     local_19 = 3;
     iVar2 = send_data_packet_with_retry_and_mutex
-                      (SYSTEM_CONFIGURATION_PARAMETER,DAT_20007a20,&local_19,1);
+                      (SYSTEM_CONFIGURATION_PARAMETER,BLE_DATA_PROCESSING_BUFFER,&local_19,1);
     if (iVar2 == 0) {
       local_19 = 0;
       iVar2 = send_data_packet_with_retry_and_mutex
-                        (SYSTEM_CONFIGURATION_PARAMETER,DAT_20007a20 + 1,&local_19);
+                        (SYSTEM_CONFIGURATION_PARAMETER,BLE_DATA_PROCESSING_BUFFER + 1,&local_19);
       if (iVar2 != 0) {
         iVar2 = 1;
       }

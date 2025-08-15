@@ -41,12 +41,13 @@ LAB_00019768:
             }
           }
           manage_ble_connection_state_comprehensive(param_1 + 0x200);
-          iVar1 = dequeue_uid(&DAT_20006aac);
+          iVar1 = dequeue_uid(&ANCS_DATA_SOURCE_HANDLER_STATE);
           if (iVar1 == 0) {
             if (0 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): !!!!!!!!!!!!!!get -> ancs_get_attr_req_sem %d evt_id %d\n",
-                            "ble_ancs_data_req_thread",DAT_20006aac,(uint)DAT_20006ab0);
+                            "ble_ancs_data_req_thread",ANCS_DATA_SOURCE_HANDLER_STATE,
+                            (uint)DAT_20006ab0);
               }
               else {
                 handle_heartbeat("%s(): !!!!!!!!!!!!!!get -> ancs_get_attr_req_sem %d evt_id %d\n",
@@ -68,7 +69,7 @@ LAB_00019768:
             }
             else {
               *(undefined4 *)(param_1 + 0x1e4) = 2;
-              *(undefined4 *)(param_1 + 0x3c) = DAT_20006aac;
+              *(undefined4 *)(param_1 + 0x3c) = ANCS_DATA_SOURCE_HANDLER_STATE;
               *(undefined1 *)(param_1 + 0x41) = 0;
               *(undefined1 *)(param_1 + 0x44) = 0x30;
               *(undefined1 *)(param_1 + 100) = 0x30;

@@ -26,19 +26,21 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
   else {
     iVar3 = create_json_obj();
     if (iVar3 != 0) {
-      create_and_set_json_boolean_field(iVar3,"call_enable",DAT_2001a22c & 1);
-      create_and_set_json_boolean_field(iVar3,"msg_enable",((uint)DAT_2001a22c << 0x1e) >> 0x1f);
+      create_and_set_json_boolean_field(iVar3,"call_enable",WHITELIST_APP_JSON_DATA_BUFFER & 1);
       create_and_set_json_boolean_field
-                (iVar3,"ios_mail_enable",((uint)DAT_2001a22c << 0x1d) >> 0x1f);
+                (iVar3,"msg_enable",((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1e) >> 0x1f);
       create_and_set_json_boolean_field
-                (iVar3,"calendar_enable",((uint)DAT_2001a22c << 0x1c) >> 0x1f);
+                (iVar3,"ios_mail_enable",((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1d) >> 0x1f);
+      create_and_set_json_boolean_field
+                (iVar3,"calendar_enable",((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1c) >> 0x1f);
       iVar4 = create_json_obj();
       if (iVar4 == 0) {
         uVar7 = 0x206;
         pcVar2 = "[%s-%d]appJson is null \n";
       }
       else {
-        create_and_set_json_boolean_field(iVar4,"enable",((uint)DAT_2001a22c << 0x1b) >> 0x1f);
+        create_and_set_json_boolean_field
+                  (iVar4,"enable",((uint)WHITELIST_APP_JSON_DATA_BUFFER << 0x1b) >> 0x1f);
         iVar5 = create_json_array_value();
         if (iVar5 == 0) {
           uVar7 = 0x20e;
@@ -48,7 +50,7 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
           uVar9 = 0;
           while( true ) {
             uVar8 = uVar9 & 0xff;
-            if (DAT_2001a22d <= uVar8) {
+            if (WHITELIST_APP_DATA_BUFFER <= uVar8) {
               add_json_named_object(iVar4,"list",iVar5);
               add_json_named_object(iVar3,"app",iVar4);
               uVar7 = format_json_value_wrapper_alt(iVar3);

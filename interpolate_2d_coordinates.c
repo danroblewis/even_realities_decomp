@@ -59,8 +59,8 @@ void interpolate_2d_coordinates(float param_1,float *param_2,undefined4 *param_3
     fVar6 = local_58[0];
   }
   iVar1 = validate_float_value(param_1);
-  fVar8 = DAT_20002d1c;
-  fVar7 = DAT_20002d1c;
+  fVar8 = IMU_ATTITUDE_CALCULATION_DATA;
+  fVar7 = IMU_ATTITUDE_CALCULATION_DATA;
   if (iVar1 == 0) {
     fVar7 = fVar11 - fVar14;
     fVar8 = (local_58[1] - fVar5) / fVar7;

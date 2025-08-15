@@ -17,7 +17,8 @@ undefined4 process_data_with_state_management_alt5(int param_1)
   local_c = 3;
   iVar1 = write_ble_uart_packet_string_with_type3_header(param_1 + 4,&local_10);
   if ((iVar1 == 0) ||
-     (iVar1 = write_ble_uart_packet_32bit_unsigned(param_1 + 4,DAT_2000ab80), iVar1 == 0)) {
+     (iVar1 = write_ble_uart_packet_32bit_unsigned(param_1 + 4,BLE_CONNECTION_DATA_BUFFER),
+     iVar1 == 0)) {
     uVar2 = 7;
   }
   else {

@@ -53,8 +53,8 @@ void process_ble_handle_mapping_comprehensive
     }
   }
   local_2a[0] = param_5;
-  if (DAT_2000af08 != (uint *)0x0) {
-    puVar4 = DAT_2000af08;
+  if (BLE_HANDLE_MAPPING_PROCESSING_STATE != (uint *)0x0) {
+    puVar4 = BLE_HANDLE_MAPPING_PROCESSING_STATE;
     do {
       uVar6 = *puVar4;
       if (uVar6 == 0) {

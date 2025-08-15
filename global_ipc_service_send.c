@@ -17,9 +17,10 @@ int global_ipc_service_send(undefined4 param_1,undefined4 param_2)
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) goto LAB_00025bf2;
         handle_heartbeat("%s(): ipc_service_send data failed with ret %d %d\n",
-                         "global_ipc_service_send",iVar1,DAT_20007a74);
+                         "global_ipc_service_send",iVar1,GLOBAL_IPC_SERVICE_STATE);
       }
-      while (DAT_20007a74 = DAT_20007a74 + 1, 2 < DAT_20007a74) {
+      while (GLOBAL_IPC_SERVICE_STATE = GLOBAL_IPC_SERVICE_STATE + 1, 2 < GLOBAL_IPC_SERVICE_STATE)
+      {
         if (0 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
             DEBUG_PRINT("%s(): sys reboot because ipc failed\n","global_ipc_service_send");
@@ -36,7 +37,7 @@ LAB_00025bf2:
       }
       return iVar1;
     }
-    DAT_20007a74 = 0;
+    GLOBAL_IPC_SERVICE_STATE = 0;
     return iVar1;
   }
   if (0 < LOG_LEVEL) {

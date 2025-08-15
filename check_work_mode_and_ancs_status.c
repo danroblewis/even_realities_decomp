@@ -16,7 +16,7 @@ bool check_work_mode_and_ancs_status(void)
   work_mode_ptr2 = get_work_mode();
   work_mode_ptr = get_work_mode();
   ancs_connection_handle = get_ancs_connection_handle();
-  if ((DAT_20018d91 == '\x03') && (ancs_connection_handle != '\0')) {
+  if ((ANCS_STATUS_AND_WORK_MODE_FLAGS == '\x03') && (ancs_connection_handle != '\0')) {
     work_mode_char_ptr = (char *)get_work_mode();
     if (*work_mode_char_ptr == '\x01') {
       if ((int)((uint)*(byte *)(work_mode_ptr + 0x6de) << 0x1f) < 0) {

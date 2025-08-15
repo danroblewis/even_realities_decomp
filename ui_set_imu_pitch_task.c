@@ -22,20 +22,20 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
   get_work_mode();
   set_work_mode_parameter(param_1 + 0x24);
   set_work_mode_flag_bit_1();
-  if ((char)DAT_2001cf8f == '\0') {
+  if ((char)IMU_PITCH_TASK_DATA == '\0') {
     if (param_3 == 1) {
-      cVar2 = DAT_2001cf8f._1_1_;
-      if (DAT_2001cf8f._1_1_ != '\0') {
+      cVar2 = IMU_PITCH_TASK_DATA._1_1_;
+      if (IMU_PITCH_TASK_DATA._1_1_ != '\0') {
         return 0;
       }
       configure_advanced_utf_drawing();
       gui_screen_clear();
       reset_animation_counters();
       DAT_2001cf91 = cVar2;
-      DAT_2001cf8f._0_1_ = cVar2;
-      DAT_2001cf8f._1_1_ = 1;
+      IMU_PITCH_TASK_DATA._0_1_ = cVar2;
+      IMU_PITCH_TASK_DATA._1_1_ = 1;
       reset_animation_counters();
-      DAT_2001cf8f = CONCAT11(DAT_2001cf8f._1_1_,1);
+      IMU_PITCH_TASK_DATA = CONCAT11(IMU_PITCH_TASK_DATA._1_1_,1);
       clear_work_mode_flag_bit_1();
       iVar6 = 0;
       do {
@@ -93,7 +93,7 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
     gui_screen_clear();
   }
   else {
-    if ((char)DAT_2001cf8f != '\x01') {
+    if ((char)IMU_PITCH_TASK_DATA != '\x01') {
       return 0;
     }
     if (param_3 == 1) {
@@ -116,7 +116,7 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
   }
   configure_advanced_utf_drawing();
   DAT_2001cf91 = 0;
-  DAT_2001cf8f = 0;
+  IMU_PITCH_TASK_DATA = 0;
   return 0;
 }
 

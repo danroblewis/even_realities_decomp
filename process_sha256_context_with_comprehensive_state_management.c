@@ -34,14 +34,14 @@ int process_sha256_context_with_comprehensive_state_management
   if (*(char *)(param_1 + 0xf) == '\x04') {
     iVar3 = validate_sha256_parameters_with_size_checking(param_1[0x10],param_1[0xc]);
     if (iVar3 == 0) {
-      _DAT_50845400 = *DAT_20002f3c;
-      _DAT_50845404 = DAT_20002f3c[1];
-      _DAT_50845408 = DAT_20002f3c[2];
-      _DAT_5084540c = DAT_20002f3c[3];
-      _DAT_50845410 = DAT_20002f3c[4];
-      _DAT_50845414 = DAT_20002f3c[5];
-      _DAT_50845418 = DAT_20002f3c[6];
-      _DAT_5084541c = DAT_20002f3c[7];
+      _DAT_50845400 = *INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY;
+      _DAT_50845404 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[1];
+      _DAT_50845408 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[2];
+      _DAT_5084540c = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[3];
+      _DAT_50845410 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[4];
+      _DAT_50845414 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[5];
+      _DAT_50845418 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[6];
+      _DAT_5084541c = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[7];
       uVar5 = param_1[0xc];
       if (uVar5 < 3) {
         iVar4 = uVar5 * 8 + 0x10;
@@ -49,14 +49,14 @@ int process_sha256_context_with_comprehensive_state_management
                           (param_1[0x10],uVar5,param_1[0x11],param_1[0x12],param_1[0x13],
                            param_1[0x14],param_1 + 4,iVar4);
         if (iVar3 != 0) {
-          _DAT_50845400 = *DAT_20002f3c;
-          _DAT_50845404 = DAT_20002f3c[1];
-          _DAT_50845408 = DAT_20002f3c[2];
-          _DAT_5084540c = DAT_20002f3c[3];
-          _DAT_50845410 = DAT_20002f3c[4];
-          _DAT_50845414 = DAT_20002f3c[5];
-          _DAT_50845418 = DAT_20002f3c[6];
-          _DAT_5084541c = DAT_20002f3c[7];
+          _DAT_50845400 = *INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY;
+          _DAT_50845404 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[1];
+          _DAT_50845408 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[2];
+          _DAT_5084540c = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[3];
+          _DAT_50845410 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[4];
+          _DAT_50845414 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[5];
+          _DAT_50845418 = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[6];
+          _DAT_5084541c = INTERRUPT_PRIORITY_LEVEL_CONFIGURATION_ARRAY[7];
           fill_memory_buffer_with_zeros_wrapper(param_1 + 4,iVar4);
         }
         *(undefined1 *)(param_1 + 0xf) = 0;

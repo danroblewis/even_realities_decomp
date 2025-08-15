@@ -26,17 +26,18 @@ int bluetooth_hci_command_processing_with_state_management_and_parameter
       }
       iVar1 = bluetooth_hci_command_processing_with_validation_and_parameter(&iStack_18);
     } while (-1 < iVar1);
-    iVar2 = copy_memory_word_short_and_byte((int)&DAT_20002000 + param_1 * 7,&iStack_18);
+    iVar2 = copy_memory_word_short_and_byte
+                      ((int)&BLUETOOTH_HCI_COMMAND_BUFFER + param_1 * 7,&iStack_18);
     iVar1 = param_2;
     if (param_2 == 0) goto LAB_00054d38;
   }
   else {
-    iVar1 = (int)&DAT_20002000 + param_1 * 7;
+    iVar1 = (int)&BLUETOOTH_HCI_COMMAND_BUFFER + param_1 * 7;
     iVar2 = param_2;
   }
   copy_memory_word_short_and_byte(iVar1,iVar2);
 LAB_00054d38:
-  iVar1 = dereference_pointer_value(&DAT_200020d4);
+  iVar1 = dereference_pointer_value(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION);
   if (iVar1 << 0x1d < 0) {
     check_system_status_and_compress();
     return_zero_alt();

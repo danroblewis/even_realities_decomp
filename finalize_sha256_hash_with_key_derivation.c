@@ -47,7 +47,7 @@ int finalize_sha256_hash_with_key_derivation
   if (iVar1 == 0) {
     iVar1 = update_sha256_hash_with_buffer_management(param_1,param_4,param_5,uVar4);
   }
-  iVar2 = (*DAT_20002f54)(param_1 + 0x9c);
+  iVar2 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER)(param_1 + 0x9c);
   if (iVar2 != 0) {
     iVar1 = iVar2;
   }

@@ -8,7 +8,7 @@
 undefined1 get_work_mode_status(void)
 
 {
-  CURRENT_STOCK_INDEX = DAT_2001b816;
+  CURRENT_STOCK_INDEX = SYSTEM_PARAMETER_AND_WORK_MODE_STATUS;
   set_system_byte_69();
   return CURRENT_STOCK_INDEX;
 }

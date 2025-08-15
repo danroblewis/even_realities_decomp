@@ -104,7 +104,7 @@ LAB_0002385e:
     change_work_mode_to(7);
     goto switchD_00023894_caseD_4;
   case 0x16:
-    if (DAT_200079d4 == 0x1c0000) {
+    if (FILE_STORAGE_COMMIT_STATE == 0x1c0000) {
       process_encoded_data_from_flash();
       pcVar2 = (char *)get_work_mode();
       if (*pcVar2 == '\x01') {
@@ -121,10 +121,10 @@ LAB_0002385e:
       }
       *puVar10 = uVar5;
     }
-    DAT_200079d4 = 0;
-    DAT_200079d8 = 0;
+    FILE_STORAGE_COMMIT_STATE = 0;
+    FILE_STORAGE_BUFFER = 0;
     CRC32_CHECKSUM_VALUE = 0;
-    DAT_200079dc = 0;
+    FILE_STORAGE_BUFFER_MANAGEMENT = 0;
     goto LAB_0002385e;
   case 0x17:
     goto switchD_00023894_caseD_17;

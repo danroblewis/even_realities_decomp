@@ -25,7 +25,7 @@ undefined4 opt3007_chip_init(int param_1)
     param_1 = get_work_mode();
     param_1 = param_1 + 0xf80;
   }
-  DAT_20007b6c = param_1;
+  OPT3007_LIGHT_SENSOR_STATE = param_1;
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): opt3007 init start:\n","opt3007_chip_init");
@@ -69,7 +69,7 @@ undefined4 opt3007_chip_init(int param_1)
           local_27 = (byte)((local_2a & 63999) >> 8) | 6;
           local_28 = 1;
           local_26 = (undefined1)(local_2a & 63999);
-          iVar1 = check_driver_ready(DAT_200023fc);
+          iVar1 = check_driver_ready(OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER);
           if (iVar1 == 0) {
             if (LOG_LEVEL < 1) {
               return 0xfffffffb;
@@ -85,10 +85,11 @@ undefined4 opt3007_chip_init(int param_1)
             local_24 = &local_28;
             local_20 = 3;
             local_1c = 2;
-            iVar1 = (**(code **)(*(int *)(DAT_200023fc + 8) + 8))(DAT_200023fc,&local_24,1,0x45);
+            iVar1 = (**(code **)(*(int *)(OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER + 8) + 8))
+                              (OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER,&local_24,1,0x45);
             if (-1 < iVar1) {
-              if (DAT_20007b6c != 0) {
-                *(undefined4 *)(DAT_20007b6c + 0x10) = 1;
+              if (OPT3007_LIGHT_SENSOR_STATE != 0) {
+                *(undefined4 *)(OPT3007_LIGHT_SENSOR_STATE + 0x10) = 1;
               }
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -98,7 +99,7 @@ undefined4 opt3007_chip_init(int param_1)
                   handle_heartbeat();
                 }
               }
-              DAT_20018da1 = 1;
+              OPT3001_AMBIENT_LIGHT_SENSOR_STATE = 1;
               return 0;
             }
             if (LOG_LEVEL < 1) {

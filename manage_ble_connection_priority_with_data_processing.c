@@ -68,12 +68,12 @@ void manage_ble_connection_priority_with_data_processing(void)
           puVar7[1] = puVar2;
           goto LAB_0007468c;
         }
-        if (puVar7 == DAT_2000b468) break;
+        if (puVar7 == BLE_CONNECTION_PRIORITY_MANAGER) break;
       }
       *puVar2 = &DMIC_BUFFER_POINTER;
-      puVar2[1] = DAT_2000b468;
-      *DAT_2000b468 = puVar2;
-      DAT_2000b468 = puVar2;
+      puVar2[1] = BLE_CONNECTION_PRIORITY_MANAGER;
+      *BLE_CONNECTION_PRIORITY_MANAGER = puVar2;
+      BLE_CONNECTION_PRIORITY_MANAGER = puVar2;
 LAB_0007468c:
       manage_ble_connection_priority(1);
       iVar4 = validate_and_clear_connection_state(&DAT_2000b490);

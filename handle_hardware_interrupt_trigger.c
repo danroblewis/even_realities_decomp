@@ -15,7 +15,7 @@ int handle_hardware_interrupt_trigger
   uint uVar2;
   uint uVar3;
   
-  uVar2 = (uint)DAT_2000b378;
+  uVar2 = (uint)HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER;
   if (uVar2 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x2e8,param_4);
@@ -25,11 +25,11 @@ int handle_hardware_interrupt_trigger
   }
   uVar3 = param_2 & 3;
   if (uVar3 == 0) {
-    if (DAT_2000b348 == 0) {
-      DAT_2000b381 = 0;
+    if (HARDWARE_CONFIGURATION_AND_INTERRUPT_HANDLING_MANAGER == 0) {
+      HARDWARE_INTERRUPT_FLAG_REGISTER = 0;
       _DAT_5002b51c = param_2;
       _DAT_5002b520 = param_1;
-      if ((DAT_2000b380 != '\0') ||
+      if ((HARDWARE_INTERRUPT_TRIGGER_REGISTER != '\0') ||
          (iVar1 = trigger_hardware_interrupt_operation(1), iVar1 != 0xbad0007)) {
         _DAT_5002b100 = 0;
         _DAT_5002b00c = 1;
@@ -38,11 +38,11 @@ int handle_hardware_interrupt_trigger
       }
     }
     else if (uVar2 == 1) {
-      DAT_2000b381 = 0;
-      DAT_2000b378 = 4;
+      HARDWARE_INTERRUPT_FLAG_REGISTER = 0;
+      HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER = 4;
       _DAT_5002b100 = uVar3;
       _DAT_5002b304 = uVar2;
-      if (DAT_2000b380 == '\0') {
+      if (HARDWARE_INTERRUPT_TRIGGER_REGISTER == '\0') {
         _DAT_5002b51c = param_2;
         _DAT_5002b520 = param_1;
         trigger_hardware_interrupt_operation(0);

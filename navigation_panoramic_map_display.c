@@ -373,7 +373,7 @@ LAB_0003ed90:
       copy_navigation_map_data_with_pattern_filling
                 (&overview_map_buffer,*(uint *)(param_2 + 0xb1),0x2001ba2e,fill_param);
     }
-    DAT_2001ba2d = 1;
+    NAVIGATION_MAP_DISPLAY_STATE_DATA = 1;
     mutex_unlock(&WORK_MODE_CONTEXT);
   }
   DAT_20004bbc = 1;

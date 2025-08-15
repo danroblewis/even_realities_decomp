@@ -28,18 +28,18 @@ uint handle_bluetooth_privacy_mode_management_with_callback(char *param_1,int pa
     }
   }
   if (param_2 == 0) {
-    if (DAT_20002007 == 1) {
+    if (BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE == 1) {
       return 0xfffffff4;
     }
-    iVar1 = dereference_pointer_value(&DAT_200020d4);
+    iVar1 = dereference_pointer_value(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION);
     if ((iVar1 << 0x1f < 0) ||
        ((param_1 != (char *)0x0 &&
         (iVar1 = compare_byte_arrays_7_bytes(param_1,&DAT_000f2b3a), iVar1 == 0)))) {
-      uVar3 = (uint)DAT_20002007;
-      DAT_20002007 = DAT_20002007 + 1;
+      uVar3 = (uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE;
+      BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE = BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE + 1;
       uVar2 = bluetooth_hci_command_processing_with_state_management_and_parameter(uVar3,param_1);
       if (uVar2 != 0) {
-        DAT_20002007 = DAT_20002007 + -1;
+        BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE = BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE + -1;
         return uVar2;
       }
       return uVar3;

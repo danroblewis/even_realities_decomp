@@ -26,14 +26,14 @@ void bt_ancs_data_source_handler(undefined4 param_1,byte *param_2,undefined4 par
   }
   if (*param_2 == 0) {
     if (*(int *)(param_2 + 8) == 0) {
-      DAT_20006aa0 = *(undefined4 *)(param_2 + 4);
-      DAT_20006aa4 = *(undefined4 *)(param_2 + 8);
-      DAT_20006aa8 = *(undefined4 *)(param_2 + 0xc);
+      ANCS_DATA_SOURCE_HANDLER_STATE = *(undefined4 *)(param_2 + 4);
+      ANCS_ATTRIBUTE_REQUEST_STATE = *(undefined4 *)(param_2 + 8);
+      BLUETOOTH_ANCS_DATA_SOURCE_HANDLER = *(undefined4 *)(param_2 + 0xc);
       DAT_2000ff71 = '\x01';
     }
   }
   else if ((*param_2 == 1) && (DAT_2000ff71 != '\0')) {
-    if (DAT_20006aac != DAT_2000231c) {
+    if (ANCS_DATA_SOURCE_HANDLER_STATE != DAT_2000231c) {
       iVar2 = calculate_ble_connection_timing_with_scaling_alt();
       iVar3 = get_work_mode();
       if (9999 < (uint)(iVar2 - *(int *)(iVar3 + 0xae8))) {
@@ -48,14 +48,14 @@ void bt_ancs_data_source_handler(undefined4 param_1,byte *param_2,undefined4 par
                 iVar2 = get_work_mode();
                 if ((*(char *)(iVar2 + 0xd5) != '\x10') &&
                    (iVar2 = get_work_mode(), *(char *)(iVar2 + 0xd5) != '\x0e')) {
-                  DAT_2000231c = DAT_20006aac;
+                  DAT_2000231c = ANCS_DATA_SOURCE_HANDLER_STATE;
                   *(uint *)(iVar1 + 0x1e4) = (uint)DAT_20006ab0;
                   enqueue_ancs(iVar1 + 0x34);
                   if (0 < LOG_LEVEL) {
                     if (IS_DEBUG == 0) {
                       DEBUG_PRINT("%s(): =========================>bt_ancs_get_attr_data_sem %d evt_id %d action %d\n"
-                                  ,"bt_ancs_data_source_handler",DAT_20006aac,(uint)DAT_20006ab0,
-                                  *(undefined4 *)(iVar1 + 0x1e4));
+                                  ,"bt_ancs_data_source_handler",ANCS_DATA_SOURCE_HANDLER_STATE,
+                                  (uint)DAT_20006ab0,*(undefined4 *)(iVar1 + 0x1e4));
                     }
                     else {
                       handle_heartbeat(

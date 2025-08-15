@@ -8,7 +8,8 @@
 byte set_sensor_status_bits(byte param_1)
 
 {
-  DAT_20019ef4 = DAT_20019ef4 & 0x80 | param_1 & 0x7f;
+  GLASSBOX_CHARGE_STATUS_AND_SENSOR_BITS =
+       GLASSBOX_CHARGE_STATUS_AND_SENSOR_BITS & 0x80 | param_1 & 0x7f;
   return param_1 & 0x7f;
 }
 

@@ -56,27 +56,30 @@ LAB_0004bd9c:
       }
       update_connection_state_flags(&DAT_2000365c);
       if (local_2c[0] != 0) {
-        update_buffer_read_position(&DAT_20003648,iVar5);
+        update_buffer_read_position(&MEMORY_ALLOCATION_BUFFER_MANAGER,iVar5);
         local_2c[0] = 0;
       }
-      iVar4 = calculate_buffer_available_space(&DAT_20003648,&local_30);
-      iVar3 = DAT_20003648;
+      iVar4 = calculate_buffer_available_space(&MEMORY_ALLOCATION_BUFFER_MANAGER,&local_30);
+      iVar3 = MEMORY_ALLOCATION_BUFFER_MANAGER;
       if (local_30 < param_1) {
         if (iVar4 == 0) {
           iVar4 = process_buffer_data_with_state_management
-                            (&DAT_20003648,local_30,&local_34,local_2c);
+                            (&MEMORY_ALLOCATION_BUFFER_MANAGER,local_30,&local_34,local_2c);
         }
         else {
-          update_buffer_read_write_positions(&DAT_20003648);
+          update_buffer_read_write_positions(&MEMORY_ALLOCATION_BUFFER_MANAGER);
           iVar3 = iVar5;
         }
       }
       else {
-        iVar6 = DAT_20003668 + DAT_20003648 * 4;
-        *(byte *)(DAT_20003668 + DAT_20003648 * 4) =
-             *(byte *)(DAT_20003668 + DAT_20003648 * 4) & 0xfc;
-        DAT_20003648 = calculate_buffer_offset_with_wrapping(&DAT_20003648,DAT_20003648,param_1);
-        if (DAT_20003648 == DAT_20003654) {
+        iVar6 = MEMORY_ALLOCATION_PRIORITY_CONTROL + MEMORY_ALLOCATION_BUFFER_MANAGER * 4;
+        *(byte *)(MEMORY_ALLOCATION_PRIORITY_CONTROL + MEMORY_ALLOCATION_BUFFER_MANAGER * 4) =
+             *(byte *)(MEMORY_ALLOCATION_PRIORITY_CONTROL + MEMORY_ALLOCATION_BUFFER_MANAGER * 4) &
+             0xfc;
+        MEMORY_ALLOCATION_BUFFER_MANAGER =
+             calculate_buffer_offset_with_wrapping
+                       (&MEMORY_ALLOCATION_BUFFER_MANAGER,MEMORY_ALLOCATION_BUFFER_MANAGER,param_1);
+        if (MEMORY_ALLOCATION_BUFFER_MANAGER == DAT_20003654) {
           DAT_20003658 = DAT_20003658 | 8;
         }
         iVar4 = 0;
@@ -97,7 +100,7 @@ LAB_0004bd9c:
       InstructionSynchronizationBarrier(0xf);
       if (local_34 != 0) {
         if (DAT_20003660 != (code *)0x0) {
-          (*DAT_20003660)(&DAT_20003648);
+          (*DAT_20003660)(&MEMORY_ALLOCATION_BUFFER_MANAGER);
         }
         local_34 = 0;
       }

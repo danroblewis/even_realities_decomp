@@ -37,7 +37,7 @@ get_assign_channel_info(int param_1,undefined4 param_2,undefined4 *param_3,undef
     }
     uVar1 = 0xffffffff;
   }
-  else if (DAT_20019ef3 == '\x01') {
+  else if (SYSTEM_READY_AND_SETTINGS_STATE == '\x01') {
     puVar4 = (undefined1 *)*param_3;
     iVar2 = get_work_mode();
     *(undefined1 *)(iVar2 + 2) = *(undefined1 *)(param_1 + 4);

@@ -8,7 +8,7 @@
 void handle_bluetooth_privacy_mode_management_with_state_validation(void)
 
 {
-  fill_memory_buffer(&DAT_20002018,0,0x50);
+  fill_memory_buffer(&BLE_CHARACTERISTIC_VALIDATION_BUFFER,0,0x50);
   return;
 }
 

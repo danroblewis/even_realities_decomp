@@ -31,18 +31,21 @@ int send_dmic_msg(int param_1)
       return iVar2;
     }
     iVar2 = (**(code **)(param_1 + 0xc))(&local_e4,0xca);
-    if ((iVar2 < 0) && (DAT_20007558 = DAT_20007558 + 1, 9 < DAT_20007558)) {
+    if ((iVar2 < 0) &&
+       (DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT = DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT + 1,
+       9 < DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT)) {
       uVar3 = get_work_mode();
       handle_work_mode_finish(uVar3,1);
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
-          DEBUG_PRINT("%s(): BLE send failed for %d times\n","send_dmic_msg",DAT_20007558);
+          DEBUG_PRINT("%s(): BLE send failed for %d times\n","send_dmic_msg",
+                      DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT);
         }
         else {
           handle_heartbeat();
         }
       }
-      DAT_20007558 = 0;
+      DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT = 0;
       return iVar2;
     }
     DAT_2000755c = DAT_2000755c + 1;
@@ -57,8 +60,8 @@ int send_dmic_msg(int param_1)
                 (uint)(0xffff8000 < uVar5);
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): dmic_send_count %d send_fail_count %d time %lld\n","send_dmic_msg",
-                      DAT_20007560 * 100,DAT_20007558,uVar5 + 0x7fff >> 0xf | uVar4 * 0x20000,
-                      uVar4 >> 0xf);
+                      DAT_20007560 * 100,DMIC_MESSAGE_AND_AUDIO_STREAM_MANAGEMENT,
+                      uVar5 + 0x7fff >> 0xf | uVar4 * 0x20000,uVar4 >> 0xf);
         }
         else {
           handle_heartbeat("%s(): dmic_send_count %d send_fail_count %d time %lld\n");

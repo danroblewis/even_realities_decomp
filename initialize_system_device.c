@@ -36,15 +36,15 @@ int initialize_system_device(void)
   undefined4 local_20;
   char *local_1c;
   
-  if ((*(uint *)(DAT_20002168 + 8) & 1) == 0) {
+  if ((*(uint *)(BLUETOOTH_HCI_COMMAND_STATE + 8) & 1) == 0) {
     uVar12 = process_data_with_initialization_and_validation(0xc03,0,local_30);
     if ((int)uVar12 != 0) {
       return (int)uVar12;
     }
     uVar10 = (uint)((ulonglong)uVar12 >> 0x20);
     if (**(char **)(local_30[0] + 0xc) == '\0') {
-      uVar10 = DAT_200020d4;
-      DAT_200020d4 = DAT_200020d4 & 9;
+      uVar10 = BLUETOOTH_PRIVACY_MODE_CONFIGURATION;
+      BLUETOOTH_PRIVACY_MODE_CONFIGURATION = BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 9;
     }
     decrement_reference_count_and_cleanup_memory(local_30[0],uVar10);
   }
@@ -53,7 +53,7 @@ int initialize_system_device(void)
     return iVar1;
   }
   DAT_20002078 = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 1);
-  DAT_2000207c = *(uint *)(*(int *)(local_30[0] + 0xc) + 5);
+  SYSTEM_DEVICE_INITIALIZATION_STATE = *(uint *)(*(int *)(local_30[0] + 0xc) + 5);
   puVar11 = &DAT_20002080;
   decrement_reference_count_and_cleanup_memory(local_30[0]);
   iVar1 = process_data_with_initialization_and_validation(0x1001,0,local_30);
@@ -86,7 +86,7 @@ int initialize_system_device(void)
   if (iVar1 != 0) {
     return iVar1;
   }
-  if (-1 < (int)(DAT_2000207c << 0x19)) {
+  if (-1 < (int)(SYSTEM_DEVICE_INITIALIZATION_STATE << 0x19)) {
     local_1c = "Non-LE capable controller detected!";
     local_20 = 2;
     call_system_cleanup_alt(&DAT_00088138,0x1040,&local_20);
@@ -96,7 +96,7 @@ int initialize_system_device(void)
   if (iVar1 != 0) {
     return iVar1;
   }
-  DAT_200020d8 = *(uint *)(*(int *)(local_30[0] + 0xc) + 1);
+  BLUETOOTH_PRIVACY_MODE_CONFIGURATION = *(uint *)(*(int *)(local_30[0] + 0xc) + 1);
   DAT_200020dc = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 5);
   decrement_reference_count_and_cleanup_memory(local_30[0]);
   iVar3 = process_data_with_initialization_and_validation(0x2002,0,local_30);
@@ -106,12 +106,12 @@ int initialize_system_device(void)
   }
   iVar3 = *(int *)(local_30[0] + 0xc);
   if ((*(short *)(iVar3 + 1) != 0) && (*(char *)(iVar3 + 3) != '\0')) {
-    DAT_20002104 = *(short *)(iVar3 + 1);
+    SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION = *(short *)(iVar3 + 1);
     setup_bluetooth_stack(&DAT_20002108,*(undefined1 *)(iVar3 + 3));
   }
   decrement_reference_count_and_cleanup_memory(iVar1);
-  uVar10 = DAT_2000207c & 0x20;
-  if ((DAT_2000207c & 0x20) == 0) {
+  uVar10 = SYSTEM_DEVICE_INITIALIZATION_STATE & 0x20;
+  if ((SYSTEM_DEVICE_INITIALIZATION_STATE & 0x20) == 0) {
     iVar1 = process_data_with_initialization_and_store(0xc6d,2);
     if (iVar1 == 0) {
       return -0x69;
@@ -133,12 +133,12 @@ int initialize_system_device(void)
     DAT_200020e4 = *(undefined4 *)(*(int *)(local_30[0] + 0xc) + 5);
     decrement_reference_count_and_cleanup_memory();
   }
-  if ((int)(DAT_200020d8 << 0x19) < 0) {
+  if ((int)(BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x19) < 0) {
     iVar1 = process_data_with_initialization_and_validation(0x202a,0,local_30);
     if (iVar1 != 0) {
       return iVar1;
     }
-    DAT_20002120 = *(undefined1 *)(*(int *)(local_30[0] + 0xc) + 1);
+    BLUETOOTH_PRIVACY_MODE_STATE = *(undefined1 *)(*(int *)(local_30[0] + 0xc) + 1);
     decrement_reference_count_and_cleanup_memory();
   }
   iVar1 = process_data_with_initialization_and_store(0x2001,8);
@@ -146,9 +146,9 @@ int initialize_system_device(void)
     return -0x69;
   }
   uVar2 = ble_memory_allocation_utility(iVar1 + 0xc,8);
-  uVar7 = DAT_200020d8 & 0xff;
+  uVar7 = BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0xff;
   uVar10 = 0x202;
-  if ((DAT_200020d8 & 0x40) == 0) {
+  if ((BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0x40) == 0) {
     uVar10 = 3;
   }
   if ((int)(uVar7 << 0x1e) < 0) {
@@ -160,7 +160,7 @@ int initialize_system_device(void)
   if ((int)(uVar7 << 0x1a) < 0) {
     uVar10 = uVar10 | 0x40;
   }
-  if ((DAT_200020d8 & 0x900) != 0) {
+  if ((BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0x900) != 0) {
     uVar10 = uVar10 | 0x800;
   }
   if ((int)(uVar7 << 0x1f) < 0) {
@@ -174,21 +174,21 @@ int initialize_system_device(void)
   if (iVar1 != 0) {
     return iVar1;
   }
-  if ((int)(DAT_2000207c << 0x1a) < 0) {
-    if (DAT_20002104 == 0) {
+  if ((int)(SYSTEM_DEVICE_INITIALIZATION_STATE << 0x1a) < 0) {
+    if (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION == 0) {
       local_1c = "ACL BR/EDR buffers not initialized";
       local_20 = 2;
       call_system_cleanup_alt(&DAT_00088138,0x1040,&local_20);
       return -5;
     }
   }
-  else if (DAT_20002104 == 0) {
+  else if (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION == 0) {
     iVar1 = process_data_with_initialization_and_validation(0x1005,0,local_30);
     if (iVar1 != 0) {
       return iVar1;
     }
-    if (DAT_20002104 == 0) {
-      DAT_20002104 = *(short *)(*(int *)(local_30[0] + 0xc) + 1);
+    if (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION == 0) {
+      SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION = *(short *)(*(int *)(local_30[0] + 0xc) + 1);
       setup_bluetooth_stack(&DAT_20002108,*(undefined2 *)(*(int *)(local_30[0] + 0xc) + 4));
     }
     decrement_reference_count_and_cleanup_memory(local_30[0]);
@@ -198,7 +198,7 @@ int initialize_system_device(void)
     return -0x69;
   }
   uVar2 = ble_memory_allocation_utility(iVar1 + 0xc,8);
-  if ((int)(DAT_200020d8 << 0x1f) < 0) {
+  if ((int)(BLUETOOTH_PRIVACY_MODE_CONFIGURATION << 0x1f) < 0) {
     uVar5 = 0x2008890;
     uVar6 = 0x20008000;
   }

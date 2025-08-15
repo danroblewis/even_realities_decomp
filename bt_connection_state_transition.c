@@ -138,7 +138,7 @@ switchD_00056804_caseD_3:
           InstructionSynchronizationBarrier(0xf);
         }
         puVar1 = &DAT_20002108;
-        if (DAT_20002104 == 0) {
+        if (SYSTEM_DEVICE_INITIALIZATION_CONFIGURATION == 0) {
           puVar1 = (undefined *)0x0;
         }
         z_spin_lock_valid(puVar1);

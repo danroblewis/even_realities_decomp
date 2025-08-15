@@ -14,10 +14,10 @@ void clear_callback_state_and_update_bitmap(void)
   ushort *puVar4;
   
   iVar2 = calculate_bit_offset_with_lookup();
-  uVar1 = *(ushort *)((int)&DAT_20002bc0 + (iVar2 + 8) * 2);
+  uVar1 = *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar2 + 8) * 2);
   if ((int)((uint)uVar1 << 0x17) < 0) {
     uVar3 = ((uint)uVar1 << 0x13) >> 0x1c;
-    *(ushort *)((int)&DAT_20002bc0 + (iVar2 + 8) * 2) = uVar1 & 0xe0ff;
+    *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar2 + 8) * 2) = uVar1 & 0xe0ff;
     iVar2 = 0;
     puVar4 = (ushort *)((int)&DAT_20002bcc + 2);
     do {
@@ -27,7 +27,7 @@ void clear_callback_state_and_update_bitmap(void)
       }
       iVar2 = iVar2 + 1;
     } while (iVar2 != 0x30);
-    (&DAT_20002bc0)[uVar3 * 2] = 0;
+    (&INTERRUPT_CONFIGURATION_BITMAP_ARRAY)[uVar3 * 2] = 0;
     iVar2 = set_bit_in_bitmap(&DAT_20002c34);
     if (iVar2 != 0xbad0000) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err == NRFX_SUCCESS",

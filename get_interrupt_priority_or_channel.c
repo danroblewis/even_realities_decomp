@@ -11,7 +11,7 @@ ushort get_interrupt_priority_or_channel(void)
   int iVar1;
   
   iVar1 = calculate_bit_offset_with_lookup();
-  return *(ushort *)((int)&DAT_20002bc0 + (iVar1 + 8) * 2) >> 0xd;
+  return *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar1 + 8) * 2) >> 0xd;
 }
 
 

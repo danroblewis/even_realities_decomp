@@ -33,7 +33,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
     uVar9 = calculate_ble_connection_timing_with_scaling();
     iVar3 = get_work_mode();
     *(undefined8 *)(*(int *)(iVar3 + 0x1010) + 3) = uVar9;
-    if (DAT_2001b9ab == '\x01') {
+    if (WORK_MODE_STATUS_UI_ANIMATION_BUFFER == '\x01') {
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       gui_bmp_dynamic_bitmap_draw(7,iVar3 + 0xd8,iVar4 + 0x3a,0,0,0,1);
@@ -44,7 +44,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
       iVar7 = get_ui_y_offset();
       iVar3 = iVar3 + 0x10c;
     }
-    else if (DAT_2001b9ab == '\x02') {
+    else if (WORK_MODE_STATUS_UI_ANIMATION_BUFFER == '\x02') {
       uVar5 = get_ui_x_offset();
       iVar3 = get_ui_y_offset();
       gui_bmp_bitmap_draw(0x48,uVar5,iVar3 + 0x3a,0,0,0);
@@ -56,7 +56,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
       iVar3 = iVar3 + 0x58;
     }
     else {
-      if (DAT_2001b9ab != '\0') {
+      if (WORK_MODE_STATUS_UI_ANIMATION_BUFFER != '\0') {
         return 0;
       }
       iVar3 = get_ui_x_offset();
@@ -72,7 +72,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
     gui_utf_draw(0,uVar5,0,iVar3,iVar4 + 0x37,iVar6 + 0x240,iVar7 + 0x88,2,0,0,0,0);
   }
   else if (DAT_2001b9aa == '\x01') {
-    if (DAT_2001b9ab == '\x01') {
+    if (WORK_MODE_STATUS_UI_ANIMATION_BUFFER == '\x01') {
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       gui_bmp_dynamic_bitmap_draw(7,iVar3 + 0xd8,iVar4 + 0x3a,0,0,0,1);
@@ -87,7 +87,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
       }
     }
     else {
-      if (DAT_2001b9ab == '\x02') {
+      if (WORK_MODE_STATUS_UI_ANIMATION_BUFFER == '\x02') {
         uVar9 = calculate_ble_connection_timing_with_scaling();
         iVar3 = get_work_mode();
         uVar8 = *(uint *)(*(int *)(iVar3 + 0x1010) + 3);
@@ -97,7 +97,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
           return 0;
         }
       }
-      else if (DAT_2001b9ab == '\0') {
+      else if (WORK_MODE_STATUS_UI_ANIMATION_BUFFER == '\0') {
         iVar3 = get_ui_x_offset();
         iVar4 = get_ui_y_offset();
         gui_bmp_dynamic_bitmap_draw(6,iVar3 + 0xec,iVar4 + 0x3a,0,0,0,1);

@@ -23,9 +23,10 @@ void enable_interrupt_sources_and_cleanup_config
     ;
   }
   process_data_with_callback_and_parameter_alt3((*param_1 << 0xc) >> 0x18);
-  if ((&DAT_2000b384)[uVar2 * 9] != 0) {
+  if ((&INTERRUPT_CONFIGURATION_STRUCTURE)[uVar2 * 9] != 0) {
     *(undefined4 *)(*param_1 + 0x308) = 0x80152;
-    handle_ble_uart_packet_completion_with_retry(*param_1,&DAT_2000b384 + uVar2 * 9);
+    handle_ble_uart_packet_completion_with_retry
+              (*param_1,&INTERRUPT_CONFIGURATION_STRUCTURE + uVar2 * 9);
   }
   iVar1 = *param_1;
   uVar3 = *(undefined4 *)(iVar1 + 0x50c);
@@ -34,7 +35,7 @@ void enable_interrupt_sources_and_cleanup_config
     enable_interrupt_source(*(undefined4 *)(iVar1 + 0x508));
     enable_interrupt_source(uVar4);
     enable_interrupt_source(uVar3);
-    enable_interrupt_source((&DAT_2000b3a4)[uVar2 * 9]);
+    enable_interrupt_source((&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar2 * 9]);
     if ((char)param_1[1] != '\0') {
       uVar3 = *(undefined4 *)(*param_1 + 0x514);
       enable_interrupt_source(*(undefined4 *)(*param_1 + 0x56c));

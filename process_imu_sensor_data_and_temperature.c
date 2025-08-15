@@ -21,18 +21,18 @@ int process_imu_sensor_data_and_temperature(undefined4 param_1)
   uStack_1c = 0;
   local_18 = 0;
   iVar1 = read_sensor_temperature_data(param_1,&local_20,&uStack_1c,&local_18);
-  uVar2 = CONCAT44(DAT_20004794,DAT_20004790);
+  uVar2 = CONCAT44(FUEL_GAUGE_UPDATE_STATE_DATA,IMU_SENSOR_DATA_AND_TEMPERATURE_STATE);
   if (-1 < iVar1) {
     execute_callback_function_pointer_at_offset(param_1,0x39,auStack_28);
     iVar1 = process_imu_sensor_data_wrapper(&local_20,0);
-    uVar2 = CONCAT44(DAT_20004794,DAT_20004790);
+    uVar2 = CONCAT44(FUEL_GAUGE_UPDATE_STATE_DATA,IMU_SENSOR_DATA_AND_TEMPERATURE_STATE);
     if (-1 < iVar1) {
       uVar2 = calculate_scaled_ble_connection_timing_with_bit_shifting();
       iVar1 = 0;
     }
   }
-  DAT_20004794 = (undefined4)((ulonglong)uVar2 >> 0x20);
-  DAT_20004790 = (undefined4)uVar2;
+  FUEL_GAUGE_UPDATE_STATE_DATA = (undefined4)((ulonglong)uVar2 >> 0x20);
+  IMU_SENSOR_DATA_AND_TEMPERATURE_STATE = (undefined4)uVar2;
   return iVar1;
 }
 

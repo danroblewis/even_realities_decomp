@@ -17,11 +17,12 @@ bluetooth_hci_command_processing_with_parameter_validation_and_callback(undefine
   
   uVar1 = calculate_string_length();
   if (uVar1 < 0x1d) {
-    iVar2 = compare_byte_arrays(&DAT_2000216c,param_1);
+    iVar2 = compare_byte_arrays(&BLUETOOTH_HCI_COMMAND_PROCESSING_STATE,param_1);
     if (iVar2 != 0) {
-      memcpy(&DAT_2000216c,param_1,uVar1);
-      (&DAT_2000216c)[uVar1] = 0;
-      iVar2 = format_bluetooth_log_message_with_validation_and_callback(&DAT_2000216c,uVar1);
+      memcpy(&BLUETOOTH_HCI_COMMAND_PROCESSING_STATE,param_1,uVar1);
+      (&BLUETOOTH_HCI_COMMAND_PROCESSING_STATE)[uVar1] = 0;
+      iVar2 = format_bluetooth_log_message_with_validation_and_callback
+                        (&BLUETOOTH_HCI_COMMAND_PROCESSING_STATE,uVar1);
       if (iVar2 != 0) {
         local_14 = "Unable to store name";
         local_18 = 2;

@@ -23,13 +23,13 @@ void bluetooth_hci_command_processing_with_state_management(void)
   undefined4 uStack_28;
   
   uStack_28 = in_r3;
-  set_bits(&DAT_200020d4,4);
+  set_bits(&BLUETOOTH_PRIVACY_MODE_CONFIGURATION,4);
   pcStack_38 = "";
-  if (1 < DAT_20002007) {
+  if (1 < BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE) {
     pcStack_38 = "[0]";
   }
-  local_34 = process_data_with_callback_validation_alt6(&DAT_20002000);
-  puVar3 = &DAT_20002000;
+  local_34 = process_data_with_callback_validation_alt6(&BLUETOOTH_HCI_COMMAND_BUFFER);
+  puVar3 = &BLUETOOTH_HCI_COMMAND_BUFFER;
   local_3c = "Identity%s: %s";
   pcVar1 = (char *)0x1;
   local_30 = 0x3010200;
@@ -37,7 +37,7 @@ void bluetooth_hci_command_processing_with_state_management(void)
   call_system_cleanup_alt(&DAT_00088138,0x28c0,&local_40);
   while( true ) {
     puVar3 = (undefined4 *)((int)puVar3 + 7);
-    if ((int)(uint)DAT_20002007 <= (int)pcVar1) break;
+    if ((int)(uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE <= (int)pcVar1) break;
     local_34 = process_data_with_callback_validation_alt6(puVar3);
     local_3c = "Identity[%d]: %s";
     local_30 = CONCAT22(local_30._2_2_,0x301);

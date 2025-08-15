@@ -11,7 +11,7 @@ void check_bonded_addr(undefined4 param_1)
   undefined1 auStack_28 [36];
   
   format_status_message(param_1,auStack_28);
-  DAT_20007514 = DAT_20007514 + 1;
+  STATUS_MESSAGE_AND_BONDED_ADDRESS_MANAGEMENT = STATUS_MESSAGE_AND_BONDED_ADDRESS_MANAGEMENT + 1;
   *(undefined1 *)(ANCS_CONNECTION_HANDLE + 0x367) = 0;
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {

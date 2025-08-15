@@ -59,7 +59,7 @@ LAB_00065bce:
                 (uint)(byte)" 00000000000000"[iVar12 + 0xf] << 5;
         uVar14 = calculate_bit_offset_with_lookup(uVar9);
         uVar10 = (uint)((ulonglong)uVar14 >> 0x20);
-        uVar1 = *(ushort *)((int)&DAT_20002bc0 + ((int)uVar14 + 8) * 2);
+        uVar1 = *(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + ((int)uVar14 + 8) * 2);
         uVar7 = uVar10 >> 3;
         *(byte *)((int)piVar11 + uVar7) =
              *(byte *)((int)piVar11 + uVar7) & ~(byte)(1 << (uVar10 & 7));

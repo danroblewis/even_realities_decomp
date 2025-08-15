@@ -15,13 +15,13 @@ int handle_bluetooth_privacy_mode_management_with_validation_and_callback(void)
   undefined1 auStack_2f [7];
   undefined1 auStack_28 [24];
   
-  if (DAT_20002007 == 0) {
+  if (BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE == 0) {
     iVar1 = handle_bluetooth_privacy_mode_management_with_callback_execution(auStack_28,1);
-    DAT_20002007 = (byte)iVar1;
+    BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE = (byte)iVar1;
     if (iVar1 != 0) {
       bVar2 = 0;
       do {
-        if ((uint)DAT_20002007 <= (uint)bVar2) {
+        if ((uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE <= (uint)bVar2) {
           return 0;
         }
         copy_memory_short_and_word(auStack_2f,auStack_28 + (uint)bVar2 * 0x16);

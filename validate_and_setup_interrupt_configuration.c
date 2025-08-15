@@ -53,11 +53,11 @@ validate_and_setup_interrupt_configuration
     sVar5 = (&DAT_000f6fd9)[uVar8];
 LAB_00067370:
     if (param_2[1] >> sVar5 == 0) {
-      if (((param_3 & 8) == 0) || ((&DAT_2000b3a4)[uVar8 * 9] == -1)) {
+      if (((param_3 & 8) == 0) || ((&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar8 * 9] == -1)) {
         if ((&DAT_2000b3a1)[uVar8 * 0x24] != '\0') {
           return 0xbad000b;
         }
-        iVar6 = (&DAT_2000b384)[uVar8 * 9];
+        iVar6 = (&INTERRUPT_CONFIGURATION_STRUCTURE)[uVar8 * 9];
         if (iVar6 != 0) {
           bVar9 = (param_3 & 0x14) == 0;
           if (bVar9) {
@@ -75,7 +75,7 @@ LAB_00067370:
         *(uint *)(&DAT_2000b394 + iVar6) = uVar3;
         *(uint *)(&DAT_2000b398 + iVar6) = uVar4;
         *(uint *)(&DAT_2000b39c + iVar6) = uVar7;
-        if ((&DAT_2000b3a4)[uVar8 * 9] != -1) {
+        if ((&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar8 * 9] != -1) {
           if ((&DAT_2000b3a3)[iVar6] == '\0') {
             calculate_and_set_interrupt_bit_mask_alt();
           }
@@ -110,15 +110,15 @@ LAB_00067370:
         *(undefined4 *)(iVar6 + 0x118) = 0;
         *(undefined4 *)(iVar6 + 0x500) = 7;
         if ((param_3 & 8) == 0) {
-          iVar1 = (&DAT_2000b384)[uVar8 * 9];
+          iVar1 = (&INTERRUPT_CONFIGURATION_STRUCTURE)[uVar8 * 9];
           *(undefined4 *)(iVar6 + 0x10) = 1;
           if (iVar1 == 0) {
             do {
             } while (*(int *)(iVar6 + 0x118) == 0);
             clear_multiple_interrupt_flags(iVar6,0x40,&local_30);
           }
-          if ((&DAT_2000b384)[uVar8 * 9] == 0) {
-            if ((&DAT_2000b3a4)[uVar8 * 9] != -1) {
+          if ((&INTERRUPT_CONFIGURATION_STRUCTURE)[uVar8 * 9] == 0) {
+            if ((&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar8 * 9] != -1) {
               if ((&DAT_2000b3a3)[uVar8 * 0x24] == '\0') {
                 calculate_and_set_interrupt_bit_mask();
               }
@@ -126,12 +126,13 @@ LAB_00067370:
                 calculate_and_set_interrupt_bit_mask_alt();
               }
             }
-            handle_ble_uart_packet_completion_with_retry(iVar6,&DAT_2000b384 + uVar8 * 9);
+            handle_ble_uart_packet_completion_with_retry
+                      (iVar6,&INTERRUPT_CONFIGURATION_STRUCTURE + uVar8 * 9);
             return 0xbad0000;
           }
         }
-        else if ((&DAT_2000b384)[uVar8 * 9] == 0) {
-          if ((&DAT_2000b3a4)[uVar8 * 9] == -1) {
+        else if ((&INTERRUPT_CONFIGURATION_STRUCTURE)[uVar8 * 9] == 0) {
+          if ((&INTERRUPT_SOURCE_ENABLE_CONFIGURATION)[uVar8 * 9] == -1) {
             return 0xbad0000;
           }
           if ((&DAT_2000b3a3)[uVar8 * 0x24] != '\0') {

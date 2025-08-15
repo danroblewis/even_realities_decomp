@@ -20,7 +20,7 @@ int trigger_hardware_interrupt_operation(int param_1)
     if (iVar1 != 0xbad0000) {
       return iVar1;
     }
-    DAT_2000b380 = 1;
+    HARDWARE_INTERRUPT_TRIGGER_REGISTER = 1;
   }
   return 0xbad0000;
 }

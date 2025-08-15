@@ -32,7 +32,8 @@ void process_string_with_length_calculation_and_validation
   local_38 = 0;
   local_72 = 0xffff;
   local_6c = local_7c;
-  parse_format_string_comprehensive(DAT_20002d20,&local_80,param_2,&uStack_8);
+  parse_format_string_comprehensive
+            (STRING_PROCESSING_AND_PRINTF_CONFIGURATION,&local_80,param_2,&uStack_8);
   return;
 }
 

@@ -16,7 +16,7 @@ undefined4 * get_system_status_with_validation(void)
       puVar1 = (undefined4 *)0x0;
       if (DAT_20008ec1 < 4) {
         DAT_20008ec0 = 10;
-        return &DAT_20008eb4;
+        return &MESSAGE_BUFFER_MANAGEMENT_SYSTEM;
       }
     }
     else {

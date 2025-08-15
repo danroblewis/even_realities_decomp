@@ -17,7 +17,7 @@ int handle_configuration_setting_with_validation
   int *piVar4;
   int iVar5;
   
-  ppuVar3 = (undefined **)&DAT_000882b0;
+  ppuVar3 = (undefined **)&BUFFER_STRUCTURE_INITIALIZATION_CONFIG;
   iVar5 = 0;
   while( true ) {
     if (&PTR_LAB_00051fd8_1_00088328 < ppuVar3) {
@@ -35,8 +35,9 @@ int handle_configuration_setting_with_validation
     ppuVar3 = ppuVar3 + 5;
     iVar5 = iVar1;
   }
-  pcVar2 = (code *)&DAT_2000a10c;
-  for (piVar4 = (int *)DAT_2000a10c; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
+  pcVar2 = (code *)&BUFFER_STRUCTURE_CALLBACK_CONFIGURATION;
+  for (piVar4 = (int *)BUFFER_STRUCTURE_CALLBACK_CONFIGURATION; piVar4 != (int *)0x0;
+      piVar4 = (int *)*piVar4) {
     if ((((param_1 == 0) ||
          (iVar1 = compare_string_with_pattern(piVar4[-5],param_1,0,pcVar2,param_4),
          pcVar2 = extraout_r3, iVar1 != 0)) && (pcVar2 = (code *)piVar4[-2], pcVar2 != (code *)0x0))

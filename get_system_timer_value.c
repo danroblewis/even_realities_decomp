@@ -8,7 +8,7 @@
 undefined1 * get_system_timer_value(void)
 
 {
-  return &DAT_2001a22c;
+  return &WHITELIST_APP_JSON_DATA_BUFFER;
 }
 
 

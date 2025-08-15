@@ -60,14 +60,16 @@ int process_ble_pairing_comprehensive(int param_1,int param_2)
       return 3;
     }
   }
-  if (DAT_2000af48 == (undefined4 *)0x0) {
+  if (BLE_PAIRING_AND_AUTHENTICATION_DATA == (undefined4 *)0x0) {
     set_bit_in_value(param_1 + 4,6);
     return 0;
   }
   iVar4 = check_ble_connection_state();
   iVar10 = param_1 + 4;
   iVar1 = extract_bit_from_value(iVar10,0xe);
-  if ((iVar1 == 0) && (iVar1 = memcmp_byte_arrays(param_1 + 0x57,DAT_2000af48,0x20), iVar1 == 0)) {
+  if ((iVar1 == 0) &&
+     (iVar1 = memcmp_byte_arrays(param_1 + 0x57,BLE_PAIRING_AND_AUTHENTICATION_DATA,0x20),
+     iVar1 == 0)) {
     local_1c = "Remote public key rejected";
     local_20 = 2;
     process_and_compress_data_wrapper(&DAT_00088180,0x1080,&local_20);
@@ -78,9 +80,9 @@ int process_ble_pairing_comprehensive(int param_1,int param_2)
     return 8;
   }
   puVar9 = (undefined4 *)ble_memory_allocation_utility(iVar1 + 0xc,0x40);
-  puVar2 = DAT_2000af48 + 8;
+  puVar2 = BLE_PAIRING_AND_AUTHENTICATION_DATA + 8;
   puVar6 = puVar9;
-  puVar8 = DAT_2000af48;
+  puVar8 = BLE_PAIRING_AND_AUTHENTICATION_DATA;
   do {
     puVar7 = puVar8;
     puVar8 = puVar7 + 1;

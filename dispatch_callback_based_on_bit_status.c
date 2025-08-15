@@ -14,10 +14,11 @@ void dispatch_callback_based_on_bit_status(undefined4 callback_parameter)
   
   uVar3 = calculate_bit_offset_with_lookup();
   uVar1 = (undefined4)((ulonglong)uVar3 >> 0x20);
-  uVar2 = (uint)*(ushort *)((int)&DAT_20002bc0 + ((int)uVar3 + 8) * 2);
+  uVar2 = (uint)*(ushort *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + ((int)uVar3 + 8) * 2);
   if ((int)(uVar2 << 0x17) < 0) {
     uVar2 = (uVar2 << 0x13) >> 0x1c;
-    (*(code *)(&DAT_20002bc0)[uVar2 * 2])(callback_parameter,uVar1,(&DAT_20002bc4)[uVar2 * 2]);
+    (*(code *)(&INTERRUPT_CONFIGURATION_BITMAP_ARRAY)[uVar2 * 2])
+              (callback_parameter,uVar1,(&DAT_20002bc4)[uVar2 * 2]);
   }
   if (DAT_20002bc8 != (code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x000654fa. Too many branches */

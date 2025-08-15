@@ -8,7 +8,7 @@
 undefined4 cleanup_sensor_system(void)
 
 {
-  if (DAT_20002424 != 0) {
+  if (SENSOR_SYSTEM_STATUS_AND_CONFIGURATION != 0) {
     acquire_resource_mutex_if_valid();
   }
   return 0;

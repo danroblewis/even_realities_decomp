@@ -43,7 +43,7 @@ void render_work_mode_ui_based_on_state(void)
          (iVar3 = get_work_mode(), *(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\x10')) &&
         (iVar3 = get_work_mode(), *(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\x11')) &&
        ((iVar3 = get_work_mode(), *(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\x03' ||
-        (DAT_2001cdce != 2)))))))) {
+        (WORK_MODE_STATE_AND_UI_CONFIGURATION != 2)))))))) {
     iVar3 = get_work_mode();
     iVar10 = *(int *)(iVar3 + 0x1014);
     uVar4 = get_ui_x_offset();
@@ -56,13 +56,13 @@ void render_work_mode_ui_based_on_state(void)
   switch(*(undefined1 *)(*(int *)(iVar3 + 0x1014) + 2)) {
   case 0:
     clear_work_mode_flag_bit_1();
-    DAT_20009ff4 = 0;
-    while (DAT_20009ff4 < 8) {
+    WORK_MODE_UI_RENDER_BUFFER = 0;
+    while (WORK_MODE_UI_RENDER_BUFFER < 8) {
       uVar4 = get_ui_x_offset();
       uVar9 = 0;
       iVar3 = get_ui_y_offset();
       gui_bmp_bitmap_draw(0x16,uVar4,iVar3 + 0x38,0,0,0);
-      uVar4 = get_data_by_index_and_type((&DAT_200034f3)[DAT_2001cdce],1);
+      uVar4 = get_data_by_index_and_type((&DAT_200034f3)[WORK_MODE_STATE_AND_UI_CONFIGURATION],1);
       iVar3 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       iVar6 = get_ui_x_offset();
@@ -84,13 +84,14 @@ void render_work_mode_ui_based_on_state(void)
           if (bVar1 != 0) {
             *(byte *)(iVar5 + iVar3) =
                  bVar1 & (&DASHBOARD_PIXEL_MASK_TABLE)
-                         [iVar3 + (uint)local_30[DAT_20009ff4] * 0x140 + (uVar9 % 0x1a) * 0xa00];
+                         [iVar3 + (uint)local_30[WORK_MODE_UI_RENDER_BUFFER] * 0x140 +
+                                  (uVar9 % 0x1a) * 0xa00];
           }
           iVar3 = iVar3 + 1;
         } while (iVar3 != 0x140);
         uVar9 = uVar9 + 1;
       } while (uVar9 != 199);
-      DAT_20009ff4 = DAT_20009ff4 + 1;
+      WORK_MODE_UI_RENDER_BUFFER = WORK_MODE_UI_RENDER_BUFFER + 1;
       iVar3 = get_work_mode();
       uVar4 = *(undefined4 *)(iVar3 + 0xeb4);
       iVar3 = get_work_mode();
@@ -123,12 +124,12 @@ void render_work_mode_ui_based_on_state(void)
   case 5:
   case 0x14:
   case 0x15:
-    if (DAT_2001cdce == 1) {
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION == 1) {
       iVar2 = get_work_mode();
       if (*(char *)(*(int *)(iVar2 + 0x1014) + 2) != '\x03') {
         iVar2 = get_work_mode();
         if (*(char *)(*(int *)(iVar2 + 0x1014) + 2) != '\x15') goto switchD_000408e4_caseD_a;
-        DAT_2001cdd0 = 0;
+        WORK_MODE_UI_RENDERING_STATE = 0;
         iVar2 = get_work_mode();
         if ((*(byte *)(*(int *)(iVar2 + 0x1014) + 0x1f) & 3) != 1) goto switchD_000408e4_caseD_a;
         send_event_status(0x14);
@@ -141,7 +142,7 @@ LAB_00040c1c:
         *(undefined1 *)(iVar2 + 2) = uVar8;
         goto switchD_000408e4_caseD_a;
       }
-      DAT_2001cdd0 = 0;
+      WORK_MODE_UI_RENDERING_STATE = 0;
       uVar4 = get_data_by_index_and_type(8);
       iVar6 = get_ui_x_offset();
       iVar2 = get_ui_y_offset();
@@ -152,7 +153,7 @@ LAB_00040c1c:
       iVar6 = iVar6 + 0x8c;
       goto LAB_00040bc6;
     }
-    if (DAT_2001cdce != 2) goto switchD_000408e4_caseD_a;
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION != 2) goto switchD_000408e4_caseD_a;
     iVar3 = get_work_mode();
     if ((*(char *)(*(int *)(iVar3 + 0x1014) + 2) == '\x15') &&
        (iVar3 = get_work_mode(),
@@ -161,17 +162,17 @@ LAB_00040c1c:
       iVar3 = get_work_mode();
       *(byte *)(*(int *)(iVar3 + 0x1014) + 0x1f) = *(byte *)(*(int *)(iVar3 + 0x1014) + 0x1f) | 1;
     }
-    if (DAT_2001cdd1 != '\0') {
+    if (WORK_MODE_STATE_VALIDATION_FLAGS != '\0') {
 LAB_00040c64:
-      DAT_2001cdd2 = 0;
+      WORK_MODE_ANIMATION_STATE = 0;
       goto switchD_000408e4_caseD_a;
     }
     iVar3 = get_work_mode();
     if ((*(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\x15') || (DAT_20004c00 == '\x01')) {
       clear_work_mode_flag_bit_1();
     }
-    DAT_20009ff4 = 0;
-    while (DAT_20009ff4 < 8) {
+    WORK_MODE_UI_RENDER_BUFFER = 0;
+    while (WORK_MODE_UI_RENDER_BUFFER < 8) {
       uVar4 = get_data_by_index_and_type(0x14);
       uVar13 = get_ui_x_offset();
       uVar7 = get_ui_y_offset();
@@ -291,13 +292,14 @@ LAB_00040c64:
           if (bVar1 != 0) {
             *(byte *)(iVar5 + iVar3) =
                  bVar1 & (&DASHBOARD_PIXEL_MASK_TABLE)
-                         [iVar3 + (uint)local_30[DAT_20009ff4] * 0x140 + (uVar9 % 0x1a) * 0xa00];
+                         [iVar3 + (uint)local_30[WORK_MODE_UI_RENDER_BUFFER] * 0x140 +
+                                  (uVar9 % 0x1a) * 0xa00];
           }
           iVar3 = iVar3 + 1;
         } while (iVar3 != 0x140);
         uVar9 = uVar9 + 1;
       } while (uVar9 != 199);
-      DAT_20009ff4 = DAT_20009ff4 + 1;
+      WORK_MODE_UI_RENDER_BUFFER = WORK_MODE_UI_RENDER_BUFFER + 1;
       iVar3 = get_work_mode();
       uVar4 = *(undefined4 *)(iVar3 + 0xeb4);
       iVar3 = get_work_mode();
@@ -323,7 +325,7 @@ LAB_00040c64:
     goto LAB_00040b66;
   case 6:
   case 0x13:
-    if (DAT_2001cdce == 1) {
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION == 1) {
       iVar2 = get_work_mode();
       if (*(char *)(*(int *)(iVar2 + 0x1014) + 2) == '\x06') {
         uVar4 = get_ui_x_offset();
@@ -352,7 +354,7 @@ LAB_00040c64:
       uVar13 = 1;
       goto LAB_000411c8;
     }
-    if (DAT_2001cdce != 2) goto switchD_000408e4_caseD_a;
+    if (WORK_MODE_STATE_AND_UI_CONFIGURATION != 2) goto switchD_000408e4_caseD_a;
     iVar3 = get_work_mode();
     if (*(char *)(*(int *)(iVar3 + 0x1014) + 2) == '\x06') {
       iVar3 = get_work_mode();
@@ -364,12 +366,12 @@ LAB_00040c64:
     }
     else {
       iVar3 = get_work_mode();
-      if ((*(char *)(*(int *)(iVar3 + 0x1014) + 2) == '\x13') && (DAT_2001cdd1 != '\0'))
-      goto LAB_00040c64;
+      if ((*(char *)(*(int *)(iVar3 + 0x1014) + 2) == '\x13') &&
+         (WORK_MODE_STATE_VALIDATION_FLAGS != '\0')) goto LAB_00040c64;
     }
     clear_work_mode_flag_bit_1();
-    DAT_20009ff4 = 0;
-    while (DAT_20009ff4 < 8) {
+    WORK_MODE_UI_RENDER_BUFFER = 0;
+    while (WORK_MODE_UI_RENDER_BUFFER < 8) {
       iVar3 = get_ui_x_offset();
       uVar9 = 0;
       iVar5 = get_ui_y_offset();
@@ -424,13 +426,14 @@ LAB_00040c64:
           if (bVar1 != 0) {
             *(byte *)(iVar5 + iVar3) =
                  bVar1 & (&DASHBOARD_PIXEL_MASK_TABLE)
-                         [iVar3 + (uint)local_30[DAT_20009ff4] * 0x140 + (uVar9 % 0x1a) * 0xa00];
+                         [iVar3 + (uint)local_30[WORK_MODE_UI_RENDER_BUFFER] * 0x140 +
+                                  (uVar9 % 0x1a) * 0xa00];
           }
           iVar3 = iVar3 + 1;
         } while (iVar3 != 0x140);
         uVar9 = uVar9 + 1;
       } while (uVar9 != 199);
-      DAT_20009ff4 = DAT_20009ff4 + 1;
+      WORK_MODE_UI_RENDER_BUFFER = WORK_MODE_UI_RENDER_BUFFER + 1;
       iVar3 = get_work_mode();
       uVar4 = *(undefined4 *)(iVar3 + 0xeb4);
       iVar3 = get_work_mode();
@@ -500,8 +503,8 @@ LAB_00040b66:
     iVar2 = get_ui_y_offset();
     gui_bmp_bitmap_draw(0x36,uVar4,iVar2 + 0x37,0,0,0);
     iVar2 = get_work_mode();
-    if ((*(char *)(*(int *)(iVar2 + 0x1014) + 2) == '\x0f') && (DAT_2001cdce == 1))
-    goto switchD_000408e4_caseD_a;
+    if ((*(char *)(*(int *)(iVar2 + 0x1014) + 2) == '\x0f') &&
+       (WORK_MODE_STATE_AND_UI_CONFIGURATION == 1)) goto switchD_000408e4_caseD_a;
     uVar4 = get_data_by_index_and_type(0x23);
     iVar6 = get_ui_x_offset();
     iVar2 = get_ui_y_offset();
@@ -515,7 +518,8 @@ LAB_00040b66:
   case 0x10:
   case 0x11:
     iVar2 = get_work_mode();
-    if ((*(char *)(*(int *)(iVar2 + 0x1014) + 2) == '\x11') && (DAT_2001cdce == 1)) {
+    if ((*(char *)(*(int *)(iVar2 + 0x1014) + 2) == '\x11') &&
+       (WORK_MODE_STATE_AND_UI_CONFIGURATION == 1)) {
       uVar4 = get_ui_x_offset();
       iVar2 = get_ui_y_offset();
       gui_bmp_bitmap_draw(0x38,uVar4,iVar2 + 0x37,0,0,0);

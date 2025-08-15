@@ -12,7 +12,7 @@ uint count_active_system_entries(void)
   undefined4 *puVar2;
   
   uVar1 = 0;
-  puVar2 = &DAT_20007dac;
+  puVar2 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY;
   do {
     if (*(char *)(puVar2 + 4) == '\0') {
       return uVar1 & 0xff;

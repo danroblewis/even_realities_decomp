@@ -8,9 +8,9 @@
 void clear_system_flags(void)
 
 {
-  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
-  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffd);
-  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffb);
+  clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffe);
+  clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffd);
+  clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffb);
   return;
 }
 

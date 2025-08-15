@@ -64,7 +64,7 @@ LAB_0007a09e:
       iVar1 = -0x3c;
 LAB_0007a0a4:
       clear_memory_buffer_with_zero_fill(auStack_40,0x20);
-      iVar3 = (*DAT_20002f54)(param_1 + 0x110);
+      iVar3 = (*CRYPTOGRAPHIC_KEY_DERIVATION_COUNTER)(param_1 + 0x110);
       if (iVar3 != 0) {
         iVar1 = -0x1e;
       }

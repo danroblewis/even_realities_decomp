@@ -39,9 +39,9 @@ char * check_work_mode_status_and_handle_states(void)
     pcVar2 = (char *)get_work_mode();
     if (*pcVar2 == '\x01') {
       reset_audio_stream_flag();
-      DAT_2001b9ab = local_11[0];
+      WORK_MODE_STATUS_UI_ANIMATION_BUFFER = local_11[0];
       iVar3 = get_work_mode();
-      *(undefined1 *)(iVar3 + 0xcd) = DAT_2001b9ab;
+      *(undefined1 *)(iVar3 + 0xcd) = WORK_MODE_STATUS_UI_ANIMATION_BUFFER;
       iVar3 = get_work_mode();
       **(undefined1 **)(iVar3 + 0x1010) = 1;
       uVar1 = get_work_mode();

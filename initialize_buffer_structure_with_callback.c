@@ -8,7 +8,7 @@
 void initialize_buffer_structure_with_callback(void)
 
 {
-  DAT_2000a10c = 0;
+  BUFFER_STRUCTURE_CALLBACK_CONFIGURATION = 0;
   DAT_2000a110 = 0;
   DAT_2000a104 = 0;
   DAT_2000a108 = 0;

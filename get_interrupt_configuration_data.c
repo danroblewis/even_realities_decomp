@@ -27,7 +27,9 @@ undefined4 get_interrupt_configuration_data(undefined4 param_1,int param_2)
     uVar3 = calculate_bit_offset_with_lookup(param_1);
     uVar2 = 0xbad0000;
     *(byte *)((ulonglong)uVar3 >> 0x20) =
-         (byte)((ushort)*(undefined2 *)((int)&DAT_20002bc0 + ((int)uVar3 + 8) * 2) >> 0xd);
+         (byte)((ushort)*(undefined2 *)
+                         ((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + ((int)uVar3 + 8) * 2) >> 0xd)
+    ;
   }
   return uVar2;
 }

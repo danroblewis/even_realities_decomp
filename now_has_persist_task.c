@@ -13,7 +13,7 @@ undefined1 now_has_persist_task(int param_1,undefined4 param_2)
   undefined4 uVar3;
   
   uVar3 = param_2;
-  while (DAT_20018d9c != '\0') {
+  while (PERSISTENT_TASK_STATUS_MANAGER != '\0') {
     short_timing_delay();
   }
   uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x1054) + 4);

@@ -49,9 +49,9 @@ void post_notification_cmd_process(int param_1,undefined1 *param_2,int param_3)
       spi_master_transaction_debug(param_1,auStack_a0,8);
     }
     else {
-      if (DAT_20007da8 == 0) {
-        DAT_20007da8 = malloc_maybe(0x800);
-        if (DAT_20007da8 == 0) {
+      if (NOTIFICATION_COMMAND_PROCESSING_STATE == 0) {
+        NOTIFICATION_COMMAND_PROCESSING_STATE = malloc_maybe(0x800);
+        if (NOTIFICATION_COMMAND_PROCESSING_STATE == 0) {
           if (IS_DEBUG == 0) {
             DEBUG_PRINT("[%s-%d] malloc failed !!\n","post_notification_cmd_process",0x19f);
           }
@@ -60,17 +60,18 @@ void post_notification_cmd_process(int param_1,undefined1 *param_2,int param_3)
           }
         }
         else {
-          fill_memory_buffer(DAT_20007da8,0,0x800);
+          fill_memory_buffer(NOTIFICATION_COMMAND_PROCESSING_STATE,0,0x800);
         }
       }
-      if (DAT_20007da8 != 0) {
-        iVar2 = handle_complex_data_processing(DAT_20007da8,param_3,puVar3[2]);
+      if (NOTIFICATION_COMMAND_PROCESSING_STATE != 0) {
+        iVar2 = handle_complex_data_processing
+                          (NOTIFICATION_COMMAND_PROCESSING_STATE,param_3,puVar3[2]);
         uVar1 = local_b4;
         local_b4._0_2_ = CONCAT11((char)iVar2,(undefined1)local_b4);
         local_b4._3_1_ = SUB41(uVar1,3);
         local_b4._0_3_ = CONCAT12(*(undefined1 *)(param_3 + 1),(undefined2)local_b4);
         if (iVar2 == 0xc9) {
-          parse_ncs_notification(DAT_20007da8,puVar3 + 4);
+          parse_ncs_notification(NOTIFICATION_COMMAND_PROCESSING_STATE,puVar3 + 4);
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): ncs data receive okay !\n\n","post_notification_cmd_process");
@@ -82,8 +83,8 @@ void post_notification_cmd_process(int param_1,undefined1 *param_2,int param_3)
           *(undefined2 *)(puVar3 + 2) = 0x1b4;
           spi_master_transaction_debug(param_1,auStack_a0,8);
           local_b4._0_2_ = CONCAT11(0xc9,(undefined1)local_b4);
-          call_data_verification_handler_with_memory_cleanup(DAT_20007da8);
-          DAT_20007da8 = 0;
+          call_data_verification_handler_with_memory_cleanup(NOTIFICATION_COMMAND_PROCESSING_STATE);
+          NOTIFICATION_COMMAND_PROCESSING_STATE = 0;
         }
       }
       (**(code **)(param_1 + 0xc))(&local_b4,0x14);

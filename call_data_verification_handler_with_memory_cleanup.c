@@ -8,7 +8,7 @@
 void call_data_verification_handler_with_memory_cleanup(undefined4 verification_data)
 
 {
-  memory_free_with_mutex_protection(DAT_20002d20,verification_data);
+  memory_free_with_mutex_protection(STRING_PROCESSING_AND_PRINTF_CONFIGURATION,verification_data);
   return;
 }
 

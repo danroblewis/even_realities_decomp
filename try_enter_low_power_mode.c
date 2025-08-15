@@ -21,7 +21,7 @@ void try_enter_low_power_mode(void)
   
   uVar1 = get_adc_nfc_current_value();
   if (((4999 < uVar1) || (iVar2 = get_work_mode(), *(byte *)(iVar2 + 0xfc0) < 0x62)) ||
-     (DAT_20018d94 == 0)) {
+     (POWER_MANAGEMENT_STATE == 0)) {
     return;
   }
   disable_watchdog();
@@ -34,14 +34,14 @@ LAB_00026cc2:
         iVar2 = get_work_mode();
         DEBUG_PRINT("%s(): try to sleep chargerGetVdcRect() %d GLOBAL->battery_info[0] %d can_enter_low_power %d\n"
                     ,"try_enter_low_power_mode",uVar3,(uint)*(byte *)(iVar2 + 0xfc0),
-                    (uint)DAT_20018d94);
+                    (uint)POWER_MANAGEMENT_STATE);
       }
       else {
         uVar3 = get_adc_nfc_current_value();
         iVar2 = get_work_mode();
         handle_heartbeat("%s(): try to sleep chargerGetVdcRect() %d GLOBAL->battery_info[0] %d can_enter_low_power %d\n"
                          ,"try_enter_low_power_mode",uVar3,*(undefined1 *)(iVar2 + 0xfc0),
-                         DAT_20018d94);
+                         POWER_MANAGEMENT_STATE);
       }
     }
     uVar1 = 0;
@@ -56,7 +56,7 @@ LAB_00026cc2:
       }
       uVar1 = uVar1 + 1;
     } while (uVar1 != 10);
-    if (DAT_20018d94 != 0) goto LAB_00026d96;
+    if (POWER_MANAGEMENT_STATE != 0) goto LAB_00026d96;
     iVar2 = compare_and_update_sensor_data_alt();
     if (iVar2 != 1) {
       if (LOG_LEVEL < 1) goto LAB_00026d88;
@@ -93,14 +93,14 @@ LAB_00026d96:
             }
             goto LAB_00026cc2;
           }
-          DAT_20018d94 = 2;
+          POWER_MANAGEMENT_STATE = 2;
           while (DAT_20018d81 == '\0') {
             lVar8 = calculate_mathematical_operation_with_bit_shifting();
             lVar8 = lVar8 - CONCAT44(DAT_200040c4,DAT_200040c0);
             iVar2 = (int)((ulonglong)lVar8 >> 0x20);
             bVar7 = (uint)lVar8 < 300000;
             if ((uint)bVar7 <= (uint)-iVar2) break;
-            if (DAT_20018d94 == 0) {
+            if (POWER_MANAGEMENT_STATE == 0) {
               return;
             }
             delay_with_timing(1000,-(uint)!bVar7 - iVar2);
@@ -116,8 +116,8 @@ LAB_00026d96:
               handle_heartbeat();
             }
           }
-          while ((iVar2 = get_work_mode(), 0x5e < *(byte *)(iVar2 + 0xfc0) && (DAT_20018d94 != 0)))
-          {
+          while ((iVar2 = get_work_mode(), 0x5e < *(byte *)(iVar2 + 0xfc0) &&
+                 (POWER_MANAGEMENT_STATE != 0))) {
             uVar6 = uVar6 + 1;
             delay_with_timing(0x32);
             if (0x4af < uVar6) {
@@ -132,19 +132,19 @@ LAB_00026d96:
               iVar2 = get_work_mode();
               DEBUG_PRINT("%s(): wakeup chargerGetVdcRect() %d GLOBAL->battery_info[0] %d can_enter_low_power %d\n"
                           ,"try_enter_low_power_mode",uVar3,(uint)*(byte *)(iVar2 + 0xfc0),
-                          (uint)DAT_20018d94);
+                          (uint)POWER_MANAGEMENT_STATE);
             }
             else {
               uVar3 = get_adc_nfc_current_value();
               iVar2 = get_work_mode();
               handle_heartbeat("%s(): wakeup chargerGetVdcRect() %d GLOBAL->battery_info[0] %d can_enter_low_power %d\n"
                                ,"try_enter_low_power_mode",uVar3,*(undefined1 *)(iVar2 + 0xfc0),
-                               DAT_20018d94);
+                               POWER_MANAGEMENT_STATE);
             }
           }
           uVar1 = 0x28;
           do {
-            if (DAT_20018d94 != 0) break;
+            if (POWER_MANAGEMENT_STATE != 0) break;
             delay_with_timing(100);
             manage_adc_nfc_system_state();
             fuel_gauge_update(&PTR_s_charger_00087d70,0);

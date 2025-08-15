@@ -26,7 +26,7 @@ initialize_buffer_structure_with_memory(undefined4 param_1,undefined4 *param_2,u
     *param_2 = 0;
   }
   ppuVar5 = (undefined **)0x0;
-  ppuVar3 = (undefined **)&DAT_000882b0;
+  ppuVar3 = (undefined **)&BUFFER_STRUCTURE_INITIALIZATION_CONFIG;
   uVar8 = param_1;
   local_24 = param_2;
   uStack_20 = param_3;
@@ -49,8 +49,9 @@ initialize_buffer_structure_with_memory(undefined4 param_1,undefined4 *param_2,u
     }
     ppuVar3 = ppuVar3 + 5;
   }
-  puVar2 = &DAT_2000a10c;
-  for (piVar4 = (int *)DAT_2000a10c; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
+  puVar2 = &BUFFER_STRUCTURE_CALLBACK_CONFIGURATION;
+  for (piVar4 = (int *)BUFFER_STRUCTURE_CALLBACK_CONFIGURATION; piVar4 != (int *)0x0;
+      piVar4 = (int *)*piVar4) {
     uVar7 = piVar4[-5];
     iVar1 = compare_string_with_pattern(param_1,uVar7,&local_24,puVar2,uVar8);
     puVar2 = extraout_r3;

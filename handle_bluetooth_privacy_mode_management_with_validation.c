@@ -19,18 +19,18 @@ void handle_bluetooth_privacy_mode_management_with_validation(int param_1)
   if (param_1 == 0) {
     return;
   }
-  if (DAT_20002120 == 0) {
-    if (DAT_20002121 == 0) {
+  if (BLUETOOTH_PRIVACY_MODE_STATE == 0) {
+    if (BLUETOOTH_PRIVACY_MODE_CURRENT_STATE == 0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","bt_dev.le.rl_entries > 0",
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/id.c",0x433);
                     /* WARNING: Subroutine does not return */
       trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/id.c",0x433);
     }
   }
-  else if ((uint)DAT_20002121 <= DAT_20002120 + 1) {
+  else if ((uint)BLUETOOTH_PRIVACY_MODE_CURRENT_STATE <= BLUETOOTH_PRIVACY_MODE_STATE + 1) {
     iVar1 = bt_connection_disconnect_with_parameter_validation_and_callback(0,0,6);
     if (iVar1 != 0) {
-      DAT_200020d4 = DAT_200020d4 | 0x8000;
+      BLUETOOTH_PRIVACY_MODE_CONFIGURATION = BLUETOOTH_PRIVACY_MODE_CONFIGURATION | 0x8000;
       *(byte *)(param_1 + 8) = *(byte *)(param_1 + 8) | 2;
       validate_and_process_ble_characteristics_with_callback_validation_and_state_management();
       return;
@@ -39,8 +39,8 @@ void handle_bluetooth_privacy_mode_management_with_validation(int param_1)
               (&LAB_000810aa_1,0);
     iVar1 = process_bluetooth_hci_command_202d(0);
     if (iVar1 == 0) {
-      if (DAT_20002120 < DAT_20002121) {
-        DAT_20002121 = DAT_20002121 - 1;
+      if (BLUETOOTH_PRIVACY_MODE_STATE < BLUETOOTH_PRIVACY_MODE_CURRENT_STATE) {
+        BLUETOOTH_PRIVACY_MODE_CURRENT_STATE = BLUETOOTH_PRIVACY_MODE_CURRENT_STATE - 1;
         *(byte *)(param_1 + 8) = *(byte *)(param_1 + 8) & 0xfb;
         handle_ble_attribute_properties(2,&LAB_00081034_1,0);
       }
@@ -51,7 +51,7 @@ void handle_bluetooth_privacy_mode_management_with_validation(int param_1)
           copy_memory_word_short_and_byte(uVar2,param_1 + 1);
           iVar1 = process_data_with_initialization_and_validation(0x2028,iVar1,0);
           if (iVar1 == 0) {
-            DAT_20002121 = DAT_20002121 - 1;
+            BLUETOOTH_PRIVACY_MODE_CURRENT_STATE = BLUETOOTH_PRIVACY_MODE_CURRENT_STATE - 1;
             *(byte *)(param_1 + 8) = *(byte *)(param_1 + 8) & 0xfb;
             goto LAB_00055142;
           }
@@ -68,13 +68,13 @@ void handle_bluetooth_privacy_mode_management_with_validation(int param_1)
       execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1840,&local_48);
     }
 LAB_00055142:
-    if (DAT_20002121 != 0) {
+    if (BLUETOOTH_PRIVACY_MODE_CURRENT_STATE != 0) {
       process_bluetooth_hci_command_202d(1);
     }
     handle_bluetooth_privacy_mode_management_with_validation_and_callback_execution(0x81081,0);
     return;
   }
-  DAT_20002121 = DAT_20002121 - 1;
+  BLUETOOTH_PRIVACY_MODE_CURRENT_STATE = BLUETOOTH_PRIVACY_MODE_CURRENT_STATE - 1;
   *(byte *)(param_1 + 8) = *(byte *)(param_1 + 8) & 0xfb;
   return;
 }

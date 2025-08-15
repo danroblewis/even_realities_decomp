@@ -19,7 +19,7 @@ undefined4 read_and_validate_whitelist_app_flash_settings(void)
   if (uVar1 == 0) {
     uVar1 = (uint)local_15eb;
     if (uVar1 < 0x65) {
-      memcpy(&DAT_2001a22c,&uStack_15ec,0x15e2);
+      memcpy(&WHITELIST_APP_JSON_DATA_BUFFER,&uStack_15ec,0x15e2);
       return 0;
     }
     if (IS_DEBUG != 0) {

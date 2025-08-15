@@ -32,7 +32,7 @@ undefined4 process_for_even_ai_show(char *param_1,byte *param_2)
       handle_message_expiration_and_sync();
     }
     if (param_1[0xd5] != '\x04') {
-      DAT_20018d9f = 0;
+      MESSAGE_CONFIRMATION_FLAG = 0;
     }
     switch(param_1[0xd5]) {
     case '\0':
@@ -98,7 +98,7 @@ undefined4 process_for_even_ai_show(char *param_1,byte *param_2)
           }
         }
       }
-      DAT_20018d9f = 0;
+      MESSAGE_CONFIRMATION_FLAG = 0;
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           iVar9 = get_work_mode();
@@ -162,9 +162,9 @@ LAB_0002e040:
         goto LAB_0002e040;
       }
       if (((*param_2 == 2) && (iVar9 = get_system_byte_2(), iVar9 == 0)) ||
-         (((int)(DAT_20007b38 << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1)))) {
-        if ((int)(DAT_20007b38 << 0x1e) < 0) {
-          DAT_20007b38 = DAT_20007b38 & 0xfffffffd;
+         (((int)(PROXY_THREAD_MUTEX << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1)))) {
+        if ((int)(PROXY_THREAD_MUTEX << 0x1e) < 0) {
+          PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX & 0xfffffffd;
         }
         iVar9 = check_system_status_conditions();
         if (iVar9 == 0) {
@@ -424,10 +424,11 @@ LAB_0002ca3c:
           goto LAB_0002caae;
         }
         if ((((*param_2 == 1) && (iVar9 = get_system_byte_2(), iVar9 == 0)) ||
-            (((int)(DAT_20007b38 << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1)))) ||
-           (((int)(DAT_20007b38 << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 2)))) {
-          if ((int)(DAT_20007b38 << 0x1e) < 0) {
-            DAT_20007b38 = DAT_20007b38 & 0xfffffffd;
+            (((int)(PROXY_THREAD_MUTEX << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 1))))
+           || (((int)(PROXY_THREAD_MUTEX << 0x1e) < 0 && (iVar9 = get_system_byte_2(), iVar9 == 2)))
+           ) {
+          if ((int)(PROXY_THREAD_MUTEX << 0x1e) < 0) {
+            PROXY_THREAD_MUTEX = PROXY_THREAD_MUTEX & 0xfffffffd;
           }
           iVar9 = now_has_persist_task(param_1,param_1[0xd5]);
           if (iVar9 != 1) {

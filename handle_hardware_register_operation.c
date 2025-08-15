@@ -14,7 +14,7 @@ handle_hardware_register_operation(byte *param_1,int param_2,int param_3,undefin
   int iVar1;
   undefined4 uVar2;
   
-  if (DAT_2000b378 == '\0') {
+  if (HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\0') {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x1dd,param_4);
     uVar2 = 0x1dd;
@@ -23,15 +23,15 @@ LAB_00066a1a:
     trigger_system_service_call("WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",uVar2)
     ;
   }
-  if (DAT_2000b378 == '\x01') {
-    if ((DAT_2000b380 != '\0') ||
+  if (HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\x01') {
+    if ((HARDWARE_INTERRUPT_TRIGGER_REGISTER != '\0') ||
        (iVar1 = trigger_hardware_interrupt_operation(), iVar1 != 0xbad0007)) {
       _DAT_5002b308 = 1;
       backup_and_restore_hardware_config();
       if (param_2 != 0) {
         set_hardware_register_from_bytes(param_1[1],param_2);
       }
-      DAT_2000b381 = 0;
+      HARDWARE_INTERRUPT_FLAG_REGISTER = 0;
       _DAT_5002b100 = 0;
       _DAT_5002b634 =
            (uint)param_1[2] << 0xc | (uint)param_1[1] << 8 | (uint)*param_1 |

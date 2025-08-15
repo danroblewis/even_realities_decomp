@@ -26,12 +26,12 @@ void handle_ble_connection_state_change(int param_1,int param_2)
       if (iVar6 != 0) {
         process_ble_attribute_data(*(undefined4 *)(iVar5 + 0xc0));
       }
-      if (DAT_2000ad20 != (int *)0x0) {
-        puVar7 = (undefined4 *)*DAT_2000ad20;
+      if (BLE_CONNECTION_STATE_BUFFER != (int *)0x0) {
+        puVar7 = (undefined4 *)*BLE_CONNECTION_STATE_BUFFER;
         if (puVar7 != (undefined4 *)0x0) {
           puVar7 = puVar7 + -3;
         }
-        pcVar4 = (code *)DAT_2000ad20[-3];
+        pcVar4 = (code *)BLE_CONNECTION_STATE_BUFFER[-3];
         if (pcVar4 == (code *)0x0) goto LAB_0005dba4;
         do {
           (*pcVar4)(iVar5,iVar6);
@@ -79,12 +79,12 @@ LAB_0005db1a:
     bt_connection_disconnect_with_parameter_validation(iVar5,uVar2,uVar3);
   }
   iVar6 = extract_bit_from_value(iVar6,3);
-  if ((iVar6 != 0) && (DAT_2000ad20 != (int *)0x0)) {
-    iVar6 = *DAT_2000ad20;
+  if ((iVar6 != 0) && (BLE_CONNECTION_STATE_BUFFER != (int *)0x0)) {
+    iVar6 = *BLE_CONNECTION_STATE_BUFFER;
     if (iVar6 != 0) {
       iVar6 = iVar6 + -0xc;
     }
-    pcVar4 = (code *)DAT_2000ad20[-2];
+    pcVar4 = (code *)BLE_CONNECTION_STATE_BUFFER[-2];
     if (pcVar4 != (code *)0x0) goto LAB_0005dbf8;
     while (iVar6 != 0) {
       do {

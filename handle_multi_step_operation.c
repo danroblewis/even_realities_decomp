@@ -16,7 +16,7 @@ void handle_multi_step_operation(undefined4 param_1,undefined4 param_2)
   DEBUG_PRINT("The discovery procedure for ANCS succeeded\n");
   iVar2 = process_data_with_state_management_alt(param_1,param_2);
   if (iVar2 == 0) {
-    DAT_20006ab4 = DAT_20006ab4 | 2;
+    ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS = ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS | 2;
     iVar2 = process_data_with_parameter_validation_alt(param_2,&LAB_00018ef4_1);
     if (iVar2 != 0) {
       DEBUG_PRINT("Failed to enable Notification Source notification (err %d)\n",iVar2);
@@ -34,7 +34,7 @@ LAB_000188fc:
   if (iVar2 != 0) {
     DEBUG_PRINT("Could not release the discovery data, error code: %d\n",iVar2);
   }
-  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
+  clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffe);
   handle_conditional_operation(uVar1,1);
   return;
 }

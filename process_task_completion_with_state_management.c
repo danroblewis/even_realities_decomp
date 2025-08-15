@@ -108,15 +108,16 @@ LAB_0004dcaa:
         uVar3 = process_task_completion_with_callback_execution(param_1,"[%08lu] ",param_2);
       }
       else {
-        uVar3 = DAT_2000a0e4;
-        if (DAT_2000a0e4 != 0) {
-          uVar3 = (param_2 / DAT_2000a0e0) / DAT_2000a0e4;
-          uVar10 = (param_2 / DAT_2000a0e0 - DAT_2000a0e4 * uVar3) * 1000;
-          uVar8 = uVar10 / DAT_2000a0e4;
+        uVar3 = TASK_COMPLETION_STATE;
+        if (TASK_COMPLETION_STATE != 0) {
+          uVar3 = (param_2 / DAT_2000a0e0) / TASK_COMPLETION_STATE;
+          uVar10 = (param_2 / DAT_2000a0e0 - TASK_COMPLETION_STATE * uVar3) * 1000;
+          uVar8 = uVar10 / TASK_COMPLETION_STATE;
           uVar3 = process_task_completion_with_callback_execution
                             (param_1,"[%02u:%02u:%02u.%03u,%03u] ",uVar3 / 0xe10,
                              (uVar3 % 0xe10) / 0x3c,(uVar3 % 0xe10) % 0x3c,uVar8,
-                             ((uVar10 - DAT_2000a0e4 * uVar8) * 1000) / DAT_2000a0e4);
+                             ((uVar10 - TASK_COMPLETION_STATE * uVar8) * 1000) /
+                             TASK_COMPLETION_STATE);
         }
       }
       iVar2 = iVar2 + uVar3;

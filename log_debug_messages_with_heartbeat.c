@@ -13,7 +13,7 @@ void log_debug_messages_with_heartbeat(void)
   undefined4 *puVar2;
   
   iVar1 = 10;
-  puVar2 = &DAT_20008eb4;
+  puVar2 = &MESSAGE_BUFFER_MANAGEMENT_SYSTEM;
   do {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("PUSH: g_arrMsgContent[%d].uidTail is %d push %d \n",iVar1,puVar2[2],*puVar2,in_r3

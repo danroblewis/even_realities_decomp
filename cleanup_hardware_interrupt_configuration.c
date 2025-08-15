@@ -17,7 +17,7 @@ void cleanup_hardware_interrupt_configuration(void)
   uint uVar5;
   undefined4 in_r3;
   
-  if (DAT_2000b378 == '\0') {
+  if (HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\0') {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x2b1,in_r3);
                     /* WARNING: Subroutine does not return */
@@ -43,7 +43,7 @@ void cleanup_hardware_interrupt_configuration(void)
       set_interrupt_priority_level_wrapper(uVar5 & 0xff);
     }
   }
-  DAT_2000b378 = 0;
+  HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER = 0;
   return;
 }
 

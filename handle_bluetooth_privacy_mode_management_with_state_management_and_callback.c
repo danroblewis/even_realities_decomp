@@ -17,11 +17,11 @@ handle_bluetooth_privacy_mode_management_with_state_management_and_callback
   uVar3 = *(uint *)(param_1 + 4);
   if ((-1 < (int)(uVar3 << 0x15)) &&
      ((iVar2 = *(int *)(param_1 + 0x10), iVar2 == 0 || ((uVar3 & 1) != 0)))) {
-    if ((uint)DAT_20002007 <= (uint)*param_1) {
+    if ((uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE <= (uint)*param_1) {
       return 0;
     }
-    iVar1 = memcmp_byte_arrays((int)&DAT_20002000 + (uint)*param_1 * 7,&DAT_000f2b3a,7,
-                               (uint)DAT_20002007,param_4);
+    iVar1 = memcmp_byte_arrays((int)&BLUETOOTH_HCI_COMMAND_BUFFER + (uint)*param_1 * 7,&DAT_000f2b3a
+                               ,7,(uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE,param_4);
     if (iVar1 == 0) {
       return 0;
     }

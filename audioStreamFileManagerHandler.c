@@ -27,7 +27,7 @@ undefined4 audioStreamFileManagerHandler(void)
   short local_f2;
   byte local_f0 [204];
   
-  if (DAT_20019dab == '\0') {
+  if (AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE == '\0') {
     if (AUDIO_STREAM_STATE == 0) {
       return 0;
     }
@@ -119,7 +119,7 @@ LAB_0002fac2:
             }
           }
 LAB_0002fb54:
-          DAT_20019daa = (byte)uVar5;
+          AUDIO_STREAM_FILE_MANAGER_BUFFER = (byte)uVar5;
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): audio manager start check success,will fill up audio stream to Num%d block\n"
@@ -129,11 +129,11 @@ LAB_0002fb54:
               handle_heartbeat();
             }
           }
-          DAT_20007bb8 = (char *)0x0;
-          DAT_20007bb4 = 0;
+          AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
+          AUDIO_STREAM_FILE_MANAGER_STATE = 0;
           fill_memory_buffer(&DAT_20018daa,0,0x1000);
-          DAT_20007bbc = 0;
-          DAT_20019dab = 1;
+          AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE = 0;
+          AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = 1;
           return 0;
         }
         if (2 < LOG_LEVEL) {
@@ -188,7 +188,7 @@ LAB_0002fc9e:
     }
   }
   else {
-    if (DAT_20019dab != '\x01') {
+    if (AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE != '\x01') {
       return 0;
     }
     if (AUDIO_STREAM_STATE == 0) {
@@ -199,9 +199,10 @@ LAB_0002fc9e:
     if (iVar1 == 0) {
       if (local_f4[0] != '\x01') {
         if (local_f4[0] == '\x02') {
-          pcVar2 = DAT_20007bb8 + local_f2;
+          pcVar2 = AUDIO_STREAM_FILE_MANAGER_DATA + local_f2;
           if (0xfff < (int)pcVar2) {
-            memcpy(&DAT_20018daa + (int)DAT_20007bb8,local_f0,0x1000 - (int)DAT_20007bb8);
+            memcpy(&DAT_20018daa + (int)AUDIO_STREAM_FILE_MANAGER_DATA,local_f0,
+                   0x1000 - (int)AUDIO_STREAM_FILE_MANAGER_DATA);
             if (2 < iVar3) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): To complete a sector of data, perform flash write operations\n",
@@ -213,8 +214,9 @@ LAB_0002fc9e:
             }
             iVar3 = check_driver_ready(&FLASH_DRIVER_INTERFACE);
             if (iVar3 == 0) goto LAB_0002f9be;
-            iVar3 = (uint)DAT_20019daa * 0x20000 + 0x421000 + DAT_20007bb4 * 0x1000;
-            if (iVar3 <= (int)((uint)DAT_20019daa * 0x20000 + 0x431000)) {
+            iVar3 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x421000 +
+                    AUDIO_STREAM_FILE_MANAGER_STATE * 0x1000;
+            if (iVar3 <= (int)((uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x431000)) {
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): wirte addr = 0x%08x\n","audioStreamFileManagerHandler",iVar3);
@@ -234,8 +236,9 @@ LAB_0002fc9e:
               uVar4 = get_work_mode();
               pcVar2 = (char *)(*pcVar8)(uVar4,iVar3,&DAT_20018daa,0x1000);
               if (pcVar2 == (char *)0x0) {
-                DAT_20007bbc = calculate_crc32(DAT_20007bbc,&DAT_20018daa,0x1000);
-                DAT_20007bb4 = DAT_20007bb4 + 1;
+                AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE =
+                     calculate_crc32(AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE,&DAT_20018daa,0x1000);
+                AUDIO_STREAM_FILE_MANAGER_STATE = AUDIO_STREAM_FILE_MANAGER_STATE + 1;
                 if (2 < LOG_LEVEL) {
                   if (IS_DEBUG == 0) {
                     DEBUG_PRINT("%s(): wirte 4k voice data to flash,write address = 0x%08x\n",
@@ -245,8 +248,8 @@ LAB_0002fc9e:
                     handle_heartbeat();
                   }
                 }
-                pcVar2 = DAT_20007bb8;
-                DAT_20007bb8 = (char *)0x0;
+                pcVar2 = AUDIO_STREAM_FILE_MANAGER_DATA;
+                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
                 fill_memory_buffer(&DAT_20018daa,0,0x1000);
                 iVar3 = -(int)pcVar2 + 0x1000;
                 if (2 < LOG_LEVEL) {
@@ -259,9 +262,10 @@ LAB_0002fc9e:
                   }
                 }
                 iVar3 = local_f2 - iVar3;
-                iVar1 = (int)DAT_20007bb8 + iVar3;
-                memcpy(&DAT_20018daa + (int)DAT_20007bb8,&stack0x00000f10 + -(int)pcVar2,iVar3);
-                DAT_20007bb8 = (char *)iVar1;
+                iVar1 = (int)AUDIO_STREAM_FILE_MANAGER_DATA + iVar3;
+                memcpy(&DAT_20018daa + (int)AUDIO_STREAM_FILE_MANAGER_DATA,
+                       &stack0x00000f10 + -(int)pcVar2,iVar3);
+                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)iVar1;
                 return 0;
               }
               goto joined_r0x0002fe02;
@@ -290,13 +294,13 @@ LAB_0002fc9e:
             display_DelayClose(10000);
             goto LAB_0002fd4a;
           }
-          memcpy(&DAT_20018daa + (int)DAT_20007bb8,local_f0);
+          memcpy(&DAT_20018daa + (int)AUDIO_STREAM_FILE_MANAGER_DATA,local_f0);
           if (iVar3 < 3) {
-            DAT_20007bb8 = pcVar2;
+            AUDIO_STREAM_FILE_MANAGER_DATA = pcVar2;
             return 0;
           }
           format_string = "%s(): copy %d byte into audio cache\n";
-          DAT_20007bb8 = pcVar2;
+          AUDIO_STREAM_FILE_MANAGER_DATA = pcVar2;
         }
         else {
           if (local_f4[0] != '\x03') {
@@ -313,7 +317,7 @@ LAB_0002fc9e:
               }
             }
             delVoiceBlock(local_f0[0]);
-            DAT_20019dab = 0;
+            AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = 0;
             return 0;
           }
 LAB_0002fd4a:
@@ -337,7 +341,8 @@ LAB_0002fd4a:
           }
           iVar3 = check_driver_ready(&FLASH_DRIVER_INTERFACE);
           if (iVar3 == 0) goto LAB_0002f9be;
-          iVar3 = (uint)DAT_20019daa * 0x20000 + 0x421000 + DAT_20007bb4 * 0x1000;
+          iVar3 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x421000 +
+                  AUDIO_STREAM_FILE_MANAGER_STATE * 0x1000;
           if (2 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): wirte addr = 0x%08x\n","audioStreamFileManagerHandler",iVar3);
@@ -364,7 +369,9 @@ joined_r0x0002fe02:
               format_string = "%s(): Flash write failed! %d\n\n";
               goto LAB_0002fc9e;
             }
-            DAT_20007bbc = calculate_crc32(DAT_20007bbc,&DAT_20018daa,DAT_20007bb8);
+            AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE =
+                 calculate_crc32(AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE,&DAT_20018daa,
+                                 AUDIO_STREAM_FILE_MANAGER_DATA);
             fill_memory_buffer(&DAT_20018daa,0,0x1000);
             iVar3 = get_work_mode();
             pcVar8 = *(code **)(iVar3 + 0x1030);
@@ -375,26 +382,28 @@ joined_r0x0002fe02:
             pcVar8 = *(code **)(iVar3 + 0x1038);
             uVar4 = get_work_mode();
             pcVar2 = (char *)(*pcVar8)(uVar4,0x400000,0x1000);
-            iVar3 = DAT_20007bb4;
+            iVar3 = AUDIO_STREAM_FILE_MANAGER_STATE;
             if (pcVar2 == (char *)0x0) {
               _DAT_20018daa = 0x5aa5aa5a;
-              iVar1 = (uint)DAT_20019daa * 0x14;
-              iVar6 = (uint)DAT_20019daa * 0x20000 + 0x421000;
+              iVar1 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x14;
+              iVar6 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x20000 + 0x421000;
               *(int *)(&DAT_20018db6 + iVar1) = iVar6;
               DAT_20018dae = 0;
               DAT_20018daf = 0;
               DAT_20018db0 = 0;
               DAT_20018db1 = 0;
-              *(char **)(&DAT_20018dba + iVar1) = DAT_20007bb8 + iVar6 + iVar3 * 0x1000;
+              *(char **)(&DAT_20018dba + iVar1) =
+                   AUDIO_STREAM_FILE_MANAGER_DATA + iVar6 + iVar3 * 0x1000;
               (&DAT_20018db2)[iVar1] = 2;
               (&DAT_20018db3)[iVar1] = 0;
               (&DAT_20018db4)[iVar1] = 0;
               (&DAT_20018db5)[iVar1] = 0;
               uVar4 = get_work_mode_timestamp();
               iVar3 = LOG_LEVEL;
-              uVar5 = (uint)DAT_20019daa;
+              uVar5 = (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER;
               *(undefined4 *)(&DAT_20018dbe + uVar5 * 0x14) = uVar4;
-              *(undefined4 *)(&DAT_20018dc2 + uVar5 * 0x14) = DAT_20007bbc;
+              *(undefined4 *)(&DAT_20018dc2 + uVar5 * 0x14) =
+                   AUDIO_STREAM_FILE_MANAGER_HANDLER_STATE;
               if (2 < iVar3) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): upgrade Num.%d voice manager block,total write sector num = %d, total write byte = %d ,crc32 = %d\n"
@@ -404,8 +413,8 @@ joined_r0x0002fe02:
                   handle_heartbeat();
                 }
               }
-              if (*(int *)(&DAT_20018db6 + (uint)DAT_20019daa * 0x14) ==
-                  *(int *)(&DAT_20018dba + (uint)DAT_20019daa * 0x14)) {
+              if (*(int *)(&DAT_20018db6 + (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x14) ==
+                  *(int *)(&DAT_20018dba + (uint)AUDIO_STREAM_FILE_MANAGER_BUFFER * 0x14)) {
                 if (2 < LOG_LEVEL) {
                   if (IS_DEBUG == 0) {
                     DEBUG_PRINT("%s(): voice block start addr = voice block end addr\n",
@@ -415,10 +424,10 @@ joined_r0x0002fe02:
                     handle_heartbeat();
                   }
                 }
-                DAT_20019dab = '\0';
-                DAT_20019daa = 0;
-                DAT_20007bb8 = (char *)0x0;
-                DAT_20007bb4 = 0;
+                AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = '\0';
+                AUDIO_STREAM_FILE_MANAGER_BUFFER = 0;
+                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
+                AUDIO_STREAM_FILE_MANAGER_STATE = 0;
                 process_sensor_data_buffer();
                 if (LOG_LEVEL < 1) {
                   return 0;
@@ -432,10 +441,10 @@ joined_r0x0002fe02:
                 pcVar8 = *(code **)(iVar3 + 0x1034);
                 uVar4 = get_work_mode();
                 pcVar2 = (char *)(*pcVar8)(uVar4,0x400000,&DAT_20018daa,0x1000);
-                DAT_20019dab = '\0';
-                DAT_20019daa = 0;
-                DAT_20007bb8 = (char *)0x0;
-                DAT_20007bb4 = 0;
+                AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = '\0';
+                AUDIO_STREAM_FILE_MANAGER_BUFFER = 0;
+                AUDIO_STREAM_FILE_MANAGER_DATA = (char *)0x0;
+                AUDIO_STREAM_FILE_MANAGER_STATE = 0;
                 process_sensor_data_buffer();
                 requestAudioInfoToApp(1);
                 if (pcVar2 != (char *)0x0) goto joined_r0x0002fe02;
@@ -455,9 +464,9 @@ LAB_0002fa68:
         }
         goto LAB_0002fc9e;
       }
-      DAT_20019dab = '\0';
+      AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = '\0';
       if (LOG_LEVEL < 1) {
-        DAT_20019dab = 0;
+        AUDIO_STREAM_FILE_MANAGER_EXTENDED_STATE = 0;
         return 0;
       }
       pcVar2 = "%s(): A start command occurred during recording to exit the recording\n";

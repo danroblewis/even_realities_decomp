@@ -21,7 +21,7 @@ set_device_sn_info(int param_1,undefined4 param_2,undefined4 *param_3,undefined1
     DEBUG_PRINT("get_query_sn_info para is NULL\n");
     uVar1 = 0xffffffff;
   }
-  else if (DAT_20019ef3 == '\x01') {
+  else if (SYSTEM_READY_AND_SETTINGS_STATE == '\x01') {
     param_1 = param_1 + 4;
     puVar4 = (undefined1 *)*param_3;
     call_function_with_parameters(param_1);

@@ -35,14 +35,14 @@ LAB_000533a0:
   cleanup_ble_attribute(iVar2);
 LAB_000533ac:
   handle_ble_descriptor_discovery(param_1,param_2);
-  if (DAT_2000ad20 == (int *)0x0) {
+  if (BLE_CONNECTION_STATE_BUFFER == (int *)0x0) {
     return;
   }
-  iVar1 = *DAT_2000ad20;
+  iVar1 = *BLE_CONNECTION_STATE_BUFFER;
   if (iVar1 != 0) {
     iVar1 = iVar1 + -0xc;
   }
-  pcVar3 = (code *)DAT_2000ad20[-1];
+  pcVar3 = (code *)BLE_CONNECTION_STATE_BUFFER[-1];
   if (pcVar3 == (code *)0x0) goto LAB_000533cc;
   do {
     (*pcVar3)(param_1,param_2);

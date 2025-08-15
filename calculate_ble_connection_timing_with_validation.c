@@ -35,8 +35,9 @@ undefined8 calculate_ble_connection_timing_with_validation(void)
   else {
     update_connection_state_flags(&DAT_2000b498);
     uVar3 = get_ble_timing_offset();
-    iVar4 = uVar3 + DAT_200069e0;
-    iVar5 = DAT_200069e4 + ((int)uVar3 >> 0x1f) + (uint)CARRY4(uVar3,DAT_200069e0);
+    iVar4 = uVar3 + BLE_CONNECTION_TIMEOUT_SCHEDULING;
+    iVar5 = DAT_200069e4 +
+            ((int)uVar3 >> 0x1f) + (uint)CARRY4(uVar3,BLE_CONNECTION_TIMEOUT_SCHEDULING);
     iVar2 = validate_and_clear_connection_state(&DAT_2000b498);
     if (iVar2 != 0) {
       bVar1 = (bool)isCurrentModePrivileged();

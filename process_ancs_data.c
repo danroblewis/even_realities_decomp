@@ -25,7 +25,7 @@ void process_ancs_data(undefined4 param_1)
     if (local_1c4[0] == 0) {
       local_1c4[0] = 1;
     }
-    local_1bc = DAT_20006aac;
+    local_1bc = ANCS_DATA_SOURCE_HANDLER_STATE;
     log_notification_data("FROM:ancs",local_1c4);
     if ((local_14 < 2) && (iVar1 = validate_app_whitelist(local_1b4), iVar1 != 2)) {
       if (iVar1 != 3) {

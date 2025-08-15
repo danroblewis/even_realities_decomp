@@ -8,7 +8,7 @@
 undefined1 get_system_status_value(void)
 
 {
-  return DAT_2001a229;
+  return SYSTEM_STATUS_AND_TIMER_CONTROL;
 }
 
 

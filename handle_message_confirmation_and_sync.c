@@ -42,7 +42,7 @@ void handle_message_confirmation_and_sync(void)
           }
         }
       }
-      else if (DAT_20018d9f == '\0') {
+      else if (MESSAGE_CONFIRMATION_FLAG == '\0') {
         if (*(char *)(iVar3 + 0xd) == '\0') {
           DISPLAY_UI_CONFIG = 1;
           uVar5 = get_work_mode();
@@ -56,7 +56,7 @@ void handle_message_confirmation_and_sync(void)
             process_message_and_sync(uVar5,0xc,iVar3 + 0xda);
             return;
           }
-          DAT_20018d82 = DAT_20018d9f;
+          DAT_20018d82 = MESSAGE_CONFIRMATION_FLAG;
           set_message_state(*(undefined1 *)(iVar3 + 0xc),0);
           DISPLAY_UI_CONFIG = 0;
         }

@@ -65,7 +65,7 @@ LAB_0002ee5a:
             if (iVar6 == iVar8 + iVar5) {
               iVar9 = get_system_ready_state();
               if (iVar9 != 1) {
-                if (DAT_20007b78 == 0) {
+                if (DMIC_AUDIO_STREAM_STATE == 0) {
                   enqueue_dmic(iVar5);
                 }
                 else {
@@ -86,9 +86,9 @@ LAB_0002ee5a:
                 }
                 goto LAB_0002eeb6;
               }
-              if (0x40ffff < DAT_20002404) goto LAB_0002eeb6;
+              if (0x40ffff < AUDIO_STREAM_BUFFER) goto LAB_0002eeb6;
               pcVar7 = (char *)write_device_memory_and_manage_states
-                                         (&FLASH_DRIVER_INTERFACE,DAT_20002404,iVar5,iVar8);
+                                         (&FLASH_DRIVER_INTERFACE,AUDIO_STREAM_BUFFER,iVar5,iVar8);
               if (pcVar7 != (char *)0x0) {
                 if (LOG_LEVEL < 1) goto LAB_0002eeb6;
                 format_string = "%s(): Flash write failed! %d\n\n";
@@ -96,14 +96,14 @@ LAB_0002ee5a:
               }
               if (0 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
-                  DEBUG_PRINT("%s(): Flash write to addr 0x%x\n\n","app_codec_lc3_test",DAT_20002404
-                             );
+                  DEBUG_PRINT("%s(): Flash write to addr 0x%x\n\n","app_codec_lc3_test",
+                              AUDIO_STREAM_BUFFER);
                 }
                 else {
                   handle_heartbeat();
                 }
               }
-              DAT_20002404 = DAT_20002404 + iVar8;
+              AUDIO_STREAM_BUFFER = AUDIO_STREAM_BUFFER + iVar8;
               goto LAB_0002eeb6;
             }
             pcVar7 = (char *)process_comprehensive_audio_pipeline

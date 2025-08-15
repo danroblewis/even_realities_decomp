@@ -12,7 +12,7 @@ int initialize_hardware_configuration
   char cVar1;
   int iVar2;
   
-  cVar1 = DAT_2000b378;
+  cVar1 = HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER;
   if (param_1 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","p_config",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x19b,param_4);
@@ -20,15 +20,15 @@ int initialize_hardware_configuration
     trigger_system_service_call("WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x19b)
     ;
   }
-  if (DAT_2000b378 == '\0') {
-    DAT_2000b348 = param_2;
+  if (HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER == '\0') {
+    HARDWARE_CONFIGURATION_AND_INTERRUPT_HANDLING_MANAGER = param_2;
     DAT_2000b34c = param_3;
     iVar2 = validate_and_configure_hardware_parameters();
     if (iVar2 == 0xbad0000) {
-      DAT_2000b378 = '\x01';
-      DAT_2000b380 = cVar1;
-      DAT_2000b350 = 0;
-      DAT_2000b354 = 0;
+      HARDWARE_CONFIGURATION_AND_INTERRUPT_MANAGER = '\x01';
+      HARDWARE_INTERRUPT_TRIGGER_REGISTER = cVar1;
+      HARDWARE_INTERRUPT_CONFIG_REGISTER = 0;
+      HARDWARE_INTERRUPT_STATUS_REGISTER = 0;
     }
   }
   else {

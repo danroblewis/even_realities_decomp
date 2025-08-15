@@ -16,8 +16,8 @@ uint bluetooth_hci_command_processing_with_validation_and_parameter
   undefined4 *puVar4;
   uint uVar5;
   
-  puVar4 = &DAT_20002000;
-  uVar5 = (uint)DAT_20002007;
+  puVar4 = &BLUETOOTH_HCI_COMMAND_BUFFER;
+  uVar5 = (uint)BLUETOOTH_HCI_COMMAND_PROCESSOR_STATE;
   uVar1 = 0;
   do {
     uVar3 = uVar1;

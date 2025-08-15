@@ -314,7 +314,7 @@ LAB_0001027a:
                     if (iVar1 == 0) {
                       iVar1 = get_pointer_value(&DASHBOARD_LOCK_STATUS);
                       if (iVar1 << 0x1e < 0) {
-                        iVar1 = get_pointer_value(&DAT_20007aa0);
+                        iVar1 = get_pointer_value(&DASHBOARD_LOCK_INFO_STORAGE);
                         if (((-1 < iVar1 << 0x1e) &&
                             (iVar1 = get_pointer_value(&DASHBOARD_LOCK_CONTROL), -1 < iVar1 << 0x1e)
                             ) && (iVar1 = get_pointer_value(&DASHBOARD_LOCK_STATUS),
@@ -358,7 +358,7 @@ LAB_0001027a:
                           cal_panel_canvas_coord(param_1 + -0x20,param_1 + -0x2c);
                         }
                         change_work_mode_to(2);
-                        iVar1 = get_pointer_value(&DAT_20007aa0);
+                        iVar1 = get_pointer_value(&DASHBOARD_LOCK_INFO_STORAGE);
                         if (-1 < iVar1 << 0x1e) {
                           *extraout_r3 = *extraout_r3 | 2;
                         }
@@ -394,7 +394,7 @@ LAB_000103ea:
             local_a0[6] = 0.0;
             local_a0[7] = 0.0;
             local_a0[8] = 0.0;
-            if (DAT_20007ab1 == '\x01') {
+            if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\x01') {
               pfVar7 = (float *)&local_7c;
               pfVar12 = local_a0 + 6;
               pfVar9 = &DAT_20007ad8;
@@ -422,27 +422,27 @@ LAB_000103ea:
               if (((0.1 < ABS(local_a0[0] - DAT_20007acc)) ||
                   (0.1 < ABS(local_a0[1] - DAT_20007ad0))) ||
                  (0.1 < ABS(local_a0[2] - DAT_20007ad4))) {
-                DAT_20007abc = 0;
+                ATTITUDE_TRIGGER_STATE = 0;
               }
               else {
-                DAT_20007abc = DAT_20007abc + 1;
-                if (4 < DAT_20007abc) {
-                  DAT_20007ab1 = '\x02';
+                ATTITUDE_TRIGGER_STATE = ATTITUDE_TRIGGER_STATE + 1;
+                if (4 < ATTITUDE_TRIGGER_STATE) {
+                  ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\x02';
                   DAT_20007ae4 = local_a0[6];
                   DAT_20007ae8 = local_a0[7];
                   DAT_20007aec = local_a0[8];
                 }
               }
             }
-            else if (DAT_20007ab1 == '\x02') {
-              DAT_20007ab8 = 0;
-              DAT_20007abc = 0;
+            else if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\x02') {
+              ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS = 0;
+              ATTITUDE_TRIGGER_STATE = 0;
               DAT_20007ac0 = 0;
               DAT_20007ac4 = 0;
               DAT_20007ac8 = 0;
-              DAT_20007ab1 = '\0';
+              ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\0';
             }
-            else if (DAT_20007ab1 == '\0') {
+            else if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\0') {
               pfVar12 = (float *)&DAT_00088a44;
               pfVar7 = local_a0 + 3;
               piVar8 = &DAT_20007ac0;
@@ -470,16 +470,17 @@ LAB_000103ea:
                 piVar8 = piVar8 + 1;
               } while (iVar13 != 3);
               if (iVar1 != 0) {
-                if (DAT_20007ab8 == 0) {
+                if (ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS == 0) {
                   DAT_20007ad8 = local_a0[0];
                   DAT_20007adc = local_a0[1];
                   DAT_20007ae0 = local_a0[2];
-                  DAT_20007ab8 = 1;
+                  ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS = 1;
                 }
                 else {
-                  DAT_20007ab8 = DAT_20007ab8 + 1;
-                  if (4 < DAT_20007ab8) {
-                    DAT_20007ab1 = '\x01';
+                  ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS =
+                       ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS + 1;
+                  if (4 < ATTITUDE_TRIGGER_HANDLER_CONTROL_FLAGS) {
+                    ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\x01';
                   }
                 }
               }

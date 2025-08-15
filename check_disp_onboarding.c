@@ -37,12 +37,13 @@ void check_disp_onboarding(int param_1,undefined4 param_2,undefined4 param_3)
       iVar2 = get_work_mode();
       *(undefined1 *)(*(int *)(iVar2 + 0x1014) + 3) = 0;
       iVar2 = get_work_mode();
-      DAT_2001cdce = *(undefined1 *)(*(int *)(iVar2 + 0x1014) + 3);
+      WORK_MODE_STATE_AND_UI_CONFIGURATION = *(undefined1 *)(*(int *)(iVar2 + 0x1014) + 3);
       iVar2 = get_work_mode();
       uVar3 = local_14;
       local_14._3_1_ = SUB41(uVar3,3);
       local_14._0_3_ =
-           CONCAT12(1,CONCAT11(DAT_2001cdce,*(undefined1 *)(*(int *)(iVar2 + 0x1014) + 2)));
+           CONCAT12(1,CONCAT11(WORK_MODE_STATE_AND_UI_CONFIGURATION,
+                               *(undefined1 *)(*(int *)(iVar2 + 0x1014) + 2)));
       iVar2 = onboarding_sync_data(&local_14,3);
       if (iVar2 == 0) {
         if (0 < LOG_LEVEL) {

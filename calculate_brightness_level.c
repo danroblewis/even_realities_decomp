@@ -15,7 +15,8 @@ byte calculate_brightness_level(void)
   undefined8 uVar5;
   undefined8 uVar6;
   
-  if ((DAT_20018da1 == '\0') || (iVar1 = opt3001_read_lux_value(0), iVar1 + 1U < 2)) {
+  if ((OPT3001_AMBIENT_LIGHT_SENSOR_STATE == '\0') ||
+     (iVar1 = opt3001_read_lux_value(0), iVar1 + 1U < 2)) {
     bVar4 = 0xff;
   }
   else {
@@ -53,93 +54,93 @@ byte calculate_brightness_level(void)
                 ((int)uVar6,(int)((ulonglong)uVar6 >> 0x20),(int)uVar5,
                  (int)((ulonglong)uVar5 >> 0x20));
       fVar3 = (float)complex_float_conversion();
-      bVar4 = DAT_20018da0;
-      if (DAT_20018da0 == 0xc) {
+      bVar4 = BRIGHTNESS_LEVEL_STORAGE;
+      if (BRIGHTNESS_LEVEL_STORAGE == 0xc) {
         if (120.0 < fVar3) {
-          DAT_20018da0 = 0x13;
+          BRIGHTNESS_LEVEL_STORAGE = 0x13;
           bVar4 = 0x13;
         }
         else {
-          DAT_20018da0 = bVar4;
+          BRIGHTNESS_LEVEL_STORAGE = bVar4;
           if ((int)((uint)(fVar3 < 8.0) << 0x1f) < 0) {
-            DAT_20018da0 = 6;
+            BRIGHTNESS_LEVEL_STORAGE = 6;
             bVar4 = 6;
           }
         }
       }
-      else if (DAT_20018da0 < 0xd) {
-        if (DAT_20018da0 == 3) {
+      else if (BRIGHTNESS_LEVEL_STORAGE < 0xd) {
+        if (BRIGHTNESS_LEVEL_STORAGE == 3) {
           if (6.0 < fVar3) {
-            DAT_20018da0 = 6;
+            BRIGHTNESS_LEVEL_STORAGE = 6;
             bVar4 = 6;
           }
           else {
             uVar5 = float_divide_64bit_complex();
             iVar1 = float_compare_boolean_inverted
                               ((int)uVar5,(int)((ulonglong)uVar5 >> 0x20),0x9999999a,0x3ff99999);
-            DAT_20018da0 = bVar4;
+            BRIGHTNESS_LEVEL_STORAGE = bVar4;
             if (iVar1 != 0) {
-              DAT_20018da0 = 0;
+              BRIGHTNESS_LEVEL_STORAGE = 0;
               bVar4 = 0;
             }
           }
         }
-        else if (DAT_20018da0 == 6) {
+        else if (BRIGHTNESS_LEVEL_STORAGE == 6) {
           if (12.0 < fVar3) {
-            DAT_20018da0 = 0xc;
+            BRIGHTNESS_LEVEL_STORAGE = 0xc;
             bVar4 = 0xc;
           }
           else {
-            DAT_20018da0 = bVar4;
+            BRIGHTNESS_LEVEL_STORAGE = bVar4;
             if ((int)((uint)(fVar3 < 4.0) << 0x1f) < 0) {
-              DAT_20018da0 = 3;
+              BRIGHTNESS_LEVEL_STORAGE = 3;
               bVar4 = 3;
             }
           }
         }
         else {
-          DAT_20018da0 = bVar4;
-          if (DAT_20018da0 == 0) {
+          BRIGHTNESS_LEVEL_STORAGE = bVar4;
+          if (BRIGHTNESS_LEVEL_STORAGE == 0) {
             uVar5 = float_divide_64bit_complex();
             iVar1 = float_compare_boolean_inverted_swapped
                               ((int)uVar5,(int)((ulonglong)uVar5 >> 0x20),0x33333333,0x40033333);
-            DAT_20018da0 = bVar4;
+            BRIGHTNESS_LEVEL_STORAGE = bVar4;
             if (iVar1 != 0) {
-              DAT_20018da0 = 3;
-              bVar4 = DAT_20018da0;
+              BRIGHTNESS_LEVEL_STORAGE = 3;
+              bVar4 = BRIGHTNESS_LEVEL_STORAGE;
             }
           }
         }
       }
-      else if (DAT_20018da0 == 0x1a) {
+      else if (BRIGHTNESS_LEVEL_STORAGE == 0x1a) {
         if (1440.0 < fVar3) {
-          DAT_20018da0 = 0x2a;
+          BRIGHTNESS_LEVEL_STORAGE = 0x2a;
           bVar4 = 0x2a;
         }
         else {
-          DAT_20018da0 = bVar4;
+          BRIGHTNESS_LEVEL_STORAGE = bVar4;
           if ((int)((uint)(fVar3 < 372.0) << 0x1f) < 0) {
-            DAT_20018da0 = 0x13;
+            BRIGHTNESS_LEVEL_STORAGE = 0x13;
             bVar4 = 0x13;
           }
         }
       }
-      else if (DAT_20018da0 == 0x2a) {
-        DAT_20018da0 = bVar4;
+      else if (BRIGHTNESS_LEVEL_STORAGE == 0x2a) {
+        BRIGHTNESS_LEVEL_STORAGE = bVar4;
         if ((int)((uint)(fVar3 < 960.0) << 0x1f) < 0) {
-          DAT_20018da0 = 0x1a;
+          BRIGHTNESS_LEVEL_STORAGE = 0x1a;
           bVar4 = 0x1a;
         }
       }
       else {
-        DAT_20018da0 = bVar4;
-        if (DAT_20018da0 == 0x13) {
+        BRIGHTNESS_LEVEL_STORAGE = bVar4;
+        if (BRIGHTNESS_LEVEL_STORAGE == 0x13) {
           if (496.0 < fVar3) {
-            DAT_20018da0 = 0x1a;
+            BRIGHTNESS_LEVEL_STORAGE = 0x1a;
             bVar4 = 0x1a;
           }
           else if ((int)((uint)(fVar3 < 75.0) << 0x1f) < 0) {
-            DAT_20018da0 = 0xc;
+            BRIGHTNESS_LEVEL_STORAGE = 0xc;
             bVar4 = 0xc;
           }
         }

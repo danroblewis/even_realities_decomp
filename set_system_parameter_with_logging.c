@@ -11,7 +11,7 @@ set_system_parameter_with_logging
 
 {
   CURRENT_STOCK_ID = param_1;
-  DAT_2001b815 = param_1;
+  SYSTEM_PARAMETER_LOGGING_BUFFER = param_1;
   if (2 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT(&LAB_000a8ff2_1,&LAB_000a95c8_1,&LAB_000a95c8_1,(uint)param_1,param_4);

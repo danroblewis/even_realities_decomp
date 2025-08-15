@@ -10,7 +10,7 @@ void process_data_loop_with_validation_and_retry(void)
 {
   undefined4 uVar1;
   
-  uVar1 = *(undefined4 *)(DAT_20002d20 + 0xc);
+  uVar1 = *(undefined4 *)(STRING_PROCESSING_AND_PRINTF_CONFIGURATION + 0xc);
   do {
     handle_printf_format_string(uVar1,"assertion \"%s\" failed: file \"%s\", line %d%s%s\n");
     uVar1 = process_data_with_validation_and_retry_alt2();

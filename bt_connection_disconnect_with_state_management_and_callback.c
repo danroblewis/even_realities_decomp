@@ -35,7 +35,8 @@ bt_connection_disconnect_with_state_management_and_callback(int param_1,undefine
   *(undefined1 *)(extraout_r1 + 0x26) = uVar1;
   if (*(char *)(extraout_r2 + 2) == '\x01') {
     *(int *)(extraout_r1 + 8) = extraout_r2 + 0x90;
-    *(uint *)(extraout_r1 + 4) = (int)&DAT_20002000 + (uint)*(byte *)(extraout_r2 + 8) * 7;
+    *(uint *)(extraout_r1 + 4) =
+         (int)&BLUETOOTH_HCI_COMMAND_BUFFER + (uint)*(byte *)(extraout_r2 + 8) * 7;
     iVar3 = extraout_r2 + 0x97;
     iVar4 = extraout_r2 + 0x9e;
     if (*(char *)(extraout_r2 + 3) != '\0') {

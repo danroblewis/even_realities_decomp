@@ -12,7 +12,7 @@ int erase_audio_buffer(void)
   
   iVar1 = manage_device_memory_and_state_changes(&FLASH_DRIVER_INTERFACE,0x400000,0x10000);
   if (iVar1 == 0) {
-    DAT_20002404 = 0x400000;
+    AUDIO_STREAM_BUFFER = 0x400000;
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): Flash erase ok \n\n","erase_audio_buffer");

@@ -42,7 +42,7 @@ float interpolate_1d_value(float param_1,float *param_2,float *param_3)
   fVar9 = param_3[1];
   iVar1 = validate_float_value(param_1);
   if (iVar1 != 0) {
-    return DAT_20002d1c;
+    return IMU_ATTITUDE_CALCULATION_DATA;
   }
   fVar4 = (fVar9 - fVar8) / (fVar3 - fVar7);
   fVar5 = ((fVar6 - fVar9) / (fVar5 - fVar3) - fVar4) / (fVar5 - fVar7);

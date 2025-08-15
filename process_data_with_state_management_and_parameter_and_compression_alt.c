@@ -27,9 +27,9 @@ void process_data_with_state_management_and_parameter_and_compression_alt
   if (puVar2 == &DAT_20003b4c) {
     iVar3 = calculate_ble_memory_size(param_3);
     if (*(ushort *)(&DAT_2000abf6 + iVar3 * 0xc) == param_1) {
-      if (DAT_20002140 != 0) {
+      if (BLUETOOTH_HCI_COMMAND_PROCESSING_BUFFER != 0) {
         decrement_reference_count_and_cleanup_memory();
-        DAT_20002140 = 0;
+        BLUETOOTH_HCI_COMMAND_PROCESSING_BUFFER = 0;
       }
       iVar3 = calculate_ble_memory_size(param_3);
       if ((*(int *)(&DAT_2000abf8 + iVar3 * 0xc) != 0) && (param_2 == 0)) {

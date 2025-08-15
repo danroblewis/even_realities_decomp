@@ -8,7 +8,7 @@
 undefined4 get_sensor_data_value(void)
 
 {
-  return DAT_20007bb0;
+  return SENSOR_DATA_EXCHANGE_VALUE;
 }
 
 

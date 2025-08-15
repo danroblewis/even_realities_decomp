@@ -37,35 +37,36 @@ undefined4 ui_onboarding_task(int param_1,undefined4 param_2,int param_3)
       enqueue_message_to_queue_with_work_mode_check();
     }
     pcVar4 = (char *)get_work_mode();
-    uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+    uVar6 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
     if (*pcVar4 == '\x01') {
       iVar3 = get_work_mode();
-      uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+      uVar6 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
       if (*(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\0') {
         uVar6 = calculate_ble_connection_timing_with_scaling_alt3();
         uVar7 = subtract_64bit_with_borrow_handling
-                          ((int)uVar6,(int)((ulonglong)uVar6 >> 0x20),DAT_20004bf8,DAT_20004bfc);
-        uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+                          ((int)uVar6,(int)((ulonglong)uVar6 >> 0x20),ONBOARDING_BLE_PROCESS_STATE,
+                           ONBOARDING_BLE_PROCESS_FLAGS);
+        uVar6 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
         if ((int)(uint)((uint)uVar7 < 0x3e9) <= (int)((ulonglong)uVar7 >> 0x20)) {
-          DAT_20004bf0 = DAT_20004bf0 + 1;
+          ONBOARDING_UI_TASK_STATE = ONBOARDING_UI_TASK_STATE + 1;
           uVar6 = calculate_ble_connection_timing_with_scaling_alt3();
-          DAT_20004bfc = (undefined4)((ulonglong)uVar6 >> 0x20);
-          DAT_20004bf8 = (undefined4)uVar6;
-          if (0x13 < DAT_20004bf0) {
+          ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar6 >> 0x20);
+          ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar6;
+          if (0x13 < ONBOARDING_UI_TASK_STATE) {
             if (1 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): onboarding: disconnection between the AR Glasses and the Bluetooth application!\n"
                             ,"ui_onboarding_task");
-                uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+                uVar6 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
               }
               else {
                 handle_heartbeat();
-                uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
+                uVar6 = CONCAT44(ONBOARDING_BLE_PROCESS_FLAGS,ONBOARDING_BLE_PROCESS_STATE);
               }
             }
-            DAT_20004bfc = (undefined4)((ulonglong)uVar6 >> 0x20);
-            DAT_20004bf8 = (undefined4)uVar6;
-            DAT_20004bf0 = 0x14;
+            ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar6 >> 0x20);
+            ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar6;
+            ONBOARDING_UI_TASK_STATE = 0x14;
             iVar3 = get_work_mode();
             *(undefined1 *)(*(int *)(iVar3 + 0x1014) + 2) = 0xb;
             iVar3 = get_work_mode();
@@ -83,11 +84,12 @@ undefined4 ui_onboarding_task(int param_1,undefined4 param_2,int param_3)
         }
       }
     }
-    DAT_20004bfc = (undefined4)((ulonglong)uVar6 >> 0x20);
-    DAT_20004bf8 = (undefined4)uVar6;
+    ONBOARDING_BLE_PROCESS_FLAGS = (undefined4)((ulonglong)uVar6 >> 0x20);
+    ONBOARDING_BLE_PROCESS_STATE = (undefined4)uVar6;
     iVar3 = get_work_mode();
     if (((uint)*(byte *)(*(int *)(iVar3 + 0x1014) + 2) == (int)DAT_200034f5) &&
-       (iVar3 = get_work_mode(), *(char *)(*(int *)(iVar3 + 0x1014) + 3) == DAT_2001cdce)) {
+       (iVar3 = get_work_mode(),
+       *(char *)(*(int *)(iVar3 + 0x1014) + 3) == WORK_MODE_STATE_AND_UI_CONFIGURATION)) {
       render_work_mode_ui_based_on_state(param_3);
       manage_complex_work_mode_animations_and_states(param_3);
       return 0;
@@ -96,10 +98,11 @@ undefined4 ui_onboarding_task(int param_1,undefined4 param_2,int param_3)
     if (*pcVar4 == '\x01') {
       check_work_mode_state_conditions();
       iVar3 = get_work_mode();
-      DAT_2001cdce = *(char *)(*(int *)(iVar3 + 0x1014) + 3);
+      WORK_MODE_STATE_AND_UI_CONFIGURATION = *(char *)(*(int *)(iVar3 + 0x1014) + 3);
       iVar3 = get_work_mode();
       local_14 = (undefined1  [2])
-                 CONCAT11(DAT_2001cdce,*(undefined1 *)(*(int *)(iVar3 + 0x1014) + 2));
+                 CONCAT11(WORK_MODE_STATE_AND_UI_CONFIGURATION,
+                          *(undefined1 *)(*(int *)(iVar3 + 0x1014) + 2));
       iVar3 = get_work_mode();
       _local_14 = CONCAT12(*(undefined1 *)(*(int *)(iVar3 + 0x1014) + 0xc),local_14);
       iVar3 = get_work_mode();

@@ -111,19 +111,20 @@ undefined4 process_data_with_parameter_validation_alt5(int param_1)
     DAT_2000ab7c = local_e4;
     DAT_2000ab84 = local_f0[0];
     if (local_d4[0] == 0) {
-      DAT_2000ab80 = local_d4[0];
+      BLE_CONNECTION_DATA_BUFFER = local_d4[0];
       DAT_2000ab88 = (undefined1)local_c0;
       validate_memory_bounds(&DAT_2000ab89,local_c4,local_c0,0x23);
       fill_memory_buffer(&DAT_2000ab89 + local_c0,0,0x20 - local_c0);
     }
     if (local_c8 == 0) {
-      if (DAT_2000ab84 == DAT_2000ab80) {
+      if (DAT_2000ab84 == BLE_CONNECTION_DATA_BUFFER) {
         process_data_with_validation_and_callback_alt4(1,0,auStack_b8);
       }
     }
     else {
       uVar1 = process_data_with_parameter_validation_alt3
-                        (iVar2,local_d4[2],local_e8,local_c8 + DAT_2000ab80 == DAT_2000ab84);
+                        (iVar2,local_d4[2],local_e8,
+                         local_c8 + BLE_CONNECTION_DATA_BUFFER == DAT_2000ab84);
       if (uVar1 != 0) {
         local_104 = "Irrecoverable error: flash write failed: %d";
         local_108 = 3;
@@ -131,8 +132,8 @@ undefined4 process_data_with_parameter_validation_alt5(int param_1)
         process_and_compress_data_with_validation(&DAT_00088208,0x1840,&local_108,0);
         goto LAB_00052300;
       }
-      DAT_2000ab80 = DAT_2000ab80 + local_e8;
-      if (DAT_2000ab80 == DAT_2000ab84) {
+      BLE_CONNECTION_DATA_BUFFER = BLE_CONNECTION_DATA_BUFFER + local_e8;
+      if (BLE_CONNECTION_DATA_BUFFER == DAT_2000ab84) {
         process_data_with_validation_and_callback_alt4(1,0,auStack_b8,0);
         process_data_with_state_management_alt5(*(undefined4 *)(param_1 + 8));
         process_data_with_callback_execution_alt4();

@@ -16,7 +16,7 @@ void bt_connection_disconnect_with_state_management_and_callback_validation_and_
   undefined4 uVar5;
   int local_14;
   
-  puVar4 = &DAT_00087fc8;
+  puVar4 = &BLE_CONNECTION_BATCH_PROCESSING_TABLE;
   uVar5 = param_1;
   local_14 = param_2;
   while( true ) {

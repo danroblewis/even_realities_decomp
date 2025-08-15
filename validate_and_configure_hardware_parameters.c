@@ -54,7 +54,7 @@ undefined4 validate_and_configure_hardware_parameters(undefined4 *param_1)
        (uint)*(byte *)(param_1 + 8) | _DAT_5002b600 & 0xffff00 |
        (uint)*(byte *)((int)param_1 + 0x21) << 0x18 | (uint)*(byte *)((int)param_1 + 0x22) << 0x19 |
        (uint)*(byte *)((int)param_1 + 0x23) << 0x1c;
-  if (DAT_2000b348 != 0) {
+  if (HARDWARE_CONFIGURATION_AND_INTERRUPT_HANDLING_MANAGER != 0) {
     process_data_with_parameter_validation_alt4(0x2b);
   }
   return 0xbad0000;

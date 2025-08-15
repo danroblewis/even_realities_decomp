@@ -21,7 +21,7 @@ undefined4 opt3001_reg_read(undefined1 param_1,ushort *param_2)
   
   uVar2 = 0;
   local_34[0] = 0;
-  iVar1 = check_driver_ready(DAT_200023fc);
+  iVar1 = check_driver_ready(OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER);
   if (iVar1 == 0) {
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
@@ -41,7 +41,8 @@ undefined4 opt3001_reg_read(undefined1 param_1,ushort *param_2)
     local_1c = 7;
     local_38[0] = param_1;
     local_30 = local_38;
-    iVar1 = (**(code **)(*(int *)(DAT_200023fc + 8) + 8))(DAT_200023fc,&local_30,2,0x45);
+    iVar1 = (**(code **)(*(int *)(OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER + 8) + 8))
+                      (OPT3001_AND_OPT3007_SENSOR_REGISTER_BUFFER,&local_30,2,0x45);
     if (iVar1 < 0) {
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {

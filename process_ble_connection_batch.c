@@ -16,9 +16,9 @@ void process_ble_connection_batch(void)
   int iVar6;
   undefined8 uVar7;
   
-  piVar5 = &DAT_00087fc8;
+  piVar5 = &BLE_CONNECTION_BATCH_PROCESSING_TABLE;
   do {
-    if (&DAT_00087fc8 < piVar5) {
+    if (&BLE_CONNECTION_BATCH_PROCESSING_TABLE < piVar5) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","thread_data <= __static_thread_data_list_end",
                    "WEST_TOPDIR/zephyr/kernel/thread.c",0x2f3);
       DEBUG_PRINT2("\tunexpected list end location\n");
@@ -29,7 +29,8 @@ LAB_00071f60:
     }
     if (&UNK_00087fc7 < piVar5) {
       process_ble_connection_state();
-      for (piVar5 = &DAT_00087fc8; piVar5 < (int *)((int)&DAT_00087fc8 + 1); piVar5 = piVar5 + 0xb)
+      for (piVar5 = &BLE_CONNECTION_BATCH_PROCESSING_TABLE;
+          piVar5 < (int *)((int)&BLE_CONNECTION_BATCH_PROCESSING_TABLE + 1); piVar5 = piVar5 + 0xb)
       {
         if (&UNK_00087fc7 < piVar5) {
           finalize_ble_connection_with_magnetometer();

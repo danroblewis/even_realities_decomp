@@ -15,7 +15,7 @@ undefined4 process_message_with_timeout_and_sync(void)
   short sVar5;
   
   sVar5 = 1000;
-  DAT_20018d9f = 1;
+  MESSAGE_CONFIRMATION_FLAG = 1;
   do {
     iVar2 = get_message_state_table_entry(10);
     if ((*(char *)(iVar2 + 0x10) == '\0') || (*(char *)(iVar2 + 0xc) == '\0')) break;
@@ -40,7 +40,7 @@ LAB_0002c446:
       manage_system_status_and_timeout_transitions();
       iVar2 = get_work_mode();
       z_spin_lock_valid(iVar2 + 0x38);
-      DAT_20018d9f = 0;
+      MESSAGE_CONFIRMATION_FLAG = 0;
       return 0;
     }
   }
@@ -50,7 +50,7 @@ LAB_0002c446:
   else {
     handle_heartbeat();
   }
-  DAT_20018d9f = 0;
+  MESSAGE_CONFIRMATION_FLAG = 0;
   return 0xffffffff;
 }
 

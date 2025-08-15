@@ -105,7 +105,7 @@ undefined4 process_data_with_callback_and_parameter_alt2(int *param_1,uint *para
     param_2[3] = DAT_2000ab7c;
     *param_2 = uVar3;
     param_2[1] = 0;
-    if (param_1[1] == DAT_2000ab80) {
+    if (param_1[1] == BLE_CONNECTION_DATA_BUFFER) {
       if (uVar3 < (uint)(param_1[1] + param_1[4])) {
         return 0x1f;
       }

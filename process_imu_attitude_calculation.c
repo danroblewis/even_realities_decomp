@@ -333,7 +333,7 @@ LAB_0000c72a:
   }
   else {
     fVar34 = param_5[0x15];
-    fVar40 = DAT_20002d1c;
+    fVar40 = IMU_ATTITUDE_CALCULATION_DATA;
   }
   iVar18 = (int)param_5[0x5d4];
   fVar35 = param_5[0x5d6];
@@ -685,7 +685,7 @@ LAB_0000cc1a:
   iVar15 = validate_float_value(param_5[0x4b]);
   if (iVar15 != 0) goto LAB_0000d162;
   iVar15 = validate_float_value(param_2);
-  fVar25 = DAT_20002d1c;
+  fVar25 = IMU_ATTITUDE_CALCULATION_DATA;
   if (iVar15 == 0) {
     if (param_2 < 0.0) {
       fVar25 = -1.0;
@@ -699,7 +699,7 @@ LAB_0000cc1a:
     iVar15 = validate_float_value(param_5[0x4b]);
     if (iVar15 == 0) goto LAB_0000d4ac;
 LAB_0000d34a:
-    fVar26 = fVar25 * DAT_20002d1c;
+    fVar26 = fVar25 * IMU_ATTITUDE_CALCULATION_DATA;
   }
   else {
     iVar15 = validate_float_value(param_5[0x4b]);
@@ -715,7 +715,7 @@ LAB_0000d4ac:
       }
     }
   }
-  fVar27 = DAT_20002d1c;
+  fVar27 = IMU_ATTITUDE_CALCULATION_DATA;
   if (fVar26 == -1.0) {
     pfVar12 = param_5 + 0x18;
     do {

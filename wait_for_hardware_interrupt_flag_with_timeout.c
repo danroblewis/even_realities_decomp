@@ -18,14 +18,14 @@ undefined4 wait_for_hardware_interrupt_flag_with_timeout(void)
   else {
     ppuVar1 = (undefined **)((uint)(DAT_2000b37c * 1000) / 10);
   }
-  while ((_DAT_5002b100 == 0 && (DAT_2000b381 == '\0'))) {
+  while ((_DAT_5002b100 == 0 && (HARDWARE_INTERRUPT_FLAG_REGISTER == '\0'))) {
     handle_ble_uart_packet_processing_completion(10);
     ppuVar1 = (undefined **)((int)ppuVar1 - 1);
     if (ppuVar1 == (undefined **)0x0) {
       return 0xbad0007;
     }
   }
-  if (DAT_2000b381 != '\0') {
+  if (HARDWARE_INTERRUPT_FLAG_REGISTER != '\0') {
     return 0xbad0007;
   }
   return 0xbad0000;

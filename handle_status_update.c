@@ -39,7 +39,7 @@ void handle_status_update(undefined4 param_1,undefined4 param_2)
   *(undefined2 *)(iVar2 + 0x106d) = *(undefined2 *)(puVar1 + 1);
   *(undefined1 *)(iVar2 + 0x106f) = *(undefined1 *)((int)puVar1 + 6);
   DEBUG_PRINT("Pairing completed: %s, bonded: %d\n",auStack_38,param_2);
-  DAT_20007514 = DAT_20007514 + 1;
+  STATUS_MESSAGE_AND_BONDED_ADDRESS_MANAGEMENT = STATUS_MESSAGE_AND_BONDED_ADDRESS_MANAGEMENT + 1;
   *(undefined1 *)(ANCS_CONNECTION_HANDLE + 0x367) = 0;
   return;
 }

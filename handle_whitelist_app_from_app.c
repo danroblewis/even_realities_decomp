@@ -13,9 +13,9 @@ void handle_whitelist_app_from_app
   int iVar1;
   char *format_string;
   
-  if (DAT_20009fbc == 0) {
-    DAT_20009fbc = malloc_maybe(0x1800);
-    if (DAT_20009fbc == 0) {
+  if (WHITELIST_APPLICATION_MANAGEMENT == 0) {
+    WHITELIST_APPLICATION_MANAGEMENT = malloc_maybe(0x1800);
+    if (WHITELIST_APPLICATION_MANAGEMENT == 0) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("[%s-%d] malloc failed !!\n","put_whitelist_app_from_app",0x1ca);
       }
@@ -24,16 +24,16 @@ void handle_whitelist_app_from_app
       }
     }
     else {
-      fill_memory_buffer(DAT_20009fbc,0,0x1800);
+      fill_memory_buffer(WHITELIST_APPLICATION_MANAGEMENT,0,0x1800);
     }
   }
-  if (DAT_20009fbc == 0) goto LAB_00035718;
-  iVar1 = handle_data_processing(DAT_20009fbc,whitelist_data,data_length);
+  if (WHITELIST_APPLICATION_MANAGEMENT == 0) goto LAB_00035718;
+  iVar1 = handle_data_processing(WHITELIST_APPLICATION_MANAGEMENT,whitelist_data,data_length);
   *(char *)(response_buffer + 1) = (char)iVar1;
   if (iVar1 != 0xc9) goto LAB_00035718;
-  iVar1 = validate_whitelist_app_data(DAT_20009fbc);
+  iVar1 = validate_whitelist_app_data(WHITELIST_APPLICATION_MANAGEMENT);
   if (iVar1 == 0) {
-    iVar1 = parse_whitelist_app_json(DAT_20009fbc);
+    iVar1 = parse_whitelist_app_json(WHITELIST_APPLICATION_MANAGEMENT);
     if (iVar1 == 0) {
       format_string = "invalid whilte list json ! \n";
     }
@@ -51,8 +51,8 @@ void handle_whitelist_app_from_app
     *(undefined1 *)(response_buffer + 1) = 0xca;
   }
 LAB_0003570e:
-  call_data_verification_handler_with_memory_cleanup(DAT_20009fbc);
-  DAT_20009fbc = 0;
+  call_data_verification_handler_with_memory_cleanup(WHITELIST_APPLICATION_MANAGEMENT);
+  WHITELIST_APPLICATION_MANAGEMENT = 0;
 LAB_00035718:
                     /* WARNING: Could not recover jumptable at 0x00035722. Too many branches */
                     /* WARNING: Treating indirect jump as call */

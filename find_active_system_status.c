@@ -12,7 +12,7 @@ uint find_active_system_status(void)
   undefined4 *puVar2;
   
   uVar1 = 9;
-  puVar2 = &DAT_20007dac;
+  puVar2 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY;
   do {
     if (*(char *)((int)puVar2 + 0xf63) != '\0') {
       TIMEOUT_MESSAGE_STATE = (char)uVar1;

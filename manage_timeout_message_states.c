@@ -16,7 +16,7 @@ undefined1 manage_timeout_message_states(void)
   bVar1 = *(byte *)(iVar3 + 0xdd);
   if (bVar1 != 0) {
     iVar3 = bVar1 - 1;
-    if ((&DAT_20007db0)[iVar3 * 0x6d] != 0) {
+    if ((&TIMEOUT_MESSAGE_STATE_TABLE)[iVar3 * 0x6d] != 0) {
       clear_timeout_message(1);
       if (iVar3 == 0) {
         TIMEOUT_MESSAGE_STATE = '\0';

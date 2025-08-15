@@ -30,7 +30,7 @@ undefined4 manage_dashboard_ui_operations(int framebuffer_ptr,undefined4 param_2
   iVar3 = get_work_mode();
   iVar11 = iVar3 + 0xef;
   set_work_mode_parameter(framebuffer_ptr + 0x24);
-  if (DAT_20004950 == '\0') {
+  if (DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY == '\0') {
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT(&LAB_000a9242_1,&LAB_000a957c_1);
@@ -50,7 +50,7 @@ undefined4 manage_dashboard_ui_operations(int framebuffer_ptr,undefined4 param_2
         }
       }
       gui_screen_clear();
-      fill_memory_buffer(&DAT_20004950,0,0x28);
+      fill_memory_buffer(&DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY,0,0x28);
       goto LAB_0003affc;
     }
     if ((operation_mode != 1) || (DAT_20004959 != '\0')) goto LAB_0003b198;
@@ -63,17 +63,18 @@ undefined4 manage_dashboard_ui_operations(int framebuffer_ptr,undefined4 param_2
       }
     }
     send_event_status(0x1e);
-    fill_memory_buffer(&DAT_20004950,0,0x28);
+    fill_memory_buffer(&DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY,0,0x28);
     gui_screen_clear();
     DAT_20004959 = '\x01';
     DASHBOARD_WIDGET_MODE = *(undefined1 *)(iVar3 + 0x155);
     uVar4 = (uint)WORK_MODE_FLAGS;
-    CURRENT_STOCK_INDEX = DAT_2001b816;
-    CURRENT_STOCK_ID = DAT_2001b815;
+    CURRENT_STOCK_INDEX = SYSTEM_PARAMETER_AND_WORK_MODE_STATUS;
+    CURRENT_STOCK_ID = SYSTEM_PARAMETER_LOGGING_BUFFER;
     CURRENT_NEWS_INDEX = WORK_MODE_FLAGS;
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
-        DEBUG_PRINT(&LAB_000a92b0,&LAB_000a957c_1,(uint)DAT_2001b816,(uint)DAT_2001b815,uVar4);
+        DEBUG_PRINT(&LAB_000a92b0,&LAB_000a957c_1,(uint)SYSTEM_PARAMETER_AND_WORK_MODE_STATUS,
+                    (uint)SYSTEM_PARAMETER_LOGGING_BUFFER,uVar4);
       }
       else {
         handle_heartbeat(&LAB_000a92b0);
@@ -195,9 +196,9 @@ LAB_0003b116:
     set_work_mode_flag_bit_1();
     lVar13 = calculate_ble_connection_timing_with_validation();
     uVar4 = (uint)((ulonglong)(lVar13 * 1000) >> 0x20);
-    DAT_20004960 = (uint)(lVar13 * 1000) >> 0xf | uVar4 * 0x20000;
+    DASHBOARD_UI_OPERATION_STATE = (uint)(lVar13 * 1000) >> 0xf | uVar4 * 0x20000;
     DAT_20004964 = uVar4 >> 0xf;
-    DAT_20004950 = '\x01';
+    DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY = '\x01';
     set_parameter_with_bounds_check(0x42);
     process_timeout_message_state_and_send_response();
 LAB_0003b198:
@@ -224,7 +225,7 @@ LAB_0003b198:
     DASHBOARD_LOCK_CONTROL = DASHBOARD_LOCK_CONTROL | 2;
     return 0;
   }
-  if (DAT_20004950 != '\x01') {
+  if (DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY != '\x01') {
     return 0;
   }
   uVar4 = dereference_pointer(&DASHBOARD_LOCK_STATUS);
@@ -333,7 +334,7 @@ LAB_0003b742:
           CURRENT_STOCK_INDEX =
                (CURRENT_STOCK_INDEX + 1) -
                STOCK_DATA_COUNT * ((byte)(CURRENT_STOCK_INDEX + 1) / STOCK_DATA_COUNT);
-          DAT_2001b816 = CURRENT_STOCK_INDEX;
+          SYSTEM_PARAMETER_AND_WORK_MODE_STATUS = CURRENT_STOCK_INDEX;
           set_system_byte_69();
           if (2 < LOG_LEVEL) {
             uVar4 = (uint)CURRENT_STOCK_INDEX;
@@ -349,7 +350,7 @@ LAB_0003b742:
                    uVar4 * ((byte)(CURRENT_STOCK_ID + 1) / uVar4);
           uVar4 = uVar10 & 0xff;
           CURRENT_STOCK_ID = (byte)uVar10;
-          DAT_2001b815 = CURRENT_STOCK_ID;
+          SYSTEM_PARAMETER_LOGGING_BUFFER = CURRENT_STOCK_ID;
           if (2 < LOG_LEVEL) {
             puVar7 = (undefined1 *)0xa94e9;
 LAB_0003b614:
@@ -393,8 +394,8 @@ LAB_0003b512:
           if (DAT_2000495b != '\0') {
             return 0;
           }
-          if ((int)((uVar10 - DAT_20004964) - (uint)(uVar4 < DAT_20004960)) <
-              (int)(uint)(uVar4 - DAT_20004960 < 0x5dd)) {
+          if ((int)((uVar10 - DAT_20004964) - (uint)(uVar4 < DASHBOARD_UI_OPERATION_STATE)) <
+              (int)(uint)(uVar4 - DASHBOARD_UI_OPERATION_STATE < 0x5dd)) {
             return 0;
           }
         }
@@ -406,8 +407,8 @@ LAB_0003b512:
           if (DAT_2000495b != '\0') {
             return 0;
           }
-          if ((int)((uVar10 - DAT_20004964) - (uint)(uVar4 < DAT_20004960)) <
-              (int)(uint)(uVar4 - DAT_20004960 < 0x5dd)) {
+          if ((int)((uVar10 - DAT_20004964) - (uint)(uVar4 < DASHBOARD_UI_OPERATION_STATE)) <
+              (int)(uint)(uVar4 - DASHBOARD_UI_OPERATION_STATE < 0x5dd)) {
             return 0;
           }
         }
@@ -428,9 +429,9 @@ LAB_0003b512:
   }
   send_event_status(0x1f);
   animate_framebuffer_with_pattern();
-  fill_memory_buffer(&DAT_20004950,0,0x28);
+  fill_memory_buffer(&DASHBOARD_UI_OPERATIONS_AND_STATUS_DISPLAY,0,0x28);
 LAB_0003affc:
-  DAT_20007aa0 = DAT_20007aa0 & 0xfffffffd;
+  DASHBOARD_LOCK_INFO_STORAGE = DASHBOARD_LOCK_INFO_STORAGE & 0xfffffffd;
   exit_dashboard_burial_point();
   return 0;
 }

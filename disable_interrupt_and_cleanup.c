@@ -28,7 +28,7 @@ undefined4 disable_interrupt_and_cleanup(uint param_1,uint param_2)
     }
     clear_callback_state_and_update_bitmap(param_1);
     iVar2 = calculate_bit_offset_with_lookup(param_1);
-    *(undefined2 *)((int)&DAT_20002bc0 + (iVar2 + 8) * 2) = 0;
+    *(undefined2 *)((int)&INTERRUPT_CONFIGURATION_BITMAP_ARRAY + (iVar2 + 8) * 2) = 0;
     local_c = param_1;
     iVar2 = process_data_with_validation_and_error_handling(&local_c);
     iVar2 = iVar2 + local_c * 4;

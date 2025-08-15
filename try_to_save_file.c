@@ -23,16 +23,17 @@ void try_to_save_file(int param_1)
   byte local_2c;
   
   handle_message_dequeue_alt2(&local_f4);
-  uVar1 = DAT_200079dc;
-  uVar2 = DAT_200079d8;
+  uVar1 = FILE_STORAGE_BUFFER_MANAGEMENT;
+  uVar2 = FILE_STORAGE_BUFFER;
   uVar5 = (uint)local_2c;
   if (((uVar5 < 0x15) && (local_f4 == '\r')) && (local_f3 == '\x0e')) {
-    if ((DAT_200079d4 == 0x1c0000) && (0x1fffff < DAT_200079dc)) {
+    if ((FILE_STORAGE_COMMIT_STATE == 0x1c0000) && (0x1fffff < FILE_STORAGE_BUFFER_MANAGEMENT)) {
       return;
     }
-    if (DAT_200079d8 < 0x1000) {
-      handle_retry_data_verification(DAT_200079dc,&DAT_20017062);
-      CRC32_CHECKSUM_VALUE = calculate_crc32(CRC32_CHECKSUM_VALUE,&DAT_20017062,DAT_200079d8);
+    if (FILE_STORAGE_BUFFER < 0x1000) {
+      handle_retry_data_verification(FILE_STORAGE_BUFFER_MANAGEMENT,&DAT_20017062);
+      CRC32_CHECKSUM_VALUE = calculate_crc32(CRC32_CHECKSUM_VALUE,&DAT_20017062,FILE_STORAGE_BUFFER)
+      ;
       if (LOG_LEVEL < 1) {
         return;
       }
@@ -45,12 +46,12 @@ void try_to_save_file(int param_1)
     }
   }
   else {
-    if (DAT_200079dc == 0) {
+    if (FILE_STORAGE_BUFFER_MANAGEMENT == 0) {
       local_f8 = CONCAT31(CONCAT21(CONCAT11(local_f3,local_f2),local_f1),local_f0);
-      DAT_200079dc = local_f8;
+      FILE_STORAGE_BUFFER_MANAGEMENT = local_f8;
       CRC32_CHECKSUM_VALUE = calculate_crc32(CRC32_CHECKSUM_VALUE,&local_f3,4);
       if (local_f8 == 0x1c0000) {
-        DAT_200079d4 = local_f8;
+        FILE_STORAGE_COMMIT_STATE = local_f8;
         iVar4 = get_work_mode();
         **(undefined1 **)(iVar4 + 0x100c) = 0xc;
         iVar4 = get_work_mode();
@@ -62,24 +63,24 @@ void try_to_save_file(int param_1)
           update_persist_task_status(uVar3,0x10,2);
         }
       }
-      uVar1 = DAT_200079d8;
-      memcpy(&DAT_20017062 + DAT_200079d8,auStack_ef,uVar5 - 5);
+      uVar1 = FILE_STORAGE_BUFFER;
+      memcpy(&DAT_20017062 + FILE_STORAGE_BUFFER,auStack_ef,uVar5 - 5);
       iVar4 = uVar1 - 5;
-      uVar1 = DAT_200079dc;
+      uVar1 = FILE_STORAGE_BUFFER_MANAGEMENT;
     }
     else {
-      memcpy(&DAT_20017062 + DAT_200079d8,&local_f3,uVar5 - 1);
+      memcpy(&DAT_20017062 + FILE_STORAGE_BUFFER,&local_f3,uVar5 - 1);
       iVar4 = uVar2 - 1;
     }
-    DAT_200079d8 = iVar4 + uVar5;
-    if ((DAT_200079d4 == 0x1c0000) && (0x1fffff < uVar1)) {
+    FILE_STORAGE_BUFFER = iVar4 + uVar5;
+    if ((FILE_STORAGE_COMMIT_STATE == 0x1c0000) && (0x1fffff < uVar1)) {
       return;
     }
-    if (DAT_200079d8 < 0x1000) {
+    if (FILE_STORAGE_BUFFER < 0x1000) {
       return;
     }
   }
-  handle_retry_data_verification(DAT_200079dc,&DAT_20017062,0x1000);
+  handle_retry_data_verification(FILE_STORAGE_BUFFER_MANAGEMENT,&DAT_20017062,0x1000);
   CRC32_CHECKSUM_VALUE = calculate_crc32(CRC32_CHECKSUM_VALUE,&DAT_20017062,0x1000);
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
@@ -89,10 +90,10 @@ void try_to_save_file(int param_1)
       handle_heartbeat();
     }
   }
-  DAT_200079dc = DAT_200079dc + 0x1000;
-  iVar4 = DAT_200079d8 - 0x1000;
+  FILE_STORAGE_BUFFER_MANAGEMENT = FILE_STORAGE_BUFFER_MANAGEMENT + 0x1000;
+  iVar4 = FILE_STORAGE_BUFFER - 0x1000;
   validate_memory_bounds(&DAT_20017062,&DAT_20018062,iVar4,0x1400);
-  DAT_200079d8 = iVar4;
+  FILE_STORAGE_BUFFER = iVar4;
   return;
 }
 

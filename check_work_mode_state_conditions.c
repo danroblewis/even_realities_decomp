@@ -15,9 +15,9 @@ void check_work_mode_state_conditions(void)
         (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 2) == '\x13')) ||
        (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 2) == '\x14')) ||
       (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 2) == '\x15')) &&
-     ((DAT_2001cdce == '\x02' &&
+     ((WORK_MODE_STATE_AND_UI_CONFIGURATION == '\x02' &&
       (iVar1 = get_work_mode(), *(char *)(*(int *)(iVar1 + 0x1014) + 3) == '\x01')))) {
-    DAT_2001cdd1 = 1;
+    WORK_MODE_STATE_VALIDATION_FLAGS = 1;
   }
   return;
 }

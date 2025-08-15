@@ -60,7 +60,7 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
       if (iVar7 == 0x500) break;
       iVar7 = 0x500;
     }
-    if ((OVERVIEW_MAP_ACTIVE == '\x01') && (DAT_2001ba2d == '\0')) {
+    if ((OVERVIEW_MAP_ACTIVE == '\x01') && (NAVIGATION_MAP_DISPLAY_STATE_DATA == '\0')) {
       if (*(int *)(param_2 + 0xb1) == 0x1210) {
         if (2 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
@@ -89,7 +89,7 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
         copy_navigation_map_data_with_pattern_filling
                   (&overview_map_buffer,*(uint *)(param_2 + 0xb1),0x2001ba2e,fill_param);
       }
-      DAT_2001ba2d = '\x01';
+      NAVIGATION_MAP_DISPLAY_STATE_DATA = '\x01';
       mutex_unlock(&WORK_MODE_CONTEXT);
     }
     clear_work_mode_flag_bit_1();
@@ -228,7 +228,7 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
       copy_navigation_map_data_with_pattern_filling
                 (&overview_map_buffer,*(uint *)(param_2 + 0xb1),0x2001ba2e,fill_param_00);
     }
-    DAT_2001ba2d = '\x01';
+    NAVIGATION_MAP_DISPLAY_STATE_DATA = '\x01';
     mutex_unlock(&WORK_MODE_CONTEXT);
 LAB_0003e56c:
     iVar7 = get_ui_x_offset();
@@ -238,7 +238,7 @@ LAB_0003e56c:
     gui_bitmps_merge_draw
               (iVar7 + 0x1b6,uVar8,iVar2 + 0x240,iVar6 + 0x88,&display_buffer,&DAT_2001c336,2,0xf);
   }
-  else if (DAT_2001ba2d == '\x01') goto LAB_0003e56c;
+  else if (NAVIGATION_MAP_DISPLAY_STATE_DATA == '\x01') goto LAB_0003e56c;
   OVERVIEW_MAP_READY = '\0';
 LAB_0003e644:
   if (NAVIGATION_ACTIVE == '\x01') {

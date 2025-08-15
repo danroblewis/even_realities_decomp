@@ -28,20 +28,20 @@ int handle_complex_data_processing_alt
       uVar4 = (uint)local_18._2_1_;
       DAT_20007a16 = local_18._2_1_;
       if (uVar4 == 0) {
-        DAT_20007a20 = 8;
+        BLE_DATA_PROCESSING_BUFFER = 8;
         uVar4 = (uStack_14._2_2_ & 0xff) << 8 | (uint)(uStack_14._2_2_ >> 8);
         sVar1 = (short)uVar4;
       }
       else {
-        DAT_20007a20 = 4;
+        BLE_DATA_PROCESSING_BUFFER = 4;
       }
       DAT_20007a15 = local_18._1_1_;
       DAT_20007a14 = (char)local_18;
       DAT_20007a17 = local_18._3_1_;
       DAT_20007a1a = sVar1;
       while ((iVar2 = send_control_message_with_retry_and_mutex
-                                (SYSTEM_CONFIGURATION_PARAMETER,DAT_20007a20,&local_1c,4,param_1),
-             iVar2 == 0 && (DAT_20007a20 < uVar4))) {
+                                (SYSTEM_CONFIGURATION_PARAMETER,BLE_DATA_PROCESSING_BUFFER,&local_1c
+                                 ,4,param_1), iVar2 == 0 && (BLE_DATA_PROCESSING_BUFFER < uVar4))) {
         if ((local_1c & 0xff) == 3) {
           if (local_1c._1_1_ == 0) {
             local_1c._0_1_ = 1;
@@ -57,7 +57,7 @@ int handle_complex_data_processing_alt
         if (uVar3 == 0xff) {
           uVar3 = local_1c >> 0x10;
         }
-        DAT_20007a20 = DAT_20007a20 + uVar3;
+        BLE_DATA_PROCESSING_BUFFER = BLE_DATA_PROCESSING_BUFFER + uVar3;
       }
     }
     iVar2 = -5;

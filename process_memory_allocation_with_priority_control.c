@@ -41,36 +41,45 @@ uint process_memory_allocation_with_priority_control(void)
       goto LAB_0004bef2;
     }
     update_connection_state_flags(&DAT_2000365c);
-    if (((DAT_20003658 & 8) != 0) || (uVar4 = DAT_2000364c, DAT_2000364c < DAT_20003650)) {
+    if (((DAT_20003658 & 8) != 0) ||
+       (uVar4 = DAT_2000364c, DAT_2000364c < MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE)) {
       uVar4 = DAT_2000366c;
     }
-    if (uVar4 == DAT_20003650) {
+    if (uVar4 == MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE) {
       uVar4 = 0;
       uVar10 = uVar4;
     }
     else {
-      bVar1 = *(byte *)(DAT_20003668 + DAT_20003650 * 4);
+      bVar1 = *(byte *)(MEMORY_ALLOCATION_PRIORITY_CONTROL +
+                       MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE * 4);
       uVar7 = (uint)bVar1;
-      uVar9 = DAT_20003668 + DAT_20003650 * 4;
+      uVar9 = MEMORY_ALLOCATION_PRIORITY_CONTROL + MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE * 4;
       uVar4 = uVar7 & 3;
       uVar10 = uVar4;
       if ((bVar1 & 3) != 0) {
         uVar10 = uVar9;
-        if ((uVar4 != 2) || (uVar4 = *(uint *)(DAT_20003668 + DAT_20003650 * 4) >> 2, uVar4 == 0)) {
+        if ((uVar4 != 2) ||
+           (uVar4 = *(uint *)(MEMORY_ALLOCATION_PRIORITY_CONTROL +
+                             MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE * 4) >> 2, uVar4 == 0)) {
           if ((int)(uVar7 << 0x1f) < 0) {
-            *(byte *)(DAT_20003668 + DAT_20003650 * 4) = bVar1 | 2;
-            uVar3 = DAT_20003650;
+            *(byte *)(MEMORY_ALLOCATION_PRIORITY_CONTROL +
+                     MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE * 4) = bVar1 | 2;
+            uVar3 = MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE;
             uVar6 = (*DAT_20003664)(uVar9);
-            DAT_20003650 = calculate_buffer_offset_with_wrapping(&DAT_20003648,uVar3,uVar6);
+            MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE =
+                 calculate_buffer_offset_with_wrapping
+                           (&MEMORY_ALLOCATION_BUFFER_MANAGER,uVar3,uVar6);
             uVar4 = 0;
             goto LAB_0004bf52;
           }
           uVar4 = (*DAT_20003664)(uVar9);
           uVar7 = extraout_r3;
         }
-        DAT_20003650 = calculate_buffer_offset_with_wrapping
-                                 (&DAT_20003648,DAT_20003650,uVar4,uVar7,in_r3);
-        update_buffer_write_position(&DAT_20003648,uVar4);
+        MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE =
+             calculate_buffer_offset_with_wrapping
+                       (&MEMORY_ALLOCATION_BUFFER_MANAGER,MEMORY_ALLOCATION_MANAGEMENT_STRUCTURE,
+                        uVar4,uVar7,in_r3);
+        update_buffer_write_position(&MEMORY_ALLOCATION_BUFFER_MANAGER,uVar4);
         uVar4 = uVar3;
       }
     }

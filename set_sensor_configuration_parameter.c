@@ -9,10 +9,10 @@ undefined4 set_sensor_configuration_parameter(int param_1)
 
 {
   if (param_1 != 0) {
-    if (DAT_20002428 != param_1) {
-      DAT_20002428 = param_1;
+    if (SENSOR_CONFIGURATION_PARAMETER_STORAGE != param_1) {
+      SENSOR_CONFIGURATION_PARAMETER_STORAGE = param_1;
     }
-    DAT_2000242c = 1;
+    SENSOR_CONFIGURATION_PARAMETERS = 1;
     return 0;
   }
   return 0xffffffff;

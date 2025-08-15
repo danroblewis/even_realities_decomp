@@ -13,7 +13,7 @@ void log_timeout_message_states_for_debugging
   undefined4 *puVar2;
   
   iVar1 = 0;
-  puVar2 = &DAT_20007dac;
+  puVar2 = &TIMEOUT_MESSAGE_STATE_MANAGEMENT_ARRAY;
   do {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("normal g_arrMsgContent[%d].uidTail is %d %d recvTime %d\n",iVar1,puVar2[2],

@@ -15,13 +15,13 @@ uint process_system_tasks_with_priority_management(int task_mode,int timing_flag
   int *piVar3;
   uint uVar4;
   
-  piVar3 = &DAT_000882a0;
+  piVar3 = &SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE;
   iVar1 = increment_counter(&DAT_2000a0dc);
   if (iVar1 == 0) {
     uVar2 = 0;
     uVar4 = 0;
     while( true ) {
-      if (&DAT_000882b0 < piVar3) {
+      if (&BUFFER_STRUCTURE_INITIALIZATION_CONFIG < piVar3) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","backend <= _log_backend_list_end",
                      "WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x126);
         DEBUG_PRINT2("\tunexpected list end location\n");

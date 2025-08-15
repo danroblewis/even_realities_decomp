@@ -14,7 +14,7 @@ undefined4 initialize_buffer_structure_with_context(undefined4 *param_1,undefine
   undefined4 uVar4;
   undefined8 uVar5;
   
-  ppuVar2 = (undefined **)&DAT_000882b0;
+  ppuVar2 = (undefined **)&BUFFER_STRUCTURE_INITIALIZATION_CONFIG;
   while( true ) {
     if (&PTR_LAB_00051fd8_1_00088328 < ppuVar2) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","ch <= _settings_handler_static_list_end",
@@ -32,7 +32,7 @@ undefined4 initialize_buffer_structure_with_context(undefined4 *param_1,undefine
     ppuVar2 = ppuVar2 + 5;
   }
   resource_mutex_acquire(&DAT_20003868,param_2,0xffffffff,0xffffffff);
-  puVar3 = DAT_2000a10c;
+  puVar3 = BUFFER_STRUCTURE_CALLBACK_CONFIGURATION;
   do {
     if (puVar3 == (undefined4 *)0x0) {
       param_1[5] = 0;
@@ -40,9 +40,9 @@ undefined4 initialize_buffer_structure_with_context(undefined4 *param_1,undefine
       puVar3 = param_1;
       if (DAT_2000a110 != (undefined4 *)0x0) {
         *DAT_2000a110 = param_1;
-        puVar3 = DAT_2000a10c;
+        puVar3 = BUFFER_STRUCTURE_CALLBACK_CONFIGURATION;
       }
-      DAT_2000a10c = puVar3;
+      BUFFER_STRUCTURE_CALLBACK_CONFIGURATION = puVar3;
       uVar4 = 0;
       DAT_2000a110 = param_1;
 LAB_0004e502:
