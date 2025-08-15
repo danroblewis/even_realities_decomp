@@ -55,13 +55,13 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
       param_2[0xc] = '\t';
       param_2[3] = '\0';
       if (*(uint *)(param_1 + 8) < 500) {
-        if (DAT_20018c65 != '\0') {
+        if (ADC_NFC_SENSOR_DATA_AND_STATE != '\0') {
           return;
         }
-        DAT_20018c65 = 1;
+        ADC_NFC_SENSOR_DATA_AND_STATE = 1;
         return;
       }
-      DAT_20018c65 = '\0';
+      ADC_NFC_SENSOR_DATA_AND_STATE = '\0';
     }
     DAT_20007a00 = calculate_ble_connection_timing_with_validation();
   }

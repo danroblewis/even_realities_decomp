@@ -66,12 +66,12 @@ route_ui_tasks(int ui_context_ptr,int screen_id,undefined4 task_param,uint opera
       }
       UI_TASK_ROUTING_AND_STATE_MANAGEMENT = 0xff;
       UI_TASK_ROUTING_STATE = 0xff;
-      if (DAT_2001b80f == '\0') {
+      if (FRAMEBUFFER_PROCESSING_FLAG == '\0') {
         gui_screen_clear();
       }
       else {
         animate_framebuffer_with_pattern_alt();
-        DAT_2001b80f = '\0';
+        FRAMEBUFFER_PROCESSING_FLAG = '\0';
       }
 LAB_0003606c:
       MESSAGE_CONFIRMATION_FLAG = 0;
@@ -107,9 +107,9 @@ LAB_0003606c:
       }
       else {
         if (*(char *)(local_24 + 0xe) != '\0') {
-          if (DAT_2001b80e != '\0') {
+          if (MESSAGE_PROCESSING_ACTIVE_FLAG != '\0') {
             process_framebuffer_with_ui_overlay(ui_context_ptr + 0xb90,uVar13);
-            DAT_2001b80e = '\0';
+            MESSAGE_PROCESSING_ACTIVE_FLAG = '\0';
           }
           render_ui_data_entry_display(uVar13,local_24);
           UI_TASK_ROUTING_AND_STATE_MANAGEMENT = (byte)uVar15;
@@ -946,8 +946,8 @@ switchD_0003f438_caseD_4:
             iVar8 = get_ui_x_offset();
             iVar9 = get_ui_y_offset();
             gui_utf_draw(0,&local_34,3,uVar12,iVar7 + 0x6e,iVar8 + 0x50,iVar9 + 0x89,1,0,0,0,0);
-            DAT_2000f6fd = *(byte *)(iVar11 + 0xf0);
-            DAT_2000f6fc = *(byte *)(iVar11 + 0xef);
+            UI_TASK_ROUTING_STATE_2 = *(byte *)(iVar11 + 0xf0);
+            UI_TASK_ROUTING_STATE_1 = *(byte *)(iVar11 + 0xef);
           }
           else if (0 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {
@@ -1090,7 +1090,8 @@ LAB_00040162:
     if (uVar15 < 0x13) {
       uVar13 = *(byte *)(iVar11 + 0xef) - 1;
       if (((uVar13 & 0xff) < 0x12) && (uVar15 != 0)) {
-        if ((DAT_2000f6fd != uVar15) || ((uint)DAT_2000f6fc != (uint)*(byte *)(iVar11 + 0xef))) {
+        if ((UI_TASK_ROUTING_STATE_2 != uVar15) ||
+           ((uint)UI_TASK_ROUTING_STATE_1 != (uint)*(byte *)(iVar11 + 0xef))) {
           local_34 = 0;
           local_30 = 0;
           local_2c = local_2c & 0xffff0000;
@@ -1110,8 +1111,8 @@ LAB_00040162:
           iVar7 = get_ui_x_offset();
           iVar8 = get_ui_y_offset();
           gui_utf_draw(0,&local_34,3,uVar12,y_offset + 0x6e,iVar7 + 0x50,iVar8 + 0x89,1,0,0,0,0);
-          DAT_2000f6fd = *(byte *)(iVar11 + 0xf0);
-          DAT_2000f6fc = *(byte *)(iVar11 + 0xef);
+          UI_TASK_ROUTING_STATE_2 = *(byte *)(iVar11 + 0xf0);
+          UI_TASK_ROUTING_STATE_1 = *(byte *)(iVar11 + 0xef);
         }
         goto LAB_0004027a;
       }

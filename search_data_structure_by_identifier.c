@@ -11,9 +11,9 @@ undefined4 search_data_structure_by_identifier(undefined4 param_1,undefined4 *pa
   int iVar1;
   undefined4 *puVar2;
   
-  puVar2 = DAT_2000b42c;
+  puVar2 = LINKED_LIST_DATA_STRUCTURE_IDENTIFIER;
   while( true ) {
-    if ((undefined4 **)puVar2 == &DAT_2000b42c) {
+    if ((undefined4 **)puVar2 == &LINKED_LIST_DATA_STRUCTURE_IDENTIFIER) {
       return 0xfffffffe;
     }
     iVar1 = compare_byte_arrays(puVar2[-9],param_1);

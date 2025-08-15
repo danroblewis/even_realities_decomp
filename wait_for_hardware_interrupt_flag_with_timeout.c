@@ -12,11 +12,11 @@ undefined4 wait_for_hardware_interrupt_flag_with_timeout(void)
 {
   undefined **ppuVar1;
   
-  if (DAT_2000b37c == 0) {
+  if (HARDWARE_INTERRUPT_FLAG_TIMEOUT == 0) {
     ppuVar1 = &PTR_LAB_00050394_1_0000c350;
   }
   else {
-    ppuVar1 = (undefined **)((uint)(DAT_2000b37c * 1000) / 10);
+    ppuVar1 = (undefined **)((uint)(HARDWARE_INTERRUPT_FLAG_TIMEOUT * 1000) / 10);
   }
   while ((_DAT_5002b100 == 0 && (HARDWARE_INTERRUPT_FLAG_REGISTER == '\0'))) {
     handle_ble_uart_packet_processing_completion(10);

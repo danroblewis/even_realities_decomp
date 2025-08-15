@@ -36,7 +36,8 @@ manage_hardware_timer
   puVar5 = extraout_r2;
   if (param_4 < uVar3 || uVar3 - param_4 < (uint)(param_3 <= uVar2)) {
     if (param_7 == '\0') {
-      DAT_2000b2d0 = DAT_2000b2d0 | 1 << (param_1 & 0xff);
+      HARDWARE_TIMER_INTERRUPT_CONFIGURATION =
+           HARDWARE_TIMER_INTERRUPT_CONFIGURATION | 1 << (param_1 & 0xff);
       goto LAB_0006374a;
     }
   }

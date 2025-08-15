@@ -8,7 +8,7 @@
 void set_framebuffer_processing_flag(void)
 
 {
-  DAT_2001b80f = 1;
+  FRAMEBUFFER_PROCESSING_FLAG = 1;
   return;
 }
 

@@ -8,7 +8,7 @@
 void reset_sensor_system_status(void)
 
 {
-  DAT_20019dae = 0;
+  SENSOR_SYSTEM_STATUS_MANAGEMENT = 0;
   return;
 }
 

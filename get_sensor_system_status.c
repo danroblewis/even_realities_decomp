@@ -8,7 +8,7 @@
 undefined1 get_sensor_system_status(void)
 
 {
-  return DAT_20019dae;
+  return SENSOR_SYSTEM_STATUS_MANAGEMENT;
 }
 
 

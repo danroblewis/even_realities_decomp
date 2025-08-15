@@ -17,11 +17,11 @@ int check_device_capabilities_and_state
     handle_ble_connection_state_and_status_flags();
     z_spin_lock_valid(iVar2 + 0x48);
     iVar1 = 0;
-    if (DAT_2001d535 == '\0') {
+    if (DEVICE_CAPABILITIES_AND_STATE_MANAGEMENT == '\0') {
       initialize_hardware_configuration
                 (*(undefined4 *)(param_1 + 4),&LAB_000838ca_1,iVar2,0,param_4);
       iVar1 = lookup_device_property_from_table();
-      DAT_2001d535 = iVar1 == 0;
+      DEVICE_CAPABILITIES_AND_STATE_MANAGEMENT = iVar1 == 0;
     }
     manage_device_state_with_spin_lock_validation(param_1);
   }

@@ -34,7 +34,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
   
   calculate_address_with_offset_0x1c();
   puVar1 = (undefined4 *)validate_data_structures_and_calculate_offset();
-  puVar6 = &DAT_000887b7;
+  puVar6 = &DATA_STATE_MANAGEMENT_ALT_CONFIG;
   uVar7 = *puVar1;
   puVar1 = local_34;
   do {
@@ -48,7 +48,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
   *(undefined1 *)puVar1 = 0x79;
   iVar3 = compare_data_structures(uVar7,local_34);
   if (iVar3 == 0) {
-    puVar6 = &DAT_000887c8;
+    puVar6 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT;
     *param_2 = 0;
     param_2[1] = 0;
     param_2[2] = 0;
@@ -66,7 +66,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
     *(undefined1 *)puVar1 = 0x69;
     iVar3 = process_data_with_validation_and_retry_alt(param_1,local_98);
     if (iVar3 != 0) {
-      puVar6 = &DAT_000887c8;
+      puVar6 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT;
       puVar1 = local_84;
       do {
         uVar7 = *puVar6;
@@ -80,7 +80,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
       iVar3 = search_for_matching_data_structure_entry(param_1,iVar3,local_84);
       if (iVar3 != 0) {
         *(undefined2 *)(param_2 + 2) = *(undefined2 *)(iVar3 + 4);
-        puVar6 = &DAT_000887d9;
+        puVar6 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT_EXTENDED;
         puVar1 = local_70;
         do {
           uVar7 = *puVar6;
@@ -93,7 +93,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
         *(undefined1 *)puVar1 = 0x9f;
         iVar3 = process_data_with_validation_and_retry_alt(param_1,local_70);
         if (iVar3 != 0) {
-          puVar6 = &DAT_000887d9;
+          puVar6 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT_EXTENDED;
           puVar1 = local_5c;
           do {
             uVar7 = *puVar6;
@@ -112,7 +112,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
             iVar3 = search_for_matching_data_structure_entry(param_1,iVar3,local_a0);
             if (iVar3 != 0) {
               *(undefined2 *)(param_2 + 3) = *(undefined2 *)(iVar3 + 4);
-              puVar6 = &DAT_000887ea;
+              puVar6 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT_COMPREHENSIVE;
               puVar1 = local_48;
               do {
                 uVar7 = *puVar6;
@@ -125,7 +125,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
               *(undefined1 *)puVar1 = 0x22;
               iVar3 = process_data_with_validation_and_retry_alt(param_1,local_48);
               if (iVar3 != 0) {
-                puVar6 = &DAT_000887ea;
+                puVar6 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT_COMPREHENSIVE;
                 puVar1 = local_34;
                 do {
                   uVar7 = *puVar6;

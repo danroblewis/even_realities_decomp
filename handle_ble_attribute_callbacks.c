@@ -21,7 +21,7 @@ void handle_ble_attribute_callbacks(uint param_1,code *param_2,undefined4 param_
                     /* WARNING: Subroutine does not return */
     trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xa0);
   }
-  if ((DAT_2000af5a != 0) && (BLE_ATTRIBUTE_TABLE == param_1)) {
+  if ((BLE_ATTRIBUTE_PROPERTIES_AND_CALLBACKS != 0) && (BLE_ATTRIBUTE_TABLE == param_1)) {
     local_20 = DAT_2000af4d;
     local_1c._3_1_ = (undefined1)((uint)param_2 >> 0x18);
     local_1c._0_3_ = CONCAT12(DAT_2000af53,DAT_2000af51);

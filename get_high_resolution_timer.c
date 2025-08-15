@@ -15,8 +15,9 @@ undefined8 get_high_resolution_timer(void)
   bool bVar3;
   
   DataMemoryBarrier(0x1f);
-  uVar1 = _DAT_50015504 + DAT_2000b2dc * 0x1000000;
-  uVar2 = (DAT_2000b2dc >> 8) + (uint)CARRY4(_DAT_50015504,DAT_2000b2dc * 0x1000000);
+  uVar1 = _DAT_50015504 + HIGH_RESOLUTION_TIMER_DATA * 0x1000000;
+  uVar2 = (HIGH_RESOLUTION_TIMER_DATA >> 8) +
+          (uint)CARRY4(_DAT_50015504,HIGH_RESOLUTION_TIMER_DATA * 0x1000000);
   if ((_DAT_50015504 < 0x100000) &&
      (uVar2 <= DAT_200066bc && (uint)(DAT_200066b8 <= uVar1) <= uVar2 - DAT_200066bc)) {
     bVar3 = 0xfeffffff < uVar1;

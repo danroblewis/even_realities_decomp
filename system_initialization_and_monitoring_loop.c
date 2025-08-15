@@ -31,9 +31,10 @@ void system_initialization_and_monitoring_loop
   uStack_28 = param3;
   iVar3 = setup_bluetooth_stack(&DAT_20007b00,0,10,param4,param1);
   if (iVar3 == 0) {
-    DAT_20018d88 = 1;
+    SPIN_LOCK_VALIDATION_AND_SYSTEM_INIT = 1;
   }
-  DEBUG_PRINT("[csh_debug_nfc] g_nfcMsgSemInitOk is %d \n",(uint)DAT_20018d88);
+  DEBUG_PRINT("[csh_debug_nfc] g_nfcMsgSemInitOk is %d \n",
+              (uint)SPIN_LOCK_VALIDATION_AND_SYSTEM_INIT);
   iVar3 = 0;
 LAB_0002a516:
   do {

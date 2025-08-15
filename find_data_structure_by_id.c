@@ -14,7 +14,7 @@ undefined * find_data_structure_by_id(uint param_1,int *param_2,undefined4 *para
   
   iVar2 = 0;
   uVar1 = 0;
-  puVar3 = &DAT_00098fe8;
+  puVar3 = &SYSTEM_MESSAGE_AND_ERROR_HANDLING_56;
   while( true ) {
     if (10 < iVar2) {
       return (undefined *)0x0;

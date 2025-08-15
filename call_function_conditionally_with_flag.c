@@ -8,9 +8,9 @@
 void call_function_conditionally_with_flag(void)
 
 {
-  if (DAT_2001d446 == '\x01') {
+  if (FONT_PARAMETER_FUNCTION_CALLS == '\x01') {
     update_ble_connection_priority_with_magnetometer(DAT_2000a09c,0xfffffff2);
-    DAT_2001d446 = '\0';
+    FONT_PARAMETER_FUNCTION_CALLS = '\0';
   }
   return;
 }

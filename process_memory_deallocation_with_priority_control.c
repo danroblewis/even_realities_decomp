@@ -17,8 +17,8 @@ void process_memory_deallocation_with_priority_control(uint *memory_ptr)
   int iVar7;
   undefined4 uVar8;
   
-  iVar3 = DAT_2000a0cc;
-  iVar4 = (**(code **)(DAT_2000a0cc + 0x1c))(memory_ptr);
+  iVar3 = BLUETOOTH_STACK_PREVIOUS_STATE;
+  iVar4 = (**(code **)(BLUETOOTH_STACK_PREVIOUS_STATE + 0x1c))(memory_ptr);
   iVar7 = iVar3 + 0x14;
   uVar8 = 0;
   bVar1 = (bool)isCurrentModePrivileged();

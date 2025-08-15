@@ -376,8 +376,8 @@ LAB_00014eb8:
       pcVar17 = pcVar13 + (int)pcVar16;
       if (bVar27) {
         uVar28 = float_multiply_64bit
-                           (0,0x3fe00000,(&DAT_00088900)[(int)pcVar13 * 2],
-                            (&DAT_00088904)[(int)pcVar13 * 2]);
+                           (0,0x3fe00000,(&FLOAT_TO_STRING_FORMATTING)[(int)pcVar13 * 2],
+                            (&FLOAT_TO_STRING_FORMATTING_ALT)[(int)pcVar13 * 2]);
         uVar28 = float_add_64bit((int)uVar28,(int)((ulonglong)uVar28 >> 0x20),uVar8,iVar5);
         pcVar13 = pcVar16;
         while( true ) {
@@ -408,8 +408,8 @@ LAB_00014eb8:
         goto LAB_000153dc;
       }
       uVar28 = float_multiply_64bit_alt
-                         ((&DAT_00088900)[(int)pcVar13 * 2],(&DAT_00088904)[(int)pcVar13 * 2],uVar8,
-                          iVar5);
+                         ((&FLOAT_TO_STRING_FORMATTING)[(int)pcVar13 * 2],
+                          (&FLOAT_TO_STRING_FORMATTING_ALT)[(int)pcVar13 * 2],uVar8,iVar5);
       uVar8 = (undefined4)((ulonglong)uVar28 >> 0x20);
       pcVar24 = pcVar16;
       while( true ) {

@@ -15,7 +15,7 @@ int process_memory_management_with_timing_control(void)
   bool bVar5;
   longlong lVar6;
   
-  if (DAT_2001d44b == '\0') {
+  if (TASK_ENTRY_PRIORITY_AND_STATE_INITIALIZATION == '\0') {
     return 0;
   }
   iVar1 = process_memory_allocation_with_priority_control();

@@ -70,8 +70,8 @@ LAB_00047c76:
             uVar9 = 0x14;
           }
           memcpy(&DAT_2001d432,&local_3c,uVar9);
-          DAT_2001d431 = '\x01';
-          DAT_2000ff04 = uVar9;
+          PROXY_THREAD_HANDLER_READ_WRITE_DATA = '\x01';
+          PROXY_THREAD_HANDLER_DATA = uVar9;
           goto LAB_00047c76;
         case 1:
           if (2 < LOG_LEVEL) {
@@ -83,8 +83,8 @@ LAB_00047c76:
               handle_heartbeat();
             }
           }
-          if (DAT_2001d431 != '\0') {
-            iVar3 = (**(code **)(param_1 + 0x788))(&DAT_2001d432,DAT_2000ff04);
+          if (PROXY_THREAD_HANDLER_READ_WRITE_DATA != '\0') {
+            iVar3 = (**(code **)(param_1 + 0x788))(&DAT_2001d432,PROXY_THREAD_HANDLER_DATA);
             if ((iVar3 < 0) && (1 < LOG_LEVEL)) {
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("%s(): Failed to send data over BLE connection: ret = %d \n",
@@ -107,8 +107,8 @@ LAB_00047c76:
                                  "proxy_thread_handler");
               }
             }
-            DAT_2001d431 = '\0';
-            DAT_2000ff04 = 0;
+            PROXY_THREAD_HANDLER_READ_WRITE_DATA = '\0';
+            PROXY_THREAD_HANDLER_DATA = 0;
           }
           goto LAB_00047c76;
         case 2:
@@ -175,8 +175,9 @@ LAB_00047c76:
                 PROXY_THREAD_BUFFER_1 = PROXY_THREAD_BUFFER_1 + '\x01';
                 DAT_2001d268 = 2;
                 iVar3 = 3;
-                DAT_2001d269 = (char)PROXY_THREAD_HANDLER_COMMUNICATION_STATE;
-                DAT_2001d26a = (undefined1)((uint)PROXY_THREAD_HANDLER_COMMUNICATION_STATE >> 8);
+                PROXY_THREAD_HANDLER_STATE_1 = (char)PROXY_THREAD_HANDLER_COMMUNICATION_STATE;
+                PROXY_THREAD_HANDLER_STATE_2 =
+                     (undefined1)((uint)PROXY_THREAD_HANDLER_COMMUNICATION_STATE >> 8);
                 PROXY_THREAD_HANDLER_STATE = PROXY_THREAD_HANDLER_STATE + 1;
                 DAT_2001d26b = (undefined1)PROXY_THREAD_HANDLER_STATE;
                 DAT_2001d26c = (undefined1)((uint)PROXY_THREAD_HANDLER_STATE >> 8);
@@ -264,8 +265,9 @@ LAB_00048082:
             DAT_2001d267 = PROXY_THREAD_BUFFER_1;
             PROXY_THREAD_BUFFER_1 = PROXY_THREAD_BUFFER_1 + '\x01';
             DAT_2001d268 = 2;
-            DAT_2001d269 = (char)PROXY_THREAD_HANDLER_COMMUNICATION_STATE;
-            DAT_2001d26a = (undefined1)((uint)PROXY_THREAD_HANDLER_COMMUNICATION_STATE >> 8);
+            PROXY_THREAD_HANDLER_STATE_1 = (char)PROXY_THREAD_HANDLER_COMMUNICATION_STATE;
+            PROXY_THREAD_HANDLER_STATE_2 =
+                 (undefined1)((uint)PROXY_THREAD_HANDLER_COMMUNICATION_STATE >> 8);
             PROXY_THREAD_HANDLER_STATE = PROXY_THREAD_HANDLER_STATE + 1;
             DAT_2001d26b = (undefined1)PROXY_THREAD_HANDLER_STATE;
             DAT_2001d26c = (undefined1)((uint)PROXY_THREAD_HANDLER_STATE >> 8);
@@ -399,7 +401,7 @@ LAB_00047de2:
             PROXY_THREAD_BUFFER_1 = PROXY_THREAD_BUFFER_1 + '\x01';
             puVar4[4] = 1;
             iVar3 = 0;
-            puVar4 = &DAT_2001d26a;
+            puVar4 = &PROXY_THREAD_HANDLER_STATE_2;
             do {
               iVar5 = iVar3 + 1;
               if (2 < LOG_LEVEL) {
@@ -410,9 +412,10 @@ LAB_00047de2:
                     puVar8 = &UNK_000ef07c;
                   }
                   DEBUG_PRINT("%s(): voice %d %s, timestamp = %d,crc32 = 0x%x start addr = %d,end addr = %d,total audio stream size = %d\n"
-                              ,"proxy_thread_handler",iVar5,puVar8,(&DAT_2001d35f)[iVar3 * 5],
-                              (&DAT_2001d363)[iVar3 * 5],iVar7,(&DAT_2001d35b)[iVar3 * 5],
-                              (&DAT_2001d35b)[iVar3 * 5] - iVar7);
+                              ,"proxy_thread_handler",iVar5,puVar8,
+                              (&PROXY_THREAD_HANDLER_READ_DATA_1)[iVar3 * 5],
+                              (&PROXY_THREAD_HANDLER_READ_DATA_2)[iVar3 * 5],iVar7,
+                              (&DAT_2001d35b)[iVar3 * 5],(&DAT_2001d35b)[iVar3 * 5] - iVar7);
                 }
                 else {
                   puVar8 = &UNK_000ef077;
@@ -420,21 +423,22 @@ LAB_00047de2:
                     puVar8 = &UNK_000ef07c;
                   }
                   handle_heartbeat("%s(): voice %d %s, timestamp = %d,crc32 = 0x%x start addr = %d,end addr = %d,total audio stream size = %d\n"
-                                   ,"proxy_thread_handler",iVar5,puVar8,(&DAT_2001d35f)[iVar3 * 5],
-                                   (&DAT_2001d363)[iVar3 * 5],iVar7,(&DAT_2001d35b)[iVar3 * 5],
-                                   (&DAT_2001d35b)[iVar3 * 5] - iVar7);
+                                   ,"proxy_thread_handler",iVar5,puVar8,
+                                   (&PROXY_THREAD_HANDLER_READ_DATA_1)[iVar3 * 5],
+                                   (&PROXY_THREAD_HANDLER_READ_DATA_2)[iVar3 * 5],iVar7,
+                                   (&DAT_2001d35b)[iVar3 * 5],(&DAT_2001d35b)[iVar3 * 5] - iVar7);
                 }
               }
               puVar11 = puVar4;
               if ((&DAT_2001d353)[iVar3 * 5] == 2) {
                 *puVar4 = (char)iVar5;
-                uVar2 = (&DAT_2001d35f)[iVar3 * 5];
+                uVar2 = (&PROXY_THREAD_HANDLER_READ_DATA_1)[iVar3 * 5];
                 cVar12 = cVar12 + '\x01';
                 puVar4[1] = (char)uVar2;
                 puVar4[2] = (char)((uint)uVar2 >> 8);
                 puVar4[3] = (char)((uint)uVar2 >> 0x10);
                 puVar4[4] = (char)((uint)uVar2 >> 0x18);
-                uVar2 = (&DAT_2001d363)[iVar3 * 5];
+                uVar2 = (&PROXY_THREAD_HANDLER_READ_DATA_2)[iVar3 * 5];
                 puVar11 = puVar4 + 9;
                 puVar4[5] = (char)uVar2;
                 puVar4[6] = (char)((uint)uVar2 >> 8);
@@ -445,7 +449,7 @@ LAB_00047de2:
               puVar4 = puVar11;
             } while (iVar5 != 4);
             PROXY_THREAD_COMMUNICATION_STATE = cVar12 * '\t' + 6;
-            DAT_2001d269 = cVar12;
+            PROXY_THREAD_HANDLER_STATE_1 = cVar12;
             for (iVar3 = 0; iVar3 < (int)(uint)PROXY_THREAD_COMMUNICATION_STATE; iVar3 = iVar3 + 1)
             {
               if (3 < LOG_LEVEL) {

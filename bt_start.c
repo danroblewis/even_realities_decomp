@@ -39,12 +39,12 @@ int bt_start(void)
   DAT_20002360 = 0x14ff;
   iVar6 = get_work_mode();
   if (iVar6 == 1) {
-    DAT_2000ff73 = 1;
+    BT_START_CONFIGURATION = 1;
   }
   else {
-    DAT_2000ff73 = 2;
+    BT_START_CONFIGURATION = 2;
   }
-  DAT_20002364 = &DAT_2000ff73;
+  DAT_20002364 = &BT_START_CONFIGURATION;
   uVar7 = get_system_data();
   safe_string_copy(&DAT_2000ff74,uVar7,0x13);
   iVar6 = get_work_mode();

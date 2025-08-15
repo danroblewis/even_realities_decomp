@@ -31,7 +31,7 @@ void handle_conditional_operation(undefined4 param_1,int param_2)
       clear_system_flags_with_bitwise_and(&ANCS_SECURITY_AND_CONDITIONAL_OPERATIONS,0xfffffffe);
       return;
     }
-    puVar7 = &DAT_00088388;
+    puVar7 = &CONDITIONAL_OPERATION_HANDLER_CONFIG;
     puVar6 = local_2c;
     do {
       uVar3 = *puVar7;

@@ -17,15 +17,15 @@ void load_work_mode_settings(void)
   
   puVar4 = *(undefined4 **)(WORK_MODE + 0xfec);
   DAT_2007fc00 = *puVar4;
-  DAT_2007fc08 = *(undefined4 *)((int)puVar4 + 6);
+  SYSTEM_STATIC_INFO_RESET_1 = *(undefined4 *)((int)puVar4 + 6);
   DAT_2007fc04._0_1_ = *(undefined1 *)(puVar4 + 1);
   DAT_2007fc04._1_1_ = *(undefined1 *)((int)puVar4 + 5);
-  DAT_2007fc0c = *(undefined4 *)((int)puVar4 + 10);
+  SYSTEM_STATIC_INFO_RESET_2 = *(undefined4 *)((int)puVar4 + 10);
   DAT_2007fc5f = *(undefined1 *)((int)puVar4 + 0x5d);
   DAT_2007fc60._0_1_ = *(undefined1 *)((int)puVar4 + 0x5e);
   DAT_2007fc62 = *(undefined1 *)((int)puVar4 + 0x61);
   DAT_2007fc60._1_1_ = *(undefined1 *)(puVar4 + 0x18);
-  puVar2 = &DAT_2007fc10;
+  puVar2 = &SYSTEM_STATIC_INFO_RESET_3;
   puVar5 = (undefined4 *)((int)puVar4 + 0xe);
   do {
     puVar6 = puVar5;
@@ -38,7 +38,7 @@ void load_work_mode_settings(void)
   } while (puVar5 != (undefined4 *)((int)puVar4 + 0x2e));
   puVar3[2] = *puVar5;
   *(undefined1 *)(puVar3 + 3) = *(undefined1 *)(puVar6 + 3);
-  puVar2 = &DAT_2007fc35;
+  puVar2 = &SYSTEM_STATIC_INFO_RESET_4;
   puVar5 = (undefined4 *)((int)puVar4 + 0x33);
   do {
     puVar6 = puVar5 + 1;

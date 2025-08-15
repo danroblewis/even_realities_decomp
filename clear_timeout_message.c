@@ -98,7 +98,7 @@ LAB_00033daa:
     goto LAB_00033dc8;
   }
 LAB_00033e98:
-  if ((&DAT_20007dbc)[iVar4 * 0x1b4] == '\0') {
+  if ((&SYSTEM_ENTRY_TIMEOUT_MANAGEMENT)[iVar4 * 0x1b4] == '\0') {
     iVar7 = iVar7 + 1;
     goto LAB_00033d76;
   }

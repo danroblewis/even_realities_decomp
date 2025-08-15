@@ -123,11 +123,11 @@ LAB_0004eb88:
           local_24 = "Not enough memory for service attribute data.";
           goto LAB_0004eb88;
         }
-        DAT_2000a16a = (short)piVar4[1];
-        if (*(short *)(iVar2 + 4) == DAT_2000a16a) goto LAB_0004ebe6;
+        DATA_PROCESSING_STATE_MANAGEMENT_2 = (short)piVar4[1];
+        if (*(short *)(iVar2 + 4) == DATA_PROCESSING_STATE_MANAGEMENT_2) goto LAB_0004ebe6;
         DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT = 0;
-        DAT_2000a16c = 5;
-        DAT_2000a164 = *(short *)(iVar2 + 4) + 1;
+        DATA_PROCESSING_STATE_MANAGEMENT_3 = 5;
+        DATA_PROCESSING_STATE_MANAGEMENT_1 = *(short *)(iVar2 + 4) + 1;
         uStack_48 = process_ble_characteristic_operation_by_type
                               (TASK_CALLBACK_PARAMETER_1,&DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT)
         ;
@@ -145,8 +145,8 @@ LAB_0004eb88:
   else if (bVar1 == 5) {
     if (param_2 == (undefined4 *)0x0) {
       if (CONFIGURATION_SETTING_AND_DATA_PROCESSING_STATE < 2) goto LAB_0004ebe6;
-      DAT_2000a164 = DAT_2000a174 + 1;
-      DAT_2000a16c = 3;
+      DATA_PROCESSING_STATE_MANAGEMENT_1 = DAT_2000a174 + 1;
+      DATA_PROCESSING_STATE_MANAGEMENT_3 = 3;
       uVar7 = process_ble_characteristic_operation_by_type
                         (param_1,&DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT);
       if (uVar7 == 0) {

@@ -53,7 +53,7 @@ LAB_0002a0e8:
     if (TOUCH_SENSOR_STATUS_FLAG == '\x02') {
       iVar6 = setup_touch_sensor();
       TOUCH_SENSOR_STATUS_FLAG = '\0';
-      DAT_20018d89 = 0;
+      KEY_EVENT_AND_TOUCH_KEY_THREAD_DATA = 0;
     }
   }
   iVar2 = setup_touch_sensor();

@@ -103,7 +103,7 @@ LAB_00027dd4:
           handle_heartbeat();
         }
       }
-      DAT_20018d97 = 1;
+      SLAVE_DISPLAY_THREAD_DATA = 1;
       DISPLAY_UI_STATE = 1;
       if (*(char *)(param_1 + 0xfe6) == '\0') {
         handle_work_mode_finish(param_1,0);

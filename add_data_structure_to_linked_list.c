@@ -26,11 +26,11 @@ undefined4 add_data_structure_to_linked_list(undefined4 *data_structure)
     else {
       data_structure[7] = data_structure + 7;
       data_structure[8] = data_structure + 7;
-      puVar1 = DAT_2000b430;
+      puVar1 = LINKED_LIST_DATA_STRUCTURE_POINTER;
       puVar2 = data_structure + 9;
-      data_structure[10] = DAT_2000b430;
-      DAT_2000b430 = puVar2;
-      data_structure[9] = &DAT_2000b42c;
+      data_structure[10] = LINKED_LIST_DATA_STRUCTURE_POINTER;
+      LINKED_LIST_DATA_STRUCTURE_POINTER = puVar2;
+      data_structure[9] = &LINKED_LIST_DATA_STRUCTURE_IDENTIFIER;
       *puVar1 = data_structure + 9;
       if ((6 < DAT_2000b424) && (LINKED_LIST_HEAD_POINTER != (code *)0x0)) {
         (*LINKED_LIST_HEAD_POINTER)(7,"registered %s bus\n",*data_structure);

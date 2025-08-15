@@ -12,7 +12,7 @@ undefined4 process_data_with_state_management_alt7(undefined4 param_1,undefined4
   undefined4 local_c;
   
   local_c = param_2;
-  iVar1 = check_driver_ready(&DAT_00087b90);
+  iVar1 = check_driver_ready(&DATA_PROCESSING_STATE_MANAGEMENT_ALT7);
   if (iVar1 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","device_is_ready(entropy_dev)",
                  "WEST_TOPDIR/zephyr/subsys/random/rand32_entropy_device.c",0x15,param_1);

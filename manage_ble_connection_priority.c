@@ -25,14 +25,14 @@ void manage_ble_connection_priority
     }
     if ((((*(byte *)((int)DMIC_BUFFER_SIZE + 0xd) & 0x1f) == 0) && (puVar1[6] == 0)) &&
        (0x7f < *(ushort *)((int)DMIC_BUFFER_SIZE + 0xe))) {
-      DAT_2000b460 = DMIC_BUFFER_SIZE;
+      BLE_CONNECTION_PRIORITY_VALIDATION = DMIC_BUFFER_SIZE;
       return;
     }
   }
   if (puVar1 != DMIC_BUFFER_SIZE) {
     handle_ble_connection_timeout(puVar1);
   }
-  DAT_2000b460 = puVar1;
+  BLE_CONNECTION_PRIORITY_VALIDATION = puVar1;
   return;
 }
 

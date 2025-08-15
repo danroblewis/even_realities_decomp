@@ -324,7 +324,7 @@ void process_audio_signal_transformation_matrix_alt
   fVar33 = (float)(&DAT_00090468)[iVar13 * 8];
   fVar34 = (float)(&DAT_0009046c)[iVar13 * 8];
   pfVar9 = local_2e8;
-  pfVar4 = (float *)&DAT_0008ce4c;
+  pfVar4 = (float *)&AUDIO_FILTER_APPLICATION_WITH_BIAS_AND_SCALING;
   do {
     pfVar14 = pfVar4 + 1;
     *pfVar9 = (local_320 - fVar25) * pfVar4[0x20] + pfVar4[0x10] * (local_324 - fVar29) +
@@ -337,7 +337,7 @@ void process_audio_signal_transformation_matrix_alt
               (local_2f0 - fVar33) * pfVar4[0xe0] + (local_2ec - fVar34) * pfVar4[0xf0];
     pfVar9 = pfVar9 + 1;
     pfVar4 = pfVar14;
-  } while (pfVar14 != (float *)&DAT_0008ce8c);
+  } while (pfVar14 != (float *)&SYSTEM_MESSAGE_AND_ERROR_HANDLING_28);
   local_2a8[1] = ABS(local_2e8[1]);
   local_2a8[0] = ABS(local_2e8[0]);
   local_2a8[2] = ABS(local_2e8[2]);
@@ -1219,11 +1219,11 @@ LAB_0006e15e:
   output_parameters[2] = 0;
   output_parameters[3] = 0;
   do {
-    if (0 < (int)(&DAT_000903e8)[iVar18 * 2]) {
+    if (0 < (int)(&AUDIO_SIGNAL_TRANSFORMATION_MATRIX_ALT)[iVar18 * 2]) {
       iVar10 = 0;
       fVar16 = INFINITY;
       iVar5 = 0;
-      pfVar4 = (float *)(&DAT_000903ec)[iVar18 * 2];
+      pfVar4 = (float *)(&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX)[iVar18 * 2];
       do {
         fVar34 = *pfVar4;
         pfVar4 = pfVar4 + 1;
@@ -1255,7 +1255,7 @@ LAB_0006e15e:
         if (iVar1 < 0) {
           fVar16 = fVar20;
         }
-      } while ((&DAT_000903e8)[iVar18 * 2] != iVar5);
+      } while ((&AUDIO_SIGNAL_TRANSFORMATION_MATRIX_ALT)[iVar18 * 2] != iVar5);
       if (fVar16 < local_33c) {
         output_parameters[3] = iVar10;
         output_parameters[2] = iVar18;

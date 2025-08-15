@@ -18,7 +18,7 @@ void update_persist_task_status_to_idle(int param_1)
       display_close_screen(*(undefined1 *)(param_1 + 0xd5));
     }
     if (*(char *)(param_1 + 0xd5) == '\x10') {
-      *(undefined1 *)(param_1 + 0xf98) = DAT_20018d9d;
+      *(undefined1 *)(param_1 + 0xf98) = PERSIST_TASK_STATUS_UPDATE;
     }
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {

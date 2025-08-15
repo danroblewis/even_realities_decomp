@@ -114,9 +114,9 @@ LAB_0002884a:
         process_message_and_sync(uVar3,0xf,0);
       }
     }
-    if (DAT_20018d97 != '\0') {
+    if (SLAVE_DISPLAY_THREAD_DATA != '\0') {
       delay_with_timing(2000);
-      DAT_20018d97 = '\0';
+      SLAVE_DISPLAY_THREAD_DATA = '\0';
     }
     handle_message_confirmation_and_sync();
     pcVar2 = (char *)get_work_mode();

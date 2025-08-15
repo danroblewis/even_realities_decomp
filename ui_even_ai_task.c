@@ -48,7 +48,7 @@ undefined4 ui_even_ai_task(int param_1,undefined4 param_2,int param_3)
     *puVar13 = uVar12;
   }
   if (uVar5 < 0xe) {
-    puVar18 = (&PTR_DAT_0008a3a8)[uVar5];
+    puVar18 = (&SYSTEM_MESSAGE_AND_ERROR_HANDLING_2)[uVar5];
     puVar15 = *(undefined **)(&UNK_0008a370 + uVar5 * 4);
   }
   else {

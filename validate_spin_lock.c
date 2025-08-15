@@ -8,7 +8,7 @@
 void validate_spin_lock(void)
 
 {
-  if (DAT_20018d88 != '\0') {
+  if (SPIN_LOCK_VALIDATION_AND_SYSTEM_INIT != '\0') {
     z_spin_lock_valid(&DAT_20007b00);
     return;
   }

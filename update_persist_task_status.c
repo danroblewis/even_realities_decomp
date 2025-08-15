@@ -49,8 +49,9 @@ LAB_0002bf4a:
           handle_heartbeat();
         }
       }
-      if ((param_2 == 0x10) && (DAT_20018d9d = *(char *)(param_1 + 0xf98), DAT_20018d9d == '\x01'))
-      {
+      if ((param_2 == 0x10) &&
+         (PERSIST_TASK_STATUS_UPDATE = *(char *)(param_1 + 0xf98),
+         PERSIST_TASK_STATUS_UPDATE == '\x01')) {
         *(undefined1 *)(param_1 + 0xf98) = 0;
       }
       goto LAB_0002bf78;

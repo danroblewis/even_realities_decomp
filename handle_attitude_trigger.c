@@ -443,7 +443,7 @@ LAB_000103ea:
               ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA = '\0';
             }
             else if (ATTITUDE_TRIGGER_HANDLER_STATE_AND_DATA == '\0') {
-              pfVar12 = (float *)&DAT_00088a44;
+              pfVar12 = (float *)&FLOAT_FORMATTING_CONSTANTS_8;
               pfVar7 = local_a0 + 3;
               piVar8 = &DAT_20007ac0;
               iVar1 = 0;

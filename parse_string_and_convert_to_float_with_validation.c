@@ -377,7 +377,7 @@ LAB_0001437e:
           goto LAB_00014036;
         }
         local_88 = uVar21 & 0x10;
-        puVar20 = &DAT_000888b8;
+        puVar20 = &FLOAT_FORMATTING_CONSTANTS_5;
         if (local_88 != 0) {
           local_88 = 0x6a;
         }
@@ -767,7 +767,8 @@ LAB_0001439c:
           uVar25 = uVar27;
         }
         uVar26 = float_multiply_64bit_alt
-                           ((&DAT_000888e0)[local_88 * 2],(&DAT_000888e4)[local_88 * 2],(int)uVar25,
+                           ((&DAT_000888e0)[local_88 * 2],
+                            (&FLOAT_FORMATTING_CONSTANTS_6)[local_88 * 2],(int)uVar25,
                             (int)(uVar25 >> 0x20) + -0x3500000);
         uVar21 = (uint)((ulonglong)uVar26 >> 0x20);
         uVar11 = uVar21 & 0x7ff00000;

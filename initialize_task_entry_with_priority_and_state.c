@@ -19,10 +19,10 @@ void initialize_task_entry_with_priority_and_state
   *(undefined1 *)(*(int *)(task_entry + 4) + 6) = param_3;
   **(undefined4 **)(task_entry + 4) = task_data;
   *(undefined1 *)(*(int *)(task_entry + 4) + 5) = 1;
-  if (DAT_2001d44b == '\0') {
+  if (TASK_ENTRY_PRIORITY_AND_STATE_INITIALIZATION == '\0') {
     z_spin_lock_valid(&DAT_200039f8);
   }
-  DAT_2001d44b = 1;
+  TASK_ENTRY_PRIORITY_AND_STATE_INITIALIZATION = 1;
   return;
 }
 

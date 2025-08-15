@@ -27,7 +27,7 @@ void bt_connection_disconnect_with_state_management_and_callback_validation_and_
                     /* WARNING: Subroutine does not return */
       trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x185);
     }
-    if ((undefined4 *)((int)&DAT_00087fe8 + 3) < puVar4) break;
+    if ((undefined4 *)((int)&BLE_CONNECTION_BATCH_PROCESSING_DATA + 3) < puVar4) break;
     iVar2 = (*(code *)puVar4[1])(param_1,&local_14);
     if (-1 < iVar2) {
       uVar1 = *(undefined2 *)puVar4;

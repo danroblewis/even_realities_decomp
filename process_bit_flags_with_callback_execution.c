@@ -36,14 +36,14 @@ uint process_bit_flags_with_callback_execution(uint bit_flags)
                                      1 | bVar1 >> 3 & 1) << 1 | bVar1 >> 4 & 1) << 1 |
                                   bVar1 >> 5 & 1) << 1 | bVar1 >> 6 & 1) << 1 | bVar1 >> 7));
     bit_flags = bit_flags & ~(1 << iVar6);
-    if (((&DAT_000882ac)[iVar6 * 0x10] != '\0') &&
+    if (((&SYSTEM_TASKS_PRIORITY_MANAGEMENT_CONFIG)[iVar6 * 0x10] != '\0') &&
        ((*(code **)((&SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE)[iVar6 * 4] + 0x10) == (code *)0x0 ||
         (iVar5 = (**(code **)((&SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE)[iVar6 * 4] + 0x10))
                            (&SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE + iVar6 * 4), iVar5 == 0)))) {
       uVar7 = uVar7 & ~(1 << iVar6);
       initialize_task_entry_with_priority_and_state
                 (&SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE + iVar6 * 4,
-                 *(undefined4 *)(&DAT_000882a4)[iVar6 * 4],4);
+                 *(undefined4 *)(&SYSTEM_TASKS_AND_MEMORY_MANAGEMENT_CONFIG)[iVar6 * 4],4);
     }
   }
   return uVar7;

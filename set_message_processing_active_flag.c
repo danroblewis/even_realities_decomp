@@ -8,7 +8,7 @@
 void set_message_processing_active_flag(void)
 
 {
-  DAT_2001b80e = 1;
+  MESSAGE_PROCESSING_ACTIVE_FLAG = 1;
   return;
 }
 

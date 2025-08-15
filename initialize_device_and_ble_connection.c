@@ -31,7 +31,7 @@ void initialize_device_and_ble_connection
     }
     cleanup_hardware_interrupt_configuration();
     uVar2 = 0;
-    DAT_2001d535 = 0;
+    DEVICE_CAPABILITIES_AND_STATE_MANAGEMENT = 0;
     uVar1 = extraout_r1_01;
   }
   manage_device_state_with_spin_lock_validation(param_1,uVar1,uVar2,param_4);

@@ -8,7 +8,7 @@
 undefined4 get_sensor_data_buffer_address(void)
 
 {
-  return DAT_20007ba0;
+  return DMIC_SENSOR_DATA_BUFFER_ADDRESS;
 }
 
 

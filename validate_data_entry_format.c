@@ -13,7 +13,7 @@ int validate_data_entry_format(int param_1,undefined4 param_2,undefined4 param_3
   undefined1 *puVar3;
   char *pcVar4;
   
-  puVar3 = &DAT_20007dbc + param_1 * 0x1b4;
+  puVar3 = &SYSTEM_ENTRY_TIMEOUT_MANAGEMENT + param_1 * 0x1b4;
   iVar2 = compare_string_offsets("com.android.phone_missed",puVar3,0x18,0x1b4,param_4);
   if ((iVar2 == 0) ||
      (iVar2 = compare_string_offsets("com.apple.mobilephone_missed",puVar3,0x1c), iVar2 == 0)) {

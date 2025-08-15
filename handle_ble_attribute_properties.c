@@ -14,7 +14,7 @@ void handle_ble_attribute_properties(ushort param_1,code *UNRECOVERED_JUMPTABLE,
                     /* WARNING: Subroutine does not return */
     trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xb3);
   }
-  if ((DAT_2000af5a & param_1) != 0) {
+  if ((BLE_ATTRIBUTE_PROPERTIES_AND_CALLBACKS & param_1) != 0) {
     (*UNRECOVERED_JUMPTABLE)(&BLE_ATTRIBUTE_TABLE,param_3);
   }
   if ((BLE_ATTRIBUTE_PROPERTIES_AND_CALLBACK_MANAGEMENT & param_1) != 0) {

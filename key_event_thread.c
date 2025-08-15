@@ -627,7 +627,7 @@ LAB_0002a062:
   case 6:
     DAT_20018d95 = 0;
     cVar2 = *param_1;
-    if ((DAT_20018d89 != '\0') || (cVar2 != '\x01')) goto LAB_0002a062;
+    if ((KEY_EVENT_AND_TOUCH_KEY_THREAD_DATA != '\0') || (cVar2 != '\x01')) goto LAB_0002a062;
     if (param_1[0xd5] == '\f') {
       if (2 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -640,7 +640,7 @@ LAB_0002a062:
         }
       }
       iVar3 = 1;
-      DAT_20018d89 = '\x01';
+      KEY_EVENT_AND_TOUCH_KEY_THREAD_DATA = '\x01';
       local_2c = CONCAT22(local_2c._2_2_,1);
       do {
         iVar6 = sync_to_slave(param_1,6,&local_2c,2);

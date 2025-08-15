@@ -44,7 +44,7 @@ uint process_message_and_sync
     if (message_type - 0xbU < 2) {
       DAT_20018c6f = 4;
       puVar4 = puVar9;
-      puVar7 = &DAT_20018c70;
+      puVar7 = &MESSAGE_SYNC_PROCESSING_DATA;
       do {
         puVar3 = puVar4 + 1;
         puVar6 = puVar7 + 1;
@@ -67,14 +67,14 @@ uint process_message_and_sync
       }
       if (message_type == 1) {
         DAT_20018d80 = *(undefined1 *)(work_mode_context + 0x6e1);
-        iVar1 = memcmp_byte_arrays(&DAT_20018d6b,puVar9,0x16);
+        iVar1 = memcmp_byte_arrays(&MESSAGE_SYNC_PROCESSING_PARAMETERS,puVar9,0x16);
         if (iVar1 == 0) {
           MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
           return uVar8;
         }
         DAT_20018c6f = 4;
         puVar4 = puVar9;
-        puVar7 = &DAT_20018c70;
+        puVar7 = &MESSAGE_SYNC_PROCESSING_DATA;
         do {
           puVar3 = puVar4 + 1;
           puVar6 = puVar7 + 1;
@@ -86,7 +86,7 @@ uint process_message_and_sync
       else {
         DAT_20018c6f = 4;
         puVar4 = puVar9;
-        puVar7 = &DAT_20018c70;
+        puVar7 = &MESSAGE_SYNC_PROCESSING_DATA;
         do {
           puVar3 = puVar4 + 1;
           puVar6 = puVar7 + 1;
@@ -108,14 +108,14 @@ uint process_message_and_sync
           MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
           return 2000;
         }
-        fill_memory_buffer(&DAT_20018d6b,0,0x16);
+        fill_memory_buffer(&MESSAGE_SYNC_PROCESSING_PARAMETERS,0,0x16);
         MESSAGE_PROCESSING_AND_SYNC_STATE = 0;
         return 2000;
       }
       delay_with_timing(1);
     }
     if (message_type == 1) {
-      puVar4 = &DAT_20018d6b;
+      puVar4 = &MESSAGE_SYNC_PROCESSING_PARAMETERS;
       do {
         puVar3 = puVar9 + 1;
         puVar7 = puVar4 + 1;

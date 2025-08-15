@@ -53,13 +53,13 @@ process_data_with_operation_mode_and_validation
         if (UART_CALLBACK_AND_OPERATION_MODE_DATA != 0) {
           uVar6 = 0;
           do {
-            if (((((&DAT_2001a129)[uVar6] == 'Z') && ((&DAT_2001a12a)[uVar6] == -0x5b)) &&
-                ((&DAT_2001a12b)[uVar6] == '\x7f')) &&
+            if (((((&UART_CALLBACK_AND_OPERATION_MODE_DATA)[uVar6] == 'Z') &&
+                 ((&DAT_2001a12a)[uVar6] == -0x5b)) && ((&DAT_2001a12b)[uVar6] == '\x7f')) &&
                (uVar4 = (uint)(byte)(&DAT_2001a12c)[uVar6], (int)(uVar4 + 4) < (int)(0x100 - uVar6))
                ) {
               cVar3 = '\0';
               iVar8 = 0;
-              pcVar1 = &DAT_2001a129 + uVar6;
+              pcVar1 = &UART_CALLBACK_AND_OPERATION_MODE_DATA + uVar6;
               do {
                 iVar8 = iVar8 + 1;
                 cVar3 = cVar3 + *pcVar1;

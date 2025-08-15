@@ -14,7 +14,7 @@ int initialize_sensor_registers(void)
   int iVar3;
   
   iVar3 = 0;
-  puVar2 = &DAT_0008a0a8;
+  puVar2 = &SYSTEM_MESSAGE_AND_ERROR_HANDLING_1;
   do {
     uVar1 = puVar2[1];
     if (*puVar2 != 0x4414) {

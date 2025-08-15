@@ -11,7 +11,7 @@ void process_system_tasks_and_memory_management(void)
   int iVar1;
   int *piVar2;
   
-  if (DAT_2001d44c == '\0') {
+  if (SYSTEM_TASKS_AND_MEMORY_MANAGEMENT == '\0') {
     process_system_tasks_with_priority_management(1);
     piVar2 = &SYSTEM_TASK_PRIORITY_MANAGEMENT_TABLE;
     while( true ) {
@@ -31,7 +31,7 @@ void process_system_tasks_and_memory_management(void)
     do {
       iVar1 = process_memory_management_with_timing_control();
     } while (iVar1 != 0);
-    DAT_2001d44c = '\x01';
+    SYSTEM_TASKS_AND_MEMORY_MANAGEMENT = '\x01';
   }
   return;
 }

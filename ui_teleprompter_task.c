@@ -110,9 +110,9 @@ LAB_0003cfee:
             TELEPROMPTER_UI_CONTROL_FLAGS = 0;
             TELEPROMPTER_UI_STATE_FLAGS = 0;
             UI_TELEPROMPTER_TASK_EXTENDED_STATE = 0;
-            DAT_20009fe4 = 0;
-            DAT_20009fe0 = 0;
-            DAT_20009fdc = 0;
+            TELEPROMPTER_UI_TASK_STATE_3 = 0;
+            TELEPROMPTER_UI_TASK_STATE_2 = 0;
+            TELEPROMPTER_UI_TASK_STATE_1 = 0;
             fill_memory_buffer(&DAT_200049b8,0,0x200);
             resource_mutex_acquire(&DAT_20007b3c,extraout_r1,0xffffffff,0xffffffff);
             memcpy(&DAT_200049b8,iVar5 + 0x106,0x200);
@@ -588,17 +588,17 @@ LAB_0003df5c:
     process_string_with_error_handling_and_validation
               (&local_68,0x40,pcVar7,TELEPROMPTER_UI_CONTROL_FLAGS,TELEPROMPTER_UI_STATE_FLAGS,
                UI_TELEPROMPTER_TASK_EXTENDED_STATE);
-    if (((TELEPROMPTER_UI_CONTROL_FLAGS != DAT_20009fe4) ||
-        (TELEPROMPTER_UI_STATE_FLAGS != DAT_20009fe0)) ||
-       (UI_TELEPROMPTER_TASK_EXTENDED_STATE != DAT_20009fdc)) {
+    if (((TELEPROMPTER_UI_CONTROL_FLAGS != TELEPROMPTER_UI_TASK_STATE_3) ||
+        (TELEPROMPTER_UI_STATE_FLAGS != TELEPROMPTER_UI_TASK_STATE_2)) ||
+       (UI_TELEPROMPTER_TASK_EXTENDED_STATE != TELEPROMPTER_UI_TASK_STATE_1)) {
       uVar9 = get_ui_x_offset();
       iVar5 = get_ui_y_offset();
       iVar8 = get_ui_x_offset();
       iVar11 = get_ui_y_offset();
       gui_utf_draw(0,&local_68,0,uVar9,iVar5 + 0x6e,iVar8 + 0x50,iVar11 + 0x88,1,0,0,0,0);
-      DAT_20009fe4 = TELEPROMPTER_UI_CONTROL_FLAGS;
-      DAT_20009fe0 = TELEPROMPTER_UI_STATE_FLAGS;
-      DAT_20009fdc = UI_TELEPROMPTER_TASK_EXTENDED_STATE;
+      TELEPROMPTER_UI_TASK_STATE_3 = TELEPROMPTER_UI_CONTROL_FLAGS;
+      TELEPROMPTER_UI_TASK_STATE_2 = TELEPROMPTER_UI_STATE_FLAGS;
+      TELEPROMPTER_UI_TASK_STATE_1 = UI_TELEPROMPTER_TASK_EXTENDED_STATE;
     }
     pcVar7 = (char *)get_work_mode();
     if (*pcVar7 == '\x01') {

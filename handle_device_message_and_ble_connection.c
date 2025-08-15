@@ -34,22 +34,23 @@ LAB_00060032:
         return;
       }
       DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = 0;
-      if (-1 < (int)((uint)DAT_2000b058 << 0x1f)) {
+      if (-1 < (int)((uint)DEVICE_MESSAGE_BLE_CONNECTION_DATA_3 << 0x1f)) {
         DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = 0;
         return;
       }
-      manage_task_state_decrement_with_priority_control(DAT_2000b008);
+      manage_task_state_decrement_with_priority_control(DEVICE_MESSAGE_BLE_CONNECTION_DATA_1);
       return;
     }
 LAB_00060086:
-    enqueue_message_to_priority_queue(DAT_2000b01c);
+    enqueue_message_to_priority_queue(DEVICE_MESSAGE_BLE_CONNECTION_DATA_2);
     if ((DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE != '\0') &&
-       (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = '\0', (int)((uint)DAT_2000b058 << 0x1f) < 0)) {
-      manage_task_state_decrement_with_priority_control(DAT_2000b008);
+       (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = '\0',
+       (int)((uint)DEVICE_MESSAGE_BLE_CONNECTION_DATA_3 << 0x1f) < 0)) {
+      manage_task_state_decrement_with_priority_control(DEVICE_MESSAGE_BLE_CONNECTION_DATA_1);
     }
   }
   else {
-    iVar1 = process_ble_connection_data(DAT_2000b01c,local_30,0,0);
+    iVar1 = process_ble_connection_data(DEVICE_MESSAGE_BLE_CONNECTION_DATA_2,local_30,0,0);
     if (iVar1 < 0) {
       local_3c = "Failed to allocate buffer: %d";
     }
@@ -74,9 +75,9 @@ LAB_00060086:
       cVar2 = DAT_2000b05a;
       if (*(int *)(param_1 + 4) == 0) {
         if ((DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE != '\0') &&
-           (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = '\0', (int)((uint)DAT_2000b058 << 0x1f) < 0))
-        {
-          manage_task_state_decrement_with_priority_control(DAT_2000b008);
+           (DEVICE_MESSAGE_AND_BLE_CONNECTION_STATE = '\0',
+           (int)((uint)DEVICE_MESSAGE_BLE_CONNECTION_DATA_3 << 0x1f) < 0)) {
+          manage_task_state_decrement_with_priority_control(DEVICE_MESSAGE_BLE_CONNECTION_DATA_1);
         }
         goto LAB_00060008;
       }
@@ -89,7 +90,8 @@ LAB_000600b0:
       local_1c = "No room in RX queue";
       local_20 = 2;
       execute_device_data_compression(&DAT_000881a0,0x1040,&local_20);
-      enqueue_message_to_priority_queue(DAT_2000b01c,*(undefined4 *)(param_1 + 4));
+      enqueue_message_to_priority_queue
+                (DEVICE_MESSAGE_BLE_CONNECTION_DATA_2,*(undefined4 *)(param_1 + 4));
       goto LAB_00060008;
     }
   }

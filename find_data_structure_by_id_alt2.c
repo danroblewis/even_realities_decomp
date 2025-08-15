@@ -15,7 +15,7 @@ undefined * find_data_structure_by_id_alt2(uint param_1,int *param_2,undefined4 
   ushort *puVar5;
   
   iVar4 = 0;
-  puVar5 = &DAT_00098e3c;
+  puVar5 = &SYSTEM_MESSAGE_AND_ERROR_HANDLING_54;
   iVar3 = 0;
   while( true ) {
     if (0x5f < iVar4) {

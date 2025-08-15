@@ -8,7 +8,7 @@
 void initialize_buffer_structure_with_size(undefined4 param_1)
 
 {
-  DAT_2000a100 = param_1;
+  BUFFER_STRUCTURE_SIZE_CONFIGURATION = param_1;
   return;
 }
 

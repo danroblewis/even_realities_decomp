@@ -62,7 +62,7 @@ void uart_callback(undefined4 param_1,undefined1 *param_2,uint param_3)
           }
           if (*(char *)(iVar2 + param_3 + uVar7 + -1) == cVar1) {
             UART_CALLBACK_AND_OPERATION_MODE_DATA = pcVar3[3] + 5U;
-            memcpy(&DAT_2001a129);
+            memcpy(&UART_CALLBACK_AND_OPERATION_MODE_DATA);
             fill_memory_buffer(*(undefined4 *)(param_2 + 4),0,0x100);
             return;
           }

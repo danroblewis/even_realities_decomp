@@ -35,7 +35,7 @@ undefined4 validate_and_configure_hardware_parameters(undefined4 *param_1)
       write_interrupt_configuration_registers(param_1 + 1);
     }
   }
-  DAT_2000b37c = param_1[9];
+  HARDWARE_INTERRUPT_FLAG_TIMEOUT = param_1[9];
   DAT_2000b382 = *(undefined1 *)((int)param_1 + 0x29);
   _DAT_5002b308 = 1;
   backup_and_restore_hardware_config();

@@ -34,27 +34,30 @@ process_ble_characteristic_value_change_with_parameter_validation(int param_1,in
     if (*(int *)(param_1 + -8) != 0) {
       iVar6 = 0;
       do {
-        if ((&DAT_0008b2b4)[iVar6 * 8] == *pbVar2) {
+        if ((&SYSTEM_MESSAGE_AND_ERROR_HANDLING_12)[iVar6 * 8] == *pbVar2) {
           local_44 = *(int *)(param_1 + 0x13c);
           if (local_44 != 0) goto LAB_00058dbc;
           uVar3 = increment_counter_in_structure(param_2);
-          cVar1 = (&DAT_0008b2b6)[iVar6 * 8];
+          cVar1 = (&BLE_CHARACTERISTIC_VALUE_CHANGE_PARAMETER_VALIDATION)[iVar6 * 8];
           *(undefined4 *)(param_1 + 0x13c) = uVar3;
           if (cVar1 == '\x01') {
             iVar4 = set_bit_and_check_if_already_set(param_1 + 0x118,local_44);
             if (iVar4 == 0) {
 LAB_00058e30:
-              if ((uint)*(ushort *)(param_2 + 0x10) < (uint)(byte)(&DAT_0008b2b5)[iVar6 * 8]) {
+              if ((uint)*(ushort *)(param_2 + 0x10) <
+                  (uint)(byte)(&SYSTEM_MESSAGE_AND_ERROR_HANDLING_13)[iVar6 * 8]) {
                 local_4c = (uint)*pbVar2;
                 local_54 = "Invalid len %u for code 0x%02x";
                 local_58 = 4;
                 uStack_50 = (uint)*(ushort *)(param_2 + 0x10);
                 process_and_compress_data_wrapper(&DAT_00088100,0x2040,&local_58);
-                if ((&DAT_0008b2b6)[iVar6 * 8] != '\x01') goto LAB_00058d9c;
+                if ((&BLE_CHARACTERISTIC_VALUE_CHANGE_PARAMETER_VALIDATION)[iVar6 * 8] != '\x01')
+                goto LAB_00058d9c;
                 iVar6 = 4;
               }
               else {
-                iVar6 = (*(code *)(&DAT_0008b2b8)[iVar6 * 2])(param_1 + -8,param_2);
+                iVar6 = (*(code *)(&SYSTEM_MESSAGE_AND_ERROR_HANDLING_14)[iVar6 * 2])
+                                  (param_1 + -8,param_2);
                 if ((cVar1 != '\x01') || (iVar6 == 0)) goto LAB_00058d9c;
               }
               uVar5 = (uint)*pbVar2;

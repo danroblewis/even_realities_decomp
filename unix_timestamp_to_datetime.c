@@ -34,7 +34,7 @@ undefined4 unix_timestamp_to_datetime(uint unix_timestamp,undefined2 *datetime_a
   }
   iVar5 = 0;
   *datetime_array = (short)uVar2;
-  puVar7 = &DAT_00099014;
+  puVar7 = &SYSTEM_MESSAGE_AND_ERROR_HANDLING_57;
   do {
     while( true ) {
       uVar4 = (uint)*puVar7;

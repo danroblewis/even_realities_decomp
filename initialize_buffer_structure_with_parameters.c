@@ -13,8 +13,8 @@ initialize_buffer_structure_with_parameters
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = DAT_2000a100;
-  if (DAT_2000a100 == 0) {
+  iVar1 = BUFFER_STRUCTURE_SIZE_CONFIGURATION;
+  if (BUFFER_STRUCTURE_SIZE_CONFIGURATION == 0) {
     uVar2 = 0xfffffffe;
   }
   else {

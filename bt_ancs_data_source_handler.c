@@ -29,10 +29,10 @@ void bt_ancs_data_source_handler(undefined4 param_1,byte *param_2,undefined4 par
       ANCS_DATA_SOURCE_HANDLER_STATE = *(undefined4 *)(param_2 + 4);
       ANCS_ATTRIBUTE_REQUEST_STATE = *(undefined4 *)(param_2 + 8);
       BLUETOOTH_ANCS_DATA_SOURCE_HANDLER = *(undefined4 *)(param_2 + 0xc);
-      DAT_2000ff71 = '\x01';
+      BT_ANCS_DATA_SOURCE_HANDLER = '\x01';
     }
   }
-  else if ((*param_2 == 1) && (DAT_2000ff71 != '\0')) {
+  else if ((*param_2 == 1) && (BT_ANCS_DATA_SOURCE_HANDLER != '\0')) {
     if (ANCS_DATA_SOURCE_HANDLER_STATE != DAT_2000231c) {
       iVar2 = calculate_ble_connection_timing_with_scaling_alt();
       iVar3 = get_work_mode();
@@ -65,7 +65,7 @@ void bt_ancs_data_source_handler(undefined4 param_1,byte *param_2,undefined4 par
                   }
                   fill_memory_buffer(iVar1 + 0x34,0,0x1b4);
                   z_spin_lock_valid(iVar1 + 0x1e8);
-                  DAT_2000ff71 = '\0';
+                  BT_ANCS_DATA_SOURCE_HANDLER = '\0';
                 }
               }
             }

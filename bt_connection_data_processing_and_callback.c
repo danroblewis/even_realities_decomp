@@ -34,8 +34,8 @@ void bt_connection_data_processing_and_callback(uint *param_1,uint param_2,uint 
   uVar6 = execute_bluetooth_callback_with_priority_control
                     (&MEMORY_ALLOCATION_BUFFER_MANAGER,param_1);
   uVar5 = increment_counter(&DAT_2000a0d8);
-  if (DAT_2001d44c == '\0') {
-    if (DAT_2000a0d0 != 0) {
+  if (SYSTEM_TASKS_AND_MEMORY_MANAGEMENT == '\0') {
+    if (MAIN_SYSTEM_LOGGING_DATA != 0) {
       if ((int)uVar5 == 0) {
         schedule_dashboard_lock_task_with_ble_integration
                   (&DAT_200056a8,(int)((ulonglong)uVar5 >> 0x20),0x8000,0,0,0,unaff_r4,unaff_lr);

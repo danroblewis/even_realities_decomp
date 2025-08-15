@@ -20,9 +20,9 @@ void copy_system_data(void)
   **(int **)(WORK_MODE + 0xfec) = DAT_2007fc00 + 1;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 4) = (undefined1)DAT_2007fc04;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 5) = DAT_2007fc04._1_1_;
-  uVar3 = DAT_2007fc0c;
+  uVar3 = SYSTEM_STATIC_INFO_RESET_2;
   iVar2 = *(int *)(iVar1 + 0xfec);
-  *(undefined4 *)(iVar2 + 6) = DAT_2007fc08;
+  *(undefined4 *)(iVar2 + 6) = SYSTEM_STATIC_INFO_RESET_1;
   *(undefined4 *)(iVar2 + 10) = uVar3;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x5d) = DAT_2007fc5f;
   *(undefined1 *)(*(int *)(iVar1 + 0xfec) + 0x5e) = (undefined1)DAT_2007fc60;
@@ -33,7 +33,7 @@ void copy_system_data(void)
     SYSTEM_PARAMETER_AND_WORK_MODE_STATUS = DAT_2007fc69;
   }
   puVar4 = (undefined4 *)(*(int *)(iVar1 + 0xfec) + 0xe);
-  puVar6 = &DAT_2007fc10;
+  puVar6 = &SYSTEM_STATIC_INFO_RESET_3;
   do {
     puVar7 = puVar6;
     puVar5 = puVar4;
@@ -45,7 +45,7 @@ void copy_system_data(void)
   } while (puVar7 + 2 != (undefined4 *)0x2007fc30);
   puVar5[2] = uRam2007fc30;
   *(undefined1 *)(puVar5 + 3) = *(undefined1 *)(puVar7 + 3);
-  puVar4 = &DAT_2007fc35;
+  puVar4 = &SYSTEM_STATIC_INFO_RESET_4;
   puVar6 = (undefined4 *)(*(int *)(iVar1 + 0xfec) + 0x33);
   do {
     puVar5 = puVar4 + 1;

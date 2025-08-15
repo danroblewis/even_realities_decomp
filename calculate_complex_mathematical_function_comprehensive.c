@@ -282,8 +282,10 @@ LAB_0001383e:
               iVar1 = 1;
             }
             iVar5 = iVar1 * 8;
-            uVar6 = (undefined4)((ulonglong)(&DAT_00088898)[iVar1] >> 0x20);
-            uVar20 = (undefined4)(&DAT_00088898)[iVar1];
+            uVar6 = (undefined4)
+                    ((ulonglong)(&COMPLEX_MATHEMATICAL_FUNCTION_CALCULATION_COMPREHENSIVE)[iVar1] >>
+                    0x20);
+            uVar20 = (undefined4)(&COMPLEX_MATHEMATICAL_FUNCTION_CALCULATION_COMPREHENSIVE)[iVar1];
             uVar23 = float_add_64bit(uVar19,uVar10,uVar20,uVar6);
             uVar12 = (undefined4)((ulonglong)uVar23 >> 0x20);
             uVar24 = float_add_64bit_alt(uVar20,uVar6,uVar19,uVar10);

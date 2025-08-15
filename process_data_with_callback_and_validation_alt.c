@@ -41,9 +41,9 @@ int process_data_with_callback_and_validation_alt
         DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT = (undefined *)0x0;
       }
       DAT_2000a160 = 0x4ea79;
-      DAT_2000a164 = 1;
-      DAT_2000a16a = 0xffff;
-      DAT_2000a16c = 0;
+      DATA_PROCESSING_STATE_MANAGEMENT_1 = 1;
+      DATA_PROCESSING_STATE_MANAGEMENT_2 = 0xffff;
+      DATA_PROCESSING_STATE_MANAGEMENT_3 = 0;
       iVar3 = process_ble_characteristic_operation_by_type
                         (param_1,&DATA_PROCESSING_CALLBACK_STATE_MANAGEMENT);
       if (iVar3 != 0) {

@@ -175,7 +175,7 @@ joined_r0x0002f3fa:
                 }
                 uVar5 = 0;
                 if (((DMIC_STREAM_STATE == '\0') && (iVar2 = get_system_ready_state(), iVar2 == 0))
-                   && (DAT_20007ba0 != 0)) {
+                   && (DMIC_SENSOR_DATA_BUFFER_ADDRESS != 0)) {
                   if ((*(char *)(iVar1 + 0x248) == '\0') && (*(int *)(iVar1 + 0x220) == 0)) {
                     DMIC_DATA_READY_FLAG = 1;
                     z_spin_lock_valid(iVar1 + 0x218);

@@ -29,21 +29,31 @@ void calculate_audio_correlation_alt_with_scaling
       uVar6 = *(undefined4 *)(param_2 + iVar4 * 4);
       iVar4 = param_2 + iVar4 * 4;
       uVar8 = uVar8 + 5;
-      iVar4 = (int)(short)*(undefined4 *)(iVar4 + 0x14) * (int)(short)(&DAT_0008bccc)[uVar5 * 6] +
+      iVar4 = (int)(short)*(undefined4 *)(iVar4 + 0x14) *
+              (int)(short)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_PRIORITY)[uVar5 * 6] +
               (int)(short)((uint)*(undefined4 *)(iVar4 + 0x14) >> 0x10) *
-              (int)(short)((uint)(&DAT_0008bccc)[uVar5 * 6] >> 0x10) +
-              (int)(short)*(undefined4 *)(iVar4 + 0x10) * (int)(short)(&DAT_0008bcc8)[uVar5 * 6] +
+              (int)(short)((uint)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_PRIORITY)
+                                 [uVar5 * 6] >> 0x10) +
+              (int)(short)*(undefined4 *)(iVar4 + 0x10) *
+              (int)(short)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_OFFSET)[uVar5 * 6] +
               (int)(short)((uint)*(undefined4 *)(iVar4 + 0x10) >> 0x10) *
-              (int)(short)((uint)(&DAT_0008bcc8)[uVar5 * 6] >> 0x10) +
-              (int)(short)*(undefined4 *)(iVar4 + 0xc) * (int)(short)(&DAT_0008bcc4)[uVar5 * 6] +
+              (int)(short)((uint)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_OFFSET)[uVar5 * 6]
+                          >> 0x10) +
+              (int)(short)*(undefined4 *)(iVar4 + 0xc) *
+              (int)(short)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_BASE)[uVar5 * 6] +
               (int)(short)((uint)*(undefined4 *)(iVar4 + 0xc) >> 0x10) *
-              (int)(short)((uint)(&DAT_0008bcc4)[uVar5 * 6] >> 0x10) +
-              (int)(short)*(undefined4 *)(iVar4 + 8) * (int)(short)(&DAT_0008bcc0)[uVar5 * 6] +
+              (int)(short)((uint)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_BASE)[uVar5 * 6]
+                          >> 0x10) +
+              (int)(short)*(undefined4 *)(iVar4 + 8) *
+              (int)(short)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_EXTENDED)[uVar5 * 6] +
               (int)(short)((uint)*(undefined4 *)(iVar4 + 8) >> 0x10) *
-              (int)(short)((uint)(&DAT_0008bcc0)[uVar5 * 6] >> 0x10) +
-              (int)(short)*(undefined4 *)(iVar4 + 4) * (int)(short)(&DAT_0008bcbc)[uVar5 * 6] +
+              (int)(short)((uint)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING_EXTENDED)
+                                 [uVar5 * 6] >> 0x10) +
+              (int)(short)*(undefined4 *)(iVar4 + 4) *
+              (int)(short)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING)[uVar5 * 6] +
               (int)(short)((uint)*(undefined4 *)(iVar4 + 4) >> 0x10) *
-              (int)(short)((uint)(&DAT_0008bcbc)[uVar5 * 6] >> 0x10) +
+              (int)(short)((uint)(&AUDIO_CORRELATION_CALCULATION_ALT_WITH_SCALING)[uVar5 * 6] >>
+                          0x10) +
               (int)(short)uVar6 * (int)(short)uVar7 +
               (int)(short)((uint)uVar6 >> 0x10) * (int)(short)((uint)uVar7 >> 0x10);
       lVar2 = (longlong)iVar4 * 0x3ee61bc6;

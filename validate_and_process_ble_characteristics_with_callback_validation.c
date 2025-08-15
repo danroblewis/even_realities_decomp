@@ -33,8 +33,8 @@ int validate_and_process_ble_characteristics_with_callback_validation(int *param
       }
       param_1[1] = (int)BLE_CHARACTERISTIC_VALIDATION_STATE;
       BLE_CHARACTERISTIC_VALIDATION_STATE = param_1 + 1;
-      if (DAT_2000ac78 == (int *)0x0) {
-        DAT_2000ac78 = BLE_CHARACTERISTIC_VALIDATION_STATE;
+      if (BLE_CHARACTERISTIC_CALLBACK_VALIDATION == (int *)0x0) {
+        BLE_CHARACTERISTIC_CALLBACK_VALIDATION = BLE_CHARACTERISTIC_VALIDATION_STATE;
       }
       uVar1 = BLUETOOTH_PRIVACY_MODE_CONFIGURATION | 0x20;
       if ((BLUETOOTH_PRIVACY_MODE_CONFIGURATION & 0x20) == 0) {
@@ -54,7 +54,7 @@ int validate_and_process_ble_characteristics_with_callback_validation(int *param
             }
           }
           BLE_CHARACTERISTIC_VALIDATION_STATE = (int *)0x0;
-          DAT_2000ac78 = (int *)0x0;
+          BLE_CHARACTERISTIC_CALLBACK_VALIDATION = (int *)0x0;
           return iVar3;
         }
       }

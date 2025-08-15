@@ -79,12 +79,13 @@ LAB_00010c00:
   iVar2 = calculate_scaled_ble_connection_timing_with_bit_shifting();
   iVar6 = iVar2;
   fVar7 = fVar8;
-  if (((fVar8 == 0.0) || (DAT_20007b74 == fVar8)) &&
+  if (((fVar8 == 0.0) || (FUEL_GAUGE_UPDATE_DATA == fVar8)) &&
      ((fVar8 < 100.0 &&
-      (iVar6 = DAT_20007b70, fVar7 = DAT_20007b74, 119999 < (uint)(iVar2 - DAT_20007b70))))) {
+      (iVar6 = DAT_20007b70, fVar7 = FUEL_GAUGE_UPDATE_DATA, 119999 < (uint)(iVar2 - DAT_20007b70)))
+     )) {
     DAT_20018d90 = 1;
   }
-  DAT_20007b74 = fVar7;
+  FUEL_GAUGE_UPDATE_DATA = fVar7;
   DAT_20007b70 = iVar6;
   iVar6 = validate_egp_system_data_format();
   fVar7 = fVar8;

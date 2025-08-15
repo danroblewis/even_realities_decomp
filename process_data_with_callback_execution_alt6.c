@@ -19,7 +19,7 @@ undefined4 process_data_with_callback_execution_alt6(uint param_1,uint param_2)
   uint uStack_1c;
   uint uStack_18;
   
-  puVar5 = &DAT_00087b90;
+  puVar5 = &DATA_PROCESSING_STATE_MANAGEMENT_ALT7;
   uStack_1c = param_1;
   uStack_18 = param_2;
   if (param_1 == 0) {

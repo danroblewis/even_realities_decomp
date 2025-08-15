@@ -19,7 +19,7 @@ find_ble_attribute_by_properties(uint param_1,char *param_2,undefined4 param_3,u
     trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xe9);
   }
   if ((*param_2 == '\x01') && ((param_2[6] & 0xc0U) == 0x40)) {
-    if ((int)((uint)DAT_2000af5a << 0x1e) < 0) {
+    if ((int)((uint)BLE_ATTRIBUTE_PROPERTIES_AND_CALLBACKS << 0x1e) < 0) {
       if (BLE_ATTRIBUTE_TABLE != param_1) {
         if ((int)((uint)BLE_ATTRIBUTE_PROPERTIES_AND_CALLBACK_MANAGEMENT << 0x1e) < 0) {
 LAB_0005e8ea:

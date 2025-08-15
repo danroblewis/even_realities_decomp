@@ -36,16 +36,16 @@ undefined4 handle_data_processing(int param_1,byte *param_2,uint param_3)
       bVar2 = param_2[1];
       if (bVar1 == 0) {
         DAT_2000d6f4 = (ushort)bVar1;
-        DAT_20010320 = *param_2;
+        DATA_PROCESSING_HANDLER_STATE = *param_2;
       }
-      if (DAT_20010320 != uVar5) {
+      if (DATA_PROCESSING_HANDLER_STATE != uVar5) {
         if (IS_DEBUG != 0) {
           handle_heartbeat("[%s-%d]error, curCmd is %d, but parseCmd is %d ! \n",
                            "parse_receiver_pack_pkcs7");
           return 0xca;
         }
         DEBUG_PRINT("[%s-%d]error, curCmd is %d, but parseCmd is %d ! \n",
-                    "parse_receiver_pack_pkcs7",0xd0,uVar5,(uint)DAT_20010320);
+                    "parse_receiver_pack_pkcs7",0xd0,uVar5,(uint)DATA_PROCESSING_HANDLER_STATE);
         return 0xca;
       }
       sVar3 = (short)param_3 + (DAT_2000d6f4 - 3);

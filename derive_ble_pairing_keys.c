@@ -30,7 +30,7 @@ int derive_ble_pairing_keys
   undefined1 auStack_2b [11];
   
   puVar2 = &local_58;
-  puVar3 = &DAT_000887fd;
+  puVar3 = &BLE_PAIRING_KEY_DERIVATION_CONFIG;
   do {
     puVar7 = puVar3;
     puVar6 = puVar2;

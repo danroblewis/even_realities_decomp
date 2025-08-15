@@ -39,12 +39,12 @@ LAB_0000fd36:
       if (*(char *)(param_3 + 7) == '\0') {
         if ((DAT_20003023 == '\0') && (*(char *)(param_3 + 0xb) == *(char *)(param_3 + 0xc))) {
           bVar1 = *(byte *)(param_3 + 0x13);
-          iVar6 = (uint)bVar1 - (uint)DAT_2000f6e4;
+          iVar6 = (uint)bVar1 - (uint)PROCESS_STATE_MACHINE_DATA;
           if (iVar6 < 0) {
-            iVar6 = (uint)DAT_2000f6e4 - (uint)bVar1;
+            iVar6 = (uint)PROCESS_STATE_MACHINE_DATA - (uint)bVar1;
           }
           if (0x14 < iVar6) {
-            DAT_2000f6e4 = (ushort)bVar1;
+            PROCESS_STATE_MACHINE_DATA = (ushort)bVar1;
             goto LAB_0000fd68;
           }
         }

@@ -117,7 +117,7 @@ LAB_000453d8:
               if (*puVar5 != uVar16) goto code_r0x000453e0;
               if (uVar16 == 0) goto LAB_00045314;
               puVar5 = local_2dc;
-              puVar2 = &DAT_0008843e;
+              puVar2 = &GUI_UTF_WORDWRAP_DRAW_CONFIG_1;
               do {
                 puVar11 = puVar2;
                 puVar7 = puVar5;
@@ -126,7 +126,7 @@ LAB_000453d8:
                 *(undefined4 *)(puVar7 + 2) = uVar13;
                 puVar5 = puVar7 + 4;
                 puVar2 = puVar11 + 2;
-              } while (puVar11 + 2 != &DAT_00088446);
+              } while (puVar11 + 2 != &GUI_UTF_WORDWRAP_DRAW_CONFIG_2);
               uVar1 = *(ushort *)(puVar11 + 3);
               uVar8 = uVar18 + 1;
               *(undefined **)(puVar7 + 4) = &DAT_000d0021;

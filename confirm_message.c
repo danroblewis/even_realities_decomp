@@ -21,8 +21,8 @@ void confirm_message(int param_1)
   uint uVar11;
   
   iVar5 = MESSAGE_CONFIRMATION_STATE;
-  if (((DAT_20008ec4 != '\0') && (MESSAGE_CONFIRMATION_STATE == param_1)) &&
-     (DAT_20008ec1 == '\x04')) {
+  if (((MESSAGE_BUFFER_SYSTEM_STATUS_DATA != '\0') && (MESSAGE_CONFIRMATION_STATE == param_1)) &&
+     (MESSAGE_BUFFER_CONFIRMATION_DATA == '\x04')) {
     uVar11 = DAT_20009064 & 0xff;
     pcVar3 = (char *)get_work_mode();
     if (((*pcVar3 == '\x01') && (uVar11 == 0)) &&

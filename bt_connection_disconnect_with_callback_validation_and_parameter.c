@@ -9,7 +9,7 @@ undefined4 bt_connection_disconnect_with_callback_validation_and_parameter(int *
 
 {
   if (param_1 != (int *)0x0) {
-    if (DAT_2000ad28 != (int *)0x0) {
+    if (BT_CONNECTION_DISCONNECT_CALLBACK_VALIDATION != (int *)0x0) {
       return 0xffffff88;
     }
     if ((param_1[4] == 0) &&
@@ -17,7 +17,7 @@ undefined4 bt_connection_disconnect_with_callback_validation_and_parameter(int *
       return 0xffffffea;
     }
   }
-  DAT_2000ad28 = param_1;
+  BT_CONNECTION_DISCONNECT_CALLBACK_VALIDATION = param_1;
   return 0;
 }
 

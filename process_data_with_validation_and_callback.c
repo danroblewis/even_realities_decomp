@@ -21,7 +21,7 @@ void process_data_with_validation_and_callback
     process_data_with_callback_and_parameter(&DAT_00087bc0);
   }
   DAT_2001d44e = 1;
-  execute_callbacks_and_clear_reference(&DAT_0008ad08);
+  execute_callbacks_and_clear_reference(&DATA_PROCESSING_VALIDATION_AND_CALLBACK);
   return;
 }
 

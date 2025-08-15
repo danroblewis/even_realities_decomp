@@ -16,8 +16,9 @@ void apply_audio_filter_with_bias_and_scaling
   float fVar5;
   float fVar6;
   
-  fVar4 = *(float *)((&DAT_000903ec)[param_4 * 2] + param_5 * 4);
-  pfVar2 = (float *)&DAT_0008ce4c;
+  fVar4 = *(float *)((&AUDIO_FILTER_APPLICATION_AND_SIGNAL_TRANSFORMATION_MATRIX)[param_4 * 2] +
+                    param_5 * 4);
+  pfVar2 = (float *)&AUDIO_FILTER_APPLICATION_WITH_BIAS_AND_SCALING;
   pfVar3 = param_6;
   do {
     *pfVar3 = 0.0;
