@@ -44,7 +44,7 @@ void derive_and_process_crypto_keys(void)
         *puVar3 = uVar1;
         puVar4 = puVar4 + 1;
       } while (iVar2 != 8);
-      FUN_000826e0(&DAT_20006448);
+      set_bits_in_value(&DAT_20006448);
       return;
     }
     local_11c = "Unable to calculate hash";

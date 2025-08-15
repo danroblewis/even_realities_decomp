@@ -55,7 +55,7 @@ undefined4 enqueue_message_to_queue(int param_1,undefined4 param_2,int param_3,i
         if (iVar2 != 0) {
           memcpy(*(undefined4 *)(iVar2 + 0x14),param_2,*(undefined4 *)(param_1 + 0xc));
           *(undefined4 *)(iVar2 + 0x90) = 0;
-          FUN_000738d4(iVar2);
+          handle_ble_connection_insertion_with_privilege_management(iVar2);
           validate_ble_connection_state_with_priority(iVar6,uVar3);
           return 0;
         }
@@ -115,7 +115,7 @@ LAB_000720fc:
     pcVar1 = "WEST_TOPDIR/zephyr/kernel/msg_q.c";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar1,uVar3);
+  trigger_system_service_call(pcVar1,uVar3);
 }
 
 

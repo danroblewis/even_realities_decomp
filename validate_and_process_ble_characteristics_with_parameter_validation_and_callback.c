@@ -27,8 +27,8 @@ int validate_and_process_ble_characteristics_with_parameter_validation_and_callb
     return 0;
   }
   fill_memory_buffer(param_1,0,0xd0,piVar2,param_4);
-  FUN_000732d4(param_1 + 0x60,0x570a1);
-  FUN_00072e50(param_1 + 0x28,&LAB_000813d0_1);
+  initialize_data_structure_with_buffer_setup(param_1 + 0x60,0x570a1);
+  initialize_data_structure_with_validation(param_1 + 0x28,&LAB_000813d0_1);
   return param_1;
 }
 

@@ -21,14 +21,16 @@ int initialize_resource_structure_with_memory_layout
     *(undefined4 *)(resource_context + 0x3c) = 1;
     *(char **)(resource_context + 0x34) = "sram0.shm";
     *(undefined4 *)(resource_context + 0x30) = *(undefined4 *)(resource_context + 0x98);
-    FUN_00085442(resource_context + 0x40,*(undefined4 *)(resource_context + 0x98),
-                 (undefined4 *)(resource_context + 0x30),*(undefined4 *)(resource_context + 0x9c),
-                 0xffffffff,0,0);
+    initialize_memory_buffer_structure
+              (resource_context + 0x40,*(undefined4 *)(resource_context + 0x98),
+               (undefined4 *)(resource_context + 0x30),*(undefined4 *)(resource_context + 0x9c),
+               0xffffffff,0,0);
     local_20 = &LAB_000682b4_1;
     uStack_1c = 6;
-    iVar1 = FUN_00068240(&local_20);
-    if (((iVar1 == 0) && (iVar1 = FUN_00068204(resource_context + 0x34), iVar1 == 0)) &&
-       (iVar1 = FUN_00085406("generic","sram0.shm",&local_24), iVar1 == 0)) {
+    iVar1 = create_and_initialize_data_structure(&local_20);
+    if (((iVar1 == 0) &&
+        (iVar1 = add_data_structure_to_secondary_list(resource_context + 0x34), iVar1 == 0)) &&
+       (iVar1 = execute_resource_callback("generic","sram0.shm",&local_24), iVar1 == 0)) {
       if (*(int *)(local_24 + 8) == 0) {
         local_24 = 0;
       }
@@ -36,10 +38,12 @@ int initialize_resource_structure_with_memory_layout
         local_24 = local_24 + 0xc;
       }
       *(int *)(resource_context + 0xa0) = local_24;
-      iVar1 = FUN_0007ed88(*(undefined4 *)(resource_context + 0x94));
+      iVar1 = setup_audio_processing_with_buffer_initialization
+                        (*(undefined4 *)(resource_context + 0x94));
       *(int *)(resource_context + 0xd4) = iVar1;
       if (iVar1 != 0) {
-        iVar1 = FUN_0007ed88(*(undefined4 *)(resource_context + 0x94));
+        iVar1 = setup_audio_processing_with_buffer_initialization
+                          (*(undefined4 *)(resource_context + 0x94));
         *(int *)(resource_context + 0xd8) = iVar1;
         if (iVar1 != 0) {
           *(undefined4 *)(resource_context + 0xa8) = *(undefined4 *)(resource_context + 0x8c);

@@ -13,7 +13,7 @@ void manage_ble_attribute_and_crypto_state
   int iVar1;
   int iVar2;
   
-  FUN_000735cc(&DAT_200063a0);
+  handle_ble_connection_state_management_with_privilege_and_sensors(&DAT_200063a0);
   iVar1 = get_ble_handle_value(&DAT_20006448);
   if (-1 < iVar1 << 0x1c) {
     derive_and_process_crypto_keys();
@@ -25,11 +25,11 @@ void manage_ble_attribute_and_crypto_state
     if ((int)((uint)*(byte *)(iVar1 + 8) << 0x1f) < 0) {
       iVar2 = get_ble_handle_value(iVar1 + 0xc);
       if (-1 < iVar2 << 0x1f) {
-        FUN_000826e0(iVar1 + 0xc,2);
+        set_bits_in_value(iVar1 + 0xc,2);
       }
     }
   }
-  FUN_00082932(param_3,param_4,param_5,&DAT_20006380);
+  safe_memory_copy_with_bounds_check(param_3,param_4,param_5,&DAT_20006380);
   return;
 }
 

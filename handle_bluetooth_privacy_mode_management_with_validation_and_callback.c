@@ -24,7 +24,7 @@ int handle_bluetooth_privacy_mode_management_with_validation_and_callback(void)
         if ((uint)DAT_20002007 <= (uint)bVar2) {
           return 0;
         }
-        FUN_00080fba(auStack_2f,auStack_28 + (uint)bVar2 * 0x16);
+        copy_memory_short_and_word(auStack_2f,auStack_28 + (uint)bVar2 * 0x16);
         local_30 = 1;
         iVar1 = bluetooth_hci_command_processing_with_state_management_and_parameter
                           (extraout_r2,&local_30);

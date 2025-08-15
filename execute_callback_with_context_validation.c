@@ -18,7 +18,7 @@ execute_callback_with_context_validation
   if (((callback_context == 0) || (output_buffer == (int *)0x0)) || (validation_flag == 0)) {
     local_14 = "Invalid instance, endpoint or configuration";
     local_18 = 2;
-    FUN_0007e9ea(&DAT_000881d8,0x1040,&local_18);
+    process_and_compress_data_with_validation_wrapper(&DAT_000881d8,0x1040,&local_18);
     uVar1 = 0xffffffea;
   }
   else {
@@ -32,7 +32,7 @@ execute_callback_with_context_validation
     }
     local_14 = "Invalid backend configuration";
     local_18 = 2;
-    FUN_0007e9ea(&DAT_000881d8,0x1040,&local_18);
+    process_and_compress_data_with_validation_wrapper(&DAT_000881d8,0x1040,&local_18);
     uVar1 = 0xfffffffb;
   }
   return uVar1;

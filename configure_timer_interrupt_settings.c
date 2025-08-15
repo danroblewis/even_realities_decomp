@@ -13,7 +13,7 @@ int configure_timer_interrupt_settings
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","chan >= 0 && chan < (1 + 1)",
                  "WEST_TOPDIR/zephyr/drivers/timer/nrf_rtc_timer.c",0x86,param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/drivers/timer/nrf_rtc_timer.c",0x86);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/drivers/timer/nrf_rtc_timer.c",0x86);
   }
   return param_1 * 4 + 0x50015140;
 }

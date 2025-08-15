@@ -16,9 +16,10 @@ add_resource_entry_with_validation
     uVar1 = 0xffffffea;
   }
   else if (operation_type == 1) {
-    uVar1 = FUN_00070fb4(resource_entry,resource_context + 0xe0,resource_entry + 0x40,0xffffffff,
-                         0xffffffff,*(undefined4 *)(resource_context + 0x1ac),&LAB_0007ed26_1,
-                         additional_data);
+    uVar1 = manage_audio_data_structure_with_validation
+                      (resource_entry,resource_context + 0xe0,resource_entry + 0x40,0xffffffff,
+                       0xffffffff,*(undefined4 *)(resource_context + 0x1ac),&LAB_0007ed26_1,
+                       additional_data);
   }
   else {
     uVar1 = 0;

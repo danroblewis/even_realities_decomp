@@ -24,7 +24,7 @@ undefined4 format_json_string_with_escaping(byte *param_1,int *param_2,undefined
   if (param_2 != (int *)0x0) {
     uStack_28 = param_3;
     if (param_1 == (byte *)0x0) {
-      iVar4 = FUN_00084f58(param_2,3,0x2222,0,0);
+      iVar4 = resize_dynamic_buffer(param_2,3,0x2222,0,0);
       if (iVar4 != 0) {
         safe_string_copy_with_padding(iVar4,&local_2c,param_2[1] - param_2[2]);
         return 1;
@@ -51,7 +51,7 @@ LAB_000645ac:
         }
       }
       pbVar6 = pbVar6 + (iVar7 - (int)param_1);
-      puVar1 = (undefined1 *)FUN_00084f58(param_2,pbVar6 + 3,iVar4,0,param_1);
+      puVar1 = (undefined1 *)resize_dynamic_buffer(param_2,pbVar6 + 3,iVar4,0,param_1);
       if (puVar1 != (undefined1 *)0x0) {
         pbVar3 = puVar1 + 1;
         *puVar1 = 0x22;

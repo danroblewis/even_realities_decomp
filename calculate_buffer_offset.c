@@ -1,31 +1,33 @@
 /*
  * Function: calculate_buffer_offset
- * Entry:    0005f4d4
+ * Entry:    000855e6
  * Prototype: undefined calculate_buffer_offset()
  */
 
 
-void calculate_buffer_offset(int *param_1,int param_2,undefined4 param_3,undefined4 param_4)
+int calculate_buffer_offset(int param_1,uint param_2)
 
 {
-  undefined4 uVar1;
+  int iVar1;
+  uint uVar2;
   
-  if (param_1 == (int *)0x0) {
-    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf","WEST_TOPDIR/zephyr/subsys/net/buf_simple.c",
-                 0x2b,param_4);
-    uVar1 = 0x2b;
-  }
-  else {
-    if ((short)param_1[1] == 0) {
-      *param_1 = param_1[2] + param_2;
-      return;
+  if (*(code **)(param_1 + 0x30) == (code *)0x0) {
+    uVar2 = 0;
+    if (*(uint *)(param_1 + 0xc) < 0x20) {
+      uVar2 = param_2 >> (*(uint *)(param_1 + 0xc) & 0xff);
     }
-    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf->len == 0U",
-                 "WEST_TOPDIR/zephyr/subsys/net/buf_simple.c",0x2c,param_4);
-    uVar1 = 0x2c;
+    if ((*(int *)(param_1 + 4) == 0) || (*(uint *)(param_1 + 8) <= param_2)) {
+      iVar1 = -1;
+    }
+    else {
+      iVar1 = (*(uint *)(param_1 + 0x10) & param_2) + *(int *)(*(int *)(param_1 + 4) + uVar2 * 4);
+    }
+    return iVar1;
   }
-                    /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf_simple.c",uVar1);
+                    /* WARNING: Could not recover jumptable at 0x0008561a. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  iVar1 = (**(code **)(param_1 + 0x30))();
+  return iVar1;
 }
 
 

@@ -25,7 +25,7 @@ void process_ble_connection_batch(void)
       uVar2 = 0x2f3;
 LAB_00071f60:
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/kernel/thread.c",uVar2);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/thread.c",uVar2);
     }
     if (&UNK_00087fc7 < piVar5) {
       process_ble_connection_state();

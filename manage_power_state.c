@@ -15,9 +15,10 @@ void manage_power_state(undefined4 power_data)
   if (iVar1 == 0) {
     return;
   }
-  uVar2 = FUN_0008157a(power_data);
+  uVar2 = validate_and_update_ble_connection_parameters(power_data);
   if (((int)uVar2 != 0) && ((int)uVar2 != -0x78)) {
-    FUN_0007350c(iVar1 + 0x38,(int)((ulonglong)uVar2 >> 0x20),0x8000,0);
+    handle_ble_connection_timeout_with_uart_setup
+              (iVar1 + 0x38,(int)((ulonglong)uVar2 >> 0x20),0x8000,0);
     return;
   }
   acquire_mutex_with_priority_control(iVar1 + 0x38);

@@ -34,12 +34,12 @@ void manage_ble_connection_security(int *param_1,int param_2)
   piVar10 = param_1 + -0x3b;
   piVar9 = param_1 + -0x3c;
   iVar11 = *param_1;
-  iVar1 = FUN_000831be(piVar10,1);
+  iVar1 = clear_bit_and_return_previous_state(piVar10,1);
   if (iVar1 == 0) {
     return;
   }
   if (param_2 != 0) {
-    iVar1 = FUN_00082ff6(piVar10,3);
+    iVar1 = extract_bit_from_value(piVar10,3);
     if (iVar1 == 0) {
       return;
     }
@@ -51,22 +51,22 @@ void manage_ble_connection_security(int *param_1,int param_2)
     else {
       uVar8 = 0;
     }
-    FUN_00083090(piVar10,2);
+    set_bit_in_value(piVar10,2);
     goto LAB_0005e1fa;
   }
   if (*(char *)(iVar11 + 0xb) == '\0') {
     return;
   }
-  iVar1 = FUN_00082ff6(piVar10,3);
+  iVar1 = extract_bit_from_value(piVar10,3);
   if (iVar1 == 0) {
-    FUN_00083204(piVar9);
+    reset_ble_connection_state_and_acquire_mutex(piVar9);
     return;
   }
-  iVar1 = FUN_00082ff6(piVar10,5);
+  iVar1 = extract_bit_from_value(piVar10,5);
   if (iVar1 != 0) {
     if (((int)((uint)*(byte *)(param_1 + -2) << 0x1c) < 0) &&
        ((int)((uint)*(byte *)((int)param_1 + -7) << 0x1c) < 0)) {
-      FUN_00083090(piVar10,0x11);
+      set_bit_in_value(piVar10,0x11);
     }
     *(byte *)(param_1 + -2) = *(byte *)(param_1 + -2) & 0xf7;
     *(byte *)((int)param_1 + -7) = *(byte *)((int)param_1 + -7) & 0xf7;
@@ -75,7 +75,7 @@ void manage_ble_connection_security(int *param_1,int param_2)
   if ((int)(uVar2 << 0x1f) < 0) {
     uVar5 = 6;
 LAB_0005e264:
-    FUN_00083090(piVar9,uVar5);
+    set_bit_in_value(piVar9,uVar5);
   }
   else {
     if ((int)(uVar2 << 0x1e) < 0) {
@@ -87,21 +87,21 @@ LAB_0005e264:
       goto LAB_0005e264;
     }
   }
-  uVar5 = FUN_00083090(piVar10,2);
+  uVar5 = set_bit_in_value(piVar10,2);
   if (*(int *)(*param_1 + 0xc0) == 0) {
     uStack_68 = process_data_with_callback_validation_alt6(*param_1 + 0x90);
     local_6c = "No keys space for %s";
     local_64 = 0x200;
     local_70 = 0x1000003;
-    FUN_00083074(&DAT_00088180,0x1c40,&local_70);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1c40,&local_70);
     return;
   }
-  iVar1 = FUN_00082ff6(uVar5,5);
+  iVar1 = extract_bit_from_value(uVar5,5);
   if ((iVar1 == 0) && ((int)((uint)*(byte *)(param_1 + -2) << 0x1f) < 0)) {
     iVar11 = *(int *)(*param_1 + 0xc0);
     iVar1 = validate_and_process_ble_characteristics_with_callback_execution(local_44,0x1a);
     if (iVar1 == 0) {
-      iVar1 = FUN_000830b0(piVar9,6);
+      iVar1 = handle_ble_connection_memory_allocation(piVar9,6);
       if (iVar1 == 0) {
         local_4c = "Unable to allocate Encrypt Info buffer";
       }
@@ -113,14 +113,14 @@ LAB_0005e264:
           fill_memory_buffer(uVar2 + iVar3,0,0x10 - uVar2);
         }
         update_ble_connection_state_with_error_handling(piVar9,iVar1,0);
-        iVar1 = FUN_000830b0(piVar9,7);
+        iVar1 = handle_ble_connection_memory_allocation(piVar9,7);
         if (iVar1 != 0) {
           puVar4 = (undefined2 *)ble_memory_allocation_utility(iVar1 + 0xc,10);
           *(undefined4 *)(puVar4 + 1) = local_34;
           *(undefined4 *)(puVar4 + 3) = uStack_30;
           *puVar4 = local_2c;
           update_ble_connection_state_with_error_handling(piVar9,iVar1,&LAB_0005e41c_1);
-          iVar1 = FUN_00082ff6(piVar10,0xd);
+          iVar1 = extract_bit_from_value(piVar10,0xd);
           if (iVar1 != 0) {
             set_ble_attribute_property(iVar11,1);
             puVar7 = local_44;
@@ -146,7 +146,7 @@ LAB_0005e264:
       local_4c = "Unable to get random bytes";
     }
     local_50 = 2;
-    FUN_00083074(&DAT_00088180,0x1040,&local_50);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1040,&local_50);
   }
 LAB_0005e2f2:
   if ((short)param_1[-2] != 0) {

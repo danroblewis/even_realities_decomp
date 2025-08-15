@@ -13,7 +13,7 @@ undefined4 handle_timer_interrupt_callback_execution(int param_1)
   
   iVar2 = *(int *)(param_1 + 4);
   process_data_with_callback_execution_alt4(0x18,1,0);
-  iVar2 = FUN_00067dfc(iVar2,iVar2 + 8,0x63b41);
+  iVar2 = setup_timer_configuration(iVar2,iVar2 + 8,0x63b41);
   if (iVar2 == 0xbad0000) {
     uVar1 = 0;
   }

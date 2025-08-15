@@ -47,7 +47,8 @@ void bluetooth_hci_command_processing_main_loop(void)
       if (2 < uVar6) {
         if (uVar6 == 4) {
           if (puVar7[0xc] == '\0') {
-            uVar8 = thunk_FUN_000727ac(&DAT_2000214c,(int)((ulonglong)uVar8 >> 0x20),0,0);
+            uVar8 = handle_ble_connection_state_transition_with_validation
+                              (&DAT_2000214c,(int)((ulonglong)uVar8 >> 0x20),0,0);
             uVar5 = (undefined4)((ulonglong)uVar8 >> 0x20);
             iVar3 = (int)uVar8;
             if (iVar3 == 0) {

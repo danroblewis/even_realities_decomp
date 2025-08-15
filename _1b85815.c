@@ -75,16 +75,16 @@ void _1b85815(void)
   pcVar3[0xfe5] = -1;
   *pcVar3 = '\x01';
   WORK_MODE = pcVar3;
-  FUN_0007c030(pcVar3 + 8,1);
-  FUN_0007c030(pcVar3 + 0x20,10);
-  FUN_0007c030(pcVar3 + 0x38,1);
-  FUN_0007c030(pcVar3 + 0x50,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 8,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0x20,10);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0x38,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0x50,1);
   pcVar11 = pcVar3 + 0x68;
-  FUN_0007c030(pcVar3 + 0xaf4,1);
-  FUN_0007c030(pcVar11,1);
-  FUN_0007c030(pcVar3 + 0x80,1);
-  FUN_0007c030(pcVar3 + 0x98,1);
-  FUN_0007c030(pcVar3 + 0xb0,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0xaf4,1);
+  setup_bluetooth_stack_wrapper(pcVar11,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0x80,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0x98,1);
+  setup_bluetooth_stack_wrapper(pcVar3 + 0xb0,1);
   pcVar8 = WORK_MODE;
   WORK_MODE[1] = -1;
   pcVar8[0x105c] = '\0';
@@ -95,7 +95,7 @@ void _1b85815(void)
   if (iVar2 != 0) {
     fill_memory_buffer(iVar2,0,0x6a);
   }
-  FUN_0007d230(0x65920080);
+  set_work_mode_timestamp(0x65920080);
   uVar4 = malloc_maybe(7);
   *(undefined4 *)(pcVar3 + 0xff0) = uVar4;
   puVar5 = (undefined4 *)malloc_maybe(5);
@@ -206,7 +206,7 @@ void _1b85815(void)
   pcVar3[0x1089] = cVar1;
   pcVar3[1] = '\0';
   sett_init(pcVar3 + 0x103c);
-  FUN_0007c360(pcVar3);
+  load_system_settings_and_initialize_work_mode(pcVar3);
   iVar2 = LOG_LEVEL;
   if (DAT_200069f8 == 0) {
     *pcVar3 = '\x01';
@@ -349,7 +349,7 @@ LAB_00017372:
           DEBUG_PRINT("Initialise charger.\n");
           DEBUG_PRINT("PMIC device ok\n");
           configure_device_parameters();
-          iVar2 = FUN_0007cefc();
+          iVar2 = validate_egp_system_data_format();
           if (iVar2 != 0) {
             DEBUG_PRINT("Old board, need to restrain Vterm to 4.2V\n");
             format_and_send_sensor_data();
@@ -386,7 +386,7 @@ LAB_00017372:
           pcVar3[0x1079] = '\0';
           pcVar3[0x107a] = '\0';
           pcVar3[0x107b] = '\0';
-          FUN_0007d0aa(pcVar3 + 0x1078);
+          read_sensor_data_and_scale_by_1024(pcVar3 + 0x1078);
           set_sensor_status_bits(DAT_2007fc70);
           goto LAB_00017414;
         }
@@ -408,7 +408,7 @@ LAB_00017414:
       uVar10 = (uint)(byte)pcVar3[0x1059];
       if (uVar10 == 0) break;
       if ((int)(uVar10 << 0x1f) < 0) {
-        FUN_0007c34a(pcVar3,0);
+        prepare_system_settings_and_collect_status_data(pcVar3,0);
         bVar9 = pcVar3[0x1059] & 0xfe;
         goto LAB_0001762a;
       }
@@ -429,7 +429,7 @@ LAB_0001762a:
         pcVar3[0x1059] = bVar9;
       }
     }
-    FUN_0007c038(1);
+    calculate_ble_schedule_timing_with_division(1);
     uVar4 = extraout_r1_01;
   } while( true );
 }

@@ -28,7 +28,7 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
       if (DAT_2001cf8f._1_1_ != '\0') {
         return 0;
       }
-      gui_utf_adv_draw_configure();
+      configure_advanced_utf_drawing();
       gui_screen_clear();
       reset_animation_counters();
       DAT_2001cf91 = cVar2;
@@ -114,7 +114,7 @@ undefined4 ui_set_imu_pitch_task(int param_1,undefined4 param_2,int param_3)
     }
     animate_framebuffer_with_pattern();
   }
-  gui_utf_adv_draw_configure();
+  configure_advanced_utf_drawing();
   DAT_2001cf91 = 0;
   DAT_2001cf8f = 0;
   return 0;

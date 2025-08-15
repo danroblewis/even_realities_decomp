@@ -30,7 +30,7 @@ undefined4 derive_key_output(int output,uint output_size,int kdf_ctx)
       if (0x1f < output_size) {
         uVar2 = 0x20;
       }
-      FUN_0007feaa(output,uVar2,iVar3,uVar2);
+      safe_memory_copy_with_bounds_check_alt(output,uVar2,iVar3,uVar2);
       if (output_size < 0x20) {
         output_size = 0x20;
       }

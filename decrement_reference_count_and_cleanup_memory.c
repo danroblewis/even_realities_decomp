@@ -14,7 +14,7 @@ void decrement_reference_count_and_cleanup_memory(int param_1)
   if (param_1 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf","WEST_TOPDIR/zephyr/subsys/net/buf.c",0x1d3);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x1d3);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x1d3);
   }
   do {
     iVar2 = *(int *)(param_1 + 4);

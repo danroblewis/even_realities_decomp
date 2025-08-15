@@ -47,8 +47,8 @@ int process_ble_pairing_comprehensive(int param_1,int param_2)
   if (iVar4 != 0) {
     local_14 = "Remote is using Debug Public key";
     local_18 = 2;
-    FUN_00083074(&DAT_00088180,0x10c0,&local_18);
-    FUN_00083090(param_1 + 4,0xe);
+    process_and_compress_data_wrapper(&DAT_00088180,0x10c0,&local_18);
+    set_bit_in_value(param_1 + 4,0xe);
     iVar4 = *(int *)(param_1 + 0xf0);
     if (*(int *)(iVar4 + 0xc0) == 0) {
       uVar5 = initialize_ble_attribute(*(undefined1 *)(iVar4 + 8),iVar4 + 0x90);
@@ -61,19 +61,19 @@ int process_ble_pairing_comprehensive(int param_1,int param_2)
     }
   }
   if (DAT_2000af48 == (undefined4 *)0x0) {
-    FUN_00083090(param_1 + 4,6);
+    set_bit_in_value(param_1 + 4,6);
     return 0;
   }
   iVar4 = check_ble_connection_state();
   iVar10 = param_1 + 4;
-  iVar1 = FUN_00082ff6(iVar10,0xe);
+  iVar1 = extract_bit_from_value(iVar10,0xe);
   if ((iVar1 == 0) && (iVar1 = memcmp_byte_arrays(param_1 + 0x57,DAT_2000af48,0x20), iVar1 == 0)) {
     local_1c = "Remote public key rejected";
     local_20 = 2;
-    FUN_00083074(&DAT_00088180,0x1080,&local_20);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1080,&local_20);
     return 8;
   }
-  iVar1 = FUN_000830b0(param_1,0xc);
+  iVar1 = handle_ble_connection_memory_allocation(param_1,0xc);
   if (iVar1 == 0) {
     return 8;
   }
@@ -99,16 +99,16 @@ int process_ble_pairing_comprehensive(int param_1,int param_2)
   switch(uStack_38) {
   case 0:
   case 3:
-    FUN_00083090(param_1,4);
+    set_bit_in_value(param_1,4);
     iVar4 = process_ble_authentication_operation();
     if (iVar4 != 0) {
       return iVar4;
     }
     goto LAB_0005cf9a;
   case 1:
-    uVar5 = FUN_00083090(param_1,3);
-    FUN_00083090(uVar5,0xe);
-    FUN_00083090(iVar10,10);
+    uVar5 = set_bit_in_value(param_1,3);
+    set_bit_in_value(uVar5,0xe);
+    set_bit_in_value(iVar10,10);
     (**(code **)(iVar4 + 4))(*(undefined4 *)(param_1 + 0xf0));
     goto LAB_0005cf9a;
   case 2:
@@ -121,24 +121,24 @@ int process_ble_pairing_comprehensive(int param_1,int param_2)
     *(undefined1 *)(param_1 + 0xdc) = 0;
     *(uint *)(param_1 + 0xd8) = *(uint *)(param_1 + 0xd8) % 1000000;
     if ((piVar3 != (int *)0x0) && (*piVar3 != 0)) {
-      FUN_00083090(iVar10,0xb);
+      set_bit_in_value(iVar10,0xb);
       (*(code *)*piVar3)(uVar5,*(undefined4 *)(param_1 + 0xd8));
     }
-    iVar4 = FUN_00083090(param_1,3);
+    iVar4 = set_bit_in_value(param_1,3);
     uVar5 = 0xe;
     break;
   default:
     local_3c = "Unknown pairing method (%u)";
     local_40 = 3;
-    FUN_00083074(&DAT_00088180,0x1840,&local_40);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1840,&local_40);
     return 8;
   case 5:
     uVar5 = 4;
     iVar4 = param_1;
   }
-  FUN_00083090(iVar4,uVar5);
+  set_bit_in_value(iVar4,uVar5);
 LAB_0005cf9a:
-  FUN_00083090(iVar10,7);
+  set_bit_in_value(iVar10,7);
   iVar4 = process_ble_data_with_processing(8);
   if (iVar4 == 0) {
     iVar4 = process_ble_characteristics_with_validation(param_1);

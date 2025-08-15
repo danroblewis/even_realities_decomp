@@ -74,10 +74,10 @@ int calculate_sha256_hash_with_padding_and_processing(int param_1,undefined4 par
           iVar2 = iVar1;
           if (param_1 + 0x30 == iVar1) {
             cleanup_sha256_context_with_memory_clearing(auStack_9c);
-            FUN_00079808(&DAT_2000ce00,0x1a0);
-            FUN_00079808(auStack_cc,0x30);
-            FUN_00079808(local_ec,0x20);
-            FUN_00079808(&local_fc,0x10);
+            clear_memory_buffer_with_zero_fill(&DAT_2000ce00,0x1a0);
+            clear_memory_buffer_with_zero_fill(auStack_cc,0x30);
+            clear_memory_buffer_with_zero_fill(local_ec,0x20);
+            clear_memory_buffer_with_zero_fill(&local_fc,0x10);
             return 0;
           }
         }
@@ -85,11 +85,11 @@ int calculate_sha256_hash_with_padding_and_processing(int param_1,undefined4 par
     }
 LAB_000799a0:
     cleanup_sha256_context_with_memory_clearing(auStack_9c);
-    FUN_00079808(&DAT_2000ce00,0x1a0);
-    FUN_00079808(auStack_cc,0x30);
-    FUN_00079808(local_ec,0x20);
-    FUN_00079808(&local_fc,0x10);
-    FUN_00079808(param_1,0x30);
+    clear_memory_buffer_with_zero_fill(&DAT_2000ce00,0x1a0);
+    clear_memory_buffer_with_zero_fill(auStack_cc,0x30);
+    clear_memory_buffer_with_zero_fill(local_ec,0x20);
+    clear_memory_buffer_with_zero_fill(&local_fc,0x10);
+    clear_memory_buffer_with_zero_fill(param_1,0x30);
   }
   else {
     iVar1 = -0x38;

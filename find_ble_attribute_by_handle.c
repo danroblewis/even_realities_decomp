@@ -16,7 +16,7 @@ undefined1 * find_ble_attribute_by_handle(int param_1)
   puVar2 = &DAT_2000aed4;
   while( true ) {
     if (param_1 == 0) {
-      iVar1 = FUN_000826b2(puVar2 + 1,&DAT_000f2b3a);
+      iVar1 = compare_byte_arrays_7_bytes(puVar2 + 1,&DAT_000f2b3a);
     }
     else {
       iVar1 = ble_uuid_comparison_handler(param_1,*puVar2);

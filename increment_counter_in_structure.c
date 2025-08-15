@@ -13,7 +13,7 @@ void increment_counter_in_structure
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf","WEST_TOPDIR/zephyr/subsys/net/buf.c",0x202,
                  param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x202);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x202);
   }
   *(char *)(param_1 + 8) = *(char *)(param_1 + 8) + '\x01';
   return;

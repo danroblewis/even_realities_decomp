@@ -26,9 +26,9 @@ int bt_connection_disconnect(undefined2 *conn_handle,undefined1 reason_code)
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x5d9);
     DEBUG_PRINT2("\tInvalid conn type %u\n",*(undefined1 *)(conn_handle + 1));
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x5d9);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x5d9);
   case 7:
-    iVar1 = FUN_00080ed8(*conn_handle);
+    iVar1 = send_ble_disconnect_command(*conn_handle);
     if (iVar1 != 0) {
       return iVar1;
     }

@@ -22,7 +22,7 @@ int bt_connection_disconnect_with_parameter_validation_and_callback_and_state_va
   iVar2 = bt_connection_state_transition_with_callback_execution(uVar1,4,0x10000,0);
   if (iVar2 == 0) {
     local_18 = 3;
-    FUN_00081746(&DAT_00088160,0x1840,&local_18);
+    process_and_compress_data_with_validation(&DAT_00088160,0x1840,&local_18);
     return 0;
   }
   puVar3 = (undefined1 *)ble_memory_allocation_utility(iVar2 + 0xc,4);

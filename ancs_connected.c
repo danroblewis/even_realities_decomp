@@ -43,12 +43,12 @@ void ancs_connected(int param_1,int param_2)
         return;
       }
     }
-    FUN_0008157a(param_1,&DAT_20002f60);
+    validate_and_update_ble_connection_parameters(param_1,&DAT_20002f60);
     iVar4 = get_work_mode();
-    uVar3 = FUN_0007c0c8();
+    uVar3 = calculate_ble_connection_timing_with_scaling_alt();
     *(undefined4 *)(iVar4 + 0xae4) = uVar3;
     iVar4 = get_work_mode();
-    uVar3 = FUN_0007c0c8();
+    uVar3 = calculate_ble_connection_timing_with_scaling_alt();
     *(undefined4 *)(iVar4 + 0xae8) = uVar3;
     iVar4 = ANCS_CONNECTION_HANDLE;
     *(undefined1 *)(ANCS_CONNECTION_HANDLE + 0x365) = 1;

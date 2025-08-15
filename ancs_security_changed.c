@@ -61,13 +61,13 @@ void ancs_security_changed(undefined4 param_1,undefined4 param_2,int param_3)
           handle_heartbeat();
         }
       }
-      FUN_0007c0a8(500);
+      calculate_ble_schedule_timing_with_division_alt(500);
       system_fatal_error_handler_with_priority_control(1);
 LAB_000185da:
       DEBUG_PRINT("%s(): Security failed: %s level %u err %d\n\n","ancs_security_changed",auStack_38
                   ,param_2);
     }
-    FUN_0008149a(param_1,2);
+    update_ble_connection_flags_and_permissions(param_1,2);
   }
   return;
 }

@@ -25,7 +25,7 @@ void create_and_configure_ble_descriptor
       return;
     }
     *puVar1 = param_1;
-    FUN_000828da(puVar1 + 1,param_2);
+    copy_data_structure_fields(puVar1 + 1,param_2);
   }
   uVar3 = (uint)*(ushort *)(puVar1 + 10);
   if (*(ushort *)(puVar1 + 8) == 0) {
@@ -46,7 +46,7 @@ LAB_0005a196:
   }
   *(short *)(puVar1 + 10) = (short)param_4;
 LAB_0005a178:
-  iVar2 = FUN_00080f92(*puVar1,puVar1 + 1);
+  iVar2 = is_ble_uuid_valid_and_available(*puVar1,puVar1 + 1);
   if (iVar2 == 0) {
     return;
   }

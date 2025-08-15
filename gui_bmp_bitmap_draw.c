@@ -41,7 +41,7 @@ gui_bmp_bitmap_draw(uint bitmap_id,int x_pos,int y_pos,int param_4,int param_hei
         _clean_fb_data(MAIN_FRAMEBUFFER,0,x_pos,y_pos,bitmap_width + 2 + x_pos,bitmap_height + y_pos
                       );
       }
-      draw_bitmap_to_framebuffer
+      draw_4bit_bitmap_to_framebuffer
                 (MAIN_FRAMEBUFFER,bitmap_data,bitmap_width / 2,bitmap_height,x_pos,y_pos);
       iVar1 = get_display_config_flags();
       if (-1 < iVar1 << 0x1e) {
@@ -60,7 +60,7 @@ gui_bmp_bitmap_draw(uint bitmap_id,int x_pos,int y_pos,int param_4,int param_hei
         _clean_fb_data(MAIN_FRAMEBUFFER,0,iVar1,y_pos,iVar1 + 0x18,y_pos + 0x18);
       }
       bitmap_data = get_bitmap_data_by_index(bitmap_id & 0xff,0x120);
-      draw_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,bitmap_data,0xc,0x18,x_pos,y_pos);
+      draw_4bit_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,bitmap_data,0xc,0x18,x_pos,y_pos);
       iVar1 = get_display_config_flags();
       if (-1 < iVar1 << 0x1e) {
         return 0;

@@ -24,7 +24,7 @@ uint bluetooth_hci_command_processing_with_validation_and_parameter
     if (uVar5 <= (uVar3 & 0xff)) {
       return 0xfffffffe;
     }
-    iVar2 = FUN_00080fa4(param_1,puVar4,param_3,uVar3 & 0xff,param_4);
+    iVar2 = compare_byte_arrays_7_bytes(param_1,puVar4,param_3,uVar3 & 0xff,param_4);
     puVar4 = (undefined4 *)((int)puVar4 + 7);
     uVar1 = uVar3 + 1;
     param_3 = extraout_r2;

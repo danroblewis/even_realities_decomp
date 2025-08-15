@@ -28,11 +28,11 @@ undefined4 sha256_update(int sha256_ctx,int data,uint data_len)
           uVar4 = 0x10 - iVar5;
           iVar2 = iVar5 + 0x30 + sha256_ctx;
           if (data_len < uVar4) {
-            FUN_0007feaa(iVar2,data_len,data,data_len);
+            safe_memory_copy_with_bounds_check_alt(iVar2,data_len,data,data_len);
             *(uint *)(sha256_ctx + 0x44) = *(int *)(sha256_ctx + 0x44) + data_len;
             return 1;
           }
-          FUN_0007feaa(iVar2,uVar4,data,uVar4);
+          safe_memory_copy_with_bounds_check_alt(iVar2,uVar4,data,uVar4);
           *(undefined4 *)(sha256_ctx + 0x44) = 0;
           data_len = (data_len - 0x10) + iVar5;
           data = data + uVar4;
@@ -58,7 +58,7 @@ undefined4 sha256_update(int sha256_ctx,int data,uint data_len)
         if (data_len == 0) {
           return 1;
         }
-        FUN_0007feaa(sha256_ctx + 0x30,data_len,data,data_len);
+        safe_memory_copy_with_bounds_check_alt(sha256_ctx + 0x30,data_len,data,data_len);
         *(uint *)(sha256_ctx + 0x44) = data_len;
         return 1;
       }

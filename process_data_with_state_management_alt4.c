@@ -15,8 +15,9 @@ void process_data_with_state_management_alt4(void)
                ,0x71,in_r3);
   DEBUG_PRINT2("\tImpossible slot number\n");
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/include/mgmt/mcumgr/grp/img_mgmt/img_mgmt_priv.h"
-                    ,0x71);
+  trigger_system_service_call
+            ("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/include/mgmt/mcumgr/grp/img_mgmt/img_mgmt_priv.h"
+             ,0x71);
 }
 
 

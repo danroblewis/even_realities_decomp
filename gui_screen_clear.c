@@ -32,7 +32,7 @@ undefined4 gui_screen_clear(void)
     uVar2 = 0xffffffff;
   }
   else {
-    FUN_0007d6f4(0);
+    initialize_jbd_display_system_with_memory_and_commands(0);
     uVar2 = 0;
   }
   return uVar2;

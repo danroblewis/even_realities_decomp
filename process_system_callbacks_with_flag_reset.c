@@ -19,7 +19,7 @@ void process_system_callbacks_with_flag_reset(void)
                    "WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x1d1);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x1d1);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x1d1);
     }
     if (&UNK_000882af < piVar2) break;
     if ((*(char *)(piVar2[1] + 5) != '\0') && (*(code **)(*piVar2 + 4) != (code *)0x0)) {

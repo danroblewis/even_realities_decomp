@@ -12,12 +12,12 @@ int process_data_with_initialization_and_store(undefined2 param_1,undefined4 par
   int iVar2;
   undefined2 *puVar3;
   
-  iVar1 = FUN_000836de(&DAT_20003b4c,param_2,0xffffffff,0xffffffff);
+  iVar1 = process_ble_connection_data(&DAT_20003b4c,param_2,0xffffffff,0xffffffff);
   if (iVar1 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0x10a);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0x10a);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/hci_core.c",0x10a);
   }
   calculate_buffer_offset(iVar1 + 0xc,1);
   *(undefined1 *)(iVar1 + 0x18) = 0;

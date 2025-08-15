@@ -13,9 +13,9 @@ void initialize_ble_characteristic_value_buffer
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","gatt_sub_is_empty(sub)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0xd5c);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0xd5c);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0xd5c);
   }
-  FUN_000828da(param_1 + 1,&DAT_000f2b3a,param_3,param_4);
+  copy_data_structure_fields(param_1 + 1,&DAT_000f2b3a,param_3,param_4);
   return;
 }
 

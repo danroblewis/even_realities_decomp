@@ -61,7 +61,7 @@ void low_speed_peripheral_dispatch_thread(char *param_1)
       else {
         cVar10 = cVar10 + '\x01';
         if ('\x04' < cVar10) {
-          iVar3 = FUN_0008149a(iVar1,2);
+          iVar3 = update_ble_connection_flags_and_permissions(iVar1,2);
           if ((iVar3 != 0) && (2 < LOG_LEVEL)) {
             if (IS_DEBUG == 0) {
               DEBUG_PRINT("%s(): Failed to set security (err %d)\n\n",
@@ -144,9 +144,9 @@ LAB_0002abb8:
         if (param_1[1] != '\x01') break;
         disable_watchdog();
         if (*param_1 == '\x01') {
-          FUN_0007d1d6(param_1,*(undefined4 *)(param_1 + 0xfec));
+          handle_work_mode_timestamp_operations(param_1,*(undefined4 *)(param_1 + 0xfec));
         }
-        lVar12 = FUN_0007cb2c();
+        lVar12 = calculate_mathematical_operation_with_bit_shifting();
         if (-(int)((ulonglong)(lVar12 - *(longlong *)(param_1 + 0x1060)) >> 0x20) <
             (int)(uint)(&UNK_000927bf < (undefined *)(lVar12 - *(longlong *)(param_1 + 0x1060)))) {
           if (0 < LOG_LEVEL) {
@@ -172,11 +172,11 @@ LAB_0002ac9e:
         execute_hardware_operation_with_retry((int)uVar11,(int)((ulonglong)uVar11 >> 0x20),uVar4,0);
       }
       if (*param_1 == '\x01') {
-        FUN_0007d1d6(param_1,*(undefined4 *)(param_1 + 0xfec));
+        handle_work_mode_timestamp_operations(param_1,*(undefined4 *)(param_1 + 0xfec));
       }
       iVar3 = get_data_byte_99();
       if ((iVar3 != 0) &&
-         (uVar11 = FUN_0007cb2c(),
+         (uVar11 = calculate_mathematical_operation_with_bit_shifting(),
          (int)(uint)((uint)uVar11 < 60000) <= (int)((ulonglong)uVar11 >> 0x20))) {
         check_driver_and_execute();
         set_system_navigation_mode(0);
@@ -198,9 +198,9 @@ LAB_0002ac9e:
       check_work_mode(uVar6,uVar2,uVar9);
       check_disp_onboarding(uVar6);
       if ((((iVar1 != 0) && (param_1[0x1068] == '\0')) &&
-          (iVar3 = FUN_0007cb2c(), 30000 < (uint)(iVar3 - *(int *)(param_1 + 0xae4)))) &&
-         (param_1[1] != '\x01')) {
-        uVar6 = FUN_0007cb2c();
+          (iVar3 = calculate_mathematical_operation_with_bit_shifting(),
+          30000 < (uint)(iVar3 - *(int *)(param_1 + 0xae4)))) && (param_1[1] != '\x01')) {
+        uVar6 = calculate_mathematical_operation_with_bit_shifting();
         *(undefined4 *)(param_1 + 0xae4) = uVar6;
         bt_connection_disconnect(iVar1,0x13);
       }
@@ -213,7 +213,7 @@ LAB_0002ac9e:
       check_sw0_status();
       uVar8 = 0;
     }
-    uVar11 = FUN_0007cbae();
+    uVar11 = check_work_mode_status_and_handle_states();
     if (DAT_20018d90 == '\0') {
       execute_hardware_operation_with_retry((int)uVar11,(int)((ulonglong)uVar11 >> 0x20),param3,0);
     }

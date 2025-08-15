@@ -30,17 +30,17 @@ undefined4 ancs_main(int param_1,undefined4 param_2,undefined4 param_3,undefined
       iVar1 = get_work_mode();
       if ((*(char *)(iVar1 + 0x1058) != '\0') || (iVar4 == 0)) break;
       iVar4 = iVar4 + -1;
-      FUN_0007c0a8(100);
+      calculate_ble_schedule_timing_with_division_alt(100);
     }
     iVar1 = bluetooth_hci_command_processing_with_callback_execution(0);
     if (iVar1 == 0) break;
     bluetooth_hci_command_processing_with_validation_and_callback();
     DEBUG_PRINT("BLE init failed (err %d) bt_retry_count %d\n",iVar1,iVar3);
     iVar3 = iVar3 + -1;
-    FUN_0007c0a8(1000);
+    calculate_ble_schedule_timing_with_division_alt(1000);
   } while (iVar3 != 0);
   handle_ble_attribute_callbacks(0,0x183e5);
-  FUN_0007f192();
+  process_configuration_data_with_mutex_protection();
   iVar3 = ancs_c_init(param_1 + 0x34);
   if (iVar3 == 0) goto LAB_00019a16;
   pcVar2 = "ANCS client init failed (err %d)\n";
@@ -48,7 +48,7 @@ undefined4 ancs_main(int param_1,undefined4 param_2,undefined4 param_3,undefined
     DEBUG_PRINT(pcVar2,iVar3);
     while( true ) {
       DEBUG_PRINT("ancs or ncs init failure, reboot it\n");
-      FUN_0007c0a8(1000);
+      calculate_ble_schedule_timing_with_division_alt(1000);
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
           DEBUG_PRINT("%s(): reboot because ancs start failed\r\n\n","ancs_main");
@@ -57,7 +57,7 @@ undefined4 ancs_main(int param_1,undefined4 param_2,undefined4 param_3,undefined
           handle_heartbeat();
         }
       }
-      FUN_0007c0a8(500);
+      calculate_ble_schedule_timing_with_division_alt(500);
       system_fatal_error_handler_with_priority_control(1);
 LAB_00019a16:
       iVar3 = call_function_with_data();

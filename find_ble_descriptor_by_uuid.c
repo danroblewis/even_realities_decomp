@@ -17,8 +17,8 @@ find_ble_descriptor_by_uuid(uint param_1,undefined4 param_2,undefined4 param_3,u
   iVar2 = 0;
   puVar3 = &DAT_2000ff19;
   while (((byte)puVar3[-1] != param_1 ||
-         (iVar1 = FUN_000826b2(puVar3,param_2,param_3,(uint)(byte)puVar3[-1],param_4),
-         param_3 = extraout_r2, iVar1 == 0))) {
+         (iVar1 = compare_byte_arrays_7_bytes(puVar3,param_2,param_3,(uint)(byte)puVar3[-1],param_4)
+         , param_3 = extraout_r2, iVar1 == 0))) {
     iVar2 = iVar2 + 0xc;
     puVar3 = puVar3 + 0xc;
     if (iVar2 == 0x24) {

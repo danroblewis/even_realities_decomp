@@ -24,7 +24,7 @@ undefined4 process_chinese_character_bitmaps(int param_1)
   iVar1 = convert_string_to_unicode_buffer(&DAT_000a8d20,&local_3a);
   for (iVar2 = 0; iVar2 < (int)(uint)local_3a; iVar2 = iVar2 + 1) {
     uVar5 = find_chinese_bitmap_by_unicode(*(undefined2 *)(iVar1 + iVar2 * 2),0xc,0x24);
-    FUN_0007d4f8(param_1 + 0x24,uVar5,0xc,0x24,iVar2 * 0xc + 6,0);
+    draw_bitmap_to_framebuffer(param_1 + 0x24,uVar5,0xc,0x24,iVar2 * 0xc + 6,0);
   }
   iVar1 = get_work_mode();
   iVar2 = 0;
@@ -39,7 +39,7 @@ undefined4 process_chinese_character_bitmaps(int param_1)
     iVar2 = iVar2 + 0x1e;
     for (iVar4 = 0; iVar4 < iVar1; iVar4 = iVar4 + 1) {
       uVar5 = find_chinese_bitmap_by_unicode(*(undefined1 *)((int)local_38 + iVar4),0xc,0x24);
-      FUN_0007d4f8(param_1 + 0x24,uVar5,0xc,0x24,iVar4 * 0xc + 6,iVar2);
+      draw_bitmap_to_framebuffer(param_1 + 0x24,uVar5,0xc,0x24,iVar4 * 0xc + 6,iVar2);
     }
   } while (iVar2 != 0x5a);
   return 0;

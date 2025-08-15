@@ -32,8 +32,8 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
   undefined4 local_34 [2];
   undefined1 local_2c [16];
   
-  FUN_0007f4d2();
-  puVar1 = (undefined4 *)FUN_0007f460();
+  calculate_address_with_offset_0x1c();
+  puVar1 = (undefined4 *)validate_data_structures_and_calculate_offset();
   puVar6 = &DAT_000887b7;
   uVar7 = *puVar1;
   puVar1 = local_34;
@@ -77,7 +77,7 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
         puVar1 = puVar1 + 2;
       } while (puVar6 != (undefined4 *)&UNK_000887d8);
       *(undefined1 *)puVar1 = 0x69;
-      iVar3 = FUN_0007f570(param_1,iVar3,local_84);
+      iVar3 = search_for_matching_data_structure_entry(param_1,iVar3,local_84);
       if (iVar3 != 0) {
         *(undefined2 *)(param_2 + 2) = *(undefined2 *)(iVar3 + 4);
         puVar6 = &DAT_000887d9;
@@ -104,12 +104,12 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
             puVar1 = puVar1 + 2;
           } while (puVar6 != (undefined4 *)&UNK_000887e9);
           *(undefined1 *)puVar1 = 0x9f;
-          iVar4 = FUN_0007f570(param_1,iVar3,local_5c);
+          iVar4 = search_for_matching_data_structure_entry(param_1,iVar3,local_5c);
           if (iVar4 != 0) {
             *(undefined2 *)((int)param_2 + 10) = *(undefined2 *)(iVar4 + 4);
             local_a0[0] = 0;
             local_9e = 0x2902;
-            iVar3 = FUN_0007f570(param_1,iVar3,local_a0);
+            iVar3 = search_for_matching_data_structure_entry(param_1,iVar3,local_a0);
             if (iVar3 != 0) {
               *(undefined2 *)(param_2 + 3) = *(undefined2 *)(iVar3 + 4);
               puVar6 = &DAT_000887ea;
@@ -136,15 +136,15 @@ undefined4 process_data_with_state_management_alt(undefined4 param_1,undefined4 
                   puVar1 = puVar1 + 2;
                 } while (puVar6 != (undefined4 *)&UNK_000887fa);
                 *(undefined1 *)puVar1 = 0x22;
-                iVar4 = FUN_0007f570(param_1,iVar3,local_34);
+                iVar4 = search_for_matching_data_structure_entry(param_1,iVar3,local_34);
                 if (iVar4 != 0) {
                   *(undefined2 *)((int)param_2 + 0xe) = *(undefined2 *)(iVar4 + 4);
                   local_9c[0] = 0;
                   local_9a = 0x2902;
-                  iVar3 = FUN_0007f570(param_1,iVar3,local_9c);
+                  iVar3 = search_for_matching_data_structure_entry(param_1,iVar3,local_9c);
                   if (iVar3 != 0) {
                     *(undefined2 *)(param_2 + 4) = *(undefined2 *)(iVar3 + 4);
-                    uVar7 = FUN_0007f4c8(param_1);
+                    uVar7 = dereference_pointer_simple(param_1);
                     *param_2 = uVar7;
                     return 0;
                   }

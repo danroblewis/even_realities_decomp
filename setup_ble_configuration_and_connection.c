@@ -42,7 +42,7 @@ int setup_ble_configuration_and_connection(int param_1,int param_2,code *param_3
             return -0xc;
           }
           *puVar2 = 0;
-          FUN_000828da(puVar2 + 1,auStack_40);
+          copy_data_structure_fields(puVar2 + 1,auStack_40);
         }
         if (param_2 != 0) {
           iVar1 = (*param_3)(param_4,&local_48,2);
@@ -57,7 +57,7 @@ int setup_ble_configuration_and_connection(int param_1,int param_2,code *param_3
           if (iVar1 == 2) {
             uStack_50 = (uint)local_47;
             if (uStack_50 < 2) {
-              FUN_00082b98(puVar2,uStack_50 & 1);
+              conditional_bit_set_or_clear(puVar2,uStack_50 & 1);
               return 0;
             }
             local_54 = 
@@ -71,7 +71,7 @@ int setup_ble_configuration_and_connection(int param_1,int param_2,code *param_3
             local_28 = 2;
             ble_data_processing_wrapper(&DAT_00088128,0x1080,&local_28);
           }
-          FUN_00082bb8(puVar2,0);
+          conditional_ble_service_discovery_processing(puVar2,0);
           return 0;
         }
         initialize_ble_connection_data(puVar2);

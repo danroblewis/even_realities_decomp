@@ -33,7 +33,7 @@ int handle_validated_event(int param_1,uint param_2)
                "WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",0x5d1);
   DEBUG_PRINT2("\tUnsupported pin\n");
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",0x5d1);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",0x5d1);
 }
 
 

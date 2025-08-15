@@ -26,19 +26,19 @@ int initialize_device_components_comprehensive(int param_1)
   puVar4 = (undefined4 *)*puVar7;
   puVar4[0x140] = 0;
   *piVar5 = param_1;
-  iVar1 = FUN_00084b14(puVar7[3]);
+  iVar1 = execute_function_chain_with_parameter_passing(puVar7[3]);
   if ((-1 < iVar1) && (iVar1 = configure_device_memory_parameters(param_1,piVar5 + 1), iVar1 == 0))
   {
     if ((int)(puVar7[1] << 0x1e) < 0) {
-      iVar2 = FUN_0006540c(piVar5 + 7);
+      iVar2 = process_bit_flags_wrapper(piVar5 + 7);
       if (iVar2 != 0xbad0000) {
         local_24 = "Failed to allocate PPI Channel";
         local_28 = 2;
         process_and_compress_data_with_validation(&DAT_00088290,0x1040,&local_28,0);
         return -5;
       }
-      FUN_000850dc((char)piVar5[7],puVar4 + 0x48,puVar4 + 3);
-      FUN_00064f30(1 << (uint)*(byte *)(piVar5 + 7));
+      set_sensor_interrupt_flags_wrapper((char)piVar5[7],puVar4 + 0x48,puVar4 + 3);
+      set_system_configuration_register(1 << (uint)*(byte *)(piVar5 + 7));
     }
     if (piVar5[3] == 0) {
       puVar4[0x140] = 8;

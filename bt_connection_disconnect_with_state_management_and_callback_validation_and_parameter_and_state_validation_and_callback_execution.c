@@ -45,7 +45,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
     }
     goto LAB_00058420;
   }
-  uVar7 = FUN_00081bc0(param_3[1]);
+  uVar7 = calculate_linked_list_total_size(param_3[1]);
   if ((uint)*(ushort *)(iVar6 + 0x1e) < (uint)*(ushort *)(iVar6 + 0x2e)) {
     uVar2 = (uint)*(ushort *)(iVar6 + 0x1e) - (int)uVar7;
   }
@@ -56,7 +56,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
     return 0;
   }
   iVar1 = find_last_element_in_linked_list((int)((ulonglong)uVar7 >> 0x20));
-  iVar3 = FUN_00081bc0(param_3[1]);
+  iVar3 = calculate_linked_list_total_size(param_3[1]);
   if ((uint)*(ushort *)(iVar6 + 0x1e) < (uint)*(ushort *)(iVar6 + 0x2e)) {
     uVar2 = (uint)*(ushort *)(iVar6 + 0x1e) - iVar3;
   }
@@ -65,7 +65,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
   }
   uVar4 = calculate_ble_buffer_available_space(iVar1 + 0xc);
   if (uVar2 < uVar4) {
-    iVar3 = FUN_00081bc0(param_3[1]);
+    iVar3 = calculate_linked_list_total_size(param_3[1]);
     if ((uint)*(ushort *)(iVar6 + 0x1e) < (uint)*(ushort *)(iVar6 + 0x2e)) {
       iVar3 = (uint)*(ushort *)(iVar6 + 0x1e) - iVar3;
     }
@@ -78,7 +78,7 @@ bt_connection_disconnect_with_state_management_and_callback_validation_and_param
   }
   if (iVar3 == 0) {
     uVar7 = calculate_ble_memory_offset(*(undefined1 *)(param_3[1] + 10));
-    iVar1 = FUN_000836de((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),0,0);
+    iVar1 = process_ble_connection_data((int)uVar7,(int)((ulonglong)uVar7 >> 0x20),0,0);
     if (iVar1 == 0) {
       return 0;
     }
@@ -117,7 +117,7 @@ LAB_00058420:
       local_70 = uVar2;
     }
     local_78 = 3;
-    FUN_00081ddc(&DAT_00088100,0x1880,&local_78);
+    process_and_compress_data_wrapper(&DAT_00088100,0x1880,&local_78);
   }
 LAB_000584fc:
   param_3[2] = 0;

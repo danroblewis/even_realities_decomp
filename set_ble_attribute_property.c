@@ -12,7 +12,7 @@ void set_ble_attribute_property(int param_1,ushort param_2,undefined4 param_3,un
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","keys != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x12a,param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x12a);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x12a);
   }
   *(ushort *)(param_1 + 0xe) = param_2 | *(ushort *)(param_1 + 0xe);
   return;

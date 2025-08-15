@@ -12,8 +12,9 @@ void process_resource_allocation_with_callback
 {
   int iVar1;
   
-  iVar1 = FUN_00070fb4(allocation_buffer,resource_context + 0xe0,allocation_flags,0xffffffff,
-                       callback_data,*(undefined4 *)(resource_context + 0x1ac),&LAB_0007eae0_1);
+  iVar1 = manage_audio_data_structure_with_validation
+                    (allocation_buffer,resource_context + 0xe0,allocation_flags,0xffffffff,
+                     callback_data,*(undefined4 *)(resource_context + 0x1ac),&LAB_0007eae0_1);
   if (iVar1 == 0) {
     *(undefined1 *)(allocation_buffer + 100) = 1;
     if (*(code **)(resource_context + 0x1a8) != (code *)0x0) {

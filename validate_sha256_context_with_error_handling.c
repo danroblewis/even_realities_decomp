@@ -31,7 +31,7 @@ int validate_sha256_context_with_error_handling(int param_1)
   }
   iVar1 = -0x3d;
 LAB_00079f98:
-  FUN_00079808(auStack_a8,0x90);
+  clear_memory_buffer_with_zero_fill(auStack_a8,0x90);
   return iVar1;
 }
 

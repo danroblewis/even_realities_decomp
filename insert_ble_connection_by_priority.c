@@ -20,7 +20,7 @@ void insert_ble_connection_by_priority(undefined4 *param_1)
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!z_is_idle_thread_object(thread)",
                  "WEST_TOPDIR/zephyr/kernel/sched.c",0xc1);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/kernel/sched.c",0xc1);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/sched.c",0xc1);
   }
   puVar2 = (undefined4 *)0x0;
   if ((undefined4 **)DMIC_BUFFER_POINTER != &DMIC_BUFFER_POINTER) {

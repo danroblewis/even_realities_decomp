@@ -91,9 +91,10 @@ void render_dashboard_ui(int dashboard_data,int system_data,int display_mode,int
       if (iVar2 == 1) {
         uVar3 = get_work_mode_timestamp();
         unix_timestamp_to_datetime(uVar3,&local_94);
-        uVar3 = FUN_0007d4b2((char)(local_94 >> 0x10) + '.');
-        cVar1 = FUN_0007d280(local_94 & 0xffff,local_94._2_2_,local_90 & 0xffff);
-        uVar4 = FUN_0007d4b2(cVar1 + '(');
+        uVar3 = get_data_by_index_and_type((char)(local_94 >> 0x10) + '.');
+        cVar1 = calculate_complex_mathematical_formula_with_division
+                          (local_94 & 0xffff,local_94._2_2_,local_90 & 0xffff);
+        uVar4 = get_data_by_index_and_type(cVar1 + '(');
         local_80 = 0;
         local_7c[0] = 0;
         local_7c[1] = 0;
@@ -256,9 +257,10 @@ LAB_0003acba:
       else {
         uVar3 = get_work_mode_timestamp();
         unix_timestamp_to_datetime(uVar3,&local_94);
-        uVar3 = FUN_0007d4b2((char)(local_94 >> 0x10) + '.');
-        cVar1 = FUN_0007d280(local_94 & 0xffff,local_94._2_2_,local_90 & 0xffff);
-        uVar4 = FUN_0007d4b2(cVar1 + '(');
+        uVar3 = get_data_by_index_and_type((char)(local_94 >> 0x10) + '.');
+        cVar1 = calculate_complex_mathematical_formula_with_division
+                          (local_94 & 0xffff,local_94._2_2_,local_90 & 0xffff);
+        uVar4 = get_data_by_index_and_type(cVar1 + '(');
         local_80 = 0;
         local_7c[0] = 0;
         local_7c[1] = 0;
@@ -354,9 +356,10 @@ LAB_0003acba:
       local_a8 = 0;
       uVar3 = get_work_mode_timestamp();
       unix_timestamp_to_datetime(uVar3,&local_b0);
-      uVar3 = FUN_0007d4b2((char)(local_b0 >> 0x10) + '.');
-      cVar1 = FUN_0007d280(local_b0 & 0xffff,local_b0._2_2_,local_ac & 0xffff);
-      uVar4 = FUN_0007d4b2(cVar1 + '(');
+      uVar3 = get_data_by_index_and_type((char)(local_b0 >> 0x10) + '.');
+      cVar1 = calculate_complex_mathematical_formula_with_division
+                        (local_b0 & 0xffff,local_b0._2_2_,local_ac & 0xffff);
+      uVar4 = get_data_by_index_and_type(cVar1 + '(');
       local_a4 = '\0';
       uStack_a3 = 0;
       uStack_a2 = 0;
@@ -904,7 +907,7 @@ LAB_0003803a:
               iVar5 = iVar5 + 0x10a;
               goto LAB_00038708;
             }
-            iVar2 = FUN_0007d1d0(&SYSTEM_FLAGS_REGISTER);
+            iVar2 = dereference_pointer(&SYSTEM_FLAGS_REGISTER);
             if ((-1 < iVar2 << 0x1e) || (NEWS_DISPLAY_ACTIVE != '\x01')) goto LAB_000385f0;
             NEWS_DISPLAY_ACTIVE = (char)iVar5;
             iVar2 = get_work_mode();
@@ -1054,7 +1057,7 @@ LAB_00037e16:
       iVar6 = get_ui_y_offset();
       gui_bmp_bitmap_draw(0x3b,iVar2 + 0x10a,iVar6 + 2,0,0,0);
       if (iVar5 == 0) {
-        iVar2 = FUN_0007d1d0(&SYSTEM_FLAGS_REGISTER);
+        iVar2 = dereference_pointer(&SYSTEM_FLAGS_REGISTER);
         if ((iVar2 << 0x1e < 0) && (STOCK_DISPLAY_ACTIVE == '\x01')) {
           STOCK_DISPLAY_ACTIVE = (char)iVar5;
           iVar2 = get_work_mode();
@@ -1138,9 +1141,10 @@ LAB_00037e16:
       local_9c = 0;
       uVar3 = get_work_mode_timestamp();
       unix_timestamp_to_datetime(uVar3,&local_a4);
-      uVar3 = FUN_0007d4b2((char)uStack_a2 + '.');
-      cVar1 = FUN_0007d280(CONCAT11(uStack_a3,local_a4),uStack_a2,CONCAT11(uStack_9f,local_a0));
-      uVar4 = FUN_0007d4b2(cVar1 + '(');
+      uVar3 = get_data_by_index_and_type((char)uStack_a2 + '.');
+      cVar1 = calculate_complex_mathematical_formula_with_division
+                        (CONCAT11(uStack_a3,local_a4),uStack_a2,CONCAT11(uStack_9f,local_a0));
+      uVar4 = get_data_by_index_and_type(cVar1 + '(');
       local_94 = 0;
       local_90 = 0;
       local_8c = 0;
@@ -1295,7 +1299,7 @@ LAB_00038e6e:
       iVar6 = get_ui_y_offset();
       gui_bmp_bitmap_draw(0x3b,iVar2 + 0xe0,iVar6 + 2,0,0,0);
       if (iVar5 == 0) {
-        iVar2 = FUN_0007d1d0(&SYSTEM_FLAGS_REGISTER);
+        iVar2 = dereference_pointer(&SYSTEM_FLAGS_REGISTER);
         if ((iVar2 << 0x1e < 0) && (STOCK_DISPLAY_ACTIVE == '\x01')) {
           STOCK_DISPLAY_ACTIVE = (char)iVar5;
           iVar2 = get_work_mode();
@@ -1465,9 +1469,10 @@ LAB_00037d2a:
   if (iVar2 == 1) {
     uVar3 = get_work_mode_timestamp();
     unix_timestamp_to_datetime(uVar3,&local_a4);
-    uVar3 = FUN_0007d4b2((char)uStack_a2 + '.');
-    cVar1 = FUN_0007d280(CONCAT11(uStack_a3,local_a4),uStack_a2,CONCAT11(uStack_9f,local_a0));
-    uVar4 = FUN_0007d4b2(cVar1 + '(');
+    uVar3 = get_data_by_index_and_type((char)uStack_a2 + '.');
+    cVar1 = calculate_complex_mathematical_formula_with_division
+                      (CONCAT11(uStack_a3,local_a4),uStack_a2,CONCAT11(uStack_9f,local_a0));
+    uVar4 = get_data_by_index_and_type(cVar1 + '(');
     local_94 = 0;
     local_90 = 0;
     local_8c = 0;
@@ -1874,7 +1879,7 @@ LAB_00038708:
               iVar2 = iVar2 + 0x20010824;
               goto LAB_00037d2a;
             }
-            iVar2 = FUN_0007d1d0(&SYSTEM_FLAGS_REGISTER);
+            iVar2 = dereference_pointer(&SYSTEM_FLAGS_REGISTER);
             if ((-1 < iVar2 << 0x1e) || (NEWS_DISPLAY_ACTIVE != '\x01')) goto LAB_000385f0;
             NEWS_DISPLAY_ACTIVE = (char)iVar5;
             iVar2 = get_work_mode();
@@ -2074,7 +2079,7 @@ LAB_000397a0:
       iVar5 = iVar5 + 0xba;
       goto LAB_00037d2a;
     }
-    iVar2 = FUN_0007d1d0(&SYSTEM_FLAGS_REGISTER);
+    iVar2 = dereference_pointer(&SYSTEM_FLAGS_REGISTER);
     if ((iVar2 << 0x1e < 0) && (STOCK_DISPLAY_ACTIVE == '\x01')) {
       STOCK_DISPLAY_ACTIVE = (char)iVar5;
       iVar2 = get_work_mode();
@@ -2159,9 +2164,10 @@ LAB_00039318:
   else {
     uVar3 = get_work_mode_timestamp();
     unix_timestamp_to_datetime(uVar3,&local_a4);
-    uVar3 = FUN_0007d4b2((char)uStack_a2 + '.');
-    cVar1 = FUN_0007d280(CONCAT11(uStack_a3,local_a4),uStack_a2,CONCAT11(uStack_9f,local_a0));
-    uVar4 = FUN_0007d4b2(cVar1 + '(');
+    uVar3 = get_data_by_index_and_type((char)uStack_a2 + '.');
+    cVar1 = calculate_complex_mathematical_formula_with_division
+                      (CONCAT11(uStack_a3,local_a4),uStack_a2,CONCAT11(uStack_9f,local_a0));
+    uVar4 = get_data_by_index_and_type(cVar1 + '(');
     local_94 = 0;
     local_90 = 0;
     local_8c = 0;
@@ -2333,7 +2339,7 @@ LAB_00038dfc:
       iVar8 = get_ui_y_offset();
       goto LAB_000397a0;
     }
-    iVar2 = FUN_0007d1d0(&SYSTEM_FLAGS_REGISTER);
+    iVar2 = dereference_pointer(&SYSTEM_FLAGS_REGISTER);
     if ((iVar2 << 0x1e < 0) && (STOCK_DISPLAY_ACTIVE == '\x01')) {
       STOCK_DISPLAY_ACTIVE = (char)iVar5;
       iVar2 = get_work_mode();

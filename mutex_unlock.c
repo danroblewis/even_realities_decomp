@@ -58,7 +58,7 @@ undefined4 mutex_unlock(int mutex)
         if (iVar4 != 0) {
           *(int *)(mutex + 0x10) = (int)*(char *)(iVar4 + 0xe);
           *(undefined4 *)(iVar4 + 0x90) = 0;
-          FUN_000738d4();
+          handle_ble_connection_insertion_with_privilege_management();
           validate_ble_connection_state_with_priority(&DAT_2000b470,uVar3);
           return 0;
         }
@@ -93,7 +93,7 @@ undefined4 mutex_unlock(int mutex)
   pcVar2 = "WEST_TOPDIR/zephyr/kernel/mutex.c";
 LAB_00072578:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar2,uVar3);
+  trigger_system_service_call(pcVar2,uVar3);
 }
 
 

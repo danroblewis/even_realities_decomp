@@ -26,7 +26,7 @@ void bt_connection_disconnect_with_callback_execution_and_parameter_and_state_va
   
   piVar6 = (int *)(param_1 + 0x1c);
   do {
-    iVar2 = FUN_000816a2(piVar6);
+    iVar2 = get_counter_value(piVar6);
     if (iVar2 == 0) {
       local_1c = "No credits to receive packet";
       goto LAB_00057c04;
@@ -42,7 +42,7 @@ void bt_connection_disconnect_with_callback_execution_and_parameter_and_state_va
     uStack_38 = uVar7;
     local_34 = (uint)*(ushort *)(param_1 + 0x18);
 LAB_00057bb0:
-    FUN_00081746(&DAT_00088160,uVar4,&local_40);
+    process_and_compress_data_with_validation(&DAT_00088160,uVar4,&local_40);
   }
   else {
     if (*(int *)(param_1 + 0x80) != 0) {
@@ -105,9 +105,9 @@ LAB_00057c04:
       uVar4 = 0x1040;
     }
     local_20 = 2;
-    FUN_00081746(&DAT_00088160,uVar4,&local_20);
+    process_and_compress_data_with_validation(&DAT_00088160,uVar4,&local_20);
   }
-  FUN_00081b30(param_1);
+  handle_ble_connection_state_transition(param_1);
   return;
 }
 

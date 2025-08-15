@@ -17,7 +17,7 @@ int process_ble_attribute_data(undefined1 *param_1)
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","keys != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x146);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x146);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x146);
   }
   iVar1 = process_data_with_validation_and_compression_alt(*param_1,param_1 + 1,param_1 + 0xc,0x50);
   if (iVar1 != 0) {

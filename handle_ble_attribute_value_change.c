@@ -36,7 +36,7 @@ int handle_ble_attribute_value_change
           ble_data_processing_wrapper(&DAT_00088128,0x1080,&local_28);
           return -0x11;
         }
-        FUN_000828da(puVar2 + 1,param_1 + 0x90);
+        copy_data_structure_fields(puVar2 + 1,param_1 + 0x90);
         *puVar2 = *(undefined1 *)(param_1 + 8);
       }
       if (*(code **)(iVar5 + 0x10) != (code *)0x0) {
@@ -58,7 +58,7 @@ int handle_ble_attribute_value_change
                   (*(undefined1 *)(param_1 + 8),param_1 + 0x90,0);
       }
       if (uVar4 == 0) {
-        FUN_000828da(puVar2 + 1,&DAT_000f2b3a);
+        copy_data_structure_fields(puVar2 + 1,&DAT_000f2b3a);
         *puVar2 = 0;
         *(undefined2 *)(puVar2 + 8) = 0;
       }

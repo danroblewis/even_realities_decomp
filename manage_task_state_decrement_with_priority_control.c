@@ -78,7 +78,7 @@ manage_task_state_decrement_with_priority_control
   pcVar5 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
 LAB_0004bac6:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar5,uVar6);
+  trigger_system_service_call(pcVar5,uVar6);
 }
 
 

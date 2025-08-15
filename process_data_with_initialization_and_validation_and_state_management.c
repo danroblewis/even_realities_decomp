@@ -34,12 +34,12 @@ void process_data_with_initialization_and_validation_and_state_management(int pa
     local_30 = 3;
     uStack_28 = uVar5;
     call_system_cleanup_alt(&DAT_00088138,0x1840,&local_30);
-    FUN_00080f56(uVar5,2);
+    send_ble_command_0x2021(uVar5,2);
   }
   else {
     iVar3 = bt_connection_disconnect_with_callback(iVar2,&local_20);
     if (iVar3 == 0) {
-      FUN_00080f56(uVar5,0x1e);
+      send_ble_command_0x2021(uVar5,0x1e);
     }
     else {
       iVar3 = process_data_with_initialization_and_store(0x2020,0xe);

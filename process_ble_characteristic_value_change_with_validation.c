@@ -36,7 +36,7 @@ void process_ble_characteristic_value_change_with_validation
     uVar1 = 0x37f;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",uVar1);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",uVar1);
 }
 
 

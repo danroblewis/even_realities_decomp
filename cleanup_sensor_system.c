@@ -9,7 +9,7 @@ undefined4 cleanup_sensor_system(void)
 
 {
   if (DAT_20002424 != 0) {
-    FUN_0007c8b0();
+    acquire_resource_mutex_if_valid();
   }
   return 0;
 }

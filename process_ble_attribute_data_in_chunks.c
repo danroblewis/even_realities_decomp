@@ -26,7 +26,7 @@ void process_ble_attribute_data_in_chunks(int param_1,undefined4 param_2,undefin
   local_40 = param_3;
   iVar2 = find_ble_characteristic_by_handle();
   if (iVar2 != 0) {
-    FUN_000836ec(auStack_34,param_2,local_40);
+    initialize_memory_structure_with_word_and_short(auStack_34,param_2,local_40);
     while (4 < local_30) {
       local_3c = (short *)update_buffer_position_and_size_alt(auStack_34,4);
       uVar6 = (uint)(ushort)local_3c[1];

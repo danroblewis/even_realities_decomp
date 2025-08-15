@@ -28,7 +28,7 @@ set_json_object_field_with_memory_management(int param_1,int param_2,int param_3
     }
     *(int *)(param_3 + 0x20) = param_2;
     *(uint *)(param_3 + 0xc) = uVar2;
-    uVar1 = FUN_00084f2e(param_1,param_3);
+    uVar1 = insert_element_into_linked_list(param_1,param_3);
     return uVar1;
   }
   return 0;

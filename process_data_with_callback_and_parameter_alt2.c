@@ -56,8 +56,9 @@ undefined4 process_data_with_callback_and_parameter_alt2(int *param_1,uint *para
                    ,0x71);
       DEBUG_PRINT2("\tImpossible slot number\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/include/mgmt/mcumgr/grp/img_mgmt/img_mgmt_priv.h"
-                        ,0x71);
+      trigger_system_service_call
+                ("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/include/mgmt/mcumgr/grp/img_mgmt/img_mgmt_priv.h"
+                 ,0x71);
     }
     iVar1 = validate_state_transition(uVar3 ^ 1);
     if (iVar1 == 0) {
@@ -73,7 +74,7 @@ undefined4 process_data_with_callback_and_parameter_alt2(int *param_1,uint *para
           return 10;
         }
         if (*(uint *)(local_24 + 8) < (uint)param_1[2]) {
-          FUN_0007ef7e();
+          no_operation();
           uStack_30 = param_1[2];
           local_2c = *(undefined4 *)(local_24 + 8);
           local_34 = "Upload too large for slot: %u > %u";
@@ -81,7 +82,7 @@ undefined4 process_data_with_callback_and_parameter_alt2(int *param_1,uint *para
           call_system_cleanup(&DAT_00088208,0x2040,&local_38);
           return 0x1e;
         }
-        FUN_0007ef7e();
+        no_operation();
         if ((char)param_1[7] != '\0') {
           iVar1 = clear_key_slot(auStack_20);
           if (iVar1 != 0) {

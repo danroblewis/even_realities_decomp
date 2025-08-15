@@ -40,7 +40,7 @@ int handle_configuration_setting_with_flags
       DAT_2000a12a = (undefined2)uVar3;
       DAT_2000a11c = *(undefined4 *)(local_20[0] + 4);
       DAT_2000a150 = *(undefined4 *)(local_20[0] + 0xc);
-      iVar1 = FUN_0007f344(&DAT_2000a114);
+      iVar1 = initialize_and_process_complex_data_structure(&DAT_2000a114);
       if (iVar1 == 0) {
         DAT_2000a118 = &DAT_200027fc;
         initialize_buffer_structure_with_flags(&DAT_2000a114);

@@ -37,7 +37,7 @@ LAB_0005ec94:
                ,"WEST_TOPDIR/zephyr/include/zephyr/sys/byteorder.h",0x215);
   DEBUG_PRINT2("\tSource and destination buffers must not overlap\n");
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/sys/byteorder.h",0x215);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/sys/byteorder.h",0x215);
 }
 
 

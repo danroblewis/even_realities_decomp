@@ -50,7 +50,7 @@ LAB_00028a32:
   }
   if (TOUCH_SENSOR_STATUS_FLAG == '\x01') {
     iVar1 = setup_touch_sensor();
-    FUN_0007d0aa(sensor_data + 0x1078);
+    read_sensor_data_and_scale_by_1024(sensor_data + 0x1078);
     if (30000 < iVar1 - iVar7) {
       iVar6 = 0;
       iVar4 = iVar6;
@@ -87,7 +87,7 @@ LAB_00028ab0:
   if ((iVar6 <= iVar1) || (iVar2 - iVar6 < 0x2711)) goto LAB_00028a32;
   if (150000 < iVar6 - iVar1) {
     DEBUG_PRINT("#############################long press################################\n");
-    FUN_0007d0aa(sensor_data + 0x1078);
+    read_sensor_data_and_scale_by_1024(sensor_data + 0x1078);
 code_r0x00028ad6:
     DEBUG_PRINT("aw9320x_diff_get: %d\n",*(undefined4 *)(sensor_data + 0x1078));
     goto LAB_00028b4e;

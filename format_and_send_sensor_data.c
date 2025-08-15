@@ -12,7 +12,7 @@ undefined4 format_and_send_sensor_data(void)
   undefined4 uVar2;
   undefined4 in_r3;
   
-  iVar1 = FUN_00083dc8(&DAT_00087c80,3,0xc,8,in_r3);
+  iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,3,0xc,8,in_r3);
   if (iVar1 < 0) {
     DEBUG_PRINT("Could not change termination voltage to 4.2V\n");
     uVar2 = 0xffffffff;

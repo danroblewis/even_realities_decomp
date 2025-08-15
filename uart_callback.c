@@ -95,7 +95,7 @@ void uart_callback(undefined4 param_1,undefined1 *param_2,uint param_3)
       uVar4 = 0x51;
     }
                     /* WARNING: Subroutine does not return */
-    assertion_failure("../src/production_test/serial_port.c",uVar4);
+    trigger_system_service_call("../src/production_test/serial_port.c",uVar4);
   case 4:
     DEBUG_PRINT(
                "****************************UART_RX_BUF_RELEASED***************************************\n"

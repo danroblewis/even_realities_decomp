@@ -43,7 +43,7 @@ uint process_ble_characteristic_operation_comprehensive(int param_1,int param_2)
     }
   }
   iVar11 = param_1 + 4;
-  iVar4 = FUN_00082ff6(iVar11,0xf);
+  iVar4 = extract_bit_from_value(iVar11,0xf);
   if ((iVar4 == 0) &&
      (uVar5 = validate_and_process_ble_characteristics_comprehensive(param_1), uVar5 != 0)) {
     return uVar5 & 0xff;
@@ -61,11 +61,11 @@ uint process_ble_characteristic_operation_comprehensive(int param_1,int param_2)
   *(byte *)(param_1 + 0x16) = pbVar13[5] & 1;
   if (((int)((uint)*(byte *)(param_1 + 0x13) << 0x1c) < 0) && ((int)((uint)pbVar13[2] << 0x1c) < 0))
   {
-    FUN_00083090(iVar11,5);
+    set_bit_in_value(iVar11,5);
     *(byte *)(param_1 + 0x15) = *(byte *)(param_1 + 0x15) & 2;
     *(undefined1 *)(param_1 + 0x16) = 0;
   }
-  iVar4 = FUN_00082ff6(iVar11,5);
+  iVar4 = extract_bit_from_value(iVar11,5);
   if (iVar4 == 0) {
     puVar9 = &DAT_2001d533;
   }
@@ -75,11 +75,11 @@ uint process_ble_characteristic_operation_comprehensive(int param_1,int param_2)
   *(undefined1 *)(param_1 + 0x12) = *puVar9;
   if (((int)((uint)*(byte *)(param_1 + 0x13) << 0x1a) < 0) && ((int)((uint)pbVar13[2] << 0x1a) < 0))
   {
-    FUN_00083090(iVar11,0x14);
+    set_bit_in_value(iVar11,0x14);
   }
   if (((int)((uint)*(byte *)(param_1 + 0x13) << 0x1f) < 0) && ((int)((uint)pbVar13[2] << 0x1f) < 0))
   {
-    FUN_00083090(iVar11,0xd);
+    set_bit_in_value(iVar11,0xd);
   }
   else {
     *(undefined1 *)(param_1 + 0x15) = 0;
@@ -87,9 +87,9 @@ uint process_ble_characteristic_operation_comprehensive(int param_1,int param_2)
   }
   *(undefined1 *)(param_1 + 0xe8) = *(undefined1 *)(param_1 + 0x16);
   *(undefined1 *)(param_1 + 0xe9) = *(undefined1 *)(param_1 + 0x15);
-  uVar6 = FUN_00083090(iVar11,3);
+  uVar6 = set_bit_in_value(iVar11,3);
   uVar5 = (uint)*pbVar13;
-  iVar4 = FUN_00082ff6(uVar6,5);
+  iVar4 = extract_bit_from_value(uVar6,5);
   if (iVar4 == 0) {
     if (uVar5 < 5) {
       if ((int)((uint)(*(byte *)(param_1 + 0xb) & *(byte *)(param_1 + 0x12)) << 0x1f) < 0) {
@@ -129,7 +129,8 @@ LAB_0005d782:
     }
   }
   *(byte *)(param_1 + 8) = bVar8;
-  iVar4 = FUN_00083002(param_1,*(undefined4 *)(iVar12 + 0xc0));
+  iVar4 = validate_ble_connection_parameters_and_characteristics
+                    (param_1,*(undefined4 *)(iVar12 + 0xc0));
   if (iVar4 == 0) {
     return 3;
   }
@@ -152,7 +153,7 @@ LAB_0005d80e:
       if (bVar8 != 0x10) {
         return 6;
       }
-      iVar4 = FUN_00082ff6(iVar11,5);
+      iVar4 = extract_bit_from_value(iVar11,5);
       if (iVar4 == 0) {
         return 3;
       }
@@ -162,11 +163,12 @@ LAB_0005d80e:
       return 8;
     }
   }
-  iVar4 = FUN_00082ff6(iVar11,5);
+  iVar4 = extract_bit_from_value(iVar11,5);
   if (iVar4 != 0) {
-    if ((((*(char *)(param_1 + 8) == '\0') && (iVar4 = FUN_00082ff6(iVar11,0xf), iVar4 == 0)) &&
-        (iVar3 != 0)) && (*(int *)(iVar3 + 0x14) != 0)) {
-      FUN_00083090(iVar11,10);
+    if ((((*(char *)(param_1 + 8) == '\0') &&
+         (iVar4 = extract_bit_from_value(iVar11,0xf), iVar4 == 0)) && (iVar3 != 0)) &&
+       (*(int *)(iVar3 + 0x14) != 0)) {
+      set_bit_in_value(iVar11,10);
       pcVar10 = *(code **)(iVar3 + 0x14);
       goto LAB_0005d876;
     }
@@ -181,14 +183,14 @@ LAB_0005d80e:
   if (((iVar12 != 0) && ((int)((uint)*(byte *)(iVar12 + 0xd) << 0x1f) < 0)) && (uStack_40 == 0)) {
     local_24 = "JustWorks failed, authenticated keys present";
     local_28 = 2;
-    FUN_00083074(&DAT_00088180,0x1040,&local_28);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1040,&local_28);
     return 8;
   }
   switch(uStack_40) {
   case 0:
     goto switchD_0005d81a_caseD_0;
   case 1:
-    FUN_00083090(iVar11,10);
+    set_bit_in_value(iVar11,10);
     (*(code *)piVar7[1])(iVar4);
     break;
   case 2:
@@ -198,7 +200,7 @@ LAB_0005d80e:
     }
     local_38[0] = local_38[0] % 1000000;
     if ((piVar7 != (int *)0x0) && (*piVar7 != 0)) {
-      FUN_00083090(iVar11,0xb);
+      set_bit_in_value(iVar11,0xb);
       (*(code *)*piVar7)(iVar4,local_38[0]);
     }
     *(char *)(param_1 + 0x47) = (char)local_38[0];
@@ -209,21 +211,21 @@ LAB_0005d80e:
   default:
     local_44 = "Unknown pairing method (%u)";
     local_48 = 3;
-    FUN_00083074(&DAT_00088180,0x1840,&local_48);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1840,&local_48);
     return 8;
   case 6:
     if ((piVar7 == (int *)0x0) || (piVar7[3] == 0)) {
       return 2;
     }
     local_38[0] = local_38[0] & 0xffff0000;
-    FUN_00083090(iVar11,10);
+    set_bit_in_value(iVar11,10);
     (*(code *)piVar7[3])(*(undefined4 *)(param_1 + 0xf0),local_38);
   }
   if (*(char *)(param_1 + 8) == '\0') {
 switchD_0005d81a_caseD_0:
-    iVar12 = FUN_00082ff6(iVar11,0xf);
+    iVar12 = extract_bit_from_value(iVar11,0xf);
     if (((iVar12 == 0) && (iVar3 != 0)) && (*(int *)(iVar3 + 0x14) != 0)) {
-      FUN_00083090(iVar11,10);
+      set_bit_in_value(iVar11,10);
       pcVar10 = *(code **)(iVar3 + 0x14);
       iVar12 = *(int *)(param_1 + 0xf0);
 LAB_0005d876:
@@ -231,11 +233,11 @@ LAB_0005d876:
       return 0;
     }
   }
-  param_1 = FUN_00083090(param_1,3);
+  param_1 = set_bit_in_value(param_1,3);
   uVar6 = 0xe;
 LAB_0005d908:
-  FUN_00083090(param_1,uVar6);
-  uVar5 = FUN_000830ee();
+  set_bit_in_value(param_1,uVar6);
+  uVar5 = update_ble_connection_state_and_allocate_memory();
   return uVar5;
 }
 

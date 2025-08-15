@@ -22,12 +22,12 @@ undefined4 validate_and_process_ble_connection_parameters(int param_1,int param_
   if (*(short *)(param_2 + 0x10) == 0) {
     local_24 = "Too small SMP PDU received";
     local_28 = 2;
-    FUN_00083074(&DAT_00088180,0x1040,&local_28);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1040,&local_28);
     return 0;
   }
   pbVar1 = (byte *)update_buffer_position_and_size_alt(param_2 + 0xc,1);
   iVar4 = param_1 + -0xf0;
-  iVar2 = FUN_00082ff6(param_1 + -0xec,4);
+  iVar2 = extract_bit_from_value(param_1 + -0xec,4);
   uVar3 = (uint)*pbVar1;
   if (iVar2 == 0) {
     if (uVar3 < 0xf) {
@@ -35,18 +35,18 @@ undefined4 validate_and_process_ble_connection_parameters(int param_1,int param_
         local_44 = "Unhandled SMP code 0x%02x";
         local_48 = 3;
         uStack_40 = uVar3;
-        FUN_00083074(&DAT_00088180,0x1880,&local_48);
+        process_and_compress_data_wrapper(&DAT_00088180,0x1880,&local_48);
         iVar2 = 7;
       }
       else {
-        iVar2 = FUN_000831be(iVar4);
+        iVar2 = clear_bit_and_return_previous_state(iVar4);
         uVar3 = (uint)*pbVar1;
         if (iVar2 == 0) {
           local_44 = "Unexpected SMP code 0x%02x";
           local_48 = 3;
           uStack_40 = uVar3;
-          FUN_00083074(&DAT_00088180,0x1880,&local_48);
-          iVar2 = FUN_00082ff6(param_1 + -0xec,3);
+          process_and_compress_data_wrapper(&DAT_00088180,0x1880,&local_48);
+          iVar2 = extract_bit_from_value(param_1 + -0xec,3);
           if (iVar2 == 0) {
             return 0;
           }
@@ -63,7 +63,7 @@ undefined4 validate_and_process_ble_connection_parameters(int param_1,int param_
           local_48 = 4;
           uStack_40 = (uint)*(ushort *)(param_2 + 0x10);
           local_3c = uVar3;
-          FUN_00083074(&DAT_00088180,0x2040,&local_48);
+          process_and_compress_data_wrapper(&DAT_00088180,0x2040,&local_48);
           iVar2 = 10;
         }
       }
@@ -77,7 +77,7 @@ undefined4 validate_and_process_ble_connection_parameters(int param_1,int param_
   }
   local_48 = 3;
   uStack_40 = uVar3;
-  FUN_00083074(&DAT_00088180,0x1880,&local_48);
+  process_and_compress_data_wrapper(&DAT_00088180,0x1880,&local_48);
   return 0;
 }
 

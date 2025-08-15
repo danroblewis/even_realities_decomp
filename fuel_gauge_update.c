@@ -37,7 +37,7 @@ int fuel_gauge_update(undefined4 param_1)
       DEBUG_PRINT("Error: Could not read from charger device\n");
       return iVar2;
     }
-    lVar9 = FUN_0007ceda();
+    lVar9 = calculate_scaled_ble_connection_timing_with_bit_shifting();
     lVar9 = lVar9 - CONCAT44(DAT_20004794,DAT_20004790);
     if ((int)((ulonglong)lVar9 >> 0x20) < (int)(uint)((uint)lVar9 < 1000)) {
       return -1;
@@ -47,7 +47,7 @@ int fuel_gauge_update(undefined4 param_1)
     fVar8 = (float)process_imu_attitude_data(local_44,local_40,local_3c[0],fVar8 / 1000.0,0);
     if ((((fVar7 != 0.0) || (iVar6 = iVar6 + -1, iVar6 == 0)) ||
         (-1 < (int)((uint)(fVar8 < 100.0) << 0x1f))) || (fVar8 <= 0.0)) {
-      uVar10 = FUN_0007ceda();
+      uVar10 = calculate_scaled_ble_connection_timing_with_bit_shifting();
       goto LAB_00010c00;
     }
     calculate_ble_schedule_timing(0xa4,0);
@@ -76,7 +76,7 @@ LAB_00010c00:
   }
   DAT_20004794 = (undefined4)((ulonglong)uVar10 >> 0x20);
   DAT_20004790 = (undefined4)uVar10;
-  iVar2 = FUN_0007ceda();
+  iVar2 = calculate_scaled_ble_connection_timing_with_bit_shifting();
   iVar6 = iVar2;
   fVar7 = fVar8;
   if (((fVar8 == 0.0) || (DAT_20007b74 == fVar8)) &&
@@ -86,7 +86,7 @@ LAB_00010c00:
   }
   DAT_20007b74 = fVar7;
   DAT_20007b70 = iVar6;
-  iVar6 = FUN_0007cefc();
+  iVar6 = validate_egp_system_data_format();
   fVar7 = fVar8;
   if (iVar6 != 0) {
     fVar7 = fVar8 * 1.25;

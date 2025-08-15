@@ -25,9 +25,9 @@ undefined4 process_data_with_validation_and_parameter_alt3(void)
   else {
     local_24 = setup_device_buffer_with_validation(uStack_28 & 0xff,local_1c);
     if (local_24 == 0) {
-      uVar1 = FUN_0007f012(local_1c[0]);
+      uVar1 = call_function_pointer_and_return_byte(local_1c[0]);
       *(undefined1 *)((ulonglong)uVar3 >> 0x20) = uVar1;
-      FUN_0007ef7e(local_1c[0]);
+      no_operation(local_1c[0]);
       uVar2 = 0;
     }
     else {

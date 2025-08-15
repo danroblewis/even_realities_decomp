@@ -22,7 +22,7 @@ void monitor_sensor_status_periodically(void)
     uVar2 = uVar2 + 1;
     calculate_ble_schedule_timing(0x290,0);
   } while (uVar2 != 10);
-  iVar1 = FUN_0007d12e();
+  iVar1 = calculate_ble_connection_timing_scaled();
   if (999 < (uint)(iVar1 - DAT_20007bf0)) {
     if (uVar2 == 10) {
       DAT_20019ef0 = DAT_20019ef0 + 1;

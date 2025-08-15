@@ -46,7 +46,8 @@ void render_ui_with_framebuffer_management
       _reflash_fb_data_to_lcd_ex
                 (uVar5,*(undefined4 *)(iVar3 + 0xeb8),param_4,param_5,param_6,param_7,*puVar1);
     } while (iVar2 != 9);
-    FUN_0007d5f2(MAIN_FRAMEBUFFER,param_4,param_5,param_4,iVar4,0x1b,param_6 - param_4);
+    draw_bitmap_with_extended_parameters_alt
+              (MAIN_FRAMEBUFFER,param_4,param_5,param_4,iVar4,0x1b,param_6 - param_4);
     iVar2 = get_display_config_flags();
     param_5 = param_7;
   }
@@ -55,7 +56,8 @@ void render_ui_with_framebuffer_management
     if (iVar2 < 0x21) {
       return;
     }
-    FUN_0007d5f2(MAIN_FRAMEBUFFER,param_4,param_5 + -0x1b,param_4,param_5,0x1b,param_6 - param_4);
+    draw_bitmap_with_extended_parameters_alt
+              (MAIN_FRAMEBUFFER,param_4,param_5 + -0x1b,param_4,param_5,0x1b,param_6 - param_4);
     iVar2 = get_display_config_flags();
     if (iVar2 << 0x1e < 0) {
       _clean_fb_data(MAIN_FRAMEBUFFER,0,param_4,param_5,param_6,param_7);

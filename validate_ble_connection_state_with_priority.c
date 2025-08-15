@@ -50,7 +50,7 @@ void validate_ble_connection_state_with_priority(undefined4 param_1,int param_2)
   uVar3 = 0xf0;
 LAB_00073a28:
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar3);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar3);
 }
 
 

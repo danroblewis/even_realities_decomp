@@ -51,7 +51,7 @@ void validate_and_process_ble_characteristics_with_validation_and_state_manageme
         local_1c = "Unexpected first L2CAP frame";
         local_20 = param_3;
         bt_log_connection_error(&DAT_00088108,0x1040,&local_20);
-        FUN_000813d6(param_1);
+        cleanup_reference_and_set_null(param_1);
       }
       *(int *)(param_1 + 0x10) = param_2;
 LAB_000563ce:
@@ -68,7 +68,7 @@ LAB_000563ce:
         local_3c = "ACL len mismatch (%u > %u)";
         local_40 = 4;
         bt_log_connection_error(&DAT_00088108,0x2040,&local_40);
-        FUN_000813d6(param_1);
+        cleanup_reference_and_set_null(param_1);
         return;
       }
       *(undefined4 *)(param_1 + 0x10) = 0;
@@ -81,7 +81,7 @@ LAB_000563ce:
     uStack_38 = param_3;
     bt_log_connection_error(&DAT_00088108,0x1840,&local_40);
   }
-  FUN_000813d6(param_1);
+  cleanup_reference_and_set_null(param_1);
 LAB_00056432:
   decrement_reference_count_and_cleanup_memory(param_2);
   return;

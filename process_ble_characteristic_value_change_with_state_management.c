@@ -23,9 +23,9 @@ char process_ble_characteristic_value_change_with_state_management
   if (param_2 != 0) {
     iVar1 = 1;
   }
-  iVar1 = FUN_00082ec8(*(undefined4 *)*param_1,iVar1);
+  iVar1 = handle_ble_attribute_processing_with_connection_state(*(undefined4 *)*param_1,iVar1);
   if (iVar1 == 0) {
-    iVar1 = FUN_00082236(param_1 + 0x48,5);
+    iVar1 = set_bit_and_check_if_already_set(param_1 + 0x48,5);
     if (iVar1 == 0) {
       return '\x12';
     }
@@ -46,10 +46,10 @@ char process_ble_characteristic_value_change_with_state_management
     local_24 = param_6;
     local_20 = param_7;
     local_1c = '\x01';
-    FUN_00081cee(param_4,param_4,0x81c8d,&local_30);
+    process_ble_handle_mapping_wrapper(param_4,param_4,0x81c8d,&local_30);
     if (local_1c == '\0') {
       if (local_2c != 0) {
-        FUN_000821a4(param_1);
+        handle_ble_characteristic_value_change_with_debug_init(param_1);
       }
     }
     else {
@@ -57,7 +57,8 @@ char process_ble_characteristic_value_change_with_state_management
         bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
                   (*(undefined4 *)(local_2c + 0x18));
         decrement_reference_count_and_cleanup_memory(local_2c);
-        FUN_000821f4(param_1,param_2,param_4,local_1c);
+        handle_ble_characteristic_value_change_with_callback_and_debug
+                  (param_1,param_2,param_4,local_1c);
       }
       if (param_2 == 0x18) {
         return local_1c;

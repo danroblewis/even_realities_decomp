@@ -26,7 +26,7 @@ int format_json_value_with_memory_management(undefined4 param_1,undefined4 param
   pcStack_1c = JSON_ALLOC_TPL;
   local_20 = param_2;
   if ((local_34 != 0) && (iVar1 = format_json_value_by_type(param_1,&local_34), iVar1 != 0)) {
-    FUN_00084f16(&local_34);
+    update_string_position_by_length(&local_34);
     if (SENSOR_CALLBACK_FUNCTION == (code *)0x0) {
       iVar1 = (*JSON_ALLOC_TPL)(local_2c + 1);
       if (iVar1 != 0) {

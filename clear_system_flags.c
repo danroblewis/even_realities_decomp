@@ -8,9 +8,9 @@
 void clear_system_flags(void)
 
 {
-  FUN_0007c08e(&DAT_20006ab4,0xfffffffe);
-  FUN_0007c08e(&DAT_20006ab4,0xfffffffd);
-  FUN_0007c08e(&DAT_20006ab4,0xfffffffb);
+  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
+  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffd);
+  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffb);
   return;
 }
 

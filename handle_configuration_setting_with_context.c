@@ -20,7 +20,7 @@ int handle_configuration_setting_with_context
                  "len <= (128 - sizeof(struct k_mem_block_id) - sizeof(struct data_chunk_item *))",
                  "WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",0x5b);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",0x5b);
+    trigger_system_service_call("WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",0x5b);
   }
   puVar3 = DAT_2000a2a4;
   if ((DAT_2000a2a4 == (undefined4 *)0x0) ||

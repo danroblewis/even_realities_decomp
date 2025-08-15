@@ -23,7 +23,7 @@ undefined4 process_ble_descriptor_and_log(void)
       iStack_18 = iVar2;
       ble_data_processing_wrapper(&DAT_00088128,0x1840,&local_20);
     }
-    FUN_00082928(puVar1);
+    initialize_structure_with_zeros(puVar1);
   }
   return 0;
 }

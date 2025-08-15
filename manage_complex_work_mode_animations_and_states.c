@@ -34,7 +34,7 @@ void manage_complex_work_mode_animations_and_states(void)
   iVar4 = get_work_mode();
   switch(*(undefined1 *)(*(int *)(iVar4 + 0x1014) + 2)) {
   case 0:
-    uVar18 = FUN_0007d382();
+    uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
     iVar4 = get_work_mode();
     uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
     uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -60,7 +60,7 @@ void manage_complex_work_mode_animations_and_states(void)
       return;
     }
     if (DAT_2001cdd0 != 0) {
-      uVar18 = FUN_0007d382();
+      uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar4 = get_work_mode();
       uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
       uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -86,7 +86,7 @@ void manage_complex_work_mode_animations_and_states(void)
     if (DAT_2001cdce == '\x01') {
       iVar4 = get_work_mode();
       if ((*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x05') && (DAT_2001cdd1 == '\0')) {
-        uVar18 = FUN_0007d382();
+        uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
         iVar4 = get_work_mode();
         uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
         uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -100,7 +100,7 @@ void manage_complex_work_mode_animations_and_states(void)
         iVar4 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         gui_bmp_dynamic_bitmap_draw(2,iVar4 + 0x42,iVar5 + 0x70,0,0,0,0);
-        uVar12 = FUN_0007d4b2(0x13);
+        uVar12 = get_data_by_index_and_type(0x13);
         iVar4 = get_ui_x_offset();
         iVar6 = get_ui_y_offset();
         iVar5 = get_ui_x_offset();
@@ -111,7 +111,7 @@ void manage_complex_work_mode_animations_and_states(void)
         iVar4 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         gui_bmp_dynamic_bitmap_draw(2,iVar4 + 0x82,iVar5 + 0x70,0,0,0,0);
-        uVar12 = FUN_0007d4b2(0x13);
+        uVar12 = get_data_by_index_and_type(0x13);
         iVar4 = get_ui_x_offset();
         iVar6 = get_ui_y_offset();
         iVar5 = get_ui_x_offset();
@@ -124,7 +124,7 @@ void manage_complex_work_mode_animations_and_states(void)
     if (DAT_2001cdce != '\x02') {
       return;
     }
-    uVar18 = FUN_0007d382();
+    uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
     iVar4 = get_work_mode();
     uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
     uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -133,12 +133,12 @@ void manage_complex_work_mode_animations_and_states(void)
        (DAT_2001cdd1 != '\0')) {
       if (DAT_2001cdd2 == '\0') {
         DAT_2001cdd2 = '\x01';
-        uVar12 = FUN_0007d4b2(0x14);
+        uVar12 = get_data_by_index_and_type(0x14);
         uVar8 = get_ui_x_offset();
         uVar9 = get_ui_y_offset();
         iVar4 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
-        FUN_0007d4b2(0x14);
+        get_data_by_index_and_type(0x14);
         uVar10 = calculate_string_length();
         gui_utf_draw(0,uVar12,3,uVar8,uVar9,iVar4 + 0x76,iVar5 + 0x1b,1,uVar10,0,0,0);
         uVar12 = get_ui_x_offset();
@@ -186,20 +186,20 @@ void manage_complex_work_mode_animations_and_states(void)
         uVar12 = get_ui_x_offset();
         iVar4 = get_ui_y_offset();
         gui_bmp_bitmap_draw_ex(0x39,uVar12,iVar4 + 0x51,&local_428,0x55);
-        uVar12 = FUN_0007d4b2(0x16);
+        uVar12 = get_data_by_index_and_type(0x16);
         iVar4 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         iVar6 = get_ui_x_offset();
         iVar7 = get_ui_y_offset();
-        FUN_0007d4b2(0x16);
+        get_data_by_index_and_type(0x16);
         uVar8 = calculate_string_length();
         gui_utf_draw(0,uVar12,0,iVar4 + 0x1c,iVar5 + 0x51,iVar6 + 0xf2,iVar7 + 0x6c,1,uVar8,0,0,0);
-        uVar12 = FUN_0007d4b2(0x15);
+        uVar12 = get_data_by_index_and_type(0x15);
         uVar8 = get_ui_x_offset();
         iVar4 = get_ui_y_offset();
         iVar5 = get_ui_x_offset();
         iVar6 = get_ui_y_offset();
-        FUN_0007d4b2(0x15);
+        get_data_by_index_and_type(0x15);
         uVar9 = calculate_string_length();
         gui_utf_draw(0,uVar12,0,uVar8,iVar4 + 0x6d,iVar5 + 0xf2,iVar6 + 0x88,1,uVar9,0,0,0);
         iVar4 = get_work_mode();
@@ -207,7 +207,7 @@ void manage_complex_work_mode_animations_and_states(void)
           iVar4 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           gui_bmp_bitmap_draw(0x3b,iVar4 + 0x108,iVar5 + 1,0,0,0);
-          uVar12 = FUN_0007d4b2(0x17);
+          uVar12 = get_data_by_index_and_type(0x17);
           iVar4 = get_ui_x_offset();
           uVar8 = get_ui_y_offset();
           iVar5 = get_ui_x_offset();
@@ -224,12 +224,12 @@ void manage_complex_work_mode_animations_and_states(void)
           iVar4 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           gui_bmp_bitmap_draw_ex(0x3b,iVar4 + 0x108,iVar5 + 1,&local_428,0x55);
-          uVar12 = FUN_0007d4b2(0x17);
+          uVar12 = get_data_by_index_and_type(0x17);
           iVar4 = get_ui_x_offset();
           uVar8 = get_ui_y_offset();
           iVar5 = get_ui_x_offset();
           iVar6 = get_ui_y_offset();
-          FUN_0007d4b2(0x17);
+          get_data_by_index_and_type(0x17);
           uVar9 = calculate_string_length();
           gui_utf_draw(0,uVar12,0,iVar4 + 0x126,uVar8,iVar5 + 0x202,iVar6 + 0x1b,1,uVar9,0,0,0);
           iVar4 = get_work_mode();
@@ -253,7 +253,7 @@ void manage_complex_work_mode_animations_and_states(void)
         else {
           uVar12 = 0x18;
         }
-        uVar12 = FUN_0007d4b2(uVar12);
+        uVar12 = get_data_by_index_and_type(uVar12);
         iVar4 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         iVar6 = get_ui_x_offset();
@@ -265,7 +265,7 @@ void manage_complex_work_mode_animations_and_states(void)
         else {
           uVar8 = 0x18;
         }
-        FUN_0007d4b2(uVar8);
+        get_data_by_index_and_type(uVar8);
         uVar8 = calculate_string_length();
         gui_utf_draw(0,uVar12,0,iVar4 + 0x108,iVar5 + 0x1b,iVar6 + 0x232,iVar7 + 0x87,4,uVar8,0,0,0)
         ;
@@ -284,7 +284,7 @@ void manage_complex_work_mode_animations_and_states(void)
         if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x05') {
           iVar4 = get_system_byte_1_alt();
           if (iVar4 == 6) {
-            uVar12 = FUN_0007d4b2(9);
+            uVar12 = get_data_by_index_and_type(9);
             iVar4 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
             iVar6 = get_ui_x_offset();
@@ -295,7 +295,7 @@ void manage_complex_work_mode_animations_and_states(void)
             iVar4 = iVar4 + 0xae;
           }
           else {
-            uVar12 = FUN_0007d4b2(9);
+            uVar12 = get_data_by_index_and_type(9);
             iVar4 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
             iVar6 = get_ui_x_offset();
@@ -314,7 +314,7 @@ void manage_complex_work_mode_animations_and_states(void)
             if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x15') {
               iVar4 = get_system_byte_1_alt();
               if (iVar4 == 6) {
-                uVar12 = FUN_0007d4b2(0xf);
+                uVar12 = get_data_by_index_and_type(0xf);
                 iVar4 = get_ui_x_offset();
                 iVar5 = get_ui_y_offset();
                 iVar6 = get_ui_x_offset();
@@ -322,7 +322,7 @@ void manage_complex_work_mode_animations_and_states(void)
                 iVar4 = iVar4 + 100;
               }
               else {
-                uVar12 = FUN_0007d4b2(0xf);
+                uVar12 = get_data_by_index_and_type(0xf);
                 iVar4 = get_ui_x_offset();
                 iVar5 = get_ui_y_offset();
                 iVar6 = get_ui_x_offset();
@@ -333,7 +333,7 @@ void manage_complex_work_mode_animations_and_states(void)
             }
             goto LAB_00041f3a;
           }
-          uVar12 = FUN_0007d4b2(0xb);
+          uVar12 = get_data_by_index_and_type(0xb);
           iVar4 = get_ui_x_offset();
           iVar5 = get_ui_y_offset();
           iVar6 = get_ui_x_offset();
@@ -417,7 +417,7 @@ LAB_00041f76:
       if (DAT_2001cdce != '\x02') {
         return;
       }
-      uVar18 = FUN_0007d382();
+      uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar4 = get_work_mode();
       uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
       uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -466,31 +466,31 @@ LAB_00042560:
         uVar12 = get_ui_x_offset();
         iVar4 = get_ui_y_offset();
         gui_bmp_bitmap_draw_ex(0x38,uVar12,iVar4 + 4,&local_428,0x55);
-        uVar12 = FUN_0007d4b2(0x1a);
+        uVar12 = get_data_by_index_and_type(0x1a);
         iVar4 = get_ui_x_offset();
         iVar5 = get_ui_y_offset();
         iVar6 = get_ui_x_offset();
         iVar7 = get_ui_y_offset();
-        FUN_0007d4b2(0x1a);
+        get_data_by_index_and_type(0x1a);
         uVar8 = calculate_string_length();
         gui_utf_draw(0,uVar12,0,iVar4 + 0x24,iVar5 + 3,iVar6 + 0x150,iVar7 + 0x1e,1,uVar8,0,0,0);
         iVar4 = get_work_mode();
         if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x06') {
-          uVar12 = FUN_0007d4b2(0x1c);
+          uVar12 = get_data_by_index_and_type(0x1c);
           uVar8 = get_ui_x_offset();
           iVar4 = get_ui_y_offset();
           iVar5 = get_ui_x_offset();
           iVar6 = get_ui_y_offset();
           uVar9 = 0x1c;
 LAB_00042606:
-          FUN_0007d4b2(uVar9);
+          get_data_by_index_and_type(uVar9);
           uVar9 = calculate_string_length();
           gui_utf_draw(0,uVar12,0,uVar8,iVar4 + 0x37,iVar5 + 0x240,iVar6 + 0x6d,2,uVar9,0,0,0);
         }
         else {
           iVar4 = get_work_mode();
           if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x13') {
-            uVar12 = FUN_0007d4b2(0xc);
+            uVar12 = get_data_by_index_and_type(0xc);
             uVar8 = get_ui_x_offset();
             iVar4 = get_ui_y_offset();
             iVar5 = get_ui_x_offset();
@@ -503,7 +503,7 @@ LAB_00042606:
         if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x06') {
           iVar4 = get_system_byte_1_alt();
           if (iVar4 == 6) {
-            uVar12 = FUN_0007d4b2(0x10);
+            uVar12 = get_data_by_index_and_type(0x10);
             iVar4 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
             iVar6 = get_ui_x_offset();
@@ -511,7 +511,7 @@ LAB_00042606:
             iVar4 = iVar4 + 0x34;
           }
           else {
-            uVar12 = FUN_0007d4b2(0x10);
+            uVar12 = get_data_by_index_and_type(0x10);
             iVar4 = get_ui_x_offset();
             iVar5 = get_ui_y_offset();
             iVar6 = get_ui_x_offset();
@@ -525,7 +525,7 @@ LAB_00042606:
           if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x13') {
             iVar4 = get_system_byte_1_alt();
             if (iVar4 == 6) {
-              uVar12 = FUN_0007d4b2(10);
+              uVar12 = get_data_by_index_and_type(10);
               iVar4 = get_ui_x_offset();
               iVar5 = get_ui_y_offset();
               iVar6 = get_ui_x_offset();
@@ -537,7 +537,7 @@ LAB_00042606:
               iVar4 = iVar4 + 0xdc;
             }
             else {
-              uVar12 = FUN_0007d4b2(10);
+              uVar12 = get_data_by_index_and_type(10);
               iVar4 = get_ui_x_offset();
               iVar5 = get_ui_y_offset();
               iVar6 = get_ui_x_offset();
@@ -592,7 +592,7 @@ LAB_000422ba:
     }
     iVar4 = get_work_mode();
     if (*(char *)(*(int *)(iVar4 + 0x1014) + 2) == '\x06') {
-      uVar18 = FUN_0007d382();
+      uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar4 = get_work_mode();
       uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
       uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -608,7 +608,7 @@ LAB_000422ba:
         gui_bmp_bitmap_draw_ex(0x38,uVar12,iVar4 + 0x37,&local_428,0x55);
         iVar4 = get_system_byte_1_alt();
         if (iVar4 == 6) {
-          uVar12 = FUN_0007d4b2(0x19);
+          uVar12 = get_data_by_index_and_type(0x19);
           iVar4 = get_ui_x_offset();
           iVar7 = get_ui_y_offset();
           iVar6 = get_ui_x_offset();
@@ -616,7 +616,7 @@ LAB_000422ba:
           iVar4 = iVar4 + 0x34;
         }
         else {
-          uVar12 = FUN_0007d4b2(0x19);
+          uVar12 = get_data_by_index_and_type(0x19);
           iVar4 = get_ui_x_offset();
           iVar7 = get_ui_y_offset();
           iVar6 = get_ui_x_offset();
@@ -689,7 +689,7 @@ LAB_000418a6:
     *(undefined1 *)(iVar5 + 3) = uVar15;
     break;
   case 0x16:
-    uVar18 = FUN_0007d382();
+    uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
     iVar4 = get_work_mode();
     uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
     uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -704,7 +704,7 @@ LAB_000418a6:
       return;
     }
     if (DAT_2001cdd0 != 0) {
-      uVar18 = FUN_0007d382();
+      uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar4 = get_work_mode();
       uVar16 = *(uint *)(*(int *)(iVar4 + 0x1014) + 4);
       uVar1 = (int)((ulonglong)uVar18 >> 0x20) - *(int *)(*(int *)(iVar4 + 0x1014) + 8);
@@ -717,7 +717,7 @@ LAB_000418a6:
 LAB_000418d2:
     DAT_2001cdd0 = DAT_2001cdd0 + 1;
     send_event_status(uVar12);
-    uVar18 = FUN_0007d382();
+    uVar18 = calculate_ble_connection_timing_with_scaling_alt3();
     iVar4 = get_work_mode();
     *(undefined8 *)(*(int *)(iVar4 + 0x1014) + 4) = uVar18;
   }

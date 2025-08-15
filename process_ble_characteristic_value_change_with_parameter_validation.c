@@ -27,7 +27,7 @@ process_ble_characteristic_value_change_with_parameter_validation(int param_1,in
   if (*(short *)(param_2 + 0x10) == 0) {
     local_2c = "Too small ATT PDU received";
     local_30 = 2;
-    FUN_00081ddc(&DAT_00088100,0x1040,&local_30);
+    process_and_compress_data_wrapper(&DAT_00088100,0x1040,&local_30);
   }
   else {
     pbVar2 = (byte *)update_buffer_position_and_size_alt(param_2 + 0xc,1);
@@ -41,7 +41,7 @@ process_ble_characteristic_value_change_with_parameter_validation(int param_1,in
           cVar1 = (&DAT_0008b2b6)[iVar6 * 8];
           *(undefined4 *)(param_1 + 0x13c) = uVar3;
           if (cVar1 == '\x01') {
-            iVar4 = FUN_00082236(param_1 + 0x118,local_44);
+            iVar4 = set_bit_and_check_if_already_set(param_1 + 0x118,local_44);
             if (iVar4 == 0) {
 LAB_00058e30:
               if ((uint)*(ushort *)(param_2 + 0x10) < (uint)(byte)(&DAT_0008b2b5)[iVar6 * 8]) {
@@ -49,7 +49,7 @@ LAB_00058e30:
                 local_54 = "Invalid len %u for code 0x%02x";
                 local_58 = 4;
                 uStack_50 = (uint)*(ushort *)(param_2 + 0x10);
-                FUN_00081ddc(&DAT_00088100,0x2040,&local_58);
+                process_and_compress_data_wrapper(&DAT_00088100,0x2040,&local_58);
                 if ((&DAT_0008b2b6)[iVar6 * 8] != '\x01') goto LAB_00058d9c;
                 iVar6 = 4;
               }
@@ -63,12 +63,13 @@ LAB_00058e30:
             local_2c = "Ignoring unexpected request";
           }
           else {
-            if ((cVar1 != '\x05') || (iVar4 = FUN_00082236(param_1 + 0x118,1), iVar4 == 0))
+            if ((cVar1 != '\x05') ||
+               (iVar4 = set_bit_and_check_if_already_set(param_1 + 0x118,1), iVar4 == 0))
             goto LAB_00058e30;
             local_2c = "Ignoring unexpected indication";
           }
           local_30 = 2;
-          FUN_00081ddc(&DAT_00088100,0x1080,&local_30);
+          process_and_compress_data_wrapper(&DAT_00088100,0x1080,&local_30);
           goto LAB_00058d9c;
         }
         iVar6 = iVar6 + 1;
@@ -78,21 +79,21 @@ LAB_00058dbc:
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!att_chan->rsp_buf",
                      "WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0xb54);
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0xb54);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0xb54);
       }
       uVar3 = increment_counter_in_structure(param_2);
       *(undefined4 *)(param_1 + 0x13c) = uVar3;
       uStack_50 = (uint)*pbVar2;
       local_54 = "Unhandled ATT code 0x%02x";
       local_58 = 3;
-      FUN_00081ddc(&DAT_00088100,0x1880,&local_58);
+      process_and_compress_data_wrapper(&DAT_00088100,0x1880,&local_58);
       uVar7 = bt_connection_disconnect_with_validation_and_state_management_and_callback_execution_and_parameter_and_state_validation_and_callback
                         (*pbVar2);
       uVar5 = (uint)((ulonglong)uVar7 >> 0x20);
       if (((int)uVar7 != 0) && ((int)uVar7 != 5)) {
         iVar6 = 6;
 LAB_00058e12:
-        FUN_000821f4(param_1 + -8,uVar5,0,iVar6);
+        handle_ble_characteristic_value_change_with_callback_and_debug(param_1 + -8,uVar5,0,iVar6);
       }
 LAB_00058d9c:
       decrement_reference_count_and_cleanup_memory(*(undefined4 *)(param_1 + 0x13c));

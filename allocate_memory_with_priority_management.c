@@ -52,21 +52,22 @@ int allocate_memory_with_priority_management(uint param_1)
         uVar7 = 0x72;
 LAB_0004bd9c:
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar7);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar7);
       }
       update_connection_state_flags(&DAT_2000365c);
       if (local_2c[0] != 0) {
-        FUN_0007e4bc(&DAT_20003648,iVar5);
+        update_buffer_read_position(&DAT_20003648,iVar5);
         local_2c[0] = 0;
       }
-      iVar4 = FUN_0007e314(&DAT_20003648,&local_30);
+      iVar4 = calculate_buffer_available_space(&DAT_20003648,&local_30);
       iVar3 = DAT_20003648;
       if (local_30 < param_1) {
         if (iVar4 == 0) {
-          iVar4 = FUN_0007e3ce(&DAT_20003648,local_30,&local_34,local_2c);
+          iVar4 = process_buffer_data_with_state_management
+                            (&DAT_20003648,local_30,&local_34,local_2c);
         }
         else {
-          FUN_0007e390(&DAT_20003648);
+          update_buffer_read_write_positions(&DAT_20003648);
           iVar3 = iVar5;
         }
       }
@@ -74,7 +75,7 @@ LAB_0004bd9c:
         iVar6 = DAT_20003668 + DAT_20003648 * 4;
         *(byte *)(DAT_20003668 + DAT_20003648 * 4) =
              *(byte *)(DAT_20003668 + DAT_20003648 * 4) & 0xfc;
-        DAT_20003648 = FUN_0007e35c(&DAT_20003648,DAT_20003648,param_1);
+        DAT_20003648 = calculate_buffer_offset_with_wrapping(&DAT_20003648,DAT_20003648,param_1);
         if (DAT_20003648 == DAT_20003654) {
           DAT_20003658 = DAT_20003658 | 8;
         }

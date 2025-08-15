@@ -20,26 +20,26 @@ void panel_init(void)
       handle_heartbeat();
     }
   }
-  FUN_0007d74e();
-  FUN_0007d77c(6);
+  send_jbd_display_command_sequence_0x66_0x99();
+  manage_jbd_display_power_state(6);
   jbd_spi_write_register(1,0x10);
-  FUN_0007d6ae(0);
-  FUN_0007d658(0);
-  FUN_0007d658(0,0x14);
-  FUN_0007d658(0x18,0);
-  FUN_0007d658(0x18,0x14);
-  FUN_0007d658(0xc,10);
-  FUN_0007d77c(0x71);
-  FUN_0007d77c(0x97);
-  FUN_0007d772(1);
-  FUN_0007d77c(0x73);
-  FUN_0007d77c(0x97);
-  FUN_0007d772(1);
-  FUN_0007d67e(0xf);
+  initialize_jbd_display_memory_buffers(0);
+  initialize_jbd_battery_system_with_commands(0);
+  initialize_jbd_battery_system_with_commands(0,0x14);
+  initialize_jbd_battery_system_with_commands(0x18,0);
+  initialize_jbd_battery_system_with_commands(0x18,0x14);
+  initialize_jbd_battery_system_with_commands(0xc,10);
+  manage_jbd_display_power_state(0x71);
+  manage_jbd_display_power_state(0x97);
+  multiply_by_1000_and_jump(1);
+  manage_jbd_display_power_state(0x73);
+  manage_jbd_display_power_state(0x97);
+  multiply_by_1000_and_jump(1);
+  send_jbd_display_command_0x46(0xf);
   jbd_spi_write_register(0x31,4);
-  FUN_0007d77c(0xa3);
-  FUN_0007d77c(0x97);
-  FUN_0007d772(1,extraout_r1,extraout_r2,in_r3);
+  manage_jbd_display_power_state(0xa3);
+  manage_jbd_display_power_state(0x97);
+  multiply_by_1000_and_jump(1,extraout_r1,extraout_r2,in_r3);
   return;
 }
 

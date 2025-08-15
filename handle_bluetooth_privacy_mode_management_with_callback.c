@@ -14,11 +14,12 @@ uint handle_bluetooth_privacy_mode_management_with_callback(char *param_1,int pa
   undefined4 local_18;
   char *local_14;
   
-  if ((param_1 != (char *)0x0) && (iVar1 = FUN_00080fa4(param_1,&DAT_000f2b3a), iVar1 == 0)) {
+  if ((param_1 != (char *)0x0) &&
+     (iVar1 = compare_byte_arrays_7_bytes(param_1,&DAT_000f2b3a), iVar1 == 0)) {
     if ((*param_1 != '\x01') || ((param_1[6] & 0xc0U) != 0xc0)) {
       local_14 = "Only static random identity address supported";
       local_18 = 2;
-      FUN_0008104a(&DAT_00088150,0x1040,&local_18);
+      execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1040,&local_18);
       return 0xffffffea;
     }
     iVar1 = bluetooth_hci_command_processing_with_validation_and_parameter(param_1);
@@ -30,9 +31,10 @@ uint handle_bluetooth_privacy_mode_management_with_callback(char *param_1,int pa
     if (DAT_20002007 == 1) {
       return 0xfffffff4;
     }
-    iVar1 = FUN_00080fb4(&DAT_200020d4);
+    iVar1 = dereference_pointer_value(&DAT_200020d4);
     if ((iVar1 << 0x1f < 0) ||
-       ((param_1 != (char *)0x0 && (iVar1 = FUN_00080fa4(param_1,&DAT_000f2b3a), iVar1 == 0)))) {
+       ((param_1 != (char *)0x0 &&
+        (iVar1 = compare_byte_arrays_7_bytes(param_1,&DAT_000f2b3a), iVar1 == 0)))) {
       uVar3 = (uint)DAT_20002007;
       DAT_20002007 = DAT_20002007 + 1;
       uVar2 = bluetooth_hci_command_processing_with_state_management_and_parameter(uVar3,param_1);

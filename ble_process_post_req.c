@@ -54,7 +54,7 @@ undefined4 ble_process_post_req(int param_1,byte *packet,int param_3)
     local_a0 = 0;
     fill_memory_buffer(auStack_9c,0,0x11);
     if (_command_id == 0xf4) {
-      FUN_0007c20a(param_1);
+      process_message_dequeue_with_callback_execution(param_1);
       return 0;
     }
     if (_command_id == 0xf5) {

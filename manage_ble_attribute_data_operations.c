@@ -41,10 +41,10 @@ int manage_ble_attribute_data_operations
           if (bVar4) {
             iVar2 = get_ble_handle_value(param_2 + 5);
             if (iVar2 << 0x1d < 0) {
-              FUN_00082e24(param_1,param_2);
+              handle_ble_connection_state_processing_and_cleanup(param_1,param_2);
             }
             if (bVar6) {
-              FUN_00082ab8(iVar1 + 8,param_2 + 6);
+              remove_element_from_linked_list_and_update_pointers(iVar1 + 8,param_2 + 6);
               if (*(int *)(iVar1 + 8) == 0) {
                 initialize_ble_characteristic_value_buffer(iVar1);
               }
@@ -56,7 +56,7 @@ int manage_ble_attribute_data_operations
               if (iVar2 != 0) {
                 return iVar2;
               }
-              FUN_00082ab8(iVar1 + 8,param_2 + 6);
+              remove_element_from_linked_list_and_update_pointers(iVar1 + 8,param_2 + 6);
               if (*(int *)(iVar1 + 8) == 0) {
                 initialize_ble_characteristic_value_buffer(iVar1);
               }
@@ -77,7 +77,7 @@ int manage_ble_attribute_data_operations
     uVar3 = 0x14dd;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar3);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar3);
 }
 
 

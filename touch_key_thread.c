@@ -39,7 +39,7 @@ LAB_0002a0e8:
   } while (-1 < (int)((uint)*(ushort *)(param_1 + 0x105c) << 0x1f));
   if (TOUCH_SENSOR_STATUS_FLAG == '\x01') {
     iVar1 = setup_touch_sensor();
-    FUN_0007d0aa(param_1 + 0x1078);
+    read_sensor_data_and_scale_by_1024(param_1 + 0x1078);
     if (10000 < iVar1 - iVar8) {
       iVar6 = 0;
       iVar4 = iVar6;
@@ -109,7 +109,7 @@ LAB_0002a24e:
     goto LAB_0002a0e8;
   }
   if (iVar6 == 0) {
-    FUN_0007d0aa(param_1 + 0x1078);
+    read_sensor_data_and_scale_by_1024(param_1 + 0x1078);
     if ((-20000 < *(int *)(param_1 + 0x1078)) && (*(int *)(param_1 + 0x1078) < 20000)) {
       iVar4 = 0;
       goto LAB_0002a0e8;

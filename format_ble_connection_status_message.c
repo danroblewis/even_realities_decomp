@@ -47,7 +47,7 @@ LAB_00059950:
   local_4c = (undefined1 *)CONCAT22(local_4c._2_2_,0x200);
   local_58 = 0x1000003;
   local_50 = auStack_38;
-  FUN_00081ddc(&DAT_00088100,0x1c40,&local_58);
+  process_and_compress_data_wrapper(&DAT_00088100,0x1c40,&local_58);
   process_ble_connection_cleanup_and_state_transition(param_1 + -0x158);
   return;
 }

@@ -26,17 +26,19 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
   else {
     iVar3 = create_json_obj();
     if (iVar3 != 0) {
-      FUN_0008504c(iVar3,"call_enable",DAT_2001a22c & 1);
-      FUN_0008504c(iVar3,"msg_enable",((uint)DAT_2001a22c << 0x1e) >> 0x1f);
-      FUN_0008504c(iVar3,"ios_mail_enable",((uint)DAT_2001a22c << 0x1d) >> 0x1f);
-      FUN_0008504c(iVar3,"calendar_enable",((uint)DAT_2001a22c << 0x1c) >> 0x1f);
+      create_and_set_json_boolean_field(iVar3,"call_enable",DAT_2001a22c & 1);
+      create_and_set_json_boolean_field(iVar3,"msg_enable",((uint)DAT_2001a22c << 0x1e) >> 0x1f);
+      create_and_set_json_boolean_field
+                (iVar3,"ios_mail_enable",((uint)DAT_2001a22c << 0x1d) >> 0x1f);
+      create_and_set_json_boolean_field
+                (iVar3,"calendar_enable",((uint)DAT_2001a22c << 0x1c) >> 0x1f);
       iVar4 = create_json_obj();
       if (iVar4 == 0) {
         uVar7 = 0x206;
         pcVar2 = "[%s-%d]appJson is null \n";
       }
       else {
-        FUN_0008504c(iVar4,"enable",((uint)DAT_2001a22c << 0x1b) >> 0x1f);
+        create_and_set_json_boolean_field(iVar4,"enable",((uint)DAT_2001a22c << 0x1b) >> 0x1f);
         iVar5 = create_json_array_value();
         if (iVar5 == 0) {
           uVar7 = 0x20e;
@@ -49,7 +51,7 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
             if (DAT_2001a22d <= uVar8) {
               add_json_named_object(iVar4,"list",iVar5);
               add_json_named_object(iVar3,"app",iVar4);
-              uVar7 = FUN_0008501a(iVar3);
+              uVar7 = format_json_value_wrapper_alt(iVar3);
               if (IS_DEBUG == 0) {
                 DEBUG_PRINT("cJsonStr is %s \n",uVar7);
               }
@@ -67,7 +69,7 @@ undefined2 create_whitelist_app_json_structure(int param_1,undefined4 param_2,un
             if (iVar6 == 0) break;
             add_json_field_complex(iVar6,"id",&DAT_2001a22e + uVar8 * 0x38);
             add_json_field_complex(iVar6,"name",&DAT_2001a256 + uVar8 * 0x38);
-            thunk_FUN_00084f2e(iVar5,iVar6);
+            insert_element_into_linked_list(iVar5,iVar6);
           }
           uVar7 = 0x219;
           pcVar2 = "[%s-%d]appItem is null \n";

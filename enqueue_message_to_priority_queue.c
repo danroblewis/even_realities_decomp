@@ -53,7 +53,7 @@ void enqueue_message_to_priority_queue(int param_1,undefined4 *param_2)
        (iVar2 = process_ble_connection_list_with_cleanup(param_1), iVar2 != 0)) {
       *(undefined4 *)(iVar2 + 0x90) = 0;
       *(undefined4 **)(iVar2 + 0x14) = param_2;
-      FUN_000738d4();
+      handle_ble_connection_insertion_with_privilege_management();
       validate_ble_connection_state_with_priority(iVar6,uVar7);
       return;
     }
@@ -77,7 +77,7 @@ void enqueue_message_to_priority_queue(int param_1,undefined4 *param_2)
   pcVar3 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
 LAB_00071d6e:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar7);
+  trigger_system_service_call(pcVar3,uVar7);
 }
 
 

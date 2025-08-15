@@ -15,7 +15,7 @@ int validate_and_process_ble_characteristics_with_validation_and_callback_execut
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","conn",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x509);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x509);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x509);
   }
   piVar1 = (int *)(param_1 + 0xd0);
   do {

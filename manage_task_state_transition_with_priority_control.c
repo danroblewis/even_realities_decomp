@@ -5,26 +5,27 @@
  */
 
 
-uint manage_task_state_transition_with_priority_control(int *param_1,undefined4 *param_2)
+void * manage_task_state_transition_with_priority_control(int *param_1,undefined4 *param_2)
 
 {
   ushort uVar1;
   bool bVar2;
   uint uVar3;
-  int iVar4;
-  char *pcVar5;
-  int iVar6;
-  undefined4 uVar7;
+  void *pvVar4;
+  int iVar5;
+  char *pcVar6;
+  int iVar7;
+  undefined4 uVar8;
   undefined4 *additional_param;
-  uint uVar8;
-  int *piVar9;
+  void *pvVar9;
+  int *piVar10;
   int priority;
   
-  uVar3 = FUN_0007e1c6();
-  if ((int)uVar3 < 0) {
-    return uVar3;
+  pvVar4 = (void *)validate_heap_chunk_parameters(param_1,param_2);
+  if ((int)pvVar4 < 0) {
+    return pvVar4;
   }
-  piVar9 = param_1 + 5;
+  piVar10 = param_1 + 5;
   priority = 0;
   bVar2 = (bool)isCurrentModePrivileged();
   if (bVar2) {
@@ -35,29 +36,29 @@ uint manage_task_state_transition_with_priority_control(int *param_1,undefined4 
     setBasePriority(0x20);
   }
   InstructionSynchronizationBarrier(0xf);
-  iVar4 = check_connection_state_validity(piVar9);
-  if (iVar4 == 0) {
+  iVar5 = check_connection_state_validity(piVar10);
+  if (iVar5 == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_lock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
-    DEBUG_PRINT2("\tInvalid spinlock %p\n",piVar9);
-    uVar7 = 0x72;
+    DEBUG_PRINT2("\tInvalid spinlock %p\n",piVar10);
+    uVar8 = 0x72;
   }
   else {
-    update_connection_state_flags(piVar9);
+    update_connection_state_flags(piVar10);
     uVar1 = *(ushort *)(param_1 + 7);
-    uVar3 = uVar1 & 7;
+    pvVar4 = (void *)(uVar1 & 7);
     if (*(short *)((int)param_1 + 0x1e) == -1) {
-      uVar8 = 0xfffffff5;
+      pvVar9 = (void *)0xfffffff5;
 LAB_0004b9a6:
-      iVar4 = 0;
+      iVar5 = 0;
     }
     else {
-      uVar8 = uVar3;
-      if (uVar3 != 2) {
-        switch(uVar3) {
-        case 0:
-        case 4:
-        case 6:
+      pvVar9 = pvVar4;
+      if (pvVar4 != (void *)0x2) {
+        switch(pvVar4) {
+        case (void *)0x0:
+        case (void *)0x4:
+        case (void *)0x6:
           *param_2 = 0;
           additional_param = (undefined4 *)param_1[1];
           if (additional_param == (undefined4 *)0x0) {
@@ -70,46 +71,46 @@ LAB_0004b9a6:
           }
           if ((uVar1 & 7) == 0) {
             manage_task_state_and_priority(param_1,2,priority,additional_param);
-            return uVar3;
+            return pvVar4;
           }
           break;
-        case 1:
-          uVar8 = 0xfffffffb;
+        case (void *)0x1:
+          pvVar9 = (void *)0xfffffffb;
           break;
         default:
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","state == (1UL << (0))",
                        "WEST_TOPDIR/zephyr/lib/os/onoff.c",0x1c8);
-          uVar7 = 0x1c8;
-          pcVar5 = "WEST_TOPDIR/zephyr/lib/os/onoff.c";
+          uVar8 = 0x1c8;
+          pcVar6 = "WEST_TOPDIR/zephyr/lib/os/onoff.c";
           goto LAB_0004b9d2;
-        case 5:
-          uVar8 = 0xffffff7a;
+        case (void *)0x5:
+          pvVar9 = (void *)0xffffff7a;
         }
         goto LAB_0004b9a6;
       }
       *(short *)((int)param_1 + 0x1e) = *(short *)((int)param_1 + 0x1e) + 1;
     }
-    iVar6 = validate_and_clear_connection_state(piVar9);
-    if (iVar6 != 0) {
+    iVar7 = validate_and_clear_connection_state(piVar10);
+    if (iVar7 != 0) {
       bVar2 = (bool)isCurrentModePrivileged();
       if (bVar2) {
         setBasePriority(priority);
       }
       InstructionSynchronizationBarrier(0xf);
-      if (iVar4 != 0) {
-        FUN_0007e1e6(param_1,param_2,uVar3,0);
+      if (iVar5 != 0) {
+        allocate_memory_with_callback(param_1,param_2,pvVar4,0);
       }
-      return uVar8;
+      return pvVar9;
     }
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","z_spin_unlock_valid(l)",
                  "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0xf0);
-    DEBUG_PRINT2("\tNot my spinlock %p\n",piVar9);
-    uVar7 = 0xf0;
+    DEBUG_PRINT2("\tNot my spinlock %p\n",piVar10);
+    uVar8 = 0xf0;
   }
-  pcVar5 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
+  pcVar6 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
 LAB_0004b9d2:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar5,uVar7);
+  trigger_system_service_call(pcVar6,uVar8);
 }
 
 

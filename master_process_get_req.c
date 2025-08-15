@@ -74,7 +74,7 @@ int master_process_get_req(char *param_1,byte *param_2,byte *param_3,undefined4 
         if (iVar20 == iVar5) {
           *param_3 = 0x6f;
           param_3[1] = 0x6b;
-          FUN_0007d968(param_3 + 0x12,iVar20,param_3 + 2);
+          process_burial_point_data_with_padding(param_3 + 0x12,iVar20,param_3 + 2);
           dump_hex_data("flash_md5",param_3 + 2,0x10);
           return iVar18;
         }
@@ -145,8 +145,9 @@ int master_process_get_req(char *param_1,byte *param_2,byte *param_3,undefined4 
         return iVar18;
       case 0x4c:
         uVar14 = *(uint *)(param_2 + 4);
-        FUN_0007c0e2(uVar14 << 0x18 | (uVar14 >> 8 & 0xff) << 0x10 | (uVar14 >> 0x10 & 0xff) << 8 |
-                     uVar14 >> 0x18);
+        handle_uid_drop_package_with_bluetooth_manager
+                  (uVar14 << 0x18 | (uVar14 >> 8 & 0xff) << 0x10 | (uVar14 >> 0x10 & 0xff) << 8 |
+                   uVar14 >> 0x18);
         break;
       case 0x4d:
         iVar18 = get_work_mode();
@@ -548,7 +549,7 @@ LAB_0002b1a0:
         else if (uVar14 == 0xc) {
           uVar4 = 0;
 LAB_0002b1f2:
-          FUN_0007d2f8(uVar4);
+          set_work_mode_state_and_update_flags(uVar4);
         }
       }
       param_1[0xfea] = bVar15;

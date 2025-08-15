@@ -72,7 +72,7 @@ void add_ble_connection_to_list(undefined4 *param_1,undefined4 *param_2)
   pcVar3 = "WEST_TOPDIR/zephyr/subsys/net/buf.c";
 LAB_0005f090:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar5);
+  trigger_system_service_call(pcVar3,uVar5);
 }
 
 

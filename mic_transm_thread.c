@@ -57,7 +57,8 @@ LAB_00032570:
         while( true ) {
           uVar7 = uVar6 * 200 + DAT_20002420;
           DEBUG_PRINT("start send mic data,flash address:0x%x,seq:%d\n",uVar7,uVar6);
-          iVar2 = FUN_0007d120(&FLASH_DRIVER_INTERFACE,uVar7,local_f2,200);
+          iVar2 = dispatch_function_pointer_from_structure_alt
+                            (&FLASH_DRIVER_INTERFACE,uVar7,local_f2,200);
           if (iVar2 != 0) break;
           iVar4 = 6;
           local_f4 = (ushort)(byte)uVar6;

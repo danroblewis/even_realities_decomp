@@ -32,7 +32,7 @@ int process_sha256_context_with_comprehensive_state_management
     return 0xf10005;
   }
   if (*(char *)(param_1 + 0xf) == '\x04') {
-    iVar3 = FUN_0007bbcc(param_1[0x10],param_1[0xc]);
+    iVar3 = validate_sha256_parameters_with_size_checking(param_1[0x10],param_1[0xc]);
     if (iVar3 == 0) {
       _DAT_50845400 = *DAT_20002f3c;
       _DAT_50845404 = DAT_20002f3c[1];
@@ -45,8 +45,9 @@ int process_sha256_context_with_comprehensive_state_management
       uVar5 = param_1[0xc];
       if (uVar5 < 3) {
         iVar4 = uVar5 * 8 + 0x10;
-        iVar3 = FUN_0007be24(param_1[0x10],uVar5,param_1[0x11],param_1[0x12],param_1[0x13],
-                             param_1[0x14],param_1 + 4,iVar4);
+        iVar3 = derive_sha256_key_with_counter_increment
+                          (param_1[0x10],uVar5,param_1[0x11],param_1[0x12],param_1[0x13],
+                           param_1[0x14],param_1 + 4,iVar4);
         if (iVar3 != 0) {
           _DAT_50845400 = *DAT_20002f3c;
           _DAT_50845404 = DAT_20002f3c[1];
@@ -56,7 +57,7 @@ int process_sha256_context_with_comprehensive_state_management
           _DAT_50845414 = DAT_20002f3c[5];
           _DAT_50845418 = DAT_20002f3c[6];
           _DAT_5084541c = DAT_20002f3c[7];
-          FUN_0007a3d4(param_1 + 4,iVar4);
+          fill_memory_buffer_with_zeros_wrapper(param_1 + 4,iVar4);
         }
         *(undefined1 *)(param_1 + 0xf) = 0;
       }
@@ -150,7 +151,7 @@ LAB_0007b8f6:
 joined_r0x0007b70e:
   if (bVar1) {
     *(undefined1 *)(param_1 + 0xf) = 4;
-    FUN_0007a3d4(param_1 + 4,0x20);
+    fill_memory_buffer_with_zeros_wrapper(param_1 + 4,0x20);
   }
   _DAT_50845810 = 0;
   _DAT_50845820 = 0;

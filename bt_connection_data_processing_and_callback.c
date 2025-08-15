@@ -82,7 +82,7 @@ void bt_connection_data_processing_and_callback(uint *param_1,uint param_2,uint 
     uVar4 = 0xf0;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar4);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar4);
 }
 
 

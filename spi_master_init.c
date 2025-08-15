@@ -79,12 +79,12 @@ undefined4 spi_master_init(int param_1)
   else {
     puVar4 = (undefined *)0x0;
   }
-  iVar1 = FUN_000671d8(param_1 + 0xc,&local_48,puVar4);
+  iVar1 = setup_interrupt_configuration(param_1 + 0xc,&local_48,puVar4);
   if (iVar1 != 0xbad0000) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","status == NRFX_SUCCESS","../src/spim_spis/spim.c",
                  0x68);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("../src/spim_spis/spim.c",0x68);
+    trigger_system_service_call("../src/spim_spis/spim.c",0x68);
   }
   if (*(char *)(param_1 + 0x18) == '\x03') {
     if (DAT_20018c6c != '\0') goto LAB_00026524;

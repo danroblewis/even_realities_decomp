@@ -20,7 +20,7 @@ undefined4 initialize_sensor_driver_with_validation(void)
                    "../src/production_test/serial_thread.c",0x2e,in_r3);
       DEBUG_PRINT2("\tLPUART device not ready\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("../src/production_test/serial_thread.c",0x2e);
+      trigger_system_service_call("../src/production_test/serial_thread.c",0x2e);
     }
     iVar2 = configure_sensor_driver_interface(&DAT_00087bc0);
     if (iVar2 != 0) {

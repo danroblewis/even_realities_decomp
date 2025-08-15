@@ -16,16 +16,16 @@ void manage_sensor_interrupt_configuration
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","index < 16",
                  "WEST_TOPDIR/modules/hal/nordic/nrfx/hal/nrf_ipc.h",0x1e7,enable_flag);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/modules/hal/nordic/nrfx/hal/nrf_ipc.h",0x1e7);
+    trigger_system_service_call("WEST_TOPDIR/modules/hal/nordic/nrfx/hal/nrf_ipc.h",0x1e7);
   }
   uVar1 = manage_timer_interrupt_state(sensor_config);
   puVar2 = (uint *)(sensor_index * 4 + 0x5002a180);
   if (enable_flag == 0) {
-    FUN_00064fd4(interrupt_mask,uVar1);
+    clear_sensor_interrupt_flags_alt(interrupt_mask,uVar1);
     *puVar2 = 0;
   }
   else {
-    FUN_00064f78();
+    set_sensor_interrupt_flags_alt();
     *puVar2 = interrupt_mask | 0x80000000;
   }
   return;

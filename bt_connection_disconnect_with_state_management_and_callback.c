@@ -26,12 +26,12 @@ bt_connection_disconnect_with_state_management_and_callback(int param_1,undefine
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x9b0);
     DEBUG_PRINT2("\tInvalid conn state %u\n",uVar5);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x9b0);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x9b0);
   }
   param_2[0x24] = (&DAT_000f3e4e)[uVar5];
   param_2[0x27] = 0;
   param_2[0x25] = *(undefined1 *)(param_1 + 9);
-  uVar1 = FUN_0008148a(param_1,param_2,param_1);
+  uVar1 = get_ble_connection_state(param_1,param_2,param_1);
   *(undefined1 *)(extraout_r1 + 0x26) = uVar1;
   if (*(char *)(extraout_r2 + 2) == '\x01') {
     *(int *)(extraout_r1 + 8) = extraout_r2 + 0x90;

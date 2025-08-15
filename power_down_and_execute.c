@@ -14,8 +14,8 @@ undefined4 power_down_and_execute(void)
   
   power_down_panel();
   power_down_imu_and_mic();
-  FUN_0007c038(2000);
-  iVar1 = FUN_00083dc8(&DAT_00087c80,0xb,2,1,in_r3);
+  calculate_ble_schedule_timing_with_division(2000);
+  iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,0xb,2,1,in_r3);
   if (iVar1 < 0) {
     format_string = "Could not set shipmode.\n";
   }

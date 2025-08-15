@@ -14,7 +14,7 @@ void bt_connection_disconnect_with_parameter_validation
   int iVar3;
   
   *(undefined1 *)(param_1 + 10) = *(undefined1 *)(param_1 + 9);
-  FUN_000819ea();
+  process_ble_connections_with_callback();
   for (iVar3 = BT_CONNECTION_CALLBACK_LIST_HEAD; iVar3 != 0; iVar3 = *(int *)(iVar3 + 0x20)) {
     pcVar1 = *(code **)(iVar3 + 0x14);
     if (pcVar1 != (code *)0x0) {
@@ -28,7 +28,7 @@ void bt_connection_disconnect_with_parameter_validation
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x8ca);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x8ca);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x8ca);
     }
     if (&UNK_00088057 < puVar2) break;
     if ((code *)puVar2[5] != (code *)0x0) {

@@ -15,7 +15,7 @@ void change_work_mode_to(uint param_1)
   
   iVar2 = 3000;
   while ((DAT_2000ff4b != '\0' && (iVar2 = iVar2 + -1, iVar2 != 0))) {
-    FUN_0007c038(1);
+    calculate_ble_schedule_timing_with_division(1);
   }
   DAT_2000ff4b = 1;
   if (*(byte *)(WORK_MODE + 1) == param_1) {

@@ -19,7 +19,7 @@ int process_data_with_validation_and_callback_alt
   param_1[7] = param_1 + 10;
   iVar1 = handle_ble_characteristic_read_request(*param_1,param_1 + 5,param_3,param_1 + 10,param_4);
   if (iVar1 != 0) {
-    FUN_0007f5d8(param_1 + 1,2);
+    clear_specific_bit_by_position(param_1 + 1,2);
   }
   return iVar1;
 }

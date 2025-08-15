@@ -32,20 +32,21 @@ char * handle_comprehensive_device_initialization(int param_1)
   undefined1 **local_20;
   undefined1 **local_1c;
   
-  pcVar1 = (char *)FUN_000838dc(*(undefined4 *)(*(int *)(param_1 + 4) + 0x34),0);
+  pcVar1 = (char *)process_device_data_with_callback_execution
+                             (*(undefined4 *)(*(int *)(param_1 + 4) + 0x34),0);
   if ((int)pcVar1 < 0) {
     return pcVar1;
   }
   process_data_with_callback_execution_alt4(0x2b,1,0);
   iVar5 = *(int *)(param_1 + 4);
   _DAT_500055b8 = 0;
-  FUN_00066994(iVar5,&LAB_000838ca_1,*(undefined4 *)(param_1 + 0x10));
+  initialize_hardware_configuration(iVar5,&LAB_000838ca_1,*(undefined4 *)(param_1 + 0x10));
   _DAT_500055b8 = 2;
   pcVar1 = (char *)lookup_device_property_from_table();
   if ((int)pcVar1 < 0) {
     return pcVar1;
   }
-  pcVar1 = (char *)FUN_0008397e(param_1);
+  pcVar1 = (char *)validate_device_properties_with_ab_size(param_1);
   if ((int)pcVar1 < 0) {
     return pcVar1;
   }
@@ -58,7 +59,7 @@ char * handle_comprehensive_device_initialization(int param_1)
   else {
     uVar6 = 0;
   }
-  pcVar1 = (char *)FUN_000839a6(param_1);
+  pcVar1 = (char *)read_device_property_value(param_1);
   if ((int)pcVar1 < 0) {
     uVar2 = 0x1840;
     local_3c = "RDSR failed: %d";
@@ -66,7 +67,7 @@ char * handle_comprehensive_device_initialization(int param_1)
     local_40 = (char *)0x3;
     local_38 = pcVar1;
 LAB_00060c8e:
-    FUN_000838d6(&DAT_00088270,uVar2,ppcVar3);
+    execute_device_memory_data_compression(&DAT_00088270,uVar2,ppcVar3);
   }
   else {
     if (uVar6 != (uint)((int)pcVar1 << 0x19) >> 0x1f) {
@@ -95,7 +96,7 @@ LAB_00060cdc:
         goto LAB_00060c8e;
       }
       do {
-        pcVar1 = (char *)FUN_000839a6(param_1);
+        pcVar1 = (char *)read_device_property_value(param_1);
         if ((int)pcVar1 < 0) goto LAB_00060cdc;
       } while ((int)pcVar1 * -0x80000000 < 0);
     }
@@ -123,7 +124,7 @@ LAB_00060cdc:
         local_34 = (uint)*(byte *)(iVar4 + 0x32);
         local_4c = "JEDEC id [%02x %02x %02x] expect [%02x %02x %02x]";
         local_50 = 8;
-        FUN_000838d6(&DAT_00088270,0x4040,&local_50);
+        execute_device_memory_data_compression(&DAT_00088270,0x4040,&local_50);
       }
     }
     else {

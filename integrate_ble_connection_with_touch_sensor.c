@@ -91,7 +91,7 @@ LAB_00074722:
     pcVar2 = "WEST_TOPDIR/zephyr/kernel/sched.c";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar2,uVar5);
+  trigger_system_service_call(pcVar2,uVar5);
 }
 
 

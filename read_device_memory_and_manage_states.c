@@ -35,12 +35,12 @@ int read_device_memory_and_manage_states(int param_1,int param_2,uint param_3,ui
     local_48 = 4;
     iStack_40 = param_2;
     local_3c = param_4;
-    FUN_000838d6(&DAT_00088270,0x2040,&local_48);
+    execute_device_memory_data_compression(&DAT_00088270,0x2040,&local_48);
     return -0x16;
   }
   iVar1 = check_device_capabilities_and_state();
   if (iVar1 != 0) goto LAB_000611cc;
-  FUN_00083906(param_1);
+  handle_ble_connection_state_and_status_flags(param_1);
   uVar6 = -param_2 & 3U;
   if (param_4 <= (-param_2 & 3U)) {
     uVar6 = param_4;
@@ -68,7 +68,7 @@ int read_device_memory_and_manage_states(int param_1,int param_2,uint param_3,ui
 LAB_00061156:
     if (uVar6 != 0) {
       local_34 = 4 - uVar6;
-      iVar1 = FUN_00085206(auStack_30,4,param_2 - local_34);
+      iVar1 = handle_hardware_interrupt_with_validation_alt(auStack_30,4,param_2 - local_34);
       handle_device_state_change(*(undefined4 *)(param_1 + 0x10),iVar1);
       if (iVar1 != 0xbad0000) goto LAB_000611be;
       memcpy(param_3,auStack_30 + local_34,uVar6);
@@ -77,7 +77,7 @@ LAB_00061156:
       iVar1 = 0xbad0000;
     }
     else {
-      iVar1 = FUN_00085206(auStack_30,8,param_2 + uVar6 + uVar3);
+      iVar1 = handle_hardware_interrupt_with_validation_alt(auStack_30,8,param_2 + uVar6 + uVar3);
       handle_device_state_change(*(undefined4 *)(param_1 + 0x10),iVar1);
       if (iVar1 == 0xbad0000) {
         memcpy(uVar3 + uVar6 + param_3,auStack_30,uVar8);
@@ -87,7 +87,7 @@ LAB_00061156:
   else {
     local_34 = param_3 + uVar4;
     local_38 = uVar4;
-    iVar1 = FUN_00085206(local_34,uVar3,param_2 + uVar6);
+    iVar1 = handle_hardware_interrupt_with_validation_alt(local_34,uVar3,param_2 + uVar6);
     handle_device_state_change(*(undefined4 *)(param_1 + 0x10),iVar1);
     if (iVar1 == 0xbad0000) {
       if (uVar6 != local_38) {
@@ -97,7 +97,7 @@ LAB_00061156:
     }
   }
 LAB_000611be:
-  FUN_0008392e(param_1);
+  manage_device_state_with_spin_lock_validation(param_1);
   iVar1 = lookup_device_property_from_table(iVar1);
 LAB_000611cc:
   initialize_device_and_ble_connection(param_1);

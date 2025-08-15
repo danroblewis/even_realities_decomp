@@ -16,7 +16,7 @@ bt_connection_disconnect_with_state_management_and_callback_and_state_validation
   local_14 = "No available L2CAP context for conn %p";
   local_18 = 3;
   uStack_10 = param_1;
-  FUN_00081746(&DAT_00088160,0x1840,&local_18);
+  process_and_compress_data_with_validation(&DAT_00088160,0x1840,&local_18);
   return 0xfffffff4;
 }
 

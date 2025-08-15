@@ -49,7 +49,7 @@ configure_user_settings_and_verify
     iVar3 = get_work_mode();
     *(byte *)(iVar3 + 0x1091) = bVar6;
     uVar2 = get_work_mode();
-    FUN_0007c28e(uVar2,0);
+    handle_data_verification_with_system_state_extraction(uVar2,0);
     cVar4 = '\0';
     do {
       iVar3 = read_usr_settting_from_flash(auStack_38);

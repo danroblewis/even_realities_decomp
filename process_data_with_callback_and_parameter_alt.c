@@ -18,7 +18,8 @@ void process_data_with_callback_and_parameter_alt
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","0",
                  "WEST_TOPDIR/nrf/subsys/app_event_manager/app_event_manager.c",0x7b);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/nrf/subsys/app_event_manager/app_event_manager.c",0x7b);
+    trigger_system_service_call("WEST_TOPDIR/nrf/subsys/app_event_manager/app_event_manager.c",0x7b)
+    ;
   }
   return;
 }

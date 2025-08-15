@@ -46,7 +46,7 @@ allocate_ble_memory_with_alignment_and_validation
                "WEST_TOPDIR/zephyr/kernel/mempool.c",0x25);
   DEBUG_PRINT2("\tmisaligned memory at %p (align = %zu)\n",puVar4,param_1);
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/kernel/mempool.c",0x25);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/mempool.c",0x25);
 }
 
 

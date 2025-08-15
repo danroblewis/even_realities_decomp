@@ -37,7 +37,7 @@ void process_data_with_state_management_and_parameter_and_compression_alt
         piVar4 = *(int **)(&DAT_2000abf8 + iVar3 * 0xc);
         uVar5 = (uint)piVar4[1] >> 5;
         if ((char)piVar4[2] == '\0') {
-          FUN_00080ea8(*piVar4 + uVar5 * 4,~(1 << (piVar4[1] & 0x1fU)));
+          clear_bit_in_bitmap(*piVar4 + uVar5 * 4,~(1 << (piVar4[1] & 0x1fU)));
         }
         else {
           set_bits(*piVar4 + uVar5 * 4);

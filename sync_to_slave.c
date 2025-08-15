@@ -44,7 +44,7 @@ uint sync_to_slave(char *param_1,uint param_2,undefined4 *param_3,uint param_4)
     uVar13 = 0;
     goto LAB_00026fa0;
   }
-  lVar18 = FUN_0007cb2c();
+  lVar18 = calculate_mathematical_operation_with_bit_shifting();
   plVar7 = (longlong *)(param_1 + 0x1060);
   if ((int)*plVar7 == 0 && *(int *)(param_1 + 0x1064) == 0) {
 LAB_0002700e:
@@ -237,12 +237,12 @@ LAB_00027372:
               }
               if (param_1[0x105a] == '\x02') break;
             }
-            FUN_0007d230(uVar8);
+            set_work_mode_timestamp(uVar8);
             goto LAB_00027390;
           }
           delay_with_timing(1);
         }
-        FUN_0007d230(uVar12);
+        set_work_mode_timestamp(uVar12);
 LAB_00027390:
         if (uVar14 <= uVar13) goto LAB_00026fa0;
         goto LAB_00027396;

@@ -26,7 +26,7 @@ void switch_to_dfu_mode(undefined4 param_1)
                        DAT_2000ff6e);
     }
     do {
-      FUN_0007c038(500);
+      calculate_ble_schedule_timing_with_division(500);
       system_fatal_error_handler_with_priority_control(1);
       iVar1 = extraout_r1;
 LAB_00015930:

@@ -32,7 +32,8 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
   uVar9 = manage_ble_connection_state_comprehensive(puVar3,param_2,0,0);
   if ((int)uVar9 == 0) {
     if (param_3 == 0) {
-      param_3 = thunk_FUN_000727ac(param_1 + 0x1c,(int)((ulonglong)uVar9 >> 0x20),0,0);
+      param_3 = handle_ble_connection_state_transition_with_validation
+                          (param_1 + 0x1c,(int)((ulonglong)uVar9 >> 0x20),0,0);
     }
     else {
       local_2c = (uint)DAT_20002104;
@@ -112,12 +113,12 @@ validate_and_process_ble_characteristics_with_callback_validation_and_parameter
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","*pending_no_cb > 0",
                        "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x273);
                     /* WARNING: Subroutine does not return */
-          assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x273);
+          trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x273);
         }
         *(int *)unaff_r10 = *(int *)unaff_r10 + -1;
       }
       else {
-        FUN_0008137e(param_1 + 10,puVar7);
+        remove_element_from_linked_list(param_1 + 10,puVar7);
       }
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {

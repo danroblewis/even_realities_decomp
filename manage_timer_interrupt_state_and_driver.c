@@ -64,7 +64,7 @@ undefined4 manage_timer_interrupt_state_and_driver(int param_1)
         uVar3 = 0x3e4;
       }
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",uVar3);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",uVar3);
     }
   }
   return 0xffffffed;

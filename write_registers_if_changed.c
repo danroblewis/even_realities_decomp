@@ -13,7 +13,7 @@ void write_registers_if_changed(int param_1,int param_2)
     DAT_2000a05c = param_1;
   }
   if (param_2 != DAT_2000a058) {
-    FUN_0007d67e(param_2);
+    send_jbd_display_command_0x46(param_2);
     DAT_2000a058 = param_2;
   }
   return;

@@ -76,7 +76,7 @@ undefined4 load_usr_setting(int param_1)
     }
     if (*(char *)(param_1 + 0xfea) == '\v') {
       *(undefined1 *)(param_1 + 0xfea) = 10;
-      FUN_0007c28e(param_1,0);
+      handle_data_verification_with_system_state_extraction(param_1,0);
     }
     if (1 < local_21) {
       local_21 = 0;

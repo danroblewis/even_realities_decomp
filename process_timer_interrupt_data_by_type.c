@@ -32,7 +32,8 @@ int process_timer_interrupt_data_by_type(char *param_1,int param_2,int param_3)
   uVar4 = (uint)local_20 & 0xff;
   if (uVar4 == 2) {
     if (param_2 == 0) {
-      FUN_0007efd4(param_1,0,*(undefined4 *)(param_1 + 8));
+      call_alternative_callback_function_with_bounds_validation
+                (param_1,0,*(undefined4 *)(param_1 + 8));
       return 3;
     }
   }
@@ -49,7 +50,7 @@ int process_timer_interrupt_data_by_type(char *param_1,int param_2,int param_3)
         uVar5 = 2;
       }
       else {
-        iVar3 = FUN_00084e58(param_1);
+        iVar3 = handle_memory_buffer_with_offset_calculation(param_1);
         uVar5 = 3;
         if (iVar3 != 0) {
           return iVar3;
@@ -75,7 +76,7 @@ int process_timer_interrupt_data_by_type(char *param_1,int param_2,int param_3)
       if (local_20._3_1_ != '\x03') {
         return 0;
       }
-      iVar3 = FUN_00084e58(param_1);
+      iVar3 = handle_memory_buffer_with_offset_calculation(param_1);
       return iVar3;
     }
     process_data_loop_with_validation_and_retry

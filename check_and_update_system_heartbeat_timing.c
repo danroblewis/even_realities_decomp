@@ -15,7 +15,7 @@ undefined4 check_and_update_system_heartbeat_timing(void)
   uint uVar3;
   
   uVar3 = (DAT_2001d44a + 1) % 5;
-  iVar1 = FUN_00084c76();
+  iVar1 = get_high_resolution_timer_wrapper();
   if ((DAT_2001d449 == '\0') || (7 < (uint)(iVar1 - *(int *)(&DAT_2000a0b4 + uVar3 * 4)))) {
     if (_DAT_50005114 != 0) {
       _DAT_50005114 = 0;
@@ -25,7 +25,7 @@ undefined4 check_and_update_system_heartbeat_timing(void)
       }
     }
     uVar3 = (uint)DAT_2001d44a;
-    uVar2 = FUN_00084c76();
+    uVar2 = get_high_resolution_timer_wrapper();
     *(undefined4 *)(&DAT_2000a0b4 + uVar3 * 4) = uVar2;
     uVar2 = 1;
   }

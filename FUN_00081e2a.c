@@ -20,7 +20,7 @@ uint FUN_00081e2a(int param_1,undefined4 param_2,int param_3,uint param_4,code *
   uint uVar9;
   undefined8 uVar10;
   
-  uVar10 = FUN_00081bc0(param_3);
+  uVar10 = calculate_linked_list_total_size(param_3);
   iVar5 = (int)((ulonglong)uVar10 >> 0x20);
   uVar8 = (uint)*(ushort *)(param_1 + 0x1e);
   if ((uint)*(ushort *)(param_1 + 0x2e) <= (uint)*(ushort *)(param_1 + 0x1e)) {
@@ -31,7 +31,7 @@ uint FUN_00081e2a(int param_1,undefined4 param_2,int param_3,uint param_4,code *
     iVar1 = find_last_element_in_linked_list(param_3);
     uVar9 = 0;
     while( true ) {
-      iVar2 = FUN_00081bc0(param_3);
+      iVar2 = calculate_linked_list_total_size(param_3);
       if ((uint)*(ushort *)(param_1 + 0x2e) < (uint)*(ushort *)(param_1 + 0x1e)) {
         uVar8 = (uint)*(ushort *)(param_1 + 0x2e) - iVar2;
       }
@@ -40,7 +40,7 @@ uint FUN_00081e2a(int param_1,undefined4 param_2,int param_3,uint param_4,code *
       }
       uVar3 = calculate_ble_buffer_available_space(iVar1 + 0xc);
       if (uVar8 < uVar3) {
-        iVar2 = FUN_00081bc0(param_3);
+        iVar2 = calculate_linked_list_total_size(param_3);
         if ((uint)*(ushort *)(param_1 + 0x2e) < (uint)*(ushort *)(param_1 + 0x1e)) {
           uVar3 = (uint)*(ushort *)(param_1 + 0x2e) - iVar2;
         }
@@ -53,12 +53,12 @@ uint FUN_00081e2a(int param_1,undefined4 param_2,int param_3,uint param_4,code *
       }
       if (uVar3 == 0) {
         uVar10 = calculate_ble_memory_offset(*(undefined1 *)(param_3 + 10));
-        iVar1 = FUN_000836de((int)uVar10,(int)((ulonglong)uVar10 >> 0x20),0,0);
+        iVar1 = process_ble_connection_data((int)uVar10,(int)((ulonglong)uVar10 >> 0x20),0,0);
         if (iVar1 == 0) {
           return uVar9;
         }
         append_linked_list_to_another(param_3,iVar1);
-        iVar2 = FUN_00081bc0(param_3);
+        iVar2 = calculate_linked_list_total_size(param_3);
         if ((uint)*(ushort *)(param_1 + 0x1e) < (uint)*(ushort *)(param_1 + 0x2e)) {
           uVar8 = (uint)*(ushort *)(param_1 + 0x1e) - iVar2;
         }
@@ -67,7 +67,7 @@ uint FUN_00081e2a(int param_1,undefined4 param_2,int param_3,uint param_4,code *
         }
         uVar3 = calculate_ble_buffer_available_space(iVar1 + 0xc);
         if (uVar8 < uVar3) {
-          iVar2 = FUN_00081bc0(param_3);
+          iVar2 = calculate_linked_list_total_size(param_3);
           if ((uint)*(ushort *)(param_1 + 0x1e) < (uint)*(ushort *)(param_1 + 0x2e)) {
             uVar3 = (uint)*(ushort *)(param_1 + 0x1e) - iVar2;
           }
@@ -87,7 +87,7 @@ uint FUN_00081e2a(int param_1,undefined4 param_2,int param_3,uint param_4,code *
         return uVar9;
       }
       ble_memory_allocation_utility(iVar1 + 0xc,uVar8);
-      uVar4 = FUN_00081bc0(param_3);
+      uVar4 = calculate_linked_list_total_size(param_3);
       uVar7 = (uint)*(ushort *)(param_1 + 0x2e);
       if ((uint)*(ushort *)(param_1 + 0x1e) <= (uint)*(ushort *)(param_1 + 0x2e)) {
         uVar7 = (uint)*(ushort *)(param_1 + 0x1e);

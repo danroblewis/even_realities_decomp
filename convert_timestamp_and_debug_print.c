@@ -25,8 +25,8 @@ void convert_timestamp_and_debug_print(undefined4 param_1)
   uVar4 = local_20 & 0xffff;
   DEBUG_PRINT("date: %u: %04d/%02d/%02d-%02d:%02d:%02d\n",param_1,uVar3,uVar1,uVar4,local_20 >> 0x10
               ,local_1c & 0xffff,local_1c >> 0x10);
-  cVar2 = FUN_0007d280(uVar3,uVar1,uVar4);
-  FUN_0007d4b2(cVar2 + ';');
+  cVar2 = calculate_complex_mathematical_formula_with_division(uVar3,uVar1,uVar4);
+  get_data_by_index_and_type(cVar2 + ';');
   return;
 }
 

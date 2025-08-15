@@ -49,7 +49,7 @@ undefined4 handle_clock_control_operation(int param_1,byte param_2,uint param_3)
   DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","type < CLOCK_CONTROL_NRF_TYPE_COUNT",
                "WEST_TOPDIR/zephyr/drivers/clock_control/clock_control_nrf.c",0x15d);
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/drivers/clock_control/clock_control_nrf.c",0x15d);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/drivers/clock_control/clock_control_nrf.c",0x15d);
 }
 
 

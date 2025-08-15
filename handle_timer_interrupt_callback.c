@@ -14,7 +14,7 @@ void handle_timer_interrupt_callback
                  "WEST_TOPDIR/zephyr/drivers/timer/nrf_rtc_timer.c",0x18d,param_1,param_2,param_3,
                  param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/drivers/timer/nrf_rtc_timer.c",0x18d);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/drivers/timer/nrf_rtc_timer.c",0x18d);
   }
   manage_hardware_timer();
   return;

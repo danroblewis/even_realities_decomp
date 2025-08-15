@@ -84,8 +84,8 @@ LAB_00079e32:
   if (iVar3 != 0) {
     iVar2 = iVar3;
   }
-  FUN_00079808(auStack_58,0x30);
-  FUN_00079808(auStack_68,0x10);
+  clear_memory_buffer_with_zero_fill(auStack_58,0x30);
+  clear_memory_buffer_with_zero_fill(auStack_68,0x10);
   return iVar2;
 }
 

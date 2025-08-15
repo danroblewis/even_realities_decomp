@@ -16,7 +16,7 @@ void validate_and_process_ble_characteristics_with_validation_and_state_manageme
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n",&DAT_000f3aa8,
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x46);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x46);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x46);
   }
   UNRECOVERED_JUMPTABLE = *(code **)(param_2 + 4);
   uVar1 = *(undefined4 *)(param_2 + 8);

@@ -18,11 +18,11 @@ undefined4 process_data_with_state_management_alt7(undefined4 param_1,undefined4
                  "WEST_TOPDIR/zephyr/subsys/random/rand32_entropy_device.c",0x15,param_1);
     DEBUG_PRINT2("\tEntropy device %s not ready\n","crypto@50844000");
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/random/rand32_entropy_device.c",0x15);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/random/rand32_entropy_device.c",0x15);
   }
   iVar1 = process_data_with_callback_execution_alt6(&local_c);
   if (iVar1 < 0) {
-    local_c = FUN_00084c76();
+    local_c = get_high_resolution_timer_wrapper();
   }
   return local_c;
 }

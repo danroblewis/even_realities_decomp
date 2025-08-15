@@ -28,18 +28,19 @@ configure_device_interrupt_settings(int param_1,uint param_2,uint param_3,undefi
   uStack_24 = param_2;
   local_20 = param_3;
   uStack_1c = param_4;
-  iVar2 = FUN_000658e8(uVar8,(int)&uStack_24 + 3,param_3,(uint)*(byte *)(iVar9 + 0xc),param_1);
+  iVar2 = get_interrupt_configuration_data
+                    (uVar8,(int)&uStack_24 + 3,param_3,(uint)*(byte *)(iVar9 + 0xc),param_1);
   if ((param_3 & 0x30000) == 0) {
-    FUN_00065b18(uVar8);
+    disable_interrupt_and_cleanup(uVar8);
     if (iVar2 == 0xbad0000) {
-      iVar2 = FUN_000659cc(uStack_24._3_1_);
+      iVar2 = set_device_status_bit(uStack_24._3_1_);
       if (iVar2 != 0xbad0000) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err == NRFX_SUCCESS",
                      "WEST_TOPDIR/zephyr/drivers/gpio/gpio_nrfx.c",0x6c);
         uVar4 = 0x6c;
 LAB_00061674:
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/drivers/gpio/gpio_nrfx.c",uVar4);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/drivers/gpio/gpio_nrfx.c",uVar4);
       }
     }
 LAB_00061734:
@@ -48,10 +49,10 @@ LAB_00061734:
   else {
     local_20 = 0;
     uStack_1c = 0;
-    iVar3 = FUN_0006567c(uVar8,0,&local_20);
+    iVar3 = configure_interrupt_with_priority_and_callback(uVar8,0,&local_20);
     if (iVar3 != 0xbad0000) goto LAB_000616ce;
     if (iVar2 == 0xbad0000) {
-      iVar2 = FUN_000659cc(uStack_24._3_1_);
+      iVar2 = set_device_status_bit(uStack_24._3_1_);
       if (iVar2 != 0xbad0000) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err == NRFX_SUCCESS",
                      "WEST_TOPDIR/zephyr/drivers/gpio/gpio_nrfx.c",0x7f);
@@ -89,7 +90,7 @@ LAB_000616f8:
             *(uint *)(iVar2 + 0xc) = uVar6;
           }
         }
-        iVar2 = FUN_000657e4(uVar8,&local_20,0);
+        uVar8 = configure_interrupt_source_registers(uVar8,(uint)&local_20,(byte *)0x0);
         goto LAB_0006172e;
       }
       if (0x106 < uVar5) {
@@ -126,9 +127,9 @@ LAB_000616f8:
         bVar7 = (byte)((param_3 << 0x1a) >> 0x1f);
       }
       local_20 = CONCAT31(local_20._1_3_,bVar7);
-      iVar2 = FUN_0006567c(uVar8,&local_20,0);
+      uVar8 = configure_interrupt_with_priority_and_callback(uVar8,&local_20,0);
 LAB_0006172e:
-      if (iVar2 == 0xbad0000) goto LAB_00061734;
+      if (uVar8 == 0xbad0000) goto LAB_00061734;
     }
 LAB_000616ce:
     uVar4 = 0xffffffea;

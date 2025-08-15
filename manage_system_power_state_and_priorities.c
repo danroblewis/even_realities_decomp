@@ -36,7 +36,8 @@ void manage_system_power_state_and_priorities(int param_1)
       uVar4 = 0x242;
 LAB_000607c4:
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/drivers/clock_control/clock_control_nrf.c",uVar4);
+      trigger_system_service_call
+                ("WEST_TOPDIR/zephyr/drivers/clock_control/clock_control_nrf.c",uVar4);
     }
     if ((param_1 != 1) || ((_DAT_5000541c & 3) != 2)) {
       iVar3 = check_privilege_level();

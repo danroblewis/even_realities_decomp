@@ -14,7 +14,7 @@ void bluetooth_hci_command_processing_with_validation(int param_1)
   undefined1 *puVar4;
   int iVar5;
   
-  uVar3 = FUN_00083728(param_1 + 0xc);
+  uVar3 = calculate_value_difference(param_1 + 0xc);
   uVar1 = *(ushort *)(param_1 + 0x10);
   if (uVar1 < 2) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf->len >= sizeof(*hdr)",

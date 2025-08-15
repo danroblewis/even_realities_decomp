@@ -39,7 +39,7 @@ bool bt_connection_disconnect_with_state_management_and_callback_and_parameter_a
         *(char *)(param_3 + 5) = cVar2;
       }
       else if (param_3[4] != 0) {
-        iVar3 = FUN_00081bc0(param_3[2]);
+        iVar3 = calculate_linked_list_total_size(param_3[2]);
         if ((uint)*(ushort *)(iVar7 + 0x2e) < (uint)*(ushort *)(iVar7 + 0x1e)) {
           uVar5 = (uint)*(ushort *)(iVar7 + 0x2e) - iVar3;
         }

@@ -37,7 +37,7 @@ void z_spin_lock_valid(int param_1,undefined4 param_2,undefined4 param_3,undefin
     }
     else {
       *(undefined4 *)(iVar3 + 0x90) = 0;
-      FUN_000738d4();
+      handle_ble_connection_insertion_with_privilege_management();
     }
     validate_ble_connection_state_with_priority(&DAT_2000b474,uVar4);
     return;
@@ -46,7 +46,7 @@ void z_spin_lock_valid(int param_1,undefined4 param_2,undefined4 param_3,undefin
                "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72,param_4);
   DEBUG_PRINT2("\tInvalid spinlock %p\n",&DAT_2000b474);
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",0x72);
 }
 
 

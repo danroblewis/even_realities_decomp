@@ -41,7 +41,8 @@ gui_bmp_bitmap_draw_ex(undefined4 param_1,int param_2,int param_3,int param_4,by
         _clean_fb_data(MAIN_FRAMEBUFFER,0,param_2,param_3,local_24 + 2 + param_2,local_20 + param_3)
         ;
       }
-      draw_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,param_4,local_24 / 2,local_20,param_2,param_3);
+      draw_4bit_bitmap_to_framebuffer
+                (MAIN_FRAMEBUFFER,param_4,local_24 / 2,local_20,param_2,param_3);
       iVar1 = get_display_config_flags();
       if (iVar1 << 0x1e < 0) {
         iVar1 = get_work_mode();

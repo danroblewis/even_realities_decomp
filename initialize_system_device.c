@@ -278,7 +278,7 @@ int initialize_system_device(void)
   local_20 = 2;
   call_system_cleanup_alt(&DAT_00088138,0x1080,&local_20);
 LAB_000123fe:
-  iVar1 = FUN_00081158();
+  iVar1 = return_zero_for_system_initialization();
   if (iVar1 != 0) {
     return iVar1;
   }

@@ -38,7 +38,8 @@ void process_data_with_initialization_and_parameter_validation_and_callback(int 
   }
   local_48 = (uint)puVar8[5];
   local_44 = puVar6;
-  iVar3 = FUN_00083370(iVar2,local_48,*(undefined4 *)(puVar8 + 1),*(undefined4 *)(puVar8 + 3));
+  iVar3 = process_ble_data_with_compression_and_attribute_management
+                    (iVar2,local_48,*(undefined4 *)(puVar8 + 1),*(undefined4 *)(puVar8 + 3));
   if (iVar3 == 0) {
     iVar3 = process_data_with_initialization_and_store(0x201b,2);
     if (iVar3 == 0) goto LAB_000544a8;

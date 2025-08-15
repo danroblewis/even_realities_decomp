@@ -59,7 +59,7 @@ void process_ble_data_stream_by_format
       local_60 = 0;
       do {
         if (uVar5 == 0) {
-          FUN_00082d2e(local_5c,local_60,param_5);
+          handle_ble_characteristic_operation_with_validation(local_5c,local_60,param_5);
           return;
         }
         local_64 = (uint)*puVar8;

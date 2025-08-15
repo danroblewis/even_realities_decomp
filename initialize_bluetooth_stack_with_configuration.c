@@ -30,7 +30,7 @@ void initialize_bluetooth_stack_with_configuration
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err == 0","WEST_TOPDIR/zephyr/lib/os/mpsc_pbuf.c",
                  0x2e);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/lib/os/mpsc_pbuf.c",0x2e);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/lib/os/mpsc_pbuf.c",0x2e);
   }
   return;
 }

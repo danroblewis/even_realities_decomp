@@ -26,7 +26,7 @@ void bt_connection_disconnect_with_callback_execution_and_parameter_and_state_va
   if ((*(int *)(*(int *)(param_1 + 4) + 0x10) == 0) && ((uVar2 + 2 & 0xffff) <= uVar1 + 1)) {
     local_c = "Segmentation disabled but MTU > MPS, truncating MTU";
     local_10 = 2;
-    FUN_00081746(&DAT_00088160,0x1080,&local_10);
+    process_and_compress_data_with_validation(&DAT_00088160,0x1080,&local_10);
     *(short *)(param_1 + 0x16) = *(short *)(param_1 + 0x18) + -2;
   }
   *(undefined4 *)(param_1 + 0x1c) = 1;

@@ -109,7 +109,7 @@ LAB_000754e4:
   pcVar4 = "WEST_TOPDIR/zephyr/kernel/poll.c";
 LAB_00075444:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar4,uVar5);
+  trigger_system_service_call(pcVar4,uVar5);
 }
 
 

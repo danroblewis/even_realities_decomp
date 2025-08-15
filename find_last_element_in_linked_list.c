@@ -15,7 +15,7 @@ int find_last_element_in_linked_list
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf","WEST_TOPDIR/zephyr/subsys/net/buf.c",0x236,
                  param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x236);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x236);
   }
   do {
     iVar1 = param_1;

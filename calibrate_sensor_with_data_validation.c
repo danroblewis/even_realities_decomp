@@ -55,8 +55,8 @@ undefined4 calibrate_sensor_with_data_validation(int param_1)
         if ((((iVar1 == 0) && (iVar1 = read_sensor_data_with_retry(0x1c34,&local_3c), iVar1 == 0))
             && (iVar1 = transmit_sensor_data_with_retry(0xff20,0x3c00f091), iVar1 == 0)) &&
            ((iVar1 = transmit_sensor_data_with_retry(0x4820,4), iVar1 == 0 &&
-            (iVar1 = FUN_0007d05e(&local_38,0x7fc), iVar1 == 0)))) {
-          uVar2 = FUN_0007cf34(&DAT_000a49ed,0x1b9c,0x37f8);
+            (iVar1 = transmit_sensor_configuration_and_read_data(&local_38,0x7fc), iVar1 == 0)))) {
+          uVar2 = calculate_data_checksum_in_4byte_chunks(&DAT_000a49ed,0x1b9c,0x37f8);
           local_48 = uVar2 << 0x18 | (uVar2 >> 8 & 0xff) << 0x10 | (uVar2 >> 0x10 & 0xff) << 8 |
                      uVar2 >> 0x18;
           DAT_20019dad = 1;
@@ -75,12 +75,14 @@ undefined4 calibrate_sensor_with_data_validation(int param_1)
               local_3c = uVar3;
               local_38 = uVar3;
               iVar1 = process_sensor_data_packet(1,2,&local_38,0x10);
-              if (((iVar1 == 0) && (iVar1 = FUN_0007d05e(&local_40,0x3ff8), iVar1 == 0)) &&
-                 ((iVar1 = FUN_0007d05e(&local_3c,0x3ffc), iVar1 == 0 &&
-                  ((local_40 == 0x20222022 &&
-                   (local_3c ==
-                    (uVar2 << 0x18 | (uVar2 >> 8 & 0xff) << 0x10 | (uVar2 >> 0x10 & 0xff) << 8 |
-                    uVar2 >> 0x18))))))) {
+              if (((iVar1 == 0) &&
+                  (iVar1 = transmit_sensor_configuration_and_read_data(&local_40,0x3ff8), iVar1 == 0
+                  )) && ((iVar1 = transmit_sensor_configuration_and_read_data(&local_3c,0x3ffc),
+                         iVar1 == 0 &&
+                         ((local_40 == 0x20222022 &&
+                          (local_3c ==
+                           (uVar2 << 0x18 | (uVar2 >> 8 & 0xff) << 0x10 |
+                            (uVar2 >> 0x10 & 0xff) << 8 | uVar2 >> 0x18))))))) {
                 uVar2 = 0x10002000;
                 goto LAB_0003095a;
               }

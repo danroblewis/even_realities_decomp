@@ -61,15 +61,16 @@ uint process_memory_allocation_with_priority_control(void)
             *(byte *)(DAT_20003668 + DAT_20003650 * 4) = bVar1 | 2;
             uVar3 = DAT_20003650;
             uVar6 = (*DAT_20003664)(uVar9);
-            DAT_20003650 = FUN_0007e35c(&DAT_20003648,uVar3,uVar6);
+            DAT_20003650 = calculate_buffer_offset_with_wrapping(&DAT_20003648,uVar3,uVar6);
             uVar4 = 0;
             goto LAB_0004bf52;
           }
           uVar4 = (*DAT_20003664)(uVar9);
           uVar7 = extraout_r3;
         }
-        DAT_20003650 = FUN_0007e35c(&DAT_20003648,DAT_20003650,uVar4,uVar7,in_r3);
-        FUN_0007e378(&DAT_20003648,uVar4);
+        DAT_20003650 = calculate_buffer_offset_with_wrapping
+                                 (&DAT_20003648,DAT_20003650,uVar4,uVar7,in_r3);
+        update_buffer_write_position(&DAT_20003648,uVar4);
         uVar4 = uVar3;
       }
     }
@@ -82,7 +83,7 @@ LAB_0004bf52:
       uVar8 = 0xf0;
 LAB_0004bef2:
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar8);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar8);
     }
     bVar2 = (bool)isCurrentModePrivileged();
     if (bVar2) {

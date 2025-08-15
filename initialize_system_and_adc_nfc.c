@@ -22,16 +22,19 @@ undefined4 initialize_system_and_adc_nfc(void)
      (*(int *)(SYSTEM_CONFIGURATION_PARAMETER + 8) != 0)) {
     calculate_ble_schedule_timing(0x290,0);
     (**(code **)(*(int *)(SYSTEM_CONFIGURATION_PARAMETER + 8) + 8))();
-    FUN_0007c932(SYSTEM_CONFIGURATION_PARAMETER,&local_10);
+    send_control_message_with_specific_parameters_if_valid(SYSTEM_CONFIGURATION_PARAMETER,&local_10)
+    ;
     DEBUG_PRINT("UUID = %02X %02X %02X %02X %02X %02X %02X %02X.\n",local_10 & 0xff,
                 local_10 >> 8 & 0xff,local_10 >> 0x10 & 0xff,local_10 >> 0x18,local_c & 0xff,
                 local_c >> 8 & 0xff,local_c >> 0x10 & 0xff,local_c >> 0x18);
     if ((local_c >> 8 & 0xff) - 0x50 < 2) {
       DAT_20018c69 = 1;
     }
-    FUN_0007c944(SYSTEM_CONFIGURATION_PARAMETER,&local_12);
+    send_control_message_with_different_parameters_if_valid
+              (SYSTEM_CONFIGURATION_PARAMETER,&local_12);
     DEBUG_PRINT("REV_IC = %02X.\n",(uint)local_12);
-    FUN_0007c956(SYSTEM_CONFIGURATION_PARAMETER,&local_11);
+    send_control_message_with_alternative_parameters_if_valid
+              (SYSTEM_CONFIGURATION_PARAMETER,&local_11);
     DEBUG_PRINT("REF_IC = %02X.\n",(uint)local_11);
     adc_nfc_init();
     reset_sensor_data_buffers();

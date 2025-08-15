@@ -85,7 +85,8 @@ EVEN_DASHBOARD_CLOCK_32x_TTF
       local_50 = 0;
       iVar3 = _012_resource_manger_get(1,*pbVar7,&local_4c,&local_48,&local_50,0);
       if ((iVar3 == 0) && (local_50 != 0)) {
-        draw_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,local_50,local_4c / 2,local_48,iVar2,param_3);
+        draw_4bit_bitmap_to_framebuffer
+                  (MAIN_FRAMEBUFFER,local_50,local_4c / 2,local_48,iVar2,param_3);
         iVar2 = iVar2 + local_4c + 6;
       }
       else if (1 < LOG_LEVEL) {
@@ -114,7 +115,8 @@ EVEN_DASHBOARD_CLOCK_32x_TTF
       iVar3 = _012_resource_manger_get(2,*pbVar7,&local_4c,&local_48,&local_50,0);
       iVar8 = iVar8 + 1;
       if ((iVar3 == 0) && (local_50 != 0)) {
-        draw_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,local_50,local_4c / 2,local_48,iVar2,param_3);
+        draw_4bit_bitmap_to_framebuffer
+                  (MAIN_FRAMEBUFFER,local_50,local_4c / 2,local_48,iVar2,param_3);
         if (pbVar7[1] == 0x3a) {
           iVar3 = local_4c + 7;
         }

@@ -25,7 +25,7 @@ void bt_connection_disconnect_with_state_management_and_callback_validation_and_
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x185,uVar5);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x185);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x185);
     }
     if ((undefined4 *)((int)&DAT_00087fe8 + 3) < puVar4) break;
     iVar2 = (*(code *)puVar4[1])(param_1,&local_14);

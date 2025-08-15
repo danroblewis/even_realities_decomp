@@ -19,7 +19,7 @@ void handle_ble_attribute_callbacks(uint param_1,code *param_2,undefined4 param_
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","func != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xa0);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xa0);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xa0);
   }
   if ((DAT_2000af5a != 0) && (DAT_2000af4c == param_1)) {
     local_20 = DAT_2000af4d;

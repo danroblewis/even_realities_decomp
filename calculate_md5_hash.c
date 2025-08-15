@@ -40,7 +40,7 @@ void calculate_md5_hash(int *param_1,undefined4 param_2)
   uVar7 = param_1[1];
   uVar22 = param_1[2];
   uVar8 = param_1[3];
-  piVar1 = (int *)FUN_0007d8c4(auStack_128,param_2,0x40);
+  piVar1 = (int *)convert_bytes_to_words_with_endianness_handling(auStack_128,param_2,0x40);
   iVar9 = *piVar1;
   iVar24 = piVar1[7];
   uVar10 = ((uVar22 ^ uVar8) & uVar7 ^ uVar8) + iVar9 + -0x28955b88 + iVar6;

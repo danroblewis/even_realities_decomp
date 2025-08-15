@@ -33,7 +33,7 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
       local_14 = "Unable to send credits update";
       puVar6 = param_1 + 4;
       local_18 = 2;
-      FUN_00081746(&DAT_00088160,0x1040,&local_18);
+      process_and_compress_data_with_validation(&DAT_00088160,0x1040,&local_18);
       *puVar6 = *puVar6 | 2;
       uVar5 = extraout_r1;
       if (param_1[0x20] != 0) {
@@ -47,12 +47,13 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
         param_1[0x13] = 0;
         uVar5 = extraout_r1_01;
       }
-      while (uVar7 = thunk_FUN_000727ac(param_1 + 0xc,uVar5,0,0),
-            uVar5 = (undefined4)((ulonglong)uVar7 >> 0x20), (int)uVar7 != 0) {
+      while (uVar7 = handle_ble_connection_state_transition_with_validation(param_1 + 0xc,uVar5,0,0)
+            , uVar5 = (undefined4)((ulonglong)uVar7 >> 0x20), (int)uVar7 != 0) {
         decrement_reference_count_and_cleanup_memory();
         uVar5 = extraout_r1_02;
       }
-      while (iVar2 = thunk_FUN_000727ac(param_1 + 0x26,uVar5,0,0), iVar2 != 0) {
+      while (iVar2 = handle_ble_connection_state_transition_with_validation
+                               (param_1 + 0x26,uVar5,0,0), iVar2 != 0) {
         decrement_reference_count_and_cleanup_memory();
         uVar5 = extraout_r1_03;
       }
@@ -64,7 +65,7 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
       }
       return;
     }
-    iVar3 = FUN_000816a2(param_1 + 7);
+    iVar3 = get_counter_value(param_1 + 7);
     if (iVar3 == 0) {
       uVar5 = *extraout_r3;
       *extraout_r3 = param_2;
@@ -72,7 +73,7 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
       uVar1 = *(undefined2 *)(param_1 + 5);
       puVar4[1] = (short)param_2;
       *puVar4 = uVar1;
-      FUN_00081940(*param_1,iVar2);
+      handle_ble_connection_state_transition_to_state_5(*param_1,iVar2);
       return;
     }
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","atomic_get(&chan->rx.credits) == 0",
@@ -86,7 +87,7 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
     uVar5 = 0x8f8;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",uVar5);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",uVar5);
 }
 
 

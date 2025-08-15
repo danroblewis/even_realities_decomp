@@ -31,19 +31,22 @@ LAB_0006294c:
     process_and_compress_data_with_validation(&DAT_00088250,0x1040,&local_18,0);
   }
   else {
-    iVar1 = FUN_000847d8(*(undefined4 *)(param_1 + 4),0x7e,&local_30,iVar1);
+    iVar1 = execute_callback_with_bit_manipulation_and_ble_characteristic_read
+                      (*(undefined4 *)(param_1 + 4),0x7e,&local_30,iVar1);
     if (iVar1 != 0) {
       return 0xffffffea;
     }
     uStack_38 = (uint)local_30;
     if (uStack_38 == 0x5449) {
-      iVar1 = FUN_000847d8(*(undefined4 *)(param_1 + 4),0x7f,&local_30,0);
+      iVar1 = execute_callback_with_bit_manipulation_and_ble_characteristic_read
+                        (*(undefined4 *)(param_1 + 4),0x7f,&local_30,0);
       if (iVar1 != 0) {
         return 0xffffffea;
       }
       uStack_38 = (uint)local_30;
       if (uStack_38 == 0x3001) {
-        iVar1 = FUN_000847d8(*(undefined4 *)(param_1 + 4),1,&local_2e,0);
+        iVar1 = execute_callback_with_bit_manipulation_and_ble_characteristic_read
+                          (*(undefined4 *)(param_1 + 4),1,&local_2e,0);
         if (iVar1 == 0) {
           local_2b = (byte)((local_2e & 63999) >> 8) | 6;
           local_2a = (undefined1)(local_2e & 63999);

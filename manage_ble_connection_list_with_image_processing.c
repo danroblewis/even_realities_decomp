@@ -66,7 +66,7 @@ undefined4 manage_ble_connection_list_with_image_processing(int *param_1,int par
   uVar7 = 0x72;
 LAB_000757e4:
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar7);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar7);
 }
 
 

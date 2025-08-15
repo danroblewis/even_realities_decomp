@@ -42,12 +42,13 @@ undefined4 ui_onboarding_task(int param_1,undefined4 param_2,int param_3)
       iVar3 = get_work_mode();
       uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
       if (*(char *)(*(int *)(iVar3 + 0x1014) + 2) != '\0') {
-        uVar6 = FUN_0007d382();
-        uVar7 = FUN_0007d3c2((int)uVar6,(int)((ulonglong)uVar6 >> 0x20),DAT_20004bf8,DAT_20004bfc);
+        uVar6 = calculate_ble_connection_timing_with_scaling_alt3();
+        uVar7 = subtract_64bit_with_borrow_handling
+                          ((int)uVar6,(int)((ulonglong)uVar6 >> 0x20),DAT_20004bf8,DAT_20004bfc);
         uVar6 = CONCAT44(DAT_20004bfc,DAT_20004bf8);
         if ((int)(uint)((uint)uVar7 < 0x3e9) <= (int)((ulonglong)uVar7 >> 0x20)) {
           DAT_20004bf0 = DAT_20004bf0 + 1;
-          uVar6 = FUN_0007d382();
+          uVar6 = calculate_ble_connection_timing_with_scaling_alt3();
           DAT_20004bfc = (undefined4)((ulonglong)uVar6 >> 0x20);
           DAT_20004bf8 = (undefined4)uVar6;
           if (0x13 < DAT_20004bf0) {
@@ -126,7 +127,7 @@ undefined4 ui_onboarding_task(int param_1,undefined4 param_2,int param_3)
       }
       reset_animation_counters();
       validate_and_update_work_mode_state();
-      uVar6 = FUN_0007d382();
+      uVar6 = calculate_ble_connection_timing_with_scaling_alt3();
       iVar3 = get_work_mode();
       *(undefined8 *)(*(int *)(iVar3 + 0x1014) + 4) = uVar6;
       iVar3 = get_work_mode();

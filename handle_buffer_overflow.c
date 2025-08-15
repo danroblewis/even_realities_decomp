@@ -41,7 +41,7 @@ void handle_buffer_overflow(void)
       uVar3 = 0xcd;
 LAB_000511b4:
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/lib/posix/barrier.c",uVar3);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/lib/posix/barrier.c",uVar3);
     }
     iVar2 = initialize_proximity_sensor(puVar4 + 0x14);
     if (iVar2 != 0) {

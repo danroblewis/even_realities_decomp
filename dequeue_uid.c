@@ -20,7 +20,7 @@ int dequeue_uid(undefined4 *param_1,undefined4 param_2,undefined4 param_3)
   }
   else {
     uStack_10 = param_3;
-    iVar1 = FUN_00072240(&DAT_20006a38,&local_18,0,0);
+    iVar1 = manage_ble_connection_state_comprehensive(&DAT_20006a38,&local_18,0,0);
     if (iVar1 == 0) {
       *param_1 = local_18;
       param_1[1] = uStack_14;

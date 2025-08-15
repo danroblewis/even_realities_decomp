@@ -24,7 +24,7 @@ uint calculate_ble_schedule_timing
                  "WEST_TOPDIR/zephyr/kernel/sched.c",0x5c1,param_4);
     DEBUG_PRINT2(&DAT_000f53ff);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/kernel/sched.c",0x5c1);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/sched.c",0x5c1);
   }
   if (timeout_flags == -1 && timeout_ms == -1) {
     cleanup_ble_connection_with_magnetometer(DMIC_BUFFER_SIZE);

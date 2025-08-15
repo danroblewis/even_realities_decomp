@@ -30,7 +30,7 @@ process_ble_characteristic_value_change_with_callback_validation(int *param_1,in
         if (iVar6 == 0) {
           return 0xe;
         }
-        FUN_000821a4(param_1,iVar6);
+        handle_ble_characteristic_value_change_with_debug_init(param_1,iVar6);
       }
       return 0;
     }
@@ -53,7 +53,8 @@ process_ble_characteristic_value_change_with_callback_validation(int *param_1,in
           if ((uint)*(ushort *)((int)puVar7 + 0x1a) != (uint)uVar2 + (uint)DAT_200029a4) {
             uVar5 = 7;
 LAB_000590a6:
-            FUN_000821f4(param_1,0x18,sVar3,uVar5);
+            handle_ble_characteristic_value_change_with_callback_and_debug(param_1,0x18,sVar3,uVar5)
+            ;
             return 0;
           }
           if ((uint)DAT_200029a6 < (uint)DAT_200029a4 + (uint)*(ushort *)(puVar7 + 4)) {
@@ -90,7 +91,8 @@ LAB_000590a6:
                         (param_1,0x18,0,sVar3,*(undefined2 *)(iVar4 + 0x1a),DAT_200029a0,
                          DAT_200029a4);
       if (iVar6 != 0) {
-        FUN_000821f4(param_1,0x18,*(undefined2 *)(iVar4 + 0x18),iVar6);
+        handle_ble_characteristic_value_change_with_callback_and_debug
+                  (param_1,0x18,*(undefined2 *)(iVar4 + 0x18),iVar6);
       }
     }
     else {

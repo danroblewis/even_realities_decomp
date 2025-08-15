@@ -11,7 +11,7 @@ undefined4 power_for_panel(undefined4 param_1,undefined4 param_2)
   int iVar1;
   char *pcVar2;
   
-  iVar1 = FUN_00083dc8(&DAT_00087c80,8,0,1,param_1,param_2);
+  iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,8,0,1,param_1,param_2);
   if (iVar1 < 0) {
     if (LOG_LEVEL < 1) {
       return 0;
@@ -27,9 +27,9 @@ undefined4 power_for_panel(undefined4 param_1,undefined4 param_2)
       handle_heartbeat();
     }
   }
-  FUN_0007c038(1);
+  calculate_ble_schedule_timing_with_division(1);
   if (*(char *)(WORK_MODE + 0xed4) == '\x01') {
-    iVar1 = FUN_00083dc8(&DAT_00087c80,4,10,1,param_1,param_2);
+    iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,4,10,1,param_1,param_2);
     if (iVar1 < 0) {
       if (LOG_LEVEL < 1) {
         return 0;
@@ -49,7 +49,7 @@ LAB_00015e82:
     }
   }
   else {
-    iVar1 = FUN_00083dc8(&DAT_00087c80,4,10,2,param_1,param_2);
+    iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,4,10,2,param_1,param_2);
     if (iVar1 < 0) {
       if (LOG_LEVEL < 1) {
         return 0;
@@ -62,7 +62,7 @@ LAB_00015e82:
       goto LAB_00015e82;
     }
   }
-  iVar1 = FUN_00083e0e(&DAT_00087c80,4,0xf,2,2);
+  iVar1 = handle_ble_operations_with_mutex_protection(&DAT_00087c80,4,0xf,2,2);
   if (iVar1 < 0) {
     if (LOG_LEVEL < 1) {
       return 0;
@@ -70,7 +70,7 @@ LAB_00015e82:
     pcVar2 = "%s(): Could not enable software control\n";
   }
   else {
-    iVar1 = FUN_00083dc8(&DAT_00087c80,4,2,1);
+    iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,4,2,1);
     if (iVar1 < 0) {
       if (LOG_LEVEL < 1) {
         return 0;
@@ -86,9 +86,9 @@ LAB_00015e82:
           handle_heartbeat();
         }
       }
-      FUN_0007c038(1);
+      calculate_ble_schedule_timing_with_division(1);
       call_conditional_event_handler_inverted();
-      FUN_0007c038(0xf);
+      calculate_ble_schedule_timing_with_division(0xf);
       if (LOG_LEVEL < 1) {
         return 0;
       }

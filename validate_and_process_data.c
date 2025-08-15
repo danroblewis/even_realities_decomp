@@ -18,13 +18,13 @@ undefined4 validate_and_process_data(undefined4 param_1)
     if (iVar1 == 0) {
       iVar1 = float_compare_boolean_inverted();
       if (iVar1 != 0) {
-        puVar2 = (undefined4 *)thunk_FUN_00071678();
+        puVar2 = (undefined4 *)calculate_data_structure_offset();
         uVar3 = 0;
         *puVar2 = 0x22;
       }
     }
     else {
-      puVar2 = (undefined4 *)thunk_FUN_00071678();
+      puVar2 = (undefined4 *)calculate_data_structure_offset();
       uVar3 = 0;
       *puVar2 = 0x22;
     }

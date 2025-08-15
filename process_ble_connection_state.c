@@ -74,7 +74,7 @@ LAB_00073b4c:
     pcVar3 = "WEST_TOPDIR/zephyr/kernel/include/ksched.h";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar5);
+  trigger_system_service_call(pcVar3,uVar5);
 }
 
 

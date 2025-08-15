@@ -32,7 +32,7 @@ undefined4 set_imu_pitch_reflash(void)
       else {
         iVar1 = 0xba;
       }
-      uVar2 = FUN_0007d4b2(4);
+      uVar2 = get_data_by_index_and_type(4);
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       iVar5 = get_ui_x_offset();
@@ -58,7 +58,7 @@ undefined4 set_imu_pitch_reflash(void)
       else {
         iVar1 = 0xc0;
       }
-      uVar2 = FUN_0007d4b2(2);
+      uVar2 = get_data_by_index_and_type(2);
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       iVar5 = get_ui_x_offset();
@@ -73,7 +73,7 @@ undefined4 set_imu_pitch_reflash(void)
       }
       uVar2 = 3;
     }
-    uVar2 = FUN_0007d4b2(uVar2);
+    uVar2 = get_data_by_index_and_type(uVar2);
     iVar3 = get_ui_x_offset();
     iVar4 = get_ui_y_offset();
     iVar5 = get_ui_x_offset();

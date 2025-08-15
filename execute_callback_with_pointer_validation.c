@@ -19,7 +19,7 @@ execute_callback_with_pointer_validation
   if (callback_context == (int *)0x0) {
     local_14 = "Invalid endpoint";
     local_18 = 2;
-    FUN_0007e9ea(&DAT_000881d8,0x1040,&local_18);
+    process_and_compress_data_with_validation_wrapper(&DAT_000881d8,0x1040,&local_18);
     uVar1 = 0xffffffea;
   }
   else {
@@ -27,7 +27,7 @@ execute_callback_with_pointer_validation
     if (iVar2 == 0) {
       local_14 = "Endpoint not registered\n";
       local_18 = 2;
-      FUN_0007e9ea(&DAT_000881d8,0x1040,&local_18);
+      process_and_compress_data_with_validation_wrapper(&DAT_000881d8,0x1040,&local_18);
       uVar1 = 0xfffffffe;
     }
     else {
@@ -41,7 +41,7 @@ execute_callback_with_pointer_validation
       }
       local_14 = "Invalid backend configuration";
       local_18 = 2;
-      FUN_0007e9ea(&DAT_000881d8,0x1040,&local_18);
+      process_and_compress_data_with_validation_wrapper(&DAT_000881d8,0x1040,&local_18);
       uVar1 = 0xfffffffb;
     }
   }

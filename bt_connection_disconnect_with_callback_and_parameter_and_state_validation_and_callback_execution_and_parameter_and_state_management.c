@@ -43,7 +43,7 @@ int bt_connection_disconnect_with_callback_and_parameter_and_state_validation_an
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","chan->rsp_buf",
                      "WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0x2cd);
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0x2cd);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",0x2cd);
       }
       iVar1 = increment_counter_in_structure();
       initialize_ble_memory_structure();
@@ -63,18 +63,19 @@ LAB_000586e2:
       uVar5 = 0xffffffff;
       uVar4 = 0xffffffff;
     }
-    iVar1 = FUN_0008181a(0,0,uVar5,uVar4);
+    iVar1 = transition_ble_connection_state_with_callback(0,0,uVar5,uVar4);
     if (iVar1 != 0) {
       uVar6 = process_ble_data_with_callback_validation();
       if ((undefined *)uVar6 == &DAT_200068d0) {
         uVar5 = 0;
         uVar4 = 0;
       }
-      puVar3 = (uint *)FUN_000727ac(&DAT_20003a28,(int)((ulonglong)uVar6 >> 0x20),uVar5,uVar4);
+      puVar3 = (uint *)handle_ble_connection_state_transition_with_validation
+                                 (&DAT_20003a28,(int)((ulonglong)uVar6 >> 0x20),uVar5,uVar4);
       if (puVar3 == (uint *)0x0) {
         local_24 = "Unable to allocate ATT TX meta";
         local_28 = 2;
-        FUN_00081ddc(&DAT_00088100,0x1080,&local_28);
+        process_and_compress_data_wrapper(&DAT_00088100,0x1080,&local_28);
         decrement_reference_count_and_cleanup_memory(iVar1);
         return 0;
       }
@@ -91,7 +92,7 @@ LAB_000586ce:
   uVar4 = 0x1840;
   local_48 = 3;
 LAB_00058624:
-  FUN_00081ddc(&DAT_00088100,uVar4,&local_48);
+  process_and_compress_data_wrapper(&DAT_00088100,uVar4,&local_48);
   return 0;
 }
 

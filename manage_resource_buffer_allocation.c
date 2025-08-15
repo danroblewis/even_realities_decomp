@@ -27,14 +27,16 @@ manage_resource_buffer_allocation
       local_2c = local_24;
       local_24[0] = 0x200;
       local_24[1] = 0x200;
-      uVar1 = FUN_00071358(param_1 + 0xe0,param_5,param_8,param_4,0);
+      uVar1 = initialize_and_process_comprehensive_audio_data_structure
+                        (param_1 + 0xe0,param_5,param_8,param_4,0);
       return uVar1;
     }
     local_2c = param_3;
     puStack_28 = param_3;
     local_24[0] = param_2;
-    FUN_00085be8(param_1 + 0x19c,param_6,param_7);
-    uVar1 = FUN_00071358(param_1 + 0xe0,param_5,param_8,param_4,param_1 + 0x19c,&local_2c);
+    initialize_buffer_structure(param_1 + 0x19c,param_6,param_7);
+    uVar1 = initialize_and_process_comprehensive_audio_data_structure
+                      (param_1 + 0xe0,param_5,param_8,param_4,param_1 + 0x19c,&local_2c);
   }
   return uVar1;
 }

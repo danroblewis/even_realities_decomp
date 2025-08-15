@@ -13,7 +13,7 @@ void calculate_and_store_timestamp_with_offset(uint time_offset)
 {
   longlong current_timestamp;
   
-  current_timestamp = FUN_0007cb2c();
+  current_timestamp = calculate_mathematical_operation_with_bit_shifting();
   DAT_200040c8 = (int)(current_timestamp + (ulonglong)time_offset);
   DAT_200040cc = (int)(current_timestamp + (ulonglong)time_offset >> 0x20);
   return;

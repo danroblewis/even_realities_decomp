@@ -34,7 +34,7 @@ undefined4 enter_into_long_trip(undefined4 param_1)
     if (DAT_2000242c != '\0') {
       iVar1 = DAT_20002428;
     }
-    iVar1 = FUN_0007d0e8(DAT_2000242c,iVar1,&local_20,&local_24);
+    iVar1 = process_data_with_operation_mode_and_validation(DAT_2000242c,iVar1,&local_20,&local_24);
     if (iVar1 == 0) {
       iVar1 = route_command_to_handler
                         (DAT_2000242c,&DAT_20019ff5,local_24 & 0xff,local_1c,&local_28,param_1);
@@ -48,7 +48,7 @@ undefined4 enter_into_long_trip(undefined4 param_1)
         if (iVar1 == 0) {
           reset_sensor_system_status();
           if (local_1c[0][9] == 0x80) {
-            FUN_0007d194(1000);
+            calculate_ble_schedule_timing_with_division_and_scaling(1000);
             local_1c[0][9] = 0;
             set_sensor_system_status();
             transmit_sensor_data_with_validation
@@ -87,7 +87,7 @@ undefined4 enter_into_long_trip(undefined4 param_1)
 LAB_0003324c:
                 do {
                   while( true ) {
-                    FUN_0007d194(300);
+                    calculate_ble_schedule_timing_with_division_and_scaling(300);
                     system_fatal_error_handler_with_priority_control(1);
                     uVar2 = extraout_r2;
                     pbVar3 = extraout_r3;
@@ -123,7 +123,7 @@ LAB_0003325a:
             }
             else {
               DEBUG_PRINT("enter into long trip \n");
-              FUN_0007d194(10000);
+              calculate_ble_schedule_timing_with_division_and_scaling(10000);
               change_work_mode_to(7);
             }
           }

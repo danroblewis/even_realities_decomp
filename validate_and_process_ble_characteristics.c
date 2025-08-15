@@ -26,8 +26,8 @@ validate_and_process_ble_characteristics
     iVar2 = iVar2 + 1;
     param_2 = param_2 + 4;
   }
-  FUN_000732d4(&DAT_20002030,&LAB_00055a74_1);
-  FUN_0007350c(&DAT_20002030,extraout_r1,0x3c0000,0);
+  initialize_data_structure_with_buffer_setup(&DAT_20002030,&LAB_00055a74_1);
+  handle_ble_connection_timeout_with_uart_setup(&DAT_20002030,extraout_r1,0x3c0000,0);
   return uVar1;
 }
 

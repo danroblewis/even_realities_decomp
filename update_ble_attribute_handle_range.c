@@ -13,7 +13,7 @@ void update_ble_attribute_handle_range
   uint uVar2;
   undefined8 uVar3;
   
-  uVar2 = FUN_000826e0(&DAT_20006448,1,param_3,param_4,param_4);
+  uVar2 = set_bits_in_value(&DAT_20006448,1,param_3,param_4,param_4);
   uVar1 = (ushort)param_1;
   if ((uVar2 & 1) != 0) {
     if (param_1 < DAT_20006410) {
@@ -34,7 +34,8 @@ LAB_0005a58a:
   if ((int)uVar3 << 0x1e < 0) {
     return;
   }
-  FUN_0007350c(&DAT_20006418,(int)((ulonglong)uVar3 >> 0x20),0x148,0);
+  handle_ble_connection_timeout_with_uart_setup
+            (&DAT_20006418,(int)((ulonglong)uVar3 >> 0x20),0x148,0);
   return;
 }
 

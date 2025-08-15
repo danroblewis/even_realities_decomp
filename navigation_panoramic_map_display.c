@@ -21,6 +21,7 @@ void navigation_panoramic_map_display(undefined4 param_1,int param_2)
   undefined4 extraout_r1_00;
   int iVar10;
   undefined4 uVar11;
+  undefined4 fill_param;
   int iVar12;
   uint uVar13;
   undefined4 uVar14;
@@ -369,7 +370,8 @@ LAB_0003ed90:
       }
       fill_memory_buffer(&display_buffer,0,0x1210);
       resource_mutex_acquire(&WORK_MODE_CONTEXT,extraout_r1_00,0xffffffff,0xffffffff);
-      FUN_0007da70(&overview_map_buffer,*(undefined4 *)(param_2 + 0xb1),&display_buffer);
+      copy_navigation_map_data_with_pattern_filling
+                (&overview_map_buffer,*(uint *)(param_2 + 0xb1),0x2001ba2e,fill_param);
     }
     DAT_2001ba2d = 1;
     mutex_unlock(&WORK_MODE_CONTEXT);

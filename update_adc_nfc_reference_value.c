@@ -8,7 +8,7 @@
 void update_adc_nfc_reference_value(void)
 
 {
-  FUN_0007c830(&DAT_20007a34);
+  run_adc_nfc_and_scale_result(&DAT_20007a34);
   DAT_20007a24 = DAT_20007a34;
   return;
 }

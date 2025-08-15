@@ -50,7 +50,7 @@ void process_ancs_data(undefined4 param_1)
     if (DAT_20006ab2 == '\x02') {
       safe_string_copy_with_padding(local_1b4,"com.apple.mobilephone_missed",0x20);
     }
-    FUN_0007ca80(auStack_34);
+    format_string_with_byte_patterns(auStack_34);
     ble_process_post_req(param_1,&local_1c8,local_1c4);
   }
   return;

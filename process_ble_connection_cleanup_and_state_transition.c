@@ -35,7 +35,8 @@ void process_ble_connection_cleanup_and_state_transition(int *param_1,undefined4
     uStack_1c = param_2;
     FUN_00081de2(puVar5 + 0xc,param_1 + 0x62);
     uVar4 = extraout_r1;
-    while (iVar1 = thunk_FUN_000727ac(param_1 + 0x48,uVar4,0,0), iVar1 != 0) {
+    while (iVar1 = handle_ble_connection_state_transition_with_validation(param_1 + 0x48,uVar4,0,0),
+          iVar1 != 0) {
       bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
                 (*(undefined4 *)(iVar1 + 0x18));
       decrement_reference_count_and_cleanup_memory(iVar1);
@@ -56,7 +57,8 @@ void process_ble_connection_cleanup_and_state_transition(int *param_1,undefined4
                   (*(undefined4 *)(iVar1 + 0x18));
         decrement_reference_count_and_cleanup_memory(iVar1);
       }
-      while (iVar1 = thunk_FUN_000727ac(puVar5 + 3,uVar4,0,0), iVar1 != 0) {
+      while (iVar1 = handle_ble_connection_state_transition_with_validation(puVar5 + 3,uVar4,0,0),
+            iVar1 != 0) {
         bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
                   (*(undefined4 *)(iVar1 + 0x18));
         decrement_reference_count_and_cleanup_memory(iVar1);
@@ -81,8 +83,8 @@ void process_ble_connection_cleanup_and_state_transition(int *param_1,undefined4
       local_30 = iVar1;
       local_2c = extraout_r1_00;
       ble_handle_mapping_utility(1,0xffff,0x5a3c5,iVar1);
-      FUN_00082f3a(*(undefined1 *)(iVar1 + 8),iVar8);
-      iVar2 = FUN_00080f92(*(undefined1 *)(iVar1 + 8),iVar8);
+      cleanup_ble_service_and_handles(*(undefined1 *)(iVar1 + 8),iVar8);
+      iVar2 = is_ble_uuid_valid_and_available(*(undefined1 *)(iVar1 + 8),iVar8);
       if (iVar2 != 0) {
         local_2c = CONCAT31(local_2c._1_3_,*(undefined1 *)(iVar1 + 8));
         local_30 = iVar8;
@@ -98,15 +100,15 @@ void process_ble_connection_cleanup_and_state_transition(int *param_1,undefined4
         piVar6 = piVar6 + -6;
         while( true ) {
           piVar10 = piVar9;
-          FUN_000826f6(piVar6 + 5,0xfffffff7);
-          iVar3 = FUN_00080f92(*(undefined1 *)(iVar1 + 8),iVar8);
+          clear_bits_in_value(piVar6 + 5,0xfffffff7);
+          iVar3 = is_ble_uuid_valid_and_available(*(undefined1 *)(iVar1 + 8),iVar8);
           if ((iVar3 == 0) || (iVar3 = get_ble_handle_value(piVar6 + 5), iVar3 << 0x1f < 0)) {
             *(undefined2 *)(piVar6 + 4) = 0;
-            FUN_000828e8(iVar1,iVar2,piVar11,piVar6);
+            manage_ble_characteristic_value_buffer(iVar1,iVar2,piVar11,piVar6);
           }
           else {
             if (*(char *)(iVar2 + 1) != '\0') {
-              FUN_000828da(iVar2 + 1,iVar8);
+              copy_data_structure_fields(iVar2 + 1,iVar8);
             }
             piVar11 = piVar6 + 6;
           }
@@ -120,9 +122,9 @@ void process_ble_connection_cleanup_and_state_transition(int *param_1,undefined4
       }
       iVar2 = find_ble_attribute_by_handle(iVar1);
       if (iVar2 != 0) {
-        iVar1 = FUN_00080f92(*(undefined1 *)(iVar1 + 8),iVar8);
+        iVar1 = is_ble_uuid_valid_and_available(*(undefined1 *)(iVar1 + 8),iVar8);
         if (iVar1 != 0) {
-          FUN_000828da(iVar2 + 1,iVar8);
+          copy_data_structure_fields(iVar2 + 1,iVar8);
           return;
         }
         initialize_ble_connection_data(iVar2);

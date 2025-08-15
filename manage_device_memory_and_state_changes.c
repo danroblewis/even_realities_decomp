@@ -30,21 +30,21 @@ int manage_device_memory_and_state_changes(int param_1,uint param_2,uint param_3
   iVar1 = check_device_capabilities_and_state();
   if (iVar1 == 0) {
     set_ble_connection_state(*(undefined4 *)(param_1 + 0x10));
-    iVar1 = FUN_00083954(param_1,0);
+    iVar1 = validate_device_properties_with_size_parameter(param_1,0);
     if (iVar1 == 0) {
-      FUN_00083906(param_1);
+      handle_ble_connection_state_and_status_flags(param_1);
       do {
         if (*(uint *)(iVar3 + 0x2c) != param_3) {
           if (0xffff < param_3) {
             if ((param_2 & 0xffff) != 0) goto LAB_00060e9a;
-            iVar2 = FUN_00066bc4(1,param_2);
+            iVar2 = handle_hardware_interrupt_trigger(1,param_2);
             uVar4 = 0x10000;
             goto LAB_00060e40;
           }
           if (0xfff < param_3) {
 LAB_00060e9a:
             if ((param_2 & 0xfff) == 0) {
-              iVar2 = FUN_00066bc4(0,param_2);
+              iVar2 = handle_hardware_interrupt_trigger(0,param_2);
               uVar4 = 0x1000;
               goto LAB_00060e40;
             }
@@ -53,7 +53,7 @@ LAB_00060e9a:
           local_38 = 4;
           uStack_30 = param_2;
           local_2c = param_3;
-          FUN_000838d6(&DAT_00088270,0x2040,&local_38);
+          execute_device_memory_data_compression(&DAT_00088270,0x2040,&local_38);
           handle_device_state_change(*(undefined4 *)(param_1 + 0x10),0xbad0004);
           iVar2 = 0xbad0004;
 LAB_00060eda:
@@ -61,11 +61,11 @@ LAB_00060eda:
           local_38 = 4;
           uStack_30 = param_2;
           local_2c = param_3;
-          FUN_000838d6(&DAT_00088270,0x2040,&local_38);
+          execute_device_memory_data_compression(&DAT_00088270,0x2040,&local_38);
           iVar1 = lookup_device_property_from_table(iVar2);
           break;
         }
-        iVar2 = FUN_0008520c();
+        iVar2 = trigger_hardware_interrupt_wrapper();
         uVar4 = param_3;
 LAB_00060e40:
         handle_device_state_change(*(undefined4 *)(param_1 + 0x10),iVar2);
@@ -73,8 +73,8 @@ LAB_00060e40:
         param_3 = param_3 - uVar4;
         param_2 = param_2 + uVar4;
       } while (param_3 != 0);
-      FUN_0008392e(param_1);
-      iVar3 = FUN_00083954(param_1,1);
+      manage_device_state_with_spin_lock_validation(param_1);
+      iVar3 = validate_device_properties_with_size_parameter(param_1,1);
       if (iVar1 == 0) {
         iVar1 = iVar3;
       }

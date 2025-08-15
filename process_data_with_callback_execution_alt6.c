@@ -26,7 +26,7 @@ undefined4 process_data_with_callback_execution_alt6(uint param_1,uint param_2)
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buffer != ((void *)0)",
                  "WEST_TOPDIR/nrf/drivers/entropy/entropy_cc3xx.c",0x19);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/nrf/drivers/entropy/entropy_cc3xx.c",0x19);
+    trigger_system_service_call("WEST_TOPDIR/nrf/drivers/entropy/entropy_cc3xx.c",0x19);
   }
   uVar4 = 0x400;
   uVar3 = 0;

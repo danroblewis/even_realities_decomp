@@ -12,7 +12,7 @@ void handle_multi_step_operation(undefined4 param_1,undefined4 param_2)
   int iVar2;
   char *format_string;
   
-  uVar1 = FUN_0007f4c8();
+  uVar1 = dereference_pointer_simple();
   DEBUG_PRINT("The discovery procedure for ANCS succeeded\n");
   iVar2 = process_data_with_state_management_alt(param_1,param_2);
   if (iVar2 == 0) {
@@ -30,11 +30,11 @@ void handle_multi_step_operation(undefined4 param_1,undefined4 param_2)
   }
   DEBUG_PRINT(format_string,iVar2);
 LAB_000188fc:
-  iVar2 = FUN_0007f594(param_1);
+  iVar2 = manage_microphone_state_with_bitwise_operations(param_1);
   if (iVar2 != 0) {
     DEBUG_PRINT("Could not release the discovery data, error code: %d\n",iVar2);
   }
-  FUN_0007c08e(&DAT_20006ab4,0xfffffffe);
+  clear_system_flags_with_bitwise_and(&DAT_20006ab4,0xfffffffe);
   handle_conditional_operation(uVar1,1);
   return;
 }

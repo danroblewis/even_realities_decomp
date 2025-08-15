@@ -16,7 +16,7 @@ int dequeue_ancs(undefined4 param_1)
     iVar1 = 1;
   }
   else {
-    iVar1 = FUN_00072240(&DAT_20006a6c,auStack_1c4,0,0);
+    iVar1 = manage_ble_connection_state_comprehensive(&DAT_20006a6c,auStack_1c4,0,0);
     if (iVar1 == 0) {
       memcpy(param_1,auStack_1c4,0x1b4);
     }

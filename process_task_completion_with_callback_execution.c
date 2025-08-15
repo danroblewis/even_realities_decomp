@@ -14,7 +14,7 @@ void process_task_completion_with_callback_execution
   
   uStack_8 = param_3;
   uStack_4 = param_4;
-  FUN_0007eec0(&LAB_0004daac_1,param_1,param_2,&uStack_8,param_1,&uStack_8);
+  format_string_wrapper(&LAB_0004daac_1,param_1,param_2,&uStack_8,param_1,&uStack_8);
   return;
 }
 

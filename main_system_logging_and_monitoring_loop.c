@@ -53,7 +53,7 @@ void main_system_logging_and_monitoring_loop(void)
                        "WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x350);
           DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-          assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x350);
+          trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x350);
         }
         if (&UNK_000882af < piVar5) break;
         if (*(code **)(*piVar5 + 0x18) != (code *)0x0) {

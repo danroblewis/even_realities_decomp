@@ -23,7 +23,7 @@ void validate_and_process_ble_characteristics_with_callback_execution_and_parame
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x5ef);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x5ef);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x5ef);
     }
     if (&UNK_00088057 < puVar1) break;
     if ((code *)*puVar1 != (code *)0x0) {

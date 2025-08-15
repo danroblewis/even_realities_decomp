@@ -21,7 +21,7 @@ bt_connection_disconnect_with_parameter_validation_and_callback_and_state_valida
   if ((short)param_2[5] == 0) {
     uVar2 = 0x40;
     do {
-      uVar4 = FUN_00081aca(param_1,uVar2);
+      uVar4 = find_ble_connection_by_handle(param_1,uVar2);
       if ((int)uVar4 == 0) {
         *(short *)(param_2 + 5) = (short)((ulonglong)uVar4 >> 0x20);
         param_3 = extraout_r2;
@@ -31,7 +31,7 @@ bt_connection_disconnect_with_parameter_validation_and_callback_and_state_valida
     } while (uVar2 != 0x80);
     local_14 = "Unable to allocate L2CAP channel ID";
     local_18 = 2;
-    FUN_00081746(&DAT_00088160,0x1040,&local_18);
+    process_and_compress_data_with_validation(&DAT_00088160,0x1040,&local_18);
     uVar1 = 0;
   }
   else {
@@ -49,9 +49,9 @@ LAB_0005788c:
     }
     *param_2 = param_1;
     param_2[3] = param_3;
-    FUN_000732d4(param_2 + 0x30,&LAB_00057524_1);
+    initialize_data_structure_with_buffer_setup(param_2 + 0x30,&LAB_00057524_1);
     if ((ushort)((short)param_2[5] - 0x40U) < 0x40) {
-      FUN_00072e50(param_2 + 0x22,&LAB_00081b82_1);
+      initialize_data_structure_with_validation(param_2 + 0x22,&LAB_00081b82_1);
       setup_error_handling(param_2 + 0x26);
       *(undefined1 *)(param_2 + 0x2d) = 1;
     }

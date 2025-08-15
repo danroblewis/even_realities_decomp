@@ -11,11 +11,12 @@ void handle_data_writing_with_validation
 {
   int iVar1;
   
-  iVar1 = FUN_0007c8d0(SYSTEM_CONFIGURATION_PARAMETER,param_1 & 0xff,param_3,param_4,param_1,param_2
-                      );
+  iVar1 = execute_resource_operation_with_retry_wrapper
+                    (SYSTEM_CONFIGURATION_PARAMETER,param_1 & 0xff,param_3,param_4,param_1,param_2);
   if ((iVar1 == 0) &&
-     (iVar1 = FUN_0007c8e8(SYSTEM_CONFIGURATION_PARAMETER,&stack0xffffffef), iVar1 == 0)) {
-    FUN_0007c8fa(SYSTEM_CONFIGURATION_PARAMETER);
+     (iVar1 = send_control_message_with_retry_if_valid
+                        (SYSTEM_CONFIGURATION_PARAMETER,&stack0xffffffef), iVar1 == 0)) {
+    send_control_message_and_execute_resource_operation(SYSTEM_CONFIGURATION_PARAMETER);
   }
   return;
 }

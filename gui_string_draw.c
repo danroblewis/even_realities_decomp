@@ -66,8 +66,8 @@ LAB_00045688:
         }
       }
       else {
-        draw_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,local_2c[0],local_34 / 2,local_30,iVar2,param_4)
-        ;
+        draw_4bit_bitmap_to_framebuffer
+                  (MAIN_FRAMEBUFFER,local_2c[0],local_34 / 2,local_30,iVar2,param_4);
         if ((*pbVar5 - 0x20 < 0x5f) && (param_1 == 3)) {
           iVar2 = local_34 + iVar2 + 3;
         }

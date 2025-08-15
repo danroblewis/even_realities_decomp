@@ -14,7 +14,7 @@ void update_ble_connection_handle_counter(void)
   undefined4 *puVar4;
   undefined8 uVar5;
   
-  uVar5 = FUN_000826e0(&DAT_2000af04,2);
+  uVar5 = set_bits_in_value(&DAT_2000af04,2);
   if (((uint)uVar5 & (uint)((ulonglong)uVar5 >> 0x20)) == 0) {
     puVar4 = &BT_CONNECTION_CALLBACK_LIST_END;
     bVar3 = false;
@@ -28,7 +28,7 @@ void update_ble_connection_handle_counter(void)
                      "WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x5ad);
         DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x5ad);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x5ad);
       }
       if (&UNK_0008806f < puVar4) break;
       puVar1 = puVar4 + 1;

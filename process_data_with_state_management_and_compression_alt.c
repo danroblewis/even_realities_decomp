@@ -51,7 +51,7 @@ process_data_with_state_management_and_compression_alt
       update_connection_state_flags(&DAT_2000b480);
       if ((*(uint *)(param_1 + 0xc) & 0xe) == 0) {
         if (param_4 == 0 && param_3 == 0) {
-          uVar5 = FUN_00072cd4(param_1,&local_1c);
+          uVar5 = validate_and_initialize_ble_connection_state(param_1,&local_1c);
         }
         else {
           *(uint *)(param_1 + 0xc) = *(uint *)(param_1 + 0xc) | 8;
@@ -81,7 +81,7 @@ process_data_with_state_management_and_compression_alt
     pcVar3 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar6);
+  trigger_system_service_call(pcVar3,uVar6);
 }
 
 

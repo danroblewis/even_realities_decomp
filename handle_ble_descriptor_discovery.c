@@ -33,7 +33,8 @@ int handle_ble_descriptor_discovery(uint param_1,undefined4 param_2,undefined4 p
       iVar1 = 0;
       puVar5 = &DAT_2000af19;
       do {
-        if (((byte)puVar5[-1] == param_1) && (iVar2 = FUN_000826b2(param_2,puVar5), iVar2 != 0)) {
+        if (((byte)puVar5[-1] == param_1) &&
+           (iVar2 = compare_byte_arrays_7_bytes(param_2,puVar5), iVar2 != 0)) {
           puVar4 = &DAT_2000af18 + iVar1;
           piVar3 = *(int **)((int)&DAT_2000af20 + iVar1);
           if (piVar3 != (int *)0x0) {
@@ -42,15 +43,15 @@ int handle_ble_descriptor_discovery(uint param_1,undefined4 param_2,undefined4 p
               iVar1 = iVar1 + -0x18;
             }
             *(undefined2 *)(piVar3 + -2) = 0;
-            FUN_000828e8(0,puVar4,0,piVar3 + -6);
+            manage_ble_characteristic_value_buffer(0,puVar4,0,piVar3 + -6);
             if (iVar1 != 0) {
               while (iVar2 = *(int *)(iVar1 + 0x18), iVar2 != 0) {
                 *(undefined2 *)(iVar1 + 0x10) = 0;
-                FUN_000828e8(0,puVar4,0,iVar1);
+                manage_ble_characteristic_value_buffer(0,puVar4,0,iVar1);
                 iVar1 = iVar2 + -0x18;
               }
               *(undefined2 *)(iVar1 + 0x10) = 0;
-              FUN_000828e8(0,puVar4,0,iVar1);
+              manage_ble_characteristic_value_buffer(0,puVar4,0,iVar1);
             }
           }
           break;

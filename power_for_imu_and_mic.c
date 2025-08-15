@@ -12,7 +12,7 @@ undefined4 power_for_imu_and_mic(void)
   char *format_string;
   undefined4 in_r3;
   
-  iVar1 = FUN_00083dc8(&DAT_00087c80,8,2,1,in_r3);
+  iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,8,2,1,in_r3);
   if (iVar1 < 0) {
     if (LOG_LEVEL < 1) {
       return 0;

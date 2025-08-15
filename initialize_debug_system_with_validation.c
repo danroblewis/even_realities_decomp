@@ -26,7 +26,7 @@ void initialize_debug_system_with_validation
     uVar1 = 0x1c8;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",uVar1);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",uVar1);
 }
 
 

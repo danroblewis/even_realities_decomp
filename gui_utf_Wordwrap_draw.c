@@ -80,7 +80,7 @@ LAB_0004558c:
       puVar17 = puVar3;
       for (uVar18 = 0; (int)uVar18 < (int)(uint)local_302; uVar18 = uVar18 + 1) {
         uVar16 = (uint)*puVar17;
-        iVar4 = FUN_0007d860(uVar16);
+        iVar4 = bounds_check_return_negative_one_or_zero(uVar16);
         if (iVar4 == 0) {
           iVar4 = _012_resource_manger_get(param_3,uVar16,&local_2fc,&local_2f8,&local_300,0);
           if (iVar4 < 0) {
@@ -201,7 +201,7 @@ LAB_00045314:
               }
               uVar14 = uVar14 + 1;
               if ((param_8 <= uVar14) || ((uint)(param_7 - param_5) <= uVar12)) break;
-              draw_bitmap_to_framebuffer
+              draw_4bit_bitmap_to_framebuffer
                         (MAIN_FRAMEBUFFER,local_2cc,local_2fc / 2,local_2f8,param_4,uVar12 + param_5
                         );
               iVar4 = count_matching_data_entries(*puVar17,puVar17[1]);
@@ -209,7 +209,7 @@ LAB_00045314:
               uVar19 = uVar15;
             }
             else {
-              draw_bitmap_to_framebuffer
+              draw_4bit_bitmap_to_framebuffer
                         (MAIN_FRAMEBUFFER,local_2cc,local_2fc / 2,local_2f8,param_4 + uVar19,
                          uVar12 + param_5);
               iVar4 = count_matching_data_entries(*puVar17,puVar17[1]);

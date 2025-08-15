@@ -21,7 +21,7 @@ handle_ble_connection_state_change_with_callback
   if (puVar1 == (undefined *)0x0) {
     local_24 = "No pending ATT request";
     local_28 = 2;
-    FUN_00081ddc(&DAT_00088100,0x1080,&local_28);
+    process_and_compress_data_wrapper(&DAT_00088100,0x1080,&local_28);
   }
   else {
     if (puVar1 != &DAT_2000aea0) {

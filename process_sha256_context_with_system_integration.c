@@ -107,7 +107,7 @@ LAB_0007b324:
   _DAT_50845818 = 0;
   _DAT_50845820 = 0;
   if (iVar1 != 0) {
-    FUN_0007a3d4(param_1 + 2,0x10);
+    fill_memory_buffer_with_zeros_wrapper(param_1 + 2,0x10);
   }
   iVar2 = manage_system_reference_counter_with_state_transitions(1);
   if (iVar2 != 0) {

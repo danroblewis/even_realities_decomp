@@ -17,7 +17,7 @@ longlong get_dashboard_sum_time(void)
   undefined8 uVar7;
   longlong lVar8;
   
-  uVar7 = FUN_0007daa4();
+  uVar7 = convert_ble_timing_to_milliseconds();
   iVar2 = (int)((ulonglong)uVar7 >> 0x20);
   iVar1 = get_work_mode();
   iVar3 = *(int *)(iVar1 + 0x1098);
@@ -27,12 +27,12 @@ longlong get_dashboard_sum_time(void)
     iVar1 = get_work_mode();
     uVar4 = *(uint *)(iVar1 + 0x1094);
     iVar1 = *(int *)(iVar1 + 0x1098);
-    uVar7 = FUN_0007daa4();
+    uVar7 = convert_ble_timing_to_milliseconds();
     lVar8 = CONCAT44((iVar1 - (int)((ulonglong)uVar7 >> 0x20)) - (uint)(uVar4 < (uint)uVar7),
                      uVar4 - (uint)uVar7);
   }
   else {
-    lVar8 = FUN_0007daa4();
+    lVar8 = convert_ble_timing_to_milliseconds();
     iVar1 = get_work_mode();
     lVar8 = lVar8 - *(longlong *)(iVar1 + 0x1094);
   }

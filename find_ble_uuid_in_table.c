@@ -14,7 +14,7 @@ undefined1 * find_ble_uuid_in_table(uint param_1,int param_2)
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","addr != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x11a);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x11a);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x11a);
   }
   if ((DAT_2000af4c != param_1) || (iVar1 = memcmp_byte_arrays(&DAT_2000af4d,param_2,7), iVar1 != 0)
      ) {

@@ -28,7 +28,7 @@ uint handle_device_power_state_operations(int param_1,int param_2)
         uVar3 = 0x768;
 LAB_00062cb8:
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/drivers/serial/uart_nrfx_uarte.c",uVar3);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/drivers/serial/uart_nrfx_uarte.c",uVar3);
       }
       if (*(int *)(iVar6 + 0xc) != 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!data->async->tx_size",
@@ -52,9 +52,9 @@ LAB_00062cb8:
       iVar7 = 1000;
       *(undefined4 *)(iVar6 + 0x308) = 0x100;
       do {
-        iVar2 = FUN_00084abe(*(undefined4 *)(param_1 + 4));
+        iVar2 = check_state_flags_and_return_status(*(undefined4 *)(param_1 + 4));
         if (iVar2 != 0) break;
-        thunk_FUN_00086384(1);
+        handle_ble_uart_packet_processing_completion(1);
         iVar7 = iVar7 + -1;
       } while (iVar7 != 0);
       if (*(int *)(iVar6 + 0x158) == 0) {
@@ -65,7 +65,7 @@ LAB_00062cb8:
     iVar7 = 1000;
     do {
       if (*(int *)(iVar6 + 0x158) != 0) break;
-      thunk_FUN_00086384(1);
+      handle_ble_uart_packet_processing_completion(1);
       iVar7 = iVar7 + -1;
     } while (iVar7 != 0);
     if (uVar1 == 0) {
@@ -73,7 +73,7 @@ LAB_00062cb8:
     }
     *(undefined4 *)(**(int **)(param_1 + 4) + 0x500) = 0;
     if ((int)(puVar5[1] << 0x1f) < 0) {
-      uVar1 = FUN_00084b14(puVar5[3],1);
+      uVar1 = execute_function_chain_with_parameter_passing(puVar5[3],1);
       return uVar1 & (int)uVar1 >> 0x1f;
     }
   }
@@ -81,7 +81,8 @@ LAB_00062cb8:
     if (param_2 != 1) {
       return 0xffffff7a;
     }
-    if (((int)(puVar5[1] << 0x1f) < 0) && (uVar1 = FUN_00084b14(puVar5[3],0), (int)uVar1 < 0)) {
+    if (((int)(puVar5[1] << 0x1f) < 0) &&
+       (uVar1 = execute_function_chain_with_parameter_passing(puVar5[3],0), (int)uVar1 < 0)) {
       return uVar1;
     }
     puVar4[0x140] = 8;

@@ -12,7 +12,7 @@ void initialize_ble_attribute(undefined4 param_1,int param_2,undefined4 param_3,
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","addr != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x59,param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x59);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x59);
   }
   manage_ble_attribute_table();
   return;

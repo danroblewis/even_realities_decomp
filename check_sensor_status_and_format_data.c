@@ -13,7 +13,7 @@ uint check_sensor_status_and_format_data(undefined4 param_1,uint3 param_2)
   undefined4 uStack_c;
   
   uStack_c = (uint)param_2;
-  iVar1 = FUN_00083dba(&DAT_00087c80,3,0x34,(int)&uStack_c + 3,param_1);
+  iVar1 = call_ble_callback_wrapper(&DAT_00087c80,3,0x34,(int)&uStack_c + 3,param_1);
   if (iVar1 < 0) {
     DEBUG_PRINT("Could not get charger status\n");
     uVar2 = 0xffffffff;

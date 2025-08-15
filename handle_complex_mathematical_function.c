@@ -34,12 +34,12 @@ handle_complex_mathematical_function
          (iVar1 = check_high_bit_set(param_3), iVar1 != 0)) {
         iVar1 = check_float_nan(uVar3,extraout_s1,uVar3,extraout_s1);
         if (iVar1 != 0) {
-          puVar2 = (undefined4 *)thunk_FUN_00071678();
+          puVar2 = (undefined4 *)calculate_data_structure_offset();
           *puVar2 = 0x21;
           uVar3 = float_multiply_64bit(0,0);
           return uVar3;
         }
-        puVar2 = (undefined4 *)thunk_FUN_00071678();
+        puVar2 = (undefined4 *)calculate_data_structure_offset();
         *puVar2 = 0x22;
         iVar1 = float_compare_boolean_inverted();
         if (iVar1 != 0) {
@@ -59,7 +59,7 @@ handle_complex_mathematical_function
       if (iVar1 != 0) {
         iVar1 = check_high_bit_set(param_3);
         if (iVar1 != 0) {
-          puVar2 = (undefined4 *)thunk_FUN_00071678();
+          puVar2 = (undefined4 *)calculate_data_structure_offset();
           *puVar2 = 0x22;
           return 0;
         }
@@ -75,7 +75,7 @@ handle_complex_mathematical_function
       }
       iVar1 = float_compare_boolean_inverted(param_3,param_4,0,0);
       if (iVar1 != 0) {
-        puVar2 = (undefined4 *)thunk_FUN_00071678();
+        puVar2 = (undefined4 *)calculate_data_structure_offset();
         *puVar2 = 0x21;
         return 0;
       }

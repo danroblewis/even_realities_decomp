@@ -34,13 +34,13 @@ undefined4 onboarding_ble_process(int param_1,int param_2,undefined2 *param_3,un
     goto LAB_00042a96;
   }
   DAT_20004bf0 = 0;
-  uVar8 = FUN_0007d382();
+  uVar8 = calculate_ble_connection_timing_with_scaling_alt3();
   DAT_20004bfc = (undefined4)((ulonglong)uVar8 >> 0x20);
   DAT_20004bf8 = (undefined4)uVar8;
   if (*(char *)((int)param_3 + 1) == '\x12') goto LAB_00042b26;
   validate_and_update_work_mode_state();
   **(undefined1 **)(param_1 + 0x1014) = 1;
-  uVar8 = FUN_0007d382();
+  uVar8 = calculate_ble_connection_timing_with_scaling_alt3();
   *(undefined8 *)(*(int *)(param_1 + 0x1014) + 4) = uVar8;
   *(undefined1 *)(*(int *)(param_1 + 0x1014) + 2) = *(undefined1 *)((int)param_3 + 1);
   if (2 < LOG_LEVEL) {

@@ -30,7 +30,7 @@ undefined4 process_data_with_state_management(int param_1,undefined4 *param_2,in
   if (TASK_CALLBACK_PARAMETER_1 != param_1) {
     local_24 = "Unexpected conn object. Aborting.";
     local_28 = 2;
-    FUN_0007f406(&DAT_00088130,0x1040,&local_28);
+    process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1040,&local_28);
     uVar7 = 0xfffffff2;
     goto LAB_0004eaa6;
   }
@@ -51,13 +51,14 @@ LAB_0004ebe6:
       uVar8 = 0x19c;
       goto LAB_0004eb7e;
     }
-    iVar2 = FUN_0007f386(&TASK_CALLBACK_PARAMETER_1,*(undefined2 *)(param_2 + 4));
+    iVar2 = binary_search_sorted_data_array(&TASK_CALLBACK_PARAMETER_1,*(undefined2 *)(param_2 + 4))
+    ;
     if (iVar2 == 0) {
       uVar7 = 0xfffffffd;
       goto LAB_0004eaa6;
     }
     piVar4 = (int *)param_2[3];
-    piVar9 = (int *)FUN_0007f4a0();
+    piVar9 = (int *)validate_data_structure_header_with_pattern_0x2803();
     if (piVar9 == (int *)0x0) {
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","cur_gatt_chrc != ((void *)0)",
                    "WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",0x1a8);
@@ -74,13 +75,13 @@ LAB_0004ebe6:
 LAB_0004ec80:
     uVar7 = 0xfffffff4;
 LAB_0004eaa6:
-    FUN_0007f40c(&TASK_CALLBACK_PARAMETER_1,uVar7);
+    clear_data_structures_and_execute_callbacks(&TASK_CALLBACK_PARAMETER_1,uVar7);
     return 0;
   }
   if (bVar1 < 4) {
     if (bVar1 != 2) {
       if (param_2 == (undefined4 *)0x0) {
-        FUN_0007f438(&TASK_CALLBACK_PARAMETER_1);
+        cleanup_and_reinitialize_microphone_structures_alt(&TASK_CALLBACK_PARAMETER_1);
         return 0;
       }
       piVar9 = (int *)param_2[3];
@@ -104,10 +105,10 @@ LAB_0004eaa6:
         local_24 = "Not enough memory for service attribute.";
 LAB_0004eb88:
         local_28 = 2;
-        FUN_0007f406(&DAT_00088130,0x1040,&local_28);
+        process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1040,&local_28);
       }
       else {
-        piVar4 = (int *)FUN_0007f460(iVar2);
+        piVar4 = (int *)validate_data_structures_and_calculate_offset(iVar2);
         if (piVar4 == (int *)0x0) {
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","cur_service_val != ((void *)0)",
                        "WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",0x13b);
@@ -127,13 +128,14 @@ LAB_0004eb88:
         DAT_2000a15c = 0;
         DAT_2000a16c = 5;
         DAT_2000a164 = *(short *)(iVar2 + 4) + 1;
-        uStack_48 = FUN_0005b9cc(TASK_CALLBACK_PARAMETER_1,&DAT_2000a15c);
+        uStack_48 = process_ble_characteristic_operation_by_type
+                              (TASK_CALLBACK_PARAMETER_1,&DAT_2000a15c);
         if (uStack_48 == 0) {
           return 0;
         }
         local_4c = "Descriptor discover failed, error: %d.";
         local_50 = 3;
-        FUN_0007f406(&DAT_00088130,0x1840,&local_50);
+        process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1840,&local_50);
       }
       uVar7 = 0xfffffff4;
       goto LAB_0004eaa6;
@@ -144,14 +146,14 @@ LAB_0004eb88:
       if (DAT_2000a288 < 2) goto LAB_0004ebe6;
       DAT_2000a164 = DAT_2000a174 + 1;
       DAT_2000a16c = 3;
-      uVar7 = FUN_0005b9cc(param_1,&DAT_2000a15c);
+      uVar7 = process_ble_characteristic_operation_by_type(param_1,&DAT_2000a15c);
       if (uVar7 == 0) {
         return 0;
       }
       local_4c = "Characteristic discover failed, error: %d.";
       local_50 = 3;
       uStack_48 = uVar7;
-      FUN_0007f406(&DAT_00088130,0x1840,&local_50);
+      process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1840,&local_50);
       goto LAB_0004eaa6;
     }
     local_38[0] = 0;
@@ -159,7 +161,7 @@ LAB_0004eb88:
     iVar2 = compare_data_structures(*param_2,local_38);
     if (iVar2 == 0) {
       puVar5 = (undefined4 *)handle_configuration_setting_with_validation_and_callback(param_2,8);
-      puVar6 = (undefined4 *)FUN_0007f4a0();
+      puVar6 = (undefined4 *)validate_data_structure_header_with_pattern_0x2803();
       *puVar6 = *puVar5;
       return 1;
     }
@@ -170,7 +172,7 @@ LAB_0004eb88:
     uStack_48 = (uint)*(ushort *)(param_2 + 4);
     local_4c = "Not enough memory for next attribute descriptor at handle %u.";
     local_50 = 3;
-    FUN_0007f406(&DAT_00088130,0x1840,&local_50);
+    process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1840,&local_50);
     goto LAB_0004ec80;
   }
   DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","0","WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",
@@ -179,7 +181,7 @@ LAB_0004eb88:
   uVar8 = 0x1d2;
 LAB_0004eb7e:
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",uVar8);
+  trigger_system_service_call("WEST_TOPDIR/nrf/subsys/bluetooth/gatt_dm.c",uVar8);
 }
 
 

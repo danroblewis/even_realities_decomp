@@ -26,7 +26,7 @@ process_data_with_callback_validation_alt3
   uStack_24 = param_2;
   uVar2 = call_with_parameters(iVar6,"images",6,param_4,param_1);
   if (uVar2 != 0) {
-    uVar2 = FUN_00086344(iVar6,4);
+    uVar2 = write_ble_uart_packet_extended_length_marker(iVar6,4);
   }
   iVar7 = 0;
   uVar2 = uVar2 & 1;
@@ -38,9 +38,9 @@ LAB_00051cde:
       return 7;
     }
     if (iVar7 == 2) {
-      iVar7 = FUN_00086354(iVar6,4);
+      iVar7 = write_ble_uart_packet_extended_length_marker_type7(iVar6,4);
       if (((iVar7 != 0) && (iVar7 = call_with_parameters(iVar6,"splitStatus",0xb), iVar7 != 0)) &&
-         (iVar6 = FUN_0008630c(iVar6,0), iVar6 != 0)) {
+         (iVar6 = write_ble_uart_packet_32bit_value(iVar6,0), iVar6 != 0)) {
         no_operation_alt();
         return 0;
       }

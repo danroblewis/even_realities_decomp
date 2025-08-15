@@ -60,7 +60,7 @@ void initialize_microphone(int param_1,undefined4 param_2,undefined4 param_3,und
     uVar6 = 0xf0;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar6);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar6);
 }
 
 

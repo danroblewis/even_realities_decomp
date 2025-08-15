@@ -39,7 +39,7 @@ undefined4 gui_bmp_dynamic_bitmap_draw(undefined4 param_1,int param_2,int param_
     if ((uVar3 & 2) != 0) {
       _clean_fb_data(MAIN_FRAMEBUFFER,0,param_2,param_3,local_2c + param_2,local_28 + param_3);
     }
-    draw_bitmap_to_framebuffer
+    draw_4bit_bitmap_to_framebuffer
               (MAIN_FRAMEBUFFER,
                local_28 * ((int)(local_2c * (uint)ANIM_FRAME_IDX) / 2) + local_24[0],local_2c / 2,
                local_28,param_2,param_3);

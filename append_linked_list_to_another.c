@@ -15,7 +15,7 @@ int append_linked_list_to_another(int param_1,int param_2,undefined4 param_3,und
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","frag","WEST_TOPDIR/zephyr/subsys/net/buf.c",0x24d)
     ;
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x24d);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",0x24d);
   }
   if (param_1 == 0) {
     iVar1 = increment_counter_in_structure(param_2,param_2,param_3,param_4);

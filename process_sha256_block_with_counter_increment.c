@@ -68,7 +68,7 @@ int process_sha256_block_with_counter_increment(char *param_1,uint *param_2)
     memcpy(param_1,&local_28,0x10);
   }
 LAB_00079b44:
-  FUN_00079808(&local_48,0x30);
+  clear_memory_buffer_with_zero_fill(&local_48,0x30);
   return iVar2;
 }
 

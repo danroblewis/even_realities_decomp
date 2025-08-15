@@ -23,8 +23,8 @@ int format_and_send_data_packet
   local_1c = 2;
   local_24 = auStack_28 + iVar1;
   local_20 = param_5 + 2;
-  iVar1 = FUN_0007c85e(*param_1,&local_24,1,param_2);
-  FUN_0007c87a();
+  iVar1 = execute_callback_function_pointer(*param_1,&local_24,1,param_2);
+  set_ble_schedule_timing_for_data_transmission();
   if (iVar1 < 0) {
     DEBUG_PRINT("_st25dv_write  ret %d \n",iVar1);
   }

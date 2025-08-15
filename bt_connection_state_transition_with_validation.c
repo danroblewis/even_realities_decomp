@@ -16,7 +16,7 @@ int bt_connection_state_transition_with_validation
   undefined4 uStack_18;
   
   uStack_18 = param_4;
-  iVar1 = FUN_000813e8(&DAT_20006138,1,param_1);
+  iVar1 = find_ble_connection_by_handle_in_range(&DAT_20006138,1,param_1);
   if (iVar1 != 0) {
     if ((param_2 & *(byte *)(iVar1 + 2)) != 0) {
       return iVar1;

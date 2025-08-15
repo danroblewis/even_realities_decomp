@@ -20,7 +20,7 @@ int process_data_with_callback_execution_alt
   }
   else {
     uStack_20 = param_4;
-    iVar1 = FUN_0007f612(param_1 + 1,1);
+    iVar1 = set_bit_and_return_previous_state(param_1 + 1,1);
     if (iVar1 == 0) {
       *(undefined2 *)(param_1 + 0x216) = 1;
       param_1[0x212] = &LAB_0007f5c4_1;
@@ -30,7 +30,7 @@ int process_data_with_callback_execution_alt
       param_1[0x219] = param_2;
       iVar1 = initialize_ble_attribute_data_structure(*param_1,param_1 + 0x212);
       if (iVar1 != 0) {
-        FUN_0007f5d8(param_1 + 1,1);
+        clear_specific_bit_by_position(param_1 + 1,1);
         local_2c = "Subscribe Data Source failed (err %d)";
         local_30 = 3;
         iStack_28 = iVar1;

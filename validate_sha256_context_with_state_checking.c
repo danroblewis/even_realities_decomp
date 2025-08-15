@@ -45,7 +45,7 @@ int validate_sha256_context_with_state_checking(int *param_1)
     else {
       iVar1 = 0xf00c37;
     }
-    FUN_0007a3d4(param_1,0x1c);
+    fill_memory_buffer_with_zeros_wrapper(param_1,0x1c);
   }
   return iVar1;
 }

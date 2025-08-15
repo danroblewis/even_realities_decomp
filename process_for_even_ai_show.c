@@ -147,7 +147,7 @@ LAB_0002e040:
         goto LAB_0002df66;
       }
       if (((*(char *)(*(int *)(param_1 + 0x1014) + 1) != '\0') ||
-          (iVar9 = FUN_0007c132(), iVar9 == 0)) ||
+          (iVar9 = check_work_mode_status_with_byte_array_comparison(), iVar9 == 0)) ||
          (iVar9 = get_work_mode(), *(char *)(*(int *)(iVar9 + 0x1010) + 1) != '\0')) {
         uVar10 = uVar10 + 1;
         if (((uVar10 & 0x1f) == 0) && (0 < LOG_LEVEL)) {

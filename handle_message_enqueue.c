@@ -14,7 +14,7 @@ int handle_message_enqueue(undefined4 param_1,undefined1 param_2)
   
   fill_memory_buffer(&local_114,0,0x101);
   if (DAT_2000391c == 0x30) {
-    FUN_00072240(&DAT_200038f8,&local_114,0,0);
+    manage_ble_connection_state_comprehensive(&DAT_200038f8,&local_114,0,0);
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("enqueue_bt_data drop package! \n");
     }

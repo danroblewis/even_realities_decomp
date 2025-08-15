@@ -24,7 +24,7 @@ undefined4 handle_device_data_transmission(int param_1,int param_2,uint param_3,
                  "WEST_TOPDIR/zephyr/drivers/serial/uart_nrfx_uarte.c",0x342);
     DEBUG_PRINT2("\tTX only UARTE instance\n");
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/drivers/serial/uart_nrfx_uarte.c",0x342);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/drivers/serial/uart_nrfx_uarte.c",0x342);
   }
   iVar3 = *(int *)(iVar4 + 0xc);
   if ((*(char *)(iVar3 + 0xca) == '\0') && (*(char *)(iVar3 + 0xcb) == '\0')) {
@@ -53,9 +53,10 @@ undefined4 handle_device_data_transmission(int param_1,int param_2,uint param_3,
         if (param_3 == 0) {
           *(char *)(*(int *)(iVar4 + 0xc) + 0xc9) =
                *(char *)(*(int *)(iVar4 + 0xc) + 0xc9) - (char)uVar5;
-          FUN_0008484e(param_1,uVar5);
-          FUN_00084880(param_1,*(int *)(iVar4 + 0xc) + 0x58);
-          FUN_000848b0(param_1);
+          prepare_callback_data_and_execute_with_memory_buffer_initialization(param_1,uVar5);
+          execute_callback_with_state_check_and_memory_buffer_reset
+                    (param_1,*(int *)(iVar4 + 0xc) + 0x58);
+          execute_callback_with_memory_buffer_initialization_and_constant_value(param_1);
           return 0;
         }
       }

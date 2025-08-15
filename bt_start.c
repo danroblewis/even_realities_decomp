@@ -27,7 +27,7 @@ int bt_start(void)
   undefined4 local_24;
   
   while (DAT_2000ff72 != '\0') {
-    FUN_0007c0a8(1);
+    calculate_ble_schedule_timing_with_division_alt(1);
   }
   DAT_2000ff72 = 1;
   iVar6 = get_work_mode();

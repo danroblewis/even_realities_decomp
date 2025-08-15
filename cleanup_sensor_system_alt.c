@@ -9,7 +9,7 @@ undefined4 cleanup_sensor_system_alt(void)
 
 {
   if (DAT_20002424 != 0) {
-    FUN_0007c8c4();
+    release_resource_mutex_if_valid();
   }
   return 0;
 }

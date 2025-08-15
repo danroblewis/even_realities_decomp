@@ -20,7 +20,7 @@ undefined4 gui_4bit_bitmap_override(undefined4 bitmap_id,uint x_pos,uint y_pos)
   if ((x_pos < 0x281) && (y_pos < 0x1e1)) {
     iVar1 = _012_resource_manger_get(4,bitmap_id,&local_1c,&local_18,&local_14,0);
     if (-1 < iVar1) {
-      draw_4bit_bitmap_to_framebuffer(MAIN_FRAMEBUFFER,local_14,local_1c,local_18,x_pos,y_pos);
+      draw_bitmap_with_extended_parameters(MAIN_FRAMEBUFFER,local_14,local_1c,local_18,x_pos,y_pos);
       iVar1 = get_display_config_flags();
       if (iVar1 << 0x1e < 0) {
         iVar1 = get_work_mode();

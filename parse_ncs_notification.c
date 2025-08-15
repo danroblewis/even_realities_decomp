@@ -19,9 +19,9 @@ void parse_ncs_notification(undefined4 param_1,undefined4 *param_2)
   int iVar9;
   undefined4 uVar10;
   
-  iVar1 = FUN_0008500c();
+  iVar1 = parse_json_string_wrapper();
   if (iVar1 != 0) {
-    iVar2 = FUN_0008503c(iVar1,"ncs_notification");
+    iVar2 = search_linked_list_by_string_value(iVar1,"ncs_notification");
     if (iVar2 == 0) {
       if (0 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {
@@ -34,14 +34,14 @@ void parse_ncs_notification(undefined4 param_1,undefined4 *param_2)
       cleanup_json_node(iVar1);
       return;
     }
-    iVar3 = FUN_0008503c(iVar2,"app_identifier");
-    iVar4 = FUN_0008503c(iVar2,"title");
-    iVar5 = FUN_0008503c(iVar2,"subtitle");
-    iVar6 = FUN_0008503c(iVar2,"message");
-    iVar7 = FUN_0008503c(iVar2,"date");
-    iVar8 = FUN_0008503c(iVar2,"display_name");
-    iVar9 = FUN_0008503c(iVar2,"msg_id");
-    iVar2 = FUN_0008503c(iVar2,"action");
+    iVar3 = search_linked_list_by_string_value(iVar2,"app_identifier");
+    iVar4 = search_linked_list_by_string_value(iVar2,"title");
+    iVar5 = search_linked_list_by_string_value(iVar2,"subtitle");
+    iVar6 = search_linked_list_by_string_value(iVar2,"message");
+    iVar7 = search_linked_list_by_string_value(iVar2,"date");
+    iVar8 = search_linked_list_by_string_value(iVar2,"display_name");
+    iVar9 = search_linked_list_by_string_value(iVar2,"msg_id");
+    iVar2 = search_linked_list_by_string_value(iVar2,"action");
     fill_memory_buffer(param_2,0,0x1b4);
     if (iVar3 != 0) {
       safe_string_copy_with_padding(param_2 + 4,*(undefined4 *)(iVar3 + 0x10),0x1f);

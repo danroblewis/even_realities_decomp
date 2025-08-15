@@ -44,7 +44,7 @@ int initialize_sha256_state_with_type_based_processing
       _DAT_50845414 = DAT_20002f3c[5];
       _DAT_50845418 = DAT_20002f3c[6];
       _DAT_5084541c = DAT_20002f3c[7];
-      iVar1 = FUN_0007bc24(*(undefined4 *)(param_1 + 0x40),*(undefined4 *)(param_1 + 0x30));
+      iVar1 = validate_sha256_state_with_mode(*(int *)(param_1 + 0x40),*(int *)(param_1 + 0x30));
       if (iVar1 == 0) {
         return 0;
       }

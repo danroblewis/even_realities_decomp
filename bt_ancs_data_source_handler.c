@@ -34,7 +34,7 @@ void bt_ancs_data_source_handler(undefined4 param_1,byte *param_2,undefined4 par
   }
   else if ((*param_2 == 1) && (DAT_2000ff71 != '\0')) {
     if (DAT_20006aac != DAT_2000231c) {
-      iVar2 = FUN_0007c0c8();
+      iVar2 = calculate_ble_connection_timing_with_scaling_alt();
       iVar3 = get_work_mode();
       if (9999 < (uint)(iVar2 - *(int *)(iVar3 + 0xae8))) {
         iVar2 = get_work_mode();

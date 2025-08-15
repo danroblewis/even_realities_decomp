@@ -38,7 +38,7 @@ int manage_device_driver_states(int param_1)
         uVar3 = 0x3ca;
 LAB_00062124:
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",uVar3);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",uVar3);
       }
       if ((uVar7 & 6) == 4) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n",

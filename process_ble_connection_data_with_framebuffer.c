@@ -68,7 +68,8 @@ LAB_0005eeda:
             setBasePriority(uVar8);
           }
           InstructionSynchronizationBarrier(0xf);
-          uVar11 = FUN_000727ac(param_1,(int)((ulonglong)uVar11 >> 0x20),param_3,param_4);
+          uVar11 = handle_ble_connection_state_transition_with_validation
+                             (param_1,(int)((ulonglong)uVar11 >> 0x20),param_3,param_4);
           if ((int)uVar11 == 0) {
             return 0;
           }
@@ -76,7 +77,8 @@ LAB_0005eeda:
         }
       }
       else if ((*(ushort *)(param_1 + 0x22) < *(ushort *)(param_1 + 0x20)) &&
-              (iVar6 = FUN_000727ac(param_1,extraout_r1,0,0), iVar6 != 0)) {
+              (iVar6 = handle_ble_connection_state_transition_with_validation
+                                 (param_1,extraout_r1,0,0), iVar6 != 0)) {
         uVar10 = validate_and_clear_connection_state(iVar9);
         uVar11 = CONCAT44((int)((ulonglong)uVar10 >> 0x20),iVar6);
         if ((int)uVar10 != 0) {
@@ -140,7 +142,7 @@ LAB_0005f02e:
     pcVar5 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar5,uVar8);
+  trigger_system_service_call(pcVar5,uVar8);
 }
 
 

@@ -36,7 +36,7 @@ void configure_sensor_timing_and_interrupts
     uVar5 = (sensor_flags << 8) >> 0x18;
     if (uVar5 < 0x10) {
       *(uint *)((uVar5 & 0x3f) * 4 + 0x5002a080) = uVar7 | 0x80000000;
-      FUN_00064f48(uVar7,uVar3);
+      set_sensor_interrupt_flags(uVar7,uVar3);
       handle_timer_interrupt_callback
                 (uVar6,extraout_r1,(iVar2 + 0x32) * 2,0,&LAB_0004c38c_1,sensor_flags);
       return;
@@ -47,7 +47,7 @@ void configure_sensor_timing_and_interrupts
     pcVar1 = "WEST_TOPDIR/modules/hal/nordic/nrfx/hal/nrf_ipc.h";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar1,uVar3);
+  trigger_system_service_call(pcVar1,uVar3);
 }
 
 

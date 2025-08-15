@@ -59,10 +59,10 @@ LAB_0002a516:
               DAT_20018d94 = cVar2;
               if ((DAT_20018d94 == '\0') && (iVar4 = get_work_mode(), *(char *)(iVar4 + 1) != '\b'))
               {
-                uVar9 = FUN_0007cb2c();
+                uVar9 = calculate_mathematical_operation_with_bit_shifting();
                 uVar7 = DAT_200040cc;
                 uVar1 = DAT_200040c8;
-                uVar10 = FUN_0007cb2c();
+                uVar10 = calculate_mathematical_operation_with_bit_shifting();
                 uVar8 = (uint)((ulonglong)uVar10 >> 0x20);
                 if ((DAT_200040cc <= uVar8 &&
                      (uint)((uint)uVar10 <= DAT_200040c8) <= DAT_200040cc - uVar8) &&
@@ -77,7 +77,7 @@ LAB_0002a516:
               goto LAB_0002a516;
             }
             uStack_2c = uStack_2c & 0xffffff;
-            uVar9 = FUN_0007cb2c();
+            uVar9 = calculate_mathematical_operation_with_bit_shifting();
             uVar7 = (uint)((ulonglong)uVar9 >> 0x20);
             if (DAT_200040cc <= uVar7 && (uint)((uint)uVar9 <= DAT_200040c8) <= DAT_200040cc - uVar7
                ) {

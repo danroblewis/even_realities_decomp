@@ -28,25 +28,25 @@ int sha256_finalize(int sha256_ctx,int data,int data_len)
       sha256_ctx = 0;
     }
     else {
-      FUN_0007feaa(auStack_30,0x10,data);
-      FUN_0007feda(auStack_30,data_len);
+      safe_memory_copy_with_bounds_check_alt(auStack_30,0x10,data);
+      xor_encrypt_decrypt_data(auStack_30,data_len);
       iVar1 = data_len + 0x10;
       do {
         process_data_with_callback_validation_alt2(auStack_30);
-        FUN_0007ff64(auStack_30);
-        FUN_0007ffd6(auStack_20,auStack_30);
-        FUN_0007ffd6(auStack_1c,auStack_2c);
-        FUN_0007ffd6(auStack_18,auStack_28);
-        FUN_0007ffd6(auStack_14,auStack_24);
-        FUN_0007feaa(auStack_30,0x10,auStack_20);
+        reorder_bytes_in_data_structure(auStack_30);
+        calculate_complex_checksum_with_xor_operations(auStack_20,auStack_30);
+        calculate_complex_checksum_with_xor_operations(auStack_1c,auStack_2c);
+        calculate_complex_checksum_with_xor_operations(auStack_18,auStack_28);
+        calculate_complex_checksum_with_xor_operations(auStack_14,auStack_24);
+        safe_memory_copy_with_bounds_check_alt(auStack_30,0x10,auStack_20);
         iVar2 = iVar1 + 0x10;
-        FUN_0007feda(auStack_30,iVar1);
+        xor_encrypt_decrypt_data(auStack_30,iVar1);
         iVar1 = iVar2;
       } while (iVar2 != extraout_r1 + 0xa0);
       process_data_with_callback_validation_alt2();
-      FUN_0007ff64(auStack_30);
-      FUN_0007feda(auStack_30,iVar2);
-      FUN_0007feaa(sha256_ctx,0x10,auStack_30);
+      reorder_bytes_in_data_structure(auStack_30);
+      xor_encrypt_decrypt_data(auStack_30,iVar2);
+      safe_memory_copy_with_bounds_check_alt(sha256_ctx,0x10,auStack_30);
       fill_memory_buffer(auStack_30,0,0x10);
       sha256_ctx = 1;
     }

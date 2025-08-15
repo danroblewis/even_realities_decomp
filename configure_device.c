@@ -47,7 +47,7 @@ undefined4 configure_device(int param_1,uint *param_2)
   if (*(char *)(iVar5 + 0x51) != '\0') {
     local_2c = "Cannot configure device while it is active";
     local_30 = 2;
-    FUN_000837a2(&DAT_000881a0,0x1040,&local_30);
+    execute_device_data_compression(&DAT_000881a0,0x1040,&local_30);
     return 0xfffffff0;
   }
   bVar4 = (byte)param_2[9];
@@ -66,7 +66,7 @@ LAB_0005fd14:
       if (-1 < (int)((uint)*(byte *)(iVar5 + 0x50) << 0x1e)) {
         return 0;
       }
-      FUN_000661dc();
+      reset_interrupt_configuration();
       bVar4 = *(byte *)(iVar5 + 0x50) & 0xfd;
 LAB_0005fd48:
       *(byte *)(iVar5 + 0x50) = bVar4;
@@ -145,7 +145,7 @@ LAB_0005fcda:
   puVar12 = &local_30;
   local_30 = 2;
 LAB_0005fce6:
-  FUN_000837a2(&DAT_000881a0,0x1040,puVar12);
+  execute_device_data_compression(&DAT_000881a0,0x1040,puVar12);
   return 0xffffffea;
 code_r0x0005fe3c:
   if (uVar8 != 0xffffffff) {
@@ -154,16 +154,16 @@ LAB_0005fe56:
     local_78 = local_6c;
     local_74 = local_64;
     local_80 = 4;
-    FUN_000837a2(&DAT_000881a0,0x20c0,&local_80);
+    execute_device_data_compression(&DAT_000881a0,0x20c0,&local_80);
     if ((int)((uint)*(byte *)(iVar5 + 0x50) << 0x1e) < 0) {
-      FUN_000661dc();
+      reset_interrupt_configuration();
       *(byte *)(iVar5 + 0x50) = *(byte *)(iVar5 + 0x50) & 0xfd;
     }
-    local_78 = FUN_0006615c(&local_40,*puVar12);
+    local_78 = initialize_interrupt_configuration_structure(&local_40,*puVar12);
     if (local_78 != 0xbad0000) {
       local_7c = "Failed to initialize PDM: 0x%08x";
       local_80 = 3;
-      FUN_000837a2(&DAT_000881a0,0x1840,&local_80);
+      execute_device_data_compression(&DAT_000881a0,0x1840,&local_80);
       return 0xfffffffb;
     }
     *(uint *)(iVar5 + 0x18) = (uint)*(ushort *)((int)puVar7 + 6);

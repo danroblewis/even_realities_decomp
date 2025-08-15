@@ -20,7 +20,7 @@ void setup_font_rendering(int param_1)
     }
     iVar3 = process_ble_connection_list(param_1 + 0x18);
     if (iVar3 != 0) {
-      FUN_000738d4();
+      handle_ble_connection_insertion_with_privilege_management();
       uVar4 = 0;
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {

@@ -37,9 +37,10 @@ void execute_bluetooth_callback_with_priority_control(int callback_context,byte 
   else {
     update_connection_state_flags(iVar5);
     *callback_data = *callback_data | 1;
-    uVar3 = FUN_0007e35c(callback_context,*(undefined4 *)(callback_context + 4),uVar3);
+    uVar3 = calculate_buffer_offset_with_wrapping
+                      (callback_context,*(undefined4 *)(callback_context + 4),uVar3);
     *(undefined4 *)(callback_context + 4) = uVar3;
-    FUN_0007e4f2(callback_context);
+    update_buffer_timestamp_if_needed(callback_context);
     iVar4 = validate_and_clear_connection_state(iVar5);
     if (iVar4 != 0) {
       bVar1 = (bool)isCurrentModePrivileged();
@@ -55,7 +56,7 @@ void execute_bluetooth_callback_with_priority_control(int callback_context,byte 
     uVar3 = 0xf0;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar3);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar3);
 }
 
 

@@ -20,7 +20,7 @@ uint is_msg_expiration(undefined4 param_1,undefined4 param_2,undefined4 param_3)
     pcVar2 = (char *)get_work_mode();
     if (*pcVar2 == '\x01') {
       iVar1 = get_work_mode();
-      FUN_0007d230(**(undefined4 **)(iVar1 + 0xfec));
+      set_work_mode_timestamp(**(undefined4 **)(iVar1 + 0xfec));
     }
   }
   uVar4 = (uint)(byte)(&DAT_20007dbb)[(uint)TIMEOUT_MESSAGE_STATE * 0x1b4];

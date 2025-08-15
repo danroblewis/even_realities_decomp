@@ -50,7 +50,8 @@ LAB_00047c76:
         goto LAB_00047c86;
       }
       fill_memory_buffer(local_40,0,0x18);
-      iVar3 = FUN_00072240(&MESSAGE_QUEUE_CONTEXT,local_40,0xffffffff,0xffffffff);
+      iVar3 = manage_ble_connection_state_comprehensive
+                        (&MESSAGE_QUEUE_CONTEXT,local_40,0xffffffff,0xffffffff);
       cVar12 = local_3c;
       if (iVar3 == 0) {
         switch(local_40[0]) {

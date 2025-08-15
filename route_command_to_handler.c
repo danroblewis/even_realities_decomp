@@ -59,7 +59,7 @@ LAB_00032b68:
         }
         *param_5 = *param_5 + 4;
       }
-      iVar3 = FUN_0007d16a(param_4,param_5);
+      iVar3 = calculate_checksum_by_byte_summation(param_4,param_5);
       if (iVar3 == 0) {
         return 0;
       }

@@ -1,22 +1,22 @@
 /*
  * Function: calculate_heap_chunk_overhead
- * Entry:    0007de70
- * Prototype: undefined __stdcall calculate_heap_chunk_overhead(undefined4 heap_size, undefined4 chunk_size)
+ * Entry:    0007de5c
+ * Prototype: undefined calculate_heap_chunk_overhead()
  */
 
 
-uint calculate_heap_chunk_overhead(uint heap_size,int chunk_size)
+uint calculate_heap_chunk_overhead(int param_1,int param_2)
 
 {
   int iVar1;
   
-  if (heap_size < 0x8000) {
+  if (*(uint *)(param_1 + 8) < 0x8000) {
     iVar1 = 4;
   }
   else {
     iVar1 = 8;
   }
-  return (uint)(chunk_size + 7 + iVar1) >> 3;
+  return (uint)((param_2 - iVar1) - param_1) >> 3;
 }
 
 

@@ -12,7 +12,7 @@ int calculate_heap_chunk_size
   int iVar1;
   int extraout_r2;
   
-  iVar1 = calculate_heap_chunk_overhead(chunk_size,1,heap_size,unused2,unused2);
+  iVar1 = calculate_heap_chunk_size(chunk_size,1,heap_size,unused2,unused2);
   return 0x1f - LZCOUNT((extraout_r2 + 1) - iVar1);
 }
 

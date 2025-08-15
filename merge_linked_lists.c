@@ -32,7 +32,7 @@ void merge_linked_lists(int param_1,int param_2)
     uVar2 = 0x242;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",uVar2);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",uVar2);
 }
 
 

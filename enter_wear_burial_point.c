@@ -13,13 +13,14 @@ void enter_wear_burial_point(void)
   undefined8 uVar3;
   
   iVar1 = get_work_mode();
-  if ((*(char *)(iVar1 + 0x10ac) != '\x01') && (uVar2 = FUN_0007dac0(), uVar2 < 7)) {
+  if ((*(char *)(iVar1 + 0x10ac) != '\x01') && (uVar2 = get_burial_point_status_value(), uVar2 < 7))
+  {
     iVar1 = get_work_mode();
     *(undefined1 *)(iVar1 + 0x10ac) = 1;
     iVar1 = get_work_mode();
     *(char *)(iVar1 + 0x10ad) = (char)uVar2;
     iVar1 = get_work_mode();
-    uVar3 = FUN_0007daa4();
+    uVar3 = convert_ble_timing_to_milliseconds();
     *(undefined8 *)(iVar1 + 0x10ae) = uVar3;
     iVar1 = get_work_mode();
     iVar1 = uVar2 * 0xc + iVar1;

@@ -13,7 +13,7 @@ int initialize_accelerometer(void)
   int iVar3;
   undefined4 uVar4;
   
-  iVar3 = FUN_00072f28();
+  iVar3 = manage_ble_connection_state_with_privilege_control();
   if (0 < iVar3) {
     uVar4 = 0;
     bVar1 = (bool)isCurrentModePrivileged();

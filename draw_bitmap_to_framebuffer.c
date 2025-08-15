@@ -1,31 +1,24 @@
 /*
  * Function: draw_bitmap_to_framebuffer
- * Entry:    0007d53a
- * Prototype: undefined __stdcall draw_bitmap_to_framebuffer(undefined4 framebuffer_addr, undefined4 bitmap_data, undefined4 bitmap_width, undefined4 bitmap_height, undefined4 x_pos, undefined4 y_pos)
+ * Entry:    0007d4f8
+ * Prototype: undefined draw_bitmap_to_framebuffer(undefined param_1, undefined param_2, undefined param_3, undefined param_4, undefined4 param_5)
  */
 
 
 int draw_bitmap_to_framebuffer
-              (int framebuffer_addr,int bitmap_data,int bitmap_width,int bitmap_height,int x_pos,
-              int y_pos)
+              (int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
 
 {
   int *piVar1;
   int iVar2;
   
-  if (199 < y_pos) {
-    y_pos = 200;
-  }
-  if (0x27f < x_pos) {
-    x_pos = 0x280;
-  }
-  piVar1 = (int *)(framebuffer_addr + y_pos * 4);
-  for (iVar2 = 0; iVar2 < bitmap_height; iVar2 = iVar2 + 1) {
-    memcpy(*piVar1 + x_pos / 2,bitmap_data,bitmap_width);
-    bitmap_data = bitmap_data + bitmap_width;
+  piVar1 = (int *)(param_1 + param_6 * 4);
+  for (iVar2 = 0; iVar2 < param_4; iVar2 = iVar2 + 1) {
+    memcpy(*piVar1 + param_5 % 0x140,param_2,param_3);
+    param_2 = param_2 + param_3;
     piVar1 = piVar1 + 1;
   }
-  return y_pos;
+  return param_6;
 }
 
 

@@ -64,9 +64,9 @@ process_ble_characteristic_value_change_with_state_management_and_callback
       local_20 = (char *)ble_memory_allocation_utility(local_24 + 0xc,1);
       *local_20 = '\0';
       local_1c = 0;
-      FUN_00081cee(uVar5,uVar1,0x58751,&local_2c);
+      process_ble_handle_mapping_wrapper(uVar5,uVar1,0x58751,&local_2c);
       if (*local_20 != '\0') {
-        FUN_000821a4(param_1,local_24);
+        handle_ble_characteristic_value_change_with_debug_init(param_1,local_24);
         return 0;
       }
       bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
@@ -78,7 +78,7 @@ process_ble_characteristic_value_change_with_state_management_and_callback
   }
   uVar4 = 1;
 LAB_00059274:
-  FUN_000821f4(param_1,0x10,uVar5,uVar4);
+  handle_ble_characteristic_value_change_with_callback_and_debug(param_1,0x10,uVar5,uVar4);
   return 0;
 }
 

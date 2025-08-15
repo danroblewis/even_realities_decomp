@@ -22,10 +22,10 @@ void pad_and_process_data_with_length(int *param_1,undefined4 param_2)
   }
   piStack_18 = param_1;
   uStack_14 = param_2;
-  FUN_0007d894(&piStack_18,param_1,8);
-  FUN_0007d8f4(param_1,&DAT_200034f7,iVar2);
-  FUN_0007d8f4(param_1,&piStack_18,8);
-  FUN_0007d894(param_2,param_1 + 2,0x10);
+  copy_data_with_byte_reordering_and_padding(&piStack_18,param_1,8);
+  process_bit_stream_with_md5_calculation(param_1,&DAT_200034f7,iVar2);
+  process_bit_stream_with_md5_calculation(param_1,&piStack_18,8);
+  copy_data_with_byte_reordering_and_padding(param_2,param_1 + 2,0x10);
   return;
 }
 

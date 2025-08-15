@@ -12,7 +12,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
   int iVar2;
   undefined8 uVar3;
   
-  FUN_0007c830(param_1 + 8);
+  run_adc_nfc_and_scale_result(param_1 + 8);
   DAT_20007a24 = *(undefined4 *)(param_1 + 8);
   iVar2 = get_work_mode();
   param_2[0x15] = (char)(*(byte *)(iVar2 + 0xfc4) + 200 >> 8);
@@ -23,7 +23,7 @@ void process_adc_nfc_sensor_data_and_state(int param_1,char *param_2)
   get_work_mode();
   param_2[2] = '\0';
   *(undefined1 *)(param_1 + 2) = 3;
-  FUN_0007c842();
+  set_work_mode_state_based_on_determination();
   cVar1 = *(char *)(param_1 + 2);
   if (cVar1 == '\x02') {
     uVar3 = calculate_ble_connection_timing_with_validation();

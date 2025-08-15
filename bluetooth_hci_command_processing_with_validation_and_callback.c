@@ -30,7 +30,7 @@ int bluetooth_hci_command_processing_with_validation_and_callback(void)
       iVar1 = -0x78;
     }
     else {
-      FUN_00080ea8(&DAT_200020d4,0xfffffffb);
+      clear_bit_in_bitmap(&DAT_200020d4,0xfffffffb);
       iVar1 = (**(code **)(DAT_20002168 + 0x10))();
       if (iVar1 == 0) {
         fill_memory_buffer(&DAT_20002080,0,0x40);
@@ -41,7 +41,7 @@ int bluetooth_hci_command_processing_with_validation_and_callback(void)
         DAT_2000ff06 = 0;
         process_data_with_callback_validation_alt5(&DAT_20005e30);
         process_data_with_callback_validation_alt5(&DAT_20005f08);
-        FUN_00080ea8(&DAT_200020d4,0xfffffffe);
+        clear_bit_in_bitmap(&DAT_200020d4,0xfffffffe);
       }
       else {
         local_3c = "HCI driver close failed (%d)";

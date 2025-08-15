@@ -30,14 +30,14 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
     set_work_mode_flag_bit_1();
     reset_animation_counters();
     DAT_2001b9aa = '\x01';
-    uVar9 = FUN_0007d2d8();
+    uVar9 = calculate_ble_connection_timing_with_scaling();
     iVar3 = get_work_mode();
     *(undefined8 *)(*(int *)(iVar3 + 0x1010) + 3) = uVar9;
     if (DAT_2001b9ab == '\x01') {
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       gui_bmp_dynamic_bitmap_draw(7,iVar3 + 0xd8,iVar4 + 0x3a,0,0,0,1);
-      uVar5 = FUN_0007d4b2(0x27);
+      uVar5 = get_data_by_index_and_type(0x27);
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       iVar6 = get_ui_x_offset();
@@ -48,7 +48,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
       uVar5 = get_ui_x_offset();
       iVar3 = get_ui_y_offset();
       gui_bmp_bitmap_draw(0x48,uVar5,iVar3 + 0x3a,0,0,0);
-      uVar5 = FUN_0007d4b2(0x26);
+      uVar5 = get_data_by_index_and_type(0x26);
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       iVar6 = get_ui_x_offset();
@@ -62,7 +62,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       gui_bmp_dynamic_bitmap_draw(6,iVar3 + 0xec,iVar4 + 0x3a,0,0,0,1);
-      uVar5 = FUN_0007d4b2(0x25);
+      uVar5 = get_data_by_index_and_type(0x25);
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       iVar6 = get_ui_x_offset();
@@ -76,7 +76,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
       iVar3 = get_ui_x_offset();
       iVar4 = get_ui_y_offset();
       gui_bmp_dynamic_bitmap_draw(7,iVar3 + 0xd8,iVar4 + 0x3a,0,0,0,1);
-      uVar9 = FUN_0007d2d8();
+      uVar9 = calculate_ble_connection_timing_with_scaling();
       iVar3 = get_work_mode();
       uVar8 = *(uint *)(*(int *)(iVar3 + 0x1010) + 3);
       uVar1 = (int)((ulonglong)uVar9 >> 0x20) - *(int *)(*(int *)(iVar3 + 0x1010) + 7);
@@ -88,7 +88,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
     }
     else {
       if (DAT_2001b9ab == '\x02') {
-        uVar9 = FUN_0007d2d8();
+        uVar9 = calculate_ble_connection_timing_with_scaling();
         iVar3 = get_work_mode();
         uVar8 = *(uint *)(*(int *)(iVar3 + 0x1010) + 3);
         uVar1 = (int)((ulonglong)uVar9 >> 0x20) - *(int *)(*(int *)(iVar3 + 0x1010) + 7);
@@ -101,7 +101,7 @@ undefined4 manage_ui_animation_state_and_rendering(int param_1,undefined4 param_
         iVar3 = get_ui_x_offset();
         iVar4 = get_ui_y_offset();
         gui_bmp_dynamic_bitmap_draw(6,iVar3 + 0xec,iVar4 + 0x3a,0,0,0,1);
-        uVar9 = FUN_0007d2d8();
+        uVar9 = calculate_ble_connection_timing_with_scaling();
         iVar3 = get_work_mode();
         uVar8 = *(uint *)(*(int *)(iVar3 + 0x1010) + 3);
         uVar1 = (int)((ulonglong)uVar9 >> 0x20) - *(int *)(*(int *)(iVar3 + 0x1010) + 7);

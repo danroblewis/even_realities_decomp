@@ -60,17 +60,18 @@ LAB_000514b2:
       init_data_structure(param_1[2],iVar4);
       piVar13 = (int *)param_1[2];
       piVar6 = piVar13 + 1;
-      iVar8 = FUN_0008634c(piVar6,2);
+      iVar8 = write_ble_uart_packet_extended_length_marker_type5(piVar6,2);
       if (iVar8 == 0) {
 LAB_000514f4:
-        thunk_FUN_00086354(piVar6,2);
+        write_ble_uart_packet_extended_length_marker_type7(piVar6,2);
       }
       else {
         local_30 = "rc";
         local_2c = 2;
-        iVar8 = FUN_0008633e(piVar6,&local_30);
-        if ((iVar8 == 0) || (iVar8 = FUN_0008630c(piVar6,uVar11), iVar8 == 0)) goto LAB_000514f4;
-        iVar8 = thunk_FUN_00086354(piVar6,2);
+        iVar8 = write_ble_uart_packet_string_with_type3_header(piVar6,&local_30);
+        if ((iVar8 == 0) || (iVar8 = write_ble_uart_packet_32bit_value(piVar6,uVar11), iVar8 == 0))
+        goto LAB_000514f4;
+        iVar8 = write_ble_uart_packet_extended_length_marker_type7(piVar6,2);
         if (iVar8 != 0) {
           convert_float_format(&local_38,&local_30,(piVar13[1] - *(int *)(*piVar13 + 0xc)) + -8);
           *(short *)(*piVar13 + 0x10) = (short)piVar13[1] - (short)*(undefined4 *)(*piVar13 + 0xc);
@@ -95,8 +96,8 @@ LAB_000514f4:
     }
     piVar6 = (int *)param_1[1];
     *piVar6 = param_2;
-    thunk_FUN_00085cf2(piVar6 + 1,4,*(undefined4 *)(param_2 + 0xc),*(undefined2 *)(param_2 + 0x10),1
-                      );
+    thunk_initialize_ble_uart_packet_buffer_structure
+              (piVar6 + 1,4,*(undefined4 *)(param_2 + 0xc),*(undefined2 *)(param_2 + 0x10),1);
     init_data_structure(param_1[2],iVar4);
     piVar6 = (int *)param_1[2];
     piVar6[0xd] = uVar11;
@@ -122,13 +123,13 @@ LAB_000515aa:
       pcVar12 = (code *)puVar7[1];
     }
     if (pcVar12 == (code *)0x0) goto LAB_000515aa;
-    iVar8 = FUN_0008634c(param_1[2] + 4,0xf);
+    iVar8 = write_ble_uart_packet_extended_length_marker_type5(param_1[2] + 4,0xf);
     if (iVar8 == 0) {
       uVar11 = 7;
       goto LAB_000514b2;
     }
     uVar11 = (*pcVar12)(param_1);
-    iVar8 = thunk_FUN_00086354(param_1[2] + 4,0xf);
+    iVar8 = write_ble_uart_packet_extended_length_marker_type7(param_1[2] + 4,0xf);
     if (iVar8 == 0) {
       if (uVar11 == 0) {
         uVar11 = 7;

@@ -25,7 +25,7 @@ undefined4 dispatch_ble_characteristic_operation(int param_1,undefined4 param_2,
     iVar1 = 0;
     puVar4 = &DAT_2000ff19;
     do {
-      iVar2 = FUN_000826b2(puVar4,&DAT_000f2b3a);
+      iVar2 = compare_byte_arrays_7_bytes(puVar4,&DAT_000f2b3a);
       if (iVar2 == 0) {
         iVar2 = bt_connection_disconnect_with_parameter_validation_and_callback(puVar4[-1],puVar4,7)
         ;

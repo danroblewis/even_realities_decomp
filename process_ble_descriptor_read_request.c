@@ -44,7 +44,7 @@ int process_ble_descriptor_read_request(int param_1,int param_2,code *param_3,un
             return -0xc;
           }
           *(undefined1 *)puVar2 = 0;
-          FUN_000828da((undefined1 *)((int)puVar2 + 1),auStack_40);
+          copy_data_structure_fields((undefined1 *)((int)puVar2 + 1),auStack_40);
         }
         else if (param_2 == 0) {
           *puVar2 = 0;

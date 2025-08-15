@@ -24,21 +24,21 @@ uint manage_device_power_state_and_initialization
   local_24 = param_2;
   uStack_20 = param_3;
   local_1c = param_4;
-  iVar1 = FUN_0007ef2e();
+  iVar1 = check_data_structure_bit_flag();
   if (iVar1 == 0) {
     if (param_2 != 0) {
       if (param_2 != 1) {
         return 0xffffff7a;
       }
-      uVar2 = FUN_000838dc(*(undefined4 *)(iVar4 + 0x34),0);
+      uVar2 = process_device_data_with_callback_execution(*(undefined4 *)(iVar4 + 0x34),0);
       if ((int)uVar2 < 0) {
         return uVar2;
       }
-      iVar3 = FUN_00066994(iVar4,&LAB_000838ca_1,iVar5);
+      iVar3 = initialize_hardware_configuration(iVar4,&LAB_000838ca_1,iVar5);
       if (iVar3 != 0xbad0000) {
         return 0xfffffffb;
       }
-      uVar2 = FUN_0008397e(param_1);
+      uVar2 = validate_device_properties_with_ab_size(param_1);
       if ((int)uVar2 < 0) {
         return uVar2;
       }
@@ -50,7 +50,7 @@ uint manage_device_power_state_and_initialization
       return uVar2;
     }
     uVar2 = (uint)*(byte *)(iVar5 + 0x60);
-    if ((uVar2 == 0) && (iVar1 = FUN_00066ae0(), iVar1 == 0xbad0000)) {
+    if ((uVar2 == 0) && (iVar1 = hardware_register_operation_wrapper(), iVar1 == 0xbad0000)) {
       local_24 = 0xb9;
       uStack_20 = uVar2;
       local_1c = uVar2;
@@ -58,9 +58,9 @@ uint manage_device_power_state_and_initialization
       if ((int)uVar2 < 0) {
         return uVar2;
       }
-      FUN_00086384(10);
-      FUN_00066b24();
-      uVar2 = FUN_000838dc(*(undefined4 *)(iVar4 + 0x34),1);
+      handle_ble_uart_packet_processing_completion(10);
+      cleanup_hardware_interrupt_configuration();
+      uVar2 = process_device_data_with_callback_execution(*(undefined4 *)(iVar4 + 0x34),1);
       return uVar2 & (int)uVar2 >> 0x1f;
     }
   }

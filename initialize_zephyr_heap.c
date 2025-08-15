@@ -45,7 +45,7 @@ void initialize_zephyr_heap(uint *heap_struct,int heap_start,uint heap_size)
     *(uint *)(uVar5 + 8) = uVar6;
     *(undefined4 *)(uVar5 + 0xc) = 0;
     iVar4 = calculate_heap_chunk_size(uVar6,uVar6);
-    iVar1 = calculate_heap_chunk_overhead(uVar6,1,iVar4 + 5);
+    iVar1 = calculate_heap_chunk_size(uVar6,1,iVar4 + 5);
     uVar3 = extraout_r2 * 4 + 7U >> 3;
     if (iVar1 + uVar3 <= uVar6) {
       iVar1 = extraout_r2 * 4 + -0x10;
@@ -53,15 +53,15 @@ void initialize_zephyr_heap(uint *heap_struct,int heap_start,uint heap_size)
         iVar1 = 0;
       }
       fill_memory_buffer(uVar5 + 0x10,0,iVar1);
-      set_heap_chunk_size(uVar5,0,uVar3);
+      set_heap_chunk_flag_wrapper(uVar5,0,uVar3);
       set_heap_chunk_metadata(uVar5,0,0,0);
-      uVar2 = set_heap_chunk_flags(uVar5,0,1);
-      set_heap_chunk_size(uVar2,uVar3,uVar6 - uVar3);
+      uVar2 = set_heap_chunk_flag(uVar5,0,1);
+      set_heap_chunk_flag_wrapper(uVar2,uVar3,uVar6 - uVar3);
       set_heap_chunk_metadata(uVar5,uVar3,0,uVar3);
-      set_heap_chunk_size(uVar5,uVar6);
+      set_heap_chunk_flag_wrapper(uVar5,uVar6);
       set_heap_chunk_metadata(uVar5,uVar6,0,uVar6 - uVar3);
-      uVar2 = set_heap_chunk_flags(uVar5,uVar6,1);
-      link_heap_chunks(uVar2,uVar3);
+      uVar2 = set_heap_chunk_flag(uVar5,uVar6,1);
+      add_heap_chunk_to_free_list(uVar2,uVar3);
       return;
     }
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","chunk0_size + min_chunk_size(h) <= heap_sz",
@@ -71,7 +71,7 @@ void initialize_zephyr_heap(uint *heap_struct,int heap_start,uint heap_size)
   }
 LAB_0004b3ee:
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/lib/os/heap.c",uVar2);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/lib/os/heap.c",uVar2);
 }
 
 

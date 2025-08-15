@@ -14,7 +14,7 @@ undefined4 update_sha256_data_with_buffer_management(undefined4 param_1,uint par
   if ((param_2 + param_3 < 0x100001) && (param_3 < 0x81)) {
     copy_memory_safe(auStack_90);
     iVar1 = update_sha256_data_with_block_processing(param_1,auStack_90,param_3);
-    FUN_0007a3d4(auStack_90,0x80);
+    fill_memory_buffer_with_zeros_wrapper(auStack_90,0x80);
   }
   else {
     if (param_2 < 0x100001) {

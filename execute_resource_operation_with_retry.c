@@ -31,7 +31,9 @@ int execute_resource_operation_with_retry
     current_operation_id = operation_id;
     while( true ) {
       resource_mutex_acquire(mutex_handle,current_operation_id,0xffffffff,0xffffffff);
-      operation_result = FUN_0007c882(resource_handle,operation_id,operation_data,data_length);
+      operation_result =
+           format_and_send_data_packet_with_modified_flags
+                     (resource_handle,operation_id,operation_data,data_length);
       mutex_unlock(mutex_handle);
       if (operation_result == 0) break;
       max_retries = max_retries + -1;
@@ -40,7 +42,7 @@ int execute_resource_operation_with_retry
                     *(ushort *)(resource_handle + 8) | 4,operation_id,operation_result);
         return operation_result;
       }
-      FUN_0007c87a();
+      set_ble_schedule_timing_for_data_transmission();
       current_operation_id = extraout_r1;
     }
   }

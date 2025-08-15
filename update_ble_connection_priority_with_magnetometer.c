@@ -51,7 +51,7 @@ void update_ble_connection_priority_with_magnetometer(undefined4 param_1,int par
     uVar3 = 0x53d;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/kernel/sched.c",uVar3);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/sched.c",uVar3);
 }
 
 

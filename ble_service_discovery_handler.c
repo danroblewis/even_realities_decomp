@@ -78,7 +78,7 @@ LAB_0005b40a:
     uVar2 = 0xbc5;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar2);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar2);
 }
 
 

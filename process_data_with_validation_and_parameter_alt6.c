@@ -38,7 +38,7 @@ undefined4 process_data_with_validation_and_parameter_alt6(void)
     uVar6 = 0x671;
 LAB_0005ad5c:
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar6);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar6);
   }
   if (DAT_200028bc == 0) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","svc->attr_count",

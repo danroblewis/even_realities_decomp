@@ -28,12 +28,12 @@ undefined4 handle_comprehensive_device_configuration(int param_1,uint param_2,un
   iVar8 = *(int *)(param_1 + 0x10);
   uStack_24 = param_2;
   uStack_20 = param_3;
-  iVar2 = FUN_0007fb20(iVar7,0,param_3,piVar6,param_1);
+  iVar2 = call_function_pointer_with_bit_manipulation(iVar7,0,param_3,piVar6,param_1);
   if (iVar2 < 0) {
     pcVar3 = "Failed to set user bank\r\n";
   }
   else {
-    iVar2 = FUN_0007fb3e(iVar7,(int)&uStack_24 + 2);
+    iVar2 = execute_callback_with_parameter_0xf(iVar7,(int)&uStack_24 + 2);
     if (iVar2 < 0) {
       pcVar3 = "Failed reading chip id\r\n";
     }
@@ -46,31 +46,32 @@ LAB_000622e8:
         DEBUG_PRINT(pcVar3,uVar5);
         goto LAB_000622ec;
       }
-      iVar2 = FUN_0007fb7a(iVar7,0x80);
+      iVar2 = execute_multiple_callbacks_with_parameter_manipulation_and_result_accumulation
+                        (iVar7,0x80);
       if (iVar2 < 0) {
         pcVar3 = "Failed to disable I3C\r\n";
       }
       else {
-        iVar2 = FUN_0007fe72(iVar7,(int)&uStack_24 + 3);
+        iVar2 = process_callback_results_and_bit_manipulation(iVar7,(int)&uStack_24 + 3);
         if (-1 < iVar2) {
           if (uStack_24._3_1_ != '\0') {
             DEBUG_PRINT("Disable shub before reset\r\n");
-            FUN_0007fe2a(iVar7,0);
-            FUN_00086384(300);
+            execute_multiple_operations_and_accumulate_results(iVar7,0);
+            handle_ble_uart_packet_processing_completion(300);
           }
-          iVar2 = FUN_0007fb4c(iVar7,1);
+          iVar2 = execute_callback_with_parameter_processing_and_bit_0_manipulation(iVar7,1);
           if (iVar2 < 0) goto LAB_000622ec;
-          FUN_00086384(100);
+          handle_ble_uart_packet_processing_completion(100);
           DEBUG_PRINT("accel pm is %d\r\n",(uint)*(byte *)(iVar7 + 0x18));
           cVar4 = *(char *)(iVar7 + 0x18);
           if ((cVar4 != '\x01') && (cVar4 != '\x02')) {
             cVar4 = '\0';
           }
-          FUN_0007fa22(iVar7,cVar4);
+          process_device_config_data_with_bit_manipulation(iVar7,cVar4);
           uVar5 = *(byte *)(iVar7 + 0x1a) & 0x3f;
           DEBUG_PRINT("accel range is %d\r\n",uVar5);
           iVar10 = *(int *)(param_1 + 0x10);
-          iVar2 = FUN_0007f998(*(undefined4 *)(param_1 + 4),uVar5);
+          iVar2 = execute_callbacks_with_parameter_manipulation(*(undefined4 *)(param_1 + 4),uVar5);
           if (iVar2 < 0) {
             pcVar3 = "failed to set accelerometer range %d\r\n";
           }
@@ -99,7 +100,8 @@ LAB_000622e8:
             }
             *(undefined2 *)(iVar8 + 0x1c) = uVar9;
             iVar10 = *(int *)(param_1 + 0x10);
-            iVar2 = FUN_0007fc72(*(undefined4 *)(param_1 + 4),uVar5);
+            iVar2 = process_data_with_complex_bit_manipulation_and_callback_execution
+                              (*(undefined4 *)(param_1 + 4),uVar5);
             if (iVar2 < 0) {
               pcVar3 = "failed to set accelerometer odr %d\r\n";
             }
@@ -110,10 +112,11 @@ LAB_000622e8:
               if (cVar4 != '\x01') {
                 cVar4 = '\0';
               }
-              FUN_0007fa7a(iVar7,cVar4);
+              execute_callbacks_with_parameter_manipulation_callback_0x16(iVar7,cVar4);
               uVar5 = (uint)*(byte *)(iVar7 + 0x1d);
               DEBUG_PRINT("gyro range is %d\r\n",uVar5);
-              iVar2 = FUN_0007f9c6(*(undefined4 *)(param_1 + 4),uVar5);
+              iVar2 = execute_callbacks_with_parameter_manipulation_alt
+                                (*(undefined4 *)(param_1 + 4),uVar5);
               if (iVar2 < 0) {
                 pcVar3 = "failed to set gyroscope range %d\r\n";
               }
@@ -128,14 +131,17 @@ LAB_000622e8:
                   uVar9 = 0x1a04;
                 }
                 *(undefined2 *)(iVar8 + 0x20) = uVar9;
-                iVar2 = FUN_0007fd4e(*(undefined4 *)(param_1 + 4),uVar5);
+                iVar2 = process_complex_data_with_multiple_operations_alt
+                                  (*(undefined4 *)(param_1 + 4),uVar5);
                 if (-1 < iVar2) {
-                  iVar2 = FUN_0007fbd6(iVar7,0);
+                  iVar2 = process_data_with_callback_execution_and_bit_manipulation_for_id_0xa
+                                    (iVar7,0);
                   if (iVar2 < 0) {
                     pcVar3 = "failed to set FIFO mode\r\n";
                   }
                   else {
-                    iVar2 = FUN_0007f9f4(iVar7,1);
+                    iVar2 = execute_callback_with_parameter_processing_and_bit_6_manipulation
+                                      (iVar7,1);
                     if (-1 < iVar2) {
                       return 0;
                     }

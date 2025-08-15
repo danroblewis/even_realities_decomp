@@ -13,7 +13,7 @@ void update_buffer_position_and_size
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","buf->len >= len",
                  "WEST_TOPDIR/zephyr/subsys/net/buf_simple.c",0x18d,param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf_simple.c",0x18d);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf_simple.c",0x18d);
   }
   *(ushort *)(param_1 + 1) = *(ushort *)(param_1 + 1) - (short)param_2;
   *param_1 = *param_1 + param_2;

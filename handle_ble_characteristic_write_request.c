@@ -92,7 +92,7 @@ LAB_00059a5a:
           uVar3 = 0xf23;
         }
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",uVar3);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",uVar3);
       }
       local_24 = "No buffer available to send notification";
       local_28 = 2;

@@ -14,7 +14,7 @@ undefined4 process_sensor_data_buffer(void)
   
   uVar1 = 0;
   for (iVar2 = AUDIO_STREAM_STATE; 0 < iVar2; iVar2 = iVar2 + -1) {
-    uVar1 = FUN_00072240(&DAT_20003890,auStack_dc,0,0);
+    uVar1 = manage_ble_connection_state_comprehensive(&DAT_20003890,auStack_dc,0,0);
   }
   return uVar1;
 }

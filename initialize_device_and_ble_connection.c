@@ -21,20 +21,20 @@ void initialize_device_and_ble_connection
   if (*(char *)(iVar3 + 0x60) != '\0') {
     return;
   }
-  FUN_00083906();
+  handle_ble_connection_state_and_status_flags();
   manage_ble_connection_state_comprehensive(iVar3 + 0x48,extraout_r1,0,0);
   uVar1 = extraout_r1_00;
   uVar2 = extraout_r2;
   if (*(int *)(iVar3 + 0x50) == 0) {
-    while (iVar3 = FUN_00066ae0(), iVar3 != 0xbad0000) {
+    while (iVar3 = hardware_register_operation_wrapper(), iVar3 != 0xbad0000) {
       calculate_ble_schedule_timing(0x667,0);
     }
-    FUN_00066b24();
+    cleanup_hardware_interrupt_configuration();
     uVar2 = 0;
     DAT_2001d535 = 0;
     uVar1 = extraout_r1_01;
   }
-  FUN_0008392e(param_1,uVar1,uVar2,param_4);
+  manage_device_state_with_spin_lock_validation(param_1,uVar1,uVar2,param_4);
   return;
 }
 

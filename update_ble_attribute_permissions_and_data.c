@@ -36,9 +36,9 @@ int update_ble_attribute_permissions_and_data
           } while (uVar2 != 3);
           puVar1[8] = puVar1[8] | *param_3 & 7;
         }
-        FUN_000828da(puVar1 + 1,param_1 + 0x90);
+        copy_data_structure_fields(puVar1 + 1,param_1 + 0x90);
         *puVar1 = *(undefined1 *)(param_1 + 8);
-        FUN_00082bb8(puVar1,1);
+        conditional_ble_service_discovery_processing(puVar1,1);
       }
     }
     else {

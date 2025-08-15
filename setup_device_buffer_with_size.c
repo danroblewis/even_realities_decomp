@@ -30,7 +30,7 @@ int setup_device_buffer_with_size
     local_24 = "stream_flash_erase_page err %d offset=0x%08zx";
   }
   else {
-    uVar2 = FUN_0007f064(param_1[3]);
+    uVar2 = get_value_through_double_indirect_function_pointer(param_1[3]);
     iVar1 = param_1[2] - uVar2 * ((uint)param_1[2] / uVar2);
     if (iVar1 != 0) {
       iVar1 = uVar2 - iVar1;

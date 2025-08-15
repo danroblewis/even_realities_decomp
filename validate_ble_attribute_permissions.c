@@ -20,17 +20,17 @@ int validate_ble_attribute_permissions(int param_1)
   if (*(char *)(param_1 + 3) != '\x01') {
     return -0x16;
   }
-  iVar2 = FUN_0008307a();
+  iVar2 = process_data_with_compression_and_validation();
   if (iVar2 == 0) {
     return -0x80;
   }
   iVar8 = iVar2 + 4;
-  iVar3 = FUN_00082ff6(iVar8,4);
+  iVar3 = extract_bit_from_value(iVar8,4);
   if (iVar3 != 0) {
     return -5;
   }
-  iVar3 = FUN_00082ff6(iVar8,3);
-  if ((iVar3 != 0) || (iVar3 = FUN_00082ff6(iVar8,1), iVar3 != 0)) {
+  iVar3 = extract_bit_from_value(iVar8,3);
+  if ((iVar3 != 0) || (iVar3 = extract_bit_from_value(iVar8,1), iVar3 != 0)) {
     return -0x10;
   }
   iVar3 = check_ble_connection_state(iVar2);
@@ -53,7 +53,7 @@ int validate_ble_attribute_permissions(int param_1)
 LAB_0005da5c:
     if (uVar7 != 0) goto LAB_0005da60;
   }
-  iVar3 = FUN_00082ff6(param_1 + 4,0xb);
+  iVar3 = extract_bit_from_value(param_1 + 4,0xb);
   if (iVar3 == 0) {
     if (*(int *)(param_1 + 0xc0) == 0) {
       iVar3 = find_ble_attribute_by_properties(0x20,*(undefined1 *)(param_1 + 8),param_1 + 0x90);
@@ -79,14 +79,15 @@ LAB_0005da60:
         }
       }
       iVar3 = validate_and_process_ble_characteristics_comprehensive(iVar2);
-      if ((iVar3 == 0) && (iVar3 = FUN_000830b0(iVar2,0xb), iVar3 != 0)) {
+      if ((iVar3 == 0) && (iVar3 = handle_ble_connection_memory_allocation(iVar2,0xb), iVar3 != 0))
+      {
         puVar5 = (undefined1 *)ble_memory_allocation_utility(iVar3 + 0xc,1);
         uVar1 = calculate_ble_permissions_based_on_state(iVar2,9);
         *puVar5 = uVar1;
-        iVar6 = FUN_00081820(param_1,6,iVar3,0,0);
+        iVar6 = handle_ble_connection_state_transition_with_validation(param_1,6,iVar3,0,0);
         if (iVar6 == 0) {
-          FUN_00083090(iVar8,0xf);
-          FUN_00083090(iVar2,1);
+          set_bit_in_value(iVar8,0xf);
+          set_bit_in_value(iVar2,1);
           return 0;
         }
         decrement_reference_count_and_cleanup_memory(iVar3);

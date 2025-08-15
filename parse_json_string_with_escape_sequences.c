@@ -87,11 +87,12 @@ switchD_0006434e_caseD_6f:
       break;
     case 0x75:
       if (((int)pbVar11 - (int)pbVar10 < 6) ||
-         (uVar3 = FUN_00084e9a(pbVar10 + 2), uVar3 - 0xdc00 < 0x400))
+         (uVar3 = convert_hex_string_to_integer(pbVar10 + 2), uVar3 - 0xdc00 < 0x400))
       goto switchD_0006434e_caseD_6f;
       if (uVar3 - 0xd800 < 0x400) {
         if ((((int)pbVar11 - (int)(pbVar10 + 6) < 6) || (pbVar10[6] != 0x5c)) ||
-           ((pbVar10[7] != 0x75 || (uVar4 = FUN_00084e9a(pbVar10 + 8), 0x3ff < uVar4 - 0xdc00))))
+           ((pbVar10[7] != 0x75 ||
+            (uVar4 = convert_hex_string_to_integer(pbVar10 + 8), 0x3ff < uVar4 - 0xdc00))))
         goto switchD_0006434e_caseD_6f;
         iVar5 = 0xc;
         uVar3 = ((uVar3 & 0x3ff) << 10 | uVar4 & 0x3ff) + 0x10000;

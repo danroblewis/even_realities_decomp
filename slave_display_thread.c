@@ -415,10 +415,10 @@ LAB_00027e20:
         cVar3 = *(char *)(param_1 + 0xe8);
         reset_animation_counters();
         validate_and_update_work_mode_state();
-        uVar12 = FUN_0007cb2c();
+        uVar12 = calculate_mathematical_operation_with_bit_shifting();
         *(undefined8 *)(*(int *)(param_1 + 0x1014) + 4) = uVar12;
         if ((**(int **)(param_1 + 0x1054) == 0xe) ||
-           ((iVar4 = FUN_0007c132(), iVar4 != 0 &&
+           ((iVar4 = check_work_mode_status_with_byte_array_comparison(), iVar4 != 0 &&
             (*(char *)(*(int *)(param_1 + 0x1014) + 1) == '\0')))) {
           cVar1 = *(char *)(*(int *)(param_1 + 0x1014) + 2);
           if (cVar1 == '\x03') {
@@ -533,7 +533,7 @@ LAB_0002812a:
             handle_heartbeat();
           }
         }
-        FUN_0007cb54(&DAT_20007b38);
+        atomic_set_bit_1(&DAT_20007b38);
       }
       break;
     case 7:

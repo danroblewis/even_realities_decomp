@@ -23,7 +23,7 @@ format_bluetooth_log_message
   }
   else {
     if (param_2 != (undefined1 *)0x0) {
-      FUN_0007dc4a(auStack_38,4,param_2);
+      convert_number_to_decimal_string(auStack_38,4,param_2);
       param_2 = auStack_38;
     }
     process_data_with_callback_and_parameter_alt6(auStack_34,0x24,param_1,param_3,param_2);

@@ -58,7 +58,7 @@ process_ble_characteristic_value_change_with_callback_execution
     }
     local_24 = "No ATT channel for MTU %zu";
     local_28 = 3;
-    FUN_00081ddc(&DAT_00088100,0x1880,&local_28);
+    process_and_compress_data_wrapper(&DAT_00088100,0x1880,&local_28);
   }
   return 0;
 }

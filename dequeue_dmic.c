@@ -12,7 +12,7 @@ int dequeue_dmic(undefined4 param_1)
   undefined1 auStack_d8 [204];
   
   memcpy(auStack_d8,&DAT_000885cc,200);
-  iVar1 = FUN_00072240(&DAT_20007b7c,auStack_d8,0,0);
+  iVar1 = manage_ble_connection_state_comprehensive(&DAT_20007b7c,auStack_d8,0,0);
   if (iVar1 == 0) {
     memcpy(param_1,auStack_d8,200);
   }

@@ -27,7 +27,7 @@ void initialize_ble_memory_structure
     uVar1 = 0x5a;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/net/buf.c",uVar1);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/net/buf.c",uVar1);
 }
 
 

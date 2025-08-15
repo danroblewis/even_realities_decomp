@@ -18,7 +18,7 @@ int retry_nfc_operation_with_backoff(int param_1)
   else {
     iVar2 = 10;
     do {
-      iVar1 = FUN_0007ca18(SYSTEM_CONFIGURATION_PARAMETER,param_1);
+      iVar1 = send_nfc_control_message_with_retry_and_mutex(SYSTEM_CONFIGURATION_PARAMETER,param_1);
       if (iVar1 == 0) {
         return 0;
       }

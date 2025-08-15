@@ -25,7 +25,7 @@ int handle_device_calibration_and_parameters(int param_1)
     iVar1 = -0x13;
   }
   else {
-    iVar1 = FUN_00083dc8(*puVar5,5,10,*(char *)((int)puVar5 + 0x2e) + '\x01');
+    iVar1 = pack_parameters_and_call_callback(*puVar5,5,10,*(char *)((int)puVar5 + 0x2e) + '\x01');
     if (iVar1 == 0) {
       cVar6 = '\x10';
       piVar7 = puVar5 + 5;
@@ -41,80 +41,89 @@ int handle_device_calibration_and_parameters(int param_1)
           float_multiply_64bit_alt((int)uVar8,(int)((ulonglong)uVar8 >> 0x20),uVar2,extraout_s1);
           iVar1 = float_to_int_conversion();
           uVar3 = (uint)(iVar1 << 10) / (uint)(iVar4 + iVar1);
-          iVar1 = FUN_00083de6(*puVar5,3,cVar6,(uVar3 << 0x16) >> 0x18,uVar3 & 3);
+          iVar1 = pack_multiple_parameters_and_call_callback
+                            (*puVar5,3,cVar6,(uVar3 << 0x16) >> 0x18,uVar3 & 3);
           if (iVar1 != 0) {
             return iVar1;
           }
         }
         cVar6 = cVar6 + '\x02';
       } while (cVar6 != '\x18');
-      iVar1 = FUN_00084774(&DAT_0008ba94,puVar5[1],puVar5[1],local_32);
+      iVar1 = calculate_mathematical_bounds_with_alternative_path_selection
+                        (&DAT_0008ba94,puVar5[1],puVar5[1],local_32);
       if (iVar1 != -0x16) {
-        iVar1 = FUN_00083dc8(*puVar5,3,0xc,(undefined1)local_32[0]);
+        iVar1 = pack_parameters_and_call_callback(*puVar5,3,0xc,(undefined1)local_32[0]);
         if (iVar1 != 0) {
           return iVar1;
         }
-        iVar1 = FUN_00084774(&DAT_0008ba94,puVar5[2],puVar5[2],local_32);
+        iVar1 = calculate_mathematical_bounds_with_alternative_path_selection
+                          (&DAT_0008ba94,puVar5[2],puVar5[2],local_32);
         if (iVar1 != -0x16) {
-          iVar1 = FUN_00083dc8(*puVar5,3,0xd,(undefined1)local_32[0]);
+          iVar1 = pack_parameters_and_call_callback(*puVar5,3,0xd,(undefined1)local_32[0]);
           if (iVar1 != 0) {
             return iVar1;
           }
-          iVar1 = FUN_00084602(&DAT_0008ba88,puVar5[3] + -2000,puVar5[3],local_32);
+          iVar1 = calculate_mathematical_bounds_with_validation_and_error_handling
+                            (&DAT_0008ba88,puVar5[3] + -2000,puVar5[3],local_32);
           if (iVar1 != -0x16) {
-            iVar1 = FUN_00083de6(*puVar5,3,8,((uint)local_32[0] << 0x17) >> 0x18,local_32[0] & 1);
+            iVar1 = pack_multiple_parameters_and_call_callback
+                              (*puVar5,3,8,((uint)local_32[0] << 0x17) >> 0x18,local_32[0] & 1);
             if (iVar1 != 0) {
               return iVar1;
             }
-            iVar1 = FUN_00084602(&DAT_0008ba7c,puVar5[4] + -0xc9e,puVar5[4],local_32);
+            iVar1 = calculate_mathematical_bounds_with_validation_and_error_handling
+                              (&DAT_0008ba7c,puVar5[4] + -0xc9e,puVar5[4],local_32);
             if (iVar1 != -0x16) {
-              iVar1 = FUN_00083de6(*puVar5,3,10,((uint)local_32[0] << 0x17) >> 0x18,local_32[0] & 1)
-              ;
+              iVar1 = pack_multiple_parameters_and_call_callback
+                                (*puVar5,3,10,((uint)local_32[0] << 0x17) >> 0x18,local_32[0] & 1);
               if (iVar1 != 0) {
                 return iVar1;
               }
-              iVar1 = FUN_00084774(&DAT_0008ba64,puVar5[5],puVar5[5],local_32);
+              iVar1 = calculate_mathematical_bounds_with_alternative_path_selection
+                                (&DAT_0008ba64,puVar5[5],puVar5[5],local_32);
               if (iVar1 != -0x16) {
-                iVar1 = FUN_00083dc8(*puVar5,2,2,(undefined1)local_32[0]);
+                iVar1 = pack_parameters_and_call_callback(*puVar5,2,2,(undefined1)local_32[0]);
                 if (iVar1 != 0) {
                   return iVar1;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,3,0xe,*(undefined1 *)((int)puVar5 + 0x2f));
+                iVar1 = pack_parameters_and_call_callback
+                                  (*puVar5,3,0xe,*(undefined1 *)((int)puVar5 + 0x2f));
                 if (iVar1 != 0) {
                   return iVar1;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,3,0xf,*(undefined1 *)(puVar5 + 0xc));
+                iVar1 = pack_parameters_and_call_callback
+                                  (*puVar5,3,0xf,*(undefined1 *)(puVar5 + 0xc));
                 if (iVar1 != 0) {
                   return iVar1;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,5,0x24,1);
+                iVar1 = pack_parameters_and_call_callback(*puVar5,5,0x24,1);
                 if (iVar1 != 0) {
                   return iVar1;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,5,0,1);
+                iVar1 = pack_parameters_and_call_callback(*puVar5,5,0,1);
                 if (iVar1 != 0) {
                   return iVar1;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,5,1);
+                iVar1 = pack_parameters_and_call_callback(*puVar5,5,1);
                 if (iVar1 != 0) {
                   return iVar1;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,5,0xc,1);
+                iVar1 = pack_parameters_and_call_callback(*puVar5,5,0xc,1);
                 if (iVar1 != 0) {
                   return iVar1;
                 }
                 if ((*(char *)((int)puVar5 + 0x32) != '\0') &&
-                   (iVar1 = FUN_00083dc8(*puVar5,3,0x50,1), iVar1 != 0)) {
+                   (iVar1 = pack_parameters_and_call_callback(*puVar5,3,0x50,1), iVar1 != 0)) {
                   return iVar1;
                 }
                 if ((*(char *)((int)puVar5 + 0x33) != '\0') &&
-                   (iVar1 = FUN_00083dc8(*puVar5,3,6,1), iVar1 != 0)) {
+                   (iVar1 = pack_parameters_and_call_callback(*puVar5,3,6,1), iVar1 != 0)) {
                   return iVar1;
                 }
                 if (*(char *)((int)puVar5 + 0x31) == '\0') {
                   return 0;
                 }
-                iVar1 = FUN_00083dc8(*puVar5,3,4,1);
+                iVar1 = pack_parameters_and_call_callback(*puVar5,3,4,1);
                 return iVar1;
               }
             }

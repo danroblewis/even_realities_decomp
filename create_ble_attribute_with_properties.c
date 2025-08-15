@@ -15,7 +15,7 @@ int create_ble_attribute_with_properties
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","addr != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xd2,param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xd2);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xd2);
   }
   iVar1 = find_ble_attribute_by_properties();
   if ((iVar1 == 0) && (iVar1 = initialize_ble_attribute(param_2,param_3), iVar1 != 0)) {

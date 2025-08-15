@@ -47,7 +47,8 @@ LAB_00032696:
   else {
     iVar1 = get_work_mode();
     if (*(int *)(iVar1 + 0x1030) != 0) {
-      iVar1 = FUN_0007d120(&FLASH_DRIVER_INTERFACE,0x2612d2,&DAT_20019daf,0x4e,puVar4);
+      iVar1 = dispatch_function_pointer_from_structure_alt
+                        (&FLASH_DRIVER_INTERFACE,0x2612d2,&DAT_20019daf,0x4e,puVar4);
       if (iVar1 != 0) {
         DEBUG_PRINT("Flash read failed! %d\n",iVar1);
         *puVar3 = 0x1e;

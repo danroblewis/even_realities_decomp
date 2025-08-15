@@ -12,7 +12,7 @@ void cleanup_ble_attribute(undefined1 *param_1)
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","keys != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x131);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x131);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0x131);
   }
   if ((int)((uint)(byte)param_1[8] << 0x1d) < 0) {
     handle_bluetooth_privacy_mode_management_with_validation();

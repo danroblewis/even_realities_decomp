@@ -55,16 +55,16 @@ LAB_00060ae0:
   if (9 < local_24) {
     local_2c = "cinstr %02x transfer too long: %zu";
     local_30 = 4;
-    FUN_000838d6(&DAT_00088270,0x2080,&local_30);
+    execute_device_memory_data_compression(&DAT_00088270,0x2080,&local_30);
     return 0xffffffea;
   }
   local_1f = (undefined1)local_24;
   local_1e = 0x101;
   local_1c = 0;
   local_1b = param_3;
-  FUN_00083906(param_1);
-  uVar4 = FUN_000669f4(&local_20,uVar4,uVar5);
-  FUN_0008392e(param_1);
+  handle_ble_connection_state_and_status_flags(param_1);
+  uVar4 = handle_hardware_register_operation(&local_20,uVar4,uVar5);
+  manage_device_state_with_spin_lock_validation(param_1);
   uVar4 = lookup_device_property_from_table(uVar4);
   return uVar4;
 }

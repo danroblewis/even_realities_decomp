@@ -14,7 +14,7 @@ void process_ble_service_discovery_and_handle_assignment
   undefined4 extraout_r1;
   int extraout_r2;
   
-  iVar1 = FUN_00080f92();
+  iVar1 = is_ble_uuid_valid_and_available();
   iVar2 = find_ble_service_by_uuid(param_1,param_2);
   if (iVar1 == 0) {
     return;
@@ -38,18 +38,18 @@ void process_ble_service_discovery_and_handle_assignment
                        "WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x577);
           DEBUG_PRINT2("\tCan\'t save CF / CCC to flash\n");
                     /* WARNING: Subroutine does not return */
-          assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x577);
+          trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x577);
         }
         iVar1 = 2;
         iVar2 = 0x18;
       }
     }
-    FUN_000828da(&DAT_20006329 + iVar2,param_2,&DAT_20006328 + iVar2);
+    copy_data_structure_fields(&DAT_20006329 + iVar2,param_2,&DAT_20006328 + iVar2);
     (&DAT_20006328)[iVar1 * 0xc] = (char)param_1;
     iVar2 = extraout_r2;
   }
-  FUN_000826e0(iVar2 + 8,1 << (param_3 & 0xff));
-  FUN_0007350c(&DAT_20006350,extraout_r1,0x8000,0);
+  set_bits_in_value(iVar2 + 8,1 << (param_3 & 0xff));
+  handle_ble_connection_timeout_with_uart_setup(&DAT_20006350,extraout_r1,0x8000,0);
   return;
 }
 

@@ -26,8 +26,9 @@ int process_data_with_callback_validation_alt2(void)
   else {
     local_24 = setup_device_buffer_with_validation(uStack_28 & 0xff,&local_1c);
     if (local_24 == 0) {
-      iVar1 = FUN_0007ef80(local_1c,(int)((ulonglong)uVar2 >> 0x20),extraout_r2,in_r3);
-      FUN_0007ef7e(local_1c);
+      iVar1 = call_callback_function_with_bounds_validation
+                        (local_1c,(int)((ulonglong)uVar2 >> 0x20),extraout_r2,in_r3);
+      no_operation(local_1c);
       if (iVar1 != 0) {
         local_2c = "Failed to read data from flash: %d";
         local_30 = 3;

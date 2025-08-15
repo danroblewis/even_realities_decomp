@@ -11,7 +11,7 @@ undefined1 * validate_ble_attribute_handle(int param_1,undefined1 *param_2)
   int iVar1;
   
   if (param_1 == 0) {
-    iVar1 = FUN_000826b2(param_2 + 1,&DAT_000f2b3a);
+    iVar1 = compare_byte_arrays_7_bytes(param_2 + 1,&DAT_000f2b3a);
   }
   else {
     iVar1 = ble_uuid_comparison_handler(param_1,*param_2);

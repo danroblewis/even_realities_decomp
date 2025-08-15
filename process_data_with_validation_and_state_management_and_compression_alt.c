@@ -40,7 +40,7 @@ void process_data_with_validation_and_state_management_and_compression_alt(int p
       if (-1 < (int)uVar6 << 0x15) {
         local_20 = *(undefined4 *)(iVar2 + 0xa8);
         local_1c = *(undefined4 *)(iVar2 + 0xb0);
-        FUN_00081adc(iVar2,&local_20);
+        setup_ble_connection_parameters(iVar2,&local_20);
         goto LAB_00053c44;
       }
       goto LAB_00053c4c;
@@ -49,7 +49,7 @@ LAB_00053c74:
     if (((-1 < *piVar5 << 0x17) || (*pcVar4 != ' ')) || (*(char *)(iVar2 + 0xb4) == '\0'))
     goto LAB_00053c68;
     *(char *)(iVar2 + 0xb4) = *(char *)(iVar2 + 0xb4) + -1;
-    FUN_00073418(iVar2 + 0x60,uVar3,0x28000,0);
+    handle_ble_connection_timeout_with_priority_and_validation(iVar2 + 0x60,uVar3,0x28000,0);
   }
   else {
 LAB_00053c4c:
@@ -58,7 +58,7 @@ LAB_00053c4c:
     *(undefined2 *)(iVar2 + 0xac) = *(undefined2 *)(pcVar4 + 5);
     *(undefined2 *)(iVar2 + 0xae) = *(undefined2 *)(pcVar4 + 7);
 LAB_00053c68:
-    FUN_00080ea8(piVar5,0xfffffeff);
+    clear_bit_in_bitmap(piVar5,0xfffffeff);
   }
   bt_connection_disconnect_with_validation(iVar2);
 LAB_00053c44:

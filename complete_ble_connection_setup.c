@@ -21,7 +21,7 @@ undefined4 complete_ble_connection_setup(int param_1,undefined4 param_2,undefine
   undefined2 local_1c;
   
   iVar6 = *(int *)(param_1 + 0xf0);
-  iVar2 = FUN_00082ff6(param_1 + 4,0xd,param_3,param_2);
+  iVar2 = extract_bit_from_value(param_1 + 4,0xd,param_3,param_2);
   if (iVar2 != 0) {
     iVar5 = iVar6 + 0x90;
     puVar4 = *(undefined2 **)(extraout_r3 + 0xc);
@@ -31,7 +31,7 @@ undefined4 complete_ble_connection_setup(int param_1,undefined4 param_2,undefine
       local_24 = "Unable to get keys for %s";
       local_1c = 0x200;
       local_28 = 0x1000003;
-      FUN_00083074(&DAT_00088180,0x1c40,&local_28);
+      process_and_compress_data_wrapper(&DAT_00088180,0x1c40,&local_28);
       return 8;
     }
     *(undefined2 *)(iVar2 + 0x18) = *puVar4;
@@ -47,7 +47,7 @@ undefined4 complete_ble_connection_setup(int param_1,undefined4 param_2,undefine
     if (-1 < (int)((uint)bVar1 << 0x1d)) goto LAB_0005e108;
     uVar3 = 10;
   }
-  FUN_00083090(param_1,uVar3);
+  set_bit_in_value(param_1,uVar3);
 LAB_0005e108:
   if (*(short *)(param_1 + 0xe8) == 0) {
     handle_ble_connection_state_change(param_1);

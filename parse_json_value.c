@@ -92,7 +92,7 @@ LAB_000129ea:
         return 0;
       }
       param_2[2] = uVar8 + 1;
-      FUN_00084ed8(param_2);
+      process_string_with_bounds_checking(param_2);
       uVar8 = param_2[2];
       if (uVar13 <= uVar8) {
 LAB_00012a9a:
@@ -118,10 +118,10 @@ LAB_00012a9a:
             piVar11 = piVar12;
           }
           param_2[2] = param_2[2] + 1;
-          FUN_00084ed8(param_2);
+          process_string_with_bounds_checking(param_2);
           iVar10 = parse_json_value(piVar5,param_2);
           if (iVar10 == 0) goto LAB_00012c08;
-          FUN_00084ed8(param_2);
+          process_string_with_bounds_checking(param_2);
           if ((uint)param_2[1] <= (uint)param_2[2]) goto LAB_00012c0e;
           cVar1 = *(char *)(*param_2 + param_2[2]);
           piVar9 = piVar5;
@@ -150,7 +150,7 @@ LAB_00012c0e:
         return 0;
       }
       param_2[2] = uVar8 + 1;
-      FUN_00084ed8(param_2);
+      process_string_with_bounds_checking(param_2);
       uVar8 = param_2[2];
       if (uVar13 <= uVar8) goto LAB_00012a9a;
       if (*(char *)(iVar10 + uVar8) == '}') {
@@ -172,10 +172,10 @@ LAB_00012c0e:
             piVar11 = piVar12;
           }
           param_2[2] = param_2[2] + 1;
-          FUN_00084ed8(param_2);
+          process_string_with_bounds_checking(param_2);
           iVar10 = parse_json_string_with_escape_sequences(piVar5,param_2);
           if (iVar10 == 0) goto LAB_00012c08;
-          FUN_00084ed8(param_2);
+          process_string_with_bounds_checking(param_2);
           iVar10 = piVar5[4];
           piVar5[4] = 0;
           piVar5[8] = iVar10;
@@ -183,10 +183,10 @@ LAB_00012c0e:
           if (((uint)param_2[1] <= uVar8) || (*(char *)(*param_2 + uVar8) != ':'))
           goto LAB_00012c08;
           param_2[2] = uVar8 + 1;
-          FUN_00084ed8(param_2);
+          process_string_with_bounds_checking(param_2);
           iVar10 = parse_json_value(piVar5,param_2);
           if (iVar10 == 0) goto LAB_00012c08;
-          FUN_00084ed8(param_2);
+          process_string_with_bounds_checking(param_2);
           if ((uint)param_2[1] <= (uint)param_2[2]) goto LAB_00012c0e;
           cVar1 = *(char *)(*param_2 + param_2[2]);
           piVar9 = piVar5;
@@ -222,7 +222,7 @@ LAB_00012988:
   return 1;
 LAB_000129fa:
   abStack_60[iVar3] = 0;
-  uVar16 = FUN_00077a10(abStack_60,&local_64);
+  uVar16 = parse_string_and_convert_to_float_with_validation(abStack_60,&local_64);
   pbVar6 = local_64;
   uVar17 = (undefined4)((ulonglong)uVar16 >> 0x20);
   uVar4 = (undefined4)uVar16;

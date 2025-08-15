@@ -21,7 +21,7 @@ int process_data_with_callback_and_parameter(int param_1,int param_2)
     iVar2 = -0x58;
   }
   else {
-    uVar4 = FUN_0007ef6e();
+    uVar4 = check_data_structure_high_bit_flag();
     iVar2 = (int)((ulonglong)uVar4 >> 0x20);
     if ((int)uVar4 == 0) {
       cVar1 = (&DAT_000f0ff1)[iVar2];

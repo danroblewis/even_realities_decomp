@@ -107,7 +107,7 @@ LAB_00051de4:
         iVar5 = 1;
       }
     }
-    FUN_0007ef7e(local_24);
+    no_operation(local_24);
     return iVar5;
   }
   return 10;

@@ -1,14 +1,14 @@
 /*
  * Function: dereference_pointer
- * Entry:    0007d1c8
- * Prototype: undefined __stdcall dereference_pointer(undefined4 pointer)
+ * Entry:    0007d1d0
+ * Prototype: undefined dereference_pointer()
  */
 
 
-undefined4 dereference_pointer(undefined4 *pointer)
+undefined4 dereference_pointer(undefined4 *param_1)
 
 {
-  return *pointer;
+  return *param_1;
 }
 
 

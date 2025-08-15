@@ -22,8 +22,8 @@ void set_brightness_to_panel_reg(uint param_1)
       handle_heartbeat();
     }
   }
-  thunk_FUN_0007d77c(6);
-  thunk_FUN_0007d77c(0xa9);
+  thunk_jbd_display_command_handler(6);
+  thunk_jbd_display_command_handler(0xa9);
   if (5 < param_1) {
     iVar3 = get_work_mode();
     jbd_spi_write_register((*(short *)(iVar3 + 0xed8) + 1) * 0x6f);
@@ -48,11 +48,11 @@ LAB_00046e7a:
   jbd_spi_write_register(sVar2);
   uVar4 = 0;
 LAB_00046ea0:
-  FUN_0007d67e(uVar4);
+  send_jbd_display_command_0x46(uVar4);
   jbd_spi_write_register(0x31,4);
-  thunk_FUN_0007d77c(0xa3);
-  thunk_FUN_0007d77c(0x97);
-  FUN_0007d772(1);
+  thunk_jbd_display_command_handler(0xa3);
+  thunk_jbd_display_command_handler(0x97);
+  multiply_by_1000_and_jump(1);
   return;
 }
 

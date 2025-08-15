@@ -18,6 +18,8 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
   undefined4 extraout_r1_01;
   undefined4 extraout_r1_02;
   int iVar6;
+  undefined4 fill_param;
+  undefined4 fill_param_00;
   int iVar7;
   undefined4 uVar8;
   uint uVar9;
@@ -84,7 +86,8 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
         }
         fill_memory_buffer(&display_buffer,0,0x1210);
         resource_mutex_acquire(&WORK_MODE_CONTEXT,extraout_r1_01,0xffffffff,0xffffffff);
-        FUN_0007da70(&overview_map_buffer,*(undefined4 *)(param_2 + 0xb1),&display_buffer);
+        copy_navigation_map_data_with_pattern_filling
+                  (&overview_map_buffer,*(uint *)(param_2 + 0xb1),0x2001ba2e,fill_param);
       }
       DAT_2001ba2d = '\x01';
       mutex_unlock(&WORK_MODE_CONTEXT);
@@ -222,7 +225,8 @@ void navigation_overview_map_display(undefined4 param_1,int param_2)
       }
       fill_memory_buffer(&display_buffer,0,0x1210);
       resource_mutex_acquire(&WORK_MODE_CONTEXT,extraout_r1_02,0xffffffff,0xffffffff);
-      FUN_0007da70(&overview_map_buffer,*(undefined4 *)(param_2 + 0xb1),&display_buffer);
+      copy_navigation_map_data_with_pattern_filling
+                (&overview_map_buffer,*(uint *)(param_2 + 0xb1),0x2001ba2e,fill_param_00);
     }
     DAT_2001ba2d = '\x01';
     mutex_unlock(&WORK_MODE_CONTEXT);

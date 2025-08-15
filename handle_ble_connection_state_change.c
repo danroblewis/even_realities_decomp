@@ -22,7 +22,7 @@ void handle_ble_connection_state_change(int param_1,int param_2)
   iVar6 = param_1 + 4;
   if (*(char *)(iVar5 + 0xd) == '\a') {
     if (param_2 == 0) {
-      iVar6 = FUN_00082ff6(iVar6,0xd);
+      iVar6 = extract_bit_from_value(iVar6,0xd);
       if (iVar6 != 0) {
         process_ble_attribute_data(*(undefined4 *)(iVar5 + 0xc0));
       }
@@ -57,18 +57,18 @@ LAB_0005dba4:
   else {
     local_1c = "Not connected!";
     local_20 = 2;
-    FUN_00083074(&DAT_00088180,0x1080,&local_20);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1080,&local_20);
     uVar3 = 7;
 LAB_0005db1a:
     uVar3 = (uint)(byte)(&DAT_000f5220)[uVar3];
   }
   if ((*(int *)(iVar5 + 0xc0) != 0) &&
      ((*(char *)(*(int *)(iVar5 + 0xc0) + 0xc) == '\0' ||
-      (iVar1 = FUN_00082ff6(iVar6,2), iVar1 != 0)))) {
+      (iVar1 = extract_bit_from_value(iVar6,2), iVar1 != 0)))) {
     cleanup_ble_attribute(*(undefined4 *)(iVar5 + 0xc0));
     *(undefined4 *)(iVar5 + 0xc0) = 0;
   }
-  iVar1 = FUN_00082ff6(iVar6,2);
+  iVar1 = extract_bit_from_value(iVar6,2);
   if (iVar1 == 0) {
     if (uVar3 < 8) {
       uVar2 = (&DAT_000f520f)[uVar3];
@@ -78,7 +78,7 @@ LAB_0005db1a:
     }
     bt_connection_disconnect_with_parameter_validation(iVar5,uVar2,uVar3);
   }
-  iVar6 = FUN_00082ff6(iVar6,3);
+  iVar6 = extract_bit_from_value(iVar6,3);
   if ((iVar6 != 0) && (DAT_2000ad20 != (int *)0x0)) {
     iVar6 = *DAT_2000ad20;
     if (iVar6 != 0) {
@@ -101,7 +101,7 @@ LAB_0005dbf8:
     }
   }
 LAB_0005dbba:
-  FUN_00083204(param_1);
+  reset_ble_connection_state_and_acquire_mutex(param_1);
   if ((*(char *)(iVar5 + 0xd) == '\a') && (*(char *)(iVar5 + 9) != *(char *)(iVar5 + 10))) {
     validate_ble_attribute_permissions(iVar5);
     return;

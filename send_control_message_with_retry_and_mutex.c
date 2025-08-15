@@ -39,7 +39,7 @@ int send_control_message_with_retry_and_mutex
                     (uint)*(ushort *)(puVar3 + 2),param_2,iVar1);
         return iVar1;
       }
-      FUN_0007c87a();
+      set_ble_schedule_timing_for_data_transmission();
       uVar2 = extraout_r1;
     }
   }

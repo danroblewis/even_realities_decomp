@@ -34,7 +34,7 @@ int generate_cryptographic_key_with_validation(int param_1,undefined4 param_2,ui
             fill_memory_buffer(auStack_40,0,0x20);
             iVar1 = extract_sha256_hash_result_with_type_validation(iVar3,auStack_40);
             if (iVar1 == 0) {
-              FUN_0007abe8(iVar3);
+              clear_memory_buffer_with_fixed_size(iVar3);
               reset_sha256_context_with_error_handling(iVar3);
               iVar1 = set_sha256_context_parameter_with_validation(iVar3,0);
               if (((iVar1 == 0) &&
@@ -63,7 +63,7 @@ int generate_cryptographic_key_with_validation(int param_1,undefined4 param_2,ui
 LAB_0007a09e:
       iVar1 = -0x3c;
 LAB_0007a0a4:
-      FUN_00079808(auStack_40,0x20);
+      clear_memory_buffer_with_zero_fill(auStack_40,0x20);
       iVar3 = (*DAT_20002f54)(param_1 + 0x110);
       if (iVar3 != 0) {
         iVar1 = -0x1e;

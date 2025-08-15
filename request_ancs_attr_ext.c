@@ -13,7 +13,7 @@ int request_ancs_attr_ext(undefined4 param_1,uint param_2,undefined4 param_3)
   uint uVar3;
   
   iVar1 = get_bluetooth_manager();
-  iVar2 = FUN_0007f6b6(&DAT_20006ae8,&DAT_20006aac,&LAB_0001827c_1);
+  iVar2 = initialize_data_structure_with_configuration(&DAT_20006ae8,&DAT_20006aac,&LAB_0001827c_1);
   uVar3 = 0;
   do {
     if ((((DAT_20006aa4 == 0) && ((ushort)DAT_20006aa0 != 0)) && (*DAT_20006aa8 != '\0')) &&
@@ -43,7 +43,8 @@ LAB_0001925a:
         handle_heartbeat();
       }
       for (; uVar3 < 200; uVar3 = uVar3 + 1 & 0xffff) {
-        iVar2 = thunk_FUN_0007f7d2(&DAT_20006ae8,DAT_20006aa8,(ushort)DAT_20006aa0,&LAB_0001827c_1);
+        iVar2 = thunk_process_data_with_ble_buffer_management
+                          (&DAT_20006ae8,DAT_20006aa8,(ushort)DAT_20006aa0,&LAB_0001827c_1);
         if (iVar2 == 0) goto LAB_00019286;
         calculate_ble_schedule_timing(0xa4,0);
       }

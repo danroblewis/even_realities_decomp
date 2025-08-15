@@ -146,7 +146,7 @@ LAB_000238ee:
     uVar8 = (uint)(lVar14 * 1000) >> 0xf | uVar3 * 0x20000;
   } while ((int)((uVar3 >> 0xf) - (uint)(uVar8 < uVar11)) < (int)(uint)(uVar8 - uVar11 < 5000));
   *(undefined4 *)(param_1 + 0x104c) = 0;
-  FUN_0007c34a(param_1,uVar12);
+  prepare_system_settings_and_collect_status_data(param_1,uVar12);
   uVar6 = extraout_r1_02;
   goto LAB_0002385e;
 switchD_00023894_caseD_17:

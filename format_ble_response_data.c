@@ -55,7 +55,7 @@ void format_ble_response_data
         return;
       }
     }
-    FUN_00082d2e(param_1,(short)param_5[2],param_5);
+    handle_ble_characteristic_operation_with_validation(param_1,(short)param_5[2],param_5);
   }
   else {
     local_5c = "Invalid data len %u";

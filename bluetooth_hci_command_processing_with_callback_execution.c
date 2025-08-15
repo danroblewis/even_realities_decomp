@@ -24,7 +24,7 @@ int bluetooth_hci_command_processing_with_callback_execution(int param_1)
     call_system_cleanup_alt(&DAT_00088138,0x1040,&local_20);
   }
   else {
-    uVar1 = FUN_00080ea8(&DAT_200020d4,0xfffffffd);
+    uVar1 = clear_bit_in_bitmap(&DAT_200020d4,0xfffffffd);
     iVar2 = set_bits(uVar1,1);
     if (iVar2 << 0x1f < 0) {
       iVar2 = -0x78;
@@ -40,17 +40,18 @@ int bluetooth_hci_command_processing_with_callback_execution(int param_1)
         local_40 = iVar2;
         initialize_ble_connection_with_timeout
                   (&DAT_20005e30,&DAT_2002bb80,0x400,0x545f1,0,0,0,0xfffffff7);
-        FUN_00086412(&DAT_20005e30,"BT TX");
-        FUN_000730b4(&DAT_20005f08);
-        FUN_000730e8(&DAT_20005f08,&DAT_2002bf80,0x898,0xfffffff8,0);
-        FUN_00086412(&DAT_20005f08,"BT RX");
+        get_ble_uart_protocol_error_code(&DAT_20005e30,"BT TX");
+        initialize_memory_buffer_with_zero_fill(&DAT_20005f08);
+        initialize_ble_connection_with_timeout_and_state_management
+                  (&DAT_20005f08,&DAT_2002bf80,0x898,0xfffffff8,0);
+        get_ble_uart_protocol_error_code(&DAT_20005f08,"BT RX");
         iVar2 = (**(code **)(DAT_20002168 + 0xc))();
         if (iVar2 == 0) {
           if (param_1 == 0) {
             iVar2 = initialize_system_device();
           }
           else {
-            FUN_00072fdc(&DAT_200020c4);
+            initialize_accelerometer_wrapper(&DAT_200020c4);
           }
         }
         else {

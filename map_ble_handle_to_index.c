@@ -27,7 +27,7 @@ uint map_ble_handle_to_index(uint param_1)
                      "WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x713);
         DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x713);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x713);
       }
       if (&UNK_0008806f < puVar2) break;
       uVar7 = *puVar2;

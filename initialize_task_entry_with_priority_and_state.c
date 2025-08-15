@@ -13,7 +13,7 @@ void initialize_task_entry_with_priority_and_state
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","backend != ((void *)0)",
                  "WEST_TOPDIR/zephyr/include/zephyr/logging/log_backend.h",0xdf);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/logging/log_backend.h",0xdf);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/logging/log_backend.h",0xdf);
   }
   *(char *)(*(int *)(task_entry + 4) + 4) = (char)(task_entry + -0x882a0 >> 4) + '\x01';
   *(undefined1 *)(*(int *)(task_entry + 4) + 6) = param_3;

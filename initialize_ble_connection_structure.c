@@ -22,7 +22,7 @@ LAB_00071e6c:
                    ,"WEST_TOPDIR/zephyr/kernel/thread.c",0x21a,param_1,param_2,param_3,param_4);
       DEBUG_PRINT2("\tinvalid priority (%d); allowed range: %d to %d\n",param_8,0xe,0xfffffff0);
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/kernel/thread.c",0x21a);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/thread.c",0x21a);
     }
   }
   else if (0x1e < param_8 + 0x10U) goto LAB_00071e6c;

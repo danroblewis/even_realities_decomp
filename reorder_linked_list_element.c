@@ -66,7 +66,7 @@ LAB_00061442:
     uVar3 = 0x3b;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio/gpio_utils.h",uVar3);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio/gpio_utils.h",uVar3);
 }
 
 

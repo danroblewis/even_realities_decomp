@@ -22,7 +22,7 @@ update_burial_point_day_index
   local_24 = param_2;
   local_20 = param_3;
   local_1c = param_4;
-  uVar2 = FUN_0007d216();
+  uVar2 = get_work_mode_timestamp();
   local_24 = 0;
   local_20 = 0;
   local_1c = 0;

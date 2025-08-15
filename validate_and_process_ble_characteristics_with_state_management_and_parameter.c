@@ -18,12 +18,12 @@ void validate_and_process_ble_characteristics_with_state_management_and_paramete
   
   do {
     do {
-      iVar1 = thunk_FUN_000727ac(param_1 + 0x38,param_2,0,0);
+      iVar1 = handle_ble_connection_state_transition_with_validation(param_1 + 0x38,param_2,0,0);
       if (iVar1 == 0) {
         if (*(int *)(param_1 + 0x14) == 0) {
           if (*(int *)(param_1 + 0x1c) == 0) {
-            FUN_000813d6(param_1);
-            FUN_0007350c(param_1 + 0x60,extraout_r1_01,0,0);
+            cleanup_reference_and_set_null(param_1);
+            handle_ble_connection_timeout_with_uart_setup(param_1 + 0x60,extraout_r1_01,0,0);
             return;
           }
           DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","conn->pending_no_cb == 0",
@@ -37,7 +37,7 @@ void validate_and_process_ble_characteristics_with_state_management_and_paramete
           uVar2 = 0x313;
         }
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",uVar2);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",uVar2);
       }
       iVar3 = *(int *)(iVar1 + 0x18);
       *(undefined4 *)(iVar1 + 0x18) = 0;

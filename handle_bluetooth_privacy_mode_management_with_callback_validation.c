@@ -23,10 +23,10 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation
     if (param_2 << 0x1d < 0) {
       local_1c = "Can\'t set both IDENTITY & NRPA";
       local_20 = 2;
-      FUN_0008104a(&DAT_00088150,0x1040,&local_20);
+      execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1040,&local_20);
       return -0x16;
     }
-    iVar1 = FUN_00081102();
+    iVar1 = validate_and_update_bluetooth_address();
     if (iVar1 != 0) {
       return iVar1;
     }
@@ -37,7 +37,7 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation
         bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
         if (bVar2 != 1) goto LAB_000554d8;
 LAB_000554dc:
-        iVar1 = FUN_000810f2(param_1,uVar3 * 7 + 0x20002001);
+        iVar1 = handle_bluetooth_address_update_with_hci_command(param_1,uVar3 * 7 + 0x20002001);
         if (iVar1 != 0) {
           return iVar1;
         }
@@ -66,11 +66,12 @@ LAB_000554d8:
     if (param_2 << 0x1d < 0) {
       bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
       if (bVar2 != 1) goto LAB_000554d8;
-      iVar1 = FUN_000810f2(param_1,(short)(ushort)*param_1 * 7 + 0x20002001);
+      iVar1 = handle_bluetooth_address_update_with_hci_command
+                        (param_1,(short)(ushort)*param_1 * 7 + 0x20002001);
       bVar2 = *(byte *)((int)&DAT_20002000 + uVar3 * 7);
       goto LAB_0005551e;
     }
-    iVar1 = FUN_00081102();
+    iVar1 = validate_and_update_bluetooth_address();
   }
   bVar2 = 1;
 LAB_0005551e:

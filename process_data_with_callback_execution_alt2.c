@@ -20,17 +20,20 @@ uint process_data_with_callback_execution_alt2(int param_1,undefined4 param_2,in
   local_18 = "err";
   *(short *)(param_1 + 0x32) = (short)param_3;
   local_14 = 3;
-  iVar1 = FUN_0008633e(param_1,&local_18);
-  if ((iVar1 != 0) && (iVar1 = FUN_0008634c(param_1,2), iVar1 != 0)) {
+  iVar1 = write_ble_uart_packet_string_with_type3_header(param_1,&local_18);
+  if ((iVar1 != 0) &&
+     (iVar1 = write_ble_uart_packet_extended_length_marker_type5(param_1,2), iVar1 != 0)) {
     local_18 = "group";
     local_14 = 5;
-    iVar1 = FUN_0008633e(param_1,&local_18);
-    if ((iVar1 != 0) && (iVar1 = FUN_00086320(param_1,param_2), iVar1 != 0)) {
+    iVar1 = write_ble_uart_packet_string_with_type3_header(param_1,&local_18);
+    if ((iVar1 != 0) && (iVar1 = write_ble_uart_packet_32bit_unsigned(param_1,param_2), iVar1 != 0))
+    {
       local_18 = "rc";
       local_14 = 2;
-      iVar1 = FUN_0008633e(param_1,&local_18);
-      if ((iVar1 != 0) && (iVar1 = FUN_00086320(param_1,param_3), iVar1 != 0)) {
-        uVar2 = thunk_FUN_00086354(param_1,2);
+      iVar1 = write_ble_uart_packet_string_with_type3_header(param_1,&local_18);
+      if ((iVar1 != 0) &&
+         (iVar1 = write_ble_uart_packet_32bit_unsigned(param_1,param_3), iVar1 != 0)) {
+        uVar2 = write_ble_uart_packet_extended_length_marker_type7(param_1,2);
         goto LAB_0005162e;
       }
     }

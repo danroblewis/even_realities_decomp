@@ -17,7 +17,7 @@ int process_data_with_parameter_validation_alt(undefined4 *param_1,int param_2)
     iVar1 = -0x16;
   }
   else {
-    iVar1 = FUN_0007f612(param_1 + 1,0);
+    iVar1 = set_bit_and_return_previous_state(param_1 + 1,0);
     if (iVar1 == 0) {
       param_1[0x20a] = 0x7f635;
       *(undefined2 *)(param_1 + 0x20e) = 1;
@@ -27,7 +27,7 @@ int process_data_with_parameter_validation_alt(undefined4 *param_1,int param_2)
       param_1[0x211] = param_2;
       iVar1 = initialize_ble_attribute_data_structure(*param_1,param_1 + 0x20a);
       if (iVar1 != 0) {
-        FUN_0007f5d8(param_1 + 1,0);
+        clear_specific_bit_by_position(param_1 + 1,0);
         local_24 = "Subscribe Notification Source failed (err %d)";
         local_28 = 3;
         iStack_20 = iVar1;

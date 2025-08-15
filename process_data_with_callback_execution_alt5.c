@@ -13,10 +13,10 @@ undefined4 process_data_with_callback_execution_alt5(int param_1)
                  "WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/transport/src/smp.c",0x92);
     DEBUG_PRINT2("\tRequired transport output function pointer cannot be NULL\n");
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/transport/src/smp.c",0x92);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/transport/src/smp.c",0x92);
   }
   init_data_fields();
-  FUN_00072e50(param_1,0x80ab5);
+  initialize_data_structure_with_validation(param_1,0x80ab5);
   setup_error_handling(param_1 + 0x10);
   return 0;
 }

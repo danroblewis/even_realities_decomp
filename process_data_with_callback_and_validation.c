@@ -56,7 +56,7 @@ int process_data_with_callback_and_validation
     uVar9 = 0x394;
 LAB_0004abe4:
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/lib/os/cbprintf_packaged.c",uVar9);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/lib/os/cbprintf_packaged.c",uVar9);
   }
   bVar1 = param_1[2];
   uVar15 = (uint)bVar1;
@@ -144,7 +144,7 @@ LAB_0004acba:
         puVar11 = *(undefined **)(param_1 + (uint)pbVar14[1] * 4);
         if ((&DAT_000879b0 <= puVar11) && (puVar11 <= &UNK_000f8d63)) break;
         if (local_68 != 0) {
-          uVar18 = FUN_0007dc00(local_5c,*pbVar14);
+          uVar18 = validate_format_string_pattern(local_5c,*pbVar14);
           uVar9 = (undefined4)((ulonglong)uVar18 >> 0x20);
           if ((int)uVar18 != 0) goto LAB_0004ace6;
         }
@@ -161,7 +161,7 @@ LAB_0004ad68:
         }
       }
       if (local_68 != 0) {
-        uVar18 = FUN_0007dc00(local_5c,*pbVar14);
+        uVar18 = validate_format_string_pattern(local_5c,*pbVar14);
         uVar9 = (undefined4)((ulonglong)uVar18 >> 0x20);
         if ((int)uVar18 != 0) {
 LAB_0004ace6:
@@ -269,8 +269,8 @@ LAB_0004adbe:
       pbVar4 = pbVar14;
       if ((&UNK_000879af < *(undefined **)(param_1 + (uint)bVar2 * 4)) &&
          (*(undefined **)(param_1 + (uint)bVar2 * 4) < &UNK_000f8d64)) goto LAB_0004aede;
-    } while ((local_68 != 0) && (iVar16 = FUN_0007dc00(local_5c), bVar8 = extraout_r1, iVar16 != 0))
-    ;
+    } while ((local_68 != 0) &&
+            (iVar16 = validate_format_string_pattern(local_5c), bVar8 = extraout_r1, iVar16 != 0));
     if (local_78 != 0) {
       if (uVar10 < 0x10) goto LAB_0004af48;
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","scpy_cnt < sizeof(cpy_str_pos)",
@@ -289,7 +289,7 @@ LAB_0004adbe:
   uVar9 = 1099;
   goto LAB_0004abe4;
 LAB_0004aede:
-  if ((local_68 == 0) || (iVar16 = FUN_0007dc00(local_5c), iVar16 == 0)) {
+  if ((local_68 == 0) || (iVar16 = validate_format_string_pattern(local_5c), iVar16 == 0)) {
     if ((int)(param_5 << 0x1f) < 0) {
       if (0xf < uVar10) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","scpy_cnt < sizeof(cpy_str_pos)",

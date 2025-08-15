@@ -17,10 +17,10 @@ int calculate_sha256_hash_with_integrated_context_management
      (iVar1 = update_sha256_data_with_buffer_management(&DAT_2000d5fc,param_1,param_2), iVar1 == 0))
   {
     iVar1 = extract_sha256_hash_result_with_type_validation(&DAT_2000d5fc,param_3);
-    FUN_0007abe8(&DAT_2000d5fc);
+    clear_memory_buffer_with_fixed_size(&DAT_2000d5fc);
     return iVar1;
   }
-  FUN_0007abe8(&DAT_2000d5fc);
+  clear_memory_buffer_with_fixed_size(&DAT_2000d5fc);
   return iVar1;
 }
 

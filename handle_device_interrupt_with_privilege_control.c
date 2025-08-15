@@ -32,7 +32,7 @@ void handle_device_interrupt_with_privilege_control(int param_1,undefined1 param
       }
       InstructionSynchronizationBarrier(0xf);
       piVar7 = *(int **)(param_1 + 4);
-      uVar8 = FUN_00084abe(piVar7,uVar5);
+      uVar8 = check_state_flags_and_return_status(piVar7,uVar5);
       if ((int)uVar8 != 0) break;
       bVar1 = (bool)isCurrentModePrivileged();
       if (bVar1) {
@@ -46,7 +46,8 @@ void handle_device_interrupt_with_privilege_control(int param_1,undefined1 param
     }
 LAB_00062fa2:
     **(undefined1 **)(iVar6 + 0x14) = param_2;
-    FUN_0008496c(param_1,*(undefined4 *)(iVar6 + 0x14),1);
+    initialize_data_structure_with_extraction_and_flag_configuration
+              (param_1,*(undefined4 *)(iVar6 + 0x14),1);
     bVar1 = (bool)isCurrentModePrivileged();
     if (bVar1) {
       setBasePriority(uVar5);
@@ -57,7 +58,7 @@ LAB_00062fa2:
   do {
     iVar3 = 100;
     do {
-      iVar4 = FUN_00084abe(*(undefined4 *)(param_1 + 4));
+      iVar4 = check_state_flags_and_return_status(*(undefined4 *)(param_1 + 4));
       if (iVar4 != 0) {
         uVar5 = 0;
         bVar1 = (bool)isCurrentModePrivileged();
@@ -69,7 +70,7 @@ LAB_00062fa2:
           setBasePriority(0x20);
         }
         InstructionSynchronizationBarrier(0xf);
-        uVar8 = FUN_00084abe(*(undefined4 *)(param_1 + 4),uVar5);
+        uVar8 = check_state_flags_and_return_status(*(undefined4 *)(param_1 + 4),uVar5);
         if ((int)uVar8 != 0) goto LAB_00062fa2;
         bVar1 = (bool)isCurrentModePrivileged();
         if (bVar1) {
@@ -78,7 +79,7 @@ LAB_00062fa2:
         InstructionSynchronizationBarrier(0xf);
         break;
       }
-      thunk_FUN_00086384(1);
+      handle_ble_uart_packet_processing_completion(1);
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
     calculate_ble_schedule_timing(0x21,0);

@@ -98,7 +98,7 @@ LAB_00019768:
           }
         }
         else {
-          FUN_0007c0a8(1000);
+          calculate_ble_schedule_timing_with_division_alt(1000);
         }
         goto LAB_00019768;
       }

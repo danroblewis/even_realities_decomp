@@ -81,7 +81,7 @@ int handle_complex_data_processing_and_writing(undefined1 *param_1,char *param_2
   local_154 = 0x20;
   local_14f = param_1[9];
   uVar1 = initialize_data_structure_alt(auStack_c8,&local_154);
-  uVar2 = FUN_0007c3da(auStack_c8,&local_13c);
+  uVar2 = dispatch_function_pointer_or_return_status_code(auStack_c8,&local_13c);
   local_88[0] = local_13c;
   local_88[1] = uStack_138;
   local_88[2] = uStack_134;
@@ -104,7 +104,7 @@ int handle_complex_data_processing_and_writing(undefined1 *param_1,char *param_2
     local_15a = param_2[7];
     local_158 = param_2[8];
     uVar2 = initialize_data_structure_alt2(auStack_a8,&local_160);
-    uVar3 = FUN_0007c3da(auStack_a8,&local_104);
+    uVar3 = dispatch_function_pointer_or_return_status_code(auStack_a8,&local_104);
     uVar1 = (uVar2 | uVar3) & 0xffff | uVar1;
     local_6c[0] = local_104;
     local_6c[1] = uStack_100;
@@ -122,7 +122,7 @@ int handle_complex_data_processing_and_writing(undefined1 *param_1,char *param_2
     local_de = param_3[2];
     local_148 = &local_e8;
     local_144 = 0xb;
-    uVar1 = FUN_0007c4f4(&local_148,&local_120);
+    uVar1 = parse_and_copy_data_structure_with_validation(&local_148,&local_120);
     local_88[iVar5 * 7] = local_120;
     local_88[iVar5 * 7 + 1] = uStack_11c;
     local_88[iVar5 * 7 + 2] = uStack_118;
@@ -138,13 +138,13 @@ int handle_complex_data_processing_and_writing(undefined1 *param_1,char *param_2
   local_140 = 0;
   DAT_20018c6a = 0;
   do {
-    uVar2 = FUN_0007c7de(&local_148,local_88 + iVar4 * 7);
+    uVar2 = manage_linked_list_with_flags_and_counters(&local_148,local_88 + iVar4 * 7);
     iVar4 = iVar4 + 1;
     uVar1 = (uVar2 | uVar1) & 0xffff;
   } while (iVar4 != iVar5);
   local_168 = &local_e8;
   local_164 = 0x20;
-  uVar2 = FUN_0007c77e(&local_148,&local_168);
+  uVar2 = process_linked_list_data_with_validation_and_copying(&local_148,&local_168);
   uVar3 = handle_data_writing_with_state(local_168,local_164);
   uVar1 = uVar3 & 0xffff | uVar1 | uVar2 & 0xffff;
   if (uVar1 != 0) {

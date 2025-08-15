@@ -30,7 +30,7 @@ void FUN_000820ae(int param_1)
     piVar6 = piVar5;
     if ((piVar2[0x49] == 0) &&
        (((puVar4 != (undefined4 *)0x0 || (piVar3 == (int *)0x0)) &&
-        (puVar4 = (undefined4 *)FUN_00081bac(param_1 + 4), piVar3 = piVar2,
+        (puVar4 = (undefined4 *)remove_element_from_linked_list(param_1 + 4), piVar3 = piVar2,
         puVar4 != (undefined4 *)0x0)))) {
       iVar1 = process_ble_characteristic_value_change_with_validation(piVar2,puVar4);
       if (-1 < iVar1) {

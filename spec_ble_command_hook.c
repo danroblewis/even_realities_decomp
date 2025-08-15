@@ -248,7 +248,7 @@ LAB_0000f39a:
               add_json_field_complex(enabled,"text",&TELEPROMPTER_TEXT_FIELD);
               uVar6 = create_json_obj();
               add_json_named_object(uVar6,"teleprompter_info",enabled);
-              enabled = FUN_00085014(uVar6);
+              enabled = format_json_value_wrapper(uVar6);
               uVar7 = calculate_string_length();
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -280,7 +280,7 @@ LAB_0000f39a:
             add_json_field_complex(enabled,"info",&NAVIGATION_INFO_FIELD);
             uVar6 = create_json_obj();
             add_json_named_object(uVar6,"navigation_info",enabled);
-            enabled = FUN_00085014(uVar6);
+            enabled = format_json_value_wrapper(uVar6);
             uVar7 = calculate_string_length();
             if (2 < LOG_LEVEL) {
               if (IS_DEBUG == 0) {

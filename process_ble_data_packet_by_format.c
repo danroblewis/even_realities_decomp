@@ -70,7 +70,8 @@ LAB_0005bd6e:
           *(short *)(param_5 + 2) = sVar1;
           local_70 = 10;
           local_6c = uVar4;
-          sVar1 = FUN_00082aee(param_1,0x5c005,param_5,0x8275f);
+          sVar1 = handle_ble_connection_state_change_with_characteristic_processing
+                            (param_1,0x5c005,param_5,0x8275f);
           if (sVar1 == 0) {
             return;
           }
@@ -184,7 +185,7 @@ LAB_0005bd56:
 LAB_0005bd82:
     if ((uVar9 == 0) && (sVar1 != 0)) {
 LAB_0005bd8c:
-      FUN_00082d2e(param_1,sVar1,param_5);
+      handle_ble_characteristic_operation_with_validation(param_1,sVar1,param_5);
       return;
     }
   }

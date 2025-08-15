@@ -15,7 +15,7 @@ uint bt_connection_state_transition_with_parameter_validation
                  ,"WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x543,param_4);
     DEBUG_PRINT2("\tInvalid bt_conn pointer\n");
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x543);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x543);
   }
   return ((int)(param_1 + -0x20006138) >> 3) * 0x684bda13 & 0xff;
 }

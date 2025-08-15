@@ -126,7 +126,7 @@ LAB_0007c084:
     goto LAB_0007c084;
   }
   if (*pcVar2 != '\x01') {
-    uVar4 = FUN_0007c038(0x32);
+    uVar4 = calculate_ble_schedule_timing_with_division(0x32);
     return uVar4;
   }
   if (param_1 != 1) {
@@ -178,7 +178,7 @@ LAB_0007c084:
 LAB_00026156:
   iVar6 = 1;
   while( true ) {
-    iVar7 = FUN_0007ca54(*(undefined4 *)(pcVar1 + 0xf00),3,pcVar1 + 0xf04);
+    iVar7 = execute_callback_function_if_valid(*(undefined4 *)(pcVar1 + 0xf00),3,pcVar1 + 0xf04);
     if (-1 < iVar7) {
       uVar8 = extraout_r3;
       if (param_1 < 3) {
@@ -190,7 +190,8 @@ LAB_00026156:
         *(undefined4 *)(pcVar1 + 0xf08) = uVar8;
       }
       while( true ) {
-        iVar7 = FUN_0007ca54(*(undefined4 *)(pcVar1 + 0xf00),7,pcVar1 + 0xf04);
+        iVar7 = execute_callback_function_if_valid(*(undefined4 *)(pcVar1 + 0xf00),7,pcVar1 + 0xf04)
+        ;
         if (-1 < iVar7) {
           if (1 < LOG_LEVEL) {
             if (IS_DEBUG == 0) {

@@ -16,7 +16,7 @@ find_ble_attribute_by_properties(uint param_1,char *param_2,undefined4 param_3,u
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","addr != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xe9);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xe9);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xe9);
   }
   if ((*param_2 == '\x01') && ((param_2[6] & 0xc0U) == 0x40)) {
     if ((int)((uint)DAT_2000af5a << 0x1e) < 0) {

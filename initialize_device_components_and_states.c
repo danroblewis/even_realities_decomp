@@ -16,14 +16,15 @@ int initialize_device_components_and_states
   int iVar3;
   
   process_data_with_callback_execution_alt4(5,1,0,param_4,param_4);
-  iVar1 = FUN_00065190(&LAB_00060634_1);
+  iVar1 = validate_and_initialize_system_state(&LAB_00060634_1);
   if (iVar1 == 0xbad0000) {
     _DAT_5000555c = 0x9ba5;
-    FUN_000651d8();
+    initialize_hardware_registers_and_validate_state();
     iVar1 = 0;
     do {
       iVar3 = *(int *)(param_1 + 0x10);
-      iVar2 = FUN_0007e212(iVar3 + iVar1 * 0x20,&DAT_0008b5fc);
+      iVar2 = initialize_data_structure_with_validation
+                        ((void *)(iVar3 + iVar1 * 0x20),&DAT_0008b5fc);
       if (iVar2 < 0) {
         return iVar2;
       }

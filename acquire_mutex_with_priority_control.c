@@ -62,7 +62,7 @@ acquire_mutex_with_priority_control
     pcVar3 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar6);
+  trigger_system_service_call(pcVar3,uVar6);
 }
 
 

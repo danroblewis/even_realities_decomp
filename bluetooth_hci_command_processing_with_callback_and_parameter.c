@@ -34,7 +34,7 @@ void bluetooth_hci_command_processing_with_callback_and_parameter(int param_1,in
     else {
       if (-1 < (int)((uint)*(byte *)(iVar4 + 8) << 0x1d)) {
         if ((param_2[1] == 0) && ((int)((uint)*(byte *)(param_1 + 8) << 0x1d) < 0)) {
-          iVar1 = FUN_00080fa4(iVar4 + 1,param_1 + 1);
+          iVar1 = compare_byte_arrays_7_bytes(iVar4 + 1,param_1 + 1);
           fill_memory_buffer(auStack_30,0,0x16);
           iVar2 = memcmp_byte_arrays(iVar4 + 0x2a,auStack_30,0x10);
           if (((iVar2 != 0) &&
@@ -52,7 +52,7 @@ void bluetooth_hci_command_processing_with_callback_and_parameter(int param_1,in
     }
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/id.c",uVar3);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/id.c",uVar3);
 }
 
 

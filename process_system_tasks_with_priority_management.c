@@ -26,7 +26,7 @@ uint process_system_tasks_with_priority_management(int task_mode,int timing_flag
                      "WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x126);
         DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x126);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x126);
       }
       if (&UNK_000882af < piVar3) break;
       if ((char)piVar3[3] != '\0') {

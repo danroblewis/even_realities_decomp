@@ -16,13 +16,13 @@ undefined4 handle_voltage_regulation_with_validation(float param_1)
   if ((DAT_200035af != -1) && (iVar1 = setup_voltage_regulation(param_1), iVar1 != 0)) {
     if (param_1 <= 88.72168) {
       if ((int)((uint)(param_1 < -103.972084) << 0x1f) < 0) {
-        puVar2 = (undefined4 *)thunk_FUN_00071678();
+        puVar2 = (undefined4 *)calculate_data_structure_offset();
         uVar3 = 0;
         *puVar2 = 0x22;
       }
     }
     else {
-      puVar2 = (undefined4 *)thunk_FUN_00071678();
+      puVar2 = (undefined4 *)calculate_data_structure_offset();
       uVar3 = 0x7f800000;
       *puVar2 = 0x22;
     }

@@ -38,7 +38,7 @@ update_screen_display(int framebuffer_ptr,undefined4 param_2,int screen_width,in
       iVar1 = get_work_mode();
       CURRENT_DISPLAY_Y = (uint)*(ushort *)(iVar1 + 0x1074);
       uVar2 = get_display_dimensions_and_bitmap(0,&local_18,&local_14);
-      draw_bitmap_to_framebuffer
+      draw_4bit_bitmap_to_framebuffer
                 (framebuffer_ptr + 0x24,uVar2,local_18 / 2,local_14,CURRENT_DISPLAY_X,
                  CURRENT_DISPLAY_Y);
       iVar1 = get_work_mode();

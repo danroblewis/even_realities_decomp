@@ -79,7 +79,7 @@ undefined4 ui_even_ai_task(int param_1,undefined4 param_2,int param_3)
           handle_heartbeat();
         }
       }
-      gui_utf_adv_draw_configure();
+      configure_advanced_utf_drawing();
       if (*(byte *)(iVar3 + 0xef) < 0xc) {
         gui_screen_clear();
       }
@@ -195,7 +195,7 @@ LAB_0003c204:
     }
     gui_screen_clear();
 LAB_0003c2be:
-    gui_utf_adv_draw_configure();
+    configure_advanced_utf_drawing();
     DAT_2001b9a8 = 0;
     DAT_2000a050 = 0;
     DAT_2000a04c = 0;

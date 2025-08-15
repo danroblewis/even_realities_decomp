@@ -32,7 +32,7 @@ undefined4 reset_usr_setting(int param_1)
   log_debug_message_with_heartbeat(0);
   *(undefined1 *)(param_1 + 0xec1) = 3;
   *(undefined4 *)(param_1 + 0xf68) = 0;
-  FUN_0007c28e(param_1,0);
+  handle_data_verification_with_system_state_extraction(param_1,0);
   return 0;
 }
 

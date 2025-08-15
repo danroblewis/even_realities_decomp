@@ -12,7 +12,7 @@ void handle_ble_attribute_properties(ushort param_1,code *UNRECOVERED_JUMPTABLE,
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","func != ((void *)0)",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xb3);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xb3);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/keys.c",0xb3);
   }
   if ((DAT_2000af5a & param_1) != 0) {
     (*UNRECOVERED_JUMPTABLE)(&DAT_2000af4c,param_3);

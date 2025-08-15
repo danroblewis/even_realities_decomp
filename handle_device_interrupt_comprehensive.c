@@ -50,8 +50,8 @@ void handle_device_interrupt_comprehensive(int param_1)
       bVar7 = (byte)iVar4 & 8;
     }
     local_28 = CONCAT31(local_28._1_3_,bVar7);
-    FUN_00084840(param_1,local_2c);
-    FUN_000849da(param_1);
+    execute_callback_function_pointer_if_valid(param_1,local_2c);
+    setup_font_rendering_with_data_structure_validation_and_flag_management(param_1);
   }
   if ((*(int *)(iVar6 + 0x110) != 0) && (*(int *)(iVar6 + 0x304) << 0x1b < 0)) {
     *(undefined4 *)(iVar6 + 0x110) = 0;
@@ -66,14 +66,14 @@ void handle_device_interrupt_comprehensive(int param_1)
     uVar5 = ((uint)bVar7 - *(int *)(iVar2 + 0x60)) + iVar4;
     *(uint *)(iVar2 + 0x70) = *(int *)(iVar2 + 0x70) + (uVar5 & ~((int)uVar5 >> 0x1f));
     if (0 < (int)uVar5) {
-      FUN_0008484e(param_1);
+      prepare_callback_data_and_execute_with_memory_buffer_initialization(param_1);
     }
     iVar4 = *(int *)(iVar8 + 0xc);
     if (*(char *)(iVar4 + 0xca) == '\0') {
       *(undefined1 *)(iVar4 + 0xce) = 0;
     }
     else {
-      FUN_00084880(param_1,iVar4 + 0x58);
+      execute_callback_with_state_check_and_memory_buffer_reset(param_1,iVar4 + 0x58);
       uVar3 = 0;
       bVar10 = (bool)isCurrentModePrivileged();
       if (bVar10) {
@@ -113,7 +113,7 @@ void handle_device_interrupt_comprehensive(int param_1)
     iVar8 = *(int *)(param_1 + 0x10);
     fill_memory_buffer(local_2c,0,0x14,*(undefined4 *)(iVar6 + 0x14c));
     local_2c[0] = 3;
-    FUN_00084840(param_1,local_2c);
+    execute_callback_function_pointer_if_valid(param_1,local_2c);
     iVar2 = *(int *)(iVar8 + 0xc);
     iVar4 = *(int *)(iVar2 + 0x74);
     if (iVar4 != -1) {
@@ -131,17 +131,17 @@ void handle_device_interrupt_comprehensive(int param_1)
     *(undefined4 *)(iVar6 + 0x144) = 0;
     iVar4 = *(int *)(param_1 + 0x10);
     iVar2 = *(int *)(param_1 + 4);
-    FUN_00084880(param_1,*(int *)(iVar4 + 0xc) + 0x58);
-    FUN_00084880(param_1,*(int *)(iVar4 + 0xc) + 100);
+    execute_callback_with_state_check_and_memory_buffer_reset(param_1,*(int *)(iVar4 + 0xc) + 0x58);
+    execute_callback_with_state_check_and_memory_buffer_reset(param_1,*(int *)(iVar4 + 0xc) + 100);
     *(undefined1 *)(*(int *)(iVar4 + 0xc) + 0xca) = 0;
     if (*(char *)(*(int *)(iVar4 + 0xc) + 0xcb) != '\0') {
       *(undefined1 *)(*(int *)(iVar4 + 0xc) + 0xcb) = 0;
-      FUN_00084a54(*(undefined4 *)(param_1 + 4),0,0);
+      manage_memory_buffer_with_string_processing_and_busy_wait(*(undefined4 *)(param_1 + 4),0,0);
     }
     if (*(int *)(iVar2 + 4) << 0x1b < 0) {
-      FUN_00084b32(param_1,2);
+      manage_privileged_mode_with_flag_clearing_and_memory_processing(param_1,2);
     }
-    FUN_000848b0(param_1);
+    execute_callback_with_memory_buffer_initialization_and_constant_value(param_1);
   }
   if ((*(int *)(iVar6 + 0x120) != 0) && (*(int *)(iVar6 + 0x304) << 0x17 < 0)) {
     iVar4 = **(int **)(param_1 + 4);
@@ -175,7 +175,7 @@ void handle_device_interrupt_comprehensive(int param_1)
   iVar6 = **(int **)(param_1 + 4);
   if ((*(int **)(param_1 + 4))[1] << 0x1b < 0) {
     *(undefined4 *)(iVar6 + 0x308) = 0x400000;
-    FUN_00084b32(param_1,1);
+    manage_privileged_mode_with_flag_clearing_and_memory_processing(param_1,1);
     if (*(int *)(*(int *)(iVar4 + 0xc) + 0xc) == 0) {
       return;
     }
@@ -210,7 +210,7 @@ void handle_device_interrupt_comprehensive(int param_1)
        (bVar10 = *(int *)(iVar2 + 0x14) == iStack_24, iStack_24 = *(int *)(iVar2 + 0x1c) + iStack_24
        , bVar10)) {
       *(int *)(iVar2 + 0x1c) = iStack_24;
-      iVar2 = FUN_00084a24(iVar4);
+      iVar2 = copy_memory_buffer_with_bounds_checking_and_data_structure_update(iVar4);
       if (iVar2 != 0) goto LAB_00063380;
       iStack_24 = *(int *)(*(int *)(iVar4 + 0xc) + 0x1c);
     }
@@ -223,7 +223,7 @@ void handle_device_interrupt_comprehensive(int param_1)
     *(undefined4 *)(iVar6 + 0x308) = 0x400000;
     *(undefined4 *)(*(int *)(iVar4 + 0xc) + 8) = 0;
     *(undefined4 *)(*(int *)(iVar4 + 0xc) + 0xc) = 0;
-    FUN_00084840(param_1,local_2c);
+    execute_callback_function_pointer_if_valid(param_1,local_2c);
   }
   else {
 LAB_00063380:
@@ -237,7 +237,7 @@ LAB_00063380:
       setBasePriority(0x20);
     }
     InstructionSynchronizationBarrier(0xf);
-    FUN_00084ade(param_1,iVar4);
+    manage_state_and_initialize_data_structure_based_on_flags(param_1,iVar4);
     bVar10 = (bool)isCurrentModePrivileged();
     if (bVar10) {
       setBasePriority(uVar3);

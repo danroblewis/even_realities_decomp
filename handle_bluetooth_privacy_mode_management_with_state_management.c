@@ -23,7 +23,7 @@ undefined4 handle_bluetooth_privacy_mode_management_with_state_management(undefi
       iVar2 = *(int *)(local_34[0] + 0xc) + 1;
       iVar1 = memcmp_byte_arrays(iVar2,&DAT_000f2b47,6);
       if ((iVar1 != 0) && (iVar1 = memcmp_byte_arrays(iVar2,&DAT_000f2b41,6), iVar1 != 0)) {
-        FUN_00080fba(param_1 + 1,iVar2);
+        copy_memory_short_and_word(param_1 + 1,iVar2);
         *param_1 = 0;
         decrement_reference_count_and_cleanup_memory(local_34[0]);
         return 1;
@@ -34,7 +34,7 @@ undefined4 handle_bluetooth_privacy_mode_management_with_state_management(undefi
     local_1c = "Failed to read public address";
   }
   local_20 = 2;
-  FUN_0008104a(&DAT_00088150,0x1080,&local_20);
+  execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1080,&local_20);
   return 0;
 }
 

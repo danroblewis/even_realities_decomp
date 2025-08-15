@@ -23,7 +23,7 @@ undefined4 handle_ble_characteristic_read_request(int param_1,int *param_2)
     uVar3 = 0x13de;
 LAB_0005c24c:
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar3);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar3);
   }
   if ((param_2 == (int *)0x0) || (*param_2 == 0)) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","params && params->func",
@@ -44,7 +44,7 @@ LAB_0005c24c:
   }
   uVar5 = *(ushort *)(param_2 + 3);
   if (*(short *)((int)param_2 + 6) == 0) {
-    iVar2 = FUN_000823fa();
+    iVar2 = analyze_ble_connection_parameters_and_find_extremes();
     uVar6 = uVar5 + 2;
     if (uVar6 <= iVar2 - 1U) {
       uVar7 = 0x12;
@@ -53,7 +53,7 @@ LAB_0005c24c:
       goto LAB_0005c2be;
     }
   }
-  sVar1 = FUN_000823fa(param_1);
+  sVar1 = analyze_ble_connection_parameters_and_find_extremes(param_1);
   uVar5 = *(ushort *)(param_2 + 3);
   if ((ushort)(sVar1 - 5U) <= *(ushort *)(param_2 + 3)) {
     uVar5 = sVar1 - 5U;
@@ -63,7 +63,8 @@ LAB_0005c24c:
   puVar4 = (undefined *)0x82e05;
   uVar3 = 0x82857;
 LAB_0005c2be:
-  uVar3 = FUN_00082aee(param_1,puVar4,param_2,uVar3,uVar7,uVar6);
+  uVar3 = handle_ble_connection_state_change_with_characteristic_processing
+                    (param_1,puVar4,param_2,uVar3,uVar7,uVar6);
   return uVar3;
 }
 

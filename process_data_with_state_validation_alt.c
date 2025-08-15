@@ -107,7 +107,7 @@ LAB_0004f296:
     iVar8 = *(int *)(param_1 + 0x8fc) + *(int *)(param_1 + 0x920) * 0x10;
     if (uVar5 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x8fc) + *(int *)(param_1 + 0x920) * 0x10) != '\0') {
-        FUN_0007f7c8(param_1,param_1 + 0x918);
+        execute_callback_function_if_valid(param_1,param_1 + 0x918);
       }
       iVar8 = *(int *)(param_1 + 0x904);
       bVar10 = iVar8 != 0;
@@ -169,7 +169,7 @@ LAB_0004f296:
     if (*(ushort *)(param_1 + 0x910) == *(ushort *)(param_1 + 0x91c)) {
 LAB_0004f3be:
       if (*(char *)(*(int *)(param_1 + 0x8fc) + *(int *)(param_1 + 0x920) * 0x10) != '\0') {
-        FUN_0007f7c8(param_1,param_1 + 0x918);
+        execute_callback_function_if_valid(param_1,param_1 + 0x918);
       }
       iVar8 = *(int *)(param_1 + 0x904);
       bVar10 = iVar8 != 0;

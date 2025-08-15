@@ -13,9 +13,9 @@ void handle_ble_connection_error(int param_1)
   
   local_c = "SMP Timeout";
   local_10 = 2;
-  FUN_00083074(&DAT_00088180,0x1040,&local_10);
+  process_and_compress_data_wrapper(&DAT_00088180,0x1040,&local_10);
   handle_ble_connection_state_change(param_1 + -0x208,8);
-  FUN_00083090(param_1 + -0x204,4);
+  set_bit_in_value(param_1 + -0x204,4);
   return;
 }
 

@@ -12,7 +12,8 @@ int enqueue_dmic(undefined4 param_1)
   undefined1 auStack_d8 [204];
   
   memcpy(auStack_d8,&DAT_000885cc,200);
-  if ((DAT_20007ba0 == 8) && (FUN_00072240(&DAT_20007b7c,auStack_d8,0,0), 0 < LOG_LEVEL)) {
+  if ((DAT_20007ba0 == 8) &&
+     (manage_ble_connection_state_comprehensive(&DAT_20007b7c,auStack_d8,0,0), 0 < LOG_LEVEL)) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): enqueue_dmic num is full, drop it %d\r\n\n","enqueue_dmic",8);
     }

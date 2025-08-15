@@ -20,13 +20,13 @@ void process_data_with_validation_and_callback_alt5(int param_1,undefined4 param
   undefined1 auStack_34 [32];
   
   if (*(int *)(param_1 + 0x3c) != 0) {
-    uVar1 = FUN_00072e9c();
+    uVar1 = handle_connection_state_validation_with_privilege_management();
     if ((uVar1 & 5) != 0) {
-      FUN_00072fe8(param_1);
+      setup_sensor_interfaces_with_privilege_management(param_1);
     }
     setup_error_handling(auStack_34);
     uVar4 = extraout_r1;
-    while (uVar5 = thunk_FUN_000727ac(param_1 + 0x10,uVar4,0,0),
+    while (uVar5 = handle_ble_connection_state_transition_with_validation(param_1 + 0x10,uVar4,0,0),
           uVar4 = (undefined4)((ulonglong)uVar5 >> 0x20), iVar2 = (int)uVar5, iVar2 != 0) {
       iVar3 = (**(code **)(param_1 + 0x3c))(iVar2,param_2);
       if (iVar3 == 0) {
@@ -38,7 +38,8 @@ void process_data_with_validation_and_callback_alt5(int param_1,undefined4 param
         uVar4 = extraout_r1_01;
       }
     }
-    while (iVar2 = thunk_FUN_000727ac(auStack_34,uVar4,0,0), iVar2 != 0) {
+    while (iVar2 = handle_ble_connection_state_transition_with_validation(auStack_34,uVar4,0,0),
+          iVar2 != 0) {
       initialize_debug_system_with_validation(param_1 + 0x10,iVar2);
       uVar4 = extraout_r1_02;
     }

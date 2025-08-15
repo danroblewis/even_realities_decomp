@@ -32,11 +32,11 @@ void handle_bluetooth_privacy_mode_management(undefined1 *param_1)
   }
   handle_bluetooth_privacy_mode_management_with_validation_and_callback_execution(&LAB_000810aa_1,0)
   ;
-  if ((DAT_20002121 == 0) || (iVar1 = FUN_00081050(0), iVar1 == 0)) {
+  if ((DAT_20002121 == 0) || (iVar1 = process_bluetooth_hci_command_202d(0), iVar1 == 0)) {
     if (DAT_20002121 == DAT_20002120) {
       local_1c = "Resolving list size exceeded. Switching to host.";
       local_20 = 2;
-      FUN_0008104a(&DAT_00088150,0x1080,&local_20);
+      execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1080,&local_20);
       iVar1 = process_data_with_initialization_and_validation(0x2029,0);
       if (iVar1 == 0) {
         DAT_20002121 = DAT_20002121 + 1;
@@ -46,7 +46,8 @@ void handle_bluetooth_privacy_mode_management(undefined1 *param_1)
       local_1c = "Failed to clear resolution list";
     }
     else {
-      iVar1 = FUN_00080fd2(*param_1,param_1 + 1,param_1 + 0x2a);
+      iVar1 = process_bluetooth_hci_command_with_memory_allocation
+                        (*param_1,param_1 + 1,param_1 + 0x2a);
       if (iVar1 == 0) {
         DAT_20002121 = DAT_20002121 + 1;
         param_1[8] = param_1[8] | 4;
@@ -54,7 +55,7 @@ void handle_bluetooth_privacy_mode_management(undefined1 *param_1)
           local_1c = "Set privacy mode command is not supported";
           goto LAB_00054efa;
         }
-        FUN_00080fc4(auStack_30,param_1 + 1);
+        copy_memory_word_short_and_byte(auStack_30,param_1 + 1);
         local_29 = 1;
         iVar1 = process_data_with_initialization_and_store(0x204e,8);
         if (iVar1 != 0) {
@@ -76,9 +77,9 @@ LAB_00054efa:
     uVar2 = 0x1080;
   }
   local_20 = 2;
-  FUN_0008104a(&DAT_00088150,uVar2,&local_20);
+  execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,uVar2,&local_20);
 LAB_00054f5c:
-  FUN_00081050(1);
+  process_bluetooth_hci_command_202d(1);
   handle_bluetooth_privacy_mode_management_with_validation_and_callback_execution(0x81081,0);
   return;
 }

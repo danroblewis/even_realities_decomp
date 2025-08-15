@@ -13,11 +13,11 @@ uint validate_and_process_ble_characteristics_with_validation(void)
   undefined *puVar3;
   undefined4 uVar4;
   
-  FUN_00081320(&DAT_20002018);
-  FUN_00081180(&DAT_20002028,0xffffbfff);
-  iVar1 = FUN_0008117a(&DAT_20002028);
+  acquire_connection_mutex(&DAT_20002018);
+  apply_bitwise_and_mask(&DAT_20002028,0xffffbfff);
+  iVar1 = get_ble_characteristic_value(&DAT_20002028);
   if (iVar1 << 0x18 < 0) {
-    iVar1 = FUN_0008117a(&DAT_20002028);
+    iVar1 = get_ble_characteristic_value(&DAT_20002028);
     if (iVar1 << 0x15 < 0) {
       iVar1 = handle_bluetooth_privacy_mode_management_with_validation_and_state_management
                         (&DAT_20002018);
@@ -38,7 +38,7 @@ uint validate_and_process_ble_characteristics_with_validation(void)
                   (iVar1);
       }
     }
-    uVar2 = FUN_000812d2(&DAT_20002018,0);
+    uVar2 = send_ble_command_0x200a(&DAT_20002018,0);
     return uVar2;
   }
   return (uint)(iVar1 << 0x18) >> 0x1f;

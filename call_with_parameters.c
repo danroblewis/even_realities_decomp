@@ -15,7 +15,7 @@ void call_with_parameters(undefined4 func_ptr,undefined4 param1,undefined4 param
   local_10 = param1;
   uStack_c = param2;
   uStack_8 = param2;
-  FUN_0008633e(func_ptr,&local_10);
+  write_ble_uart_packet_string_with_type3_header(func_ptr,&local_10);
   return;
 }
 

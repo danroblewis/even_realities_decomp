@@ -62,7 +62,7 @@ LAB_000440a2:
       for (local_2f0 = 0; (int)local_2f0 < (int)(uint)local_2da; local_2f0 = local_2f0 + 1) {
         puVar14 = puVar2 + 1;
         uVar12 = (uint)*puVar2;
-        iVar3 = FUN_0007d860(uVar12);
+        iVar3 = bounds_check_return_negative_one_or_zero(uVar12);
         if (iVar3 == 0) {
           iVar4 = _012_resource_manger_get(param_3,uVar12,&local_2d4,&local_2d0,&local_2d8,0);
           iVar1 = local_2d0;
@@ -97,14 +97,14 @@ LAB_000440a2:
               }
               uVar9 = uVar9 + 1;
               if ((param_8 <= uVar9) || ((uint)(param_7 - param_5) <= uVar7)) break;
-              draw_bitmap_to_framebuffer
+              draw_4bit_bitmap_to_framebuffer
                         (MAIN_FRAMEBUFFER,local_2cc,iVar4,iVar1,param_4,uVar7 + param_5);
               iVar3 = count_matching_data_entries(*puVar2,*puVar14);
               uVar10 = local_2d4 + iVar3;
               uVar13 = uVar10;
             }
             else {
-              draw_bitmap_to_framebuffer
+              draw_4bit_bitmap_to_framebuffer
                         (MAIN_FRAMEBUFFER,local_2cc,iVar4,iVar1,uVar10 + param_4,uVar7 + param_5);
               iVar3 = count_matching_data_entries(*puVar2,*puVar14);
               uVar10 = uVar10 + iVar3 + local_2d4;

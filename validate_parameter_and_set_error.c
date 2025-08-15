@@ -13,7 +13,7 @@ undefined4 validate_parameter_and_set_error(uint param_1)
   if ((param_1 < 0x10) && (*(int *)(&DAT_20002550 + param_1 * 0x28) != 0)) {
     return 0;
   }
-  puVar1 = (undefined4 *)thunk_FUN_00071678();
+  puVar1 = (undefined4 *)calculate_data_structure_offset();
   *puVar1 = 9;
   return 0xffffffff;
 }

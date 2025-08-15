@@ -30,7 +30,7 @@ void bt_connection_disconnect_with_state_management(int param_1)
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x85c);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x85c);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x85c);
     }
     if (&UNK_00088057 < puVar1) break;
     if ((code *)puVar1[4] != (code *)0x0) {

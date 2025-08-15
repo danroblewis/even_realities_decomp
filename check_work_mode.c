@@ -27,7 +27,7 @@ void check_work_mode(int param_1,int param_2,int param_3)
   if (uVar2 == 8) {
     return;
   }
-  uVar6 = FUN_0007cb2c();
+  uVar6 = calculate_mathematical_operation_with_bit_shifting();
   if ((int)((ulonglong)uVar6 >> 0x20) < (int)(uint)((uint)uVar6 < 10000)) {
     return;
   }
@@ -72,7 +72,7 @@ void check_work_mode(int param_1,int param_2,int param_3)
         DAT_20018d93 = 0;
         DAT_20018d92 = '\0';
         DAT_20018d87 = bVar5;
-        FUN_0007dada();
+        check_and_clear_burial_point_flag();
         if (param_1 == 0) {
           if (uVar2 != 4) {
             _event_id2 = get_work_mode();

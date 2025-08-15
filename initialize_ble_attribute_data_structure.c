@@ -21,7 +21,7 @@ int initialize_ble_attribute_data_structure(int param_1,int *param_2)
     uVar4 = 0x147d;
 LAB_0005c3e4:
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar4);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",uVar4);
   }
   if ((param_2 == (int *)0x0) || (*param_2 == 0)) {
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","params && params->notify",
@@ -53,7 +53,7 @@ LAB_0005c3e4:
     if (puVar2 == (undefined1 *)0x0) {
       return -0xc;
     }
-    FUN_000828da(puVar2 + 1,param_1 + 0x90);
+    copy_data_structure_fields(puVar2 + 1,param_1 + 0x90);
     *puVar2 = *(undefined1 *)(param_1 + 8);
   }
   piVar5 = *(int **)(puVar2 + 8);

@@ -11,7 +11,7 @@ void initialize_ble_connection_data
 {
   int extraout_r2;
   
-  FUN_000828da(param_1 + 1,&DAT_000f2b3a,param_1,param_4,param_4);
+  copy_data_structure_fields(param_1 + 1,&DAT_000f2b3a,param_1,param_4,param_4);
   *(undefined1 *)(extraout_r2 + 8) = 0;
   *(undefined4 *)(extraout_r2 + 0xc) = 0;
   return;

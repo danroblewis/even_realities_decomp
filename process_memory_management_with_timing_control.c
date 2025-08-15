@@ -28,7 +28,7 @@ int process_memory_management_with_timing_control(void)
                      "WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x1c5);
         DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x1c5);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/logging/log_core.c",0x1c5);
       }
       if (&UNK_000882af < puVar4) break;
       if (*(char *)(puVar4[1] + 5) != '\0') {

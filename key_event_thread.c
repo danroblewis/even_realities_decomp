@@ -310,7 +310,7 @@ LAB_00029aac:
                         handle_heartbeat();
                       }
                     }
-                    FUN_0007cb54(&DAT_20007b38);
+                    atomic_set_bit_1(&DAT_20007b38);
                     break;
                   }
                   if (1 < LOG_LEVEL) {
@@ -328,7 +328,7 @@ LAB_00029aac:
             }
           }
           else {
-            FUN_0007cb54(&DAT_20007b34);
+            atomic_set_bit_1(&DAT_20007b34);
             do {
               iVar6 = sync_to_slave(param_1,8,&local_30,2);
               if (iVar6 < 5000) {
@@ -450,7 +450,7 @@ LAB_00029a76:
           process_message_and_sync(param_1,8,0,0);
         }
         param_1[0xfea] = '\n';
-        FUN_0007d2f8(1);
+        set_work_mode_state_and_update_flags(1);
         if (0 < LOG_LEVEL) {
           pcVar4 = 
           "%s(): #############################exit not disturb################################\n\n";
@@ -474,7 +474,7 @@ LAB_00029cf8:
         }
         param_1[0xfea] = '\f';
         handle_work_mode_finish(param_1,1);
-        FUN_0007d2f8(0);
+        set_work_mode_state_and_update_flags(0);
         if (0 < LOG_LEVEL) {
           pcVar4 = 
           "%s(): #############################enter not disturb################################\n\n"
@@ -686,7 +686,7 @@ LAB_00029a02:
       handle_heartbeat();
     }
   }
-  FUN_0007cb54(&DAT_20007b38);
+  atomic_set_bit_1(&DAT_20007b38);
   goto LAB_0002956e;
 }
 

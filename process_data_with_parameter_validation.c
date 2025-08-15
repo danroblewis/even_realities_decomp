@@ -16,7 +16,8 @@ void process_data_with_parameter_validation(void)
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","device_is_ready(uart_dev)",
                  "WEST_TOPDIR/zephyr/subsys/logging/backends/log_backend_uart.c",0x7f,in_r3);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/backends/log_backend_uart.c",0x7f);
+    trigger_system_service_call
+              ("WEST_TOPDIR/zephyr/subsys/logging/backends/log_backend_uart.c",0x7f);
   }
   return;
 }

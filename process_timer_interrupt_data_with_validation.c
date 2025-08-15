@@ -17,7 +17,7 @@ int process_timer_interrupt_data_with_validation(int param_1)
   
   puVar5 = local_28;
   iVar2 = *(int *)(param_1 + 8);
-  FUN_0007f012();
+  call_function_pointer_and_return_byte();
   pcVar4 = (char *)&DAT_0009907c;
   do {
     uVar1 = *(undefined4 *)pcVar4;
@@ -27,7 +27,8 @@ int process_timer_interrupt_data_with_validation(int param_1)
     puVar5[1] = uVar3;
     puVar5 = puVar5 + 2;
   } while (pcVar4 != "%s(): RTC has sync at %lld ms\n");
-  iVar2 = FUN_0007efaa(param_1,iVar2 - 0x10U & 0xfffffff8,local_28,0x10);
+  iVar2 = safe_function_pointer_call_with_bounds_check_alt
+                    (param_1,iVar2 - 0x10U & 0xfffffff8,local_28,0x10);
   if (iVar2 != 0) {
     iVar2 = 1;
   }

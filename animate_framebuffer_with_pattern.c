@@ -39,7 +39,7 @@ animate_framebuffer_with_pattern(undefined4 param_1,undefined4 param_2,undefined
     iVar2 = get_work_mode();
     _reflash_fb_data_to_lcd(uVar6,*(undefined4 *)(iVar2 + 0xeb8),0,0,0x280,199,param_3);
     iVar4 = iVar4 + -0x140;
-    FUN_00086384(5000);
+    handle_ble_uart_packet_processing_completion(5000);
   } while (iVar4 != -0xa00);
   gui_screen_clear();
   return 0;

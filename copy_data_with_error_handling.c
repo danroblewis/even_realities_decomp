@@ -26,7 +26,7 @@ int copy_data_with_error_handling(undefined1 *param_1)
     local_14 = "No space for a UUID.";
   }
   local_18 = 2;
-  FUN_0007f406(&DAT_00088130,0x1040,&local_18);
+  process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1040,&local_18);
   return 0;
 }
 

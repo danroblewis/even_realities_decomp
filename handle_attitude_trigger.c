@@ -312,12 +312,13 @@ LAB_0001027a:
                     }
                     iVar1 = get_system_byte_2();
                     if (iVar1 == 0) {
-                      iVar1 = FUN_0007ca4e(&DASHBOARD_LOCK_STATUS);
+                      iVar1 = get_pointer_value(&DASHBOARD_LOCK_STATUS);
                       if (iVar1 << 0x1e < 0) {
-                        iVar1 = FUN_0007ca4e(&DAT_20007aa0);
+                        iVar1 = get_pointer_value(&DAT_20007aa0);
                         if (((-1 < iVar1 << 0x1e) &&
-                            (iVar1 = FUN_0007ca4e(&DASHBOARD_LOCK_CONTROL), -1 < iVar1 << 0x1e)) &&
-                           (iVar1 = FUN_0007ca4e(&DASHBOARD_LOCK_STATUS), iVar1 << 0x1e < 0)) {
+                            (iVar1 = get_pointer_value(&DASHBOARD_LOCK_CONTROL), -1 < iVar1 << 0x1e)
+                            ) && (iVar1 = get_pointer_value(&DASHBOARD_LOCK_STATUS),
+                                 iVar1 << 0x1e < 0)) {
                           local_7c = (float)CONCAT22(extraout_var,0x650);
                           local_78 = 0x101;
                           if (2 < LOG_LEVEL) {
@@ -357,7 +358,7 @@ LAB_0001027a:
                           cal_panel_canvas_coord(param_1 + -0x20,param_1 + -0x2c);
                         }
                         change_work_mode_to(2);
-                        iVar1 = FUN_0007ca4e(&DAT_20007aa0);
+                        iVar1 = get_pointer_value(&DAT_20007aa0);
                         if (-1 < iVar1 << 0x1e) {
                           *extraout_r3 = *extraout_r3 | 2;
                         }

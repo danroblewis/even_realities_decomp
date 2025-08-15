@@ -38,17 +38,17 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation_and_parame
     iVar6 = 1;
   }
   local_54 = 0;
-  uVar9 = FUN_0008117a(&DAT_200020d4);
+  uVar9 = get_ble_characteristic_value(&DAT_200020d4);
   puVar3 = (undefined1 *)((ulonglong)uVar9 >> 0x20);
   if (-1 < (int)uVar9 << 0x1d) {
     return -0xb;
   }
   iVar1 = handle_bluetooth_privacy_mode_management_with_state_management_and_callback(puVar3);
-  if ((iVar1 == 0) || (iVar1 = FUN_00081130(puVar3), iVar1 == 0)) {
+  if ((iVar1 == 0) || (iVar1 = convert_to_boolean_flag(puVar3), iVar1 == 0)) {
     return -0x16;
   }
   puVar7 = param_1 + 0x10;
-  iVar2 = FUN_0008117a(puVar7);
+  iVar2 = get_ble_characteristic_value(puVar7);
   local_4c = (uint)(iVar2 << 0x18) >> 0x1f;
   if (iVar2 << 0x18 < 0) {
     return -0x78;
@@ -60,8 +60,8 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation_and_parame
   uStack_42 = 0;
   local_50 = (undefined2)*(undefined4 *)(puVar3 + 8);
   local_4e = (undefined2)*(undefined4 *)(puVar3 + 0xc);
-  uStack_43 = FUN_0008115c(*(undefined4 *)(puVar3 + 4),0xffffdfff);
-  FUN_00081180(&DAT_200020d4);
+  uStack_43 = calculate_bluetooth_privacy_flags(*(undefined4 *)(puVar3 + 4),0xffffdfff);
+  apply_bitwise_and_mask(&DAT_200020d4);
   DAT_2000206f = *puVar3;
   *param_1 = DAT_2000206f;
   iVar6 = handle_bluetooth_privacy_mode_management_with_callback_validation
@@ -70,15 +70,15 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation_and_parame
     return iVar6;
   }
   if (iVar8 == 0) {
-    FUN_00081196(param_1 + 9,&DAT_000f2b3a);
-    iVar6 = FUN_000812b2(puVar3);
+    copy_memory_word_short_and_byte_alt(param_1 + 9,&DAT_000f2b3a);
+    iVar6 = analyze_bluetooth_state_flags(puVar3);
     uVar5 = *(uint *)(puVar3 + 4);
     if (-1 < (int)(uVar5 << 0x1f)) goto LAB_000557f6;
     local_4c = local_4c & 0xffffff00;
   }
   else {
-    FUN_00081196(param_1 + 9,*(undefined4 *)(puVar3 + 0x10));
-    iVar6 = FUN_000812b2(puVar3);
+    copy_memory_word_short_and_byte_alt(param_1 + 9,*(undefined4 *)(puVar3 + 0x10));
+    iVar6 = analyze_bluetooth_state_flags(puVar3);
     uVar5 = *(uint *)(puVar3 + 4);
     if ((int)(uVar5 << 0x1f) < 0) {
       if ((uVar5 & 0x10) == 0) {
@@ -88,7 +88,7 @@ int handle_bluetooth_privacy_mode_management_with_callback_validation_and_parame
         uVar4 = 4;
       }
       local_4c = CONCAT31(local_4c._1_3_,uVar4);
-      FUN_00081196((int)&local_4c + 2,*(undefined4 *)(puVar3 + 0x10));
+      copy_memory_word_short_and_byte_alt((int)&local_4c + 2,*(undefined4 *)(puVar3 + 0x10));
       iVar1 = 0;
     }
     else {
@@ -112,7 +112,8 @@ LAB_000557f6:
     return iVar2;
   }
   if ((iVar8 == 0) &&
-     (iVar2 = FUN_000811ce(param_1,extraout_r2,param_4,param_5,param_6,iVar1,iVar6), iVar2 != 0)) {
+     (iVar2 = process_bluetooth_hci_commands_2008_and_2009
+                        (param_1,extraout_r2,param_4,param_5,param_6,iVar1,iVar6), iVar2 != 0)) {
     return iVar2;
   }
   if ((*(int *)(puVar3 + 4) << 0x1f < 0) &&
@@ -129,7 +130,7 @@ LAB_000557f6:
     }
   }
   else {
-    iVar2 = FUN_000812d2(param_1,1);
+    iVar2 = send_ble_command_0x200a(param_1,1);
     if (iVar2 != 0) {
       local_2c = "Failed to start advertiser";
       local_30 = 2;
@@ -150,12 +151,12 @@ LAB_000557f6:
   }
   uVar5 = ((*(uint *)(puVar3 + 4) ^ 2) << 0x1e) >> 0x1f;
 LAB_0005590e:
-  FUN_000811a4(puVar7,0xe,uVar5);
-  FUN_000811a4(puVar7,8,iVar6 == 1);
-  FUN_000811a4(puVar7,9,iVar6 == 2);
-  FUN_000811a4(puVar7,10,*(uint *)(puVar3 + 4) & 1);
-  FUN_000811a4(puVar7,0xb,iVar1);
-  FUN_000811a4(puVar7,0xd,(uint)(*(int *)(puVar3 + 4) << 0x1d) >> 0x1f);
+  set_or_clear_bit_flag(puVar7,0xe,uVar5);
+  set_or_clear_bit_flag(puVar7,8,iVar6 == 1);
+  set_or_clear_bit_flag(puVar7,9,iVar6 == 2);
+  set_or_clear_bit_flag(puVar7,10,*(uint *)(puVar3 + 4) & 1);
+  set_or_clear_bit_flag(puVar7,0xb,iVar1);
+  set_or_clear_bit_flag(puVar7,0xd,(uint)(*(int *)(puVar3 + 4) << 0x1d) >> 0x1f);
   return 0;
 }
 

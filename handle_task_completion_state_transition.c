@@ -28,7 +28,7 @@ int handle_task_completion_state_transition
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","0","WEST_TOPDIR/zephyr/lib/os/notify.c",0x45,
                    param_4);
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/lib/os/notify.c",0x45);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/lib/os/notify.c",0x45);
     }
     param_1[1] = 0;
   }

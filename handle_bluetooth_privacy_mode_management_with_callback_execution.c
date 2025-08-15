@@ -47,7 +47,7 @@ uint handle_bluetooth_privacy_mode_management_with_callback_execution(int param_
       }
       local_1c = "No static addresses stored in controller";
       local_20 = 2;
-      FUN_0008104a(&DAT_00088150,0x1080,&local_20);
+      execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1080,&local_20);
       return 0;
     }
     local_1c = "Failed to read static addresses";
@@ -56,7 +56,7 @@ uint handle_bluetooth_privacy_mode_management_with_callback_execution(int param_
     local_1c = "Read Static Addresses command not available";
   }
   local_20 = 2;
-  FUN_0008104a(&DAT_00088150,0x1080,&local_20);
+  execute_bluetooth_privacy_mode_data_compression(&DAT_00088150,0x1080,&local_20);
   return 0;
 }
 

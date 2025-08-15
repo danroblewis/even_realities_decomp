@@ -19,7 +19,7 @@ undefined4 handle_message_processing(undefined4 param_1,undefined4 param_2,undef
   uStack_14 = param_2;
   uStack_10 = param_3;
   for (iVar2 = DAT_20003984; 0 < iVar2; iVar2 = iVar2 + -1) {
-    uVar1 = FUN_00072240(&DAT_20003960,&uStack_18,0,0);
+    uVar1 = manage_ble_connection_state_comprehensive(&DAT_20003960,&uStack_18,0,0);
   }
   return uVar1;
 }

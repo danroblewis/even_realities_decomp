@@ -11,7 +11,7 @@ int FUN_00082114(undefined4 param_1,undefined4 param_2)
   int iVar1;
   int iVar2;
   
-  iVar1 = thunk_FUN_000727ac(param_2,param_2,0,0);
+  iVar1 = handle_ble_connection_state_transition_with_validation(param_2,param_2,0,0);
   if (iVar1 == 0) {
     iVar2 = -2;
   }

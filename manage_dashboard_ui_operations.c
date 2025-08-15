@@ -201,11 +201,11 @@ LAB_0003b116:
     set_parameter_with_bounds_check(0x42);
     process_timeout_message_state_and_send_response();
 LAB_0003b198:
-    iVar3 = FUN_0007d1d0(&DASHBOARD_LOCK_STATUS);
+    iVar3 = dereference_pointer(&DASHBOARD_LOCK_STATUS);
     if (-1 < iVar3 << 0x1e) {
       return 0;
     }
-    iVar3 = FUN_0007d1d0(&DASHBOARD_LOCK_CONTROL);
+    iVar3 = dereference_pointer(&DASHBOARD_LOCK_CONTROL);
     if (iVar3 << 0x1e < 0) {
       return 0;
     }
@@ -227,8 +227,9 @@ LAB_0003b198:
   if (DAT_20004950 != '\x01') {
     return 0;
   }
-  uVar4 = FUN_0007d1d0(&DASHBOARD_LOCK_STATUS);
-  if (((uVar4 & 2) != 0) && (iVar5 = FUN_0007d1d0(&DASHBOARD_LOCK_CONTROL), -1 < iVar5 << 0x1e)) {
+  uVar4 = dereference_pointer(&DASHBOARD_LOCK_STATUS);
+  if (((uVar4 & 2) != 0) &&
+     (iVar5 = dereference_pointer(&DASHBOARD_LOCK_CONTROL), -1 < iVar5 << 0x1e)) {
     local_30 = 0x650;
     local_2c = CONCAT22(local_2c._2_2_,0x201);
     if (2 < LOG_LEVEL) {
@@ -381,7 +382,7 @@ LAB_0003b512:
       if (*pcVar6 != '\x01') {
         return 0;
       }
-      iVar3 = FUN_0007d248();
+      iVar3 = validate_work_mode_status();
       lVar13 = calculate_ble_connection_timing_with_validation();
       uVar10 = (uint)((ulonglong)(lVar13 * 1000) >> 0x20);
       uVar4 = (uint)(lVar13 * 1000) >> 0xf | uVar10 * 0x20000;

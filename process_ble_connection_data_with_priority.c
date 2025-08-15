@@ -64,7 +64,7 @@ int process_ble_connection_data_with_priority
     uVar6 = 0xf0;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar6);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/spinlock.h",uVar6);
 }
 
 

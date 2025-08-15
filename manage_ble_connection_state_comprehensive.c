@@ -88,7 +88,7 @@ manage_ble_connection_state_comprehensive(int param_1,undefined4 param_2,uint pa
     pcVar2 = "WEST_TOPDIR/zephyr/kernel/sem.c";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar2,uVar4);
+  trigger_system_service_call(pcVar2,uVar4);
 }
 
 

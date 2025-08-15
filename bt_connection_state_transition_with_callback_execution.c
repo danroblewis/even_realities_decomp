@@ -18,12 +18,12 @@ int bt_connection_state_transition_with_callback_execution
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!k_is_in_isr()",
                  "WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x55f);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x55f);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/conn.c",0x55f);
   }
   if (param_1 == (undefined *)0x0) {
     param_1 = &DAT_20003a7c;
   }
-  iVar1 = FUN_000836de(param_1,&DAT_20003a7c,param_3,param_4);
+  iVar1 = process_ble_connection_data(param_1,&DAT_20003a7c,param_3,param_4);
   if (iVar1 == 0) {
     local_1c = "Unable to allocate buffer within timeout";
     local_20 = 2;

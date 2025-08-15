@@ -20,7 +20,7 @@ undefined4 manage_device_interrupt_enable_state(int param_1,uint param_2,int par
   uVar1 = *(uint *)(iVar2 + 0x84) >> (param_2 & 0xff) & 1;
   if (param_3 == 0) {
     if (uVar1 != 0) {
-      FUN_00065e4c(param_2 & 0xff);
+      set_hardware_interrupt_enable_bit_alt(param_2 & 0xff);
       *(uint *)(iVar2 + 0x84) = *(uint *)(iVar2 + 0x84) & ~(1 << (param_2 & 0xff));
 LAB_00061c20:
       if (*(int *)(iVar2 + 0x84) == 0) {
@@ -39,7 +39,7 @@ LAB_00061c20:
       process_data_with_parameter_validation_alt4(0x2a);
     }
     *(uint *)(iVar2 + 0x84) = *(uint *)(iVar2 + 0x84) | 1 << (param_2 & 0xff);
-    FUN_00065e10(param_2 & 0xff);
+    set_hardware_interrupt_enable_bit(param_2 & 0xff);
     goto LAB_00061c20;
   }
   return 0xffffff88;

@@ -74,7 +74,8 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
       format_string = "%s(): Watchdog install error\n";
     }
     else {
-      iVar1 = FUN_00084cb0(&HARDWARE_OPERATION_MESSAGE,2);
+      iVar1 = conditional_callback_execution_based_on_character_value(&HARDWARE_OPERATION_MESSAGE,2)
+      ;
       if (iVar1 < 0) {
         if (LOG_LEVEL < 1) {
           return 0;
@@ -100,7 +101,8 @@ init_watchdog(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
               handle_heartbeat();
             }
           }
-          iVar2 = FUN_00084c7e(&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
+          iVar2 = conditional_callback_execution_with_parameter_packing
+                            (&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
           if (iVar2 == 0) break;
           calculate_ble_schedule_timing(0x667,0);
           iVar1 = iVar1 + -1;

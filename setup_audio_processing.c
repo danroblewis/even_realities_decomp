@@ -28,7 +28,7 @@ setup_audio_processing(uint param_1,undefined4 param_2,undefined4 param_3,undefi
                    "WEST_TOPDIR/zephyr/kernel/mempool.c",0x25);
       DEBUG_PRINT2("\tmisaligned memory at %p (align = %zu)\n",puVar2,4);
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/kernel/mempool.c",0x25);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/mempool.c",0x25);
     }
   }
   else {

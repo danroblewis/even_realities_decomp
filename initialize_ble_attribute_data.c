@@ -9,8 +9,9 @@ void initialize_ble_attribute_data
                (undefined4 param_1,int param_2,undefined4 param_3,undefined4 param_4)
 
 {
-  FUN_000826e0(param_2 + 0x14,8,param_3,param_4,param_1,param_2,param_3);
-  FUN_00082aee(param_1,0x5a1b1,param_2,0x82b6f,0x12,4);
+  set_bits_in_value(param_2 + 0x14,8,param_3,param_4,param_1,param_2,param_3);
+  handle_ble_connection_state_change_with_characteristic_processing
+            (param_1,0x5a1b1,param_2,0x82b6f,0x12,4);
   return;
 }
 

@@ -95,7 +95,7 @@ LAB_00026d96:
           }
           DAT_20018d94 = 2;
           while (DAT_20018d81 == '\0') {
-            lVar8 = FUN_0007cb2c();
+            lVar8 = calculate_mathematical_operation_with_bit_shifting();
             lVar8 = lVar8 - CONCAT44(DAT_200040c4,DAT_200040c0);
             iVar2 = (int)((ulonglong)lVar8 >> 0x20);
             bVar7 = (uint)lVar8 < 300000;

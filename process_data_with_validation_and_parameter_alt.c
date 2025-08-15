@@ -135,7 +135,7 @@ LAB_0004f66c:
   pcVar3 = "WEST_TOPDIR/zephyr/include/zephyr/spinlock.h";
 LAB_0004f5e6:
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar8);
+  trigger_system_service_call(pcVar3,uVar8);
 }
 
 

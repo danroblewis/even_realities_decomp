@@ -36,7 +36,7 @@ LAB_0002aed6:
           handle_heartbeat();
         }
       }
-      iVar1 = FUN_00084c94(&HARDWARE_OPERATION_MESSAGE);
+      iVar1 = execute_callback_and_update_state_on_success(&HARDWARE_OPERATION_MESSAGE);
       if (iVar1 == 0) {
         HARDWARE_OPERATION_PARAMETER = -0x10;
         goto LAB_0002aed6;

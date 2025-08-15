@@ -21,12 +21,12 @@ undefined4 format_bluetooth_log_message_with_parameters(undefined1 *param_1,int 
   }
   else {
     if (param_1 != (undefined1 *)0x0) {
-      FUN_0007dc4a(auStack_38,4,param_1);
+      convert_number_to_decimal_string(auStack_38,4,param_1);
       param_1 = auStack_38;
     }
     process_data_with_callback_and_parameter_alt6(auStack_34,0x24,"sc",param_2,param_1);
   }
-  uVar1 = FUN_0007f198(auStack_34);
+  uVar1 = initialize_buffer_structure_with_default_parameters(auStack_34);
   return uVar1;
 }
 

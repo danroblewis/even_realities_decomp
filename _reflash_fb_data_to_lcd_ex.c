@@ -86,8 +86,8 @@ _reflash_fb_data_to_lcd_ex
       *(undefined4 *)(iVar10 + iVar8) = local_30;
       *(undefined1 *)(iVar7 + 4) = local_2c;
     }
-    FUN_0007d77c(0x97);
-    FUN_0007d772(1);
+    manage_jbd_display_power_state(0x97);
+    multiply_by_1000_and_jump(1);
     uVar3 = 0;
   }
   return uVar3;

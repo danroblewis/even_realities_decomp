@@ -31,7 +31,7 @@ spi_master_trans_data_tx_rx
     }
   }
   else {
-    iVar1 = FUN_00067304(param_1 + 0xc,&local_18,0);
+    iVar1 = validate_and_setup_interrupt_configuration(param_1 + 0xc,&local_18,0);
     if (iVar1 == 0xbad0000) {
       return 0;
     }

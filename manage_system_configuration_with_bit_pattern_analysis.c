@@ -104,7 +104,7 @@ LAB_0007a954:
                *(int *)(param_2 + 0x24) * (*(uint *)(param_2 + 0x10) / 0x18) * 0x18000 >> 6;
           _DAT_5084512c = 1;
           *param_1 = local_48 << 8 | local_48 << 0x18 | *param_1 & 0xffffff;
-          iVar1 = FUN_0007b098(&local_44);
+          iVar1 = reset_system_status_flags_and_memory(&local_44);
           if ((local_44 & 0x1a) != 0 || iVar1 != 0) goto LAB_0007a7c0;
           local_40 = _DAT_50845114;
           local_3c = _DAT_50845118;

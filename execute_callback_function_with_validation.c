@@ -14,11 +14,13 @@ execute_callback_function_with_validation
   code *UNRECOVERED_JUMPTABLE;
   
   if (callback_context == 0) {
-    FUN_0007e9ea(&DAT_000881d8,0x1040,&stack0xfffffff0,2,0,param_2,param_3,param_4);
+    process_and_compress_data_with_validation_wrapper
+              (&DAT_000881d8,0x1040,&stack0xfffffff0,2,0,param_2,param_3,param_4);
     uVar1 = 0xffffffea;
   }
   else if (*(undefined4 **)(callback_context + 8) == (undefined4 *)0x0) {
-    FUN_0007e9ea(&DAT_000881d8,0x1040,&stack0xfffffff0,2,callback_context,param_2,param_3,param_4);
+    process_and_compress_data_with_validation_wrapper
+              (&DAT_000881d8,0x1040,&stack0xfffffff0,2,callback_context,param_2,param_3,param_4);
     uVar1 = 0xfffffffb;
   }
   else {

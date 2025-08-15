@@ -47,9 +47,9 @@ undefined4 handle_ble_connection_state_change_with_validation(undefined4 param_1
       local_24 = (undefined1 *)ble_memory_allocation_utility(local_28 + 0xc,1);
       *local_24 = 0;
       local_1c = '\n';
-      FUN_00081cee(uVar6,uVar1,0x58809,&local_30);
+      process_ble_handle_mapping_wrapper(uVar6,uVar1,0x58809,&local_30);
       if (local_1c == '\0') {
-        FUN_000821a4(param_1,local_28);
+        handle_ble_characteristic_value_change_with_debug_init(param_1,local_28);
         return 0;
       }
       bt_connection_disconnect_with_callback_validation_and_parameter_and_state_validation_and_callback_execution
@@ -61,7 +61,7 @@ undefined4 handle_ble_connection_state_change_with_validation(undefined4 param_1
   }
   cVar4 = '\x01';
 LAB_000594e8:
-  FUN_000821f4(param_1,8,uVar6,cVar4);
+  handle_ble_characteristic_value_change_with_callback_and_debug(param_1,8,uVar6,cVar4);
   return 0;
 }
 

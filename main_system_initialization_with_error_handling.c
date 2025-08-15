@@ -13,7 +13,7 @@ undefined4 main_system_initialization_with_error_handling(void)
   int iVar1;
   undefined1 auStack_14 [8];
   
-  iVar1 = FUN_0007a28c();
+  iVar1 = return_zero_simple();
   if (iVar1 != 0) {
     cleanup_system_components_comprehensive();
     return 3;

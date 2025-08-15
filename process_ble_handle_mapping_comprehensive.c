@@ -31,7 +31,7 @@ void process_ble_handle_mapping_comprehensive
                      "WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x7d7);
         DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x7d7);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/gatt.c",0x7d7);
       }
       if (&UNK_0008806f < piVar3) break;
       if (piVar3[1] + uVar6 < param_1) {
@@ -40,8 +40,9 @@ void process_ble_handle_mapping_comprehensive
       else {
         for (uVar5 = 0; uVar2 = uVar6 + uVar5 & 0xffff, uVar5 < (uint)piVar3[1]; uVar5 = uVar5 + 1)
         {
-          iVar1 = FUN_00082712(uVar5 * 0x14 + *piVar3,uVar2,param_1,param_2,param_3,param_4,&param_5
-                               ,param_6,param_7);
+          iVar1 = validate_data_and_execute_callback_with_counter
+                            (uVar5 * 0x14 + *piVar3,uVar2,param_1,param_2,param_3,param_4,&param_5,
+                             param_6,param_7);
           if (iVar1 == 0) {
             return;
           }
@@ -60,8 +61,9 @@ void process_ble_handle_mapping_comprehensive
 LAB_0005ab44:
         for (; uVar6 < puVar4[-1]; uVar6 = uVar6 + 1) {
           iVar1 = uVar6 * 0x14 + puVar4[-2];
-          iVar1 = FUN_00082712(iVar1,*(undefined2 *)(iVar1 + 0x10),param_1,param_2,param_3,param_4,
-                               local_2a,param_6,param_7);
+          iVar1 = validate_data_and_execute_callback_with_counter
+                            (iVar1,*(undefined2 *)(iVar1 + 0x10),param_1,param_2,param_3,param_4,
+                             local_2a,param_6,param_7);
           if (iVar1 == 0) {
             return;
           }

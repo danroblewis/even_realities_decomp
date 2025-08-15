@@ -60,7 +60,8 @@ void display_thread_handler(int param_1)
     bVar2 = false;
     lVar1 = (longlong)(int)(DAT_20002544 & ~((int)DAT_20002544 >> 0x1f)) * 0x8000 + 999;
     uVar9 = handle_unsigned_division((int)lVar1,(int)((ulonglong)lVar1 >> 0x20),1000,0);
-    iVar4 = FUN_00072240(&DAT_200038c4,local_40,(int)uVar9,(int)((ulonglong)uVar9 >> 0x20));
+    iVar4 = manage_ble_connection_state_comprehensive
+                      (&DAT_200038c4,local_40,(int)uVar9,(int)((ulonglong)uVar9 >> 0x20));
     uVar3 = local_3c;
     if (iVar4 == 0) {
       bVar2 = true;
@@ -285,7 +286,7 @@ LAB_00049488:
             if (local_40[0] == 2) {
               if ((*(char *)(param_1 + 0xd5) == '\x10') &&
                  (iVar4 = get_work_mode(), **(byte **)(iVar4 + 0x100c) < 0xc)) {
-                FUN_0007d6f4(0);
+                initialize_jbd_display_system_with_memory_and_commands(0);
               }
               if (2 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
@@ -393,7 +394,7 @@ LAB_000492ac:
         display_reflash_handler(param_1,*(undefined1 *)(param_1 + 0xd5),iVar8,2);
       }
 LAB_000495ba:
-      FUN_0007d6f4(0);
+      initialize_jbd_display_system_with_memory_and_commands(0);
       setup_font_rendering_system();
       _DAT_2001d447 = 0;
     }

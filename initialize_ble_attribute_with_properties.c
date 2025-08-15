@@ -22,12 +22,12 @@ void initialize_ble_attribute_with_properties(int param_1)
   undefined2 local_1c;
   undefined4 *puVar5;
   
-  iVar1 = FUN_0008307a();
+  iVar1 = process_data_with_compression_and_validation();
   if (iVar1 == 0) {
     return;
   }
   iVar9 = iVar1 + 4;
-  iVar2 = FUN_00082ff6(iVar9,3);
+  iVar2 = extract_bit_from_value(iVar9,3);
   if (iVar2 == 0) {
     return;
   }
@@ -41,11 +41,11 @@ void initialize_ble_attribute_with_properties(int param_1)
     local_24 = "Unable to get keys for %s";
     local_1c = 0x200;
     local_28 = 0x1000003;
-    FUN_00083074(&DAT_00088180,0x1c40,&local_28);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1c40,&local_28);
     update_ble_connection_parameters(iVar1,8);
     return;
   }
-  iVar2 = FUN_00082ff6(iVar9,0xe);
+  iVar2 = extract_bit_from_value(iVar9,0xe);
   if (iVar2 != 0) {
     *(byte *)(*(int *)(param_1 + 0xc0) + 0xd) = *(byte *)(*(int *)(param_1 + 0xc0) + 0xd) | 2;
   }
@@ -73,14 +73,14 @@ LAB_0005e51c:
     bVar6 = *(byte *)(iVar1 + 0xd);
   }
   *(byte *)(*(int *)(param_1 + 0xc0) + 0xc) = bVar6;
-  iVar2 = FUN_00082ff6(iVar9,5);
+  iVar2 = extract_bit_from_value(iVar9,5);
   iVar7 = *(int *)(param_1 + 0xc0);
   if (iVar2 == 0) {
     *(byte *)(iVar7 + 0xd) = *(byte *)(iVar7 + 0xd) & 0xef;
   }
   else {
     *(byte *)(iVar7 + 0xd) = *(byte *)(iVar7 + 0xd) | 0x10;
-    iVar2 = FUN_00082ff6(iVar9,0xd);
+    iVar2 = extract_bit_from_value(iVar9,0xd);
     if (iVar2 != 0) {
       set_ble_attribute_property(*(undefined4 *)(param_1 + 0xc0),0x20);
       puVar4 = (undefined4 *)(iVar1 + 0x47);

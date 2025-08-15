@@ -23,7 +23,7 @@ undefined4 validate_whitelist_app_data(void)
   undefined1 auStack_50 [39];
   undefined1 local_29;
   
-  iVar2 = FUN_0008500c();
+  iVar2 = parse_json_string_wrapper();
   if (iVar2 == 0) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("error root JSON NODE !\n");
@@ -33,7 +33,7 @@ undefined4 validate_whitelist_app_data(void)
     }
     return 0;
   }
-  iVar3 = FUN_0008503c(iVar2,"call_enable");
+  iVar3 = search_linked_list_by_string_value(iVar2,"call_enable");
   if (iVar3 == 0) {
     pcVar4 = "callEnable is NULL !\n";
 LAB_00035088:
@@ -49,7 +49,7 @@ LAB_00035088:
       pcVar4 = "callEnable is not the same !\n";
       goto LAB_00035088;
     }
-    iVar3 = FUN_0008503c(iVar2,"msg_enable");
+    iVar3 = search_linked_list_by_string_value(iVar2,"msg_enable");
     if (iVar3 == 0) {
       pcVar4 = "msgEnable is NULL !\n";
       goto LAB_00035088;
@@ -58,7 +58,7 @@ LAB_00035088:
       pcVar4 = "msgEnable is not the same !\n";
       goto LAB_00035088;
     }
-    iVar3 = FUN_0008503c(iVar2,"calendar_enable");
+    iVar3 = search_linked_list_by_string_value(iVar2,"calendar_enable");
     if (iVar3 == 0) {
       pcVar4 = "jsonCalendarEnable is NULL !\n";
       goto LAB_00035088;
@@ -67,7 +67,7 @@ LAB_00035088:
       pcVar4 = "calendarEnable is not the same !\n";
       goto LAB_00035088;
     }
-    iVar3 = FUN_0008503c(iVar2,"ios_mail_enable");
+    iVar3 = search_linked_list_by_string_value(iVar2,"ios_mail_enable");
     if (iVar3 == 0) {
       pcVar4 = "iosMailEnableJson is NULL !\n";
       goto LAB_00035088;
@@ -76,12 +76,12 @@ LAB_00035088:
       pcVar4 = "iosMailEnable is not the same !\n";
       goto LAB_00035088;
     }
-    iVar3 = FUN_0008503c(iVar2,"app");
+    iVar3 = search_linked_list_by_string_value(iVar2,"app");
     if (iVar3 == 0) {
       pcVar4 = "appJson is NULL !\n";
       goto LAB_00035088;
     }
-    iVar5 = FUN_0008503c(iVar3,"enable");
+    iVar5 = search_linked_list_by_string_value(iVar3,"enable");
     if (iVar5 == 0) {
       pcVar4 = "appEnableJson is NULL !\n";
       goto LAB_00035088;
@@ -90,14 +90,14 @@ LAB_00035088:
       pcVar4 = "appEnable is not the same !\n";
       goto LAB_00035088;
     }
-    iVar3 = FUN_0008503c(iVar3,"list");
+    iVar3 = search_linked_list_by_string_value(iVar3,"list");
     if (iVar3 == 0) {
       pcVar4 = "appListJson is NULL !\n";
       goto LAB_00035088;
     }
-    iVar5 = FUN_000850c8();
+    iVar5 = check_character_is_space();
     if (iVar5 != 0) {
-      bVar1 = FUN_00085020(iVar3);
+      bVar1 = count_linked_list_elements(iVar3);
       uVar8 = (uint)bVar1;
       if (DAT_2001a22d != uVar8) {
         pcVar4 = "appCounts is not the same !\n";
@@ -105,7 +105,7 @@ LAB_00035088:
       }
       uVar10 = 0;
       for (uVar9 = uVar10; (uVar9 & 0xff) < uVar8; uVar9 = uVar9 + 1) {
-        iVar5 = FUN_00085030(iVar3,uVar9);
+        iVar5 = get_linked_list_element_at_index(iVar3,uVar9);
         if (iVar5 == 0) {
           pcVar4 = "singleAppJson is NULL !\n";
 LAB_000351c4:
@@ -117,12 +117,12 @@ LAB_000351c4:
           }
         }
         else {
-          iVar6 = FUN_0008503c(iVar5,"id");
+          iVar6 = search_linked_list_by_string_value(iVar5,"id");
           if (iVar6 == 0) {
             pcVar4 = "appIdJson is NULL !\n";
             goto LAB_000351c4;
           }
-          iVar5 = FUN_0008503c(iVar5,"name");
+          iVar5 = search_linked_list_by_string_value(iVar5,"name");
           if (iVar5 == 0) {
             pcVar4 = "appNameJson is NULL !\n";
             goto LAB_000351c4;

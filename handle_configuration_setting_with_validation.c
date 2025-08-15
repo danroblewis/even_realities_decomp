@@ -25,7 +25,7 @@ int handle_configuration_setting_with_validation
                    "WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0xf4);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0xf4);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0xf4);
     }
     if (&UNK_00088327 < ppuVar3) break;
     if (((param_1 != 0) && (iVar1 = compare_string_with_pattern(*ppuVar3,param_1,0), iVar1 == 0)) ||

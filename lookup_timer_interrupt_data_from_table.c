@@ -26,12 +26,14 @@ uint lookup_timer_interrupt_data_from_table
   uStack_1c = param_2;
   uStack_18 = param_3;
   uStack_14 = param_4;
-  iVar1 = FUN_0007ef04(param_1,&uStack_20);
+  iVar1 = set_buffer_bytes_when_condition_met(param_1,&uStack_20);
   if (iVar1 == 1) {
-    iVar1 = FUN_00084e72(*(undefined4 *)(&DAT_0008bb90 + param_1 * 8),&uStack_20);
+    iVar1 = setup_device_buffer_with_timer_validation
+                      (*(undefined4 *)(&DAT_0008bb90 + param_1 * 8),&uStack_20);
   }
   if (iVar1 == 0) {
-    iVar1 = FUN_00084e72(*(undefined4 *)(&DAT_0008bb94 + param_1 * 8),&uStack_18);
+    iVar1 = setup_device_buffer_with_timer_validation
+                      (*(undefined4 *)(&DAT_0008bb94 + param_1 * 8),&uStack_18);
     if (iVar1 == 1) {
       uStack_18 = CONCAT31(uStack_18._1_3_,3);
       uStack_18 = CONCAT13(3,(undefined3)uStack_18);
@@ -42,11 +44,11 @@ uint lookup_timer_interrupt_data_from_table
     uVar6 = uStack_18 & 0xff;
     puVar3 = &DAT_000f694f;
     do {
-      iVar2 = FUN_00084d70(*puVar3,uVar5);
+      iVar2 = validate_parameter_conditions(*puVar3,uVar5);
       iVar4 = extraout_r2;
       if (((((iVar2 != 0) &&
-            (iVar2 = FUN_00084d70(*(undefined1 *)(extraout_r2 + 1),uVar6), iVar4 = extraout_r2_00,
-            iVar2 != 0)) &&
+            (iVar2 = validate_parameter_conditions(*(undefined1 *)(extraout_r2 + 1),uVar6),
+            iVar4 = extraout_r2_00, iVar2 != 0)) &&
            ((*(char *)(extraout_r2_00 + 2) == '\x04' ||
             (uStack_20._3_1_ == *(char *)(extraout_r2_00 + 2))))) &&
           ((*(char *)(extraout_r2_00 + 3) == '\x04' ||

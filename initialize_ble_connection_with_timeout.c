@@ -29,7 +29,7 @@ int initialize_ble_connection_with_timeout(int param_1)
                  "WEST_TOPDIR/zephyr/kernel/thread.c",0x28c);
     DEBUG_PRINT2("\tThreads may not be created in ISRs\n");
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/kernel/thread.c",0x28c);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/thread.c",0x28c);
   }
   initialize_ble_connection_structure();
   if (in_stack_0000001c != -1 || in_stack_00000018 != -1) {

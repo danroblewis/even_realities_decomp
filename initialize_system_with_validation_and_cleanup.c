@@ -15,7 +15,7 @@ int initialize_system_with_validation_and_cleanup
     param_1 = (int *)0x2000cc30;
   }
   if (*param_1 != 0x5ac9bca5) {
-    FUN_00079808(param_1,0x1c0);
+    clear_memory_buffer_with_zero_fill(param_1,0x1c0);
     initialize_cryptographic_context_with_parameter_setup(param_1 + 1);
     initialize_sha256_context_with_default_values(param_1 + 0x47);
     iVar1 = finalize_sha256_hash_with_key_derivation

@@ -235,7 +235,7 @@ LAB_00028eae:
         pbVar12 = *(byte **)(param_1 + 0xff0);
         break;
       case '\x03':
-        iVar7 = FUN_0007cb2c();
+        iVar7 = calculate_mathematical_operation_with_bit_shifting();
         iVar3 = iVar7;
         if ((DAT_20007afc != 0) && (iVar3 = DAT_20007afc, 9999 < (uint)(iVar7 - DAT_20007afc))) {
           DAT_20007af8 = (DAT_20007af8 + 1) % 7;
@@ -500,7 +500,7 @@ LAB_00029414:
                 }
               }
               uStack_30 = uVar4;
-              FUN_0007d874(param_1[0xd5]);
+              display_refresh_wrapper_with_parameters(param_1[0xd5]);
               if (0 < LOG_LEVEL) {
                 if (IS_DEBUG == 0) {
                   DEBUG_PRINT("%s(): display_reflash_screen %d done\n","display_dispatch_thread",
@@ -562,10 +562,10 @@ LAB_000294ea:
       goto LAB_00028cc8;
     }
     if ((1 < (byte)param_1[0xfe6] - 1) && ((byte)param_1[0xfe6] != 4)) {
-      lVar15 = FUN_0007cb2c();
+      lVar15 = calculate_mathematical_operation_with_bit_shifting();
       manage_ble_connection_state_comprehensive
                 (param_1 + 0x38,(int)((ulonglong)lVar15 >> 0x20),0x4000,0);
-      lVar16 = FUN_0007cb2c();
+      lVar16 = calculate_mathematical_operation_with_bit_shifting();
       if ((int)((ulonglong)(lVar16 - lVar15) >> 0x20) < (int)(uint)((uint)(lVar16 - lVar15) < 500))
       goto LAB_00028eae;
       goto LAB_000290ca;

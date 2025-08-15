@@ -23,7 +23,7 @@ uint handle_device_operation_by_code(int param_1,undefined4 param_2)
   case 2:
     if (*(char *)(iVar2 + 0x51) != '\0') {
       *(undefined1 *)(iVar2 + 0x52) = 1;
-      FUN_00066300();
+      manage_device_interrupt_completion_state();
     }
     break;
   case 1:
@@ -31,7 +31,7 @@ uint handle_device_operation_by_code(int param_1,undefined4 param_2)
     if (-1 < (int)((uint)*(byte *)(iVar2 + 0x50) << 0x1e)) {
       local_1c = "Device is not configured";
       local_20 = 2;
-      FUN_000837a2(&DAT_000881a0,0x1040,&local_20);
+      execute_device_data_compression(&DAT_000881a0,0x1040,&local_20);
       return 0xfffffffb;
     }
     if (*(char *)(iVar2 + 0x51) == '\0') {
@@ -50,7 +50,7 @@ uint handle_device_operation_by_code(int param_1,undefined4 param_2)
         *(undefined1 *)((int)puVar3 + 0x51) = 0;
         local_3c = "Failed to request clock: %d";
         local_40 = 3;
-        FUN_000837a2(&DAT_000881a0,0x1840,&local_40);
+        execute_device_data_compression(&DAT_000881a0,0x1840,&local_40);
         return 0xfffffffb;
       }
     }
@@ -59,7 +59,7 @@ uint handle_device_operation_by_code(int param_1,undefined4 param_2)
     local_3c = "Invalid command: %d";
     local_40 = 3;
     iStack_38 = param_2;
-    FUN_000837a2(&DAT_000881a0,0x1840,&local_40);
+    execute_device_data_compression(&DAT_000881a0,0x1840,&local_40);
     return 0xffffffea;
   }
   return 0;

@@ -11,7 +11,7 @@ int getAudioMessageQueueCacheData
 {
   int iVar1;
   
-  iVar1 = FUN_00072240(&DAT_20003890,param_1,0,0,param_4);
+  iVar1 = manage_ble_connection_state_comprehensive(&DAT_20003890,param_1,0,0,param_4);
   if (iVar1 != 0) {
     if (0 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {

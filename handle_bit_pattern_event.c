@@ -52,7 +52,7 @@ void handle_bit_pattern_event(int *param_1,uint param_2)
     uVar2 = 0x382;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",uVar2);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",uVar2);
 }
 
 

@@ -17,7 +17,8 @@ int handle_state_validated_event(uint param_1,uint param_2,undefined4 param_3)
   local_14 = param_2;
   uStack_10 = param_3;
   if (uVar2 != 0) {
-    iVar1 = FUN_00083b1a(&DAT_00087b60,&local_14,param_3,(undefined *)0x83b1b,param_1);
+    iVar1 = extract_nested_data_structure_value
+                      (&DAT_00087b60,&local_14,param_3,(undefined *)0x83b1b,param_1);
     if (iVar1 == 0) {
       if (((local_14 ^ DAT_2000b178) & uVar2) == 0) {
         iVar1 = 0;
@@ -33,7 +34,7 @@ int handle_state_validated_event(uint param_1,uint param_2,undefined4 param_3)
                "WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",0x5f6);
   DEBUG_PRINT2("\tUnsupported pin\n");
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",0x5f6);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/include/zephyr/drivers/gpio.h",0x5f6);
 }
 
 

@@ -13,11 +13,11 @@ void validate_and_process_ble_descriptor(int param_1)
   char *local_1c;
   int iStack_18;
   
-  iVar1 = FUN_00080f92(*(undefined1 *)(param_1 + 8),param_1 + 0x90);
+  iVar1 = is_ble_uuid_valid_and_available(*(undefined1 *)(param_1 + 8),param_1 + 0x90);
   if (iVar1 == 0) {
     iVar1 = find_ble_descriptor_by_uuid(*(undefined1 *)(param_1 + 8),param_1 + 0x90);
     if (iVar1 != 0) {
-      FUN_00082928();
+      initialize_structure_with_zeros();
     }
   }
   else {

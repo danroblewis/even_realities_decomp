@@ -43,14 +43,14 @@ int process_data_with_validation_and_callback_alt2(void)
                   ("WEST_TOPDIR/zephyr/subsys/mgmt/mcumgr/grp/img_mgmt/src/zephyr_img_mgmt.c",0x43,
                    "img_mgmt_flash_check_empty_inner","fa->fa_size % 4 == 0");
       }
-      iVar2 = FUN_0007f012(iVar5);
+      iVar2 = call_function_pointer_and_return_byte(iVar5);
       iVar7 = *(int *)(iVar5 + 8);
       for (; (int)uVar1 < iVar7; uVar1 = uVar1 + 0x40) {
         iVar6 = iVar7 - uVar1;
         if (0x3f < iVar6) {
           iVar6 = 0x40;
         }
-        iVar3 = FUN_0007ef80(iVar5,uVar1,aiStack_60,iVar6);
+        iVar3 = call_callback_function_with_bounds_validation(iVar5,uVar1,aiStack_60,iVar6);
         if (iVar3 < 0) {
           local_74 = "Failed to read data from flash area: %d";
           local_78 = 3;
@@ -62,7 +62,8 @@ int process_data_with_validation_and_callback_alt2(void)
         piVar4 = aiStack_60;
         for (iVar3 = 0; iVar3 != iVar6 >> 2; iVar3 = iVar3 + 1) {
           if (*piVar4 != iVar2 * 0x1010101) {
-            iVar5 = FUN_0007efd4(local_64,0,*(undefined4 *)(local_64 + 8));
+            iVar5 = call_alternative_callback_function_with_bounds_validation
+                              (local_64,0,*(undefined4 *)(local_64 + 8));
             if (iVar5 != 0) {
               local_74 = "Failed to erase flash area: %d";
               local_78 = 3;
@@ -77,7 +78,7 @@ int process_data_with_validation_and_callback_alt2(void)
       }
       iVar5 = 1;
 LAB_00051770:
-      FUN_0007ef7e(local_64);
+      no_operation(local_64);
     }
   }
   return iVar5;

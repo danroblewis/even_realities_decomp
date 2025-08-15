@@ -24,7 +24,7 @@ void handle_process_state_machine(undefined4 param_1,undefined4 param_2,int para
   DAT_20018c66 = 1;
   switch(*(undefined1 *)(param_3 + 5)) {
   case 1:
-    FUN_0007c3c2(param_3);
+    set_default_configuration_values(param_3);
     *(undefined1 *)(param_3 + 5) = 2;
     DAT_20018c66 = extraout_r2;
     *(undefined1 *)(param_3 + 2) = 0;

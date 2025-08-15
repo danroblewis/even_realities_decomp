@@ -21,8 +21,8 @@ void app_codec_lc3_test(int param_1,int param_2)
   undefined4 local_30;
   undefined4 uStack_2c;
   
-  uVar1 = FUN_00068ecc(10000,16000);
-  uVar2 = FUN_00068e40(10000,16000);
+  uVar1 = calculate_audio_buffer_size_by_sample_rate(10000,16000);
+  uVar2 = calculate_audio_timing_by_sample_rate(10000,16000);
   iVar3 = malloc_maybe(uVar1);
   iVar9 = (uVar2 & 0x7fff) * 2;
   iVar4 = malloc_maybe(iVar9);
@@ -59,7 +59,7 @@ LAB_0002ee5a:
           }
         }
         else {
-          uVar1 = FUN_00068f94(10000,16000,0,iVar3);
+          uVar1 = initialize_audio_configuration_and_buffers(10000,16000,0,iVar3);
           iVar6 = iVar5;
           do {
             if (iVar6 == iVar8 + iVar5) {
@@ -106,7 +106,8 @@ LAB_0002ee5a:
               DAT_20002404 = DAT_20002404 + iVar8;
               goto LAB_0002eeb6;
             }
-            pcVar7 = (char *)FUN_00069238(uVar1,0,param_1,1,0x14,iVar6,uVar1,param_1);
+            pcVar7 = (char *)process_comprehensive_audio_pipeline
+                                       (uVar1,0,param_1,1,0x14,iVar6,uVar1,param_1);
             iVar6 = iVar6 + 0x14;
             param_1 = param_1 + iVar9;
           } while (pcVar7 == (char *)0x0);

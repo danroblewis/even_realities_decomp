@@ -20,8 +20,9 @@ void search_and_update_resource_entries_with_callback
   while( true ) {
     iVar1 = compare_byte_arrays(search_key,iVar2);
     if (iVar1 == 0) {
-      iVar1 = FUN_00070fb4(iVar2 + -0x40,resource_context,search_key,0xffffffff,update_data,
-                           *(undefined4 *)(iVar4 + 0x10),&LAB_0007ed26_1);
+      iVar1 = manage_audio_data_structure_with_validation
+                        (iVar2 + -0x40,resource_context,search_key,0xffffffff,update_data,
+                         *(undefined4 *)(iVar4 + 0x10),&LAB_0007ed26_1);
       if (iVar1 != 0) {
         return;
       }

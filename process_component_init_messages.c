@@ -19,7 +19,7 @@ undefined4 process_component_init_messages(undefined4 param_1,undefined4 param_2
   uStack_14 = param_2;
   uStack_10 = param_3;
   for (; 0 < in_stack_0000000c; in_stack_0000000c = in_stack_0000000c + -1) {
-    uVar1 = FUN_00072240(&DAT_20003994,&uStack_18,0,0);
+    uVar1 = manage_ble_connection_state_comprehensive(&DAT_20003994,&uStack_18,0,0);
   }
   return uVar1;
 }

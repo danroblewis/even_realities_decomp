@@ -40,7 +40,7 @@ int update_sha256_hash_with_buffer_management(int param_1,int param_2,uint param
        (iVar1 = process_sha256_block_with_counter_increment(param_1,&DAT_2000cfa0), iVar1 == 0)) {
       *(undefined4 *)(param_1 + 0x10) = 1;
     }
-    FUN_00079808(&DAT_2000cfa0,0x180);
+    clear_memory_buffer_with_zero_fill(&DAT_2000cfa0,0x180);
   }
   else {
 LAB_00079c1a:

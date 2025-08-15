@@ -24,11 +24,11 @@ uint search_data_structure_with_count_and_retrieval
   if (*(char *)(data_context + 0x10) == '\0') {
     local_24 = "NVS not initialized";
     local_28 = 2;
-    FUN_0007e658(&DAT_000881b8,0x1040,&local_28);
+    wrapper_set_r3_to_zero(&DAT_000881b8,0x1040,&local_28);
     uVar1 = 0xfffffff3;
   }
   else {
-    iVar2 = FUN_0007e65e(*(undefined4 *)(data_context + 0x2c),8);
+    iVar2 = calculate_aligned_address(*(undefined4 *)(data_context + 0x2c),8);
     if ((uint)*(ushort *)(data_context + 0xc) + iVar2 * -2 < buffer_size) {
       uVar1 = 0xffffffea;
     }
@@ -43,12 +43,13 @@ uint search_data_structure_with_count_and_retrieval
           if (*(uint *)(data_context + 4) != local_3c) goto LAB_0004cb52;
           break;
         }
-        uVar1 = FUN_0007e6e2(data_context,&local_3c,&local_38);
+        uVar1 = process_data_with_alignment_and_validation(data_context,&local_3c,&local_38);
         if (uVar1 != 0) {
           return uVar1;
         }
-        if ((local_38 == search_key) && (iVar2 = FUN_0007e672(data_context,&local_38), iVar2 != 0))
-        {
+        if ((local_38 == search_key) &&
+           (iVar2 = validate_data_structure_with_checksum_and_alignment(data_context,&local_38),
+           iVar2 != 0)) {
           uVar4 = uVar4 + 1;
         }
         uVar1 = uVar3;
@@ -60,8 +61,9 @@ LAB_0004cb52:
           if (buffer_size <= uVar1) {
             uVar1 = buffer_size;
           }
-          uVar1 = FUN_0007e53e(data_context,(uVar3 & 0xffff0000) + (uint)local_36,output_buffer,
-                               uVar1);
+          uVar1 = execute_function_pointer_from_structure_offset
+                            (data_context,(uVar3 & 0xffff0000) + (uint)local_36,output_buffer,uVar1)
+          ;
           if (uVar1 != 0) {
             return uVar1;
           }

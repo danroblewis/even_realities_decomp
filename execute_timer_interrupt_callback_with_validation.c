@@ -36,7 +36,7 @@ void execute_timer_interrupt_callback_with_validation(void)
     uVar2 = 0xab;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/nrf/subsys/caf/modules/power_manager.c",uVar2);
+  trigger_system_service_call("WEST_TOPDIR/nrf/subsys/caf/modules/power_manager.c",uVar2);
 }
 
 

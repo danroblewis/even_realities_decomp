@@ -41,7 +41,7 @@ undefined4 process_ble_key_derivation(int param_1)
   default:
     local_74 = "Unknown pairing method (%u)";
     local_78 = 3;
-    FUN_00083074(&DAT_00088180,0x1840,&local_78);
+    process_and_compress_data_wrapper(&DAT_00088180,0x1840,&local_78);
     return 8;
   case 5:
     puVar5 = *(undefined4 **)(param_1 + 0xe4);
@@ -101,7 +101,7 @@ undefined4 process_ble_key_derivation(int param_1)
         if (iVar1 != 0) {
           return 0xb;
         }
-        iVar1 = FUN_000830b0(param_1,0xd);
+        iVar1 = handle_ble_connection_memory_allocation(param_1,0xd);
         if (iVar1 == 0) {
           return 8;
         }
@@ -115,7 +115,7 @@ undefined4 process_ble_key_derivation(int param_1)
           puVar4 = puVar4 + 2;
         } while (puVar5 != local_48);
         update_ble_connection_state_with_error_handling(param_1,iVar1,0);
-        FUN_00083090(param_1 + 4,1);
+        set_bit_in_value(param_1 + 4,1);
         return 0;
       }
       local_24 = "Calculate remote DHKey check failed";
@@ -128,7 +128,7 @@ undefined4 process_ble_key_derivation(int param_1)
     local_24 = "Calculate LTK failed";
   }
   local_28 = 2;
-  FUN_00083074(&DAT_00088180,0x1040,&local_28);
+  process_and_compress_data_wrapper(&DAT_00088180,0x1040,&local_28);
   return 8;
 }
 

@@ -25,21 +25,22 @@ int check_device_status_and_handle_timing
       lVar1 = (longlong)(int)(param_5 & ~((int)param_5 >> 0x1f)) * 0x8000 + 999;
       uVar4 = handle_unsigned_division((int)lVar1,(int)((ulonglong)lVar1 >> 0x20),1000,0);
     }
-    iVar2 = FUN_00072240(iVar3 + 0x1c,param_3,(int)uVar4,(int)((ulonglong)uVar4 >> 0x20));
+    iVar2 = manage_ble_connection_state_comprehensive
+                      (iVar3 + 0x1c,param_3,(int)uVar4,(int)((ulonglong)uVar4 >> 0x20));
     if (iVar2 == 0) {
       *param_4 = *(undefined4 *)(iVar3 + 0x18);
     }
     else {
       local_1c = "No audio data to be read";
       local_20 = 2;
-      FUN_000837a2(&DAT_000881a0,0x1040,&local_20);
+      execute_device_data_compression(&DAT_000881a0,0x1040,&local_20);
     }
   }
   else {
     iVar2 = -5;
     local_1c = "Device is not configured";
     local_20 = 2;
-    FUN_000837a2(&DAT_000881a0,0x1040,&local_20);
+    execute_device_data_compression(&DAT_000881a0,0x1040,&local_20);
   }
   return iVar2;
 }

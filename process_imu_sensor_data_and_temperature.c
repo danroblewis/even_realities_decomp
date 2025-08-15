@@ -23,11 +23,11 @@ int process_imu_sensor_data_and_temperature(undefined4 param_1)
   iVar1 = read_sensor_temperature_data(param_1,&local_20,&uStack_1c,&local_18);
   uVar2 = CONCAT44(DAT_20004794,DAT_20004790);
   if (-1 < iVar1) {
-    FUN_0007cef6(param_1,0x39,auStack_28);
+    execute_callback_function_pointer_at_offset(param_1,0x39,auStack_28);
     iVar1 = process_imu_sensor_data_wrapper(&local_20,0);
     uVar2 = CONCAT44(DAT_20004794,DAT_20004790);
     if (-1 < iVar1) {
-      uVar2 = FUN_0007ceda();
+      uVar2 = calculate_scaled_ble_connection_timing_with_bit_shifting();
       iVar1 = 0;
     }
   }

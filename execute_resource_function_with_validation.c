@@ -18,9 +18,9 @@ execute_resource_function_with_validation(int param_1,undefined4 param_2,undefin
     uVar2 = 0xffffffff;
   }
   else {
-    uVar2 = FUN_0007dcb8(*(undefined4 *)(&DAT_2000254c + param_1 * 0x28),
-                         *(undefined4 *)(&DAT_20002548 + param_1 * 0x28),0x101,param_2,param_3,uVar2
-                        );
+    uVar2 = execute_resource_callback_function
+                      (*(undefined4 *)(&DAT_2000254c + param_1 * 0x28),
+                       *(undefined4 *)(&DAT_20002548 + param_1 * 0x28),0x101,param_2,param_3,uVar2);
   }
   return uVar2;
 }

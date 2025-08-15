@@ -22,8 +22,8 @@ int initialize_and_configure_sensor_complete(int *param_1)
     DAT_20007bc0 = param_1;
     iVar1 = check_sensor_status_and_validate();
     if ((iVar1 != -1) &&
-       ((iVar1 = configure_sensor_parameters(), iVar1 == 0 && (iVar1 = FUN_0007cf70(), iVar1 != -1))
-       )) {
+       ((iVar1 = configure_sensor_parameters(), iVar1 == 0 &&
+        (iVar1 = read_sensor_data_with_retry_and_status_check(), iVar1 != -1)))) {
       if (iVar1 == -2) {
         transmit_sensor_data_with_retry(0xff20,0x3c00f091);
         read_sensor_data_with_retry(0x1c00,auStack_1c);
@@ -36,7 +36,7 @@ int initialize_and_configure_sensor_complete(int *param_1)
          ((((iVar1 = configure_sensor_with_checksum_verification(), iVar1 == 0 &&
             (iVar1 = configure_sensor_parameters(), iVar1 == 0)) &&
            (iVar1 = check_sensor_status_and_validate(), iVar1 == 0)) &&
-          (iVar1 = FUN_0007cf70(), iVar1 == 0)))) {
+          (iVar1 = read_sensor_data_with_retry_and_status_check(), iVar1 == 0)))) {
         iVar1 = initialize_sensor_registers();
         if (iVar1 != 0) {
           iVar1 = 1;

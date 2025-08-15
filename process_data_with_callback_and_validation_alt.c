@@ -44,13 +44,13 @@ int process_data_with_callback_and_validation_alt
       DAT_2000a164 = 1;
       DAT_2000a16a = 0xffff;
       DAT_2000a16c = 0;
-      iVar3 = FUN_0005b9cc(param_1,&DAT_2000a15c);
+      iVar3 = process_ble_characteristic_operation_by_type(param_1,&DAT_2000a15c);
       if (iVar3 != 0) {
         local_24 = "Discover failed, error: %d.";
         local_28 = 3;
         iStack_20 = iVar3;
-        FUN_0007f406(&DAT_00088130,0x1840,&local_28);
-        FUN_0007f3f0(&TASK_STATE_FLAGS,0xfffffffe);
+        process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1840,&local_28);
+        apply_bitwise_and_mask(&TASK_STATE_FLAGS,0xfffffffe);
       }
     }
     else {

@@ -54,7 +54,7 @@ LAB_0005673e:
       case (char *)0x1:
         validate_and_process_ble_characteristics_with_state_management_and_parameter(conn_handle);
         if (*(char *)(conn_handle + 2) == '\x01') {
-          uVar2 = thunk_FUN_00072e9c(conn_handle + 0x60);
+          uVar2 = handle_connection_state_validation_with_privilege_management(conn_handle + 0x60);
           if ((uVar2 & 0xc) != 0) {
             acquire_mutex_with_priority_control(conn_handle + 0x60);
           }
@@ -165,7 +165,8 @@ switchD_00056804_caseD_3:
           if (bVar8) {
             *(char *)(conn_handle + 0xb4) = cVar6;
           }
-          FUN_00073418(conn_handle + 0x60,extraout_r1,0x28000,0);
+          handle_ble_connection_timeout_with_priority_and_validation
+                    (conn_handle + 0x60,extraout_r1,0x28000,0);
         }
       }
       break;

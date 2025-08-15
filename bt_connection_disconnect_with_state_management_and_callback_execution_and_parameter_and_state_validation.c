@@ -61,7 +61,7 @@ bt_connection_disconnect_with_state_management_and_callback_execution_and_parame
     local_58 = uVar16;
 LAB_00057e04:
     local_60 = 4;
-    FUN_00081746(&DAT_00088160,0x2040,&local_60);
+    process_and_compress_data_with_validation(&DAT_00088160,0x2040,&local_60);
     return 0;
   }
   uVar17 = (uint)pbVar7[1];
@@ -71,7 +71,7 @@ LAB_00057e04:
   }
   uVar14 = (uint)*pbVar7;
   if (uVar14 == 1) {
-    puVar10 = (undefined4 *)FUN_00081626(*param_1,uVar17);
+    puVar10 = (undefined4 *)find_and_remove_element_from_linked_list_by_id(*param_1,uVar17);
 LAB_000581ee:
     if (puVar10 == (undefined4 *)0x0) {
       return 0;
@@ -84,7 +84,7 @@ LAB_000581ee:
       iVar20 = *param_1;
       puVar15 = *(undefined2 **)(param_2 + 0xc);
       if (uVar16 < 4) goto LAB_00057e70;
-      iVar8 = FUN_00081660(iVar20,*puVar15);
+      iVar8 = find_and_remove_element_from_linked_list_by_handle(iVar20,*puVar15);
       if (iVar8 == 0) {
         local_40 = puVar15[1];
         local_3e = *puVar15;
@@ -112,7 +112,9 @@ LAB_000581ee:
       goto LAB_000581ac;
     case 1:
       if (3 < uVar16) {
-        puVar10 = (undefined4 *)FUN_00081660(*param_1,*(undefined2 *)(*(int *)(param_2 + 0xc) + 2));
+        puVar10 = (undefined4 *)
+                  find_and_remove_element_from_linked_list_by_handle
+                            (*param_1,*(undefined2 *)(*(int *)(param_2 + 0xc) + 2));
         goto LAB_000581ee;
       }
       local_2c = "Too small LE disconn rsp packet size";
@@ -171,7 +173,7 @@ LAB_00057ed4:
           sVar19 = 9;
           goto LAB_00057ed6;
         }
-        local_44 = FUN_00081a4e(iVar20,(uint)uVar2);
+        local_44 = search_linked_list_element_by_value(iVar20,(uint)uVar2);
         if (local_44 != 0) {
           sVar19 = 10;
           goto LAB_00057ed6;
@@ -209,7 +211,7 @@ LAB_00057f58:
               *(undefined2 *)(iVar8 + 0x26) = (undefined2)local_4c;
               *(ushort *)(iVar8 + 0x24) = uVar2;
               *(ushort *)(iVar8 + 0x28) = uVar3;
-              FUN_0008174c(iVar8,local_50);
+              update_counter_and_call_callback(iVar8,local_50);
               bt_connection_disconnect_with_callback_execution_and_parameter_and_state_validation
                         (iVar8);
               sVar19 = 0;
@@ -225,13 +227,13 @@ LAB_00057f58:
           }
           local_2c = "Mandatory callback \'recv\' missing";
           local_30 = 2;
-          FUN_00081746(&DAT_00088160,0x1040,&local_30);
+          process_and_compress_data_with_validation(&DAT_00088160,0x1040,&local_30);
         }
         sVar19 = 0xb;
 LAB_00057ed6:
         *(short *)(puVar10 + 2) = sVar19;
         local_58 = 0;
-        iVar20 = FUN_00081820(iVar20,5,iVar11);
+        iVar20 = handle_ble_connection_state_transition_with_validation(iVar20,5,iVar11);
         if (iVar20 != 0) {
           decrement_reference_count_and_cleanup_memory(iVar11);
           return 0;
@@ -258,14 +260,14 @@ LAB_00057e70:
         uVar2 = puVar15[4];
         uVar6 = *puVar15;
         if (((uVar2 & 0xfff7) == 0) || (uVar2 == 5)) {
-          puVar10 = (undefined4 *)FUN_00081626(iVar20,uVar17,0);
+          puVar10 = (undefined4 *)find_and_remove_element_from_linked_list_by_id(iVar20,uVar17,0);
           if (puVar10 == (undefined4 *)0x0) goto LAB_00058032;
           acquire_mutex_with_priority_control(puVar10 + 0x30);
           *(undefined1 *)(puVar10 + 0x2e) = 0;
           uVar13 = extraout_r1_00;
           if (uVar2 != 5) goto LAB_0005809c;
           puVar18 = puVar10 + 4;
-          iVar11 = FUN_000816a2(puVar18,extraout_r1_00,*puVar10);
+          iVar11 = get_counter_value(puVar18,extraout_r1_00,*puVar10);
           if (-1 < iVar11 << 0x1d) {
             bVar1 = *(byte *)(extraout_r2 + 9);
             if (bVar1 < 2) goto LAB_00058142;
@@ -280,13 +282,13 @@ LAB_00057e70:
           }
         }
         else {
-          puVar10 = (undefined4 *)FUN_00081626(iVar20,uVar17,1);
+          puVar10 = (undefined4 *)find_and_remove_element_from_linked_list_by_id(iVar20,uVar17,1);
           if (puVar10 == (undefined4 *)0x0) {
 LAB_00058032:
             local_5c = "Cannot find channel for ident %u";
             local_60 = 3;
             local_58 = uVar17;
-            FUN_00081746(&DAT_00088160,0x1840,&local_60);
+            process_and_compress_data_with_validation(&DAT_00088160,0x1840,&local_60);
             return 0;
           }
           acquire_mutex_with_priority_control(puVar10 + 0x30);
@@ -302,18 +304,18 @@ LAB_0005809c:
               if (*(code **)puVar10[1] != (code *)0x0) {
                 (**(code **)puVar10[1])(puVar10);
               }
-              FUN_0008174c(puVar10,local_4c);
+              update_counter_and_call_callback(puVar10,local_4c);
               return 0;
             }
             goto LAB_00058136;
           }
           puVar18 = puVar10 + 4;
-          iVar11 = FUN_000816a2(puVar18,uVar13,*puVar10);
+          iVar11 = get_counter_value(puVar18,uVar13,*puVar10);
           if ((-1 < iVar11 << 0x1d) && (*(byte *)(extraout_r2_00 + 9) < 2)) {
 LAB_00058142:
             uVar13 = 2;
 LAB_000580fc:
-            iVar11 = FUN_0008149a(*puVar10,uVar13);
+            iVar11 = update_ble_connection_flags_and_permissions(*puVar10,uVar13);
             if (-1 < iVar11) {
               *puVar18 = *puVar18 | 4;
               return 0;
@@ -321,7 +323,7 @@ LAB_000580fc:
           }
         }
 LAB_0005812c:
-        FUN_00081788(iVar20,puVar10);
+        remove_element_from_linked_list_by_pointer(iVar20,puVar10);
 LAB_00058136:
         bt_connection_cleanup_and_notify(puVar10);
         return 0;
@@ -333,19 +335,20 @@ LAB_00058136:
         local_2c = "Too small LE Credits packet size";
       }
       else {
-        iVar20 = FUN_00081a4e(*param_1,**(undefined2 **)(param_2 + 0xc),
-                              (*(undefined2 **)(param_2 + 0xc))[1]);
+        iVar20 = search_linked_list_element_by_value
+                           (*param_1,**(undefined2 **)(param_2 + 0xc),
+                            (*(undefined2 **)(param_2 + 0xc))[1]);
         if (iVar20 != 0) {
-          iVar11 = FUN_000816a2(iVar20 + 0x2c);
+          iVar11 = get_counter_value(iVar20 + 0x2c);
           if (0xffff < iVar11 + extraout_r2_01) {
             local_2c = "Credits overflow";
             local_30 = 2;
-            FUN_00081746(&DAT_00088160,0x1040,&local_30);
-            FUN_00081b30(iVar20);
+            process_and_compress_data_with_validation(&DAT_00088160,0x1040,&local_30);
+            handle_ble_connection_state_transition(iVar20);
             return 0;
           }
-          FUN_0008174c(iVar20,extraout_r2_01);
-          FUN_00081720(iVar20);
+          update_counter_and_call_callback(iVar20,extraout_r2_01);
+          handle_ble_connection_timeout_with_uart_setup(iVar20);
           return 0;
         }
         local_2c = "Unable to find channel of LE Credits packet";
@@ -353,14 +356,14 @@ LAB_00058136:
     }
 LAB_00057dc4:
     local_30 = 2;
-    FUN_00081746(&DAT_00088160,0x1040,&local_30);
+    process_and_compress_data_with_validation(&DAT_00088160,0x1040,&local_30);
   }
   else {
 switchD_00057e38_caseD_2:
     local_5c = "Rejecting unknown L2CAP PDU code 0x%02x";
     local_60 = 3;
     local_58 = uVar14;
-    FUN_00081746(&DAT_00088160,0x1880,&local_60);
+    process_and_compress_data_with_validation(&DAT_00088160,0x1880,&local_60);
     iVar20 = *param_1;
     iVar11 = bt_connection_disconnect_with_parameter_validation_and_callback_and_state_validation
                        (1,pbVar7[1],2);
@@ -371,7 +374,7 @@ switchD_00057e38_caseD_2:
     *puVar12 = 0;
     puVar12[1] = 0;
 LAB_000581ac:
-    FUN_00081940(iVar20,iVar11);
+    handle_ble_connection_state_transition_to_state_5(iVar20,iVar11);
   }
   return 0;
 }

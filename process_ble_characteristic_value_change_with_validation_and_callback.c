@@ -28,7 +28,7 @@ process_ble_characteristic_value_change_with_validation_and_callback
     local_2c = "ATT channel %p MTU too small for RSP (%u < %u)";
     local_30 = 5;
     iStack_28 = param_1;
-    FUN_00081ddc(&DAT_00088100,0x2880,&local_30);
+    process_and_compress_data_wrapper(&DAT_00088100,0x2880,&local_30);
     uVar1 = 0;
   }
   else {

@@ -16,7 +16,7 @@ float setup_audio_buffers(float param_1,undefined4 param_2)
     param_1 = (float)scale_float_number(param_1,param_2);
     iVar1 = setup_voltage_regulation();
     if ((iVar1 == 0) || (param_1 == 0.0)) {
-      puVar2 = (undefined4 *)thunk_FUN_00071678();
+      puVar2 = (undefined4 *)calculate_data_structure_offset();
       *puVar2 = 0x22;
     }
   }

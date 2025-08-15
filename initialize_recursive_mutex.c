@@ -29,7 +29,7 @@ void initialize_recursive_mutex(int *param_1)
     uVar2 = 0x181;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/lib/libc/newlib/libc-hooks.c",uVar2);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/lib/libc/newlib/libc-hooks.c",uVar2);
 }
 
 

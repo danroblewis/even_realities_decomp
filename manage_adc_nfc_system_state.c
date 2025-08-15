@@ -19,10 +19,11 @@ undefined4 manage_adc_nfc_system_state(undefined4 param_1,uint3 param_2)
     if (iVar1 < 0) {
       return 0;
     }
-    iVar1 = FUN_0007c9f2(SYSTEM_CONFIGURATION_PARAMETER,&stack0xffffffef);
+    iVar1 = send_control_message_with_specific_command_code
+                      (SYSTEM_CONFIGURATION_PARAMETER,&stack0xffffffef);
     if (iVar1 == 0) {
       uVar3 = uVar3 & 0xfeffffff;
-      FUN_0007c9fe(SYSTEM_CONFIGURATION_PARAMETER);
+      send_data_packet_with_specific_command_code(SYSTEM_CONFIGURATION_PARAMETER);
     }
     handle_data_writing_with_validation(0xff);
     iVar1 = handle_state_checking(0);

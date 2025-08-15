@@ -94,10 +94,10 @@ LAB_0003cfee:
             gui_screen_clear();
             fill_memory_buffer(&DAT_20004988,0,0x230);
             DAT_20004988 = 1;
-            uVar19 = FUN_0007d33a();
+            uVar19 = calculate_ble_connection_timing_with_scaling_alt();
             DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
             DAT_20004990 = (undefined4)uVar19;
-            uVar19 = FUN_0007d33a();
+            uVar19 = calculate_ble_connection_timing_with_scaling_alt();
             DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
             DAT_20004998 = (int)uVar19;
             DAT_200049a0 = 0;
@@ -117,7 +117,7 @@ LAB_0003cfee:
             DAT_200049ac = *(byte *)(iVar5 + 0xef);
             DAT_200049ad = *(byte *)(iVar5 + 0xfb);
             mutex_unlock(&DAT_20007b3c);
-            uVar19 = FUN_0007d33a();
+            uVar19 = calculate_ble_connection_timing_with_scaling_alt();
             uVar14 = *(char *)(iVar5 + 0xfb) * 1000;
             uVar6 = uVar14 + (uint)uVar19;
             DAT_200049b0 = uVar6 - 0x15e;
@@ -213,11 +213,11 @@ LAB_0003cf98:
         }
       }
       if (*(byte *)(iVar5 + 0xf9) - 2 < 2) {
-        uVar19 = FUN_0007d33a();
+        uVar19 = calculate_ble_connection_timing_with_scaling_alt();
         DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
         DAT_20004990 = (undefined4)uVar19;
         DAT_20004988 = 2;
-        uVar19 = FUN_0007d33a();
+        uVar19 = calculate_ble_connection_timing_with_scaling_alt();
         DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
         DAT_20004998 = (int)uVar19;
         uVar9 = get_ui_x_offset();
@@ -258,7 +258,7 @@ LAB_0003d394:
         handle_heartbeat();
       }
     }
-    uVar19 = FUN_0007d33a();
+    uVar19 = calculate_ble_connection_timing_with_scaling_alt();
     iVar5 = (int)((ulonglong)uVar19 >> 0x20);
     uVar6 = (uint)uVar19;
     if ((int)((iVar5 - DAT_200049b4) - (uint)(uVar6 < DAT_200049b0)) < 0 ==
@@ -273,11 +273,11 @@ LAB_0003d394:
           handle_heartbeat();
         }
       }
-      uVar19 = FUN_0007d33a();
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
       DAT_20004998 = (int)uVar19;
       DAT_20004988 = 2;
-      uVar19 = FUN_0007d33a();
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
       DAT_20004990 = (undefined4)uVar19;
       uVar9 = get_ui_x_offset();
@@ -332,10 +332,10 @@ LAB_0003d4ba:
           handle_heartbeat();
         }
       }
-      uVar19 = FUN_0007d33a();
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_2000499c = (undefined4)((ulonglong)uVar19 >> 0x20);
       DAT_20004998 = (int)uVar19;
-      uVar19 = FUN_0007d33a();
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
       DAT_20004990 = (undefined4)uVar19;
       DAT_20004988 = 2;
@@ -392,18 +392,18 @@ LAB_0003d4ba:
     if (DAT_200049a5 == '\x01') {
       uVar6 = DAT_200049a0;
       if (DAT_200049a4 == '\0') {
-        iVar8 = FUN_0007d33a();
+        iVar8 = calculate_ble_connection_timing_with_scaling_alt();
         DAT_200049a0 = (DAT_200049a0 - DAT_20004998) + iVar8;
         DAT_200049a4 = cVar2;
         uVar6 = DAT_200049a0;
       }
     }
     else if (DAT_200049a4 == '\0') {
-      iVar8 = FUN_0007d33a();
+      iVar8 = calculate_ble_connection_timing_with_scaling_alt();
       uVar6 = (iVar8 - DAT_20004998) + DAT_200049a0;
     }
     else {
-      DAT_20004998 = FUN_0007d33a();
+      DAT_20004998 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_2000499c = 0;
       DAT_200049a8 = DAT_200049a0;
       DAT_200049a4 = '\0';
@@ -492,7 +492,7 @@ LAB_0003d4ba:
         gui_bmp_bitmap_draw(0x1b,uVar9,iVar8 + 0x36,0,0,0);
         DAT_200049a5 = '\x01';
         DAT_200049a0 = iVar5 * 1000;
-        DAT_20004998 = FUN_0007d33a();
+        DAT_20004998 = calculate_ble_connection_timing_with_scaling_alt();
         DAT_2000499c = 0;
         if (LOG_LEVEL < 3) goto LAB_0003df5c;
         pcVar7 = "%s(): suspend enable...\n";
@@ -590,12 +590,13 @@ LAB_0003df5c:
       if ((0 < HEARTBEAT_SEQ) && (HEARTBEAT_SEQ = 0, DAT_20004989 < '\x14')) {
         DAT_20004989 = '\x13';
       }
-      uVar19 = FUN_0007d33a();
-      uVar18 = FUN_0007d3c2((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),DAT_20004990,DAT_20004994);
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
+      uVar18 = subtract_64bit_with_borrow_handling
+                         ((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),DAT_20004990,DAT_20004994);
       uVar19 = CONCAT44(DAT_20004994,DAT_20004990);
       if ((int)((ulonglong)uVar18 >> 0x20) < (int)(uint)((uint)uVar18 < 0x3e9))
       goto switchD_0003cf6c_caseD_4;
-      uVar19 = FUN_0007d33a();
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
       DAT_20004990 = (undefined4)uVar19;
       DAT_20004989 = DAT_20004989 + -1;
@@ -658,7 +659,7 @@ LAB_0003df5c:
         goto switchD_0003cf6c_caseD_4;
       }
       DAT_20004988 = 3;
-      uVar19 = FUN_0007d33a();
+      uVar19 = calculate_ble_connection_timing_with_scaling_alt();
       DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
       DAT_20004990 = (undefined4)uVar19;
       gui_screen_clear();
@@ -707,7 +708,7 @@ LAB_0003df5c:
       }
     }
     DAT_20004988 = 3;
-    uVar19 = FUN_0007d33a();
+    uVar19 = calculate_ble_connection_timing_with_scaling_alt();
     DAT_20004994 = (undefined4)((ulonglong)uVar19 >> 0x20);
     DAT_20004990 = (undefined4)uVar19;
     gui_screen_clear();
@@ -754,8 +755,9 @@ LAB_0003df5c:
         handle_heartbeat();
       }
     }
-    uVar19 = FUN_0007d33a();
-    uVar19 = FUN_0007d3c2((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),DAT_20004990,DAT_20004994);
+    uVar19 = calculate_ble_connection_timing_with_scaling_alt();
+    uVar19 = subtract_64bit_with_borrow_handling
+                       ((int)uVar19,(int)((ulonglong)uVar19 >> 0x20),DAT_20004990,DAT_20004994);
     if ((int)(uint)((uint)uVar19 < 0x1f41) <= (int)((ulonglong)uVar19 >> 0x20)) {
       if (1 < LOG_LEVEL) {
         if (IS_DEBUG == 0) {

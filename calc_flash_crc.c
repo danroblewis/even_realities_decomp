@@ -97,7 +97,7 @@ undefined4 calc_flash_crc(undefined2 *param_1,int param_2,uint param_3)
           handle_heartbeat();
         }
       }
-      uVar9 = FUN_0007da4a(*param_1,local_428,iVar5);
+      uVar9 = calculate_crc_with_parameter_validation(*param_1,local_428,iVar5);
       iVar6 = iVar6 + 0x400;
       *param_1 = (short)uVar9;
       uVar2 = extraout_r2_00;

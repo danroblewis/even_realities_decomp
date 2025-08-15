@@ -26,8 +26,8 @@ LAB_000640fe:
     if (param_2 < 0xf) break;
     pcVar2 = "(swap_type) < 0xF";
   }
-  uVar1 = FUN_00084d64();
-  FUN_00084dea(param_1,uVar1,&stack0xfffffff7,1);
+  uVar1 = calculate_timer_data_size_or_offset();
+  handle_memory_buffer_with_bounds_checking(param_1,uVar1,&stack0xfffffff7,1);
   return;
 }
 

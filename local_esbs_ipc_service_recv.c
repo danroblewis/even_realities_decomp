@@ -145,7 +145,7 @@ LAB_000159b4:
   *(byte *)(param_1 + 0xc9) = *(byte *)(param_1 + 0xc9) & 0xc0 | *param_2 & 0x3f;
   *(byte *)(param_1 + 0xca) = param_2[1];
   *(byte *)(param_1 + 0xcb) = param_2[2];
-  FUN_0007d230(*(undefined4 *)(param_2 + 7));
+  set_work_mode_timestamp(*(undefined4 *)(param_2 + 7));
   uVar5 = *(undefined1 *)(param_1 + 0xd5);
   local_30._0_2_ = CONCAT11(uVar5,(byte)local_30);
   puVar2 = (undefined4 *)(param_1 + 0xd4);

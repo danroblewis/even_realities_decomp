@@ -56,7 +56,7 @@ undefined4 spi_master_deinit(int param_1)
                          "spi_master_deinit");
       }
     }
-    FUN_00067248(param_1 + 0xc);
+    enable_interrupt_sources_and_cleanup_config(param_1 + 0xc);
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {
         DEBUG_PRINT("%s(): spim(bus=%d): uninit finish\n","spi_master_deinit",

@@ -42,7 +42,7 @@ LAB_000528e0:
     iVar3 = process_data_with_callback_validation_alt5(iVar8);
     if (((iVar3 != 0) && (*(char *)(iVar3 + 0x69) != '\0')) &&
        (*(char *)(param_1 + 0x1c) == *(char *)(iVar3 + 0x69))) {
-      FUN_000729fc(iVar3 + 0x6c);
+      cleanup_ble_connection_states(iVar3 + 0x6c);
       uVar7 = 0;
       bVar2 = false;
       while (uVar5 = (uint)*(ushort *)(param_1 + 0x10), uVar6 = 0, uVar7 < uVar5) {

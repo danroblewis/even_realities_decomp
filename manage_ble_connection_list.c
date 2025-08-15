@@ -19,7 +19,7 @@ void manage_ble_connection_list(int *param_1,int *param_2,undefined4 param_3,und
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!z_is_idle_thread_object(thread)",
                    "WEST_TOPDIR/zephyr/kernel/sched.c",0xc1,param_4);
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/kernel/sched.c",0xc1);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/sched.c",0xc1);
     }
     piVar1 = (int *)*param_2;
     if (param_2 != piVar1) {

@@ -337,13 +337,14 @@ LAB_0003fc46:
             if ((0 < SYNC_PACKET_COUNTER) && (SYNC_PACKET_COUNTER = 0, DAT_20004be5 < 0x14)) {
               DAT_20004be5 = 0x13;
             }
-            uVar22 = FUN_0007d35a();
-            uVar21 = FUN_0007d3c2((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,
-                                  DAT_20004bec);
+            uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
+            uVar21 = subtract_64bit_with_borrow_handling
+                               ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,
+                                DAT_20004bec);
             uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
             if ((int)((ulonglong)uVar21 >> 0x20) < (int)(uint)((uint)uVar21 < 0x3e9))
             goto switchD_0003f438_caseD_4;
-            uVar22 = FUN_0007d35a();
+            uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
             DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
             DAT_20004be8 = (undefined4)uVar22;
             DAT_20004be5 = DAT_20004be5 - 1;
@@ -409,7 +410,7 @@ LAB_0003fc46:
               }
               clear_memory_buffer_0x38();
               DAT_20004bbe = '\x01';
-              uVar22 = FUN_0007d35a();
+              uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
               DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
               DAT_20004be8 = (undefined4)uVar22;
               DAT_20004be5 = 10;
@@ -432,7 +433,7 @@ LAB_0003fc46:
               gui_screen_clear();
               DAT_2001ba2d = 0;
               DAT_20004be5 = 10;
-              uVar22 = FUN_0007d35a();
+              uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
               DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
               DAT_20004be8 = (undefined4)uVar22;
               navigation_overview_map_display(iVar11,y_offset);
@@ -541,7 +542,7 @@ joined_r0x0003fa68:
             iVar8 = get_ui_y_offset();
             EVEN_DASHBOARD_CLOCK_32x_TTF
                       (uVar12,uVar14,y_offset + 2,iVar7 + 0x4c,iVar8 + 0x1d,3,iVar11);
-            uVar22 = FUN_0007d35a();
+            uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
             DAT_20004bd0 = 5000;
             DAT_20004bd4 = 0;
           }
@@ -675,13 +676,13 @@ LAB_0003f994:
         if ((0 < SYNC_PACKET_COUNTER) && (SYNC_PACKET_COUNTER = 0, DAT_20004be5 < 0x14)) {
           DAT_20004be5 = 0x13;
         }
-        uVar22 = FUN_0007d35a();
-        uVar21 = FUN_0007d3c2((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,DAT_20004bec
-                             );
+        uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
+        uVar21 = subtract_64bit_with_borrow_handling
+                           ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,DAT_20004bec);
         uVar22 = CONCAT44(DAT_20004bec,DAT_20004be8);
         if ((int)((ulonglong)uVar21 >> 0x20) < (int)(uint)((uint)uVar21 < 0x3e9))
         goto switchD_0003f438_caseD_4;
-        uVar22 = FUN_0007d35a();
+        uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
         DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
         DAT_20004be8 = (undefined4)uVar22;
         DAT_20004be5 = DAT_20004be5 - 1;
@@ -746,7 +747,7 @@ joined_r0x0003f84c:
         }
 LAB_0003f5aa:
         DAT_20004bb8 = 2;
-        uVar22 = FUN_0007d35a();
+        uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
         DAT_20004bec = (undefined4)((ulonglong)uVar22 >> 0x20);
         DAT_20004be8 = (undefined4)uVar22;
         gui_screen_clear();
@@ -768,8 +769,9 @@ LAB_0003f5aa:
           handle_heartbeat();
         }
       }
-      uVar22 = FUN_0007d35a();
-      uVar22 = FUN_0007d3c2((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,DAT_20004bec);
+      uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
+      uVar22 = subtract_64bit_with_borrow_handling
+                         ((int)uVar22,(int)((ulonglong)uVar22 >> 0x20),DAT_20004be8,DAT_20004bec);
       if ((int)(uint)((uint)uVar22 < 0x1f41) <= (int)((ulonglong)uVar22 >> 0x20)) {
         if (1 < LOG_LEVEL) {
           if (IS_DEBUG == 0) {
@@ -803,7 +805,7 @@ LAB_0003f5aa:
         if ((operation_mode == 1) && (pcVar6 = (char *)get_work_mode(), *pcVar6 == '\x01')) {
           enqueue_message_to_queue_with_work_mode_check();
         }
-        uVar22 = FUN_0007d35a();
+        uVar22 = calculate_ble_connection_timing_with_scaling_alt2();
         iVar11 = (int)((ulonglong)uVar22 >> 0x20);
         y_offset = DAT_20004bd4 + DAT_20004bdc + (uint)CARRY4(DAT_20004bd0,DAT_20004bd8);
         bVar20 = DAT_20004bd0 + DAT_20004bd8 < (uint)uVar22;
@@ -865,7 +867,7 @@ switchD_0003f438_caseD_4:
             handle_heartbeat();
           }
         }
-        gui_utf_adv_draw_configure();
+        configure_advanced_utf_drawing();
         gui_screen_clear();
         reset_animation_counters();
         fill_memory_buffer(&DAT_2000f6ee,0,0x10);
@@ -968,7 +970,7 @@ switchD_0003f438_caseD_4:
       }
       gui_screen_clear();
 LAB_00040162:
-      gui_utf_adv_draw_configure();
+      configure_advanced_utf_drawing();
       DAT_2000a040 = 0;
       DAT_2000a044 = 0;
       DAT_2000a04c = 0;

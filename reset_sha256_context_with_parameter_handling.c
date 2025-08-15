@@ -38,7 +38,7 @@ int reset_sha256_context_with_parameter_handling
     }
   }
 LAB_00079f16:
-  FUN_00079808(auStack_40,0x20);
+  clear_memory_buffer_with_zero_fill(auStack_40,0x20);
   return iVar1;
 }
 

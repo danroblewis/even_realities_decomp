@@ -24,20 +24,20 @@ int bt_connection_disconnect_with_validation_and_state_management_and_callback_e
   
   piVar10 = param_1 + 0xb;
   do {
-    iVar4 = FUN_000816a2(piVar10);
+    iVar4 = get_counter_value(piVar10);
     if (iVar4 == 0) {
       return -0xb;
     }
   } while (*piVar10 != iVar4);
   *piVar10 = iVar4 + -1;
   iVar4 = param_2 + 0xc;
-  uVar5 = FUN_00083728(iVar4);
+  uVar5 = calculate_value_difference(iVar4);
   uVar1 = *(ushort *)(param_2 + 0x10);
   if ((((uint)uVar1 + param_3 <= (uint)*(ushort *)(param_1 + 10)) &&
-      (uVar6 = FUN_00083728(iVar4), (param_3 + 9U & 0xffff) <= uVar6)) &&
+      (uVar6 = calculate_value_difference(iVar4), (param_3 + 9U & 0xffff) <= uVar6)) &&
      (*(int *)(param_2 + 4) == 0)) {
     if (param_3 != 0) {
-      uVar2 = FUN_00081616(param_2);
+      uVar2 = calculate_total_linked_list_size(param_2);
       write_ble_data_uint16(iVar4,uVar2);
     }
     iVar7 = increment_counter_in_structure(param_2);
@@ -50,7 +50,7 @@ LAB_000575f6:
   }
   uVar12 = calculate_ble_memory_offset(*(undefined1 *)(param_2 + 10));
   if (*(code **)(param_1[1] + 0xc) == (code *)0x0) {
-    iVar7 = FUN_000836de((int)uVar12,(int)((ulonglong)uVar12 >> 0x20),0,0);
+    iVar7 = process_ble_connection_data((int)uVar12,(int)((ulonglong)uVar12 >> 0x20),0,0);
     if (iVar7 != 0) goto LAB_00057644;
     iVar7 = bt_connection_state_transition_with_callback_execution(0,4,0,0);
     if (iVar7 == 0) goto LAB_000575f6;
@@ -61,14 +61,14 @@ LAB_000575f6:
       DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","seg",
                    "WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x70d);
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x70d);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/l2cap.c",0x70d);
     }
 LAB_00057644:
     calculate_buffer_offset(iVar7 + 0xc,9);
   }
   iVar11 = iVar7 + 0xc;
   if (param_3 != 0) {
-    uVar2 = FUN_00081616(param_2);
+    uVar2 = calculate_total_linked_list_size(param_2);
     write_ble_data_uint16_with_allocation(iVar11,uVar2);
   }
   uVar6 = calculate_ble_buffer_available_space(iVar11);
@@ -92,8 +92,9 @@ LAB_0005769a:
   else {
     uVar9 = 0x81a61;
   }
-  iVar4 = FUN_00081820(*param_1,*(undefined2 *)(param_1 + 9),iVar7,uVar9,
-                       *(undefined4 *)(param_2 + 0x18));
+  iVar4 = handle_ble_connection_state_transition_with_validation
+                    (*param_1,*(undefined2 *)(param_1 + 9),iVar7,uVar9,
+                     *(undefined4 *)(param_2 + 0x18));
   if (iVar4 != 0) {
     *piVar10 = *piVar10 + 1;
     decrement_reference_count_and_cleanup_memory(iVar7);
@@ -104,7 +105,7 @@ LAB_0005769a:
     }
     return iVar4;
   }
-  iVar4 = FUN_000816a2(piVar10);
+  iVar4 = get_counter_value(piVar10);
   if (iVar4 == 0) {
     param_1[4] = param_1[4] & 0xfffffffe;
     if (*(code **)(param_1[1] + 0x1c) != (code *)0x0) {

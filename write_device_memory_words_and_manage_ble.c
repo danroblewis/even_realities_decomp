@@ -18,7 +18,7 @@ write_device_memory_words_and_manage_ble(undefined4 param_1,uint param_2,int par
   uint uStack_20;
   uint local_1c;
   
-  uVar2 = FUN_000839dc(param_2,param_4);
+  uVar2 = validate_range_bounds(param_2,param_4);
   if ((int)uVar2 == 0) {
     local_24 = "invalid address: 0x%08lx:%zu";
   }
@@ -28,7 +28,8 @@ write_device_memory_words_and_manage_ble(undefined4 param_1,uint param_2,int par
         manage_ble_connection_state_comprehensive
                   (&DAT_2000b154,(int)((ulonglong)uVar2 >> 0x20),0xffffffff,0xffffffff);
         for (uVar1 = 0; uVar1 != (param_4 & 0xfffffffc); uVar1 = uVar1 + 4) {
-          FUN_00065f80(uVar1 + param_2,*(undefined4 *)(param_3 + uVar1));
+          validate_address_and_perform_hardware_operations_alt
+                    (uVar1 + param_2,*(undefined4 *)(param_3 + uVar1));
         }
         do {
         } while (-1 < _DAT_50039400 << 0x1f);

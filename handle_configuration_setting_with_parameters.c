@@ -28,9 +28,9 @@ int handle_configuration_setting_with_parameters(int param_1,undefined4 param_2)
       if (sVar5 == -0x8000) {
         return 0;
       }
-      iVar1 = FUN_0007e9dc(iVar6,sVar5,auStack_6c,0x4a);
+      iVar1 = search_data_structure_wrapper(iVar6,sVar5,auStack_6c,0x4a);
       sVar4 = sVar3 + 0x3fff;
-      iVar2 = FUN_0007e9dc(iVar6,sVar4,&uStack_75,1);
+      iVar2 = search_data_structure_wrapper(iVar6,sVar4,&uStack_75,1);
       if (0 < iVar1) break;
       if (0 < iVar2) {
 LAB_0004e7d8:
@@ -39,8 +39,8 @@ LAB_0004e7d8:
           search_and_update_data_structure_with_mutex_protection
                     (iVar6,0x8000,(short *)(param_1 + 0x38),2);
         }
-        FUN_0007e9d4(iVar6,sVar5);
-        FUN_0007e9d4(iVar6,sVar4);
+        update_data_structure_with_zero_flag(iVar6,sVar5);
+        update_data_structure_with_zero_flag(iVar6,sVar4);
       }
     }
     if (iVar2 < 1) goto LAB_0004e7d8;

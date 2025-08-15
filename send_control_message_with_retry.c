@@ -25,7 +25,7 @@ int send_control_message_with_retry(int param_1,undefined4 param_2,undefined4 pa
     uVar2 = param_2;
     while( true ) {
       resource_mutex_acquire(uVar5,uVar2,0xffffffff,0xffffffff);
-      iVar1 = FUN_0007c898(iVar4,param_2,param_3,param_4);
+      iVar1 = send_control_message_with_flags(iVar4,param_2,param_3,param_4);
       mutex_unlock(uVar5);
       if (iVar1 == 0) break;
       iVar3 = iVar3 + -1;
@@ -34,7 +34,7 @@ int send_control_message_with_retry(int param_1,undefined4 param_2,undefined4 pa
                     *(ushort *)(iVar4 + 8) | 4,param_2,iVar1);
         return iVar1;
       }
-      FUN_0007c87a();
+      set_ble_schedule_timing_for_data_transmission();
       uVar2 = extraout_r1;
     }
   }

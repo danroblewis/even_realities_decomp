@@ -13,7 +13,7 @@ uint calculate_offset(int data_ptr)
   
   uVar1 = *(uint *)(data_ptr + 0x18);
   if (uVar1 != 0) {
-    iVar2 = thunk_FUN_000823fa();
+    iVar2 = thunk_bt_connection_parameter_analyzer();
     uVar1 = iVar2 - 3U & 0xffff;
   }
   return uVar1;

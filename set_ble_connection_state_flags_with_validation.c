@@ -38,7 +38,7 @@ void set_ble_connection_state_flags_with_validation
     uVar1 = 0x2d;
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/kernel/poll.c",uVar1);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/poll.c",uVar1);
 }
 
 

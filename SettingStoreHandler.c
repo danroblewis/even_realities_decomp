@@ -22,7 +22,7 @@ uint SettingStoreHandler(void)
   undefined1 local_20 [4];
   byte local_1c;
   
-  iVar1 = FUN_00072240(&DAT_20003994,local_20,0,0);
+  iVar1 = manage_ble_connection_state_comprehensive(&DAT_20003994,local_20,0,0);
   if (iVar1 == 0) {
     if (2 < LOG_LEVEL) {
       if (IS_DEBUG == 0) {

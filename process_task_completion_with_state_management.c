@@ -96,7 +96,7 @@ LAB_0004dcaa:
       uVar6 = 0x1bf;
       goto LAB_0004db3e;
     }
-    iVar1 = FUN_0007ee44();
+    iVar1 = return_zero_stub();
     if (iVar1 == 0) {
       iVar2 = 0;
     }
@@ -150,14 +150,14 @@ LAB_0004dcaa:
     else {
       puVar5 = &LAB_0004daac_1;
 LAB_0004dc74:
-      iVar2 = FUN_0007db9e(puVar5,0x7eec1,param_1,param_7);
+      iVar2 = process_variable_length_data_structure(puVar5,0x7eec1,param_1,param_7);
       if (iVar2 < 0) {
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","err >= 0",
                      "WEST_TOPDIR/zephyr/subsys/logging/log_output.c",0x219);
         uVar6 = 0x219;
 LAB_0004db3e:
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/log_output.c",uVar6);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/logging/log_output.c",uVar6);
       }
       if (param_9 != 0) goto LAB_0004dcaa;
 LAB_0004dd74:
@@ -169,7 +169,7 @@ LAB_0004dd74:
     process_task_completion_with_priority_based_callback(param_1,param_10);
   }
 LAB_0004dd7a:
-  FUN_0007eece(param_1);
+  execute_callbacks_and_clear_reference(param_1);
   return;
 }
 

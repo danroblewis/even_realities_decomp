@@ -8,7 +8,7 @@
 void call_function_with_data(void)
 
 {
-  FUN_0007f8c6(&DAT_20006abc);
+  fill_memory_buffer_with_zeros_alt(&DAT_20006abc);
   return;
 }
 

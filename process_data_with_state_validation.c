@@ -1,29 +1,33 @@
 /*
  * Function: process_data_with_state_validation
- * Entry:    0004df34
- * Prototype: undefined process_data_with_state_validation()
+ * Entry:    00065d3c
+ * Prototype: undefined __stdcall process_data_with_state_validation(undefined4 unused_parameter, undefined4 data_value, undefined4 additional_data)
  */
 
 
-void process_data_with_state_validation(undefined4 param_1,uint param_2)
+undefined4
+process_data_with_state_validation(undefined4 param_1,int data_value,undefined4 additional_data)
 
 {
   undefined4 uVar1;
-  uint uVar2;
-  undefined4 *puStack_18;
-  uint uStack_14;
   
-  puStack_18 = &DAT_0008ad08;
-  uVar2 = 9999;
-  if (param_2 < 10000) {
-    uVar2 = param_2;
+  if (data_value == 0) {
+    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","handler",
+                 "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_ipc.c",0x34);
+                    /* WARNING: Subroutine does not return */
+    trigger_system_service_call("WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_ipc.c",0x34);
   }
-  uStack_14 = param_2;
-  uVar1 = format_string_with_variable_arguments(&puStack_18,5,"%d",uVar2);
-  FUN_0007eea6(&LAB_0004df64_1,"\x1b[1;31m--- ",0xb,DAT_2000a0f4);
-  FUN_0007eea6(&LAB_0004df64_1,&puStack_18,uVar1,DAT_2000a0f4);
-  FUN_0007eea6(&LAB_0004df64_1," messages dropped ---\r\n\x1b[0m",0x1b,DAT_2000a0f4);
-  return;
+  if (DAT_2000b328 == '\0') {
+    process_data_with_parameter_validation_alt4(0x2a);
+    uVar1 = 0xbad0000;
+    DAT_2000b328 = '\x01';
+    DAT_2000b324 = data_value;
+    DAT_2000b32c = additional_data;
+  }
+  else {
+    uVar1 = 0xbad000c;
+  }
+  return uVar1;
 }
 
 

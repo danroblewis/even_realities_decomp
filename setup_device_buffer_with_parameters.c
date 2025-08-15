@@ -31,12 +31,12 @@ int setup_device_buffer_with_parameters(uint param_1,undefined4 *param_2,undefin
     iVar1 = *(int *)(local_30 + 0xc);
     local_2c = param_1;
     uStack_20 = param_3;
-    FUN_0007ef7e();
+    no_operation();
     if (iVar1 == 0) {
       local_14 = -0x13;
     }
     else {
-      FUN_00083ac2(iVar1,0x7f021,&local_2c);
+      iterate_data_structure_with_callback(iVar1,0x7f021,&local_2c);
       if (local_14 == 0) {
         *param_2 = local_1c;
       }

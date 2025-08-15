@@ -31,7 +31,7 @@ undefined4 setup_image_processing(int param_1,uint param_2)
       }
       *(undefined4 *)(pbVar3 + 0x30) = uVar2;
       if (((pbVar3[-0x53] & 0x1f) != 0) || (*(int *)(pbVar3 + -0x48) != 0)) goto LAB_0008684e;
-      FUN_000738d4(pbVar3 + -0x60);
+      handle_ble_connection_insertion_with_privilege_management(pbVar3 + -0x60);
       iVar4 = 0;
 LAB_00086846:
       *pbVar3 = (byte)iVar4;
@@ -48,7 +48,7 @@ LAB_00086846:
         pbVar3[0x2d] = 0;
         pbVar3[0x2e] = 0;
         pbVar3[0x2f] = 0;
-        FUN_00072f28(iVar4,pbVar3 + -0x14);
+        manage_ble_connection_state_with_privilege_control(iVar4,pbVar3 + -0x14);
         *pbVar3 = 0;
         goto LAB_000867f8;
       }

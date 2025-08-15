@@ -26,8 +26,8 @@ int send_control_message_with_byte_swap
   local_1c = 2;
   local_18 = 0;
   local_14 = control_param;
-  iVar1 = FUN_0007c85e(comm_interface,&local_20,2,comm_param);
-  FUN_0007c87a();
+  iVar1 = execute_callback_function_pointer(comm_interface,&local_20,2,comm_param);
+  set_ble_schedule_timing_for_data_transmission();
   if (iVar1 < 0) {
     DEBUG_PRINT("_st25dv_read  ret %d \n",iVar1);
   }

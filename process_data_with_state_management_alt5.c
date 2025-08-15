@@ -15,8 +15,9 @@ undefined4 process_data_with_state_management_alt5(int param_1)
   
   local_10 = &DAT_000a24e0;
   local_c = 3;
-  iVar1 = FUN_0008633e(param_1 + 4,&local_10);
-  if ((iVar1 == 0) || (iVar1 = thunk_FUN_00086320(param_1 + 4,DAT_2000ab80), iVar1 == 0)) {
+  iVar1 = write_ble_uart_packet_string_with_type3_header(param_1 + 4,&local_10);
+  if ((iVar1 == 0) ||
+     (iVar1 = write_ble_uart_packet_32bit_unsigned(param_1 + 4,DAT_2000ab80), iVar1 == 0)) {
     uVar2 = 7;
   }
   else {

@@ -16,7 +16,7 @@ void remove_ble_connection_from_list
     DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","!z_is_idle_thread_object(thread)",
                  "WEST_TOPDIR/zephyr/kernel/sched.c",0x484,param_4);
                     /* WARNING: Subroutine does not return */
-    assertion_failure("WEST_TOPDIR/zephyr/kernel/sched.c",0x484);
+    trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/sched.c",0x484);
   }
   iVar2 = *param_2;
   piVar1 = (int *)param_2[1];

@@ -47,7 +47,7 @@ uint format_json_value_by_type(int param_1,int param_2)
       else {
         iVar6 = 2;
       }
-      puVar5 = (undefined1 *)FUN_00084f58(param_2,iVar6 + 1);
+      puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6 + 1);
       if (puVar5 != (undefined1 *)0x0) {
         *puVar5 = 0x7b;
         *(int *)(param_2 + 0xc) = *(int *)(param_2 + 0xc) + 1;
@@ -57,7 +57,7 @@ uint format_json_value_by_type(int param_1,int param_2)
         *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + iVar6;
         for (; piVar11 != (int *)0x0; piVar11 = (int *)*piVar11) {
           if (*(int *)(param_2 + 0x14) != 0) {
-            puVar9 = (undefined1 *)FUN_00084f58(param_2,*(undefined4 *)(param_2 + 0xc));
+            puVar9 = (undefined1 *)resize_dynamic_buffer(param_2,*(undefined4 *)(param_2 + 0xc));
             puVar5 = puVar9;
             if (puVar9 == (undefined1 *)0x0) goto switchD_000646e2_caseD_3;
             for (; (uint)((int)puVar5 - (int)puVar9) < *(uint *)(param_2 + 0xc); puVar5 = puVar5 + 1
@@ -68,14 +68,14 @@ uint format_json_value_by_type(int param_1,int param_2)
           }
           iVar6 = format_json_string_with_escaping(piVar11[8],param_2);
           if (iVar6 == 0) goto switchD_000646e2_caseD_3;
-          FUN_00084f16(param_2);
+          update_string_position_by_length(param_2);
           if (*(int *)(param_2 + 0x14) == 0) {
             iVar6 = 1;
           }
           else {
             iVar6 = 2;
           }
-          puVar5 = (undefined1 *)FUN_00084f58(param_2,iVar6);
+          puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6);
           if (puVar5 == (undefined1 *)0x0) goto switchD_000646e2_caseD_3;
           *puVar5 = 0x3a;
           if (*(int *)(param_2 + 0x14) != 0) {
@@ -84,7 +84,7 @@ uint format_json_value_by_type(int param_1,int param_2)
           *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + iVar6;
           iVar6 = format_json_value_by_type(piVar11,param_2);
           if (iVar6 == 0) goto switchD_000646e2_caseD_3;
-          FUN_00084f16(param_2);
+          update_string_position_by_length(param_2);
           iVar6 = *(int *)(param_2 + 0x14);
           if (iVar6 != 0) {
             iVar6 = 1;
@@ -92,7 +92,7 @@ uint format_json_value_by_type(int param_1,int param_2)
           if (*piVar11 != 0) {
             iVar6 = iVar6 + 1;
           }
-          puVar5 = (undefined1 *)FUN_00084f58(param_2,iVar6 + 1);
+          puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6 + 1);
           if (puVar5 == (undefined1 *)0x0) goto switchD_000646e2_caseD_3;
           puVar9 = puVar5;
           if (*piVar11 != 0) {
@@ -113,7 +113,7 @@ uint format_json_value_by_type(int param_1,int param_2)
         else {
           iVar6 = *(int *)(param_2 + 0xc) + 1;
         }
-        puVar5 = (undefined1 *)FUN_00084f58(param_2,iVar6);
+        puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6);
         if (puVar5 != (undefined1 *)0x0) {
           puVar9 = puVar5;
           if (*(int *)(param_2 + 0x14) != 0) {
@@ -133,7 +133,7 @@ LAB_000648d0:
     else if (uVar10 == 0x80) {
       if (*(int *)(param_1 + 0x10) != 0) {
         iVar6 = calculate_string_length();
-        iVar4 = FUN_00084f58(param_2,iVar6 + 1);
+        iVar4 = resize_dynamic_buffer(param_2,iVar6 + 1);
         if (iVar4 != 0) {
           memcpy(iVar4,*(undefined4 *)(param_1 + 0x10),iVar6 + 1);
           goto LAB_00064728;
@@ -142,7 +142,7 @@ LAB_000648d0:
     }
     else if (uVar10 == 0x20) {
       piVar11 = *(int **)(param_1 + 8);
-      puVar5 = (undefined1 *)FUN_00084f58(param_2,1);
+      puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,1);
       if (puVar5 != (undefined1 *)0x0) {
         *puVar5 = 0x5b;
         *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 1;
@@ -150,7 +150,7 @@ LAB_000648d0:
         for (; piVar11 != (int *)0x0; piVar11 = (int *)*piVar11) {
           iVar6 = format_json_value_by_type(piVar11,param_2);
           if (iVar6 == 0) goto switchD_000646e2_caseD_3;
-          FUN_00084f16(param_2);
+          update_string_position_by_length(param_2);
           if (*piVar11 != 0) {
             if (*(int *)(param_2 + 0x14) == 0) {
               iVar6 = 1;
@@ -158,7 +158,7 @@ LAB_000648d0:
             else {
               iVar6 = 2;
             }
-            puVar5 = (undefined1 *)FUN_00084f58(param_2,iVar6 + 1);
+            puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6 + 1);
             if (puVar5 == (undefined1 *)0x0) goto switchD_000646e2_caseD_3;
             *puVar5 = 0x2c;
             if (*(int *)(param_2 + 0x14) == 0) {
@@ -172,7 +172,7 @@ LAB_000648d0:
             *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + iVar6;
           }
         }
-        puVar5 = (undefined1 *)FUN_00084f58(param_2,2);
+        puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,2);
         if (puVar5 != (undefined1 *)0x0) {
           puVar5[1] = 0;
           *puVar5 = 0x5d;
@@ -190,7 +190,7 @@ LAB_000648d0:
     local_44._3_1_ = 's';
     local_40[0] = 'e';
     local_40[1] = '\0';
-    iVar6 = FUN_00084f58(param_2,6);
+    iVar6 = resize_dynamic_buffer(param_2,6);
     if (iVar6 != 0) {
       safe_string_copy_with_padding(iVar6,&local_44,*(int *)(param_2 + 4) - *(int *)(param_2 + 8));
       return uVar10;
@@ -207,7 +207,7 @@ switchD_000646e2_caseD_3:
 LAB_00064706:
     local_44 = *(undefined4 *)pcVar8;
     local_40[0] = pcVar8[4];
-    uVar10 = FUN_00084f58(param_2,5);
+    uVar10 = resize_dynamic_buffer(param_2,5);
     if (uVar10 != 0) {
       safe_string_copy_with_padding(uVar10,&local_44,*(int *)(param_2 + 4) - *(int *)(param_2 + 8));
 LAB_00064728:
@@ -260,7 +260,7 @@ LAB_000647a8:
       strcpy_safe(&local_44,&DAT_000f6977);
       iVar6 = 4;
     }
-    puVar5 = (undefined1 *)FUN_00084f58(param_2,iVar6 + 1);
+    puVar5 = (undefined1 *)resize_dynamic_buffer(param_2,iVar6 + 1);
     if (puVar5 == (undefined1 *)0x0) goto switchD_000646e2_caseD_3;
     puVar7 = &local_44;
     for (puVar9 = puVar5; puVar5 + iVar6 != puVar9; puVar9 = puVar9 + 1) {

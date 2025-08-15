@@ -11,7 +11,7 @@ undefined4 power_down_panel(void)
   int iVar1;
   char *format_string;
   
-  FUN_0007c038(2);
+  calculate_ble_schedule_timing_with_division(2);
   call_conditional_event_handler();
   if (0 < LOG_LEVEL) {
     if (IS_DEBUG == 0) {
@@ -21,8 +21,8 @@ undefined4 power_down_panel(void)
       handle_heartbeat();
     }
   }
-  FUN_0007c038(0x10);
-  iVar1 = FUN_00083dc8(&DAT_00087c80,4,3,1);
+  calculate_ble_schedule_timing_with_division(0x10);
+  iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,4,3,1);
   if (iVar1 < 0) {
     if (LOG_LEVEL < 1) {
       return 0;
@@ -38,8 +38,8 @@ undefined4 power_down_panel(void)
         handle_heartbeat();
       }
     }
-    FUN_0007c038(5);
-    iVar1 = FUN_00083dc8(&DAT_00087c80,8,1);
+    calculate_ble_schedule_timing_with_division(5);
+    iVar1 = pack_parameters_and_call_callback(&DAT_00087c80,8,1);
     if (iVar1 < 0) {
       if (LOG_LEVEL < 1) {
         return 0;

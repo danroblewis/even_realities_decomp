@@ -50,13 +50,13 @@ LAB_00047096:
   }
   uVar5 = 0;
 LAB_000470b8:
-  thunk_FUN_0007d77c(6);
-  thunk_FUN_0007d77c(0xa9);
+  thunk_jbd_display_command_handler(6);
+  thunk_jbd_display_command_handler(0xa9);
   write_registers_if_changed(sVar4,uVar5);
   jbd_spi_write_register(0x31,4);
-  thunk_FUN_0007d77c(0xa3);
-  thunk_FUN_0007d77c(0x97);
-  FUN_0007d772(1);
+  thunk_jbd_display_command_handler(0xa3);
+  thunk_jbd_display_command_handler(0x97);
+  multiply_by_1000_and_jump(1);
   return;
 }
 

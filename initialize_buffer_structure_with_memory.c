@@ -36,7 +36,7 @@ initialize_buffer_structure_with_memory(undefined4 param_1,undefined4 *param_2,u
                    "WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0x94);
       DEBUG_PRINT2("\tunexpected list end location\n");
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0x94);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/settings/src/settings.c",0x94);
     }
     if (&UNK_00088327 < ppuVar3) break;
     puVar6 = *ppuVar3;

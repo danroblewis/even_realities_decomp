@@ -67,7 +67,7 @@ void float_to_string_ieee754(undefined4 output_buffer,uint float_value,int unuse
         DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","len >= 0",
                      "WEST_TOPDIR/zephyr/subsys/logging/log_msg.c",0x59);
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/subsys/logging/log_msg.c",0x59);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/logging/log_msg.c",0x59);
       }
     }
   }

@@ -29,17 +29,17 @@ undefined4 manage_ble_connection_state_and_cleanup(int param_1,undefined4 param_
         }
       }
       else {
-        iVar1 = FUN_00080f92(*(undefined1 *)(param_3 + 8),param_3 + 0x90);
+        iVar1 = is_ble_uuid_valid_and_available(*(undefined1 *)(param_3 + 8),param_3 + 0x90);
         if (iVar1 == 0) {
           if (puVar2 == &DAT_20002a20) {
             validate_and_process_ble_descriptor(param_3);
           }
-          FUN_000828da(puVar3,&DAT_000f2b3a);
+          copy_data_structure_fields(puVar3,&DAT_000f2b3a);
           *puVar2 = 0;
           *(undefined2 *)(puVar2 + 8) = 0;
         }
         else {
-          FUN_000828da(puVar3,param_3 + 0x90);
+          copy_data_structure_fields(puVar3,param_3 + 0x90);
         }
       }
     }

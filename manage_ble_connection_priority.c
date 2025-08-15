@@ -21,7 +21,7 @@ void manage_ble_connection_priority
                    "WEST_TOPDIR/zephyr/kernel/sched.c",0x8f,param_4);
       DEBUG_PRINT2(&DAT_000f53ff);
                     /* WARNING: Subroutine does not return */
-      assertion_failure("WEST_TOPDIR/zephyr/kernel/sched.c",0x8f);
+      trigger_system_service_call("WEST_TOPDIR/zephyr/kernel/sched.c",0x8f);
     }
     if ((((*(byte *)((int)DMIC_BUFFER_SIZE + 0xd) & 0x1f) == 0) && (puVar1[6] == 0)) &&
        (0x7f < *(ushort *)((int)DMIC_BUFFER_SIZE + 0xe))) {

@@ -19,12 +19,13 @@ int configure_timer_interrupt_parameters
     return -0xc;
   }
   if (*param_2 == 0) {
-    iVar1 = FUN_00083e70(*puVar3,param_2[1],param_3,0,param_4);
+    iVar1 = process_parameters_and_call_formatted_callbacks(*puVar3,param_2[1],param_3,0,param_4);
     if (iVar1 < 0) {
       return iVar1;
     }
     if ((*(byte *)(param_2 + 3) & 3) != 3) {
-      iVar1 = FUN_00083dc8(*puVar3,7,5,(&DAT_000f66c1)[*(byte *)(param_2 + 3) & 3]);
+      iVar1 = pack_parameters_and_call_callback
+                        (*puVar3,7,5,(&DAT_000f66c1)[*(byte *)(param_2 + 3) & 3]);
       if (iVar1 < 0) {
         return iVar1;
       }

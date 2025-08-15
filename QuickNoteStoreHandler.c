@@ -30,7 +30,7 @@ int QuickNoteStoreHandler(uint param_1,uint param_2,undefined4 param_3)
   local_30 = param_1;
   local_2c = param_2;
   uStack_28 = param_3;
-  iVar2 = FUN_00072240(&DAT_20003960,&local_30,0,0);
+  iVar2 = manage_ble_connection_state_comprehensive(&DAT_20003960,&local_30,0,0);
   uVar1 = local_2c;
   if (iVar2 != 0) {
     if (LOG_LEVEL < 1) {

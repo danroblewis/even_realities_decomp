@@ -18,7 +18,9 @@ int execute_hardware_operation_with_retry
   
   operation_result = 5;
   do {
-    function_result = FUN_00084c7e(&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
+    function_result =
+         conditional_callback_execution_with_parameter_packing
+                   (&HARDWARE_OPERATION_MESSAGE,HARDWARE_OPERATION_PARAMETER);
     if (function_result == 0) {
       return 0;
     }

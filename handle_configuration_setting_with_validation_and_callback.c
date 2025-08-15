@@ -35,7 +35,7 @@ handle_configuration_setting_with_validation_and_callback(undefined4 *param_1,in
     local_1c = "No space for new attribute.";
   }
   local_20 = 2;
-  FUN_0007f406(&DAT_00088130,0x1040,&local_20);
+  process_and_compress_data_with_validation_wrapper(&DAT_00088130,0x1040,&local_20);
   return (undefined4 *)0x0;
 }
 

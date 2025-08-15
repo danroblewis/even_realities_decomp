@@ -77,7 +77,7 @@ LAB_0005bc4e:
       puVar10 = (ushort *)((int)puVar10 + (uint)*param_3);
     }
     if ((uVar3 == 0) && (uVar9 != 0)) {
-      FUN_00082d2e(param_1,uVar9,param_5);
+      handle_ble_characteristic_operation_with_validation(param_1,uVar9,param_5);
       return;
     }
   }

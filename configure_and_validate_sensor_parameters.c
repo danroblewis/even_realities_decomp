@@ -56,7 +56,7 @@ int configure_and_validate_sensor_parameters
         if (iVar7 != 0) {
           return iVar7;
         }
-        iVar7 = FUN_0007cfac();
+        iVar7 = read_sensor_data_with_retry_and_timeout_check();
         if (iVar7 != 0) {
           return iVar7;
         }
@@ -69,9 +69,10 @@ int configure_and_validate_sensor_parameters
         uVar11 = set_sensor_operation_mode(*param_1);
         if (uVar11 == 0) {
           for (; uVar11 < uVar9; uVar11 = uVar11 + 4) {
-            iVar6 = FUN_0007cfdc(uVar5 + uVar11 & 0xffff,
-                                 (uint)pbVar12[1] << 0x10 | (uint)*pbVar12 << 0x18 |
-                                 (uint)pbVar12[3] | (uint)pbVar12[2] << 8);
+            iVar6 = transmit_sensor_configuration_sequence_and_validate
+                              (uVar5 + uVar11 & 0xffff,
+                               (uint)pbVar12[1] << 0x10 | (uint)*pbVar12 << 0x18 | (uint)pbVar12[3]
+                               | (uint)pbVar12[2] << 8);
             pbVar12 = pbVar12 + 4;
             if (iVar6 != 0) goto LAB_00030622;
           }
@@ -82,20 +83,23 @@ int configure_and_validate_sensor_parameters
             iVar6 = transmit_sensor_data_with_retry(0xff20,0x3c00f091);
             if ((iVar6 == 0) && (uVar9 = transmit_sensor_data_with_retry(0x4820,4), uVar9 == 0)) {
               for (; uVar9 < uVar11; uVar9 = uVar9 + 4) {
-                iVar6 = FUN_0007d05e(&local_1c,*(int *)(param_1 + 0xc) + uVar9 & 0xffff);
+                iVar6 = transmit_sensor_configuration_and_read_data
+                                  (&local_1c,*(int *)(param_1 + 0xc) + uVar9 & 0xffff);
                 if ((iVar6 != 0) ||
                    (pbVar1 = pbVar12 + 1, bVar4 = *pbVar12, pbVar2 = pbVar12 + 3,
                    pbVar3 = pbVar12 + 2, pbVar12 = pbVar12 + 4,
                    ((uint)*pbVar1 << 0x10 | (uint)bVar4 << 0x18 | (uint)*pbVar2 | (uint)*pbVar3 << 8
                    ) != local_1c)) goto LAB_00030622;
               }
-              iVar6 = FUN_0007d02a(*(undefined2 *)(*(int *)(param_1 + 0x10) + 8),0x20222022,*param_1
-                                  );
+              iVar6 = set_sensor_operation_mode_and_transmit_configuration
+                                (*(undefined2 *)(*(int *)(param_1 + 0x10) + 8),0x20222022,*param_1);
               if (iVar6 == 0) {
                 puVar10 = *(undefined4 **)(param_1 + 0x10);
-                uVar8 = FUN_0007cf34(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 8),
-                                     *puVar10);
-                iVar6 = FUN_0007d02a(*(undefined2 *)(puVar10 + 3),uVar8,*param_1);
+                uVar8 = calculate_data_checksum_in_4byte_chunks
+                                  (*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 8),
+                                   *puVar10);
+                iVar6 = set_sensor_operation_mode_and_transmit_configuration
+                                  (*(undefined2 *)(puVar10 + 3),uVar8,*param_1);
                 if (iVar6 == 0) {
                   if (*param_1 != '\x01') {
                     return 0;

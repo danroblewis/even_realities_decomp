@@ -37,7 +37,7 @@ LAB_00050eb8:
                      param_3);
         DEBUG_PRINT2("\tMarking %u areas for dynamic regions failed\n\n",param_2);
                     /* WARNING: Subroutine does not return */
-        assertion_failure("WEST_TOPDIR/zephyr/arch/arm/core/aarch32/mpu/arm_mpu.c",299);
+        trigger_system_service_call("WEST_TOPDIR/zephyr/arch/arm/core/aarch32/mpu/arm_mpu.c",299);
       }
       *piVar3 = iVar1;
       if ((iVar1 == -0x16) || ((int)(uint)DAT_2001d450 <= iVar1)) goto LAB_00050eb8;

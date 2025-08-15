@@ -15,7 +15,7 @@ int FUN_00082030(int param_1,int param_2,undefined4 param_3,undefined4 param_4)
   undefined4 uVar5;
   undefined8 uVar6;
   
-  uVar6 = FUN_00081bc0(*(undefined4 *)(param_2 + 8));
+  uVar6 = calculate_linked_list_total_size(*(undefined4 *)(param_2 + 8));
   iVar2 = (int)((ulonglong)uVar6 >> 0x20);
   uVar3 = (uint)*(ushort *)(param_1 + 0x1e);
   uVar4 = (uint)*(ushort *)(param_1 + 0x2e);

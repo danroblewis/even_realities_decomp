@@ -18,13 +18,13 @@ process_command_table
   undefined4 local_30;
   int iStack_2c;
   
-  iVar2 = FUN_00085fa2();
+  iVar2 = parse_ble_uart_packet_with_buffer_expansion();
   if (iVar2 != 0) {
     *processed_count = 0;
     puVar5 = command_table;
 LAB_000808a2:
     do {
-      iVar3 = FUN_00085f9c(command_data,&local_30);
+      iVar3 = parse_ble_uart_packet_and_advance_buffer(command_data,&local_30);
       iVar2 = iStack_2c;
       uVar1 = local_30;
       if (iVar3 == 0) break;
@@ -47,9 +47,9 @@ LAB_000808a2:
         }
         puVar5 = puVar5 + 5;
       }
-      iVar2 = FUN_00086064(command_data,0);
+      iVar2 = parse_ble_uart_complex_packet_with_recursion(command_data,0);
     } while (iVar2 != 0);
-    iVar2 = thunk_FUN_00085df6(command_data);
+    iVar2 = manage_complex_data_structure_with_state(command_data);
     if (iVar2 != 0) {
       return 0;
     }

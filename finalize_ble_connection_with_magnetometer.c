@@ -86,7 +86,7 @@ LAB_00073c24:
     pcVar3 = "WEST_TOPDIR/zephyr/kernel/sched.c";
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure(pcVar3,uVar5);
+  trigger_system_service_call(pcVar3,uVar5);
 }
 
 

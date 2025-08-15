@@ -28,7 +28,7 @@ void on_triple_click(void)
     iVar1 = get_work_mode();
     *(undefined1 *)(iVar1 + 0xd5) = 3;
     iVar1 = get_work_mode();
-    FUN_0007d874(*(undefined1 *)(iVar1 + 0xd5));
+    display_refresh_wrapper_with_parameters(*(undefined1 *)(iVar1 + 0xd5));
     DAT_20018d8b = 1;
     return;
   }

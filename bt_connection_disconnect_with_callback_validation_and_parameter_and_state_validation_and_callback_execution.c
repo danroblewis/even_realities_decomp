@@ -40,7 +40,7 @@ void bt_connection_disconnect_with_callback_validation_and_parameter_and_state_v
     }
   }
                     /* WARNING: Subroutine does not return */
-  assertion_failure("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",uVar1);
+  trigger_system_service_call("WEST_TOPDIR/zephyr/subsys/bluetooth/host/att.c",uVar1);
 }
 
 

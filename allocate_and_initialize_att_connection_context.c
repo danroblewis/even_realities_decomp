@@ -56,13 +56,13 @@ undefined4 allocate_and_initialize_att_connection_context(undefined4 param_1,und
     uStack_28 = *local_20;
     local_2c = "No available ATT channel for conn %p";
     local_30 = 3;
-    FUN_00081ddc(&DAT_00088100,0x1880,&local_30);
+    process_and_compress_data_wrapper(&DAT_00088100,0x1880,&local_30);
   }
   else {
     local_2c = "No available ATT context for conn %p";
     local_30 = 3;
     uStack_28 = param_1;
-    FUN_00081ddc(&DAT_00088100,0x1840,&local_30);
+    process_and_compress_data_wrapper(&DAT_00088100,0x1840,&local_30);
   }
   return 0xfffffff4;
 }

@@ -45,11 +45,11 @@ int parse_json_value_with_memory_allocation
             pppppppuVar4 = (undefined4 *******)0x0;
           }
         }
-        uVar3 = FUN_00084ed8(pppppppuVar4);
+        uVar3 = process_string_with_bounds_checking(pppppppuVar4);
         iVar2 = parse_json_value(iVar1,uVar3);
         if ((iVar2 != 0) &&
            ((param_4 == 0 ||
-            ((FUN_00084ed8(&local_3c), local_34 < local_38 &&
+            ((process_string_with_bounds_checking(&local_3c), local_34 < local_38 &&
              (*(char *)((int)local_3c + local_34) == '\0')))))) {
           if (param_3 == (int *)0x0) {
             return iVar1;
