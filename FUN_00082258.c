@@ -1,0 +1,19 @@
+/*
+ * Function: FUN_00082258
+ * Entry:    00082258
+ * Prototype: undefined FUN_00082258()
+ */
+
+
+void FUN_00082258(undefined4 param_1,int param_2)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_00083718(param_2 + 0xc);
+  process_ble_characteristic_value_change_with_state_management
+            (param_1,0,0,uVar1,0,*(undefined4 *)(param_2 + 0xc),*(undefined2 *)(param_2 + 0x10));
+  return;
+}
+
+

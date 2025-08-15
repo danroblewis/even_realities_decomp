@@ -54,7 +54,7 @@ public class DumpDecompiled extends GhidraScript {
             mon.setMessage("Decompiling: " + f.getName() + " @ " + f.getEntryPoint());
             DecompileResults res = ifc.decompileFunction(f, timeoutSec, mon);
 
-            String fileSafeName = sanitize(f.getEntryPoint().toString() + "_" + f.getName()) + ".c";
+            String fileSafeName = sanitize(f.getName()) + ".c";
             Path outFile = outDir.resolve(fileSafeName);
 
             try {
@@ -74,7 +74,7 @@ public class DumpDecompiled extends GhidraScript {
                 }
 
                 Files.write(outFile, sb.toString().getBytes(StandardCharsets.UTF_8));
-                index.add(f.getEntryPoint() + "\t" + f.getName() + "\t" + outFile.getFileName().toString());
+                index.add(f.getName() + "\t" + outFile.getFileName().toString());
             } catch (IOException e) {
                 printerr("Write failed for " + f.getName() + ": " + e.getMessage());
                 fail++;
@@ -92,4 +92,3 @@ public class DumpDecompiled extends GhidraScript {
         return s.replaceAll("[^A-Za-z0-9_\\-\\.]", "_");
     }
 }
-

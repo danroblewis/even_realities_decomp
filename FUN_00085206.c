@@ -1,0 +1,90 @@
+/*
+ * Function: FUN_00085206
+ * Entry:    00085206
+ * Prototype: undefined FUN_00085206()
+ */
+
+
+/* WARNING: Removing unreachable block (ram,0x0006657a) */
+/* WARNING: Removing unreachable block (ram,0x00066582) */
+/* WARNING: Removing unreachable block (ram,0x0006658c) */
+/* WARNING: Removing unreachable block (ram,0x0006659c) */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int FUN_00085206(uint param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  int iVar3;
+  undefined4 uVar4;
+  
+  if (DAT_2000b378 == '\0') {
+    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED",
+                 "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x7a);
+    uVar4 = 0x7a;
+  }
+  else {
+    if (param_1 != 0) {
+      if (((param_1 & 0xe0000000) == 0x20000000) && ((param_1 & 3) == 0)) {
+        if ((DAT_2000b378 == '\x01') || ((DAT_2000b378 == '\x03' && (DAT_2000b380 != '\0')))) {
+          DAT_2000b381 = 0;
+          _DAT_5002b504 = param_3;
+          _DAT_5002b508 = param_1;
+          _DAT_5002b50c = param_2;
+          if (DAT_2000b348 == 0) {
+            if ((DAT_2000b380 != '\0') || (iVar3 = FUN_000664f0(1), iVar3 != 0xbad0007)) {
+              _DAT_5002b100 = 0;
+              _DAT_5002b004 = 1;
+              iVar3 = FUN_0006649c();
+              return iVar3;
+            }
+          }
+          else {
+            uVar1 = param_1;
+            uVar4 = param_2;
+            uVar2 = param_3;
+            if (DAT_2000b350 == 0) {
+              DAT_2000b378 = '\x03';
+              _DAT_5002b100 = DAT_2000b350;
+              _DAT_5002b304 = 1;
+              DAT_2000b350 = param_1;
+              DAT_2000b358 = param_2;
+              DAT_2000b360 = param_3;
+              if (DAT_2000b380 == '\0') {
+                FUN_000664f0(0);
+                uVar1 = DAT_2000b354;
+                uVar4 = DAT_2000b35c;
+                uVar2 = DAT_2000b364;
+              }
+              else {
+                _DAT_5002b004 = 1;
+                uVar1 = DAT_2000b354;
+                uVar4 = DAT_2000b35c;
+                uVar2 = DAT_2000b364;
+              }
+            }
+            DAT_2000b364 = uVar2;
+            DAT_2000b35c = uVar4;
+            DAT_2000b354 = uVar1;
+            iVar3 = 0xbad0000;
+          }
+        }
+        else {
+          iVar3 = 0xbad000b;
+        }
+      }
+      else {
+        iVar3 = 0xbad000a;
+      }
+      return iVar3;
+    }
+    DEBUG_PRINT2("ASSERTION FAIL [%s] @ %s:%d\n","p_buffer != ((void *)0)",
+                 "WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",0x7b);
+    uVar4 = 0x7b;
+  }
+                    /* WARNING: Subroutine does not return */
+  assertion_failure("WEST_TOPDIR/modules/hal/nordic/nrfx/drivers/src/nrfx_qspi.c",uVar4);
+}
+
+
