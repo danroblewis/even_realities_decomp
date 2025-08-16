@@ -42,5 +42,34 @@
       "end_delimeter": "0a0a"
     },
     "created_at": null
+  },
+  "msg_instance_005": {
+    "id": "msg_instance_005",
+    "message_type_id": "msg_004",
+    "name": "4e_hello_world",
+    "description": "",
+    "values": {
+      "command": "4e",
+      "length": "000b",
+      "flags": "02",
+      "width": "0064",
+      "height": "0064",
+      "xpos": "000a",
+      "ypos": "000a",
+      "text_data": "68656c6c6f20776f726c64"
+    },
+    "created_at": null
+  },
+  "msg_instance_006": {
+    "id": "msg_instance_006",
+    "message_type_id": "msg_005",
+    "name": "clear_screen",
+    "description": "",
+    "values": {
+      "command": "18",
+      "length": "0001",
+      "data": "00"
+    },
+    "created_at": null
   }
 }

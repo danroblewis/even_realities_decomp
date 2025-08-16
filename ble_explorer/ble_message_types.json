@@ -120,5 +120,118 @@
         "computed_from": null
       }
     ]
+  },
+  "msg_004": {
+    "id": "msg_004",
+    "name": "text_4e",
+    "description": "",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "4e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "flags",
+        "width": 1,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "00",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "width",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "height",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "xpos",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "10",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "ypos",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "10",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "text_data",
+        "width": 255,
+        "is_max_width": true,
+        "description": "",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_005": {
+    "id": "msg_005",
+    "name": "clear_screen",
+    "description": "",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "18",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "00",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
   }
 }
