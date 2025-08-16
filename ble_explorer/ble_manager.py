@@ -259,6 +259,12 @@ class BLEManager:
             for msg in self.communication_log
         ]
     
+    def clear_communication_log(self):
+        """Clear the communication log"""
+        self.communication_log.clear()
+        self.message_id_counter = 0
+        logger.info("Communication log cleared")
+    
     async def disconnect(self):
         """Disconnect from the current device"""
         if self.client and self.is_connected:

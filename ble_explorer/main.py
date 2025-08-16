@@ -201,8 +201,9 @@ def serialize_message(message: Message, message_type: MessageType) -> bytes:
                 if isinstance(value, int):
                     if attr.is_max_width:
                         # For max width, ensure value fits
-                        if value > (1 << (attr.width * 8)) - 1:
-                            raise ValueError(f"Value {value} exceeds max width {attr.width} bytes")
+                        max_value = (1 << (attr.width * 8)) - 1
+                        if value > max_value:
+                            raise ValueError(f"Value {value} exceeds max width {attr.width} bytes (max value: {max_value})")
                         # Convert to bytes with specified width
                         result.extend(value.to_bytes(attr.width, byteorder='big'))
                     else:
@@ -335,7 +336,7 @@ async def edit_message_type_form(request: Request, message_type_id: str):
     
     return templates.TemplateResponse("message_type_form.html", {
         "request": request, 
-        "message_type": data[message_type_id]
+        "message_type": data[message_type_id].model_dump()
     })
 
 @app.post("/message-types/{message_type_id}", response_class=HTMLResponse)
@@ -514,7 +515,7 @@ async def view_message(request: Request, message_id: str):
     return templates.TemplateResponse("message_view.html", {
         "request": request,
         "message": message,
-        "message_type": message_type,
+        "message_type": message_type.model_dump(),
         "serialized_bytes": serialized_bytes,
         "hex_string": hex_string,
         "escaped_string": escaped_string
@@ -688,8 +689,8 @@ async def view_message_sequence(request: Request, sequence_id: str):
                 serialized_bytes = None
             
             sequence_messages.append({
-                "message": message,
-                "message_type": message_type,
+                "message": message.model_dump(),
+                "message_type": message_type.model_dump(),
                 "delay_ms": delay_ms,
                 "hex_string": hex_string,
                 "escaped_string": escaped_string,
@@ -718,7 +719,7 @@ async def edit_message_sequence_form(request: Request, sequence_id: str):
     
     return templates.TemplateResponse("message_sequence_form.html", {
         "request": request,
-        "sequence": sequence,
+        "sequence": sequence.model_dump(),
         "messages": {k: v.model_dump() for k, v in messages.items()},
         "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
@@ -995,6 +996,7 @@ async def run_message(message_id: str):
         }
         
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail=f"Failed to run message: {str(e)}")
 
 @app.post("/api/message-sequences/{sequence_id}/run")
@@ -1055,6 +1057,20 @@ async def run_message_sequence(sequence_id: str):
 async def get_communication_log():
     """Get the BLE communication log"""
     return ble_manager.get_communication_log()
+
+@app.post("/api/ble/clear-log")
+async def clear_communication_log():
+    """Clear the BLE communication log"""
+    try:
+        # Clear the communication log in the BLE manager
+        ble_manager.clear_communication_log()
+        logger.info("Communication log cleared via API")
+        
+        return {"status": "cleared", "message": "Communication log cleared successfully"}
+        
+    except Exception as e:
+        logger.error(f"Failed to clear communication log: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to clear communication log: {str(e)}")
 
 @app.post("/api/ble/send-custom")
 async def send_custom_message(request: Request):

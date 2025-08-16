@@ -119,7 +119,7 @@
                                 <th>Time</th>
                                 <th>Message</th>
                                 <th>Data</th>
-                                <th>Response</th>
+                                <th style="white-space: nowrap;">Response</th>
                             </tr>
                         </thead>
                         <tbody id="communicationLog">
@@ -192,12 +192,35 @@
     transform: scale(1.01);
     transition: transform 0.2s ease;
 }
+
+/* Prevent word wrapping in response column */
+#communicationLog td:nth-child(4) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* Response column styling */
+.response-column {
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ensure table columns have proper widths */
+#communicationLog th:nth-child(1) { width: 80px; }  /* Time */
+#communicationLog th:nth-child(2) { width: 200px; } /* Message */
+#communicationLog th:nth-child(3) { width: 50px; } /* Data */
+#communicationLog th:nth-child(4) { width: 200px; } /* Response */
 </style>
 
 <script>
 let websocket = null;
 let selectedDeviceAddress = null;
 let communicationLog = [];
+let isLogCleared = false; // Flag to track if log was manually cleared
 
 // Initialize WebSocket connection
 function initWebSocket() {
@@ -292,7 +315,7 @@ function updateCommunicationLog(logData) {
         const messageName = msg.message_name || msg.sequence_name || 'Unknown';
         const data = msg.hex_data || 'N/A';
         const response = msg.response_to ? 
-            `<small class="text-muted">Response to: ${msg.response_to}</small><br><small class="text-info">${msg.response_time_ms}ms</small>` : 
+            `<small class="text-muted">${msg.response_to}</small> <small class="text-info">${msg.response_time_ms}ms</small>` : 
             'No response';
         
         // Create clickable message name with appropriate link
@@ -320,7 +343,7 @@ function updateCommunicationLog(logData) {
             <td><small>${time}</small></td>
             <td>${messageLink}${replayButton}</td>
             <td><code class="small">${data}</code></td>
-            <td>${response}</td>
+            <td class="response-column">${response}</td>
         `;
         
         tbody.appendChild(row);
@@ -429,28 +452,41 @@ async function disconnectDevice() {
 async function clearLog() {
     if (confirm('Are you sure you want to clear the communication log? This action cannot be undone.')) {
         try {
-            // Clear the display
-            const tbody = document.getElementById('communicationLog');
-            tbody.innerHTML = '';
+            // Call the API to clear the log on the server
+            const response = await fetch('/api/ble/clear-log', {
+                method: 'POST'
+            });
             
-            // Clear the stored data
-            communicationLog = [];
-            
-            // Reset counters
-            const messageCount = document.getElementById('messageCount');
-            const sentCount = document.getElementById('sentCount');
-            const receivedCount = document.getElementById('receivedCount');
-            
-            messageCount.textContent = '0 messages';
-            sentCount.textContent = '0 sent';
-            receivedCount.textContent = '0 received';
-            
-            // Show success message
-            showAlert('Communication log cleared successfully!', 'success');
+            if (response.ok) {
+                // Clear the display
+                const tbody = document.getElementById('communicationLog');
+                tbody.innerHTML = '';
+                
+                // Clear the stored data
+                communicationLog = [];
+                
+                // Reset counters
+                const messageCount = document.getElementById('messageCount');
+                const sentCount = document.getElementById('sentCount');
+                const receivedCount = document.getElementById('receivedCount');
+                
+                messageCount.textContent = '0 messages';
+                sentCount.textContent = '0 sent';
+                receivedCount.textContent = '0 received';
+                
+                // Show success message
+                showAlert('Communication log cleared successfully!', 'success');
+                
+                // Reset the cleared flag
+                isLogCleared = false;
+                
+            } else {
+                throw new Error('Failed to clear log on server');
+            }
             
         } catch (error) {
             console.error('Failed to clear log:', error);
-            showAlert('Failed to clear communication log', 'danger');
+            showAlert('Failed to clear communication log: ' + error.message, 'danger');
         }
     }
 }
@@ -645,7 +681,7 @@ async function replayMessage(hexData, messageName) {
             },
             body: JSON.stringify({
                 hex_data: hexData,
-                message_name: `Replay: ${messageName}`
+                message_name: `${messageName}`
             })
         });
         

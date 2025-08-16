@@ -59,5 +59,66 @@
         "computed_from": null
       }
     ]
+  },
+  "msg_003": {
+    "id": "msg_003",
+    "name": "send_text",
+    "description": "",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": true,
+        "description": "Command identifier",
+        "default_value": "4e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "header",
+        "width": 4,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "00010030",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 4,
+        "is_max_width": false,
+        "description": "",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "start_delimeter",
+        "width": 2,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "0a0a",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "payload",
+        "width": 255,
+        "is_max_width": false,
+        "description": "",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "end_delimeter",
+        "width": 1,
+        "is_max_width": false,
+        "description": "",
+        "default_value": "0a0a",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
   }
 }

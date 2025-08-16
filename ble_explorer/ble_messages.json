@@ -13,5 +13,20 @@
       "seq_2": "02"
     },
     "created_at": null
+  },
+  "msg_instance_003": {
+    "id": "msg_instance_003",
+    "message_type_id": "msg_003",
+    "name": "text_hello_world",
+    "description": "",
+    "values": {
+      "command": "4e",
+      "header": "00010030",
+      "length": "00000101",
+      "start_delimeter": "0a0a",
+      "payload": "54657374206d65737361676520310a0a",
+      "end_delimeter": "0a0a"
+    },
+    "created_at": null
   }
 }
