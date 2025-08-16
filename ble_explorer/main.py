@@ -617,6 +617,19 @@ async def view_message(request: Request, message_id: str):
         "escaped_string": escaped_string
     })
 
+@app.get("/messages/by-name/{message_name}", response_class=HTMLResponse)
+async def redirect_message_by_name(message_name: str):
+    """Redirect to a message page by searching for the message name"""
+    messages = load_messages()
+    
+    # Find the first message with a matching name
+    for message_id, message in messages.items():
+        if message.name == message_name:
+            return RedirectResponse(url=f"/messages/{message_id}", status_code=303)
+    
+    # If no message found with that name, raise 404
+    raise HTTPException(status_code=404, detail=f"No message found with name '{message_name}'")
+
 @app.get("/messages/{message_id}/edit", response_class=HTMLResponse)
 async def edit_message_form(request: Request, message_id: str):
     messages = load_messages()
