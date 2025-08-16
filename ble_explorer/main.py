@@ -79,7 +79,7 @@ def load_data() -> Dict[str, MessageType]:
 
 def save_data(data: Dict[str, MessageType]):
     with open(DATA_FILE, 'w') as f:
-        json.dump({k: v.dict() for k, v in data.items()}, f, indent=2)
+        json.dump({k: v.model_dump() for k, v in data.items()}, f, indent=2)
 
 def load_messages() -> Dict[str, Message]:
     messages_file = "ble_messages.json"
@@ -92,7 +92,7 @@ def load_messages() -> Dict[str, Message]:
 def save_messages(messages: Dict[str, Message]):
     messages_file = "ble_messages.json"
     with open(messages_file, 'w') as f:
-        json.dump({k: v.dict() for k, v in messages.items()}, f, indent=2)
+        json.dump({k: v.model_dump() for k, v in messages.items()}, f, indent=2)
 
 def generate_message_id() -> str:
     messages = load_messages()
@@ -112,7 +112,7 @@ def load_message_sequences() -> Dict[str, MessageSequence]:
 def save_message_sequences(sequences: Dict[str, MessageSequence]):
     sequences_file = "ble_message_sequences.json"
     with open(sequences_file, 'w') as f:
-        json.dump({k: v.dict() for k, v in sequences.items()}, f, indent=2)
+        json.dump({k: v.model_dump() for k, v in sequences.items()}, f, indent=2)
 
 def generate_sequence_id() -> str:
     sequences = load_message_sequences()
@@ -187,7 +187,14 @@ def generate_id() -> str:
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     data = load_data()
-    return templates.TemplateResponse("index.html", {"request": request, "message_types": data.values()})
+    messages = load_messages()
+    message_sequences = load_message_sequences()
+    return templates.TemplateResponse("index.html", {
+        "request": request, 
+        "message_types": [mt.model_dump() for mt in data.values()],
+        "messages": [msg.model_dump() for msg in messages.values()],
+        "message_sequences": [seq.model_dump() for seq in message_sequences.values()]
+    })
 
 @app.get("/message-types/new", response_class=HTMLResponse)
 async def new_message_type_form(request: Request):
