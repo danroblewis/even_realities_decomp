@@ -132,15 +132,52 @@ body {
 
 .attribute-row {
     background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-    margin-bottom: 1rem;
 }
 
 .attribute-row:hover {
     background-color: #e9ecef;
+}
+
+.attribute-row td {
+    vertical-align: middle;
+    padding: 0.5rem;
+}
+
+.attribute-row input[type="text"],
+.attribute-row input[type="number"] {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.attribute-row input[type="text"]:focus,
+.attribute-row input[type="number"]:focus {
     border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.attribute-row .form-check {
+    margin: 0;
+}
+
+.attribute-row .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.attribute-row .btn-group {
+    width: auto;
+}
+
+.attribute-row .btn-group .btn {
+    padding: 0.125rem 0.25rem;
+    font-size: 0.7rem;
+    min-width: 28px;
+}
+
+.attribute-row .btn-group .btn:hover {
+    z-index: 1;
 }
 
 /* Responsive adjustments */

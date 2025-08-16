@@ -110,8 +110,19 @@ async def create_message_type(
                 except ValueError:
                     pass
             
-            is_computed = i < len(attribute_computed) and attribute_computed[i] == "true"
-            computed_from = attribute_computed_from[i] if i < len(attribute_computed_from) and attribute_computed_from[i].strip() else None
+            # Check if this attribute is computed by looking for the specific field
+            is_computed = False
+            computed_from = None
+            
+            # Look for computed checkbox and computed_from field for this specific index
+            form_data = await request.form()
+            computed_key = f"attribute_computed_{i}"
+            computed_from_key = f"attribute_computed_from_{i}"
+            
+            if computed_key in form_data:
+                is_computed = True
+                if computed_from_key in form_data:
+                    computed_from = form_data[computed_from_key].strip() if form_data[computed_from_key].strip() else None
             
             attributes.append(Attribute(
                 name=attr_name.strip(),
@@ -124,8 +135,10 @@ async def create_message_type(
             ))
     
     # Ensure first attribute is always "command"
-    if not attributes or attributes[0].name != "command":
-        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None))
+    if not attributes:
+        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
+    elif attributes[0].name != "command":
+        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
     
     message_type = MessageType(
         id=generate_id(),
@@ -188,8 +201,19 @@ async def update_message_type(
                 except ValueError:
                     pass
             
-            is_computed = i < len(attribute_computed) and attribute_computed[i] == "true"
-            computed_from = attribute_computed_from[i] if i < len(attribute_computed_from) and attribute_computed_from[i].strip() else None
+            # Check if this attribute is computed by looking for the specific field
+            is_computed = False
+            computed_from = None
+            
+            # Look for computed checkbox and computed_from field for this specific index
+            form_data = await request.form()
+            computed_key = f"attribute_computed_{i}"
+            computed_from_key = f"attribute_computed_from_{i}"
+            
+            if computed_key in form_data:
+                is_computed = True
+                if computed_from_key in form_data:
+                    computed_from = form_data[computed_from_key].strip() if form_data[computed_from_key].strip() else None
             
             attributes.append(Attribute(
                 name=attr_name.strip(),
@@ -202,8 +226,10 @@ async def update_message_type(
             ))
     
     # Ensure first attribute is always "command"
-    if not attributes or attributes[0].name != "command":
-        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None))
+    if not attributes:
+        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
+    elif attributes[0].name != "command":
+        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
     
     data[message_type_id] = MessageType(
         id=message_type_id,
