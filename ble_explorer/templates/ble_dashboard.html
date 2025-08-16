@@ -79,6 +79,9 @@
                     </div>
                 </div>
                 <div>
+                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" onclick="toggleDataView()" id="dataViewToggle">
+                        <i class="fas fa-code me-2"></i>Show Hex
+                    </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm me-2" onclick="refreshCommunicationLog()">
                         <i class="fas fa-sync-alt me-2"></i>Refresh
                     </button>
@@ -185,8 +188,7 @@
 
 /* Hover effect for the communication log rows */
 #communicationLog tr:hover {
-    transform: scale(1.01);
-    transition: transform 0.2s ease;
+    background-color: rgba(0,0,0,0.05);
 }
 
 /* Prevent word wrapping in response column */
@@ -276,11 +278,6 @@
     box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.3);
 }
 
-/* Smooth transitions for status changes */
-#communicationLog tr {
-    transition: all 0.3s ease;
-}
-
 /* Enhanced table styling */
 #communicationLog .table {
     border-radius: 8px;
@@ -304,6 +301,8 @@
 /* Data display styling */
 #communicationLog .data-display {
     font-family: 'Courier New', monospace;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 #communicationLog .data-display div {
@@ -314,6 +313,8 @@
     font-size: 0.75rem;
     color: #495057;
     margin-right: 0.5rem;
+    display: block;
+    margin-bottom: 0.25rem;
 }
 
 #communicationLog .data-display code {
@@ -325,6 +326,31 @@
 
 #communicationLog .data-display .text-success {
     color: #28a745 !important;
+    font-weight: 600;
+}
+
+/* Attribute row styling */
+.attribute-pill {
+    display: inline-block;
+    padding: 0.1rem 0.3rem;
+    margin: 0.1rem 0.2rem 0.1rem 0;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 3px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.attribute-name {
+    font-weight: 400;
+    color: #6c757d;
+    margin-left: 0.3rem;
+    font-size: 0.65rem;
+}
+
+.attribute-value {
+    font-family: 'Courier New', monospace;
+    color: #212529;
     font-weight: 600;
 }
 
@@ -360,6 +386,26 @@ let selectedDeviceAddress = null;
 let communicationLog = [];
 let isLogCleared = false; // Flag to track if log was manually cleared
 
+// Global variable to track data view mode
+let showParsedData = true;
+
+// Function to toggle between parsed and hex data view
+function toggleDataView() {
+    showParsedData = !showParsedData;
+    const toggleBtn = document.getElementById('dataViewToggle');
+    
+    if (showParsedData) {
+        toggleBtn.innerHTML = '<i class="fas fa-code me-2"></i>Show Hex';
+        toggleBtn.className = 'btn btn-outline-secondary btn-sm me-2';
+    } else {
+        toggleBtn.innerHTML = '<i class="fas fa-list me-2"></i>Show Parsed';
+        toggleBtn.className = 'btn btn-outline-info btn-sm me-2';
+    }
+    
+    // Refresh the display
+    updateCommunicationLog(communicationLog);
+}
+
 // Initialize WebSocket connection
 function initWebSocket() {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -392,31 +438,61 @@ function initWebSocket() {
     };
 }
 
-// Update connection status display
-function updateConnectionStatus(status) {
-    const indicator = document.getElementById('connectionIndicator');
-    const statusText = document.getElementById('connectionStatus');
-    const deviceInfo = document.getElementById('deviceInfo');
-    const connectBtn = document.getElementById('connectBtn');
-    const disconnectBtn = document.getElementById('disconnectBtn');
+// Function to create parsed data display
+function createParsedDataDisplay(parsedData) {
+    if (!parsedData) return '';
     
-    if (status.is_connected) {
-        indicator.className = 'rounded-circle bg-success';
-        indicator.style.width = '20px';
-        indicator.style.height = '20px';
-        statusText.textContent = 'Connected';
-        deviceInfo.textContent = `${status.device_name} (${status.device_address})`;
-        connectBtn.style.display = 'none';
-        disconnectBtn.style.display = 'inline-block';
-    } else {
-        indicator.className = 'rounded-circle bg-secondary';
-        indicator.style.width = '20px';
-        indicator.style.height = '20px';
-        statusText.textContent = 'Not Connected';
-        deviceInfo.textContent = 'No device connected';
-        connectBtn.style.display = 'inline-block';
-        disconnectBtn.style.display = 'none';
+    let display = '';
+    for (const [attrName, attrValue] of Object.entries(parsedData)) {
+        // Skip command attribute as it's already shown in the command code
+        if (attrName === 'command') continue;
+        
+        // Format the value nicely
+        let formattedValue = attrValue;
+        let displayValue = attrValue;
+        
+        if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+            // For hex values, show both hex and decimal if reasonable
+            try {
+                const decimalValue = parseInt(attrValue, 16);
+                if (decimalValue < 1000) { // Only show decimal for reasonable values
+                    formattedValue = `${attrValue} (${decimalValue})`;
+                }
+                displayValue = formattedValue;
+            } catch (e) {
+                // Keep original value if parsing fails
+                displayValue = attrValue;
+            }
+        }
+        
+        // Special handling for text fields
+        if (attrName.toLowerCase().includes('text') || attrName.toLowerCase().includes('payload')) {
+            try {
+                // Try to convert hex to text
+                if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+                    const hexStr = attrValue.substring(2); // Remove '0x' prefix
+                    if (hexStr.length % 2 === 0) {
+                        const bytes = new Uint8Array(hexStr.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+                        const textDecoder = new TextDecoder('utf-8');
+                        const text = textDecoder.decode(bytes).replace(/\x00/g, ''); // Remove null bytes
+                        if (text && text.length > 0 && text.match(/^[\x20-\x7E\n\r\t]*$/)) {
+                            // Only use text if it's printable ASCII
+                            displayValue = `"${text}"`;
+                        }
+                    }
+                }
+            } catch (e) {
+                // Keep original value if text conversion fails
+            }
+        }
+        
+        display += `<span class="attribute-pill">
+            <span class="attribute-value">${displayValue}</span>
+            <span class="attribute-name">${attrName}</span>
+        </span>`;
     }
+    
+    return display;
 }
 
 // Update communication log display
@@ -473,10 +549,23 @@ function updateCommunicationLog(logData) {
         let dataDisplay = '';
         if (msg.direction === 'sent' && msg.response_data) {
             // Show sent data and response data
-            dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data}</code></div>`;
-            dataDisplay += `<div class="data-display"><code class="small text-success">${msg.response_data}</code></div>`;
+            if (showParsedData && msg.parsed_data && msg.message_type_info) {
+                // Show parsed sent data
+                dataDisplay = `<div class="data-display"><strong>Sent (${msg.message_type_info.name}):</strong></div>`;
+                dataDisplay += createParsedDataDisplay(msg.parsed_data);
+                dataDisplay += `<div class="data-display"><strong>Response:</strong></div>`;
+                dataDisplay += `<div class="data-display"><code class="small text-success">${msg.response_data}</code></div>`;
+            } else {
+                // Fallback to hex display
+                dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data}</code></div>`;
+                dataDisplay += `<div class="data-display"><code class="small text-success">${msg.response_data}</code></div>`;
+            }
+        } else if (showParsedData && msg.parsed_data && msg.message_type_info) {
+            // Show parsed data
+            dataDisplay = `<div class="data-display"><strong>${msg.message_type_info.name}:</strong></div>`;
+            dataDisplay += createParsedDataDisplay(msg.parsed_data);
         } else {
-            // Show just the data
+            // Show just the hex data
             dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data || 'N/A'}</code></div>`;
         }
         

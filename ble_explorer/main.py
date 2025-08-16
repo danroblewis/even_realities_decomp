@@ -312,6 +312,184 @@ def serialize_message(message: Message, message_type: MessageType) -> bytes:
     
     return bytes(result)
 
+def find_matching_message_types(command_code: str, packet_length: int) -> List[MessageType]:
+    """Find message types that match the given command code and packet length."""
+    data = load_data()
+    matching_types = []
+    
+    logger.info(f"Looking for message types matching command {command_code} with packet length {packet_length}")
+    
+    for msg_type in data.values():
+        # Check if command code matches
+        if msg_type.attributes and msg_type.attributes[0].name == "command":
+            # Extract the command value from the first attribute
+            cmd_attr = msg_type.attributes[0]
+            if cmd_attr.default_value and cmd_attr.default_value.lower() == command_code.lower():
+                # Calculate expected packet length for this message type
+                fixed_length = 0
+                has_max_width = False
+                computed_count = 0
+                max_width_value = 0
+                
+                logger.info(f"  Command match found: {cmd_attr.default_value} == {command_code}")
+                
+                for attr in msg_type.attributes:
+                    if attr.width and not attr.is_computed:
+                        if attr.is_max_width:
+                            has_max_width = True
+                            max_width_value = attr.width
+                            logger.info(f"    Attribute {attr.name}: width={attr.width} (max_width)")
+                        else:
+                            fixed_length += attr.width
+                            logger.info(f"    Attribute {attr.name}: width={attr.width} (fixed)")
+                    elif attr.is_computed:
+                        computed_count += 1
+                        logger.info(f"    Attribute {attr.name}: computed (from {attr.computed_from})")
+                    else:
+                        logger.info(f"    Attribute {attr.name}: no width")
+                
+                logger.info(f"Message type {msg_type.name} (id: {msg_type.id}): fixed_length={fixed_length}, has_max_width={has_max_width}, max_width={max_width_value}, computed_count={computed_count}")
+                
+                # Check if packet length is reasonable for this message type
+                if has_max_width:
+                    # For messages with max_width fields, check that packet length is at least the fixed length
+                    # and not exceeding a reasonable maximum (fixed_length + max_width)
+                    min_length = fixed_length
+                    max_length = fixed_length + max_width_value
+                    
+                    if packet_length >= min_length:
+                        # Calculate a score based on how well the packet fits
+                        # Lower score is better (closer to fixed length)
+                        if packet_length <= max_length:
+                            score = packet_length - fixed_length
+                        else:
+                            # For packets longer than max_length, give them a higher score (lower priority)
+                            score = (packet_length - fixed_length) + 1000
+                        
+                        matching_types.append((msg_type, fixed_length, has_max_width, computed_count, score))
+                        logger.info(f"  -> MATCH (max_width, packet_length {packet_length} >= {min_length}, score={score})")
+                    else:
+                        logger.info(f"  -> NO MATCH (max_width, packet_length {packet_length} < {min_length})")
+                else:
+                    # For fixed-width messages, require exact match
+                    if packet_length == fixed_length:
+                        matching_types.append((msg_type, fixed_length, has_max_width, computed_count, 0))
+                        logger.info(f"  -> MATCH (fixed_width, packet_length {packet_length} == {fixed_length})")
+                    else:
+                        logger.info(f"  -> NO MATCH (fixed_width, packet_length {packet_length} != {fixed_length})")
+    
+    # Sort by priority: exact matches first, then by how well they match
+    def sort_key(item):
+        msg_type, fixed_length, has_max_width, computed_count, score = item
+        if not has_max_width and packet_length == fixed_length:
+            return 0  # Exact fixed-width matches get highest priority
+        elif has_max_width:
+            # For max_width messages, prefer those with closer length matches
+            # When scores are close (within 10), prioritize fewer computed fields
+            if score <= 10:
+                return score + (computed_count * 20)  # Add computed field penalty
+            else:
+                return score + 100  # Add offset to prioritize fixed-width
+        else:
+            # Fixed-width messages that don't match exactly
+            return abs(packet_length - fixed_length) + 50
+    
+    matching_types.sort(key=sort_key)
+    
+    logger.info(f"Found {len(matching_types)} matching message types")
+    for i, (msg_type, fixed_length, has_max_width, computed_count, score) in enumerate(matching_types):
+        logger.info(f"  {i+1}. {msg_type.name} (id: {msg_type.id}) - fixed: {fixed_length}, max_width: {has_max_width}, computed: {computed_count}, score: {score}")
+    
+    # Return just the message types
+    return [item[0] for item in matching_types]
+
+def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[str, Any]:
+    """Deserialize a packet into attribute-value pairs based on a message type definition."""
+    result = {}
+    offset = 0
+    
+    for attr in message_type.attributes:
+        if attr.is_computed:
+            # Skip computed attributes during deserialization
+            continue
+            
+        if not attr.width:
+            # Skip attributes without width
+            continue
+            
+        if offset >= len(packet_bytes):
+            # Ran out of data
+            break
+            
+        # Extract bytes for this attribute
+        if attr.is_max_width:
+            # For max width, we need to calculate how many bytes to consume
+            # by looking at the remaining fixed-width fields
+            remaining_fixed_width = 0
+            for future_attr in message_type.attributes[message_type.attributes.index(attr) + 1:]:
+                if future_attr.width and not future_attr.is_computed and not future_attr.is_max_width:
+                    remaining_fixed_width += future_attr.width
+            
+            # Calculate available bytes for this max_width field
+            available_bytes = len(packet_bytes) - offset - remaining_fixed_width
+            bytes_to_consume = max(0, available_bytes)
+            
+            if bytes_to_consume > 0:
+                attr_bytes = packet_bytes[offset:offset + bytes_to_consume]
+                # Remove trailing null bytes
+                while attr_bytes and attr_bytes[-1] == 0:
+                    attr_bytes = attr_bytes[:-1]
+            else:
+                attr_bytes = b''
+        else:
+            # Fixed width
+            if offset + attr.width <= len(packet_bytes):
+                attr_bytes = packet_bytes[offset:offset + attr.width]
+            else:
+                # Pad with zeros if we don't have enough data
+                attr_bytes = packet_bytes[offset:] + b'\x00' * (attr.width - (len(packet_bytes) - offset))
+        
+        # Convert bytes to appropriate value
+        if attr_bytes:
+            try:
+                # Check if this is a text field that should be converted to text
+                if attr.name.lower() in ["text", "text_data"]:
+                    # Convert bytes to text, removing null bytes
+                    text_value = attr_bytes.decode('utf-8', errors='ignore').rstrip('\x00')
+                    result[attr.name] = text_value
+                else:
+                    # Try to convert to integer first
+                    if len(attr_bytes) <= 8:  # Reasonable size for int conversion
+                        value = int.from_bytes(attr_bytes, byteorder='big')
+                        # Convert to hex string for consistency
+                        result[attr.name] = f"0x{value:0{len(attr_bytes)*2}x}"
+                    else:
+                        # For larger data, keep as hex string
+                        result[attr.name] = attr_bytes.hex()
+            except Exception:
+                # Fallback to hex string
+                result[attr.name] = attr_bytes.hex()
+        else:
+            result[attr.name] = "0x00"
+        
+        # Update offset based on actual bytes consumed, not the field width
+        if attr.is_max_width:
+            offset += len(attr_bytes)
+        else:
+            offset += attr.width
+    
+    return result
+
+def get_best_message_type_match(command_code: str, packet_bytes: bytes) -> Optional[MessageType]:
+    """Find the best matching message type for a given packet."""
+    matching_types = find_matching_message_types(command_code, len(packet_bytes))
+    
+    if not matching_types:
+        return None
+    
+    # Return the first (best) match
+    return matching_types[0]
+
 def generate_id() -> str:
     data = load_data()
     counter = len(data) + 1
@@ -1001,6 +1179,64 @@ async def serialize_message_sequence_api(sequence_id: str):
         "messages": result
     }
 
+@app.get("/api/packets/parse")
+async def parse_packet(hex_data: str):
+    """Parse a hex packet and return its deserialized attribute-value mappings."""
+    try:
+        # Convert hex string to bytes
+        packet_bytes = bytes.fromhex(hex_data)
+        
+        if len(packet_bytes) < 1:
+            raise HTTPException(status_code=400, detail="Packet too short")
+        
+        # Extract command code (first byte)
+        command_code = f"{packet_bytes[0]:02x}"
+        
+        # Find matching message types
+        matching_types = find_matching_message_types(command_code, len(packet_bytes))
+        
+        if not matching_types:
+            return {
+                "command_code": command_code,
+                "packet_length": len(packet_bytes),
+                "hex_data": hex_data,
+                "parsed": False,
+                "message": "No matching message type found"
+            }
+        
+        # Get the best match
+        best_match = matching_types[0]
+        
+        # Deserialize the packet
+        parsed_data = deserialize_packet(packet_bytes, best_match)
+        
+        return {
+            "command_code": command_code,
+            "packet_length": len(packet_bytes),
+            "hex_data": hex_data,
+            "parsed": True,
+            "message_type": {
+                "id": best_match.id,
+                "name": best_match.name,
+                "description": best_match.description
+            },
+            "attributes": [
+                {
+                    "name": attr.name,
+                    "width": attr.width,
+                    "is_max_width": attr.is_max_width,
+                    "description": attr.description,
+                    "value": parsed_data.get(attr.name, "N/A")
+                }
+                for attr in best_match.attributes
+            ],
+            "parsed_data": parsed_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to parse packet: {e}")
+        raise HTTPException(status_code=400, detail=f"Failed to parse packet: {str(e)}")
+
 # BLE Device Management
 @app.get("/api/ble/scan")
 async def scan_for_devices():
@@ -1174,7 +1410,7 @@ async def run_message_sequence(sequence_id: str):
 @app.get("/api/ble/communication-log")
 async def get_communication_log():
     """Get the BLE communication log"""
-    return ble_manager.get_communication_log()
+    return await ble_manager.get_communication_log()
 
 @app.post("/api/ble/clear-log")
 async def clear_communication_log():
@@ -1240,7 +1476,7 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             # Send current communication log
-            log_data = ble_manager.get_communication_log()
+            log_data = await ble_manager.get_communication_log()
             await websocket.send_text(json.dumps({
                 "type": "communication_log",
                 "data": log_data

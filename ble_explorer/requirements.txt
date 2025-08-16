@@ -4,3 +4,5 @@ jinja2
 python-multipart
 bleak
 websockets
+aiohttp
+pytest

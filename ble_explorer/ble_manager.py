@@ -31,6 +31,10 @@ class BLEMessage:
     status: Optional[str] = None  # "pending", "success", "error", "in_progress"
     command_code: Optional[str] = None  # First byte/2 hex chars of sent message
     response_data: Optional[str] = None  # Response data for sent messages
+    parsed_data: Optional[Dict[str, Any]] = None  # Parsed attribute-value mappings
+    message_type_info: Optional[Dict[str, Any]] = None  # Message type information
+    response_parsed_data: Optional[Dict[str, Any]] = None # Parsed data for responses
+    response_message_type_info: Optional[Dict[str, Any]] = None # Message type info for responses
 
 class BLEManager:
     def __init__(self):
@@ -138,6 +142,213 @@ class BLEManager:
             return status in ["C9", "CA", "CB", "06"]
         return False
     
+    async def _parse_packet(self, hex_data: str) -> Optional[Dict[str, Any]]:
+        """Parse a hex packet using the main application's parsing logic"""
+        try:
+            # Try to parse locally first
+            local_result = self._parse_packet_local(hex_data)
+            if local_result:
+                return local_result
+            
+            # If local parsing fails, try to call the main app's parsing
+            try:
+                # Import main app functions
+                from main import find_matching_message_types, deserialize_packet
+                
+                # Convert hex to bytes
+                packet_bytes = bytes.fromhex(hex_data)
+                if len(packet_bytes) < 1:
+                    return None
+                
+                # Extract command code
+                command_code = f"{packet_bytes[0]:02x}"
+                
+                # Find matching message types
+                matching_types = find_matching_message_types(command_code, len(packet_bytes))
+                if not matching_types:
+                    return None
+                
+                # Get the best match
+                best_match = matching_types[0]
+                
+                # Deserialize the packet
+                parsed_data = deserialize_packet(packet_bytes, best_match)
+                
+                return {
+                    'parsed_data': parsed_data,
+                    'message_type': {
+                        'id': best_match.id,
+                        'name': best_match.name,
+                        'description': best_match.description
+                    }
+                }
+                
+            except ImportError:
+                # If main app functions aren't available, fall back to local parsing
+                return self._parse_packet_local(hex_data)
+            
+        except Exception as e:
+            logger.error(f"Local packet parsing failed for {hex_data}: {e}")
+            return None
+    
+    async def ensure_message_parsed(self, message: BLEMessage) -> bool:
+        """Ensure a message has parsed data, re-parsing if necessary"""
+        if message.parsed_data is not None:
+            return True  # Already parsed
+        
+        try:
+            # Re-parse the packet
+            parsed_info = await self._parse_packet(message.hex_data)
+            if parsed_info:
+                message.parsed_data = parsed_info.get('parsed_data')
+                message.message_type_info = parsed_info.get('message_type')
+                return True
+        except Exception as e:
+            logger.error(f"Failed to re-parse message {message.id}: {e}")
+        
+        return False
+    
+    def _parse_packet_local(self, hex_data: str) -> Optional[Dict[str, Any]]:
+        """Local packet parsing fallback that doesn't require HTTP requests."""
+        try:
+            # Convert hex to bytes
+            packet_bytes = bytes.fromhex(hex_data)
+            
+            if len(packet_bytes) < 1:
+                return None
+            
+            # Extract command code
+            command_code = f"{packet_bytes[0]:02x}"
+            
+            # Basic parsing based on known command codes
+            if command_code == "25":
+                # Heartbeat command
+                if len(packet_bytes) >= 6:
+                    return {
+                        "parsed_data": {
+                            "command": f"0x{command_code}",
+                            "unknown_1": f"0x{packet_bytes[1]:02x}",
+                            "unknown_2": f"0x{packet_bytes[2]:02x}",
+                            "seq_1": f"0x{packet_bytes[3]:02x}",
+                            "constant": f"0x{packet_bytes[4]:02x}",
+                            "seq_2": f"0x{packet_bytes[5]:02x}"
+                        },
+                        "message_type": {
+                            "id": "heartbeat",
+                            "name": "heartbeat",
+                            "description": "Heartbeat message"
+                        }
+                    }
+            elif command_code == "4e":
+                # Text command - check if it matches text_4e pattern
+                if len(packet_bytes) >= 11:  # Minimum length for text_4e
+                    # Check if it looks like text_4e format
+                    if len(packet_bytes) >= 11:
+                        # Parse as text_4e: command(1) + length(2) + flags(1) + width(2) + height(2) + xpos(2) + ypos(2) + text_data(variable)
+                        length_bytes = packet_bytes[1:3]
+                        flags = packet_bytes[3]
+                        width_bytes = packet_bytes[4:6]
+                        height_bytes = packet_bytes[6:8]
+                        xpos_bytes = packet_bytes[8:10]
+                        ypos_bytes = packet_bytes[10:12]
+                        text_data = packet_bytes[12:] if len(packet_bytes) > 12 else b''
+                        
+                        # Convert to readable values
+                        length = int.from_bytes(length_bytes, byteorder='big')
+                        width = int.from_bytes(width_bytes, byteorder='big')
+                        height = int.from_bytes(height_bytes, byteorder='big')
+                        xpos = int.from_bytes(xpos_bytes, byteorder='big')
+                        ypos = int.from_bytes(ypos_bytes, byteorder='big')
+                        
+                        # Try to decode text data
+                        try:
+                            text_str = text_data.decode('utf-8').rstrip('\x00')
+                        except:
+                            text_str = text_data.hex()
+                        
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "length": f"0x{length:04x}",
+                                "flags": f"0x{flags:02x}",
+                                "width": f"0x{width:04x}",
+                                "height": f"0x{height:04x}",
+                                "xpos": f"0x{xpos:04x}",
+                                "ypos": f"0x{ypos:04x}",
+                                "text_data": text_str
+                            },
+                            "message_type": {
+                                "id": "text_4e",
+                                "name": "text_4e",
+                                "description": "Text display command with positioning"
+                            }
+                        }
+                    else:
+                        # Fallback to basic text command parsing
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "data": packet_bytes[1:].hex()
+                            },
+                            "message_type": {
+                                "id": "text_command",
+                                "name": "text_command",
+                                "description": "Text display command"
+                            }
+                        }
+            elif command_code == "18":
+                # Clear screen command
+                if len(packet_bytes) >= 4:
+                    length_bytes = packet_bytes[1:3]
+                    data = packet_bytes[3]
+                    length = int.from_bytes(length_bytes, byteorder='big')
+                    
+                    return {
+                        "parsed_data": {
+                            "command": f"0x{command_code}",
+                            "length": f"0x{length:04x}",
+                            "data": f"0x{data:02x}"
+                        },
+                        "message_type": {
+                            "id": "clear_screen",
+                            "name": "clear_screen",
+                            "description": "Clear screen command"
+                        }
+                    }
+                elif len(packet_bytes) >= 3:
+                    # Handle case where data field might be missing
+                    length_bytes = packet_bytes[1:3]
+                    length = int.from_bytes(length_bytes, byteorder='big')
+                    
+                    return {
+                        "parsed_data": {
+                            "command": f"0x{command_code}",
+                            "length": f"0x{length:04x}"
+                        },
+                        "message_type": {
+                            "id": "clear_screen",
+                            "name": "clear_screen",
+                            "description": "Clear screen command (partial)"
+                        }
+                    }
+            
+            # Generic parsing for unknown commands
+            return {
+                "parsed_data": {
+                    "command": f"0x{command_code}",
+                    "data": packet_bytes[1:].hex()
+                },
+                "message_type": {
+                    "id": "unknown",
+                    "name": "unknown",
+                    "description": f"Unknown command {command_code}"
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Local packet parsing failed for {hex_data}: {e}")
+            return None
+    
     async def _notification_handler(self, characteristic: BleakGATTCharacteristic, data: bytearray):
         """Handle incoming notifications from the device"""
         try:
@@ -151,6 +362,9 @@ class BLEManager:
                 logger.warning(f"Received packet with invalid command code: {hex_data}")
                 return
             
+            # Try to parse the packet
+            parsed_info = await self._parse_packet(hex_data)
+            
             # Look for a matching sent message in the communication log
             matching_sent = self._find_matching_sent_message(received_command_code, timestamp)
             
@@ -158,10 +372,19 @@ class BLEManager:
                 # This is a response to a sent message - update the sent message
                 response_time_ms = int((timestamp - matching_sent.timestamp).total_seconds() * 1000)
                 
+                # Ensure the sent message has parsed data before we potentially overwrite it
+                if matching_sent.parsed_data is None:
+                    await self.ensure_message_parsed(matching_sent)
+                
                 # Update the sent message with response info
                 matching_sent.response_to = f"response_{self.message_id_counter}"
                 matching_sent.response_time_ms = response_time_ms
                 matching_sent.response_data = hex_data
+                
+                # Store response parsed data separately, don't overwrite the original sent message parsed data
+                if parsed_info:
+                    matching_sent.response_parsed_data = parsed_info.get('parsed_data')
+                    matching_sent.response_message_type_info = parsed_info.get('message_type')
                 
                 # Determine status based on response
                 status_code = hex_data[:2].upper()
@@ -192,7 +415,9 @@ class BLEManager:
                     direction="received",
                     data=bytes(data),
                     hex_data=hex_data,
-                    command_code=received_command_code
+                    command_code=received_command_code,
+                    parsed_data=parsed_info.get('parsed_data') if parsed_info else None,
+                    message_type_info=parsed_info.get('message_type') if parsed_info else None
                 )
                 
                 self.message_id_counter += 1
@@ -238,6 +463,9 @@ class BLEManager:
             if not write_char:
                 raise Exception("No writable characteristic found")
             
+            # Try to parse the packet before sending
+            parsed_info = await self._parse_packet(data.hex())
+            
             # Create sent message record
             sent_msg = BLEMessage(
                 id=f"sent_{self.message_id_counter}",
@@ -250,7 +478,9 @@ class BLEManager:
                 message_id=message_id,
                 sequence_id=sequence_id,
                 status="pending",  # Start with pending status
-                command_code=self._extract_command_code(data.hex())
+                command_code=self._extract_command_code(data.hex()),
+                parsed_data=parsed_info.get('parsed_data') if parsed_info else None,
+                message_type_info=parsed_info.get('message_type') if parsed_info else None
             )
             
             self.message_id_counter += 1
@@ -298,8 +528,22 @@ class BLEManager:
         
         return sent_message_ids
     
-    def get_communication_log(self) -> List[Dict]:
-        """Get the communication log as a list of dictionaries"""
+    async def get_message_by_id(self, message_id: str) -> Optional[BLEMessage]:
+        """Get a specific message by ID, ensuring it has parsed data"""
+        for msg in self.communication_log:
+            if msg.id == message_id:
+                if msg.parsed_data is None:
+                    await self.ensure_message_parsed(msg)
+                return msg
+        return None
+    
+    async def get_communication_log(self) -> List[Dict]:
+        """Get the communication log as a list of dictionaries, ensuring all messages have parsed data"""
+        # Ensure all messages have parsed data
+        for msg in self.communication_log:
+            if msg.parsed_data is None:
+                await self.ensure_message_parsed(msg)
+        
         return [
             {
                 "id": msg.id,
@@ -312,7 +556,11 @@ class BLEManager:
                 "response_time_ms": msg.response_time_ms,
                 "status": msg.status,
                 "command_code": msg.command_code,
-                "response_data": msg.response_data
+                "response_data": msg.response_data,
+                "parsed_data": msg.parsed_data,
+                "message_type_info": msg.message_type_info,
+                "response_parsed_data": msg.response_parsed_data,
+                "response_message_type_info": msg.response_message_type_info
             }
             for msg in self.communication_log
         ]
