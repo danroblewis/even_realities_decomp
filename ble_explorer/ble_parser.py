@@ -48,6 +48,14 @@ def find_matching_message_types(command_code: str, packet_length: int, packet_by
     message_types = load_message_types()
     matching_types = []
     
+    # Detect if this is likely a response packet
+    is_response_packet = False
+    if packet_bytes and len(packet_bytes) >= 2:
+        # Check if second byte is a known response status code (0x65, 0xC9, 0xCA, 0xCB, 0x06)
+        second_byte = packet_bytes[1]
+        if second_byte in [0x65, 0xC9, 0xCA, 0xCB, 0x06]:
+            is_response_packet = True
+    
     for msg_type in message_types.values():
         # Check if command code matches
         if msg_type.attributes and msg_type.attributes[0].default_value == command_code:
@@ -55,7 +63,14 @@ def find_matching_message_types(command_code: str, packet_length: int, packet_by
             # This is a simplified check - you might want to make it more sophisticated
             matching_types.append(msg_type)
     
-    # Sort by relevance (you can implement more sophisticated sorting)
+    # Sort by relevance - prioritize response message types for response packets
+    if is_response_packet:
+        # For response packets, prioritize message types ending with "_response"
+        matching_types.sort(key=lambda x: (0 if x.name.endswith('_response') else 1, x.name))
+    else:
+        # For request packets, prioritize message types NOT ending with "_response"
+        matching_types.sort(key=lambda x: (0 if not x.name.endswith('_response') else 1, x.name))
+    
     return matching_types
 
 def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[str, Any]:
