@@ -485,7 +485,7 @@ function initWebSocket() {
 }
 
 // Function to create parsed data display
-function createParsedDataDisplay(parsedData, context = 'default') {
+function createParsedDataDisplay(parsedData, context = 'default', messageTypeInfo = null) {
     if (!parsedData) return '';
     
     // Define background colors based on context
@@ -550,7 +550,16 @@ function createParsedDataDisplay(parsedData, context = 'default') {
             }
         }
         
-        display += `<span class="attribute-pill ${bgColor}">
+        // Create tooltip with message type information if available
+        let tooltip = '';
+        if (messageTypeInfo && messageTypeInfo.name) {
+            tooltip = `Message Type: ${messageTypeInfo.name}`;
+            if (messageTypeInfo.description) {
+                tooltip += ` - ${messageTypeInfo.description}`;
+            }
+        }
+        
+        display += `<span class="attribute-pill ${bgColor}" title="${tooltip}">
             <span class="attribute-value">${displayValue}</span>
             <span class="attribute-name">${attrName}</span>
         </span>`;
@@ -615,13 +624,13 @@ function updateCommunicationLog(logData) {
             // Show sent data and response data
             if (showParsedData && msg.parsed_data && msg.message_type_info) {
                 // Show parsed sent data
-                dataDisplay = createParsedDataDisplay(msg.parsed_data, 'sent');
+                dataDisplay = createParsedDataDisplay(msg.parsed_data, 'sent', msg.message_type_info);
                 
                 // Add response data display
                 if (msg.response_parsed_data && msg.response_message_type_info) {
                     // Show parsed response data
                     dataDisplay += `<div class="data-display mt-2">`;
-                    dataDisplay += createParsedDataDisplay(msg.response_parsed_data, 'response');
+                    dataDisplay += createParsedDataDisplay(msg.response_parsed_data, 'response', msg.response_message_type_info);
                     dataDisplay += `</div>`;
                 } else {
                     // Fallback to hex display for response
@@ -638,7 +647,7 @@ function updateCommunicationLog(logData) {
             }
         } else if (showParsedData && msg.parsed_data && msg.message_type_info) {
             // Show parsed data
-            dataDisplay = createParsedDataDisplay(msg.parsed_data, msg.direction === 'sent' ? 'sent' : 'default');
+            dataDisplay = createParsedDataDisplay(msg.parsed_data, msg.direction === 'sent' ? 'sent' : 'default', msg.message_type_info);
         } else {
             // Show just the hex data
             dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data || 'N/A'}</code></div>`;
