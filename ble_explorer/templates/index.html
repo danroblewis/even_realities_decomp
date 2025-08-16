@@ -149,15 +149,23 @@
                         {% if messages %}
                             <div class="list-group list-group-flush">
                                 {% for message in messages[:5] %}
-                                <a href="/messages/{{ message.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
                                         <strong>{{ message.name }}</strong>
                                         <br><small class="text-muted">{{ message.id }}</small>
                                     </div>
-                                    <span class="badge bg-primary rounded-pill">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </span>
-                                </a>
+                                    <div class="d-flex gap-1">
+                                        <button type="button" 
+                                                class="btn btn-sm btn-outline-success"
+                                                onclick="runMessage('{{ message.id }}')"
+                                                title="Run this message">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <a href="/messages/{{ message.id }}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
                                 {% endfor %}
                             </div>
                             {% if messages | length > 5 %}
@@ -247,6 +255,25 @@ function deleteMessageType(id, name) {
     
     const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
     modal.show();
+}
+
+function runMessage(messageId) {
+    fetch(`/api/messages/${messageId}/run`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status != 'sent') {
+            alert('Failed to send message: ' + (data.detail || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error running message:', error);
+        alert('Failed to run message. Please check the console for details.');
+    });
 }
 </script>
 {% endblock %}

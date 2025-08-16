@@ -62,6 +62,12 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
+                                        <button type="button" 
+                                                class="btn btn-sm btn-outline-success"
+                                                onclick="runMessage('{{ message.id }}')"
+                                                title="Run this message">
+                                            <i class="fas fa-play"></i>
+                                        </button>
                                         <a href="/messages/{{ message.id }}" 
                                            class="btn btn-sm btn-outline-info">
                                             <i class="fas fa-eye"></i>
@@ -130,6 +136,25 @@ function deleteMessage(id, name) {
     
     const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
     modal.show();
+}
+
+function runMessage(messageId) {
+    fetch(`/api/messages/${messageId}/run`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status != 'sent') {
+            alert('Failed to send message: ' + (data.detail || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error running message:', error);
+        alert('Failed to run message. Please check the console for details.');
+    });
 }
 </script>
 {% endblock %}

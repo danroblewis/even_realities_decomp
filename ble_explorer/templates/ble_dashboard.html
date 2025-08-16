@@ -605,7 +605,6 @@ async function sendCustomMessage() {
         
         if (response.ok) {
             const result = await response.json();
-            showAlert('Custom message sent successfully!', 'success');
             input.value = ''; // Clear input on success
         } else {
             throw new Error('Failed to send custom message');

@@ -581,7 +581,7 @@ async def create_message(
     messages[message.id] = message
     save_messages(messages)
     
-    return RedirectResponse(url="/messages", status_code=303)
+    return RedirectResponse(url=f"/messages/{message.id}", status_code=303)
 
 @app.get("/messages/{message_id}", response_class=HTMLResponse)
 async def view_message(request: Request, message_id: str):
@@ -683,7 +683,7 @@ async def update_message(
     )
     save_messages(messages)
     
-    return RedirectResponse(url="/messages", status_code=303)
+    return RedirectResponse(url=f"/messages/{message_id}", status_code=303)
 
 @app.post("/messages/{message_id}/delete")
 async def delete_message(message_id: str):
