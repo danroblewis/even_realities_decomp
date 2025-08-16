@@ -89,8 +89,8 @@
         "is_max_width": false,
         "description": "",
         "default_value": null,
-        "is_computed": false,
-        "computed_from": null
+        "is_computed": true,
+        "computed_from": "payload"
       },
       {
         "name": "start_delimeter",

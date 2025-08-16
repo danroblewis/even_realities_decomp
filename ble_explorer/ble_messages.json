@@ -24,7 +24,21 @@
       "header": "00010030",
       "length": "00000101",
       "start_delimeter": "0a0a",
-      "payload": "54657374206d6573736167652031",
+      "payload": "68656c6c6f20776f726c64",
+      "end_delimeter": "0a0a"
+    },
+    "created_at": null
+  },
+  "msg_instance_004": {
+    "id": "msg_instance_004",
+    "message_type_id": "msg_003",
+    "name": "text2",
+    "description": "",
+    "values": {
+      "command": "4e",
+      "header": "00010030",
+      "start_delimeter": "0a0a",
+      "payload": "6d616b65206d65",
       "end_delimeter": "0a0a"
     },
     "created_at": null
