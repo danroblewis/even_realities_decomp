@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, HTTPException, Form
+from fastapi import FastAPI, Request, HTTPException, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -7,8 +7,56 @@ from typing import List, Optional, Dict, Any
 import json
 import os
 from pathlib import Path
+import asyncio
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Import BLE manager after logging setup
+from ble_manager import ble_manager
 
 app = FastAPI(title="BLE UART Protocol Testing Harness", version="1.0.0")
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize BLE manager on startup and auto-connect to first available device"""
+    logger.info("Starting BLE UART Protocol Testing Harness...")
+    logger.info("BLE manager initialized")
+    
+    # Auto-connect to first available device
+    try:
+        logger.info("Auto-connecting to first available BLE device...")
+        devices = await ble_manager.scan_for_devices()
+        
+        if devices:
+            first_device = devices[0]
+            logger.info(f"Found device: {first_device.name} ({first_device.address})")
+            logger.info("Attempting to connect...")
+            
+            success = await ble_manager.connect_to_device(first_device)
+            if success:
+                logger.info(f"Auto-connection successful to {first_device.name}")
+                # Start connection maintenance task
+                if not ble_manager.connection_task or ble_manager.connection_task.done():
+                    ble_manager.connection_task = asyncio.create_task(ble_manager.maintain_connection())
+            else:
+                logger.warning(f"Auto-connection failed to {first_device.name}")
+        else:
+            logger.info("No BLE devices found matching 'Even G1_' pattern")
+            
+    except Exception as e:
+        logger.error(f"Auto-connection failed: {e}")
+        logger.info("You can manually scan and connect from the BLE Dashboard")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up BLE manager on shutdown"""
+    logger.info("Shutting down BLE UART Protocol Testing Harness...")
+    if ble_manager.is_connected:
+        await ble_manager.disconnect()
+    logger.info("BLE manager cleaned up")
 
 # Mount templates and static files
 templates = Jinja2Templates(directory="templates")
@@ -384,7 +432,7 @@ async def list_messages(request: Request):
     return templates.TemplateResponse("messages.html", {
         "request": request, 
         "messages": messages.values(),
-        "message_types": {k: v.dict() for k, v in message_types.items()}
+        "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
 
 @app.get("/messages/new", response_class=HTMLResponse)
@@ -393,7 +441,7 @@ async def new_message_form(request: Request):
     return templates.TemplateResponse("message_form.html", {
         "request": request, 
         "message": None,
-        "message_types": {k: v.dict() for k, v in message_types.items()}
+        "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
 
 @app.post("/messages", response_class=HTMLResponse)
@@ -485,7 +533,7 @@ async def edit_message_form(request: Request, message_id: str):
     return templates.TemplateResponse("message_form.html", {
         "request": request,
         "message": message,
-        "message_types": {k: v.dict() for k, v in message_types.items()}
+        "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
 
 @app.post("/messages/{message_id}", response_class=HTMLResponse)
@@ -554,8 +602,8 @@ async def list_message_sequences(request: Request):
     return templates.TemplateResponse("message_sequences.html", {
         "request": request, 
         "sequences": sequences.values(),
-        "messages": {k: v.dict() for k, v in messages.items()},
-        "message_types": {k: v.dict() for k, v in message_types.items()}
+        "messages": {k: v.model_dump() for k, v in messages.items()},
+        "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
 
 @app.get("/message-sequences/new", response_class=HTMLResponse)
@@ -565,8 +613,8 @@ async def new_message_sequence_form(request: Request):
     return templates.TemplateResponse("message_sequence_form.html", {
         "request": request, 
         "sequence": None,
-        "messages": {k: v.dict() for k, v in messages.items()},
-        "message_types": {k: v.dict() for k, v in message_types.items()}
+        "messages": {k: v.model_dump() for k, v in messages.items()},
+        "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
 
 @app.post("/message-sequences", response_class=HTMLResponse)
@@ -652,7 +700,7 @@ async def view_message_sequence(request: Request, sequence_id: str):
     
     return templates.TemplateResponse("message_sequence_view.html", {
         "request": request,
-        "sequence": sequence.dict(),
+        "sequence": sequence.model_dump(),
         "sequence_messages": sequence_messages,
         "total_duration": total_duration
     })
@@ -671,8 +719,8 @@ async def edit_message_sequence_form(request: Request, sequence_id: str):
     return templates.TemplateResponse("message_sequence_form.html", {
         "request": request,
         "sequence": sequence,
-        "messages": {k: v.dict() for k, v in messages.items()},
-        "message_types": {k: v.dict() for k, v in message_types.items()}
+        "messages": {k: v.model_dump() for k, v in messages.items()},
+        "message_types": {k: v.model_dump() for k, v in message_types.items()}
     })
 
 @app.post("/message-sequences/{sequence_id}", response_class=HTMLResponse)
@@ -725,6 +773,10 @@ async def delete_message_sequence(sequence_id: str):
     save_message_sequences(sequences)
     
     return RedirectResponse(url="/message-sequences", status_code=303)
+
+@app.get("/ble-dashboard")
+async def ble_dashboard(request: Request):
+    return templates.TemplateResponse("ble_dashboard.html", {"request": request})
 
 # API endpoints for programmatic access
 @app.get("/api/message-types")
@@ -829,6 +881,255 @@ async def serialize_message_sequence_api(sequence_id: str):
         "total_duration_ms": sum(msg["delay_ms"] for msg in sequence.messages),
         "messages": result
     }
+
+# BLE Device Management
+@app.get("/api/ble/scan")
+async def scan_for_devices():
+    """Scan for BLE devices matching '_R_' pattern"""
+    try:
+        devices = await ble_manager.scan_for_devices()
+        return {
+            "devices": [
+                {
+                    "name": device.name,
+                    "address": device.address,
+                    "rssi": getattr(device, 'rssi', None)
+                }
+                for device in devices
+            ]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Scan failed: {str(e)}")
+
+@app.post("/api/ble/connect")
+async def connect_to_device(device_address: str = Form(...)):
+    """Connect to a specific BLE device"""
+    try:
+        logger.info(f"Connect request received for device: {device_address}")
+        
+        # Find the device by address
+        devices = await ble_manager.scan_for_devices()
+        target_device = None
+        for device in devices:
+            if device.address == device_address:
+                target_device = device
+                break
+        
+        if not target_device:
+            logger.warning(f"Device {device_address} not found in scan results")
+            raise HTTPException(status_code=404, detail="Device not found")
+        
+        # Connect to the device
+        success = await ble_manager.connect_to_device(target_device)
+        if success:
+            # Start connection maintenance task
+            if not ble_manager.connection_task or ble_manager.connection_task.done():
+                ble_manager.connection_task = asyncio.create_task(ble_manager.maintain_connection())
+            
+            logger.info(f"Successfully connected to {target_device.name}")
+            return {"status": "connected", "device": target_device.name}
+        else:
+            logger.error(f"Failed to connect to device {target_device.name}")
+            raise HTTPException(status_code=500, detail="Failed to connect to device")
+            
+    except Exception as e:
+        logger.error(f"Connection failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Connection failed: {str(e)}")
+
+@app.get("/api/ble/status")
+async def get_ble_status():
+    """Get current BLE connection status"""
+    logger.info(f"BLE Status Request - is_connected: {ble_manager.is_connected}")
+    logger.info(f"BLE Status Request - target_device: {ble_manager.target_device}")
+    logger.info(f"BLE Status Request - client: {ble_manager.client}")
+    
+    return {
+        "is_connected": ble_manager.is_connected,
+        "device_name": ble_manager.target_device.name if ble_manager.target_device else None,
+        "device_address": ble_manager.target_device.address if ble_manager.target_device else None
+    }
+
+@app.post("/api/ble/disconnect")
+async def disconnect_device():
+    """Disconnect from current device"""
+    try:
+        await ble_manager.disconnect()
+        return {"status": "disconnected"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Disconnect failed: {str(e)}")
+
+# Message Execution
+@app.post("/api/messages/{message_id}/run")
+async def run_message(message_id: str):
+    """Execute a single message"""
+    try:
+        if not ble_manager.is_connected:
+            raise HTTPException(status_code=400, detail="Not connected to any device")
+        
+        # Get the message
+        messages = load_messages()
+        if message_id not in messages:
+            raise HTTPException(status_code=404, detail="Message not found")
+        
+        message = messages[message_id]
+        message_types = load_data()
+        message_type = message_types.get(message.message_type_id)
+        
+        if not message_type:
+            raise HTTPException(status_code=404, detail="Message type not found")
+        
+        # Serialize the message
+        serialized_bytes = serialize_message(message, message_type)
+        
+        # Send the message
+        sent_id = await ble_manager.send_message(
+            data=serialized_bytes,
+            message_name=message.name
+        )
+        
+        return {
+            "status": "sent",
+            "message_id": message_id,
+            "sent_id": sent_id,
+            "hex_data": serialized_bytes.hex()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to run message: {str(e)}")
+
+@app.post("/api/message-sequences/{sequence_id}/run")
+async def run_message_sequence(sequence_id: str):
+    """Execute a message sequence"""
+    try:
+        if not ble_manager.is_connected:
+            raise HTTPException(status_code=400, detail="Not connected to any device")
+        
+        # Get the sequence
+        sequences = load_message_sequences()
+        if sequence_id not in sequences:
+            raise HTTPException(status_code=404, detail="Message sequence not found")
+        
+        sequence = sequences[sequence_id]
+        messages = load_messages()
+        message_types = load_data()
+        
+        # Prepare messages for sending
+        sequence_messages = []
+        for msg_info in sequence.messages:
+            message_id = msg_info["message_id"]
+            if message_id in messages:
+                message = messages[message_id]
+                message_type = message_types.get(message.message_type_id)
+                
+                if message_type:
+                    try:
+                        serialized_bytes = serialize_message(message, message_type)
+                        sequence_messages.append({
+                            "hex": serialized_bytes.hex(),
+                            "message_name": message.name,
+                            "delay_ms": msg_info["delay_ms"]
+                        })
+                    except Exception as e:
+                        logger.error(f"Failed to serialize message {message_id}: {e}")
+        
+        if not sequence_messages:
+            raise HTTPException(status_code=400, detail="No valid messages in sequence")
+        
+        # Send the sequence
+        sent_ids = await ble_manager.send_message_sequence(
+            messages=sequence_messages,
+            sequence_name=sequence.name
+        )
+        
+        return {
+            "status": "sequence_sent",
+            "sequence_id": sequence_id,
+            "sent_count": len(sent_ids),
+            "sent_ids": sent_ids
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to run sequence: {str(e)}")
+
+@app.get("/api/ble/communication-log")
+async def get_communication_log():
+    """Get the BLE communication log"""
+    return ble_manager.get_communication_log()
+
+@app.post("/api/ble/send-custom")
+async def send_custom_message(request: Request):
+    """Send a custom hexadecimal message to the connected BLE device"""
+    try:
+        if not ble_manager.is_connected:
+            raise HTTPException(status_code=400, detail="Not connected to any device")
+        
+        # Parse the request body
+        body = await request.json()
+        hex_data = body.get("hex_data")
+        message_name = body.get("message_name", "Custom Message")
+        
+        if not hex_data:
+            raise HTTPException(status_code=400, detail="hex_data is required")
+        
+        # Validate hexadecimal format
+        try:
+            # Remove any spaces and convert to bytes
+            clean_hex = hex_data.replace(" ", "")
+            if len(clean_hex) % 2 != 0:
+                raise ValueError("Hex string must have even number of characters")
+            
+            data = bytes.fromhex(clean_hex)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=f"Invalid hexadecimal format: {str(e)}")
+        
+        # Send the custom message
+        sent_id = await ble_manager.send_message(
+            data=data,
+            message_name=message_name
+        )
+        
+        return {
+            "status": "sent",
+            "sent_id": sent_id,
+            "hex_data": hex_data,
+            "message_name": message_name
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to send custom message: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to send custom message: {str(e)}")
+
+# WebSocket endpoint for real-time updates
+@app.websocket("/ws/ble")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            # Send current communication log
+            log_data = ble_manager.get_communication_log()
+            await websocket.send_text(json.dumps({
+                "type": "communication_log",
+                "data": log_data
+            }))
+            
+            # Send connection status
+            status_data = {
+                "type": "connection_status",
+                "data": {
+                    "is_connected": ble_manager.is_connected,
+                    "device_name": ble_manager.target_device.name if ble_manager.target_device else None,
+                    "device_address": ble_manager.target_device.address if ble_manager.target_device else None
+                }
+            }
+            await websocket.send_text(json.dumps(status_data))
+            
+            # Wait before sending next update
+            await asyncio.sleep(1)
+            
+    except WebSocketDisconnect:
+        logger.info("WebSocket client disconnected")
+    except Exception as e:
+        logger.error(f"WebSocket error: {e}")
 
 if __name__ == "__main__":
     import uvicorn

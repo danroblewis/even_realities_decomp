@@ -2,7 +2,7 @@
   "msg_001": {
     "id": "msg_001",
     "name": "heartbeat",
-    "description": "Heartbeat message for testing",
+    "description": "Heartbeat message for testing 25 06 00 01 04 01",
     "attributes": [
       {
         "name": "command",
@@ -18,7 +18,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Unknown field 1",
-        "default_value": "00",
+        "default_value": "06",
         "is_computed": false,
         "computed_from": null
       },
@@ -27,7 +27,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Unknown field 2",
-        "default_value": "01",
+        "default_value": "00",
         "is_computed": false,
         "computed_from": null
       },

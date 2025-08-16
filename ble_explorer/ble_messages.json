@@ -5,11 +5,11 @@
     "name": "heartbeat_1",
     "description": "",
     "values": {
-      "unknown_1": "00",
-      "constant": "04",
-      "unknown_2": "01",
       "command": "25",
-      "seq_1": "02",
+      "unknown_1": "06",
+      "unknown_2": "00",
+      "seq_1": "01",
+      "constant": "04",
       "seq_2": "02"
     },
     "created_at": null

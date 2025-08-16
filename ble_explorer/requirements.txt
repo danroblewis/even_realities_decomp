@@ -1,5 +1,6 @@
-fastapi>=0.110.0
-uvicorn[standard]>=0.27.0
-jinja2>=3.1.0
-python-multipart>=0.0.6
-pydantic>=2.6.0
+fastapi
+uvicorn
+jinja2
+python-multipart
+bleak
+websockets

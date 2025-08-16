@@ -20,6 +20,19 @@
             </div>
         </div>
 
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/messages/{{ message.id }}/edit" class="btn btn-primary">
+                <i class="fas fa-edit me-2"></i>Edit Message
+            </a>
+            <button type="button" class="btn btn-success" onclick="runMessage('{{ message.id }}')" id="runBtn">
+                <i class="fas fa-play me-2"></i>Run Message
+            </button>
+            <a href="/messages/{{ message.id }}/delete" class="btn btn-danger" 
+               onclick="return confirm('Are you sure you want to delete this message?')">
+                <i class="fas fa-trash me-2"></i>Delete Message
+            </a>
+        </div>
+
         <div class="row">
             <!-- Message Details -->
             <div class="col-md-6">
@@ -187,6 +200,81 @@ function copyToClipboard(text) {
         console.error('Could not copy text: ', err);
         alert('Failed to copy to clipboard');
     });
+}
+
+async function runMessage(messageId) {
+    try {
+        // Check BLE connection status first
+        const statusResponse = await fetch('/api/ble/status');
+        const status = await statusResponse.json();
+        
+        if (!status.is_connected) {
+            alert('Not connected to any BLE device. Please connect to a device first from the BLE Dashboard.');
+            return;
+        }
+        
+        // Disable the run button to prevent multiple clicks
+        const runBtn = document.getElementById('runBtn');
+        const originalText = runBtn.innerHTML;
+        runBtn.disabled = true;
+        runBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Running...';
+        
+        // Send the message
+        const response = await fetch(`/api/messages/${messageId}/run`, {
+            method: 'POST'
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === 'sent') {
+            // Show success feedback
+            runBtn.innerHTML = '<i class="fas fa-check me-2"></i>Sent!';
+            runBtn.classList.remove('btn-success');
+            runBtn.classList.add('btn-success');
+            
+            // Re-enable button after 2 seconds
+            setTimeout(() => {
+                runBtn.disabled = false;
+                runBtn.innerHTML = originalText;
+                runBtn.classList.remove('btn-success');
+                runBtn.classList.add('btn-success');
+            }, 2000);
+            
+            // Show success message
+            showAlert('Message sent successfully!', 'success');
+        } else {
+            throw new Error('Failed to send message');
+        }
+        
+    } catch (error) {
+        console.error('Failed to run message:', error);
+        alert('Failed to run message: ' + error.message);
+        
+        // Re-enable button on error
+        const runBtn = document.getElementById('runBtn');
+        runBtn.disabled = false;
+        runBtn.innerHTML = '<i class="fas fa-play me-2"></i>Run Message';
+    }
+}
+
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    // Insert at the top of the content
+    const content = document.querySelector('.container');
+    content.insertBefore(alertDiv, content.firstChild);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 5000);
 }
 </script>
 {% endblock %}
