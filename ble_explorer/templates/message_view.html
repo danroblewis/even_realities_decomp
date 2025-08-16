@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}{{ message.name }} - BLE UART Protocol Testing Harness{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-eye me-2"></i>
+                {{ message.name }}
+            </h1>
+            <div>
+                <a href="/messages/{{ message.id }}/edit" class="btn btn-primary me-2">
+                    <i class="fas fa-edit me-2"></i>Edit
+                </a>
+                <a href="/messages" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Messages
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Message Details -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-info-circle me-2"></i>Message Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">ID:</dt>
+                            <dd class="col-sm-8"><span class="badge bg-secondary">{{ message.id }}</span></dd>
+                            
+                            <dt class="col-sm-4">Name:</dt>
+                            <dd class="col-sm-8">{{ message.name }}</dd>
+                            
+                            <dt class="col-sm-4">Message Type:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-info">{{ message_type.name }}</span>
+                            </dd>
+                            
+                            <dt class="col-sm-4">Description:</dt>
+                            <dd class="col-sm-8">
+                                {% if message.description %}
+                                    {{ message.description }}
+                                {% else %}
+                                    <span class="text-muted">No description</span>
+                                {% endif %}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Attribute Values -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list me-2"></i>Attribute Values</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Attribute</th>
+                                        <th>Value</th>
+                                        <th>Width</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for attr in message_type.attributes %}
+                                    <tr>
+                                        <td>
+                                            <strong>{{ attr.name }}</strong>
+                                            {% if attr.is_computed %}
+                                                <i class="fas fa-calculator ms-1 text-info" title="Computed"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if attr.name in message.values %}
+                                                <code>{{ message.values[attr.name] }}</code>
+                                            {% elif attr.default_value %}
+                                                <code class="text-muted">{{ attr.default_value }}</code>
+                                                <small class="text-muted">(default)</small>
+                                            {% else %}
+                                                <span class="text-muted">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if attr.width %}
+                                                {% if attr.is_max_width %}
+                                                    ≤{{ attr.width }}
+                                                {% else %}
+                                                    {{ attr.width }}
+                                                {% endif %}
+                                            {% else %}
+                                                Variable
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Serialized Output -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-code me-2"></i>Serialized Output</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if serialized_bytes %}
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Hex String:</strong></label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control font-monospace" 
+                                           value="{{ hex_string }}" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" 
+                                            onclick="copyToClipboard('{{ hex_string }}')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Escaped String:</strong></label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control font-monospace" 
+                                           value="{{ escaped_string }}" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" 
+                                            onclick="copyToClipboard('{{ escaped_string }}')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Byte Length:</strong></label>
+                                <span class="badge bg-success">{{ serialized_bytes | length }} bytes</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Raw Bytes:</strong></label>
+                                <div class="bg-light p-2 rounded font-monospace small">
+                                    {% for byte in serialized_bytes %}
+                                        <span class="text-muted">{{ loop.index0 }}:</span> 
+                                        <code>0x{{ "%02x" | format(byte) }}</code>
+                                        {% if not loop.last %}<br>{% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Serialization Error:</strong> {{ hex_string }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Show a temporary success message
+        const button = event.target.closest('button');
+        const originalIcon = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-success');
+        
+        setTimeout(() => {
+            button.innerHTML = originalIcon;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-outline-secondary');
+        }, 1000);
+    }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+        alert('Failed to copy to clipboard');
+    });
+}
+</script>
+{% endblock %}

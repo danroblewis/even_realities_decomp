@@ -1,0 +1,17 @@
+{
+  "msg_instance_001": {
+    "id": "msg_instance_001",
+    "message_type_id": "msg_001",
+    "name": "heartbeat_1",
+    "description": "",
+    "values": {
+      "unknown_1": "00",
+      "constant": "04",
+      "unknown_2": "01",
+      "command": "25",
+      "seq_1": "02",
+      "seq_2": "02"
+    },
+    "created_at": null
+  }
+}
