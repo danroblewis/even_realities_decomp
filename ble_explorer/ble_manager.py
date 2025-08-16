@@ -28,6 +28,9 @@ class BLEMessage:
     sequence_id: Optional[str] = None  # Actual sequence ID for linking
     response_to: Optional[str] = None
     response_time_ms: Optional[int] = None
+    status: Optional[str] = None  # "pending", "success", "error", "in_progress"
+    command_code: Optional[str] = None  # First byte/2 hex chars of sent message
+    response_data: Optional[str] = None  # Response data for sent messages
 
 class BLEManager:
     def __init__(self):
@@ -122,52 +125,102 @@ class BLEManager:
         except Exception as e:
             logger.error(f"Failed to start notification listener: {e}")
     
+    def _extract_command_code(self, hex_data: str) -> str:
+        """Extract the command code (first 2 hex characters) from a hex string"""
+        if len(hex_data) >= 2:
+            return hex_data[:2].upper()
+        return ""
+    
+    def _is_status_response(self, hex_data: str) -> bool:
+        """Check if the received data is a status response (C9, CA, CB, 06)"""
+        if len(hex_data) >= 2:
+            status = hex_data[:2].upper()
+            return status in ["C9", "CA", "CB", "06"]
+        return False
+    
     async def _notification_handler(self, characteristic: BleakGATTCharacteristic, data: bytearray):
         """Handle incoming notifications from the device"""
         try:
             timestamp = datetime.now()
             hex_data = data.hex()
             
-            # Check if this might be a response to a sent message
-            response_to = None
-            response_time_ms = None
+            # Extract the command code from the received packet (first 2 hex characters)
+            received_command_code = self._extract_command_code(hex_data)
             
-            # Look for recent sent messages that might be waiting for responses
-            for msg in reversed(self.communication_log):
-                if msg.direction == "sent" and not msg.response_to:
-                    # Simple heuristic: if response comes within 500ms, assume it's related
-                    time_diff = (timestamp - msg.timestamp).total_seconds() * 1000
-                    if time_diff < 500:
-                        response_to = msg.id
-                        response_time_ms = int(time_diff)
-                        break
+            if not received_command_code:
+                logger.warning(f"Received packet with invalid command code: {hex_data}")
+                return
             
-            # Create received message record
-            received_msg = BLEMessage(
-                id=f"recv_{self.message_id_counter}",
-                timestamp=timestamp,
-                direction="received",
-                data=bytes(data),
-                hex_data=hex_data,
-                response_to=response_to,
-                response_time_ms=response_time_ms
-            )
+            # Look for a matching sent message in the communication log
+            matching_sent = self._find_matching_sent_message(received_command_code, timestamp)
             
-            self.message_id_counter += 1
-            self.communication_log.append(received_msg)
-            
-            # Update the sent message if this is a response
-            if response_to:
-                for msg in self.communication_log:
-                    if msg.id == response_to:
-                        msg.response_to = received_msg.id
-                        msg.response_time_ms = response_time_ms
-                        break
-            
-            logger.info(f"Received notification: {hex_data} (response to: {response_to})")
+            if matching_sent:
+                # This is a response to a sent message - update the sent message
+                response_time_ms = int((timestamp - matching_sent.timestamp).total_seconds() * 1000)
+                
+                # Update the sent message with response info
+                matching_sent.response_to = f"response_{self.message_id_counter}"
+                matching_sent.response_time_ms = response_time_ms
+                matching_sent.response_data = hex_data
+                
+                # Determine status based on response
+                status_code = hex_data[:2].upper()
+                if status_code == "C9":
+                    matching_sent.status = "success"
+                elif status_code == "CA":
+                    matching_sent.status = "error"
+                elif status_code == "CB":
+                    matching_sent.status = "in_progress"
+                elif status_code == "06":
+                    matching_sent.status = "heartbeat"
+                else:
+                    # Check if it's a command code match (like 2506 response to 2506 command)
+                    if received_command_code == matching_sent.command_code:
+                        matching_sent.status = "acknowledged"
+                    else:
+                        matching_sent.status = "unknown"
+                
+                logger.info(f"Associated response {hex_data} with sent message {matching_sent.id} ({matching_sent.command_code}) - Status: {matching_sent.status} in {response_time_ms}ms")
+                
+                # DON'T add this as a separate received message - it's now part of the sent message
+                return
+            else:
+                # This is an unmatched received packet - add it to the log
+                received_msg = BLEMessage(
+                    id=f"recv_{self.message_id_counter}",
+                    timestamp=timestamp,
+                    direction="received",
+                    data=bytes(data),
+                    hex_data=hex_data,
+                    command_code=received_command_code
+                )
+                
+                self.message_id_counter += 1
+                self.communication_log.append(received_msg)
+                
+                logger.info(f"Received unmatched notification: {hex_data} (Command: {received_command_code})")
             
         except Exception as e:
             logger.error(f"Error handling notification: {e}")
+    
+    def _find_matching_sent_message(self, received_command_code: str, timestamp: datetime) -> Optional[BLEMessage]:
+        """Find a sent message that matches the received response within the last 2 seconds"""
+        current_time = timestamp
+        
+        # Look back through the last 2 seconds of sent messages
+        for msg in reversed(self.communication_log):
+            if msg.direction == "sent" and not msg.response_to:
+                # Check if within 2 seconds
+                time_diff = (current_time - msg.timestamp).total_seconds()
+                if time_diff <= 2.0:
+                    # Check if command codes match
+                    if msg.command_code == received_command_code:
+                        return msg
+                elif time_diff > 2.0:
+                    # Stop searching if we're beyond 2 seconds
+                    break
+        
+        return None
     
     async def send_message(self, data: bytes, message_name: str = None, sequence_name: str = None, message_id: str = None, sequence_id: str = None) -> str:
         """Send a message to the connected device"""
@@ -195,7 +248,9 @@ class BLEManager:
                 message_name=message_name,
                 sequence_name=sequence_name,
                 message_id=message_id,
-                sequence_id=sequence_id
+                sequence_id=sequence_id,
+                status="pending",  # Start with pending status
+                command_code=self._extract_command_code(data.hex())
             )
             
             self.message_id_counter += 1
@@ -203,7 +258,7 @@ class BLEManager:
             
             # Send the data
             await self.client.write_gatt_char(write_char.uuid, data)
-            logger.info(f"Sent message: {data.hex()} ({message_name or 'unnamed'})")
+            logger.info(f"Sent message: {data.hex()} ({message_name or 'unnamed'}) - Command: {sent_msg.command_code}")
             
             return sent_msg.id
             
@@ -254,7 +309,10 @@ class BLEManager:
                 "message_name": msg.message_name,
                 "sequence_name": msg.sequence_name,
                 "response_to": msg.response_to,
-                "response_time_ms": msg.response_time_ms
+                "response_time_ms": msg.response_time_ms,
+                "status": msg.status,
+                "command_code": msg.command_code,
+                "response_data": msg.response_data
             }
             for msg in self.communication_log
         ]

@@ -79,6 +79,9 @@
                     </div>
                 </div>
                 <div>
+                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" onclick="refreshCommunicationLog()">
+                        <i class="fas fa-sync-alt me-2"></i>Refresh
+                    </button>
                     <button type="button" class="btn btn-outline-danger btn-sm me-2" onclick="clearLog()">
                         <i class="fas fa-trash me-2"></i>Clear Log
                     </button>
@@ -112,7 +115,7 @@
                                 <th>Time</th>
                                 <th>Message</th>
                                 <th>Data</th>
-                                <th style="white-space: nowrap;">Response</th>
+                                <th style="white-space: nowrap;">Status/Response</th>
                             </tr>
                         </thead>
                         <tbody id="communicationLog">
@@ -194,19 +197,161 @@
     max-width: 200px;
 }
 
-/* Response column styling */
-.response-column {
-    width: 120px;
+/* Status/Response column styling */
+.status-response-column {
+    width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Ensure table columns have proper widths */
-#communicationLog th:nth-child(1) { width: 80px; }  /* Time */
-#communicationLog th:nth-child(2) { width: 200px; } /* Message */
-#communicationLog th:nth-child(3) { width: 50px; } /* Data */
-#communicationLog th:nth-child(4) { width: 200px; } /* Response */
+/* Message status styling */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Command code display styling */
+#communicationLog .text-muted.d-block {
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+}
+
+/* Table row styling for different message states */
+#communicationLog tr.table-success {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+#communicationLog tr.table-danger {
+    background: linear-gradient(90deg, 
+        rgba(220, 53, 69, 0.05) 0%, 
+        rgba(220, 53, 69, 0.15) 50%, 
+        rgba(220, 53, 69, 0.05) 100%) !important;
+    border-left: 3px solid #dc3545;
+}
+
+#communicationLog tr.table-warning {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+#communicationLog tr.table-info {
+    background-color: rgba(23, 162, 184, 0.1) !important;
+    border-left: 3px solid #17a2b8;
+}
+
+#communicationLog tr.table-primary {
+    background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+#communicationLog tr.table-secondary {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+}
+
+/* Enhanced styling for error messages */
+#communicationLog tr.table-danger:hover {
+    background: linear-gradient(90deg, 
+        rgba(220, 53, 69, 0.1) 0%, 
+        rgba(220, 53, 69, 0.2) 50%, 
+        rgba(220, 53, 69, 0.1) 100%) !important;
+}
+
+/* Status badge enhancements */
+.badge.bg-danger {
+    box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.3);
+}
+
+.badge.bg-success {
+    box-shadow: 0 0 0 1px rgba(40, 167, 69, 0.3);
+}
+
+.badge.bg-warning {
+    box-shadow: 0 0 0 1px rgba(255, 193, 7, 0.3);
+}
+
+.badge.bg-info {
+    box-shadow: 0 0 0 1px rgba(23, 162, 184, 0.3);
+}
+
+.badge.bg-secondary {
+    box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.3);
+}
+
+/* Smooth transitions for status changes */
+#communicationLog tr {
+    transition: all 0.3s ease;
+}
+
+/* Enhanced table styling */
+#communicationLog .table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#communicationLog th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Command code styling */
+#communicationLog .text-muted.d-block {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #6c757d !important;
+}
+
+/* Data display styling */
+#communicationLog .data-display {
+    font-family: 'Courier New', monospace;
+}
+
+#communicationLog .data-display div {
+    margin-bottom: 0.25rem;
+}
+
+#communicationLog .data-display strong {
+    font-size: 0.75rem;
+    color: #495057;
+    margin-right: 0.5rem;
+}
+
+#communicationLog .data-display code {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    background-color: rgba(0,0,0,0.05);
+}
+
+#communicationLog .data-display .text-success {
+    color: #28a745 !important;
+    font-weight: 600;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.alert-info {
+    background-color: rgba(23, 162, 184, 0.1);
+    color: #0c5460;
+    border-left: 4px solid #17a2b8;
+}
 </style>
 
 <script>
@@ -297,11 +442,23 @@ function updateCommunicationLog(logData) {
     logData.slice().reverse().forEach(msg => {
         const row = document.createElement('tr');
         
-        // Set background color based on message direction
+        // Set background color and styling based on message direction and status
         if (msg.direction === 'sent') {
-            row.className = 'table-primary'; // Light blue for sent messages
+            if (msg.status === 'success') {
+                row.className = 'table-success'; // Green for successful sent messages
+            } else if (msg.status === 'error') {
+                row.className = 'table-danger'; // Red for failed sent messages
+            } else if (msg.status === 'in_progress') {
+                row.className = 'table-warning'; // Yellow for in-progress messages
+            } else if (msg.status === 'heartbeat') {
+                row.className = 'table-info'; // Blue for heartbeat responses
+            } else if (msg.status === 'acknowledged') {
+                row.className = 'table-success'; // Green for acknowledged messages
+            } else {
+                row.className = 'table-primary'; // Blue for pending sent messages
+            }
         } else {
-            row.className = 'table-success'; // Light green for received messages
+            row.className = 'table-secondary'; // Gray for received messages
         }
         
         const time = new Date(msg.timestamp).toLocaleTimeString('en-GB', { 
@@ -311,10 +468,51 @@ function updateCommunicationLog(logData) {
             second: '2-digit' 
         });
         const messageName = msg.message_name || msg.sequence_name || 'Unknown';
-        const data = msg.hex_data || 'N/A';
-        const response = msg.response_to ? 
-            `<small class="text-muted">${msg.response_to}</small> <small class="text-info">${msg.response_time_ms}ms</small>` : 
-            'No response';
+        
+        // Create data display - show both sent and received data if available
+        let dataDisplay = '';
+        if (msg.direction === 'sent' && msg.response_data) {
+            // Show sent data and response data
+            dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data}</code></div>`;
+            dataDisplay += `<div class="data-display"><code class="small text-success">${msg.response_data}</code></div>`;
+        } else {
+            // Show just the data
+            dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data || 'N/A'}</code></div>`;
+        }
+        
+        // Create status/response display
+        let statusResponse = '';
+        if (msg.direction === 'sent') {
+            if (msg.status === 'success') {
+                statusResponse = `<span class="badge bg-success">✓ Success</span>`;
+                if (msg.response_time_ms) {
+                    statusResponse += ` <small class="text-muted">(${msg.response_time_ms}ms)</small>`;
+                }
+            } else if (msg.status === 'error') {
+                statusResponse = `<span class="badge bg-danger">✗ Error</span>`;
+            } else if (msg.status === 'in_progress') {
+                statusResponse = `<span class="badge bg-warning">⟳ In Progress</span>`;
+            } else if (msg.status === 'heartbeat') {
+                statusResponse = `<span class="badge bg-info">💓 Heartbeat</span>`;
+                if (msg.response_time_ms) {
+                    statusResponse += ` <small class="text-muted">(${msg.response_time_ms}ms)</small>`;
+                }
+            } else if (msg.status === 'acknowledged') {
+                statusResponse = `<span class="badge bg-success">✓ Acknowledged</span>`;
+                if (msg.response_time_ms) {
+                    statusResponse += ` <small class="text-muted">(${msg.response_time_ms}ms)</small>`;
+                }
+            } else {
+                statusResponse = `<span class="badge bg-secondary">⏳ Pending</span>`;
+            }
+        } else {
+            // For received messages, show command code if available
+            if (msg.command_code) {
+                statusResponse = `<span class="badge bg-info">${msg.command_code}</span>`;
+            } else {
+                statusResponse = `<span class="text-muted">Received</span>`;
+            }
+        }
         
         // Create clickable message name with appropriate link
         let messageLink = messageName;
@@ -338,16 +536,45 @@ function updateCommunicationLog(logData) {
             </button>`;
         }
         
+        // Add command code display for sent messages
+        let commandDisplay = '';
+        if (msg.direction === 'sent' && msg.command_code) {
+            commandDisplay = `<small class="text-muted d-block">Command: ${msg.command_code}</small>`;
+        }
+        
         row.innerHTML = `
             <td><small>${time}</small></td>
-            <td>${messageLink}${replayButton}</td>
-            <td><code class="small">${data}</code></td>
-            <td class="response-column">${response}</td>
+            <td>${messageLink}${replayButton}${commandDisplay}</td>
+            <td>${dataDisplay}</td>
+            <td class="status-response-column">${statusResponse}</td>
         `;
         
         tbody.appendChild(row);
     });
 }
+
+// Function to refresh communication log periodically
+function startCommunicationLogRefresh() {
+    // Refresh every 2 seconds to show real-time status updates
+    setInterval(async () => {
+        try {
+            const response = await fetch('/api/ble/communication-log');
+            if (response.ok) {
+                const data = await response.json();
+                if (data.type === 'communication_log') {
+                    updateCommunicationLog(data.data);
+                }
+            }
+        } catch (error) {
+            console.error('Failed to refresh communication log:', error);
+        }
+    }, 2000);
+}
+
+// Start the refresh when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    startCommunicationLogRefresh();
+});
 
 // Scan for BLE devices
 async function scanForDevices() {
@@ -639,27 +866,6 @@ function clearCustomInput() {
     document.getElementById('customMessageInput').focus();
 }
 
-// Show alert messages
-function showAlert(message, type = 'info') {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-    alertDiv.innerHTML = `
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-    
-    // Insert at the top of the content
-    const content = document.querySelector('.container');
-    content.insertBefore(alertDiv, content.firstChild);
-    
-    // Auto-dismiss after 5 seconds
-    setTimeout(() => {
-        if (alertDiv.parentNode) {
-            alertDiv.remove();
-        }
-    }, 5000);
-}
-
 // Replay a message from the communication log
 async function replayMessage(hexData, messageName) {
     try {
@@ -762,5 +968,45 @@ async function sendMessage(messageId) {
 document.addEventListener('DOMContentLoaded', function() {
     loadMessageButtons();
 });
+
+// Manual refresh communication log
+async function refreshCommunicationLog() {
+    try {
+        const response = await fetch('/api/ble/communication-log');
+        if (response.ok) {
+            const data = await response.json();
+            if (data.type === 'communication_log') {
+                updateCommunicationLog(data.data);
+                showAlert('Communication log refreshed!', 'success');
+            }
+        } else {
+            throw new Error('Failed to refresh communication log');
+        }
+    } catch (error) {
+        console.error('Failed to refresh communication log:', error);
+        showAlert('Failed to refresh communication log: ' + error.message, 'danger');
+    }
+}
+
+// Show alert message
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    // Insert at the top of the page
+    const container = document.querySelector('.container');
+    container.insertBefore(alertDiv, container.firstChild);
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 5000);
+}
 </script>
 {% endblock %}
