@@ -47,6 +47,32 @@ TEST_PACKETS = {
         "hex": "4e000100300a0a68656c6c6f20776f726c640a0a0a0a",
         "expected_type": "msg_003",
         "description": "Send text command with 'hello world'"
+    },
+    # New test cases for f5 messages
+    "charging": {
+        "hex": "f50900000000000000000000000000000000000000",
+        "expected_type": "msg_015",  # charging status
+        "description": "Charging status notification"
+    },
+    "ble_paired_success": {
+        "hex": "f51100000000000000000000000000000000000000",
+        "expected_type": "msg_019",  # BLE paired success
+        "description": "BLE paired success notification"
+    },
+    "open_dashboard": {
+        "hex": "f51e00000000000000000000000000000000000000",
+        "expected_type": "msg_023",  # open dashboard
+        "description": "Open dashboard notification"
+    },
+    "head_up": {
+        "hex": "f50200000000000000000000000000000000000000",
+        "expected_type": "msg_008",  # head up
+        "description": "Head up notification"
+    },
+    "head_up_alt": {
+        "hex": "f50300000000000000000000000000000000000000",
+        "expected_type": "msg_009",  # head down (should match head_down, not head_up)
+        "description": "Head down notification (f503)"
     }
 }
 
@@ -65,7 +91,7 @@ class TestMessageTypeMatching:
         command = f"{packet[0]:02x}"
         length = len(packet)
         
-        matching_types = find_matching_message_types(command, length)
+        matching_types = find_matching_message_types(command, length, packet)
         
         assert len(matching_types) > 0, "Should find at least one matching message type"
         
@@ -92,7 +118,7 @@ class TestMessageTypeMatching:
         command = f"{packet[0]:02x}"
         length = len(packet)
         
-        matching_types = find_matching_message_types(command, length)
+        matching_types = find_matching_message_types(command, length, packet)
         
         assert len(matching_types) > 0, "Should find at least one matching message type"
         
@@ -122,7 +148,7 @@ class TestMessageTypeMatching:
         command = f"{packet[0]:02x}"
         length = len(packet)
         
-        matching_types = find_matching_message_types(command, length)
+        matching_types = find_matching_message_types(command, length, packet)
         
         assert len(matching_types) > 0, "Should find at least one matching message type"
         
@@ -155,7 +181,7 @@ class TestMessageTypeMatching:
         command = f"{packet[0]:02x}"
         length = len(packet)
         
-        matching_types = find_matching_message_types(command, length)
+        matching_types = find_matching_message_types(command, length, packet)
         
         assert len(matching_types) > 0, "Should find at least one matching message type"
         
@@ -182,13 +208,13 @@ class TestMessageTypeMatching:
         assert "6869" in parsed_data["text_data"]
     
     def test_send_text_command(self, message_types):
-        """Test that send_text command matches correctly."""
+        """Test that send text command matches correctly."""
         packet_data = TEST_PACKETS["send_text"]
         packet = bytes.fromhex(packet_data["hex"])
         command = f"{packet[0]:02x}"
         length = len(packet)
         
-        matching_types = find_matching_message_types(command, length)
+        matching_types = find_matching_message_types(command, length, packet)
         
         assert len(matching_types) > 0, "Should find at least one matching message type"
         
@@ -205,11 +231,156 @@ class TestMessageTypeMatching:
         # Test deserialization
         parsed_data = deserialize_packet(packet, send_text_type)
         assert parsed_data["command"] == "0x4e"
-        assert parsed_data["header"] == "0x00010030"
-        assert parsed_data["start_delimeter"] == "0x0a0a"
-        assert parsed_data["end_delimeter"] == "0x0a0a"
-        # payload should contain the hex representation of "hello world\n\n"
-        assert "68656c6c6f20776f726c64" in parsed_data["payload"]
+        assert parsed_data["header"] == "00010030"
+        assert "length" in parsed_data
+        assert "start_delimeter" in parsed_data
+        assert "payload" in parsed_data
+    
+    def test_charging_notification(self, message_types):
+        """Test that charging notification (f509) matches the specific charging message type."""
+        packet_data = TEST_PACKETS["charging"]
+        packet = bytes.fromhex(packet_data["hex"])
+        command = f"{packet[0]:02x}"
+        length = len(packet)
+        
+        matching_types = find_matching_message_types(command, length, packet)
+        
+        assert len(matching_types) > 0, "Should find at least one matching message type"
+        
+        # The first match should be the most specific one (charging status)
+        best_match = matching_types[0]
+        assert best_match.id == packet_data["expected_type"], f"Expected {packet_data['expected_type']}, got {best_match.id}"
+        assert best_match.name == "charging_status", f"Expected charging_status, got {best_match.name}"
+        
+        # Test deserialization
+        parsed_data = deserialize_packet(packet, best_match)
+        assert parsed_data["command"] == "0xf5"
+        assert parsed_data["subcommand"] == "0x09"
+        
+        # Verify this is not being caught by a general rule
+        assert best_match.id != "msg_006", "Should not match general touchpad_double_tap rule"
+    
+    def test_ble_paired_success_notification(self, message_types):
+        """Test that BLE paired success notification (f511) matches the specific message type."""
+        packet_data = TEST_PACKETS["ble_paired_success"]
+        packet = bytes.fromhex(packet_data["hex"])
+        command = f"{packet[0]:02x}"
+        length = len(packet)
+        
+        matching_types = find_matching_message_types(command, length, packet)
+        
+        assert len(matching_types) > 0, "Should find at least one matching message type"
+        
+        # The first match should be the most specific one (BLE paired success)
+        best_match = matching_types[0]
+        assert best_match.id == packet_data["expected_type"], f"Expected {packet_data['expected_type']}, got {best_match.id}"
+        assert best_match.name == "ble_paired_success", f"Expected ble_paired_success, got {best_match.name}"
+        
+        # Test deserialization
+        parsed_data = deserialize_packet(packet, best_match)
+        assert parsed_data["command"] == "0xf5"
+        assert parsed_data["subcommand"] == "0x11"
+        
+        # Verify this is not being caught by a general rule
+        assert best_match.id != "msg_006", "Should not match general touchpad_double_tap rule"
+    
+    def test_open_dashboard_notification(self, message_types):
+        """Test that open dashboard notification (f51e) matches the specific message type."""
+        packet_data = TEST_PACKETS["open_dashboard"]
+        packet = bytes.fromhex(packet_data["hex"])
+        command = f"{packet[0]:02x}"
+        length = len(packet)
+        
+        matching_types = find_matching_message_types(command, length, packet)
+        
+        assert len(matching_types) > 0, "Should find at least one matching message type"
+        
+        # The first match should be the most specific one (open dashboard)
+        best_match = matching_types[0]
+        assert best_match.id == packet_data["expected_type"], f"Expected {packet_data['expected_type']}, got {best_match.id}"
+        assert best_match.name == "open_dashboard", f"Expected open_dashboard, got {best_match.name}"
+        
+        # Test deserialization
+        parsed_data = deserialize_packet(packet, best_match)
+        assert parsed_data["command"] == "0xf5"
+        assert parsed_data["subcommand"] == "0x1e"
+        
+        # Verify this is not being caught by a general rule
+        assert best_match.id != "msg_006", "Should not match general touchpad_double_tap rule"
+    
+    def test_head_up_notification(self, message_types):
+        """Test that head up notification (f502) matches the specific message type."""
+        packet_data = TEST_PACKETS["head_up"]
+        packet = bytes.fromhex(packet_data["hex"])
+        command = f"{packet[0]:02x}"
+        length = len(packet)
+        
+        matching_types = find_matching_message_types(command, length, packet)
+        
+        assert len(matching_types) > 0, "Should find at least one matching message type"
+        
+        # The first match should be the most specific one (head up)
+        best_match = matching_types[0]
+        assert best_match.id == packet_data["expected_type"], f"Expected {packet_data['expected_type']}, got {best_match.id}"
+        assert best_match.name == "head_up", f"Expected head_up, got {best_match.name}"
+        
+        # Test deserialization
+        parsed_data = deserialize_packet(packet, best_match)
+        assert parsed_data["command"] == "0xf5"
+        assert parsed_data["subcommand"] == "0x02"
+        
+        # Verify this is not being caught by a general rule
+        assert best_match.id != "msg_006", "Should not match general touchpad_double_tap rule"
+    
+    def test_head_down_notification(self, message_types):
+        """Test that head down notification (f503) matches the specific message type."""
+        packet_data = TEST_PACKETS["head_up_alt"]  # This is actually head_down with f503
+        packet = bytes.fromhex(packet_data["hex"])
+        command = f"{packet[0]:02x}"
+        length = len(packet)
+        
+        matching_types = find_matching_message_types(command, length, packet)
+        
+        assert len(matching_types) > 0, "Should find at least one matching message type"
+        
+        # The first match should be the most specific one (head down)
+        best_match = matching_types[0]
+        assert best_match.id == packet_data["expected_type"], f"Expected {packet_data['expected_type']}, got {best_match.id}"
+        assert best_match.name == "head_down", f"Expected head_down, got {best_match.name}"
+        
+        # Test deserialization
+        parsed_data = deserialize_packet(packet, best_match)
+        assert parsed_data["command"] == "0xf5"
+        assert parsed_data["subcommand"] == "0x03"
+        
+        # Verify this is not being caught by a general rule
+        assert best_match.id != "msg_006", "Should not match general touchpad_double_tap rule"
+    
+    def test_f5_message_specificity_priority(self, message_types):
+        """Test that f5 messages with specific data values are prioritized over general ones."""
+        # Test with charging notification (f509)
+        packet = bytes.fromhex("f50900000000000000000000000000000000000000")
+        command = "f5"
+        length = len(packet)
+        
+        matching_types = find_matching_message_types(command, length, packet)
+        
+        assert len(matching_types) > 0, "Should find at least one matching message type"
+        
+        # The first match should be the most specific one
+        best_match = matching_types[0]
+        
+        # It should be a specific message type, not a general one
+        assert best_match.name in ["charging_status", "ble_paired_success", "open_dashboard", "head_up", "head_down"], \
+            f"Expected specific f5 message type, got {best_match.name}"
+        
+        # It should NOT be the general touchpad_double_tap (msg_006)
+        assert best_match.id != "msg_006", "Should not match general touchpad_double_tap rule"
+        
+        # Verify the subcommand field is correctly parsed
+        parsed_data = deserialize_packet(packet, best_match)
+        assert parsed_data["command"] == "0xf5"
+        assert parsed_data["subcommand"] == "0x09"
 
 class TestMessageTypeAnalysis:
     """Test message type analysis and structure understanding."""

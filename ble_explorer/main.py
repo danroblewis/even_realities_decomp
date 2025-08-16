@@ -312,7 +312,7 @@ def serialize_message(message: Message, message_type: MessageType) -> bytes:
     
     return bytes(result)
 
-def find_matching_message_types(command_code: str, packet_length: int) -> List[MessageType]:
+def find_matching_message_types(command_code: str, packet_length: int, packet_bytes: bytes = None) -> List[MessageType]:
     """Find message types that match the given command code and packet length."""
     data = load_data()
     matching_types = []
@@ -378,21 +378,50 @@ def find_matching_message_types(command_code: str, packet_length: int) -> List[M
                     else:
                         logger.info(f"  -> NO MATCH (fixed_width, packet_length {packet_length} != {fixed_length})")
     
-    # Sort by priority: exact matches first, then by how well they match
+    # Sort by priority: exact data value matches first, then by how well they match
     def sort_key(item):
         msg_type, fixed_length, has_max_width, computed_count, score = item
+        
+        # For f5 messages, check if the subcommand value matches exactly
+        if command_code.lower() == "f5" and packet_bytes and len(packet_bytes) >= 2:
+            subcommand_attr = msg_type.attributes[1] if len(msg_type.attributes) > 1 else None
+            if subcommand_attr and subcommand_attr.name == "data" and subcommand_attr.default_value is not None:
+                # This is an f5 message with a specific subcommand value
+                # Check if it matches the actual packet subcommand
+                packet_subcommand_value = packet_bytes[1]
+                try:
+                    expected_subcommand_value = int(subcommand_attr.default_value, 16)
+                    if packet_subcommand_value == expected_subcommand_value:
+                        # Exact match! Give it highest priority
+                        logger.info(f"    EXACT SUBCOMMAND MATCH: packet subcommand {packet_subcommand_value:02x} == expected {expected_subcommand_value:02x} for {msg_type.name}")
+                        return -10000  # Very high priority for exact matches
+                    else:
+                        logger.info(f"    NO SUBCOMMAND MATCH: packet subcommand {packet_subcommand_value:02x} != expected {expected_subcommand_value:02x} for {msg_type.name}")
+                except ValueError:
+                    pass
+        
+        # Calculate base specificity score based on default values
+        base_specificity = 0
+        for attr in msg_type.attributes:
+            if not attr.is_computed and not attr.is_max_width and attr.default_value is not None:
+                if attr.name == "data":
+                    base_specificity += 200  # Higher weight for data field
+                else:
+                    base_specificity += 100
+        
         if not has_max_width and packet_length == fixed_length:
-            return 0  # Exact fixed-width matches get highest priority
+            # Exact fixed-width matches get highest priority, but with specificity bonus
+            return -base_specificity  # Negative so higher specificity comes first
         elif has_max_width:
             # For max_width messages, prefer those with closer length matches
-            # When scores are close (within 10), prioritize fewer computed fields
+            # When scores are close (within 10), prioritize fewer computed fields and higher specificity
             if score <= 10:
-                return score + (computed_count * 20)  # Add computed field penalty
+                return score + (computed_count * 20) - base_specificity  # Add computed field penalty, subtract specificity bonus
             else:
-                return score + 100  # Add offset to prioritize fixed-width
+                return score + 100 - base_specificity  # Add offset to prioritize fixed-width, subtract specificity bonus
         else:
             # Fixed-width messages that don't match exactly
-            return abs(packet_length - fixed_length) + 50
+            return abs(packet_length - fixed_length) + 50 - base_specificity
     
     matching_types.sort(key=sort_key)
     
@@ -404,13 +433,20 @@ def find_matching_message_types(command_code: str, packet_length: int) -> List[M
     return [item[0] for item in matching_types]
 
 def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[str, Any]:
-    """Deserialize a packet into attribute-value pairs based on a message type definition."""
+    """Deserialize a packet according to a message type definition."""
     result = {}
     offset = 0
     
+    # Extract command code from the message type for special handling
+    command_code = None
+    for attr in message_type.attributes:
+        if attr.name == "command" and attr.default_value:
+            command_code = attr.default_value
+            break
+    
     for attr in message_type.attributes:
         if attr.is_computed:
-            # Skip computed attributes during deserialization
+            # Skip computed fields - they'll be calculated later
             continue
             
         if not attr.width:
@@ -472,6 +508,10 @@ def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[s
         else:
             result[attr.name] = "0x00"
         
+        # Special handling for F5 messages: map "data" field to "subcommand"
+        if command_code and command_code.lower() == "f5" and attr.name == "data":
+            result["subcommand"] = result.pop("data")
+        
         # Update offset based on actual bytes consumed, not the field width
         if attr.is_max_width:
             offset += len(attr_bytes)
@@ -482,7 +522,7 @@ def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[s
 
 def get_best_message_type_match(command_code: str, packet_bytes: bytes) -> Optional[MessageType]:
     """Find the best matching message type for a given packet."""
-    matching_types = find_matching_message_types(command_code, len(packet_bytes))
+    matching_types = find_matching_message_types(command_code, len(packet_bytes), packet_bytes)
     
     if not matching_types:
         return None
@@ -1193,7 +1233,7 @@ async def parse_packet(hex_data: str):
         command_code = f"{packet_bytes[0]:02x}"
         
         # Find matching message types
-        matching_types = find_matching_message_types(command_code, len(packet_bytes))
+        matching_types = find_matching_message_types(command_code, len(packet_bytes), packet_bytes)
         
         if not matching_types:
             return {

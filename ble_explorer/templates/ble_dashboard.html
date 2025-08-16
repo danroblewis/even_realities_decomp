@@ -257,6 +257,52 @@
         rgba(220, 53, 69, 0.1) 100%) !important;
 }
 
+/* Attribute pill styling with context-based colors */
+.attribute-pill {
+    display: inline-block;
+    margin: 0.1rem 0.2rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.attribute-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.attribute-pill.bg-primary.bg-opacity-10 {
+    background-color: rgba(0, 123, 255, 0.1) !important;
+    border-color: rgba(0, 123, 255, 0.3);
+}
+
+.attribute-pill.bg-success.bg-opacity-10 {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+.attribute-pill.bg-secondary.bg-opacity-10 {
+    background-color: rgba(108, 117, 125, 0.1) !important;
+    border-color: rgba(108, 117, 125, 0.3);
+}
+
+.attribute-name {
+    font-weight: 600;
+    color: #495057;
+    margin-right: 0.5rem;
+}
+
+.attribute-value {
+    font-family: 'Courier New', monospace;
+    color: #212529;
+    background-color: rgba(255,255,255,0.7);
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
 /* Status badge enhancements */
 .badge.bg-danger {
     box-shadow: 0 0 0 1px rgba(220, 53, 69, 0.3);
@@ -439,8 +485,17 @@ function initWebSocket() {
 }
 
 // Function to create parsed data display
-function createParsedDataDisplay(parsedData) {
+function createParsedDataDisplay(parsedData, context = 'default') {
     if (!parsedData) return '';
+    
+    // Define background colors based on context
+    const bgColors = {
+        'sent': 'bg-primary bg-opacity-10',
+        'response': 'bg-success bg-opacity-10',
+        'default': 'bg-secondary bg-opacity-10'
+    };
+    
+    const bgColor = bgColors[context] || bgColors.default;
     
     let display = '';
     for (const [attrName, attrValue] of Object.entries(parsedData)) {
@@ -451,25 +506,27 @@ function createParsedDataDisplay(parsedData) {
         let formattedValue = attrValue;
         let displayValue = attrValue;
         
-        if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
-            // For hex values, show both hex and decimal if reasonable
-            try {
-                const decimalValue = parseInt(attrValue, 16);
-                if (decimalValue < 1000) { // Only show decimal for reasonable values
-                    formattedValue = `${attrValue} (${decimalValue})`;
-                }
-                displayValue = formattedValue;
-            } catch (e) {
-                // Keep original value if parsing fails
-                displayValue = attrValue;
-            }
-        }
+        // Check if this attribute is likely a decimal number (don't show hex for these)
+        const decimalAttributes = ['length', 'size', 'width', 'height', 'x_pos', 'y_pos', 'xpos', 'ypos', 'seq_'];
+        const isDecimalAttribute = decimalAttributes.some(decimalAttr => 
+            attrName.toLowerCase().includes(decimalAttr)
+        );
         
-        // Special handling for text fields
-        if (attrName.toLowerCase().includes('text') || attrName.toLowerCase().includes('payload')) {
-            try {
-                // Try to convert hex to text
-                if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+        // Check if this is a text field
+        const isTextAttribute = attrName.toLowerCase().includes('text') || attrName.toLowerCase().includes('payload');
+        
+        if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+            if (isDecimalAttribute) {
+                // For decimal attributes, show decimal value
+                try {
+                    const decimalValue = parseInt(attrValue, 16);
+                    displayValue = decimalValue.toString();
+                } catch (e) {
+                    displayValue = attrValue.substring(2); // Remove '0x' prefix
+                }
+            } else if (isTextAttribute) {
+                // For text attributes, try to decode to text
+                try {
                     const hexStr = attrValue.substring(2); // Remove '0x' prefix
                     if (hexStr.length % 2 === 0) {
                         const bytes = new Uint8Array(hexStr.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
@@ -478,15 +535,22 @@ function createParsedDataDisplay(parsedData) {
                         if (text && text.length > 0 && text.match(/^[\x20-\x7E\n\r\t]*$/)) {
                             // Only use text if it's printable ASCII
                             displayValue = `"${text}"`;
+                        } else {
+                            displayValue = attrValue.substring(2); // Show hex if text conversion fails
                         }
+                    } else {
+                        displayValue = attrValue.substring(2); // Show hex if odd length
                     }
+                } catch (e) {
+                    displayValue = attrValue.substring(2); // Show hex if text conversion fails
                 }
-            } catch (e) {
-                // Keep original value if text conversion fails
+            } else {
+                // For everything else, show hex value
+                displayValue = attrValue.substring(2); // Remove '0x' prefix
             }
         }
         
-        display += `<span class="attribute-pill">
+        display += `<span class="attribute-pill ${bgColor}">
             <span class="attribute-value">${displayValue}</span>
             <span class="attribute-name">${attrName}</span>
         </span>`;
@@ -551,19 +615,30 @@ function updateCommunicationLog(logData) {
             // Show sent data and response data
             if (showParsedData && msg.parsed_data && msg.message_type_info) {
                 // Show parsed sent data
-                dataDisplay = `<div class="data-display"><strong>Sent (${msg.message_type_info.name}):</strong></div>`;
-                dataDisplay += createParsedDataDisplay(msg.parsed_data);
-                dataDisplay += `<div class="data-display"><strong>Response:</strong></div>`;
-                dataDisplay += `<div class="data-display"><code class="small text-success">${msg.response_data}</code></div>`;
+                dataDisplay = createParsedDataDisplay(msg.parsed_data, 'sent');
+                
+                // Add response data display
+                if (msg.response_parsed_data && msg.response_message_type_info) {
+                    // Show parsed response data
+                    dataDisplay += `<div class="data-display mt-2">`;
+                    dataDisplay += createParsedDataDisplay(msg.response_parsed_data, 'response');
+                    dataDisplay += `</div>`;
+                } else {
+                    // Fallback to hex display for response
+                    dataDisplay += `<div class="data-display mt-2">`;
+                    dataDisplay += `<code class="small text-success">${msg.response_data}</code>`;
+                    dataDisplay += `</div>`;
+                }
             } else {
                 // Fallback to hex display
                 dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data}</code></div>`;
-                dataDisplay += `<div class="data-display"><code class="small text-success">${msg.response_data}</code></div>`;
+                dataDisplay += `<div class="data-display mt-2">`;
+                dataDisplay += `<code class="small text-success">${msg.response_data}</code>`;
+                dataDisplay += `</div>`;
             }
         } else if (showParsedData && msg.parsed_data && msg.message_type_info) {
             // Show parsed data
-            dataDisplay = `<div class="data-display"><strong>${msg.message_type_info.name}:</strong></div>`;
-            dataDisplay += createParsedDataDisplay(msg.parsed_data);
+            dataDisplay = createParsedDataDisplay(msg.parsed_data, msg.direction === 'sent' ? 'sent' : 'default');
         } else {
             // Show just the hex data
             dataDisplay = `<div class="data-display"><code class="small">${msg.hex_data || 'N/A'}</code></div>`;

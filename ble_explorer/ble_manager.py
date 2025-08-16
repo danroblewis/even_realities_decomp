@@ -164,7 +164,7 @@ class BLEManager:
                 command_code = f"{packet_bytes[0]:02x}"
                 
                 # Find matching message types
-                matching_types = find_matching_message_types(command_code, len(packet_bytes))
+                matching_types = find_matching_message_types(command_code, len(packet_bytes), packet_bytes)
                 if not matching_types:
                     return None
                 
@@ -235,7 +235,7 @@ class BLEManager:
                         },
                         "message_type": {
                             "id": "heartbeat",
-                            "name": "heartbeat",
+                            "name": "Heartbeat",
                             "description": "Heartbeat message"
                         }
                     }
@@ -279,7 +279,7 @@ class BLEManager:
                             },
                             "message_type": {
                                 "id": "text_4e",
-                                "name": "text_4e",
+                                "name": "Text Display",
                                 "description": "Text display command with positioning"
                             }
                         }
@@ -292,7 +292,7 @@ class BLEManager:
                             },
                             "message_type": {
                                 "id": "text_command",
-                                "name": "text_command",
+                                "name": "Text Command",
                                 "description": "Text display command"
                             }
                         }
@@ -311,7 +311,7 @@ class BLEManager:
                         },
                         "message_type": {
                             "id": "clear_screen",
-                            "name": "clear_screen",
+                            "name": "Clear Screen",
                             "description": "Clear screen command"
                         }
                     }
@@ -327,10 +327,95 @@ class BLEManager:
                         },
                         "message_type": {
                             "id": "clear_screen",
-                            "name": "clear_screen",
+                            "name": "Clear Screen",
                             "description": "Clear screen command (partial)"
                         }
                     }
+            elif command_code == "f5":
+                # F5 notification messages - check for specific subcommand values
+                if len(packet_bytes) >= 2:
+                    subcommand_value = packet_bytes[1]
+                    
+                    # Map specific subcommand values to message types
+                    if subcommand_value == 0x09:
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "subcommand": f"0x{subcommand_value:02x}",
+                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
+                            },
+                            "message_type": {
+                                "id": "charging_status",
+                                "name": "Charging Status",
+                                "description": "Charging status notification"
+                            }
+                        }
+                    elif subcommand_value == 0x11:
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "subcommand": f"0x{subcommand_value:02x}",
+                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
+                            },
+                            "message_type": {
+                                "id": "ble_paired_success",
+                                "name": "BLE Paired Success",
+                                "description": "BLE paired success notification"
+                            }
+                        }
+                    elif subcommand_value == 0x1e:
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "subcommand": f"0x{subcommand_value:02x}",
+                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
+                            },
+                            "message_type": {
+                                "id": "open_dashboard",
+                                "name": "Open Dashboard",
+                                "description": "Open dashboard notification"
+                            }
+                        }
+                    elif subcommand_value == 0x02:
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "subcommand": f"0x{subcommand_value:02x}",
+                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
+                            },
+                            "message_type": {
+                                "id": "head_up",
+                                "name": "Head Up",
+                                "description": "Head up notification"
+                            }
+                        }
+                    elif subcommand_value == 0x03:
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "subcommand": f"0x{subcommand_value:02x}",
+                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
+                            },
+                            "message_type": {
+                                "id": "head_down",
+                                "name": "Head Down",
+                                "description": "Head down notification"
+                            }
+                        }
+                    else:
+                        # Generic F5 message for unknown subcommand values
+                        return {
+                            "parsed_data": {
+                                "command": f"0x{command_code}",
+                                "data": f"0x{subcommand_value:02x}",  # This is actually a subcommand
+                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
+                            },
+                            "message_type": {
+                                "id": "f5_notification",
+                                "name": f"F5 Notification (0x{subcommand_value:02x})",
+                                "description": f"F5 notification with subcommand value 0x{subcommand_value:02x}"
+                            }
+                        }
             
             # Generic parsing for unknown commands
             return {
@@ -340,7 +425,7 @@ class BLEManager:
                 },
                 "message_type": {
                     "id": "unknown",
-                    "name": "unknown",
+                    "name": f"Command 0x{command_code.upper()}",
                     "description": f"Unknown command {command_code}"
                 }
             }
@@ -362,7 +447,19 @@ class BLEManager:
                 logger.warning(f"Received packet with invalid command code: {hex_data}")
                 return
             
-            # Try to parse the packet
+            # Check if this is a response packet by looking at the second byte
+            is_response_packet = False
+            if len(data) >= 2:
+                second_byte = data[1]
+                # Check if second byte is a known response status code
+                if second_byte in [0xc9, 0xca, 0xcb]:  # success, error, in_progress
+                    is_response_packet = True
+                    logger.info(f"Detected response packet with status code 0x{second_byte:02x}")
+            
+            # Parsing Strategy:
+            # - Sent messages: We already know the message type, so parsing is optional
+            # - Response packets: Don't parse using message type definitions, create simple response structure
+            # - Other received packets: Try to parse to determine message type
             parsed_info = await self._parse_packet(hex_data)
             
             # Look for a matching sent message in the communication log
@@ -373,7 +470,9 @@ class BLEManager:
                 response_time_ms = int((timestamp - matching_sent.timestamp).total_seconds() * 1000)
                 
                 # Ensure the sent message has parsed data before we potentially overwrite it
-                if matching_sent.parsed_data is None:
+                # For sent messages, we already know the message type, so we don't need to parse again
+                if matching_sent.parsed_data is None and not matching_sent.message_name:
+                    # Only parse if we don't have basic message info
                     await self.ensure_message_parsed(matching_sent)
                 
                 # Update the sent message with response info
@@ -382,26 +481,64 @@ class BLEManager:
                 matching_sent.response_data = hex_data
                 
                 # Store response parsed data separately, don't overwrite the original sent message parsed data
-                if parsed_info:
+                if is_response_packet:
+                    # For response packets, create simple parsed data with status info
+                    # We don't need to parse these using message type definitions since they're responses
+                    matching_sent.response_parsed_data = {
+                        "command": f"0x{received_command_code}",
+                        "status_code": f"0x{data[1]:02x}",
+                        "data": data[2:].hex() if len(data) > 2 else ""
+                    }
+                    matching_sent.response_message_type_info = {
+                        "id": "response",
+                        "name": "Response",
+                        "description": f"Response packet with status 0x{data[1]:02x}"
+                    }
+                elif parsed_info and parsed_info.get('message_type'):
+                    # For non-response packets that we successfully parsed, use the parsed info
                     matching_sent.response_parsed_data = parsed_info.get('parsed_data')
                     matching_sent.response_message_type_info = parsed_info.get('message_type')
+                else:
+                    # For packets we couldn't parse, create basic info
+                    matching_sent.response_parsed_data = {
+                        "command": f"0x{received_command_code}",
+                        "data": data[1:].hex() if len(data) > 1 else ""
+                    }
+                    matching_sent.response_message_type_info = {
+                        "id": "unknown",
+                        "name": "Unknown",
+                        "description": f"Unknown packet type for command {received_command_code}"
+                    }
                 
                 # Determine status based on response
-                status_code = hex_data[:2].upper()
-                if status_code == "C9":
-                    matching_sent.status = "success"
-                elif status_code == "CA":
-                    matching_sent.status = "error"
-                elif status_code == "CB":
-                    matching_sent.status = "in_progress"
-                elif status_code == "06":
-                    matching_sent.status = "heartbeat"
-                else:
-                    # Check if it's a command code match (like 2506 response to 2506 command)
-                    if received_command_code == matching_sent.command_code:
-                        matching_sent.status = "acknowledged"
+                if is_response_packet:
+                    # Use the second byte for status determination
+                    status_code = data[1]
+                    if status_code == 0xc9:
+                        matching_sent.status = "success"
+                    elif status_code == 0xca:
+                        matching_sent.status = "error"
+                    elif status_code == 0xcb:
+                        matching_sent.status = "in_progress"
                     else:
                         matching_sent.status = "unknown"
+                else:
+                    # For non-response packets, use the old logic
+                    status_code = hex_data[:2].upper()
+                    if status_code == "C9":
+                        matching_sent.status = "success"
+                    elif status_code == "CA":
+                        matching_sent.status = "error"
+                    elif status_code == "CB":
+                        matching_sent.status = "in_progress"
+                    elif status_code == "06":
+                        matching_sent.status = "heartbeat"
+                    else:
+                        # Check if it's a command code match (like 2506 response to 2506 command)
+                        if received_command_code == matching_sent.command_code:
+                            matching_sent.status = "acknowledged"
+                        else:
+                            matching_sent.status = "unknown"
                 
                 logger.info(f"Associated response {hex_data} with sent message {matching_sent.id} ({matching_sent.command_code}) - Status: {matching_sent.status} in {response_time_ms}ms")
                 
@@ -409,6 +546,43 @@ class BLEManager:
                 return
             else:
                 # This is an unmatched received packet - add it to the log
+                # Set message_name based on parsed message type info if available
+                message_name = None
+                parsed_data = None
+                message_type_info = None
+                
+                if is_response_packet:
+                    # For response packets, create simple response message
+                    # We don't need to parse these since they're responses
+                    message_name = f"Response (0x{data[1]:02x})"
+                    parsed_data = {
+                        "command": f"0x{received_command_code}",
+                        "status_code": f"0x{data[1]:02x}",
+                        "data": data[2:].hex() if len(data) > 2 else ""
+                    }
+                    message_type_info = {
+                        "id": "response",
+                        "name": "Response",
+                        "description": f"Response packet with status 0x{data[1]:02x}"
+                    }
+                elif parsed_info and parsed_info.get('message_type'):
+                    # For non-response packets that we successfully parsed, use the parsed info
+                    message_name = parsed_info['message_type'].get('name')
+                    parsed_data = parsed_info.get('parsed_data')
+                    message_type_info = parsed_info.get('message_type')
+                else:
+                    # For packets we couldn't parse, create basic info
+                    message_name = f"Unknown ({received_command_code})"
+                    parsed_data = {
+                        "command": f"0x{received_command_code}",
+                        "data": data[1:].hex() if len(data) > 1 else ""
+                    }
+                    message_type_info = {
+                        "id": "unknown",
+                        "name": "Unknown",
+                        "description": f"Unknown packet type for command {received_command_code}"
+                    }
+                
                 received_msg = BLEMessage(
                     id=f"recv_{self.message_id_counter}",
                     timestamp=timestamp,
@@ -416,8 +590,9 @@ class BLEManager:
                     data=bytes(data),
                     hex_data=hex_data,
                     command_code=received_command_code,
-                    parsed_data=parsed_info.get('parsed_data') if parsed_info else None,
-                    message_type_info=parsed_info.get('message_type') if parsed_info else None
+                    message_name=message_name,  # Set the message name based on parsed type
+                    parsed_data=parsed_data,
+                    message_type_info=message_type_info
                 )
                 
                 self.message_id_counter += 1
@@ -464,7 +639,18 @@ class BLEManager:
                 raise Exception("No writable characteristic found")
             
             # Try to parse the packet before sending
-            parsed_info = await self._parse_packet(data.hex())
+            # For sent messages, we already know the message type, so parsing is optional
+            # We'll only parse if we need to extract additional information
+            parsed_info = None
+            try:
+                parsed_info = await self._parse_packet(data.hex())
+            except Exception as e:
+                # Parsing failed, but that's okay for sent messages
+                logger.debug(f"Optional parsing failed for sent message: {e}")
+            
+            # Set message_name based on parsed type info if no explicit name provided
+            if not message_name and parsed_info and parsed_info.get('message_type'):
+                message_name = parsed_info['message_type'].get('name')
             
             # Create sent message record
             sent_msg = BLEMessage(

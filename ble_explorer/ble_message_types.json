@@ -233,5 +233,821 @@
         "computed_from": null
       }
     ]
+  },
+  "msg_006": {
+    "id": "msg_006",
+    "name": "touchpad_double_tap",
+    "description": "TouchPad Double Tap notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 00 for double tap",
+        "default_value": "00",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_007": {
+    "id": "msg_007",
+    "name": "touchpad_single_tap",
+    "description": "TouchPad Single Tap notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 01 for single tap",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_008": {
+    "id": "msg_008",
+    "name": "head_up",
+    "description": "Head Up notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 02 for head up",
+        "default_value": "02",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_009": {
+    "id": "msg_009",
+    "name": "head_down",
+    "description": "Head Down notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 03 for head down",
+        "default_value": "03",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_010": {
+    "id": "msg_010",
+    "name": "touchpad_triple_tap",
+    "description": "TouchPad Triple Tap notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 04 for triple tap",
+        "default_value": "04",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_011": {
+    "id": "msg_011",
+    "name": "touchpad_triple_tap_alt",
+    "description": "TouchPad Triple Tap notification (alternate)",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 05 for triple tap (alternate)",
+        "default_value": "05",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_012": {
+    "id": "msg_012",
+    "name": "glasses_worn",
+    "description": "Glasses are worn notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 06 for glasses worn",
+        "default_value": "06",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_013": {
+    "id": "msg_013",
+    "name": "glasses_removed",
+    "description": "Glasses taken off, not in box notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 07 for glasses removed",
+        "default_value": "07",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_014": {
+    "id": "msg_014",
+    "name": "case_lid_open",
+    "description": "Put in case, lid open notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 08 for case lid open",
+        "default_value": "08",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_015": {
+    "id": "msg_015",
+    "name": "charging_status",
+    "description": "Charging status notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 09 for charging status (00/01)",
+        "default_value": "09",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_016": {
+    "id": "msg_016",
+    "name": "case_lid_closed",
+    "description": "Put in case, lid closed notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 0B for case lid closed",
+        "default_value": "0b",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_017": {
+    "id": "msg_017",
+    "name": "case_charging",
+    "description": "Case charging notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 0E for case charging (00/01)",
+        "default_value": "0e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_018": {
+    "id": "msg_018",
+    "name": "case_battery_percent",
+    "description": "Case battery percent notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 0F for case battery percent (00~64)",
+        "default_value": "0f",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_019": {
+    "id": "msg_019",
+    "name": "ble_paired_success",
+    "description": "BLE paired success notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 11 for BLE paired success",
+        "default_value": "11",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_020": {
+    "id": "msg_020",
+    "name": "right_touchpad_press_hold_release",
+    "description": "Right TouchPad pressed, held, and released notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 12 for right touchpad press-hold-release",
+        "default_value": "12",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_021": {
+    "id": "msg_021",
+    "name": "left_touchpad_press_hold",
+    "description": "Left TouchPad pressed and held notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 17 for left touchpad press-hold",
+        "default_value": "17",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_022": {
+    "id": "msg_022",
+    "name": "left_touchpad_press_release",
+    "description": "Left TouchPad pressed and released notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 18 for left touchpad press-release",
+        "default_value": "18",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_023": {
+    "id": "msg_023",
+    "name": "open_dashboard",
+    "description": "Open Dashboard (double tap) notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 1E for open dashboard",
+        "default_value": "1e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_024": {
+    "id": "msg_024",
+    "name": "close_dashboard",
+    "description": "Close Dashboard (double tap) notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 1F for close dashboard",
+        "default_value": "1f",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_025": {
+    "id": "msg_025",
+    "name": "translate_transcribe_double_tap",
+    "description": "Double tap either side when set to translate or transcribe notification",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Event data - 20 for translate/transcribe double tap",
+        "default_value": "20",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 19,
+        "is_max_width": true,
+        "description": "Variable padding bytes (usually zeros)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_026": {
+    "id": "msg_026",
+    "name": "clear_screen_response",
+    "description": "Response packet for clear_screen command",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "18",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Response status code (C9=success, CA=error, CB=in_progress)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 18,
+        "is_max_width": false,
+        "description": "Padding bytes (usually zeros)",
+        "default_value": "000000000000000000000000000000000000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_027": {
+    "id": "msg_027",
+    "name": "send_text_response",
+    "description": "Response packet for send_text command",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "4e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Response status code (C9=success, CA=error, CB=in_progress)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 18,
+        "is_max_width": false,
+        "description": "Padding bytes (usually zeros)",
+        "default_value": "000000000000000000000000000000000000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_028": {
+    "id": "msg_028",
+    "name": "text_4e_response",
+    "description": "Response packet for text_4e command",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "4e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Response status code (C9=success, CA=error, CB=in_progress)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 18,
+        "is_max_width": false,
+        "description": "Padding bytes (usually zeros)",
+        "default_value": "000000000000000000000000000000000000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_029": {
+    "id": "msg_029",
+    "name": "heartbeat_response",
+    "description": "Response packet for heartbeat command",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "25",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Response status code (C9=success, CA=error, CB=in_progress)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 18,
+        "is_max_width": false,
+        "description": "Padding bytes (usually zeros)",
+        "default_value": "000000000000000000000000000000000000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
   }
 }

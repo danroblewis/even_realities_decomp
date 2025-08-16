@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute Display Test</title>
+    <style>
+        .attribute-pill {
+            display: inline-block;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            padding: 4px 12px;
+            margin: 2px;
+            font-size: 0.9em;
+        }
+        .attribute-value {
+            font-weight: bold;
+            color: #495057;
+        }
+        .attribute-name {
+            color: #6c757d;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Attribute Display Test</h1>
+    <p>This demonstrates how attributes are now displayed with the updated logic:</p>
+    
+    <h3>Before (showing hex for all attributes):</h3>
+    <div id="before"></div>
+    
+    <h3>After (decimal values for numeric attributes):</h3>
+    <div id="after"></div>
+
+    <script>
+        // Sample parsed data
+        const parsedData = {
+            'command': '0x4e',
+            'length': '0x000b',
+            'width': '0x0140',
+            'height': '0x00c8',
+            'xpos': '0x0020',
+            'ypos': '0x0010',
+            'flags': '0x01',
+            'seq_1': '0x04',
+            'seq_2': '0x01',
+            'unknown_1': '0x06',
+            'unknown_2': '0x00',
+            'constant': '0x04',
+            'text_data': '0x68656c6c6f20776f726c64',
+            'padding': '0x000000'
+        };
+
+        // Old display logic (showing hex for everything)
+        function createOldDisplay(parsedData) {
+            let display = '';
+            for (const [attrName, attrValue] of Object.entries(parsedData)) {
+                if (attrName === 'command') continue;
+                
+                let displayValue = attrValue;
+                if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+                    try {
+                        const hexValue = attrValue.substring(2);
+                        const decimalValue = parseInt(attrValue, 16);
+                        if (decimalValue < 1000) {
+                            displayValue = `${hexValue} (${decimalValue})`;
+                        } else {
+                            displayValue = hexValue;
+                        }
+                    } catch (e) {
+                        displayValue = attrValue.substring(2);
+                    }
+                }
+                
+                display += `<span class="attribute-pill">
+                    <span class="attribute-value">${displayValue}</span>
+                    <span class="attribute-name">${attrName}</span>
+                </span>`;
+            }
+            return display;
+        }
+
+        // New display logic (decimal for numeric attributes, text for text attributes, hex for others)
+        function createNewDisplay(parsedData) {
+            let display = '';
+            for (const [attrName, attrValue] of Object.entries(parsedData)) {
+                if (attrName === 'command') continue;
+                
+                let displayValue = attrValue;
+                
+                // Check if this attribute is likely a decimal number
+                const decimalAttributes = ['length', 'size', 'width', 'height', 'x_pos', 'y_pos', 'xpos', 'ypos', 'seq_'];
+                const isDecimalAttribute = decimalAttributes.some(decimalAttr => 
+                    attrName.toLowerCase().includes(decimalAttr)
+                );
+                
+                // Check if this is a text field
+                const isTextAttribute = attrName.toLowerCase().includes('text') || attrName.toLowerCase().includes('payload');
+                
+                if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+                    if (isDecimalAttribute) {
+                        // For decimal attributes, show decimal value
+                        try {
+                            const decimalValue = parseInt(attrValue, 16);
+                            displayValue = decimalValue.toString();
+                        } catch (e) {
+                            displayValue = attrValue.substring(2);
+                        }
+                    } else if (isTextAttribute) {
+                        // For text attributes, try to decode to text
+                        try {
+                            const hexStr = attrValue.substring(2);
+                            if (hexStr.length % 2 === 0) {
+                                const bytes = new Uint8Array(hexStr.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+                                const textDecoder = new TextDecoder('utf-8');
+                                const text = textDecoder.decode(bytes).replace(/\x00/g, '');
+                                if (text && text.length > 0 && text.match(/^[\x20-\x7E\n\r\t]*$/)) {
+                                    displayValue = `"${text}"`;
+                                } else {
+                                    displayValue = attrValue.substring(2);
+                                }
+                            } else {
+                                displayValue = attrValue.substring(2);
+                            }
+                        } catch (e) {
+                            displayValue = attrValue.substring(2);
+                        }
+                    } else {
+                        // For everything else, show hex value
+                        displayValue = attrValue.substring(2);
+                    }
+                }
+                
+                display += `<span class="attribute-pill">
+                    <span class="attribute-value">${displayValue}</span>
+                    <span class="attribute-name">${attrName}</span>
+                </span>`;
+            }
+            return display;
+        }
+
+        // Render both displays
+        document.getElementById('before').innerHTML = createOldDisplay(parsedData);
+        document.getElementById('after').innerHTML = createNewDisplay(parsedData);
+    </script>
+</body>
+</html>
