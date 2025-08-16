@@ -1,0 +1,18 @@
+{
+  "msg_001": {
+    "id": "msg_001",
+    "name": "Updated Message",
+    "description": "Updated description",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "max_width": null,
+        "description": "Updated command",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  }
+}

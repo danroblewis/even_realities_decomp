@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if message_type %}Edit Message Type{% else %}New Message Type{% endif %} - BLE UART Protocol Testing Harness
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-{% if message_type %}edit{% else %}plus{% endif %} me-2"></i>
+                {% if message_type %}Edit Message Type{% else %}New Message Type{% endif %}
+            </h1>
+            <a href="/" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to List
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" id="messageTypeForm" action="{% if message_type %}/message-types/{{ message_type.id }}{% else %}/message-types{% endif %}">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Message Type Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                   value="{{ message_type.name if message_type else '' }}" required>
+                            <div class="form-text">A descriptive name for this message type (e.g., "Data Request", "Status Update")</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" 
+                                   value="{{ message_type.description if message_type else '' }}">
+                            <div class="form-text">Optional description of what this message type is used for</div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5><i class="fas fa-list me-2"></i>Attributes</h5>
+                        <button type="button" class="btn btn-success btn-sm" onclick="addAttribute()">
+                            <i class="fas fa-plus me-2"></i>Add Attribute
+                        </button>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note:</strong> The first attribute is always "command" and cannot be removed. 
+                        Use "width" for fixed-size attributes or "max_width" for variable-size attributes.
+                    </div>
+
+                    <div id="attributesContainer">
+                        <!-- Attributes will be dynamically added here -->
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="/" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>
+                            {% if message_type %}Update{% else %}Create{% endif %} Message Type
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let attributeCounter = 0;
+
+// Initialize attributes on page load
+document.addEventListener('DOMContentLoaded', function() {
+    {% if message_type %}
+        // Load existing attributes for editing
+        {% for attr in message_type.attributes %}
+            addAttribute(
+                '{{ attr.name }}',
+                '{{ attr.width or "" }}',
+                '{{ attr.max_width or "" }}',
+                '{{ attr.description or "" }}',
+                '{{ attr.default_value or "" }}',
+                {{ 'true' if attr.is_computed else 'false' }},
+                '{{ attr.computed_from or "" }}'
+            );
+        {% endfor %}
+    {% else %}
+        // Add default command attribute for new message types
+        addAttribute('command', '1', '', 'Command identifier', '', false, '');
+    {% endif %}
+});
+
+function addAttribute(name = '', width = '1', maxWidth = '', description = '', defaultValue = '', isComputed = false, computedFrom = '') {
+    const container = document.getElementById('attributesContainer');
+    const attributeDiv = document.createElement('div');
+    attributeDiv.className = 'row mb-3 attribute-row';
+    attributeDiv.id = `attribute-${attributeCounter}`;
+    
+    const isFirst = attributeCounter === 0;
+    const isCommand = name === 'command' || (attributeCounter === 0 && !name);
+    
+    attributeDiv.innerHTML = `
+        <div class="col-md-3">
+            <label class="form-label">Attribute Name *</label>
+            <input type="text" class="form-control" name="attribute_names" 
+                   value="${name}" required ${isCommand ? 'readonly' : ''}>
+            ${isCommand ? '<div class="form-text text-muted">Fixed as "command"</div>' : ''}
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Width (bytes)</label>
+            <input type="number" class="form-control" name="attribute_widths" 
+                   value="${width}" min="1" placeholder="Fixed size">
+            <div class="form-text">Fixed size in bytes</div>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Max Width (bytes)</label>
+            <input type="number" class="form-control" name="attribute_max_widths" 
+                   value="${maxWidth}" min="1" placeholder="Max size">
+            <div class="form-text">Maximum size in bytes</div>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" name="attribute_descriptions" 
+                   value="${description}" placeholder="Optional">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Default Value</label>
+            <input type="text" class="form-control" name="attribute_default_values" 
+                   value="${defaultValue}" placeholder="Optional">
+            <div class="form-text">Default value for this attribute</div>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Computed</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="attribute_computed" 
+                       value="true" ${isComputed ? 'checked' : ''} onchange="toggleComputedField(${attributeCounter})">
+                <label class="form-check-label">Is computed</label>
+            </div>
+            <input type="text" class="form-control mt-1" name="attribute_computed_from" 
+                   value="${computedFrom}" placeholder="Source attribute" 
+                   ${isComputed ? '' : 'style="display: none;"'}>
+        </div>
+        <div class="col-md-1">
+            <label class="form-label">&nbsp;</label>
+            ${!isCommand ? `<button type="button" class="btn btn-outline-danger btn-sm d-block" onclick="removeAttribute(${attributeCounter})">
+                <i class="fas fa-trash"></i>
+            </button>` : ''}
+        </div>
+    `;
+    
+    container.appendChild(attributeDiv);
+    attributeCounter++;
+}
+
+function removeAttribute(index) {
+    const element = document.getElementById(`attribute-${index}`);
+    if (element) {
+        element.remove();
+    }
+}
+
+function toggleComputedField(index) {
+    const computedFromField = document.querySelector(`#attribute-${index} input[name="attribute_computed_from"]`);
+    const checkbox = document.querySelector(`#attribute-${index} input[name="attribute_computed"]`);
+    
+    if (checkbox.checked) {
+        computedFromField.style.display = 'block';
+    } else {
+        computedFromField.style.display = 'none';
+        computedFromField.value = '';
+    }
+}
+
+// Form validation
+document.getElementById('messageTypeForm').addEventListener('submit', function(e) {
+    const attributes = document.querySelectorAll('.attribute-row');
+    let hasError = false;
+    
+    // Check if we have at least one attribute
+    if (attributes.length === 0) {
+        alert('At least one attribute is required.');
+        e.preventDefault();
+        return;
+    }
+    
+    // Validate each attribute
+    attributes.forEach((attr, index) => {
+        const name = attr.querySelector('input[name="attribute_names"]').value.trim();
+        const width = attr.querySelector('input[name="attribute_widths"]').value.trim();
+        const maxWidth = attr.querySelector('input[name="attribute_max_widths"]').value.trim();
+        const isComputed = attr.querySelector('input[name="attribute_computed"]').checked;
+        const computedFrom = attr.querySelector('input[name="attribute_computed_from"]').value.trim();
+        
+        if (!name) {
+            alert(`Attribute ${index + 1} must have a name.`);
+            hasError = true;
+            return;
+        }
+        
+        if (!width && !maxWidth && !isComputed) {
+            alert(`Attribute "${name}" must have either a width, max width, or be computed.`);
+            hasError = true;
+            return;
+        }
+        
+        if (isComputed && !computedFrom) {
+            alert(`Computed attribute "${name}" must specify which attribute it's computed from.`);
+            hasError = true;
+            return;
+        }
+    });
+    
+    if (hasError) {
+        e.preventDefault();
+    }
+});
+</script>
+{% endblock %}
