@@ -132,7 +132,7 @@ function addAttribute(name = '', width = '1', isMaxWidth = false, description = 
         </td>
         <td>
             <div class="form-check d-flex justify-content-center">
-                <input class="form-check-input" type="checkbox" name="attribute_is_max_width" 
+                <input class="form-check-input" type="checkbox" name="attribute_is_max_width_${attributeCounter}" 
                        value="true" ${isMaxWidth === true || isMaxWidth === 'true' ? 'checked' : ''}>
             </div>
         </td>
@@ -308,7 +308,7 @@ document.getElementById('messageTypeForm').addEventListener('submit', function(e
     attributes.forEach((attr, index) => {
         const name = attr.querySelector('input[name="attribute_names"]').value.trim();
         const width = attr.querySelector('input[name="attribute_widths"]').value.trim();
-        const isMaxWidth = attr.querySelector('input[name="attribute_is_max_width"]').checked;
+        const isMaxWidth = attr.querySelector(`input[name="attribute_is_max_width_${index}"]`).checked;
         const isComputed = attr.querySelector(`input[name="attribute_computed_${index}"]`).checked;
         const computedFrom = attr.querySelector(`input[name="attribute_computed_from_${index}"]`).value.trim();
         

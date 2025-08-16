@@ -68,7 +68,7 @@
       {
         "name": "command",
         "width": 1,
-        "is_max_width": true,
+        "is_max_width": false,
         "description": "Command identifier",
         "default_value": "4e",
         "is_computed": false,
@@ -104,7 +104,7 @@
       {
         "name": "payload",
         "width": 255,
-        "is_max_width": false,
+        "is_max_width": true,
         "description": "",
         "default_value": null,
         "is_computed": false,
@@ -112,7 +112,7 @@
       },
       {
         "name": "end_delimeter",
-        "width": 1,
+        "width": 2,
         "is_max_width": false,
         "description": "",
         "default_value": "0a0a",

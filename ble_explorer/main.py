@@ -169,6 +169,81 @@ def generate_sequence_id() -> str:
         counter += 1
     return f"seq_{counter:03d}"
 
+def validate_attribute_values(values: Dict[str, Any], message_type: MessageType) -> None:
+    """Validate that attribute values meet the constraints defined in the message type."""
+    for attr in message_type.attributes:
+        if attr.name in values:
+            value = values[attr.name]
+            
+            # Convert value to appropriate format for validation
+            if isinstance(value, str):
+                # Handle hex strings
+                if value.startswith('0x'):
+                    try:
+                        value = int(value, 16)
+                    except ValueError:
+                        raise ValueError(f"Invalid hex value '{value}' for attribute '{attr.name}'")
+                elif value.startswith('\\x'):
+                    # Handle escaped hex like \x25
+                    try:
+                        value = int(value[2:], 16)
+                    except ValueError:
+                        raise ValueError(f"Invalid escaped hex value '{value}' for attribute '{attr.name}'")
+                else:
+                    # Try to parse as hex or decimal
+                    try:
+                        value = int(value, 16)
+                    except ValueError:
+                        try:
+                            value = int(value)
+                        except ValueError:
+                            # If it's a string, validate length
+                            if attr.width:
+                                if attr.is_max_width:
+                                    # For max width, ensure string length is within limit
+                                    if len(value.encode('utf-8')) > attr.width:
+                                        raise ValueError(f"String value '{value}' for attribute '{attr.name}' exceeds max width {attr.width} bytes")
+                                else:
+                                    # For fixed width, ensure exact length
+                                    encoded_length = len(value.encode('utf-8'))
+                                    if encoded_length != attr.width:
+                                        raise ValueError(f"String value '{value}' for attribute '{attr.name}' has length {encoded_length} bytes, but fixed width is {attr.width} bytes")
+                            continue  # String validation complete
+            
+            # Validate numeric values
+            if isinstance(value, int) and attr.width:
+                if attr.is_max_width:
+                    # For max width, ensure value fits
+                    max_value = (1 << (attr.width * 8)) - 1
+                    if value > max_value:
+                        raise ValueError(f"Value {value} for attribute '{attr.name}' exceeds max width {attr.width} bytes (max value: {max_value})")
+                    if value < 0:
+                        # Check if negative values are allowed for this width
+                        min_value = -(1 << (attr.width * 8 - 1))
+                        if value < min_value:
+                            raise ValueError(f"Value {value} for attribute '{attr.name}' is below minimum for {attr.width} bytes (min value: {min_value})")
+                else:
+                    # For fixed width, ensure value fits exactly
+                    max_value = (1 << (attr.width * 8)) - 1
+                    if value > max_value:
+                        raise ValueError(f"Value {value} for attribute '{attr.name}' exceeds fixed width {attr.width} bytes (max value: {max_value})")
+                    if value < 0:
+                        # Check if negative values are allowed for this width
+                        min_value = -(1 << (attr.width * 8 - 1))
+                        if value < min_value:
+                            raise ValueError(f"Value {value} for attribute '{attr.name}' is below minimum for {attr.width} bytes (min value: {min_value})")
+            
+            # Validate byte values
+            elif isinstance(value, bytes) and attr.width:
+                if attr.is_max_width:
+                    # For max width, ensure bytes fit
+                    if len(value) > attr.width:
+                        raise ValueError(f"Byte value for attribute '{attr.name}' has length {len(value)} bytes, but max width is {attr.width} bytes")
+                else:
+                    # For fixed width, ensure exact length
+                    if len(value) != attr.width:
+                        raise ValueError(f"Byte value for attribute '{attr.name}' has length {len(value)} bytes, but fixed width is {attr.width} bytes")
+
 def serialize_message(message: Message, message_type: MessageType) -> bytes:
     """Serialize a message to bytes based on its message type definition."""
     result = bytearray()
@@ -200,20 +275,32 @@ def serialize_message(message: Message, message_type: MessageType) -> bytes:
             if attr.width:
                 if isinstance(value, int):
                     if attr.is_max_width:
-                        # For max width, ensure value fits
+                        # For max width, ensure value fits within the max width
                         max_value = (1 << (attr.width * 8)) - 1
                         if value > max_value:
                             raise ValueError(f"Value {value} exceeds max width {attr.width} bytes (max value: {max_value})")
-                        # Convert to bytes with specified width
-                        result.extend(value.to_bytes(attr.width, byteorder='big'))
+                        # For max width, use the minimum bytes needed to represent the value
+                        if value == 0:
+                            # Special case: 0 needs at least 1 byte
+                            min_bytes = 1
+                            result.extend(value.to_bytes(min_bytes, byteorder='big'))
+                        else:
+                            # Calculate minimum bytes needed
+                            min_bytes = (value.bit_length() + 7) // 8
+                            result.extend(value.to_bytes(min_bytes, byteorder='big'))
+                        logger.info(f"Serializing attribute '{attr.name}' with value {value} (int) to {min_bytes} bytes (max width: {attr.width})")
                     else:
                         # Fixed width
+                        logger.info(f"Serializing attribute '{attr.name}' with value {value} (int) to {attr.width} bytes (fixed width)")
                         result.extend(value.to_bytes(attr.width, byteorder='big'))
                 elif isinstance(value, bytes):
                     if attr.is_max_width:
-                        # For max width, truncate if necessary
+                        # For max width, use actual data length (truncate if it exceeds max)
                         if len(value) > attr.width:
                             value = value[:attr.width]
+                            logger.info(f"Serializing attribute '{attr.name}' with value (bytes) to {len(value)} bytes (truncated from max width: {attr.width})")
+                        else:
+                            logger.info(f"Serializing attribute '{attr.name}' with value (bytes) to {len(value)} bytes (max width: {attr.width})")
                         result.extend(value)
                     else:
                         # Fixed width - pad or truncate
@@ -262,7 +349,6 @@ async def create_message_type(
     description: str = Form(""),
     attribute_names: List[str] = Form(...),
     attribute_widths: List[str] = Form(...),
-    attribute_is_max_width: List[str] = Form(default=[]),
     attribute_descriptions: List[str] = Form(...),
     attribute_default_values: List[str] = Form(...),
     attribute_computed: List[str] = Form(default=[]),
@@ -282,7 +368,9 @@ async def create_message_type(
                     pass
             
             # Check if this attribute uses max width
-            if i < len(attribute_is_max_width) and attribute_is_max_width[i] == "true":
+            form_data = await request.form()
+            max_width_key = f"attribute_is_max_width_{i}"
+            if max_width_key in form_data:
                 is_max_width = True
             
             # Check if this attribute is computed by looking for the specific field
@@ -347,7 +435,6 @@ async def update_message_type(
     description: str = Form(""),
     attribute_names: List[str] = Form(...),
     attribute_widths: List[str] = Form(...),
-    attribute_is_max_width: List[str] = Form(default=[]),
     attribute_descriptions: List[str] = Form(...),
     attribute_default_values: List[str] = Form(...),
     attribute_computed: List[str] = Form(default=[]),
@@ -371,7 +458,9 @@ async def update_message_type(
                     pass
             
             # Check if this attribute uses max width
-            if i < len(attribute_is_max_width) and attribute_is_max_width[i] == "true":
+            form_data = await request.form()
+            max_width_key = f"attribute_is_max_width_{i}"
+            if max_width_key in form_data:
                 is_max_width = True
             
             # Check if this attribute is computed by looking for the specific field
@@ -474,6 +563,12 @@ async def create_message(
             elif attr.default_value:
                 values[attr.name] = attr.default_value
     
+    # Validate attribute values
+    try:
+        validate_attribute_values(values, message_type)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=f"Validation error: {e}")
+
     message = Message(
         id=generate_message_id(),
         message_type_id=message_type_id,
@@ -508,6 +603,7 @@ async def view_message(request: Request, message_id: str):
         hex_string = serialized_bytes.hex()
         escaped_string = ''.join([f'\\x{b:02x}' for b in serialized_bytes])
     except Exception as e:
+        logger.error(f"Serialization error for message_id={message_id}: {str(e)}", exc_info=True)
         serialized_bytes = None
         hex_string = f"Error: {str(e)}"
         escaped_string = f"Error: {str(e)}"
@@ -572,6 +668,12 @@ async def update_message(
             elif attr.default_value:
                 values[attr.name] = attr.default_value
     
+    # Validate attribute values
+    try:
+        validate_attribute_values(values, message_type)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=f"Validation error: {e}")
+
     messages[message_id] = Message(
         id=message_id,
         message_type_id=message_type_id,
@@ -825,7 +927,10 @@ async def serialize_message_api(message_id: str):
             "length": len(serialized_bytes)
         }
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Serialization error: {str(e)}")
+        import traceback
+        tb_str = traceback.format_exc()
+        logger.error(f"Serialization error for message_id={message_id}: {str(e)}\n{tb_str}")
+        raise HTTPException(status_code=400, detail=f"Serialization error: {str(e)}\n{tb_str}")
 
 @app.get("/api/message-sequences")
 async def get_message_sequences():

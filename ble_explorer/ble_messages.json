@@ -24,7 +24,7 @@
       "header": "00010030",
       "length": "00000101",
       "start_delimeter": "0a0a",
-      "payload": "54657374206d65737361676520310a0a",
+      "payload": "54657374206d6573736167652031",
       "end_delimeter": "0a0a"
     },
     "created_at": null

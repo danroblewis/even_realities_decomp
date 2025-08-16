@@ -311,7 +311,12 @@ function updateCommunicationLog(logData) {
             row.className = 'table-success'; // Light green for received messages
         }
         
-        const time = new Date(msg.timestamp).toLocaleTimeString();
+        const time = new Date(msg.timestamp).toLocaleTimeString('en-GB', { 
+            hour12: false, 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit' 
+        });
         const messageName = msg.message_name || msg.sequence_name || 'Unknown';
         const data = msg.hex_data || 'N/A';
         const response = msg.response_to ? 
