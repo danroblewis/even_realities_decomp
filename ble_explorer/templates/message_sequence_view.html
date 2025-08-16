@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block title %}{{ sequence.name }} - BLE UART Protocol Testing Harness{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-play-circle me-2"></i>
+                {{ sequence.name }}
+            </h1>
+            <div>
+                <a href="/message-sequences/{{ sequence.id }}/edit" class="btn btn-primary me-2">
+                    <i class="fas fa-edit me-2"></i>Edit
+                </a>
+                <a href="/message-sequences" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Sequences
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sequence Details -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-info-circle me-2"></i>Sequence Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">ID:</dt>
+                            <dd class="col-sm-8"><span class="badge bg-secondary">{{ sequence.id }}</span></dd>
+                            
+                            <dt class="col-sm-4">Name:</dt>
+                            <dd class="col-sm-8">{{ sequence.name }}</dd>
+                            
+                            <dt class="col-sm-4">Description:</dt>
+                            <dd class="col-sm-8">
+                                {% if sequence.description %}
+                                    {{ sequence.description }}
+                                {% else %}
+                                    <span class="text-muted">No description</span>
+                                {% endif %}
+                            </dd>
+                            
+                            <dt class="col-sm-4">Total Duration:</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-success">{{ total_duration }}ms</span>
+                                <small class="text-muted">({{ "%.1f"|format(total_duration / 1000.0) }}s)</small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Sequence Messages -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list me-2"></i>Messages in Sequence</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Message</th>
+                                        <th>Delay</th>
+                                        <th>Serialized</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for msg_data in sequence_messages %}
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-secondary">{{ loop.index }}</span>
+                                        </td>
+                                        <td>
+                                            <strong>{{ msg_data.message.name }}</strong>
+                                            {% if msg_data.message_type %}
+                                                <br><small class="text-muted">{{ msg_data.message_type.name }}</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info">{{ msg_data.delay_ms }}ms</span>
+                                        </td>
+                                        <td>
+                                            {% if msg_data.serialized_bytes %}
+                                                <code class="small">{{ msg_data.hex_string[:20] }}{% if msg_data.hex_string|length > 20 %}...{% endif %}</code>
+                                            {% else %}
+                                                <span class="text-danger small">Error</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sequence Timeline -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-clock me-2"></i>Sequence Timeline</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            {% set current_time = 0 %}
+                            {% for msg_data in sequence_messages %}
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <span class="badge bg-primary">{{ loop.index }}</span>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">{{ msg_data.message.name }}</h6>
+                                            {% if msg_data.message_type %}
+                                                <small class="text-muted">{{ msg_data.message_type.name }}</small>
+                                            {% endif %}
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-info">{{ msg_data.delay_ms }}ms</span>
+                                            <br><small class="text-muted">{{ current_time }}ms</small>
+                                        </div>
+                                    </div>
+                                    {% if msg_data.serialized_bytes %}
+                                        <div class="mt-2">
+                                            <code class="small bg-light p-1 rounded">{{ msg_data.hex_string }}</code>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% set current_time = current_time + msg_data.delay_ms %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete Sequence Output -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-code me-2"></i>Complete Sequence</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Total Bytes:</strong></label>
+                            {% set total_bytes = 0 %}
+                            {% for msg_data in sequence_messages %}
+                                {% if msg_data.serialized_bytes %}
+                                    {% set total_bytes = total_bytes + msg_data.serialized_bytes|length %}
+                                {% endif %}
+                            {% endfor %}
+                            <span class="badge bg-success">{{ total_bytes }} bytes</span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Sequence Hex:</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control font-monospace small" 
+                                       value="{% for msg_data in sequence_messages %}{{ msg_data.hex_string }}{% endfor %}" readonly>
+                                <button class="btn btn-outline-secondary" type="button" 
+                                        onclick="copyToClipboard('{% for msg_data in sequence_messages %}{{ msg_data.hex_string }}{% endfor %}')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -25px;
+    top: 0;
+    background: white;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #007bff;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Show a temporary success message
+        const button = event.target.closest('button');
+        const originalIcon = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.classList.remove('btn-outline-secondary');
+        button.classList.add('btn-success');
+        
+        setTimeout(() => {
+            button.innerHTML = originalIcon;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-outline-secondary');
+        }, 1000);
+    }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+        alert('Failed to copy to clipboard');
+    });
+}
+</script>
+{% endblock %}

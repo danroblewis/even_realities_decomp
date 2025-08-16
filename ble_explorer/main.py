@@ -57,6 +57,18 @@ class MessageCreate(BaseModel):
     description: Optional[str] = ""
     values: Dict[str, Any]
 
+class MessageSequence(BaseModel):
+    id: str
+    name: str
+    description: Optional[str] = ""
+    messages: List[Dict[str, Any]]  # List of {message_id: str, delay_ms: int}
+    created_at: Optional[str] = None
+
+class MessageSequenceCreate(BaseModel):
+    name: str
+    description: Optional[str] = ""
+    messages: List[Dict[str, Any]]
+
 # Data storage functions
 def load_data() -> Dict[str, MessageType]:
     if os.path.exists(DATA_FILE):
@@ -88,6 +100,26 @@ def generate_message_id() -> str:
     while f"msg_instance_{counter:03d}" in messages:
         counter += 1
     return f"msg_instance_{counter:03d}"
+
+def load_message_sequences() -> Dict[str, MessageSequence]:
+    sequences_file = "ble_message_sequences.json"
+    if os.path.exists(sequences_file):
+        with open(sequences_file, 'r') as f:
+            data = json.load(f)
+            return {k: MessageSequence(**v) for k, v in data.items()}
+    return {}
+
+def save_message_sequences(sequences: Dict[str, MessageSequence]):
+    sequences_file = "ble_message_sequences.json"
+    with open(sequences_file, 'w') as f:
+        json.dump({k: v.dict() for k, v in sequences.items()}, f, indent=2)
+
+def generate_sequence_id() -> str:
+    sequences = load_message_sequences()
+    counter = len(sequences) + 1
+    while f"seq_{counter:03d}" in sequences:
+        counter += 1
+    return f"seq_{counter:03d}"
 
 def serialize_message(message: Message, message_type: MessageType) -> bytes:
     """Serialize a message to bytes based on its message type definition."""
@@ -506,6 +538,187 @@ async def delete_message(message_id: str):
     
     return RedirectResponse(url="/messages", status_code=303)
 
+# MessageSequence routes
+@app.get("/message-sequences", response_class=HTMLResponse)
+async def list_message_sequences(request: Request):
+    sequences = load_message_sequences()
+    messages = load_messages()
+    message_types = load_data()
+    return templates.TemplateResponse("message_sequences.html", {
+        "request": request, 
+        "sequences": sequences.values(),
+        "messages": {k: v.dict() for k, v in messages.items()},
+        "message_types": {k: v.dict() for k, v in message_types.items()}
+    })
+
+@app.get("/message-sequences/new", response_class=HTMLResponse)
+async def new_message_sequence_form(request: Request):
+    messages = load_messages()
+    message_types = load_data()
+    return templates.TemplateResponse("message_sequence_form.html", {
+        "request": request, 
+        "sequence": None,
+        "messages": {k: v.dict() for k, v in messages.items()},
+        "message_types": {k: v.dict() for k, v in message_types.items()}
+    })
+
+@app.post("/message-sequences", response_class=HTMLResponse)
+async def create_message_sequence(
+    request: Request,
+    name: str = Form(...),
+    description: str = Form(""),
+    message_ids: List[str] = Form(...),
+    delays: List[str] = Form(...)
+):
+    # Parse message sequence data
+    messages = []
+    for i, message_id in enumerate(message_ids):
+        if message_id.strip():
+            delay = 1000  # Default 1 second
+            if i < len(delays) and delays[i].strip():
+                try:
+                    delay = int(delays[i])
+                except ValueError:
+                    delay = 1000
+            
+            messages.append({
+                "message_id": message_id.strip(),
+                "delay_ms": delay
+            })
+    
+    sequence = MessageSequence(
+        id=generate_sequence_id(),
+        name=name,
+        description=description,
+        messages=messages
+    )
+    
+    sequences = load_message_sequences()
+    sequences[sequence.id] = sequence
+    save_message_sequences(sequences)
+    
+    return RedirectResponse(url="/message-sequences", status_code=303)
+
+@app.get("/message-sequences/{sequence_id}", response_class=HTMLResponse)
+async def view_message_sequence(request: Request, sequence_id: str):
+    sequences = load_message_sequences()
+    messages = load_messages()
+    message_types = load_data()
+    
+    if sequence_id not in sequences:
+        raise HTTPException(status_code=404, detail="Message sequence not found")
+    
+    sequence = sequences[sequence_id]
+    
+    # Get full message details for each message in the sequence
+    sequence_messages = []
+    total_duration = 0
+    
+    for msg_info in sequence.messages:
+        message_id = msg_info["message_id"]
+        delay_ms = msg_info["delay_ms"]
+        
+        if message_id in messages:
+            message = messages[message_id]
+            message_type = message_types.get(message.message_type_id)
+            
+            # Serialize the message
+            try:
+                serialized_bytes = serialize_message(message, message_type)
+                hex_string = serialized_bytes.hex()
+                escaped_string = ''.join([f'\\x{b:02x}' for b in serialized_bytes])
+            except Exception as e:
+                hex_string = f"Error: {str(e)}"
+                escaped_string = f"Error: {str(e)}"
+                serialized_bytes = None
+            
+            sequence_messages.append({
+                "message": message,
+                "message_type": message_type,
+                "delay_ms": delay_ms,
+                "hex_string": hex_string,
+                "escaped_string": escaped_string,
+                "serialized_bytes": serialized_bytes
+            })
+            
+            total_duration += delay_ms
+    
+    return templates.TemplateResponse("message_sequence_view.html", {
+        "request": request,
+        "sequence": sequence.dict(),
+        "sequence_messages": sequence_messages,
+        "total_duration": total_duration
+    })
+
+@app.get("/message-sequences/{sequence_id}/edit", response_class=HTMLResponse)
+async def edit_message_sequence_form(request: Request, sequence_id: str):
+    sequences = load_message_sequences()
+    messages = load_messages()
+    message_types = load_data()
+    
+    if sequence_id not in sequences:
+        raise HTTPException(status_code=404, detail="Message sequence not found")
+    
+    sequence = sequences[sequence_id]
+    
+    return templates.TemplateResponse("message_sequence_form.html", {
+        "request": request,
+        "sequence": sequence,
+        "messages": {k: v.dict() for k, v in messages.items()},
+        "message_types": {k: v.dict() for k, v in message_types.items()}
+    })
+
+@app.post("/message-sequences/{sequence_id}", response_class=HTMLResponse)
+async def update_message_sequence(
+    request: Request,
+    sequence_id: str,
+    name: str = Form(...),
+    description: str = Form(""),
+    message_ids: List[str] = Form(...),
+    delays: List[str] = Form(...)
+):
+    sequences = load_message_sequences()
+    
+    if sequence_id not in sequences:
+        raise HTTPException(status_code=404, detail="Message sequence not found")
+    
+    # Parse message sequence data
+    messages = []
+    for i, message_id in enumerate(message_ids):
+        if message_id.strip():
+            delay = 1000  # Default 1 second
+            if i < len(delays) and delays[i].strip():
+                try:
+                    delay = int(delays[i])
+                except ValueError:
+                    delay = 1000
+            
+            messages.append({
+                "message_id": message_id.strip(),
+                "delay_ms": delay
+            })
+    
+    sequences[sequence_id] = MessageSequence(
+        id=sequence_id,
+        name=name,
+        description=description,
+        messages=messages
+    )
+    save_message_sequences(sequences)
+    
+    return RedirectResponse(url="/message-sequences", status_code=303)
+
+@app.post("/message-sequences/{sequence_id}/delete")
+async def delete_message_sequence(sequence_id: str):
+    sequences = load_message_sequences()
+    if sequence_id not in sequences:
+        raise HTTPException(status_code=404, detail="Message sequence not found")
+    
+    del sequences[sequence_id]
+    save_message_sequences(sequences)
+    
+    return RedirectResponse(url="/message-sequences", status_code=303)
+
 # API endpoints for programmatic access
 @app.get("/api/message-types")
 async def get_message_types():
@@ -553,6 +766,62 @@ async def serialize_message_api(message_id: str):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Serialization error: {str(e)}")
+
+@app.get("/api/message-sequences")
+async def get_message_sequences():
+    return load_message_sequences()
+
+@app.get("/api/message-sequences/{sequence_id}")
+async def get_message_sequence(sequence_id: str):
+    sequences = load_message_sequences()
+    if sequence_id not in sequences:
+        raise HTTPException(status_code=404, detail="Message sequence not found")
+    return sequences[sequence_id]
+
+@app.get("/api/message-sequences/{sequence_id}/serialize")
+async def serialize_message_sequence_api(sequence_id: str):
+    sequences = load_message_sequences()
+    messages = load_messages()
+    message_types = load_data()
+    
+    if sequence_id not in sequences:
+        raise HTTPException(status_code=404, detail="Message sequence not found")
+    
+    sequence = sequences[sequence_id]
+    result = []
+    
+    for msg_info in sequence.messages:
+        message_id = msg_info["message_id"]
+        delay_ms = msg_info["delay_ms"]
+        
+        if message_id in messages:
+            message = messages[message_id]
+            message_type = message_types.get(message.message_type_id)
+            
+            try:
+                serialized_bytes = serialize_message(message, message_type)
+                result.append({
+                    "message_id": message_id,
+                    "message_name": message.name,
+                    "delay_ms": delay_ms,
+                    "hex": serialized_bytes.hex(),
+                    "escaped": ''.join([f'\\x{b:02x}' for b in serialized_bytes]),
+                    "length": len(serialized_bytes)
+                })
+            except Exception as e:
+                result.append({
+                    "message_id": message_id,
+                    "message_name": message.name,
+                    "delay_ms": delay_ms,
+                    "error": str(e)
+                })
+    
+    return {
+        "sequence_id": sequence_id,
+        "sequence_name": sequence.name,
+        "total_duration_ms": sum(msg["delay_ms"] for msg in sequence.messages),
+        "messages": result
+    }
 
 if __name__ == "__main__":
     import uvicorn
