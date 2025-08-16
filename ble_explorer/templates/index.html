@@ -48,9 +48,11 @@
                                         <span class="badge bg-info" title="{{ attr.description or 'No description' }}{% if attr.default_value %} - Default: {{ attr.default_value }}{% endif %}">
                                             {{ attr.name }}
                                             {% if attr.width %}
-                                                ({{ attr.width }})
-                                            {% elif attr.max_width %}
-                                                (≤{{ attr.max_width }})
+                                                {% if attr.is_max_width %}
+                                                    (≤{{ attr.width }})
+                                                {% else %}
+                                                    ({{ attr.width }})
+                                                {% endif %}
                                             {% endif %}
                                             {% if attr.default_value %}
                                                 <i class="fas fa-arrow-down ms-1" title="Default: {{ attr.default_value }}"></i>

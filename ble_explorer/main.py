@@ -21,7 +21,7 @@ DATA_FILE = "ble_message_types.json"
 class Attribute(BaseModel):
     name: str
     width: Optional[int] = None
-    max_width: Optional[int] = None
+    is_max_width: bool = False  # True if width represents max width, False if fixed width
     description: Optional[str] = ""
     default_value: Optional[str] = None
     is_computed: bool = False
@@ -85,7 +85,7 @@ async def create_message_type(
     description: str = Form(""),
     attribute_names: List[str] = Form(...),
     attribute_widths: List[str] = Form(...),
-    attribute_max_widths: List[str] = Form(...),
+    attribute_is_max_width: List[str] = Form(default=[]),
     attribute_descriptions: List[str] = Form(...),
     attribute_default_values: List[str] = Form(...),
     attribute_computed: List[str] = Form(default=[]),
@@ -96,19 +96,17 @@ async def create_message_type(
     for i, attr_name in enumerate(attribute_names):
         if attr_name.strip():
             width = None
-            max_width = None
+            is_max_width = False
             
             if attribute_widths[i].strip():
                 try:
                     width = int(attribute_widths[i])
                 except ValueError:
                     pass
-                    
-            if attribute_max_widths[i].strip():
-                try:
-                    max_width = int(attribute_max_widths[i])
-                except ValueError:
-                    pass
+            
+            # Check if this attribute uses max width
+            if i < len(attribute_is_max_width) and attribute_is_max_width[i] == "true":
+                is_max_width = True
             
             # Check if this attribute is computed by looking for the specific field
             is_computed = False
@@ -127,7 +125,7 @@ async def create_message_type(
             attributes.append(Attribute(
                 name=attr_name.strip(),
                 width=width,
-                max_width=max_width,
+                is_max_width=is_max_width,
                 description=attribute_descriptions[i].strip(),
                 default_value=attribute_default_values[i].strip() if attribute_default_values[i].strip() else None,
                 is_computed=is_computed,
@@ -136,9 +134,9 @@ async def create_message_type(
     
     # Ensure first attribute is always "command"
     if not attributes:
-        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
+        attributes.insert(0, Attribute(name="command", width=1, is_max_width=False, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
     elif attributes[0].name != "command":
-        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
+        attributes.insert(0, Attribute(name="command", width=1, is_max_width=False, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
     
     message_type = MessageType(
         id=generate_id(),
@@ -172,7 +170,7 @@ async def update_message_type(
     description: str = Form(""),
     attribute_names: List[str] = Form(...),
     attribute_widths: List[str] = Form(...),
-    attribute_max_widths: List[str] = Form(...),
+    attribute_is_max_width: List[str] = Form(default=[]),
     attribute_descriptions: List[str] = Form(...),
     attribute_default_values: List[str] = Form(...),
     attribute_computed: List[str] = Form(default=[]),
@@ -187,19 +185,17 @@ async def update_message_type(
     for i, attr_name in enumerate(attribute_names):
         if attr_name.strip():
             width = None
-            max_width = None
+            is_max_width = False
             
             if attribute_widths[i].strip():
                 try:
                     width = int(attribute_widths[i])
                 except ValueError:
                     pass
-                    
-            if attribute_max_widths[i].strip():
-                try:
-                    max_width = int(attribute_max_widths[i])
-                except ValueError:
-                    pass
+            
+            # Check if this attribute uses max width
+            if i < len(attribute_is_max_width) and attribute_is_max_width[i] == "true":
+                is_max_width = True
             
             # Check if this attribute is computed by looking for the specific field
             is_computed = False
@@ -218,7 +214,7 @@ async def update_message_type(
             attributes.append(Attribute(
                 name=attr_name.strip(),
                 width=width,
-                max_width=max_width,
+                is_max_width=is_max_width,
                 description=attribute_descriptions[i].strip(),
                 default_value=attribute_default_values[i].strip() if attribute_default_values[i].strip() else None,
                 is_computed=is_computed,
@@ -227,9 +223,9 @@ async def update_message_type(
     
     # Ensure first attribute is always "command"
     if not attributes:
-        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
+        attributes.insert(0, Attribute(name="command", width=1, is_max_width=False, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
     elif attributes[0].name != "command":
-        attributes.insert(0, Attribute(name="command", width=1, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
+        attributes.insert(0, Attribute(name="command", width=1, is_max_width=False, description="Command identifier", default_value=None, is_computed=False, computed_from=None))
     
     data[message_type_id] = MessageType(
         id=message_type_id,
