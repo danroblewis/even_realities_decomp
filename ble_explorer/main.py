@@ -17,6 +17,9 @@ logger = logging.getLogger(__name__)
 # Import BLE manager after logging setup
 from ble_manager import ble_manager
 
+# Import parsing functions from dedicated module
+from ble_parser import find_matching_message_types, deserialize_packet, MessageType, Attribute
+
 app = FastAPI(title="BLE UART Protocol Testing Harness", version="1.0.0")
 
 @app.on_event("startup")
@@ -312,7 +315,7 @@ def serialize_message(message: Message, message_type: MessageType) -> bytes:
     
     return bytes(result)
 
-def find_matching_message_types(command_code: str, packet_length: int, packet_bytes: bytes = None) -> List[MessageType]:
+# def find_matching_message_types(command_code: str, packet_length: int, packet_bytes: bytes = None) -> List[MessageType]:
     """Find message types that match the given command code and packet length."""
     data = load_data()
     matching_types = []
@@ -432,7 +435,7 @@ def find_matching_message_types(command_code: str, packet_length: int, packet_by
     # Return just the message types
     return [item[0] for item in matching_types]
 
-def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[str, Any]:
+# def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[str, Any]:
     """Deserialize a packet according to a message type definition."""
     result = {}
     offset = 0

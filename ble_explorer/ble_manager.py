@@ -145,15 +145,10 @@ class BLEManager:
     async def _parse_packet(self, hex_data: str) -> Optional[Dict[str, Any]]:
         """Parse a hex packet using the main application's parsing logic"""
         try:
-            # Try to parse locally first
-            local_result = self._parse_packet_local(hex_data)
-            if local_result:
-                return local_result
-            
-            # If local parsing fails, try to call the main app's parsing
+            # Try the main parser first (using message type definitions)
             try:
-                # Import main app functions
-                from main import find_matching_message_types, deserialize_packet
+                # Import parsing functions from our dedicated parser module
+                from ble_parser import find_matching_message_types, deserialize_packet
                 
                 # Convert hex to bytes
                 packet_bytes = bytes.fromhex(hex_data)
@@ -165,30 +160,31 @@ class BLEManager:
                 
                 # Find matching message types
                 matching_types = find_matching_message_types(command_code, len(packet_bytes), packet_bytes)
-                if not matching_types:
-                    return None
-                
-                # Get the best match
-                best_match = matching_types[0]
-                
-                # Deserialize the packet
-                parsed_data = deserialize_packet(packet_bytes, best_match)
-                
-                return {
-                    'parsed_data': parsed_data,
-                    'message_type': {
-                        'id': best_match.id,
-                        'name': best_match.name,
-                        'description': best_match.description
+                if matching_types:
+                    # Get the best match
+                    best_match = matching_types[0]
+                    
+                    # Deserialize the packet
+                    parsed_data = deserialize_packet(packet_bytes, best_match)
+                    
+                    return {
+                        'parsed_data': parsed_data,
+                        'message_type': {
+                            'id': best_match.id,
+                            'name': best_match.name,
+                            'description': best_match.description
+                        }
                     }
-                }
                 
             except ImportError:
                 # If main app functions aren't available, fall back to local parsing
-                return self._parse_packet_local(hex_data)
+                pass
+            
+            # If main parsing fails or no matching types found, fall back to local parsing
+            return self._parse_packet_local(hex_data)
             
         except Exception as e:
-            logger.error(f"Local packet parsing failed for {hex_data}: {e}")
+            logger.error(f"Packet parsing failed for {hex_data}: {e}")
             return None
     
     async def ensure_message_parsed(self, message: BLEMessage) -> bool:
@@ -220,202 +216,8 @@ class BLEManager:
             # Extract command code
             command_code = f"{packet_bytes[0]:02x}"
             
-            # Basic parsing based on known command codes
-            if command_code == "25":
-                # Heartbeat command
-                if len(packet_bytes) >= 6:
-                    return {
-                        "parsed_data": {
-                            "command": f"0x{command_code}",
-                            "unknown_1": f"0x{packet_bytes[1]:02x}",
-                            "unknown_2": f"0x{packet_bytes[2]:02x}",
-                            "seq_1": f"0x{packet_bytes[3]:02x}",
-                            "constant": f"0x{packet_bytes[4]:02x}",
-                            "seq_2": f"0x{packet_bytes[5]:02x}"
-                        },
-                        "message_type": {
-                            "id": "heartbeat",
-                            "name": "Heartbeat",
-                            "description": "Heartbeat message"
-                        }
-                    }
-            elif command_code == "4e":
-                # Text command - check if it matches text_4e pattern
-                if len(packet_bytes) >= 11:  # Minimum length for text_4e
-                    # Check if it looks like text_4e format
-                    if len(packet_bytes) >= 11:
-                        # Parse as text_4e: command(1) + length(2) + flags(1) + width(2) + height(2) + xpos(2) + ypos(2) + text_data(variable)
-                        length_bytes = packet_bytes[1:3]
-                        flags = packet_bytes[3]
-                        width_bytes = packet_bytes[4:6]
-                        height_bytes = packet_bytes[6:8]
-                        xpos_bytes = packet_bytes[8:10]
-                        ypos_bytes = packet_bytes[10:12]
-                        text_data = packet_bytes[12:] if len(packet_bytes) > 12 else b''
-                        
-                        # Convert to readable values
-                        length = int.from_bytes(length_bytes, byteorder='big')
-                        width = int.from_bytes(width_bytes, byteorder='big')
-                        height = int.from_bytes(height_bytes, byteorder='big')
-                        xpos = int.from_bytes(xpos_bytes, byteorder='big')
-                        ypos = int.from_bytes(ypos_bytes, byteorder='big')
-                        
-                        # Try to decode text data
-                        try:
-                            text_str = text_data.decode('utf-8').rstrip('\x00')
-                        except:
-                            text_str = text_data.hex()
-                        
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "length": f"0x{length:04x}",
-                                "flags": f"0x{flags:02x}",
-                                "width": f"0x{width:04x}",
-                                "height": f"0x{height:04x}",
-                                "xpos": f"0x{xpos:04x}",
-                                "ypos": f"0x{ypos:04x}",
-                                "text_data": text_str
-                            },
-                            "message_type": {
-                                "id": "text_4e",
-                                "name": "Text Display",
-                                "description": "Text display command with positioning"
-                            }
-                        }
-                    else:
-                        # Fallback to basic text command parsing
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "data": packet_bytes[1:].hex()
-                            },
-                            "message_type": {
-                                "id": "text_command",
-                                "name": "Text Command",
-                                "description": "Text display command"
-                            }
-                        }
-            elif command_code == "18":
-                # Clear screen command
-                if len(packet_bytes) >= 4:
-                    length_bytes = packet_bytes[1:3]
-                    data = packet_bytes[3]
-                    length = int.from_bytes(length_bytes, byteorder='big')
-                    
-                    return {
-                        "parsed_data": {
-                            "command": f"0x{command_code}",
-                            "length": f"0x{length:04x}",
-                            "data": f"0x{data:02x}"
-                        },
-                        "message_type": {
-                            "id": "clear_screen",
-                            "name": "Clear Screen",
-                            "description": "Clear screen command"
-                        }
-                    }
-                elif len(packet_bytes) >= 3:
-                    # Handle case where data field might be missing
-                    length_bytes = packet_bytes[1:3]
-                    length = int.from_bytes(length_bytes, byteorder='big')
-                    
-                    return {
-                        "parsed_data": {
-                            "command": f"0x{command_code}",
-                            "length": f"0x{length:04x}"
-                        },
-                        "message_type": {
-                            "id": "clear_screen",
-                            "name": "Clear Screen",
-                            "description": "Clear screen command (partial)"
-                        }
-                    }
-            elif command_code == "f5":
-                # F5 notification messages - check for specific subcommand values
-                if len(packet_bytes) >= 2:
-                    subcommand_value = packet_bytes[1]
-                    
-                    # Map specific subcommand values to message types
-                    if subcommand_value == 0x09:
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "subcommand": f"0x{subcommand_value:02x}",
-                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
-                            },
-                            "message_type": {
-                                "id": "charging_status",
-                                "name": "Charging Status",
-                                "description": "Charging status notification"
-                            }
-                        }
-                    elif subcommand_value == 0x11:
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "subcommand": f"0x{subcommand_value:02x}",
-                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
-                            },
-                            "message_type": {
-                                "id": "ble_paired_success",
-                                "name": "BLE Paired Success",
-                                "description": "BLE paired success notification"
-                            }
-                        }
-                    elif subcommand_value == 0x1e:
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "subcommand": f"0x{subcommand_value:02x}",
-                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
-                            },
-                            "message_type": {
-                                "id": "open_dashboard",
-                                "name": "Open Dashboard",
-                                "description": "Open dashboard notification"
-                            }
-                        }
-                    elif subcommand_value == 0x02:
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "subcommand": f"0x{subcommand_value:02x}",
-                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
-                            },
-                            "message_type": {
-                                "id": "head_up",
-                                "name": "Head Up",
-                                "description": "Head up notification"
-                            }
-                        }
-                    elif subcommand_value == 0x03:
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "subcommand": f"0x{subcommand_value:02x}",
-                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
-                            },
-                            "message_type": {
-                                "id": "head_down",
-                                "name": "Head Down",
-                                "description": "Head down notification"
-                            }
-                        }
-                    else:
-                        # Generic F5 message for unknown subcommand values
-                        return {
-                            "parsed_data": {
-                                "command": f"0x{command_code}",
-                                "data": f"0x{subcommand_value:02x}",  # This is actually a subcommand
-                                "padding": packet_bytes[2:].hex() if len(packet_bytes) > 2 else ""
-                            },
-                            "message_type": {
-                                "id": "f5_notification",
-                                "name": f"F5 Notification (0x{subcommand_value:02x})",
-                                "description": f"F5 notification with subcommand value 0x{subcommand_value:02x}"
-                            }
-                        }
+            # This is a minimal fallback parser - most parsing should be done by the main parser
+            # Only handle a few basic cases that might not be in the message type definitions
             
             # Generic parsing for unknown commands
             return {

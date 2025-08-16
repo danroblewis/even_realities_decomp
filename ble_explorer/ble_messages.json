@@ -71,5 +71,385 @@
       "data": "00"
     },
     "created_at": null
+  },
+  "msg_instance_007": {
+    "id": "msg_instance_007",
+    "message_type_id": "msg_030",
+    "name": "get_brightness",
+    "description": "Get device brightness setting",
+    "values": {
+      "command": "29",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_008": {
+    "id": "msg_instance_008",
+    "message_type_id": "msg_031",
+    "name": "get_anti_shake",
+    "description": "Get anti-shake enable status",
+    "values": {
+      "command": "2a",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_009": {
+    "id": "msg_instance_009",
+    "message_type_id": "msg_032",
+    "name": "get_display_mode",
+    "description": "Get display mode setting",
+    "values": {
+      "command": "2b",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_010": {
+    "id": "msg_instance_010",
+    "message_type_id": "msg_033",
+    "name": "get_device_info_android",
+    "description": "Get device info for Android device",
+    "values": {
+      "command": "2c",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_011": {
+    "id": "msg_instance_011",
+    "message_type_id": "msg_033",
+    "name": "get_device_info_ios",
+    "description": "Get device info for iOS device",
+    "values": {
+      "command": "2c",
+      "length": "0001",
+      "data": "02"
+    },
+    "created_at": null
+  },
+  "msg_instance_012": {
+    "id": "msg_instance_012",
+    "message_type_id": "msg_034",
+    "name": "get_mn_s_mac",
+    "description": "Get master and slave MAC addresses",
+    "values": {
+      "command": "2d",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_012": {
+    "id": "msg_instance_012",
+    "message_type_id": "msg_034",
+    "name": "get_mn_s_mac",
+    "description": "Get master and slave MAC addresses",
+    "values": {
+      "command": "32",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_014": {
+    "id": "msg_instance_014",
+    "message_type_id": "msg_036",
+    "name": "get_glasses_sn",
+    "description": "Get glasses serial number",
+    "values": {
+      "command": "33",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_015": {
+    "id": "msg_instance_015",
+    "message_type_id": "msg_037",
+    "name": "get_device_sn",
+    "description": "Get device serial number",
+    "values": {
+      "command": "34",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_016": {
+    "id": "msg_instance_016",
+    "message_type_id": "msg_038",
+    "name": "get_esb_channel",
+    "description": "Get ESB channel setting",
+    "values": {
+      "command": "35",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_017": {
+    "id": "msg_instance_017",
+    "message_type_id": "msg_039",
+    "name": "get_system_status",
+    "description": "Get system status",
+    "values": {
+      "command": "39",
+      "length": "0002",
+      "data": "0001"
+    },
+    "created_at": null
+  },
+  "msg_instance_018": {
+    "id": "msg_instance_018",
+    "message_type_id": "msg_040",
+    "name": "get_raster_config",
+    "description": "Get raster configuration",
+    "values": {
+      "command": "3b",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_019": {
+    "id": "msg_instance_019",
+    "message_type_id": "msg_041",
+    "name": "get_message_mode",
+    "description": "Get message mode setting",
+    "values": {
+      "command": "3c",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_020": {
+    "id": "msg_instance_020",
+    "message_type_id": "msg_042",
+    "name": "get_burial_point_data",
+    "description": "Get burial point data",
+    "values": {
+      "command": "3e",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_021": {
+    "id": "msg_instance_021",
+    "message_type_id": "msg_043",
+    "name": "put_brightness_medium",
+    "description": "Example of setting medium brightness level",
+    "values": {
+      "command": "01",
+      "length": "0002",
+      "brightness_level": "80"
+    },
+    "created_at": null
+  },
+  "msg_instance_022": {
+    "id": "msg_instance_022",
+    "message_type_id": "msg_043",
+    "name": "put_brightness_high",
+    "description": "Example of setting high brightness level",
+    "values": {
+      "command": "01",
+      "length": "0002",
+      "brightness_level": "ff"
+    },
+    "created_at": null
+  },
+  "msg_instance_023": {
+    "id": "msg_instance_023",
+    "message_type_id": "msg_044",
+    "name": "put_anti_shake_enable",
+    "description": "Example of enabling anti-shake",
+    "values": {
+      "command": "02",
+      "length": "0002",
+      "enable": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_024": {
+    "id": "msg_instance_024",
+    "message_type_id": "msg_044",
+    "name": "put_anti_shake_disable",
+    "description": "Example of disabling anti-shake",
+    "values": {
+      "command": "02",
+      "length": "0002",
+      "enable": "00"
+    },
+    "created_at": null
+  },
+  "msg_instance_025": {
+    "id": "msg_instance_025",
+    "message_type_id": "msg_045",
+    "name": "put_display_mode_normal",
+    "description": "Example of setting normal display mode",
+    "values": {
+      "command": "03",
+      "length": "0002",
+      "display_mode": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_026": {
+    "id": "msg_instance_026",
+    "message_type_id": "msg_046",
+    "name": "put_wakeup_angle",
+    "description": "Example of setting wakeup angle to 100 degrees with 10 degree offset",
+    "values": {
+      "command": "06",
+      "length": "0005",
+      "action_id": "03",
+      "angle": "0064",
+      "offset": "000a"
+    },
+    "created_at": null
+  },
+  "msg_instance_027": {
+    "id": "msg_instance_027",
+    "message_type_id": "msg_047",
+    "name": "put_schedule_task",
+    "description": "Example of setting schedule task",
+    "values": {
+      "command": "06",
+      "length": "0009",
+      "action_id": "03",
+      "schedule_data": "010000000000"
+    },
+    "created_at": null
+  },
+  "msg_instance_028": {
+    "id": "msg_instance_028",
+    "message_type_id": "msg_048",
+    "name": "put_stocks_info",
+    "description": "Example of setting stocks information",
+    "values": {
+      "command": "06",
+      "length": "0009",
+      "action_id": "04",
+      "stocks_data": "010000000000"
+    },
+    "created_at": null
+  },
+  "msg_instance_029": {
+    "id": "msg_instance_029",
+    "message_type_id": "msg_049",
+    "name": "post_notification_msg",
+    "description": "Example of posting notification message",
+    "values": {
+      "command": "4b",
+      "length": "0001",
+      "notification_data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_030": {
+    "id": "msg_instance_030",
+    "message_type_id": "msg_050",
+    "name": "post_delete_notification",
+    "description": "Example of deleting notification message",
+    "values": {
+      "command": "4c",
+      "length": "0001",
+      "delete_data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_031": {
+    "id": "msg_instance_031",
+    "message_type_id": "msg_051",
+    "name": "post_dashboard_lock",
+    "description": "Example of locking dashboard",
+    "values": {
+      "command": "50",
+      "length": "0004",
+      "lock_action": "01",
+      "padding": "0000"
+    },
+    "created_at": null
+  },
+  "msg_instance_032": {
+    "id": "msg_instance_032",
+    "message_type_id": "msg_051",
+    "name": "post_dashboard_unlock",
+    "description": "Example of unlocking dashboard",
+    "values": {
+      "command": "50",
+      "length": "0004",
+      "lock_action": "00",
+      "padding": "0000"
+    },
+    "created_at": null
+  },
+  "msg_instance_033": {
+    "id": "msg_instance_033",
+    "message_type_id": "msg_052",
+    "name": "post_bt_unpair",
+    "description": "Example of unpairing Bluetooth connection",
+    "values": {
+      "command": "47",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_034": {
+    "id": "msg_instance_034",
+    "message_type_id": "msg_053",
+    "name": "post_message_dequeue",
+    "description": "Example of dequeuing message from queue",
+    "values": {
+      "command": "f4",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_035": {
+    "id": "msg_instance_035",
+    "message_type_id": "msg_054",
+    "name": "post_command_data",
+    "description": "Example of processing command data",
+    "values": {
+      "command": "f5",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_036": {
+    "id": "msg_instance_036",
+    "message_type_id": "msg_055",
+    "name": "post_report_response_success",
+    "description": "Example of successful report response",
+    "values": {
+      "command": "f1",
+      "length": "0002",
+      "status_code": "c9",
+      "data": "01"
+    },
+    "created_at": null
+  },
+  "msg_instance_037": {
+    "id": "msg_instance_037",
+    "message_type_id": "msg_055",
+    "name": "post_report_response_error",
+    "description": "Example of error report response",
+    "values": {
+      "command": "f1",
+      "length": "0002",
+      "status_code": "ca",
+      "data": "01"
+    },
+    "created_at": null
   }
 }

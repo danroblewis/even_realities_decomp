@@ -111,6 +111,22 @@
                     </div>
                 </div>
                 
+                <!-- Message Sequence Buttons -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h6 class="mb-2"><i class="fas fa-play-circle me-2"></i>Message Sequences</h6>
+                        <div id="sequenceButtons" class="d-flex flex-wrap gap-2">
+                            <!-- Sequence buttons will be populated here -->
+                        </div>
+                        <div class="form-text">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Click any sequence button to run the full sequence of messages
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
                     <table class="table table-sm table-hover">
                         <thead class="table-dark sticky-top">
@@ -1105,6 +1121,35 @@ async function loadMessageButtons() {
     }
 }
 
+// Load and display message sequence buttons
+async function loadSequenceButtons() {
+    try {
+        const response = await fetch('/api/message-sequences');
+        const sequences = await response.json();
+        
+        const sequenceButtonsContainer = document.getElementById('sequenceButtons');
+        sequenceButtonsContainer.innerHTML = '';
+        
+        Object.values(sequences).forEach(sequence => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'btn btn-outline-success rounded-pill';
+            button.innerHTML = `<i class="fas fa-play me-1"></i>${sequence.name}`;
+            button.title = `Run sequence: ${sequence.description || sequence.name}`;
+            button.onclick = () => runSequence(sequence.id);
+            sequenceButtonsContainer.appendChild(button);
+        });
+        
+        if (Object.keys(sequences).length === 0) {
+            sequenceButtonsContainer.innerHTML = '<span class="text-muted">No sequences available</span>';
+        }
+    } catch (error) {
+        console.error('Failed to load sequences:', error);
+        const sequenceButtonsContainer = document.getElementById('sequenceButtons');
+        sequenceButtonsContainer.innerHTML = '<span class="text-danger">Failed to load sequences</span>';
+    }
+}
+
 // Send a message by ID
 async function sendMessage(messageId) {
     try {
@@ -1137,9 +1182,44 @@ async function sendMessage(messageId) {
     }
 }
 
+// Run a message sequence by ID
+async function runSequence(sequenceId) {
+    try {
+        // Check BLE connection status
+        const statusResponse = await fetch('/api/ble/status');
+        const status = await statusResponse.json();
+        
+        if (!status.is_connected) {
+            alert('Not connected to any BLE device. Please connect to a device first.');
+            return;
+        }
+        
+        // Run the sequence
+        const response = await fetch(`/api/message-sequences/${sequenceId}/run`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Failed to run sequence');
+        }
+        
+        const result = await response.json();
+        showAlert(`Sequence "${result.sequence_id}" started successfully! ${result.sent_count} messages sent.`, 'success');
+        
+    } catch (error) {
+        console.error('Failed to run sequence:', error);
+        showAlert('Failed to run sequence: ' + error.message, 'danger');
+    }
+}
+
 // Initialize message buttons when page loads
 document.addEventListener('DOMContentLoaded', function() {
     loadMessageButtons();
+    loadSequenceButtons();
 });
 
 // Manual refresh communication log

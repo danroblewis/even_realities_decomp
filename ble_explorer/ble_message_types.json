@@ -933,7 +933,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Response status code (C9=success, CA=error, CB=in_progress)",
-        "default_value": null,
+        "default_value": "c9",
         "is_computed": false,
         "computed_from": null
       },
@@ -942,7 +942,7 @@
         "width": 18,
         "is_max_width": false,
         "description": "Padding bytes (usually zeros)",
-        "default_value": "000000000000000000000000000000000000",
+        "default_value": null,
         "is_computed": false,
         "computed_from": null
       }
@@ -967,7 +967,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Response status code (C9=success, CA=error, CB=in_progress)",
-        "default_value": null,
+        "default_value": "c9",
         "is_computed": false,
         "computed_from": null
       },
@@ -976,7 +976,7 @@
         "width": 18,
         "is_max_width": false,
         "description": "Padding bytes (usually zeros)",
-        "default_value": "000000000000000000000000000000000000",
+        "default_value": null,
         "is_computed": false,
         "computed_from": null
       }
@@ -1001,7 +1001,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Response status code (C9=success, CA=error, CB=in_progress)",
-        "default_value": null,
+        "default_value": "c9",
         "is_computed": false,
         "computed_from": null
       },
@@ -1010,7 +1010,7 @@
         "width": 18,
         "is_max_width": false,
         "description": "Padding bytes (usually zeros)",
-        "default_value": "000000000000000000000000000000000000",
+        "default_value": null,
         "is_computed": false,
         "computed_from": null
       }
@@ -1035,7 +1035,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Response status code (C9=success, CA=error, CB=in_progress)",
-        "default_value": null,
+        "default_value": "c9",
         "is_computed": false,
         "computed_from": null
       },
@@ -1044,7 +1044,997 @@
         "width": 18,
         "is_max_width": false,
         "description": "Padding bytes (usually zeros)",
-        "default_value": "000000000000000000000000000000000000",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_030": {
+    "id": "msg_030",
+    "name": "get_brightness",
+    "description": "Get device brightness setting",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "29",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_031": {
+    "id": "msg_031",
+    "name": "get_anti_shake_enable",
+    "description": "Get anti-shake enable status",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "2a",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_032": {
+    "id": "msg_032",
+    "name": "get_display_mode",
+    "description": "Get display mode setting",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "2b",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_033": {
+    "id": "msg_033",
+    "name": "get_device_info",
+    "description": "Get device information including charging status and software versions",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "2c",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field (01=Android, 02=iOS)",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_034": {
+    "id": "msg_034",
+    "name": "get_mn_s_mac",
+    "description": "Get master and slave MAC addresses",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "2d",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_035": {
+    "id": "msg_035",
+    "name": "get_wakeup_angle",
+    "description": "Get wakeup angle setting",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "32",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_036": {
+    "id": "msg_036",
+    "name": "get_glasses_sn",
+    "description": "Get glasses serial number",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "33",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_037": {
+    "id": "msg_037",
+    "name": "get_device_sn",
+    "description": "Get device serial number",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "34",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_038": {
+    "id": "msg_038",
+    "name": "get_esb_channel",
+    "description": "Get ESB channel setting",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "35",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_039": {
+    "id": "msg_039",
+    "name": "get_system_status",
+    "description": "Get system status and current running app",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "39",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0002",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_040": {
+    "id": "msg_040",
+    "name": "get_raster_config",
+    "description": "Get raster configuration settings",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "3b",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_041": {
+    "id": "msg_041",
+    "name": "get_message_mode",
+    "description": "Get message mode setting",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "3c",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_042": {
+    "id": "msg_042",
+    "name": "get_burial_point_data",
+    "description": "Get burial point data",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "3e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_043": {
+    "id": "msg_043",
+    "name": "put_brightness",
+    "description": "Set device brightness level",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0002",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "brightness_level",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Brightness level (0-255)",
+        "default_value": "80",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_044": {
+    "id": "msg_044",
+    "name": "put_anti_shake_enable",
+    "description": "Enable or disable anti-shake",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "02",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0002",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "enable",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Enable flag (0=disable, 1=enable)",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_045": {
+    "id": "msg_045",
+    "name": "put_display_mode",
+    "description": "Set display mode",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "03",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0002",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "display_mode",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Display mode value",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_046": {
+    "id": "msg_046",
+    "name": "put_wakeup_angle",
+    "description": "Set wakeup angle and offset",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "06",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0005",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "action_id",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Action identifier",
+        "default_value": "03",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "angle",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Wakeup angle value",
+        "default_value": "0064",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "offset",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Angle offset value",
+        "default_value": "000a",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_047": {
+    "id": "msg_047",
+    "name": "put_schedule_task",
+    "description": "Set schedule task information",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "06",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0009",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "action_id",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Action identifier",
+        "default_value": "03",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "schedule_data",
+        "width": 6,
+        "is_max_width": false,
+        "description": "Schedule data payload",
+        "default_value": "010000000000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_048": {
+    "id": "msg_048",
+    "name": "put_stocks_info",
+    "description": "Set stocks information",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "06",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0009",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "action_id",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Action identifier",
+        "default_value": "04",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "stocks_data",
+        "width": 6,
+        "is_max_width": false,
+        "description": "Stocks data payload",
+        "default_value": "010000000000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_049": {
+    "id": "msg_049",
+    "name": "post_notification_msg",
+    "description": "Post notification message",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "4b",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "notification_data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Notification data",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_050": {
+    "id": "msg_050",
+    "name": "post_delete_notification",
+    "description": "Delete notification message",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "4c",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "delete_data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Delete data",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_051": {
+    "id": "msg_051",
+    "name": "post_dashboard_lock",
+    "description": "Lock or unlock dashboard",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "50",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0004",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "lock_action",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Lock action (01=lock, 00=unlock)",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Padding bytes",
+        "default_value": "0000",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_052": {
+    "id": "msg_052",
+    "name": "post_bt_unpair",
+    "description": "Unpair Bluetooth connection",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "47",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_053": {
+    "id": "msg_053",
+    "name": "post_message_dequeue",
+    "description": "Dequeue message from queue",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f4",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_054": {
+    "id": "msg_054",
+    "name": "post_command_data",
+    "description": "Process command data",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f5",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_055": {
+    "id": "msg_055",
+    "name": "post_report_response",
+    "description": "Report response message",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier",
+        "default_value": "f1",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0002",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Status code",
+        "default_value": "c9",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Data field",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_056": {
+    "id": "msg_056",
+    "name": "get_brightness_response",
+    "description": "Response packet for get_brightness command",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier (29)",
+        "default_value": "29",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "response_status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Response status code (65=success)",
+        "default_value": "65",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "brightness_value",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Brightness value in decimal (0-255)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "auto_brightness_enabled",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Auto brightness enabled flag (0=disabled, 1=enabled)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "padding",
+        "width": 16,
+        "is_max_width": false,
+        "description": "Padding bytes (usually zeros)",
+        "default_value": null,
         "is_computed": false,
         "computed_from": null
       }
