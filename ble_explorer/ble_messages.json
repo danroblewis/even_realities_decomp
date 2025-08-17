@@ -451,5 +451,18 @@
       "data": "01"
     },
     "created_at": null
+  },
+  "msg_instance_038": {
+    "id": "msg_instance_038",
+    "message_type_id": "msg_057",
+    "name": "get_firmware_version_example",
+    "description": "Example of requesting firmware version information",
+    "values": {
+      "command": "23",
+      "subcommand": "74",
+      "length": "0001",
+      "data": "01"
+    },
+    "created_at": null
   }
 }

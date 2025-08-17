@@ -51,9 +51,9 @@ def find_matching_message_types(command_code: str, packet_length: int, packet_by
     # Detect if this is likely a response packet
     is_response_packet = False
     if packet_bytes and len(packet_bytes) >= 2:
-        # Check if second byte is a known response status code (0x65, 0xC9, 0xCA, 0xCB, 0x06)
+        # Check if second byte is a known response status code (0x65, 0xC9, 0xCA, 0xCB, 0x06, 0x65)
         second_byte = packet_bytes[1]
-        if second_byte in [0x65, 0xC9, 0xCA, 0xCB, 0x06]:
+        if second_byte in [0x65, 0xC9, 0xCA, 0xCB, 0x06, 0x65]:
             is_response_packet = True
     
     for msg_type in message_types.values():

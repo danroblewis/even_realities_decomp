@@ -254,7 +254,7 @@ class BLEManager:
             if len(data) >= 2:
                 second_byte = data[1]
                 # Check if second byte is a known response status code
-                if second_byte in [0xc9, 0xca, 0xcb]:  # success, error, in_progress
+                if second_byte in [0xc9, 0xca, 0xcb, 0x65]:  # success, error, in_progress
                     is_response_packet = True
                     logger.info(f"Detected response packet with status code 0x{second_byte:02x}")
             

@@ -2039,5 +2039,91 @@
         "computed_from": null
       }
     ]
+  },
+  "msg_057": {
+    "id": "msg_057",
+    "name": "get_firmware_version",
+    "description": "Request firmware version information",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier (0x23 = 35)",
+        "default_value": "23",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "subcommand",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Subcommand identifier",
+        "default_value": "74",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Packet length",
+        "default_value": "0001",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "data",
+        "width": 255,
+        "is_max_width": true,
+        "description": "Data field",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
+  },
+  "msg_058": {
+    "id": "msg_058",
+    "name": "get_firmware_version_response",
+    "description": "Response containing firmware version information",
+    "attributes": [
+      {
+        "name": "command",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Command identifier (0x23 = 35)",
+        "default_value": "6e",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "status_code",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Response status code (0x65=success)",
+        "default_value": "65",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "length",
+        "width": 2,
+        "is_max_width": false,
+        "description": "Response length (0x0066 = 102 bytes)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "text",
+        "width": 102,
+        "is_max_width": false,
+        "description": "Firmware version information string (net build time, app build time, version, device ID)",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      }
+    ]
   }
 }
