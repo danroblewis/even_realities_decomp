@@ -63,59 +63,95 @@
   "msg_003": {
     "id": "msg_003",
     "name": "send_text",
-    "description": "",
+    "description": "Send text to render on the device screen via BLE UART",
     "attributes": [
       {
         "name": "command",
         "width": 1,
         "is_max_width": false,
-        "description": "Command identifier",
+        "description": "Command identifier for send text",
         "default_value": "4e",
         "is_computed": false,
         "computed_from": null
       },
       {
-        "name": "header",
-        "width": 4,
+        "name": "sequence",
+        "width": 1,
         "is_max_width": false,
-        "description": "",
-        "default_value": "00010030",
-        "is_computed": false,
-        "computed_from": null
-      },
-      {
-        "name": "length",
-        "width": 4,
-        "is_max_width": false,
-        "description": "",
+        "description": "Sequence number for message ordering",
         "default_value": null,
-        "is_computed": true,
-        "computed_from": "payload"
-      },
-      {
-        "name": "start_delimeter",
-        "width": 2,
-        "is_max_width": false,
-        "description": "",
-        "default_value": "0a0a",
         "is_computed": false,
         "computed_from": null
       },
       {
-        "name": "payload",
+        "name": "flags",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Flags for text rendering options",
+        "default_value": "01",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "reserved_1",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Reserved field, set to 0",
+        "default_value": "00",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "screen_status",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Screen status/state indicator",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "reserved_2",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Reserved field, set to 0",
+        "default_value": "00",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "reserved_3",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Reserved field, set to 0",
+        "default_value": "00",
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "current_page",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Current page number for multi-page text",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "total_pages",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Total number of pages for multi-page text",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "text_data",
         "width": 255,
         "is_max_width": true,
-        "description": "",
+        "description": "UTF-8 encoded text data to display",
         "default_value": null,
-        "is_computed": false,
-        "computed_from": null
-      },
-      {
-        "name": "end_delimeter",
-        "width": 2,
-        "is_max_width": false,
-        "description": "",
-        "default_value": "0a0a",
         "is_computed": false,
         "computed_from": null
       }
@@ -236,32 +272,41 @@
   },
   "msg_006": {
     "id": "msg_006",
-    "name": "touchpad_double_tap",
-    "description": "TouchPad Double Tap notification",
+    "name": "send_text_response",
+    "description": "Response to send_text command indicating success, error, or status",
     "attributes": [
       {
         "name": "command",
         "width": 1,
         "is_max_width": false,
-        "description": "Command identifier",
-        "default_value": "f5",
+        "description": "Response command identifier (same as request)",
+        "default_value": "4e",
         "is_computed": false,
         "computed_from": null
       },
       {
-        "name": "data",
+        "name": "status_code",
         "width": 1,
         "is_max_width": false,
-        "description": "Event data - 00 for double tap",
-        "default_value": "00",
+        "description": "Status response code: 0xC9=success, 0xCA=error, 0xCB=in_progress, 0x06=status",
+        "default_value": null,
         "is_computed": false,
         "computed_from": null
       },
       {
-        "name": "padding",
-        "width": 19,
+        "name": "sequence",
+        "width": 1,
+        "is_max_width": false,
+        "description": "Echo of the sequence number from the request",
+        "default_value": null,
+        "is_computed": false,
+        "computed_from": null
+      },
+      {
+        "name": "additional_data",
+        "width": 255,
         "is_max_width": true,
-        "description": "Variable padding bytes (usually zeros)",
+        "description": "Optional additional response data or error details",
         "default_value": null,
         "is_computed": false,
         "computed_from": null

@@ -98,11 +98,11 @@
   },
   "msg_instance_009": {
     "id": "msg_instance_009",
-    "message_type_id": "msg_032",
-    "name": "get_display_mode",
-    "description": "Get display mode setting",
+    "message_type_id": "msg_002",
+    "name": "get_device_info",
+    "description": "Get device information",
     "values": {
-      "command": "2b",
+      "command": "30",
       "length": "0001",
       "data": "01"
     },
@@ -110,18 +110,25 @@
   },
   "msg_instance_010": {
     "id": "msg_instance_010",
-    "message_type_id": "msg_033",
-    "name": "get_device_info_android",
-    "description": "Get device info for Android device",
+    "message_type_id": "msg_003",
+    "name": "send_text_hello_world",
+    "description": "Send 'Hello World' text to display on screen",
     "values": {
-      "command": "2c",
-      "length": "0001",
-      "data": "01"
+      "command": "4e",
+      "sequence": "01",
+      "flags": "01",
+      "reserved_1": "00",
+      "screen_status": "30",
+      "reserved_2": "00",
+      "reserved_3": "00",
+      "current_page": "01",
+      "total_pages": "01",
+      "text_data": "48656c6c6f20576f726c64"
     },
     "created_at": null
   },
-  "msg_instance_011": {
-    "id": "msg_instance_011",
+  "msg_instance_012": {
+    "id": "msg_instance_012",
     "message_type_id": "msg_033",
     "name": "get_device_info_ios",
     "description": "Get device info for iOS device",
@@ -132,8 +139,8 @@
     },
     "created_at": null
   },
-  "msg_instance_012": {
-    "id": "msg_instance_012",
+  "msg_instance_013": {
+    "id": "msg_instance_013",
     "message_type_id": "msg_034",
     "name": "get_mn_s_mac",
     "description": "Get master and slave MAC addresses",
@@ -144,11 +151,11 @@
     },
     "created_at": null
   },
-  "msg_instance_012": {
-    "id": "msg_instance_012",
+  "msg_instance_014": {
+    "id": "msg_instance_014",
     "message_type_id": "msg_034",
-    "name": "get_mn_s_mac",
-    "description": "Get master and slave MAC addresses",
+    "name": "get_mn_s_mac_alt",
+    "description": "Get master and slave MAC addresses (alternative)",
     "values": {
       "command": "32",
       "length": "0001",
