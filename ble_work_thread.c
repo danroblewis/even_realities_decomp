@@ -12,7 +12,7 @@ void ble_work_thread(struct __ble_context* ble_context)
 {
   byte bVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 ble_tx_buffer;
   uint uVar4;
   undefined8 uVar5;
   byte local_124;
@@ -36,9 +36,9 @@ void ble_work_thread(struct __ble_context* ble_context)
       handle_heartbeat();
     }
   }
-  uVar3 = malloc_maybe(0x2b8);
+  ble_tx_buffer = malloc_maybe(0x2b8);
   iVar2 = LOG_LEVEL;
-  ble_context->tx_buffer = uVar3;
+  ble_context->tx_buffer = ble_tx_buffer;
   if (2 < iVar2) {
     if (IS_DEBUG == 0) {
       DEBUG_PRINT("%s(): tx_size:%d\n\n","ble_work_thread",0x2b8);
@@ -59,35 +59,35 @@ void ble_work_thread(struct __ble_context* ble_context)
     ble_context->processing_flag = 1;
     bVar1 = DMIC_DATA_READY_FLAG;
     if ((ble_context->command_index != 0) || (ble_context->command_param != 0))
-    goto LAB_00021e6a;
+      goto LAB_00021e6a;
     if (PENDING_EVENT_STATUS != -1) {
       ble_context->command_index = 1;
-      *ble_context->command_buffer = 0xf5;
-      *(ble_context->command_buffer + 1) = PENDING_EVENT_STATUS;
+      ble_context->command_buffer[0] = 0xf5;
+      ble_context->command_buffer[1] = PENDING_EVENT_STATUS;
       PENDING_EVENT_STATUS = -1;
-      *(undefined1 *)(*(int *)(ble_context + 0x254) + 2) = 0xcb;
+      ble_context->command_buffer[2] = 0xcb;
       ble_context->command_param = 0;
       ble_context->command_data = 3;
-      if (*(byte *)(*(int *)(ble_context + 0x254) + 1) - 9 < 2) {
-        *(ble_context->command_buffer + 2) = ble_context->dmic_data;
+      if (ble_context->command_buffer[1] - 9 < 2) {
+        ble_context->command_buffer[2] = ble_context->dmic_data;
       }
       goto LAB_00021e6a;
     }
     uVar4 = (uint)DMIC_DATA_READY_FLAG;
     if (uVar4 != 0) {
       ble_context->command_index = 1;
-      *ble_context->command_buffer = 0xf1;
+      ble_context->command_buffer[0] = 0xf1;
       DMIC_DATA_READY_FLAG = 0;
-      *(ble_context->command_buffer + 1) = 0;
-      *(ble_context->command_buffer + 2) = 0xcc;
+      ble_context->command_buffer[1] = 0;
+      ble_context->command_buffer[2] = 0xcc;
       ble_context->command_param = 0;
       goto LAB_00021e6a;
     }
     if (HEARTBEAT_PENDING_FLAG != 0) {
       ble_context->command_index = 1;
-      *ble_context->command_buffer = 0xf4;
-      *(ble_context->command_buffer + 1) = bVar1;
-      *(ble_context->command_buffer + 2) = 0xcb;
+      ble_context->command_buffer[0] = 0xf4;
+      ble_context->command_buffer[1] = bVar1;
+      ble_context->command_buffer[2] = 0xcb;
       HEARTBEAT_PENDING_FLAG = uVar4;
       ble_context->command_param = 0;
 LAB_00021e6a:
