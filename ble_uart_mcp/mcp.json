@@ -2,11 +2,9 @@
   "mcpServers": {
     "g1-device-mcp": {
       "command": "/Users/danroblewis/er/fw/decomp_files/ble_uart_mcp/venv/bin/python",
-      "args": ["mcp_server.py"],
-      "env": {
-        "PYTHONPATH": "."
-      },
-      "cwd": "/Users/danroblewis/er/fw/decomp_files/ble_uart_mcp"
+      "args": [
+        "/Users/danroblewis/er/fw/decomp_files/ble_uart_mcp/mcp_server.py"
+      ]
     }
   }
 }
