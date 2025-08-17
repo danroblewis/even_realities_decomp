@@ -1469,6 +1469,47 @@ async def clear_communication_log():
         logger.error(f"Failed to clear communication log: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to clear communication log: {str(e)}")
 
+@app.post("/api/ble/send")
+async def send_ble_message(request: Request):
+    """Send a hexadecimal message to the connected BLE device (simplified for scanner)"""
+    try:
+        if not ble_manager.is_connected:
+            raise HTTPException(status_code=400, detail="Not connected to any device")
+        
+        # Parse the request body
+        body = await request.json()
+        hex_data = body.get("hex_data")
+        
+        if not hex_data:
+            raise HTTPException(status_code=400, detail="hex_data is required")
+        
+        # Validate hexadecimal format
+        try:
+            # Remove any spaces and convert to bytes
+            clean_hex = hex_data.replace(" ", "")
+            if len(clean_hex) % 2 != 0:
+                raise ValueError("Hex string must have even number of characters")
+            
+            data = bytes.fromhex(clean_hex)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=f"Invalid hexadecimal format: {str(e)}")
+        
+        # Send the message
+        sent_id = await ble_manager.send_message(
+            data=data,
+            message_name=f"Scanner: {hex_data}"
+        )
+        
+        return {
+            "status": "sent",
+            "sent_id": sent_id,
+            "hex_data": hex_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to send BLE message: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to send BLE message: {str(e)}")
+
 @app.post("/api/ble/send-custom")
 async def send_custom_message(request: Request):
     """Send a custom hexadecimal message to the connected BLE device"""

@@ -5,6 +5,49 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Scanner/Fuzzer Widget Styles */
+.card.border-primary {
+    border-color: #007bff !important;
+    border-width: 2px !important;
+}
+
+.card.border-primary .card-header {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.scanner-controls .btn {
+    min-width: 100px;
+    font-weight: 600;
+}
+
+.scanner-controls .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.progress {
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.scanner-status-badge {
+    font-size: 0.8rem;
+    padding: 0.4em 0.8em;
+}
+
+.scanner-progress-badge {
+    font-size: 0.75rem;
+    padding: 0.3em 0.6em;
+    background-color: #6c757d !important;
+}
+
 .navbar-brand {
     font-weight: 600;
     font-size: 1.25rem;

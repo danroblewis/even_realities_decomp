@@ -144,6 +144,114 @@
                 </div>
             </div>
         </div>
+        
+        <!-- BLE Command Scanner/Fuzzer -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0"><i class="fas fa-search-plus me-2"></i>BLE Command Scanner/Fuzzer</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="prefixBytes" class="form-label">Prefix Bytes (hex)</label>
+                                <input type="text" class="form-control" id="prefixBytes" 
+                                       placeholder="e.g., 4e01" 
+                                       pattern="[0-9a-fA-F\s]*" 
+                                       title="Hexadecimal characters only">
+                                <div class="form-text">Optional prefix before fuzzed bytes</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="suffixBytes" class="form-label">Suffix Bytes (hex)</label>
+                                <input type="text" class="form-control" id="suffixBytes" 
+                                       placeholder="e.g., 0000" 
+                                       pattern="[0-9a-fA-F\s]*" 
+                                       title="Hexadecimal characters only">
+                                <div class="form-text">Optional suffix after fuzzed bytes</div>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="fuzzWidth" class="form-label">Fuzz Width (bytes)</label>
+                                <input type="number" class="form-control" id="fuzzWidth" 
+                                       min="1" max="8" value="1" 
+                                       title="Number of bytes to fuzz">
+                                <div class="form-text">Width of middle section</div>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="delayMs" class="form-label">Delay (ms)</label>
+                                <input type="number" class="form-control" id="delayMs" 
+                                       min="10" max="10000" value="1000" 
+                                       title="Delay between messages in milliseconds">
+                                <div class="form-text">Between messages</div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check mt-4 pt-2">
+                                    <input class="form-check-input" type="checkbox" id="randomizeFuzz">
+                                    <label class="form-check-label" for="randomizeFuzz">
+                                        Randomize
+                                    </label>
+                                </div>
+                                <div class="form-text">Randomize fuzz values</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="d-flex gap-2 scanner-controls">
+                                    <button type="button" class="btn btn-success" onclick="startScanner()" id="startScannerBtn">
+                                        <i class="fas fa-play me-2"></i>Run Scanner
+                                    </button>
+                                    <button type="button" class="btn btn-warning" onclick="pauseScanner()" id="pauseScannerBtn" disabled>
+                                        <i class="fas fa-pause me-2"></i>Pause
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="stopScanner()" id="stopScannerBtn" disabled>
+                                        <i class="fas fa-stop me-2"></i>Stop
+                                    </button>
+                                    <span class="badge bg-info align-self-center scanner-status-badge" id="scannerStatus">Ready</span>
+                                    <span class="badge bg-secondary align-self-center scanner-progress-badge" id="scannerProgress">0/0</span>
+                                    <span class="badge bg-dark align-self-center" id="currentMessage" style="display: none;">Current: --</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar" id="scannerProgressBar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        <strong>Scan Mode:</strong> Tests sequential byte values. 
+                                        <strong>Fuzz Mode:</strong> Tests random byte combinations.
+                                    </small>
+                                    <button type="button" class="btn btn-outline-info btn-sm" onclick="previewMessages()">
+                                        <i class="fas fa-eye me-1"></i>Preview Messages
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Preview -->
+                        <div class="row mt-2" id="messagePreview" style="display: none;">
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <h6 class="alert-heading"><i class="fas fa-eye me-2"></i>Message Preview</h6>
+                                    <div id="previewContent" class="small">
+                                        <!-- Preview content will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1260,6 +1368,401 @@ function showAlert(message, type = 'info') {
             alertDiv.remove();
         }
     }, 5000);
+}
+
+// BLE Scanner/Fuzzer functionality
+let scannerState = {
+    isRunning: false,
+    isPaused: false,
+    currentIndex: 0,
+    messageQueue: [],
+    intervalId: null,
+    totalMessages: 0
+};
+
+// Input validation for hex fields
+function validateHexInput(input) {
+    const value = input.value.trim();
+    if (value === '') return true; // Empty is valid
+    
+    const hexPattern = /^[0-9a-fA-F\s]+$/;
+    if (!hexPattern.test(value)) {
+        input.setCustomValidity('Only hexadecimal characters (0-9, A-F) and spaces are allowed');
+        return false;
+    }
+    
+    // Check if length is even (complete bytes)
+    const cleanValue = value.replace(/\s/g, '');
+    if (cleanValue.length % 2 !== 0) {
+        input.setCustomValidity('Hex string must have even number of characters (complete bytes)');
+        return false;
+    }
+    
+    input.setCustomValidity('');
+    return true;
+}
+
+// Add input validation to hex fields
+document.addEventListener('DOMContentLoaded', function() {
+    const prefixInput = document.getElementById('prefixBytes');
+    const suffixInput = document.getElementById('suffixBytes');
+    
+    if (prefixInput) {
+        prefixInput.addEventListener('input', () => validateHexInput(prefixInput));
+        prefixInput.addEventListener('blur', () => validateHexInput(prefixInput));
+    }
+    
+    if (suffixInput) {
+        suffixInput.addEventListener('input', () => validateHexInput(suffixInput));
+        suffixInput.addEventListener('blur', () => validateHexInput(suffixInput));
+    }
+});
+
+// Generate message queue for scanning/fuzzing
+function generateMessageQueue() {
+    const prefixBytes = document.getElementById('prefixBytes').value.trim();
+    const suffixBytes = document.getElementById('suffixBytes').value.trim();
+    const fuzzWidth = parseInt(document.getElementById('fuzzWidth').value);
+    const randomize = document.getElementById('randomizeFuzz').checked;
+    
+    const messages = [];
+    
+    if (randomize) {
+        // Fuzz mode: generate random combinations
+        const maxValue = Math.pow(256, fuzzWidth);
+        const numMessages = Math.min(maxValue, 1000); // Limit to 1000 random messages
+        
+        for (let i = 0; i < numMessages; i++) {
+            const randomBytes = [];
+            for (let j = 0; j < fuzzWidth; j++) {
+                randomBytes.push(Math.floor(Math.random() * 256));
+            }
+            
+            const message = buildMessage(prefixBytes, randomBytes, suffixBytes);
+            messages.push(message);
+        }
+    } else {
+        // Scan mode: generate sequential combinations
+        const maxValue = Math.pow(256, fuzzWidth);
+        const numMessages = Math.min(maxValue, 1000); // Limit to 1000 sequential messages
+        
+        for (let i = 0; i < numMessages; i++) {
+            const sequentialBytes = [];
+            let temp = i;
+            for (let j = 0; j < fuzzWidth; j++) {
+                sequentialBytes.push(temp % 256);
+                temp = Math.floor(temp / 256);
+            }
+            
+            const message = buildMessage(prefixBytes, sequentialBytes, suffixBytes);
+            messages.push(message);
+        }
+    }
+    
+    return messages;
+}
+
+// Build a message from prefix, middle bytes, and suffix
+function buildMessage(prefix, middleBytes, suffix) {
+    let message = '';
+    
+    // Add prefix
+    if (prefix) {
+        message += prefix.replace(/\s/g, '');
+    }
+    
+    // Add middle bytes
+    middleBytes.forEach(byte => {
+        message += byte.toString(16).padStart(2, '0');
+    });
+    
+    // Add suffix
+    if (suffix) {
+        message += suffix.replace(/\s/g, '');
+    }
+    
+    return message;
+}
+
+// Start the scanner/fuzzer
+async function startScanner() {
+    try {
+        // Check BLE connection status
+        const statusResponse = await fetch('/api/ble/status');
+        const status = await statusResponse.json();
+        
+        if (!status.is_connected) {
+            alert('Not connected to any BLE device. Please connect to a device first.');
+            return;
+        }
+        
+        // Validate inputs
+        const prefixBytes = document.getElementById('prefixBytes').value.trim();
+        const suffixBytes = document.getElementById('suffixBytes').value.trim();
+        const fuzzWidth = parseInt(document.getElementById('fuzzWidth').value);
+        
+        if (!validateHexInput(document.getElementById('prefixBytes')) || 
+            !validateHexInput(document.getElementById('suffixBytes'))) {
+            alert('Please fix the hex input validation errors before starting.');
+            return;
+        }
+        
+        if (fuzzWidth < 1 || fuzzWidth > 8) {
+            alert('Please enter a valid fuzz width between 1 and 8 bytes');
+            return;
+        }
+        
+        // Generate message queue
+        scannerState.messageQueue = generateMessageQueue();
+        scannerState.totalMessages = scannerState.messageQueue.length;
+        
+        // Confirm large scans
+        if (scannerState.totalMessages > 100) {
+            const confirmed = confirm(
+                `This will send ${scannerState.totalMessages} messages. ` +
+                `At ${document.getElementById('delayMs').value}ms delay, this will take approximately ` +
+                `${Math.round((scannerState.totalMessages * parseInt(document.getElementById('delayMs').value)) / 1000)} seconds. ` +
+                `Continue?`
+            );
+            if (!confirmed) {
+                return;
+            }
+        }
+        
+        scannerState.currentIndex = 0;
+        scannerState.isRunning = true;
+        scannerState.isPaused = false;
+        
+        // Update UI
+        updateScannerUI();
+        
+        // Start sending messages
+        await sendNextMessage();
+        
+        showAlert(`Scanner started! Will send ${scannerState.totalMessages} messages.`, 'success');
+        
+    } catch (error) {
+        console.error('Failed to start scanner:', error);
+        alert('Failed to start scanner: ' + error.message);
+    }
+}
+
+// Send the next message in the queue
+async function sendNextMessage() {
+    if (!scannerState.isRunning || scannerState.isPaused) {
+        return;
+    }
+    
+    if (scannerState.currentIndex >= scannerState.messageQueue.length) {
+        // Finished all messages
+        stopScanner();
+        showAlert('Scanner completed! All messages sent.', 'success');
+        return;
+    }
+    
+    try {
+        const message = scannerState.messageQueue[scannerState.currentIndex];
+        
+        // Send the message via BLE
+        const response = await fetch('/api/ble/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                hex_data: message
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to send message');
+        }
+        
+        // Update progress
+        scannerState.currentIndex++;
+        updateScannerProgress();
+        
+        // Show current message being sent
+        const currentMessageBadge = document.getElementById('currentMessage');
+        if (scannerState.currentIndex < scannerState.messageQueue.length) {
+            const nextMessage = scannerState.messageQueue[scannerState.currentIndex];
+            currentMessageBadge.textContent = `Next: ${nextMessage}`;
+            currentMessageBadge.style.display = 'inline-block';
+        } else {
+            currentMessageBadge.style.display = 'none';
+        }
+        
+        // Schedule next message
+        const delayMs = parseInt(document.getElementById('delayMs').value);
+        scannerState.intervalId = setTimeout(() => {
+            sendNextMessage();
+        }, delayMs);
+        
+    } catch (error) {
+        console.error('Failed to send message:', error);
+        showAlert(`Failed to send message ${scannerState.currentIndex + 1}: ${error.message}`, 'danger');
+        stopScanner();
+    }
+}
+
+// Pause the scanner
+function pauseScanner() {
+    if (scannerState.isRunning && !scannerState.isPaused) {
+        scannerState.isPaused = true;
+        if (scannerState.intervalId) {
+            clearTimeout(scannerState.intervalId);
+            scannerState.intervalId = null;
+        }
+        updateScannerUI();
+        showAlert('Scanner paused', 'info');
+    }
+}
+
+// Resume the scanner
+function resumeScanner() {
+    if (scannerState.isRunning && scannerState.isPaused) {
+        scannerState.isPaused = false;
+        updateScannerUI();
+        sendNextMessage();
+        showAlert('Scanner resumed', 'info');
+    }
+}
+
+// Stop the scanner
+function stopScanner() {
+    scannerState.isRunning = false;
+    scannerState.isPaused = false;
+    scannerState.currentIndex = 0;
+    scannerState.messageQueue = [];
+    
+    if (scannerState.intervalId) {
+        clearTimeout(scannerState.intervalId);
+        scannerState.intervalId = null;
+    }
+    
+    updateScannerUI();
+    showAlert('Scanner stopped', 'info');
+}
+
+// Update scanner UI elements
+function updateScannerUI() {
+    const startBtn = document.getElementById('startScannerBtn');
+    const pauseBtn = document.getElementById('pauseScannerBtn');
+    const stopBtn = document.getElementById('stopScannerBtn');
+    const statusBadge = document.getElementById('scannerStatus');
+    const progressBadge = document.getElementById('scannerProgress');
+    const progressBar = document.getElementById('scannerProgressBar');
+    const currentMessageBadge = document.getElementById('currentMessage');
+    
+    if (scannerState.isRunning) {
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        
+        if (scannerState.isPaused) {
+            pauseBtn.innerHTML = '<i class="fas fa-play me-2"></i>Resume';
+            pauseBtn.onclick = resumeScanner;
+            statusBadge.textContent = 'Paused';
+            statusBadge.className = 'badge bg-warning align-self-center';
+        } else {
+            pauseBtn.innerHTML = '<i class="fas fa-pause me-2"></i>Pause';
+            pauseBtn.onclick = pauseScanner;
+            pauseBtn.disabled = false;
+            statusBadge.textContent = 'Running';
+            statusBadge.className = 'badge bg-success align-self-center';
+        }
+        
+        // Show current message if available
+        if (scannerState.messageQueue.length > 0 && scannerState.currentIndex < scannerState.messageQueue.length) {
+            const currentMessage = scannerState.messageQueue[scannerState.currentIndex];
+            currentMessageBadge.textContent = `Next: ${currentMessage}`;
+            currentMessageBadge.style.display = 'inline-block';
+        }
+    } else {
+        startBtn.disabled = false;
+        pauseBtn.disabled = true;
+        stopBtn.disabled = true;
+        statusBadge.textContent = 'Ready';
+        statusBadge.className = 'badge bg-info align-self-center';
+        currentMessageBadge.style.display = 'none';
+    }
+    
+    // Update progress
+    const progress = scannerState.totalMessages > 0 ? 
+        (scannerState.currentIndex / scannerState.totalMessages) * 100 : 0;
+    progressBar.style.width = `${progress}%`;
+    progressBar.setAttribute('aria-valuenow', progress);
+    
+    progressBadge.textContent = `${scannerState.currentIndex}/${scannerState.totalMessages}`;
+}
+
+// Update scanner progress display
+function updateScannerProgress() {
+    const progressBadge = document.getElementById('scannerProgress');
+    const progressBar = document.getElementById('scannerProgressBar');
+    
+    const progress = scannerState.totalMessages > 0 ? 
+        (scannerState.currentIndex / scannerState.totalMessages) * 100 : 0;
+    
+    progressBar.style.width = `${progress}%`;
+    progressBar.setAttribute('aria-valuenow', progress);
+    progressBadge.textContent = `${scannerState.currentIndex}/${scannerState.totalMessages}`;
+}
+
+// Preview generated messages
+function previewMessages() {
+    const prefixBytes = document.getElementById('prefixBytes').value.trim();
+    const suffixBytes = document.getElementById('suffixBytes').value.trim();
+    const fuzzWidth = parseInt(document.getElementById('fuzzWidth').value);
+    const randomize = document.getElementById('randomizeFuzz').checked;
+    
+    if (fuzzWidth < 1 || fuzzWidth > 8) {
+        alert('Please enter a valid fuzz width between 1 and 8 bytes');
+        return;
+    }
+    
+    // Generate a few sample messages
+    const sampleMessages = [];
+    const numSamples = Math.min(10, Math.pow(256, fuzzWidth));
+    
+    if (randomize) {
+        // Show random samples
+        for (let i = 0; i < numSamples; i++) {
+            const randomBytes = [];
+            for (let j = 0; j < fuzzWidth; j++) {
+                randomBytes.push(Math.floor(Math.random() * 256));
+            }
+            const message = buildMessage(prefixBytes, randomBytes, suffixBytes);
+            sampleMessages.push(message);
+        }
+    } else {
+        // Show sequential samples
+        for (let i = 0; i < numSamples; i++) {
+            const sequentialBytes = [];
+            let temp = i;
+            for (let j = 0; j < fuzzWidth; j++) {
+                sequentialBytes.push(temp % 256);
+                temp = Math.floor(temp / 256);
+            }
+            const message = buildMessage(prefixBytes, sequentialBytes, suffixBytes);
+            sampleMessages.push(message);
+        }
+    }
+    
+    // Display preview
+    const previewDiv = document.getElementById('messagePreview');
+    const previewContent = document.getElementById('previewContent');
+    
+    let content = `<strong>Mode:</strong> ${randomize ? 'Fuzz (Random)' : 'Scan (Sequential)'}<br>`;
+    content += `<strong>Total messages to be generated:</strong> ${Math.min(Math.pow(256, fuzzWidth), 1000)}<br><br>`;
+    content += `<strong>Sample messages:</strong><br>`;
+    
+    sampleMessages.forEach((msg, index) => {
+        content += `<code class="me-2">${msg}</code>`;
+        if ((index + 1) % 3 === 0) content += '<br>';
+    });
+    
+    previewContent.innerHTML = content;
+    previewDiv.style.display = 'block';
 }
 </script>
 {% endblock %}
