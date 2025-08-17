@@ -178,6 +178,22 @@
                                 <div class="form-text">Width of middle section</div>
                             </div>
                             <div class="col-md-2">
+                                <label for="startByte" class="form-label">Start Byte (hex)</label>
+                                <input type="text" class="form-control" id="startByte" 
+                                       placeholder="00" value="00"
+                                       pattern="[0-9a-fA-F]{1,2}" 
+                                       title="Starting byte value (1-2 hex chars)">
+                                <div class="form-text">Start of byte range</div>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="endByte" class="form-label">End Byte (hex)</label>
+                                <input type="text" class="form-control" id="endByte" 
+                                       placeholder="ff" value="ff"
+                                       pattern="[0-9a-fA-F]{1,2}" 
+                                       title="Ending byte value (1-2 hex chars)">
+                                <div class="form-text">End of byte range</div>
+                            </div>
+                            <div class="col-md-2">
                                 <label for="delayMs" class="form-label">Delay (ms)</label>
                                 <input type="number" class="form-control" id="delayMs" 
                                        min="10" max="10000" value="1000" 
@@ -192,6 +208,27 @@
                                     </label>
                                 </div>
                                 <div class="form-text">Randomize fuzz values</div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="skipValues" class="form-label">Values to Skip (hex, comma-separated)</label>
+                                <input type="text" class="form-control" id="skipValues" 
+                                       placeholder="e.g., 00, ff, 7f" 
+                                       pattern="[0-9a-fA-F\s,]*" 
+                                       title="Hexadecimal values separated by commas">
+                                <div class="form-text">Skip specific byte values (e.g., 00,ff,7f)</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-end h-100">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="skipCommonValues" checked>
+                                        <label class="form-check-label" for="skipCommonValues">
+                                            Skip common values (00, FF, 7F, 80)
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -524,6 +561,46 @@
     font-weight: 600;
 }
 
+/* Enhanced tooltip styling */
+[title] {
+    position: relative;
+    cursor: help;
+}
+
+/* Custom tooltip appearance */
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: pre-line;
+    text-align: left;
+    z-index: 1000;
+    max-width: 300px;
+    word-wrap: break-word;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Tooltip arrow */
+[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    pointer-events: none;
+}
+
 /* Alert styling */
 .alert {
     border-radius: 8px;
@@ -674,14 +751,28 @@ function createParsedDataDisplay(parsedData, context = 'default', messageTypeInf
             }
         }
         
-        // Create tooltip with message type information if available
+        // Create enhanced tooltip with detailed information
         let tooltip = '';
+        
+        // Add attribute information
+        tooltip += `Attribute: ${attrName}`;
+        tooltip += `\nValue: ${displayValue}`;
+        
+        // Add original hex value if different from display value
+        if (typeof attrValue === 'string' && attrValue.startsWith('0x') && attrValue.substring(2) !== displayValue) {
+            tooltip += `\nHex: ${attrValue}`;
+        }
+        
+        // Add message type information if available
         if (messageTypeInfo && messageTypeInfo.name) {
-            tooltip = `Message Type: ${messageTypeInfo.name}`;
+            tooltip += `\n\nMessage Type: ${messageTypeInfo.name}`;
             if (messageTypeInfo.description) {
-                tooltip += ` - ${messageTypeInfo.description}`;
+                tooltip += `\nDescription: ${messageTypeInfo.description}`;
             }
         }
+        
+        // Add context information
+        tooltip += `\n\nContext: ${context}`;
         
         display += `<span class="attribute-pill ${bgColor}" title="${tooltip}">
             <span class="attribute-value">${displayValue}</span>
@@ -837,6 +928,45 @@ function updateCommunicationLog(logData) {
         let commandDisplay = '';
         if (msg.direction === 'sent' && msg.command_code) {
             commandDisplay = `<small class="text-muted d-block">Command: ${msg.command_code}</small>`;
+        }
+        
+        // Create tooltip with packet bytes converted to text
+        let tooltip = '';
+        if (msg.hex_data) {
+            tooltip = `Packet: ${msg.hex_data}`;
+            
+            // Try to convert hex to text for display
+            try {
+                const hexStr = msg.hex_data.replace(/\s/g, ''); // Remove spaces
+                if (hexStr.length % 2 === 0) {
+                    const bytes = new Uint8Array(hexStr.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+                    const textDecoder = new TextDecoder('utf-8');
+                    const text = textDecoder.decode(bytes).replace(/\x00/g, ''); // Remove null bytes
+                    
+                    // Only add text if it's printable ASCII and meaningful
+                    if (text && text.length > 0 && text.match(/^[\x20-\x7E\n\r\t]*$/) && text.length > 2) {
+                        tooltip += `\n\nText: "${text}"`;
+                    }
+                }
+            } catch (e) {
+                // If text conversion fails, just show hex
+            }
+            
+            // Add message info if available
+            if (msg.message_name) {
+                tooltip += `\n\nMessage: ${msg.message_name}`;
+            }
+            if (msg.sequence_name) {
+                tooltip += `\nSequence: ${msg.sequence_name}`;
+            }
+            if (msg.status) {
+                tooltip += `\nStatus: ${msg.status}`;
+            }
+        }
+        
+        // Set the tooltip on the row
+        if (tooltip) {
+            row.setAttribute('title', tooltip);
         }
         
         row.innerHTML = `
@@ -1406,6 +1536,9 @@ function validateHexInput(input) {
 document.addEventListener('DOMContentLoaded', function() {
     const prefixInput = document.getElementById('prefixBytes');
     const suffixInput = document.getElementById('suffixBytes');
+    const skipValuesInput = document.getElementById('skipValues');
+    const startByteInput = document.getElementById('startByte');
+    const endByteInput = document.getElementById('endByte');
     
     if (prefixInput) {
         prefixInput.addEventListener('input', () => validateHexInput(prefixInput));
@@ -1416,7 +1549,75 @@ document.addEventListener('DOMContentLoaded', function() {
         suffixInput.addEventListener('input', () => validateHexInput(suffixInput));
         suffixInput.addEventListener('blur', () => validateHexInput(suffixInput));
     }
+    
+    if (skipValuesInput) {
+        skipValuesInput.addEventListener('input', () => validateSkipValuesInput(skipValuesInput));
+        skipValuesInput.addEventListener('blur', () => validateSkipValuesInput(skipValuesInput));
+    }
+    
+    if (startByteInput) {
+        startByteInput.addEventListener('input', () => validateByteRangeInput(startByteInput, endByteInput));
+        startByteInput.addEventListener('blur', () => validateByteRangeInput(startByteInput, endByteInput));
+    }
+    
+    if (endByteInput) {
+        endByteInput.addEventListener('input', () => validateByteRangeInput(startByteInput, endByteInput));
+        endByteInput.addEventListener('blur', () => validateByteRangeInput(startByteInput, endByteInput));
+    }
 });
+
+// Input validation for skip values field
+function validateSkipValuesInput(input) {
+    const value = input.value.trim();
+    if (value === '') return true; // Empty is valid
+    
+    const skipValues = value.split(',').map(v => v.trim());
+    
+    for (const skipValue of skipValues) {
+        if (skipValue === '') continue; // Skip empty values
+        
+        // Check if it's a valid hex value (1-2 characters)
+        if (!/^[0-9a-fA-F]{1-2}$/.test(skipValue)) {
+            input.setCustomValidity('Skip values must be 1-2 character hexadecimal values (e.g., 00, ff, 7f)');
+            return false;
+        }
+    }
+    
+    input.setCustomValidity('');
+    return true;
+}
+
+// Input validation for byte range fields
+function validateByteRangeInput(startInput, endInput) {
+    const startValue = startInput.value.trim();
+    const endValue = endInput.value.trim();
+    
+    // Check if both inputs are valid hex values
+    if (!/^[0-9a-fA-F]{1,2}$/.test(startValue)) {
+        startInput.setCustomValidity('Start byte must be a valid hex value (00-FF)');
+        return false;
+    }
+    
+    if (!/^[0-9a-fA-F]{1,2}$/.test(endValue)) {
+        endInput.setCustomValidity('End byte must be a valid hex value (00-FF)');
+        return false;
+    }
+    
+    // Check if start ≤ end
+    const startByte = parseInt(startValue, 16);
+    const endByte = parseInt(endValue, 16);
+    
+    if (startByte > endByte) {
+        startInput.setCustomValidity('Start byte must be ≤ end byte');
+        endInput.setCustomValidity('End byte must be ≥ start byte');
+        return false;
+    }
+    
+    // Clear validation errors
+    startInput.setCustomValidity('');
+    endInput.setCustomValidity('');
+    return true;
+}
 
 // Generate message queue for scanning/fuzzing
 function generateMessageQueue() {
@@ -1424,42 +1625,93 @@ function generateMessageQueue() {
     const suffixBytes = document.getElementById('suffixBytes').value.trim();
     const fuzzWidth = parseInt(document.getElementById('fuzzWidth').value);
     const randomize = document.getElementById('randomizeFuzz').checked;
+    const skipValues = getSkipValues();
+    const startByte = parseInt(document.getElementById('startByte').value, 16);
+    const endByte = parseInt(document.getElementById('endByte').value, 16);
+    
+    // Validate byte range
+    if (isNaN(startByte) || isNaN(endByte) || startByte < 0 || endByte > 255 || startByte > endByte) {
+        throw new Error('Invalid byte range. Start and end bytes must be valid hex values (00-FF) with start ≤ end.');
+    }
     
     const messages = [];
+    const byteRange = endByte - startByte + 1;
     
     if (randomize) {
-        // Fuzz mode: generate random combinations
-        const maxValue = Math.pow(256, fuzzWidth);
+        // Fuzz mode: generate random combinations within range
+        const maxValue = Math.pow(byteRange, fuzzWidth);
         const numMessages = Math.min(maxValue, 1000); // Limit to 1000 random messages
         
-        for (let i = 0; i < numMessages; i++) {
+        let attempts = 0;
+        const maxAttempts = numMessages * 10; // Prevent infinite loops
+        
+        while (messages.length < numMessages && attempts < maxAttempts) {
             const randomBytes = [];
             for (let j = 0; j < fuzzWidth; j++) {
-                randomBytes.push(Math.floor(Math.random() * 256));
+                randomBytes.push(startByte + Math.floor(Math.random() * byteRange));
             }
             
-            const message = buildMessage(prefixBytes, randomBytes, suffixBytes);
-            messages.push(message);
+            // Check if any byte should be skipped
+            if (!shouldSkipBytes(randomBytes, skipValues)) {
+                const message = buildMessage(prefixBytes, randomBytes, suffixBytes);
+                messages.push(message);
+            }
+            attempts++;
         }
     } else {
-        // Scan mode: generate sequential combinations
-        const maxValue = Math.pow(256, fuzzWidth);
+        // Scan mode: generate sequential combinations within range
+        const maxValue = Math.pow(byteRange, fuzzWidth);
         const numMessages = Math.min(maxValue, 1000); // Limit to 1000 sequential messages
         
-        for (let i = 0; i < numMessages; i++) {
+        for (let i = 0; i < maxValue && messages.length < numMessages; i++) {
             const sequentialBytes = [];
             let temp = i;
             for (let j = 0; j < fuzzWidth; j++) {
-                sequentialBytes.push(temp % 256);
-                temp = Math.floor(temp / 256);
+                sequentialBytes.push(startByte + (temp % byteRange));
+                temp = Math.floor(temp / byteRange);
             }
             
-            const message = buildMessage(prefixBytes, sequentialBytes, suffixBytes);
-            messages.push(message);
+            // Check if any byte should be skipped
+            if (!shouldSkipBytes(sequentialBytes, skipValues)) {
+                const message = buildMessage(prefixBytes, sequentialBytes, suffixBytes);
+                messages.push(message);
+            }
         }
     }
     
     return messages;
+}
+
+// Get skip values from input and common values checkbox
+function getSkipValues() {
+    const skipValues = [];
+    
+    // Add custom skip values
+    const customSkipInput = document.getElementById('skipValues').value.trim();
+    if (customSkipInput) {
+        const customValues = customSkipInput.split(',').map(v => v.trim().toLowerCase());
+        skipValues.push(...customValues);
+    }
+    
+    // Add common values if checkbox is checked
+    if (document.getElementById('skipCommonValues').checked) {
+        skipValues.push('00', 'ff', '7f', '80');
+    }
+    
+    return [...new Set(skipValues)]; // Remove duplicates
+}
+
+// Check if bytes should be skipped
+function shouldSkipBytes(bytes, skipValues) {
+    if (skipValues.length === 0) return false;
+    
+    for (const byte of bytes) {
+        const hexValue = byte.toString(16).padStart(2, '0');
+        if (skipValues.includes(hexValue)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Build a message from prefix, middle bytes, and suffix
@@ -1502,8 +1754,10 @@ async function startScanner() {
         const fuzzWidth = parseInt(document.getElementById('fuzzWidth').value);
         
         if (!validateHexInput(document.getElementById('prefixBytes')) || 
-            !validateHexInput(document.getElementById('suffixBytes'))) {
-            alert('Please fix the hex input validation errors before starting.');
+            !validateHexInput(document.getElementById('suffixBytes')) ||
+            !validateSkipValuesInput(document.getElementById('skipValues')) ||
+            !validateByteRangeInput(document.getElementById('startByte'), document.getElementById('endByte'))) {
+            alert('Please fix the input validation errors before starting.');
             return;
         }
         
@@ -1714,37 +1968,54 @@ function previewMessages() {
     const suffixBytes = document.getElementById('suffixBytes').value.trim();
     const fuzzWidth = parseInt(document.getElementById('fuzzWidth').value);
     const randomize = document.getElementById('randomizeFuzz').checked;
+    const skipValues = getSkipValues();
+    const startByte = parseInt(document.getElementById('startByte').value, 16);
+    const endByte = parseInt(document.getElementById('endByte').value, 16);
     
     if (fuzzWidth < 1 || fuzzWidth > 8) {
         alert('Please enter a valid fuzz width between 1 and 8 bytes');
         return;
     }
     
+    // Validate byte range
+    if (isNaN(startByte) || isNaN(endByte) || startByte < 0 || endByte > 255 || startByte > endByte) {
+        alert('Please enter valid start and end byte values (00-FF) with start ≤ end');
+        return;
+    }
+    
+    const byteRange = endByte - startByte + 1;
+    
     // Generate a few sample messages
     const sampleMessages = [];
-    const numSamples = Math.min(10, Math.pow(256, fuzzWidth));
+    const numSamples = Math.min(10, Math.pow(byteRange, fuzzWidth));
     
     if (randomize) {
-        // Show random samples
-        for (let i = 0; i < numSamples; i++) {
+        // Show random samples within range
+        let attempts = 0;
+        while (sampleMessages.length < numSamples && attempts < numSamples * 5) {
             const randomBytes = [];
             for (let j = 0; j < fuzzWidth; j++) {
-                randomBytes.push(Math.floor(Math.random() * 256));
+                randomBytes.push(startByte + Math.floor(Math.random() * byteRange));
             }
-            const message = buildMessage(prefixBytes, randomBytes, suffixBytes);
-            sampleMessages.push(message);
+            if (!shouldSkipBytes(randomBytes, skipValues)) {
+                const message = buildMessage(prefixBytes, randomBytes, suffixBytes);
+                sampleMessages.push(message);
+            }
+            attempts++;
         }
     } else {
-        // Show sequential samples
-        for (let i = 0; i < numSamples; i++) {
+        // Show sequential samples within range
+        for (let i = 0; i < Math.pow(byteRange, fuzzWidth) && sampleMessages.length < numSamples; i++) {
             const sequentialBytes = [];
             let temp = i;
             for (let j = 0; j < fuzzWidth; j++) {
-                sequentialBytes.push(temp % 256);
-                temp = Math.floor(temp / 256);
+                sequentialBytes.push(startByte + (temp % byteRange));
+                temp = Math.floor(temp / byteRange);
             }
-            const message = buildMessage(prefixBytes, sequentialBytes, suffixBytes);
-            sampleMessages.push(message);
+            if (!shouldSkipBytes(sequentialBytes, skipValues)) {
+                const message = buildMessage(prefixBytes, sequentialBytes, suffixBytes);
+                sampleMessages.push(message);
+            }
         }
     }
     
@@ -1753,7 +2024,9 @@ function previewMessages() {
     const previewContent = document.getElementById('previewContent');
     
     let content = `<strong>Mode:</strong> ${randomize ? 'Fuzz (Random)' : 'Scan (Sequential)'}<br>`;
-    content += `<strong>Total messages to be generated:</strong> ${Math.min(Math.pow(256, fuzzWidth), 1000)}<br><br>`;
+    content += `<strong>Byte range:</strong> ${startByte.toString(16).padStart(2, '0')} - ${endByte.toString(16).padStart(2, '0')}<br>`;
+    content += `<strong>Skip values:</strong> ${skipValues.length > 0 ? skipValues.join(', ') : 'None'}<br>`;
+    content += `<strong>Total messages to be generated:</strong> ${Math.min(Math.pow(byteRange, fuzzWidth), 1000)}<br><br>`;
     content += `<strong>Sample messages:</strong><br>`;
     
     sampleMessages.forEach((msg, index) => {
