@@ -79,7 +79,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Sequence number for message ordering",
-        "default_value": null,
+        "default_value": "01",
         "is_computed": false,
         "computed_from": null
       },
@@ -106,7 +106,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Screen status/state indicator",
-        "default_value": null,
+        "default_value": "01",
         "is_computed": false,
         "computed_from": null
       },
@@ -133,7 +133,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Current page number for multi-page text",
-        "default_value": null,
+        "default_value": "01",
         "is_computed": false,
         "computed_from": null
       },
@@ -142,7 +142,7 @@
         "width": 1,
         "is_max_width": false,
         "description": "Total number of pages for multi-page text",
-        "default_value": null,
+        "default_value": "01",
         "is_computed": false,
         "computed_from": null
       },
@@ -1087,7 +1087,7 @@
       {
         "name": "padding",
         "width": 18,
-        "is_max_width": false,
+        "is_max_width": true,
         "description": "Padding bytes (usually zeros)",
         "default_value": null,
         "is_computed": false,

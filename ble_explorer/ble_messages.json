@@ -21,11 +21,15 @@
     "description": "",
     "values": {
       "command": "4e",
-      "header": "00010030",
-      "length": "00000101",
-      "start_delimeter": "0a0a",
-      "payload": "68656c6c6f20776f726c64",
-      "end_delimeter": "0a0a"
+      "sequence": "01",
+      "flags": "01",
+      "reserved_1": "00",
+      "screen_status": "01",
+      "reserved_2": "00",
+      "reserved_3": "00",
+      "current_page": "01",
+      "total_pages": "01",
+      "text_data": "68656c6c6f20776f726c64"
     },
     "created_at": null
   },
@@ -146,18 +150,6 @@
     "description": "Get master and slave MAC addresses",
     "values": {
       "command": "2d",
-      "length": "0001",
-      "data": "01"
-    },
-    "created_at": null
-  },
-  "msg_instance_014": {
-    "id": "msg_instance_014",
-    "message_type_id": "msg_034",
-    "name": "get_mn_s_mac_alt",
-    "description": "Get master and slave MAC addresses (alternative)",
-    "values": {
-      "command": "32",
       "length": "0001",
       "data": "01"
     },

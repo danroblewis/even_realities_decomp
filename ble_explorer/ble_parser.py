@@ -8,6 +8,10 @@ import json
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 
+import logging
+logger = logging.getLogger(__name__)
+
+
 # Data file path
 DATA_FILE = "ble_message_types.json"
 
@@ -91,11 +95,16 @@ def deserialize_packet(packet_bytes: bytes, message_type: MessageType) -> Dict[s
             else:
                 # Fixed width
                 width = int(attr.width)
+
                 if offset + width <= len(packet_bytes):
                     value = packet_bytes[offset:offset + width].hex()
                     result[attr.name] = value
                     offset += width
                 else:
+                    # INSERT_YOUR_CODE
+                    # Log what's happening here with the data
+                    # This is a partial/failed parse: not enough bytes for attribute
+                    logger.warning(f"[deserialize_packet] Not enough bytes for attribute '{attr.name}' (expected width {width}) at offset {offset}. Packet length: {len(packet_bytes)}. Data: {packet_bytes.hex()}")
                     # Not enough bytes
                     result[attr.name] = "insufficient_data"
                     break

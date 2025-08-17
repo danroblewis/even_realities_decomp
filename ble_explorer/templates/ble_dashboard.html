@@ -311,6 +311,10 @@
         </div>
     </div>
 </div>
+
+<!-- Custom tooltip container -->
+<div id="customTooltip" class="custom-tooltip"></div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -601,6 +605,45 @@
     pointer-events: none;
 }
 
+/* Ensure tooltips work properly on table cells */
+td[title] {
+    position: relative;
+}
+
+/* Remove the CSS-based tooltips for table cells since we'll use JavaScript */
+td[title]:hover::after,
+td[title]:hover::before {
+    display: none;
+}
+
+/* Custom tooltip container */
+.custom-tooltip {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: pre-line;
+    text-align: left;
+    z-index: 10000;
+    max-width: 300px;
+    word-wrap: break-word;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    display: none;
+}
+
+.custom-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+}
+
 /* Alert styling */
 .alert {
     border-radius: 8px;
@@ -635,6 +678,67 @@ let isLogCleared = false; // Flag to track if log was manually cleared
 
 // Global variable to track data view mode
 let showParsedData = true;
+
+// Tooltip handling
+let tooltipTimeout = null;
+
+function showTooltip(element, text, event) {
+    if (!text) return;
+    
+    const tooltip = document.getElementById('customTooltip');
+    tooltip.textContent = text;
+    tooltip.style.display = 'block';
+    
+    // Position tooltip above the mouse cursor
+    const rect = element.getBoundingClientRect();
+    const x = event.clientX;
+    let y = event.clientY - 10;
+    
+    // Ensure tooltip doesn't go off-screen
+    const tooltipRect = tooltip.getBoundingClientRect();
+    if (y - tooltipRect.height < 10) {
+        y = event.clientY + 20; // Show below cursor if not enough space above
+    }
+    if (x + tooltipRect.width > window.innerWidth - 10) {
+        tooltip.style.left = (window.innerWidth - tooltipRect.width - 10) + 'px';
+    } else {
+        tooltip.style.left = (x - tooltipRect.width / 2) + 'px';
+    }
+    tooltip.style.top = y + 'px';
+}
+
+function hideTooltip() {
+    const tooltip = document.getElementById('customTooltip');
+    tooltip.style.display = 'none';
+}
+
+function setupTooltips() {
+    // Add event listeners to all cells with data-tooltip attributes
+    document.addEventListener('mouseover', function(event) {
+        if (event.target.tagName === 'TD' && event.target.hasAttribute('data-tooltip')) {
+            const tooltipText = event.target.getAttribute('data-tooltip');
+            if (tooltipText) {
+                showTooltip(event.target, tooltipText, event);
+            }
+        }
+    });
+    
+    document.addEventListener('mouseout', function(event) {
+        if (event.target.tagName === 'TD' && event.target.hasAttribute('data-tooltip')) {
+            hideTooltip();
+        }
+    });
+    
+    // Update tooltip position when mouse moves
+    document.addEventListener('mousemove', function(event) {
+        if (event.target.tagName === 'TD' && event.target.hasAttribute('data-tooltip')) {
+            const tooltipText = event.target.getAttribute('data-tooltip');
+            if (tooltipText) {
+                showTooltip(event.target, tooltipText, event);
+            }
+        }
+    });
+}
 
 // Function to toggle between parsed and hex data view
 function toggleDataView() {
@@ -752,29 +856,36 @@ function createParsedDataDisplay(parsedData, context = 'default', messageTypeInf
         }
         
         // Create enhanced tooltip with detailed information
-        let tooltip = '';
+        let tooltip_lines = [];
         
         // Add attribute information
-        tooltip += `Attribute: ${attrName}`;
-        tooltip += `\nValue: ${displayValue}`;
         
         // Add original hex value if different from display value
         if (typeof attrValue === 'string' && attrValue.startsWith('0x') && attrValue.substring(2) !== displayValue) {
-            tooltip += `\nHex: ${attrValue}`;
+            tooltip_lines.push(`Hex: ${attrValue}`);
+        }
+
+        tooltip_lines.push(`${attrValue}`);
+        // Parse attrValue as hex to bytes, then decode those bytes into ASCII
+        if (typeof attrValue === 'string' && attrValue.startsWith('0x')) {
+            try {
+                const hexStr = attrValue.substring(2);
+                if (hexStr.length % 2 === 0) {
+                    const bytes = new Uint8Array(hexStr.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+                    const ascii = Array.from(bytes).map(b => (b >= 32 && b <= 126) ? String.fromCharCode(b) : '.').join('');
+                    tooltip_lines.push(`ASCII: "${ascii}"`);
+                }
+            } catch (e) {
+                // Ignore decoding errors
+            }
         }
         
         // Add message type information if available
         if (messageTypeInfo && messageTypeInfo.name) {
-            tooltip += `\n\nMessage Type: ${messageTypeInfo.name}`;
-            if (messageTypeInfo.description) {
-                tooltip += `\nDescription: ${messageTypeInfo.description}`;
-            }
+            tooltip_lines.push(`Message Type: ${messageTypeInfo.name}`);
         }
         
-        // Add context information
-        tooltip += `\n\nContext: ${context}`;
-        
-        display += `<span class="attribute-pill ${bgColor}" title="${tooltip}">
+        display += `<span class="attribute-pill ${bgColor}" title="${tooltip_lines.join('\n')}">
             <span class="attribute-value">${displayValue}</span>
             <span class="attribute-name">${attrName}</span>
         </span>`;
@@ -930,10 +1041,10 @@ function updateCommunicationLog(logData) {
             commandDisplay = `<small class="text-muted d-block">Command: ${msg.command_code}</small>`;
         }
         
-        // Create tooltip with packet bytes converted to text
+        // Create simplified tooltip with just hex and text
         let tooltip = '';
         if (msg.hex_data) {
-            tooltip = `Packet: ${msg.hex_data}`;
+            tooltip = "";//`Hex: ${msg.hex_data}`;
             
             // Try to convert hex to text for display
             try {
@@ -941,37 +1052,25 @@ function updateCommunicationLog(logData) {
                 if (hexStr.length % 2 === 0) {
                     const bytes = new Uint8Array(hexStr.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
                     const textDecoder = new TextDecoder('utf-8');
-                    const text = textDecoder.decode(bytes).replace(/\x00/g, ''); // Remove null bytes
+                    let text = textDecoder.decode(bytes).replace(/\x00/g, ''); // Remove null bytes
+                    // Remove non-ASCII characters from decoded text
+                    text = text.replace(/[^\x20-\x7E\n\r\t]/g, '.');
+                    text = text.replace(/[\r\n]+/g, ' ');
+                    text = text.replace(/"/g, '');
                     
                     // Only add text if it's printable ASCII and meaningful
                     if (text && text.length > 0 && text.match(/^[\x20-\x7E\n\r\t]*$/) && text.length > 2) {
-                        tooltip += `\n\nText: "${text}"`;
+                        tooltip += `${text}`;
                     }
                 }
             } catch (e) {
                 // If text conversion fails, just show hex
             }
-            
-            // Add message info if available
-            if (msg.message_name) {
-                tooltip += `\n\nMessage: ${msg.message_name}`;
-            }
-            if (msg.sequence_name) {
-                tooltip += `\nSequence: ${msg.sequence_name}`;
-            }
-            if (msg.status) {
-                tooltip += `\nStatus: ${msg.status}`;
-            }
         }
-        
-        // Set the tooltip on the row
-        if (tooltip) {
-            row.setAttribute('title', tooltip);
-        }
-        
+
         row.innerHTML = `
             <td><small>${time}</small></td>
-            <td>${messageLink}${replayButton}${commandDisplay}</td>
+            <td data-tooltip="${tooltip || ''}">${messageLink}${replayButton}${commandDisplay}</td>
             <td>${dataDisplay}</td>
             <td class="status-response-column">${statusResponse}</td>
         `;
@@ -1001,6 +1100,7 @@ function startCommunicationLogRefresh() {
 // Start the refresh when the page loads
 document.addEventListener('DOMContentLoaded', function() {
     startCommunicationLogRefresh();
+    setupTooltips();
 });
 
 // Scan for BLE devices
@@ -1577,7 +1677,7 @@ function validateSkipValuesInput(input) {
         if (skipValue === '') continue; // Skip empty values
         
         // Check if it's a valid hex value (1-2 characters)
-        if (!/^[0-9a-fA-F]{1-2}$/.test(skipValue)) {
+        if (!/^[0-9a-fA-F]{2}$/.test(skipValue)) {
             input.setCustomValidity('Skip values must be 1-2 character hexadecimal values (e.g., 00, ff, 7f)');
             return false;
         }
@@ -1769,19 +1869,6 @@ async function startScanner() {
         // Generate message queue
         scannerState.messageQueue = generateMessageQueue();
         scannerState.totalMessages = scannerState.messageQueue.length;
-        
-        // Confirm large scans
-        if (scannerState.totalMessages > 100) {
-            const confirmed = confirm(
-                `This will send ${scannerState.totalMessages} messages. ` +
-                `At ${document.getElementById('delayMs').value}ms delay, this will take approximately ` +
-                `${Math.round((scannerState.totalMessages * parseInt(document.getElementById('delayMs').value)) / 1000)} seconds. ` +
-                `Continue?`
-            );
-            if (!confirmed) {
-                return;
-            }
-        }
         
         scannerState.currentIndex = 0;
         scannerState.isRunning = true;
