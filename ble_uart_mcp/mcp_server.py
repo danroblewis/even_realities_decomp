@@ -32,35 +32,51 @@ server = FastMCP("g1-device-mcp")
 ble_manager = NordicBLEUARTManager()
 
 @server.tool()
-async def scan_g1_devices() -> str:
+async def scan_g1_devices() -> Dict[str, Any]:
     """Scan for available G1 devices.
     
     Returns:
-        str: Status message indicating the scan operation and results
+        Dict[str, Any]: JSON response with scan results including:
+            - result: "success" or "error"
+            - devices: List of discovered devices with their properties
+            - count: Number of devices found
+            - error: Error message if scan failed
         
     Note:
         This performs an actual BLE scan for devices with names containing "G1_" pattern.
-        Returns a list of discovered devices with their addresses and signal strength.
+        Returns a structured list of discovered devices with their addresses and signal strength.
     """
     try:
         devices = await ble_manager.scan_for_devices(filter_pattern="G1_")
-        
-        if not devices:
-            return "No G1 devices found during scan"
-        
-        result = f"Found {len(devices)} G1 device(s):\n"
-        for device in devices:
-            rssi = device.get('rssi', 'N/A')
-            result += f"- {device['name']} ({device['address']}) RSSI: {rssi}\n"
-        
-        return result
-        
     except Exception as e:
         logger.error(f"Scan failed: {e}")
-        return f"Scan failed: {str(e)}"
+        return {
+            "result": "error",
+            "error": str(e),
+            "devices": [],
+            "count": 0
+        }
+    
+    # Process devices to extract side information and format properly
+    processed_devices = []
+    for device in devices:
+        device_info = {
+            "name": device['name'],
+            "id": device['address'],
+            "side": "right" if "_R_" in device['name'] else "left" if "_L_" in device['name'] else "unknown",
+            "rssi": device.get('rssi') if device.get('rssi') != 'N/A' else None
+        }
+        processed_devices.append(device_info)
+    
+    return {
+        "result": "success",
+        "devices": processed_devices,
+        "count": len(processed_devices)
+    }
+    
 
 @server.tool()
-async def connect_g1_device(address: str) -> str:
+async def connect_g1_device(address: str) -> Dict[str, Any]:
     """Connect to a G1 device by address.
     
     Args:
@@ -69,146 +85,242 @@ async def connect_g1_device(address: str) -> str:
                       Example: "AA:BB:CC:DD:EE:FF"
     
     Returns:
-        str: Status message indicating connection success or failure
+        Dict[str, Any]: JSON response with connection status including:
+            - result: "success" or "error"
+            - connected: Boolean indicating connection state
+            - device_name: Name of connected device (if successful)
+            - device_address: Address of connected device (if successful)
+            - error: Error message if connection failed
         
     Note:
         This establishes a BLE connection to the specified device and discovers
         the Nordic UART service and characteristics.
     """
+    # Validate address format - accept both MAC addresses and CoreBluetooth UUIDs
+    
+    # Check if it's a MAC address (XX:XX:XX:XX:XX:XX) or CoreBluetooth UUID (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)
+    mac_pattern = r'^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$'
+    uuid_pattern = r'^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$'
+
+    if not address or (not re.match(mac_pattern, address) and not re.match(uuid_pattern, address)):
+        return {
+            "result": "error",
+            "connected": False,
+            "error": "Invalid address format. Expected format:\n- MAC address: XX:XX:XX:XX:XX:XX\n- CoreBluetooth UUID: XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+        }
+    
+    # Check if already connected
+    if ble_manager.is_connected:
+        return {
+            "result": "error",
+            "connected": True,
+            "device_name": ble_manager.target_device.name if ble_manager.target_device else "Unknown",
+            "device_address": address,
+            "error": "Already connected to a device. Disconnect first."
+        }
+
     try:
-        # Validate address format - accept both MAC addresses and CoreBluetooth UUIDs
-        
-        # Check if it's a MAC address (XX:XX:XX:XX:XX:XX) or CoreBluetooth UUID (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)
-        mac_pattern = r'^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$'
-        uuid_pattern = r'^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$'
-        
-        if not address or (not re.match(mac_pattern, address) and not re.match(uuid_pattern, address)):
-            return "Invalid address format. Expected format:\n- MAC address: XX:XX:XX:XX:XX:XX\n- CoreBluetooth UUID: XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-        
-        # Check if already connected
-        if ble_manager.is_connected:
-            return f"Already connected to {ble_manager.target_device.name if ble_manager.target_device else 'device'}. Disconnect first."
-        
-        # Attempt connection
         success = await ble_manager.connect_to_device(address)
-        
-        if success:
-            device_name = ble_manager.target_device.name if ble_manager.target_device else "Unknown"
-            return f"Successfully connected to G1 device: {device_name} ({address})"
-        else:
-            return f"Failed to connect to device {address}"
-            
     except Exception as e:
         logger.error(f"Connection failed: {e}")
-        return f"Connection failed: {str(e)}"
+        return {
+            "result": "error",
+            "connected": False,
+            "error": f"Connection failed: {str(e)}"
+        }
+
+    if success:
+        device_name = ble_manager.target_device.name if ble_manager.target_device else "Unknown"
+        return {
+            "result": "success",
+            "connected": True,
+            "device_name": device_name,
+            "device_address": address
+        }
+    else:
+        return {
+            "result": "error",
+            "connected": False,
+            "error": f"Failed to connect to device {address}"
+        }
+        
 
 @server.tool()
-async def disconnect_g1_device() -> str:
+async def disconnect_g1_device() -> Dict[str, Any]:
     """Disconnect from the current G1 device.
     
     Returns:
-        str: Status message indicating disconnection success or failure
+        Dict[str, Any]: JSON response with disconnection status including:
+            - result: "success" or "error"
+            - disconnected: Boolean indicating disconnection state
+            - device_name: Name of previously connected device (if successful)
+            - error: Error message if disconnection failed
         
     Note:
         This closes the BLE connection to the currently connected device,
         cleans up resources, stops the heartbeat mechanism, and resets connection state.
     """
-    try:
-        if not ble_manager.is_connected:
-            return "Not connected to any device"
-        
-        device_name = ble_manager.target_device.name if ble_manager.target_device else "Unknown"
+    if not ble_manager.is_connected:
+        return {
+            "result": "error",
+            "disconnected": False,
+            "error": "Not connected to any device"
+        }
+
+    device_name = ble_manager.target_device.name if ble_manager.target_device else "Unknown"
+
+    try:        
         await ble_manager.disconnect()
-        return f"Successfully disconnected from G1 device: {device_name}"
-        
+        return {
+            "result": "success",
+            "disconnected": True,
+            "device_name": device_name
+        }
     except Exception as e:
         logger.error(f"Disconnection failed: {e}")
-        return f"Disconnection failed: {str(e)}"
+        return {
+            "result": "error",
+            "disconnected": False,
+            "error": f"Disconnection failed: {str(e)}"
+        }
 
 @server.tool()
-async def get_g1_connection_status() -> str:
+async def get_g1_connection_status() -> Dict[str, Any]:
     """Get current connection status and device info.
     
     Returns:
-        str: Detailed status information including:
-             - Connection state (connected/disconnected)
-             - Device name and address (if connected)
-             - UART service availability
-             - Number of pending messages
-             - Total message count
+        Dict[str, Any]: JSON response with detailed connection status including:
+            - result: "success" or "error"
+            - connected: Boolean indicating connection state
+            - device_name: Name of connected device (if connected)
+            - device_address: Address of connected device (if connected)
+            - uart_service_available: Boolean indicating UART service availability
+            - tx_characteristic_available: Boolean indicating TX characteristic availability
+            - rx_characteristic_available: Boolean indicating RX characteristic availability
+            - pending_messages_count: Number of pending messages
+            - total_messages: Total message count
+            - error: Error message if status check failed
+        
+    Note:
+        This returns detailed status information including:
+         - Connection state (connected/disconnected)
+         - Device name and address (if connected)
+         - UART service availability
+         - Number of pending messages
+         - Total message count
     """
     try:
         status = ble_manager.get_connection_status()
-        
-        result = "G1 Device Connection Status:\n"
-        result += f"Connected: {status['connected']}\n"
-        
-        if status['connected']:
-            result += f"Device Name: {status['device_name']}\n"
-            result += f"Device Address: {status['device_address']}\n"
-            result += f"UART Service: {'Available' if status['uart_service_available'] else 'Not Available'}\n"
-            result += f"TX Characteristic: {'Available' if status['tx_characteristic_available'] else 'Not Available'}\n"
-            result += f"RX Characteristic: {'Available' if status['rx_characteristic_available'] else 'Not Available'}\n"
-            result += f"Pending Messages: {status['pending_messages_count']}\n"
-            result += f"Total Messages: {status['total_messages']}\n"
-        else:
-            result += "Device: None\n"
-            result += "Address: None\n"
-        
-        return result
-        
     except Exception as e:
         logger.error(f"Status check failed: {e}")
-        return f"Status check failed: {str(e)}"
+        return {
+            "result": "error",
+            "connected": False,
+            "error": f"Status check failed: {str(e)}"
+        }
+
+    return {
+        "result": "success",
+        "connected": status['connected'],
+        "device_name": status.get('device_name'),
+        "device_address": status.get('device_address'),
+        "uart_service_available": status.get('uart_service_available', False),
+        "tx_characteristic_available": status.get('tx_characteristic_available', False),
+        "rx_characteristic_available": status.get('rx_characteristic_available', False),
+        "pending_messages_count": status.get('pending_messages_count', 0),
+        "total_messages": status.get('total_messages', 0)
+    }
+    
 
 @server.tool()
-async def send_g1_message(hex_data: str) -> str:
+async def send_g1_message(hex_data: str) -> Dict[str, Any]:
     """Send a message to the connected G1 device.
     
     Args:
         hex_data (str): Hexadecimal string representation of the message to send.
+                       Can contain spaces, tabs, or other whitespace which will be automatically removed.
                        Should contain only valid hexadecimal characters (0-9, A-F, a-f).
-                       No spaces, colons, or other separators should be included.
-                       Example: "2506" for a command with command code 0x25 and data 0x06
-                       Example: "ABCD1234" for a longer message
+                       Examples: "2506", "25 06", "25 06 00 01", "25 06 00 01 04 02"
     
     Returns:
-        str: Status message indicating whether the message was sent successfully
-             and if a response was received within the 1-second timeout period
+        Dict[str, Any]: JSON response with message status including:
+            - result: "success" or "error"
+            - message_sent: Boolean indicating if message was sent
+            - response_received: Boolean indicating if response was received
+            - response_data: Response data in hex format (if received)
+            - timeout: Boolean indicating if message timed out
+            - error: Error message if sending failed
         
     Note:
         This sends the hex_data as bytes to the connected G1 device using the
         Nordic BLE UART protocol and waits for a response up to 1 second.
         All messages are treated as commands and will timeout after 1 second if no response is received.
+        Spaces, tabs, and other whitespace in hex_data are automatically removed before processing.
         
     Examples:
         - send_g1_message("2506") -> Sends command 0x25 with data 0x06
-        - send_g1_message("ABCD") -> Sends 0xABCD
+        - send_g1_message("25 06") -> Same as above (spaces removed)
+        - send_g1_message("25 06 00 01") -> Sends 0x25060001
+        - send_g1_message("ABCD 1234") -> Sends 0xABCD1234
         - send_g1_message("1234567890ABCDEF") -> Sends longer message
     """
+    # Validate hex data format and remove spaces/whitespace
+    if not hex_data:
+        return {
+            "result": "error",
+            "message_sent": False,
+            "error": "Hex data cannot be empty"
+        }
+    
+    # Remove all spaces, tabs, newlines, and other whitespace
+    cleaned_hex = ''.join(hex_data.split())
+    
+    # Validate that cleaned hex data contains only valid hexadecimal characters
+    if not cleaned_hex or not all(c in '0123456789ABCDEFabcdef' for c in cleaned_hex):
+        return {
+            "result": "error",
+            "message_sent": False,
+            "error": "Invalid hex data format. Use only hexadecimal characters (0-9, A-F, a-f). Spaces and whitespace are automatically removed."
+        }
+    
+    # Check connection
+    if not ble_manager.is_connected:
+        return {
+            "result": "error",
+            "message_sent": False,
+            "error": "Not connected to any device. Connect first using connect_g1_device."
+        }
+    
     try:
-        # Validate hex data format
-        if not hex_data or not all(c in '0123456789ABCDEFabcdef' for c in hex_data):
-            return "Invalid hex data format. Use only hexadecimal characters (0-9, A-F, a-f)"
-        
-        # Check connection
-        if not ble_manager.is_connected:
-            return "Not connected to any device. Connect first using connect_g1_device."
-        
-        # Send message
-        response_data = await ble_manager.send_message(hex_data)
-        
-        # Format response based on what was returned
-        if response_data:
-            # Format response data as space-separated hex pairs
-            hex_pairs = ' '.join([response_data[i:i+2] for i in range(0, len(response_data), 2)])
-            return f"Message sent successfully. Response received: {hex_pairs}"
-        else:
-            return "Message sent but timed out after 1 second (no response received)"
-            
+        # Send message using cleaned hex data
+        response_data = await ble_manager.send_message(cleaned_hex)
     except Exception as e:
         logger.error(f"Failed to send message: {e}")
-        return f"Failed to send message: {str(e)}"
+        return {
+            "result": "error",
+            "message_sent": False,
+            "error": f"Failed to send message: {str(e)}"
+        }
 
+    # Format response based on what was returned
+    if response_data:
+        # Format response data as space-separated hex pairs
+        hex_pairs = ' '.join([response_data[i:i+2] for i in range(0, len(response_data), 2)])
+        return {
+            "result": "success",
+            "message_sent": True,
+            "response_received": True,
+            "response_data": hex_pairs,
+            "timeout": False
+        }
+    else:
+        return {
+            "result": "success",
+            "message_sent": True,
+            "response_received": False,
+            "response_data": None,
+            "timeout": True
+        }
+        
 if __name__ == "__main__":
     server.run()
