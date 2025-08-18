@@ -5,16 +5,23 @@ BLE UART Manager - Minimal Stub
 
 import asyncio
 import logging
+import traceback
+from datetime import datetime
 from typing import Dict, List, Any
 
 import bleak
-from bleak import BleakScanner
+from bleak import BleakScanner, BleakClient
 from bleak.backends.device import BLEDevice
 
 logger = logging.getLogger(__name__)
 
 class NordicBLEUARTManager:
     """Minimal stub for BLE UART Manager"""
+    
+    # Nordic BLE UART Service UUIDs
+    UART_SERVICE_UUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
+    UART_TX_CHARACTERISTIC_UUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"  # Write
+    UART_RX_CHARACTERISTIC_UUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"  # Notify
     
     def __init__(self):
         self.is_connected = False
@@ -92,7 +99,6 @@ class NordicBLEUARTManager:
                 logger.info(f"Found target device in new scan: {target_device.name} ({target_device.address})")
             
             # Connect to the device
-            from bleak import BleakClient
             self.client = BleakClient(target_device)
             logger.info("Attempting to connect...")
             logger.info("Note: On macOS, you may see a pairing prompt. Please accept it if it appears.")
@@ -127,7 +133,6 @@ class NordicBLEUARTManager:
             
         except Exception as e:
             logger.error(f"Failed to connect: {e}")
-            import traceback
             logger.error(f"Connection error traceback: {traceback.format_exc()}")
             self.is_connected = False
             return False
@@ -139,15 +144,10 @@ class NordicBLEUARTManager:
                 logger.error("No services available")
                 return False
             
-            # Nordic BLE UART Service UUID (standard for Nordic devices)
-            UART_SERVICE_UUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
-            UART_TX_CHARACTERISTIC_UUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"  # Write
-            UART_RX_CHARACTERISTIC_UUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"  # Notify
-            
             # Look for the Nordic UART service
             uart_service = None
             for service in self.client.services:
-                if service.uuid.lower() == UART_SERVICE_UUID.lower():
+                if service.uuid.lower() == self.UART_SERVICE_UUID.lower():
                     uart_service = service
                     break
             
@@ -161,7 +161,7 @@ class NordicBLEUARTManager:
             # Find TX characteristic (write)
             self.tx_characteristic = None
             for char in uart_service.characteristics:
-                if char.uuid.lower() == UART_TX_CHARACTERISTIC_UUID.lower():
+                if char.uuid.lower() == self.UART_TX_CHARACTERISTIC_UUID.lower():
                     if "write" in char.properties:
                         self.tx_characteristic = char
                         logger.info("Found UART TX characteristic (write)")
@@ -174,7 +174,7 @@ class NordicBLEUARTManager:
             # Find RX characteristic (notify)
             self.rx_characteristic = None
             for char in uart_service.characteristics:
-                if char.uuid.lower() == UART_RX_CHARACTERISTIC_UUID.lower():
+                if char.uuid.lower() == self.UART_RX_CHARACTERISTIC_UUID.lower():
                     if "notify" in char.properties:
                         self.rx_characteristic = char
                         logger.info("Found UART RX characteristic (notify)")
@@ -200,11 +200,46 @@ class NordicBLEUARTManager:
     async def _notification_handler(self, characteristic, data: bytearray):
         """Handle incoming notifications from the UART RX characteristic"""
         try:
+            timestamp = datetime.now()
             hex_data = data.hex()
+            received_command_code = hex_data[:2].upper() if len(hex_data) >= 2 else ""
+            
             logger.info(f"Received UART notification: {hex_data}")
-            # TODO: Implement response matching logic
+            
+            # Look for a matching sent message
+            matching_sent = None
+            for msg_id, sent_msg in self.pending_messages.items():
+                if sent_msg["command_code"] == received_command_code:
+                    matching_sent = sent_msg
+                    break
+            
+            if matching_sent:
+                # This is a response to a sent message
+                response_time_ms = int((timestamp - matching_sent["timestamp"]).total_seconds() * 1000)
+                
+                logger.info(f"Found matching sent message: {matching_sent['id']}")
+                
+                # Update the sent message with response info
+                matching_sent["response_data"] = hex_data
+                matching_sent["response_time_ms"] = response_time_ms
+                
+                # Signal that response has been received
+                if "response_event" in matching_sent:
+                    matching_sent["response_event"].set()
+                
+                # Remove from pending messages
+                if matching_sent["id"] in self.pending_messages:
+                    del self.pending_messages[matching_sent["id"]]
+                
+                logger.info(f"Matched response {hex_data} with sent message {matching_sent['id']} in {response_time_ms}ms")
+                
+            else:
+                # This is an unmatched received message
+                logger.info(f"No matching sent message found for response {hex_data}")
+                
         except Exception as e:
             logger.error(f"Error handling notification: {e}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
     
     async def disconnect(self):
         """Disconnect from the current device"""
@@ -237,11 +272,58 @@ class NordicBLEUARTManager:
             "total_messages": len(self.communication_log)
         }
     
-    async def send_message(self, hex_data: str) -> Dict[str, Any]:
-        """Stub: send_message"""
-        logger.info(f"Stub: send_message {hex_data}")
-        return {
-            "status": "timeout",
-            "message_id": "stub_0",
-            "message": "Stub implementation"
+    async def send_message(self, hex_data: str) -> str:
+        """Send a UART message and return the hex response packet or empty string"""
+        if not self.client or not self.is_connected:
+            raise Exception("Not connected to any device")
+        
+        if not self.tx_characteristic:
+            raise Exception("UART TX characteristic not available")
+        
+        # Convert hex string to bytes
+        data = bytes.fromhex(hex_data)
+        command_code = hex_data[:2].upper() if len(hex_data) >= 2 else ""
+        
+        # Create sent message record
+        sent_msg = {
+            "id": f"sent_{self.message_id_counter}",
+            "timestamp": datetime.now(),
+            "direction": "sent",
+            "data": data,
+            "command_code": command_code
         }
+        
+        self.message_id_counter += 1
+        self.communication_log.append(sent_msg)
+        
+        # Add to pending messages
+        self.pending_messages[sent_msg["id"]] = sent_msg
+        
+        try:
+            # Send the data
+            await self.client.write_gatt_char(self.tx_characteristic.uuid, data)
+            logger.info(f"Sent UART message: {hex_data} (Command: {command_code})")
+            
+            # Create an event to wait for response
+            response_event = asyncio.Event()
+            sent_msg["response_event"] = response_event
+            
+            # Wait for response with 1-second timeout
+            await asyncio.wait_for(response_event.wait(), timeout=1.0)
+            
+            # Response received - return the hex data
+            response_data = sent_msg.get("response_data", "")
+            return response_data
+            
+        except asyncio.TimeoutError:
+            # Timeout reached
+            if sent_msg["id"] in self.pending_messages:
+                del self.pending_messages[sent_msg["id"]]
+            return ""  # Return empty string on timeout
+            
+        except Exception as e:
+            logger.error(f"Failed to send message: {e}")
+            # Clean up pending message on error
+            if sent_msg["id"] in self.pending_messages:
+                del self.pending_messages[sent_msg["id"]]
+            raise
