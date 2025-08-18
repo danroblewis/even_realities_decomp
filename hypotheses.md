@@ -195,3 +195,151 @@
 - Includes packet length information
 **Testing Required**: Send commands and analyze response format to confirm structure
 **Status**: Pending
+
+# 0x07 Command Hypotheses
+
+## 0x07 Command - Countdown Timer Control (PUT Request)
+**Hypothesis**: The command `0x07` is a countdown timer control command that sets timer values and enables/disables countdown functionality
+**Confidence**: High
+**Code Evidence**: 
+- In `ble_process_put_req.c` case 7: Handles countdown timer operations with SPI transactions
+- In `master_process_get_req.c` case 6: Shows `BLE_REQ_PUT_COUNTDOWN_TIMER` debug output with format `%d(%02d:%02d:%02d), enable:%d`
+- The debug output suggests the command expects: timer value in seconds, formatted as HH:MM:SS, and an enable flag
+- Case 7 in `ble_process_put_req.c` processes parameters and returns 0xC9 success code
+- The command appears to be a PUT request (0x01-0x27 range) based on command routing logic
+**Testing Required**: Send command `07 [timer_seconds] [enable_flag]` to verify countdown timer behavior
+**Status**: New - Requires testing
+
+## 0x07 Command - Parameter Structure
+**Hypothesis**: The 0x07 command expects a 32-bit timer value and an enable flag
+**Confidence**: Medium
+**Code Evidence**: 
+- Debug output shows timer value processing: `uVar14 / 0xe10` (seconds to hours), `(uVar14 % 0xe10) / 0x3c` (seconds to minutes), `(uVar14 % 0xe10) % 0x3c` (remaining seconds)
+- The timer value appears to be stored as a 32-bit integer (0xe10 = 3600 seconds = 1 hour)
+- Enable flag is stored at offset +5 in the timer structure
+- Command processes parameters and stores them in timer-related memory locations
+**Testing Required**: Test with different timer values and enable/disable flags to map the parameter structure
+**Status**: New - Requires testing
+
+## 0x07 Command - Response Format
+**Hypothesis**: The 0x07 command returns a success response with 0xC9 status code
+**Confidence**: High
+**Code Evidence**: 
+- Case 7 in `ble_process_put_req.c` sets `local_13c = (undefined1 [2])CONCAT11(0xc9,local_13c[0])`
+- Returns response with length 0x14 (20 bytes)
+- Uses `(**(code **)(param_1 + 0xc))(local_13c,0x14)` to send response
+- Pattern matches other PUT request responses (0xC9 success code)
+**Testing Required**: Send command and analyze response format to confirm structure
+**Status**: New - Requires testing
+
+# 0x08 Command Hypotheses
+
+## 0x08 Command - Schedule Task Control (PUT Request)
+**Hypothesis**: The command `0x08` is a schedule task control command that manages scheduled tasks and their timing
+**Confidence**: High
+**Code Evidence**: 
+- In `master_process_get_req.c` case 7: Shows `BLE_REQ_PUT_SCHEDULE_TASK` debug output
+- In `ble_process_put_req.c` case 8: Handles schedule task operations with packet validation
+- In `process_for_even_ai_show.c` case 8: Shows `E_ID_SCREEN_SCHEDULE` for schedule screen handling
+- The command copies 0x16A (362) bytes of data to a schedule buffer
+- Updates timer intervals and manages persistent task status
+- Returns 0xC9 success code
+**Testing Required**: Send command `08 [data]` to verify schedule task behavior
+**Status**: New - Requires testing
+
+## 0x08 Command - Parameter Structure
+**Hypothesis**: The 0x08 command expects a complex data structure with packet validation and task configuration
+**Confidence**: High
+**Code Evidence**: 
+- Uses packet length validation: `uVar23 = (uint)*(ushort *)((int)param_3 + 1)` vs `uVar9 = (uint)*(ushort *)(packet + 2)`
+- Copies 362 bytes (0x16A) to schedule buffer: `memcpy(*(undefined4 *)(param_1 + 0xff4),pbVar17,0x16a)`
+- Has sub-command types: case 0x03 (proxy thread operations) and case 0x04 (status operations)
+- Manages work mode states and timer intervals
+**Testing Required**: Test with different data lengths and sub-command types to map the parameter structure
+**Status**: New - Requires testing
+
+## 0x08 Command - Response Format
+**Hypothesis**: The 0x08 command returns a success response with 0xC9 status code
+**Confidence**: High
+**Code Evidence**: 
+- Case 7 in `master_process_get_req.c` follows the same pattern as other PUT requests
+- Uses `z_spin_lock_valid` and returns through standard response path
+- Pattern matches other PUT request responses (0xC9 success code)
+**Testing Required**: Send command and analyze response format to confirm structure
+**Status**: New - Requires testing
+
+# 0x09 Command Hypotheses
+
+## 0x09 Command - Teleprompter Info Control (PUT Request)
+**Hypothesis**: The command `0x09` is a teleprompter control command that manages teleprompter text, state, and operations
+**Confidence**: High
+**Code Evidence**: 
+- In `ble_process_put_req.c` case 9: Handles teleprompter operations with packet validation
+- In `process_for_even_ai_show.c` case 9: Shows `E_ID_SCREEN_TELEPROMPTER` for teleprompter screen handling
+- In `spec_ble_command_hook.c`: Shows `BLE_REQ_PUT_TELEPROMPTER_INFO` simulator handling
+- The command has multiple sub-command types (0x01 = init, 0x06 = suspend, etc.)
+- Manages teleprompter buffers and work mode states
+- Returns 0xC9 success code
+**Testing Required**: Send command `09 [sub_command] [data]` to verify teleprompter behavior
+**Status**: New - Requires testing
+
+## 0x09 Command - Parameter Structure
+**Hypothesis**: The 0x09 command expects a complex data structure with sub-commands and packet validation
+**Confidence**: High
+**Code Evidence**: 
+- Uses packet length validation: `uVar23 = (uint)*(ushort *)((int)param_3 + 1)` vs `uVar9 = (uint)*(ushort *)(packet + 2)`
+- Has sub-command types: case 0x01 (init packet), case 0x06 (suspend packet)
+- Copies data to teleprompter buffers with size validation
+- Manages packet counting and multi-packet operations
+- Uses 0x217 (535) byte buffer for teleprompter data
+**Testing Required**: Test with different sub-command types and data lengths to map the parameter structure
+**Status**: New - Requires testing
+
+## 0x09 Command - Response Format
+**Hypothesis**: The 0x09 command returns a success response with 0xC9 status code and teleprompter data
+**Confidence**: High
+**Code Evidence**: 
+- Case 9 in `ble_process_put_req.c` follows the same pattern as other PUT requests
+- Uses packet validation and memory buffer operations
+- Pattern matches other PUT request responses (0xC9 success code)
+- May return teleprompter-specific data based on sub-command type
+**Testing Required**: Send command and analyze response format to confirm structure
+**Status**: New - Requires testing
+
+# 0x0A Command Hypotheses
+
+## 0x0A Command - Navigation Info Control (PUT Request)
+**Hypothesis**: The command `0x0A` is a navigation control command that manages navigation state, maps, and routing information
+**Confidence**: High
+**Code Evidence**: 
+- In `ble_process_put_req.c` case 10: Handles navigation operations with packet validation
+- In `process_for_even_ai_show.c` case 10: Shows `E_ID_SCREEN_NAVIGATION` for navigation screen handling
+- In `spec_ble_command_hook.c`: Shows `BLE_REQ_PUT_NAVIGATION_INFO` simulator handling
+- The command has multiple sub-command types (0x00 = startup, 0x01 = sync, 0x02 = exit, etc.)
+- Manages navigation buffers, map displays, and work mode states
+- Returns 0xC9 success code
+**Testing Required**: Send command `0A [sub_command] [data]` to verify navigation behavior
+**Status**: New - Requires testing
+
+## 0x0A Command - Parameter Structure
+**Hypothesis**: The 0x0A command expects a complex data structure with sub-commands and navigation data
+**Confidence**: High
+**Code Evidence**: 
+- Uses packet length validation: `uVar23 = (uint)*(ushort *)((int)param_3 + 1)` vs `uVar9 = (uint)*(ushort *)(packet + 2)`
+- Has sub-command types: case 0x00 (startup), case 0x01 (sync), case 0x02 (exit), case 0x04 (app sync), case 0x05 (exit)
+- Manages navigation buffers with size 0xF5 (245 bytes)
+- Handles map coordinates, road names, distance info, and speed data
+- Sets `NAVIGATION_ACTIVE` flag and manages overview/panoramic map states
+**Testing Required**: Test with different sub-command types to map the parameter structure
+**Status**: New - Requires testing
+
+## 0x0A Command - Response Format
+**Hypothesis**: The 0x0A command returns a success response with 0xC9 status code and navigation data
+**Confidence**: High
+**Code Evidence**: 
+- Case 10 in `ble_process_put_req.c` follows the same pattern as other PUT requests
+- Uses packet validation and memory buffer operations
+- Pattern matches other PUT request responses (0xC9 success code)
+- May return navigation-specific data based on sub-command type
+**Testing Required**: Send command and analyze response format to confirm structure
+**Status**: New - Requires testing

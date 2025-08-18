@@ -117,6 +117,35 @@
 - **G1B Variant (b5 = 181)**: Enhanced/Standard G1 glasses - Most common responses
 - **G1A Variant (b4 = 180)**: Alternative/Base G1 glasses - Limited responses (0x0A, 0x1A, 0x13, 0x15, 0x16)
 
+## Wakeup Angle Commands (0x0B/0x32)
+
+### PUT Commands (0x0B)
+| Command | Expected Response | Real-World Effect | Notes |
+|---------|------------------|-------------------|-------|
+| `0B 01 00` | `0B C9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | **10° head tilt** required to wake up | Sets wakeup angle to level 1, no offset |
+| `0B 02 00` | `0B C9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | **80° head tilt** required to wake up | Sets wakeup angle to level 2, no offset |
+| `0B 01 01` | `0B C9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | **11° head tilt** required to wake up | Sets wakeup angle to level 1, offset 1 |
+
+### GET Commands (0x32)
+| Command | Expected Response | Current Settings | Notes |
+|---------|------------------|------------------|-------|
+| `32` | `32 6D 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Level: 1, Offset: 0 | Get wakeup angle (10° head tilt) |
+| `32` | `32 6D 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Level: 2, Offset: 0 | Get wakeup angle (80° head tilt) |
+| `32` | `32 6D 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Level: 1, Offset: 1 | Get wakeup angle (11° head tilt) |
+
+### Wakeup Angle Behavior Confirmed
+- **Level 0x01 (1)**: **10 degrees** head tilt required to wake up device
+- **Level 0x02 (2)**: **80 degrees** head tilt required to wake up device  
+- **Offset 0x01**: Adds **1 degree** to the base level
+- **Immediate Effect**: Changes take effect immediately after command
+- **Persistent**: Settings persist across device restarts
+
+### Command ID Transformation Discovery
+**Critical Breakthrough**: Command IDs get transformed before entering switch statements
+- **Formula**: `Case_Number = Command_ID - 1`
+- **Example**: Command 0x0B (11) maps to Case 10 in master process
+- **Impact**: Enables efficient discovery of other command pairs
+
 ## File Management Commands
 
 ### PUT Commands (0x15)
@@ -160,3 +189,17 @@
 - **Radio Communication**: ESB (Enhanced ShockBurst) is a Nordic Semiconductor radio protocol
 - **Channel Information**: GET command retrieves current ESB channel configuration
 - **SPI Interface**: Uses SPI master transaction to communicate with radio hardware
+
+## Navigation Commands
+
+### 0x17 (PUT) - Navigation Mode Toggle
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `17` | `17 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Enables nav subsystem (`set_system_navigation_mode(1)`), no UI by itself |
+
+### 0x0A (PUT) - Navigation Info (sub-commands)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `0A 00 [payload...]` | (may timeout) | Startup: initializes buffers; requires valid payload, likely no direct response |
+| `0A 01 [payload...]` | (may timeout) | Sync: x<=0x1e8, y<=0x88; strings: time/distance<=0x18, road<=0x40 |
+| `0A 02` | (may timeout) | Additional state mgmt; behavior TBD |

@@ -174,10 +174,39 @@
   - **Byte 4**: Information type identifier (0x80-0xBD range)
   - **Bytes 5-11**: `24 01 06 02 01 06 02` - System configuration data
 - **Device Variants Discovered**:
-  - **G1B (b5 = 181)**: Most common responses, enhanced features
-  - **G1A (b4 = 180)**: Limited responses, basic configuration
+  - **G1B Variant (b5 = 181)**: Most common responses, enhanced features
+  - **G1A Variant (b4 = 180)**: Limited responses, basic configuration
 - **Behavior**: Returns comprehensive device identification and capability information
 - **Status**: Fully tested and documented with 59+ different info types
+
+#### 0x0B - Wakeup Angle Control (PUT Request) - ✅ CONFIRMED
+- **Command Format**: `0B [level] [offset]`
+- **Parameters**: 
+  - level: Wakeup angle level (0x01 = 10°, 0x02 = 80°, etc.)
+  - offset: Additional angle offset (0x00 = no offset, 0x01 = +1°, etc.)
+- **Response**: `0B C9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `0B` - Echo of command ID
+  - `C9` - Success confirmation code (0xC9)
+  - `00` - Additional status byte
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Real-World Effects**: ✅ **Confirmed functional** - immediately changes device wakeup behavior
+- **Status**: Fully tested and documented with real-world verification
+
+#### 0x32 - Wakeup Angle Retrieval (GET Request) - ✅ CONFIRMED
+- **Command Format**: `32` (no parameters)
+- **Response**: `32 6D [level] [offset] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `32` - Echo of command ID
+  - `6D` - Status code (0x6D = 109)
+  - `[level]` - Current wakeup angle level
+  - `[offset]` - Current wakeup angle offset
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Memory Storage**: 
+  - **0xef4**: Wakeup angle level (stored as byte value)
+  - **0xef5**: Wakeup angle offset (stored as byte value)
+- **Behavior**: Returns current wakeup angle settings
+- **Status**: Fully tested and documented
 
 #### 0x15 - File Enqueue (PUT Request) - 🔄 DISCOVERED
 - **Command Format**: `15 [sequence_number] [file_data...]`
@@ -191,6 +220,81 @@
 - **Status**: Code analyzed, requires testing
 
 **Note**: While commands 0x15 and 0x35 follow the 0x20 offset routing pattern (0x15 + 0x20 = 0x35), they are NOT functionally related. Command 0x15 handles file operations while command 0x35 handles ESB channel information.
+
+## 🎯 **CRITICAL BREAKTHROUGH: Command ID Transformation Pattern**
+
+### **Pattern Discovered**
+**Command IDs get transformed before entering switch statements** in the master process:
+
+#### **Transformation Formula**
+```
+Case_Number = Command_ID - 1
+Command_ID = Case_Number + 1
+```
+
+#### **Switch Statement Structure**
+```c
+uVar14 = (uint)*param_2;  // Command ID from packet
+switch(uVar14 - 1) {      // Transform: Command_ID - 1
+  case 0:   // Command 0x01 (1)
+  case 1:   // Command 0x02 (2)  
+  case 2:   // Command 0x03 (3)
+  case 10:  // Command 0x0B (11) - Wakeup Angle
+  case 11:  // Command 0x0C (12) - Device Info
+  case 12:  // Command 0x0D (13) - Device Serial
+  case 13:  // Command 0x0E (14) - Glasses Serial
+}
+```
+
+### **Complete Command Mapping**
+
+| Command ID | Case Number | Function | Status |
+|------------|-------------|----------|---------|
+| **0x01 (1)** | **Case 0** | Brightness Control | ✅ Confirmed |
+| **0x02 (2)** | **Case 1** | Anti-Shake Enable | ✅ Confirmed |
+| **0x03 (3)** | **Case 2** | Display Mode | ✅ Confirmed |
+| **0x0B (11)** | **Case 10** | **Wakeup Angle** | ✅ **Newly Confirmed** |
+| **0x0C (12)** | **Case 11** | Device Info Control | ✅ Confirmed |
+| **0x0D (13)** | **Case 12** | Device Serial Number | ✅ Confirmed |
+| **0x0E (14)** | **Case 13** | Glasses Serial Number | ✅ Confirmed |
+
+### **Why This Discovery is Critical**
+
+1. **Explains Previous Failures**: Commands like 0x12, 0x0A were wrong because we didn't understand the transformation
+2. **Enables Efficient Search**: We can now search for `case (N-1)` to find command N
+3. **Predicts Command Structure**: If we find case X, we know the command ID is X+1
+4. **Solves Grep Limitations**: Direct grep searches for case numbers now work
+
+### **Search Strategy for Future Commands**
+
+#### **To Find Command ID N:**
+```bash
+grep "case [N-1]:" *.c
+```
+
+#### **To Find Case X Handler:**
+```bash
+grep "case [X]:" *.c
+```
+
+#### **To Find Specific Function:**
+```bash
+grep "BLE_REQ_PUT_[FUNCTION_NAME]" *.c
+```
+
+### **Impact on Reverse Engineering**
+
+1. **Faster Discovery**: Can now predict command IDs from case numbers
+2. **Accurate Mapping**: No more guessing which command ID corresponds to which function
+3. **Systematic Approach**: Can systematically work through case numbers to find all commands
+4. **Eliminates Trial-and-Error**: Command ID testing becomes predictable
+
+### **Next Steps Enabled**
+
+1. **Map All Cases**: Systematically identify all case numbers in master process
+2. **Find Missing Commands**: Use transformation pattern to discover unknown command IDs
+3. **Complete Protocol**: Build complete command map using this pattern
+4. **Efficient Testing**: Test commands with confidence knowing the correct IDs
 
 ### Investigated Commands
 
@@ -264,7 +368,7 @@ The firmware implements a sophisticated command routing system based on command 
    - POST requests: Complex responses based on operation (requires testing)
 4. **Response Consistency**: ✅ **Confirmed**: All commands of the same type return consistent response patterns
 
-### Command Structure Patterns
+### Command Structure Patterns had 
 1. **Simple Commands**: Single command byte + parameters (e.g., 0x01, 0x29)
 2. **Complex Commands**: Multi-packet structure with validation (e.g., 0x4E)
 3. **Resource Commands**: Return resource data with dimensions (e.g., 0x4E resource)
@@ -357,3 +461,72 @@ Based on code analysis and user confirmation, the three brightness types represe
 **Impact**: This discovery provides a framework for understanding the entire protocol
 **Progress**: Moved from hypothesis to confirmed fact for brightness commands
 **Next Phase**: Ready to apply the same methodology to other commands
+
+#### 0x05 - Internal Debug (PUT Request) - 🔍 NEW DISCOVERY
+- **Command Format**: `05 [subcommand] [json_data...]`
+- **Parameters**: 
+  - subcommand: Subcommand identifier (0x00, 0x01, 0x03 tested)
+  - json_data: JSON string containing whitelist configuration
+- **Response**: `05 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `05` - Echo of command ID
+  - `c9` - Success confirmation code (0xC9)
+  - `00` - Validation result (always 0x00 in our testing)
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Actual Function**: **Whitelist App Management** (not internal debug)
+- **Code Evidence**: 
+  - Case 4 in `switch(uVar14 - 1)` 
+  - Function: `handle_whitelist_app_from_app()`
+  - Allocates 6KB buffer for whitelist data
+  - Processes JSON data for app permissions
+- **Behavior**: 
+  - Always returns success (0xC9) regardless of input data
+  - Validation/parsing appears to always fail (second byte 0x00)
+  - No observable changes to whitelist settings in testing
+  - Screen effect observed once but not reproducible
+- **Status**: 🔍 **Partially Understood** - Function identified but not functional in testing
+
+#### 0x2E - Whitelist App Retrieval (GET Request) - 🔍 NEW DISCOVERY
+- **Command Format**: `2E` (no parameters)
+- **Response**: Multi-packet JSON response with whitelist configuration
+- **Response Pattern**: 
+  - `2e 08 [packet_number] [json_data_fragment]`
+  - Packet 0: `{"call_enable":fa`
+  - Packet 1: `lse,"msg_enable":`
+  - Packet 2: `false,"ios_mail_enable":`
+  - Packet 3: `enable":false,"cal`
+  - Packet 4: `endar_enable":fal`
+  - Packet 5: `se,"app":{"enable`
+  - Packet 6: `":false,"list":[]`
+  - Packet 7: `}}`
+- **Complete JSON Structure**:
+  ```json
+  {
+    "call_enable": false,
+    "msg_enable": false,
+    "ios_mail_enable": false,
+    "calendar_enable": false,
+    "app": {
+      "enable": false,
+      "list": []
+    }
+  }
+  ```
+- **Function**: `process_whitelist_app_packet_data()`
+- **Status**: ✅ **Fully Functional** - Returns current whitelist configuration
+
+#### 0x17 - Navigation Mode Toggle (PUT Request) - ⚠️ PARTIALLY CONFIRMED
+- **Command Format**: `17`
+- **Response**: `17 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Behavior**: Enables navigation system via `set_system_navigation_mode(1)`. No visual changes observed by itself. Navigation is disabled elsewhere by `set_system_navigation_mode(0)` (e.g., in `low_speed_peripheral_dispatch_thread.c`).
+- **Status**: Toggle confirmed by response; UI impact pending.
+
+#### 0x0A - Navigation Info (PUT Request) - 🔍 DISCOVERED
+- **Purpose**: Navigation data/control with sub-commands handled in `ble_process_put_req.c` case 10.
+- **Known sub-commands**:
+  - `00` Startup: Initializes 0xF5-byte buffer; clears overview/panoramic flags; updates status; enforces bounds on coordinates and strings.
+  - `01` Sync: Writes coordinates (max x=0x1e8, y=0x88) and strings with limits (time/distance 0x18, road 0x40, etc.).
+  - `02/04/05/06` Present in code; likely manage additional states.
+- **Observed**: Test packets for `0A 00`, `0A 01`, `0A 02` timed out; no UI changes.
+- **Notes**: Likely requires valid payloads and navigation mode enabled via `0x17` plus an activation sequence.
+- **Status**: Structure identified; behavior unconfirmed on device.
