@@ -196,24 +196,15 @@ async def send_g1_message(hex_data: str) -> str:
             return "Not connected to any device. Connect first using connect_g1_device."
         
         # Send message
-        result = await ble_manager.send_message(hex_data)
+        response_data = await ble_manager.send_message(hex_data)
         
-        # Format response
-        if result['status'] == 'success':
-            response_time = result.get('response_time_ms', 'N/A')
-            response_status = result.get('response_status', 'unknown')
-            # Extract response data if available
-            response_data = result.get('response_data', '')
-            if response_data:
-                # Format response data as space-separated hex pairs
-                hex_pairs = ' '.join([response_data[i:i+2] for i in range(0, len(response_data), 2)])
-                return f"Message sent successfully. Response received in {response_time}ms. Status: {response_status}. Message ID: {result['message_id']}\nResponse: {hex_pairs}"
-            else:
-                return f"Message sent successfully. Response received in {response_time}ms. Status: {response_status}. Message ID: {result['message_id']}"
-        elif result['status'] == 'timeout':
-            return f"Message sent but timed out after 1 second. Message ID: {result['message_id']}"
+        # Format response based on what was returned
+        if response_data:
+            # Format response data as space-separated hex pairs
+            hex_pairs = ' '.join([response_data[i:i+2] for i in range(0, len(response_data), 2)])
+            return f"Message sent successfully. Response received: {hex_pairs}"
         else:
-            return f"Message failed: {result.get('message', 'Unknown error')}"
+            return "Message sent but timed out after 1 second (no response received)"
             
     except Exception as e:
         logger.error(f"Failed to send message: {e}")

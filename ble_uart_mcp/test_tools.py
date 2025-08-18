@@ -6,6 +6,7 @@ Test the MCP server by creating a client and running actual commands
 import asyncio
 import os
 import sys
+import re
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -47,12 +48,32 @@ async def test_mcp_server():
                 # Test 2: Call scan_g1_devices
                 print("\n2. Testing scan_g1_devices...")
                 scan_result = await session.call_tool("scan_g1_devices", {})
-                print(f"✓ scan_g1_devices result: {scan_result.content[0].text}")
+                scan_text = scan_result.content[0].text
+                print(f"✓ scan_g1_devices result: {scan_text}")
                 
-                # Test 3: Call connect_g1_device
-                print("\n3. Testing connect_g1_device...")
+                # Extract device address from scan results for testing
+                device_address = None
+                if "Found" in scan_text and "device(s)" in scan_text:
+                    # Parse the scan results to find a device address
+                    # Handle both MAC addresses (XX:XX:XX:XX:XX:XX) and CoreBluetooth UUIDs (XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)
+                    address_match = re.search(r'\(([0-9A-Fa-f:]{17}|[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12})\)', scan_text)
+                    if address_match:
+                        device_address = address_match.group(1)
+                        print(f"✓ Found device address for testing: {device_address}")
+                    else:
+                        print("✗ Error: No device address found in scan results")
+                        print("Test cannot continue without a valid device address")
+                        return
+                else:
+                    print("✗ Error: No G1 devices found during scan")
+                    print("Test cannot continue without available devices")
+                    print("Please ensure G1 devices are powered on and in range")
+                    return
+                
+                # Test 3: Call connect_g1_device with found device
+                print(f"\n3. Testing connect_g1_device with {device_address}...")
                 connect_result = await session.call_tool("connect_g1_device", {
-                    "address": "AA:BB:CC:DD:EE:FF"
+                    "address": device_address
                 })
                 print(f"✓ connect_g1_device result: {connect_result.content[0].text}")
                 
@@ -61,23 +82,34 @@ async def test_mcp_server():
                 status_result = await session.call_tool("get_g1_connection_status", {})
                 print(f"✓ get_g1_connection_status result: {status_result.content[0].text}")
                 
-                # Test 5: Call send_g1_message
-                print("\n5. Testing send_g1_message...")
-                send_result = await session.call_tool("send_g1_message", {
-                    "hex_data": "2506",
-                    "timeout": 2.0
-                })
-                print(f"✓ send_g1_message result: {send_result.content[0].text}")
+                # Test 5: Call send_g1_message (only if connected)
+                if "Successfully connected" in connect_result.content[0].text:
+                    print("\n5. Testing send_g1_message with heartbeat command...")
+                    send_result = await session.call_tool("send_g1_message", {
+                        "hex_data": "250600010402"
+                    })
+                    print(f"✓ send_g1_message result: {send_result.content[0].text}")
+                    
+                    # Test 6: Call send_g1_message with get display mode command
+                    print("\n6. Testing send_g1_message with get display mode command...")
+                    send_result2 = await session.call_tool("send_g1_message", {
+                        "hex_data": "2b000101"
+                    })
+                    print(f"✓ send_g1_message (get display mode) result: {send_result2.content[0].text}")
+                    
+                    # Test 7: Call send_g1_message with clear screen command
+                    print("\n7. Testing send_g1_message with clear screen command...")
+                    send_result3 = await session.call_tool("send_g1_message", {
+                        "hex_data": "18000100"
+                    })
+                    print(f"✓ send_g1_message (clear screen) result: {send_result3.content[0].text}")
+                else:
+                    print("\n5. Skipping send_g1_message tests (not connected)")
+                    print("6. Skipping send_g1_message tests (not connected)")
+                    print("7. Skipping send_g1_message tests (not connected)")
                 
-                # Test 6: Call send_g1_message with different parameters
-                print("\n6. Testing send_g1_message with different parameters...")
-                send_result2 = await session.call_tool("send_g1_message", {
-                    "hex_data": "ABCD1234"
-                })
-                print(f"✓ send_g1_message (default timeout) result: {send_result2.content[0].text}")
-                
-                # Test 7: Call disconnect_g1_device
-                print("\n7. Testing disconnect_g1_device...")
+                # Test 8: Call disconnect_g1_device
+                print("\n8. Testing disconnect_g1_device...")
                 disconnect_result = await session.call_tool("disconnect_g1_device", {})
                 print(f"✓ disconnect_g1_device result: {disconnect_result.content[0].text}")
                 

@@ -80,28 +80,14 @@ async def test_ble_connection():
         # Step 4: Send clear screen packet
         print(f"\n4. Sending clear screen packet: 18000100")
         
-        # Set up callback to monitor responses
-        def on_message_received(message):
-            print(f"📨 Message received: {message.hex_data} (Type: {message.message_type.value})")
-            if message.response_to:
-                print(f"   Response to: {message.response_to}")
-                print(f"   Response time: {message.response_time_ms}ms")
-        
-        def on_status_update(message):
-            print(f"📊 Status update: {message.hex_data} (Type: {message.message_type.value})")
-        
-        manager.set_message_received_callback(on_message_received)
-        manager.set_status_update_callback(on_status_update)
-        
         # Send the clear screen packet
-        result = await manager.send_command("18000100")
+        result = await manager.send_message("18000100")
         
         print(f"✓ Clear screen packet sent!")
-        print(f"   Result: {result['status']}")
-        if 'message_id' in result:
-            print(f"   Message ID: {result['message_id']}")
-        if 'response_time_ms' in result:
-            print(f"   Response time: {result['response_time_ms']}ms")
+        if result:
+            print(f"   Response received: {result}")
+        else:
+            print("   No response received (timeout)")
         
         # Step 5: Wait a bit to see if we get any responses
         print(f"\n5. Waiting for responses (10 seconds)...")
@@ -117,9 +103,9 @@ async def test_ble_connection():
         if manager.communication_log:
             print(f"\n7. Communication log:")
             for msg in manager.communication_log:
-                direction_icon = "📤" if msg.direction == "sent" else "📥"
-                status_icon = "✅" if msg.status.value == "responded" else "⏳" if msg.status.value == "pending" else "❌"
-                print(f"   {direction_icon} {msg.hex_data} | {msg.message_type.value} | {status_icon} {msg.status.value}")
+                direction_icon = "📤" if msg['direction'] == "sent" else "📥"
+                hex_data = msg['data'].hex() if msg['direction'] == "sent" else msg.get('response_data', 'N/A')
+                print(f"   {direction_icon} {hex_data} | {msg['direction']}")
         
         print(f"\n✓ Test completed successfully!")
         
