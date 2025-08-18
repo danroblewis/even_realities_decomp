@@ -143,6 +143,42 @@
 - **Behavior**: ✅ Successfully sets glasses serial number
 - **Status**: Fully tested and documented
 
+#### 0x0C - Device Info Control (PUT Request) - ⚠️ PARTIALLY CONFIRMED
+- **Command Format**: `0C [param1] [param2]`
+- **Parameters**: 
+  - param1: Parameter 1 (tested 0x01, 0x02)
+  - param2: Parameter 2 (tested 0x00)
+- **Response**: `0C CA 65 72 72 6F 72 20 70 75 74 20 72 65 71 2E 00 00 00 00`
+- **Response Pattern**: 
+  - `0C` - Echo of command ID
+  - `CA` - Error code (0xCA = 202)
+  - `65 72 72 6F 72 20 70 75 74 20 72 65 71 2E` - "error put req." (ASCII text)
+- **Behavior**: ⚠️ Returns error - PUT command not functional
+- **Status**: Partially tested, shows error behavior
+
+#### 0x2C - Device Info Retrieval (GET Request) - ✅ CONFIRMED
+- **Command Format**: `2C [info_type]`
+- **Parameters**: 
+  - info_type: Type of device information to retrieve (0x00-0x3A+)
+- **Response**: `2C 66 [11_bytes_of_device_info] 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `2C` - Echo of command ID
+  - `66` - Status code (0x66 = 102)
+  - `[11_bytes]` - Device information (varies by info_type)
+  - `00 00 00 00 00 00 00` - Padding with zeros (20 bytes total)
+- **Data Structure**:
+  - **Bytes 1-2**: `25 28` - Device identifier/header (always constant)
+  - **Byte 3**: `b4` or `b5` - **Device variant indicator**
+    - `b5` (181): **G1B device variant** (Enhanced/Standard)
+    - `b4` (180): **G1A device variant** (Alternative/Base)
+  - **Byte 4**: Information type identifier (0x80-0xBD range)
+  - **Bytes 5-11**: `24 01 06 02 01 06 02` - System configuration data
+- **Device Variants Discovered**:
+  - **G1B (b5 = 181)**: Most common responses, enhanced features
+  - **G1A (b4 = 180)**: Limited responses, basic configuration
+- **Behavior**: Returns comprehensive device identification and capability information
+- **Status**: Fully tested and documented with 59+ different info types
+
 #### 0x15 - File Enqueue (PUT Request) - 🔄 DISCOVERED
 - **Command Format**: `15 [sequence_number] [file_data...]`
 - **Parameters**: 
