@@ -51,6 +51,7 @@ The final deliverable should be a **complete byte-for-byte protocol specificatio
 - `command_log.md` - Record of all commands sent and responses received
 - `code_analysis.md` - Key findings from firmware analysis
 - `protocol_map.md` - Current understanding of the protocol structure
+- `priorities.md` - Current research priorities and focus areas
 
 ### Information States
 1. **Observation** - Raw data from code analysis or testing
@@ -221,9 +222,51 @@ The final deliverable should be a **complete byte-for-byte protocol specificatio
    - `command_log.md` - Review previous test results
    - `code_analysis.md` - Check existing firmware analysis
    - `protocol_map.md` - Review current protocol understanding
+   - `priorities.md` - Review current research priorities
 2. **Assess Current State**: Determine what hypotheses need testing and what areas need more investigation
 3. **Plan Next Steps**: Based on current status, plan the next analysis or testing phase
 4. **Update Session Log**: Record current focus and progress in session documentation
+
+## Priority Management
+
+### Research Priority System
+- **Maintain Limited Focus**: Keep only 3-5 active research priorities at any time
+- **Prioritize by Impact**: Focus on discoveries that advance protocol understanding most significantly
+- **Balance Effort vs. Reward**: Prioritize investigations that can be completed with reasonable effort
+- **Track Dependencies**: Some investigations may depend on others being completed first
+
+### Priority Categories
+1. **High Priority**: Critical for protocol understanding, actively being worked on
+2. **Medium Priority**: Important but can wait, queued for next session
+3. **Low Priority**: Interesting but not critical, may be dropped if not pursued
+4. **Dropped**: Investigations that are no longer relevant or feasible
+
+### Priority Management Process
+1. **Review Priorities**: At the start of each session, review and update `priorities.md`
+2. **Add New Priorities**: When new research opportunities are discovered, evaluate their priority
+3. **Promote Priorities**: Move medium priorities to high when ready to work on them
+4. **Drop Low Priorities**: Remove priorities that are no longer relevant or have been superseded
+5. **Limit Active Work**: Focus on high priority items, don't start new medium priority work
+
+### Priority Documentation Format
+```markdown
+## [Priority Name]
+**Category**: [High/Medium/Low/Dropped]
+**Description**: [What needs to be investigated]
+**Rationale**: [Why this priority matters]
+**Dependencies**: [What needs to be completed first]
+**Effort Estimate**: [Low/Medium/High effort required]
+**Added Date**: [When this priority was identified]
+**Last Updated**: [When priority status was last changed]
+**Notes**: [Additional context or observations]
+```
+
+### When to Drop Priorities
+- **Superseded**: New information makes the investigation unnecessary
+- **Too Complex**: Investigation requires more effort than the potential value
+- **Blocked**: Cannot proceed due to missing dependencies or tools
+- **Low Impact**: Discovery would not significantly advance protocol understanding
+- **Time Expired**: Priority has been low priority for multiple sessions without progress
 
 ### Session Continuity
 - Maintain all documentation between sessions

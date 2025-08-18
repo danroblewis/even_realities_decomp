@@ -127,7 +127,7 @@
   - `return 3` (3-byte response)
 
 ## Actual PUT Response Format - BREAKTHROUGH DISCOVERY
-**Actual Response Format**: `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+**Actual Response Format**: `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0x00 00`
 **Response Pattern**: 
 - `01` - Echo of command ID
 - `c9` - Success confirmation code (0xC9)
@@ -207,3 +207,256 @@
 **Connection**: BLE via Nordic UART Service
 **Test Cases**: 7 brightness commands with various parameters
 **Discovery**: Command routing logic explains response format discrepancy
+
+# Confirmed Facts - Anti-Shake Enable Command
+
+## Command Structure
+**Command**: `0x02` (PUT) and `0x2A` (GET) - Anti-Shake Enable Control
+**Behavior**: Controls the anti-shake feature on the G1 device
+**Evidence**: 
+- **Code Analysis**: Identified in `master_process_get_req.c` and `ble_process_get_req.c`
+- **Test Results**: Device accepts command and responds consistently
+- **User Observations**: Command acknowledged by device
+
+## Command Format
+
+### PUT Command 0x02 - Anti-Shake State Control
+**Format**: `02 [state_value]`
+**Parameters**:
+- `state_value`: Single byte (0x00 = disabled, 0x01 = enabled, accepts any byte value 0x00-0xFF)
+**Response**: `02 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+**Response Pattern**: 
+- `02` - Echo of command ID
+- `c9` - Success confirmation code (0xC9)
+- `00` - Additional status byte
+- `00 00 00...` - Padding with zeros (20 bytes total)
+
+### GET Command 0x2A - Anti-Shake Status Request
+**Format**: `2A`
+**Parameters**: None
+**Response**: `2A 68 [current_state] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+**Response Pattern**: 
+- `2A` - Echo of command ID
+- `68` - Status code (0x68 = 104)
+- `[current_state]` - Current anti-shake state (last value set via PUT command)
+- `00 00 00...` - Padding with zeros (20 bytes total)
+
+## Device Behavior
+**Acceptance**: Device accepts any byte value (0x00-0xFF) without validation
+**State Persistence**: PUT commands immediately change and store the state
+**Response**: All PUT commands return identical success response regardless of input values
+**State Retrieval**: GET commands return the last successfully set state value
+**Evidence**: 
+- **Test Results**: Values 0x00, 0x01, 0x80, 0xFF all accepted and stored
+- **Response Analysis**: Consistent response patterns for both command types
+- **State Verification**: State changes confirmed via subsequent GET requests
+
+## Command Routing Validation
+**Hypothesis Confirmed**: The anti-shake command follows the same routing system as brightness
+**Evidence**: 
+- **PUT Command 0x02**: Successfully processed and returns 0xC9 success codes
+- **GET Command 0x2A**: Successfully processed and returns 0x68 status codes
+- **Response Format**: Different command types return different response patterns as expected
+
+## Comprehensive Testing Results - ✅ FULLY VALIDATED
+**Testing Scope**: 11 different anti-shake commands with various parameters
+**Success Rate**: 100% - All commands accepted and returned expected responses
+
+### **State Change Testing**
+- **Enable/Disable**: Successfully toggled between 0x00 (disabled) and 0x01 (enabled)
+- **Invalid Values**: Values 0x80 and 0xFF accepted and stored without modification
+- **State Persistence**: All state changes immediately stored and retrievable
+- **Response Consistency**: PUT commands maintain perfect response consistency across all test cases
+
+## Response Pattern Analysis - ✅ COMPLETE UNDERSTANDING
+**PUT Command Response Pattern**: `[command_id] [0xC9] [0x00] [padding...]`
+- **Command ID Echo**: Always echoes the sent command ID (0x02)
+- **Success Code**: Always returns 0xC9 (success confirmation)
+- **Status Byte**: Always returns 0x00 (consistent status)
+- **Padding**: Always 17 bytes of zeros (total response: 20 bytes)
+
+**GET Command Response Pattern**: `[command_id] [0x68] [current_state] [padding...]`
+- **Command ID Echo**: Always echoes the sent command ID (0x2A)
+- **Status Code**: Always returns 0x68 (status/acknowledgment)
+- **State Byte**: Returns the last successfully set state value
+- **Padding**: Always 17 bytes of zeros (total response: 20 bytes)
+
+## Key Insights from Comprehensive Testing
+1. **Perfect Consistency**: PUT commands are completely predictable and consistent
+2. **No Parameter Validation**: Device accepts all byte values without modification
+3. **Immediate State Persistence**: Changes are immediately stored and retrievable
+4. **Response Stability**: PUT responses never vary, GET responses reflect current state
+5. **Command Echo**: All commands echo their ID, confirming proper routing
+6. **Status Code Reliability**: 0xC9 for PUT success, 0x68 for GET acknowledgment
+
+## Last Verified
+**Date**: [Current Date/Time]
+**Device**: Even G1_29_R_F721C5
+**Connection**: BLE via Nordic UART Service
+**Test Cases**: Multiple anti-shake state changes
+**Discovery**: Command accepts any byte value, not just 0x00/0x01
+
+# Confirmed Facts - Display Mode Command
+
+## Command Structure
+**Command**: `0x03` (PUT) and `0x2B` (GET) - Display Mode Control
+**Behavior**: Controls various display modes and behaviors on the G1 device
+**Evidence**: 
+- **Code Analysis**: Identified in `master_process_get_req.c` and `ble_process_get_req.c`
+- **Test Results**: Device accepts command and responds consistently
+- **User Observations**: Multiple visual effects observed on device
+
+## Command Details
+
+### PUT Command 0x03 - Display Mode Control
+- **Command Format**: `03 [mode_value] [flag_show_tip]`
+- **Parameters**: 
+  - `mode_value`: Display mode (0x00-0xFF, but only certain values have effects)
+  - `flag_show_tip`: Flag for showing tips (0x00 = disabled)
+- **Response**: `03 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `03` - Echo of command ID
+  - `c9` - Success confirmation code (0xC9)
+  - `00` - Additional status byte
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+
+### GET Command 0x2B - Display Mode Status
+- **Command Format**: `2B`
+- **Parameters**: None
+- **Response**: `2B 69 [current_mode] [system_status] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `2B` - Echo of command ID
+  - `69` - Status code (0x69 = 105)
+  - `[current_mode]` - Current display mode value
+  - `[system_status]` - System status flag
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+
+## Functional Display Modes Discovered
+
+### Mode 0x0A (10) = "Activated" Mode
+- **Visual Effect**: Shows **sun icon with "Activated" text**
+- **Behavior**: **Enables dashboard with head tilt activation**
+- **Use Case**: Normal/active mode for daily use
+- **Status**: ✅ Confirmed functional
+
+### Mode 0x0B (11) = "Persistent Dashboard" Mode
+- **Visual Effect**: Dashboard pops up and **stays visible permanently**
+- **Behavior**: Dashboard remains on screen without head tilt requirement
+- **Use Case**: Official iOS app testing mode, development/debugging
+- **Status**: ✅ Confirmed functional
+
+### Mode 0x0C (12) = "Silent" Mode
+- **Visual Effect**: Shows **moon icon with "Silent" text** then disappears
+- **Behavior**: **Disables dashboard with head tilt activation**
+- **Use Case**: Silent/do-not-disturb mode
+- **Status**: ✅ Confirmed functional
+
+### Other Modes (0x00-0x09, 0x0D-0x1E)
+- **Visual Effect**: No visible changes observed
+- **Behavior**: No apparent functional differences
+- **Status**: ⚠️ No visible effects detected
+
+## Last Verified
+**Date**: [Current Date/Time]
+**Device**: Even G1_29_R_F721C5
+**Connection**: BLE via Nordic UART Service
+**Test Cases**: 31 display modes systematically tested (0x00-0x1E)
+**Discovery**: Three functional modes identified with distinct visual and behavioral effects
+
+# Confirmed Facts - Serial Number Commands
+
+## Command Structure
+**Command**: Multiple serial number related commands for device identification
+**Behavior**: Manages device and glasses serial numbers and identification information
+**Evidence**: 
+- **Code Analysis**: Identified in `ble_process_get_req.c` and related files
+- **Test Results**: Device accepts commands and responds consistently
+- **User Observations**: Commands provide device identification data
+
+## Command Details
+
+### Device Serial Number Commands (0x0D/0x2D)
+
+#### PUT Command 0x0D - Device Serial Number Control
+- **Command Format**: `0D [param1] [length] [serial_data...]`
+- **Parameters**: 
+  - `param1`: Parameter 1 (typically 0x01)
+  - `length`: Length of serial data
+  - `serial_data`: Serial number data bytes
+- **Response**: `0D CB [param1] [length] [first_byte] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `0D` - Echo of command ID
+  - `CB` - **Continuation code** (0xCB, not 0xC9 success)
+  - `[param1]` - Parameter 1 (typically 0x01)
+  - `[length]` - Length of serial data
+  - `[first_byte]` - First byte of serial data
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Status**: ⚠️ Returns continuation code - may require multi-packet operation
+
+#### GET Command 0x2D - Device Info Retrieval
+- **Command Format**: `2D`
+- **Parameters**: None
+- **Response**: `2D 67 [12_bytes_of_data] 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `2D` - Echo of command ID
+  - `67` - Status code (0x67 = 103)
+  - `[12_bytes]` - Device information (likely MAC addresses and serial data)
+  - `00 00 00 00 00 00` - Padding with zeros (20 bytes total)
+- **Current Data**: `c5 21 f7 c0 57 ee a0 5f 0f d7 30 db`
+- **Behavior**: Returns comprehensive device identification information
+- **Status**: ✅ Fully functional
+
+### Glasses Serial Number Commands (0x0E/0x33)
+
+#### PUT Command 0x0E - Glasses Serial Number Control
+- **Command Format**: `0E [param1] [length] [serial_data...]`
+- **Parameters**: 
+  - `param1`: Parameter 1 (typically 0x01)
+  - `length`: Length of serial data
+  - `serial_data`: Serial number data bytes
+- **Response**: `0E C9 [param1] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `0E` - Echo of command ID
+  - `C9` - Success confirmation code (0xC9)
+  - `[param1]` - Parameter 1 (typically 0x01)
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Behavior**: Successfully sets glasses serial number
+- **Status**: ✅ Fully functional
+
+#### GET Command 0x33 - Glasses Serial Number Retrieval
+- **Command Format**: `33`
+- **Parameters**: None
+- **Response**: `33 33 [serial_string] [suffix] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `33` - Echo of command ID
+  - `33` - Status code (0x33 = 51)
+  - `[serial_string]` - Glasses serial number string
+  - `[suffix]` - Additional identifier (e.g., "ses")
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Current Data**: `47 31 52 31 46 45 45 30 39 35 38 00 73 65 73 00`
+- **Decoded**: "G1R1FEE0958" + "ses"
+- **Behavior**: Returns current glasses serial number and identifier
+- **Status**: ✅ Fully functional
+
+## Key Discoveries
+
+### 1. **Different Response Patterns**
+- **Device commands** (0x0D/0x2D) use **0xCB continuation codes**
+- **Glasses commands** (0x0E/0x33) use **0xC9 success codes**
+- **Different data structures** suggest different storage mechanisms
+
+### 2. **Device Identification System**
+- **Device Info**: Returns 12 bytes of comprehensive device data
+- **Glasses Serial**: String-based identification with optional suffix
+- **MAC Addresses**: Likely embedded in device info response
+
+### 3. **Command Complexity**
+- **Device Serial**: May require multi-packet operations (0xCB continuation)
+- **Glasses Serial**: Simple single-packet operations (0xC9 success)
+
+## Last Verified
+**Date**: [Current Date/Time]
+**Device**: Even G1_29_R_F721C5
+**Connection**: BLE via Nordic UART Service
+**Test Cases**: Multiple serial number command variations
+**Discovery**: Glasses serial commands fully functional, device serial commands show continuation behavior

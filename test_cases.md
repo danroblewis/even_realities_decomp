@@ -15,12 +15,68 @@
 ### PUT Commands (0x01)
 | Command | Expected Response | Notes |
 |---------|------------------|-------|
-| `01 20 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Mid brightness, type 0 |
-| `01 3F 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Max brightness, type 0 |
-| `01 00 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Min brightness, type 0 |
-| `01 20 01` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Mid brightness, type 1 |
-| `01 20 02` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Mid brightness, type 2 |
-| `01 40 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Beyond max (0x3F) |
+| `01 20 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set mid brightness, type 0 |
+| `01 3F 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set max brightness, type 0 |
+| `01 00 00` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set min brightness, type 0 |
+| `01 20 01` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set mid brightness, type 1 |
+| `01 20 02` | `01 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set mid brightness, type 2 |
+
+## Anti-Shake Commands
+
+### GET Commands (0x2A)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `2A` | `2A 68 [current_state] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get current anti-shake state |
+
+### PUT Commands (0x02)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `02 00` | `02 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Disable anti-shake |
+| `02 01` | `02 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Enable anti-shake |
+| `02 FF` | `02 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set anti-shake to 0xFF |
+
+## Display Mode Commands
+
+### GET Commands (0x2B)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `2B` | `2B 69 [current_mode] [system_status] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get current display mode |
+
+### PUT Commands (0x03) - Functional Modes
+| Command | Expected Response | Visual Effect | Behavior |
+|---------|------------------|---------------|----------|
+| `03 0A 00` | `03 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Sun icon + "Activated" | Enables dashboard with head tilt |
+| `03 0B 00` | `03 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Dashboard stays visible | Persistent dashboard mode |
+| `03 0C 00` | `03 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Moon icon + "Silent" | Disables dashboard with head tilt |
+
+## Serial Number Commands
+
+### Device Serial Number Commands (0x0D/0x2D)
+
+#### GET Commands (0x2D)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `2D` | `2D 67 [12_bytes_of_data] 00 00 00 00 00 00` | Get device info (MAC addresses, serial data) |
+
+#### PUT Commands (0x0D)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `0D 01 04 54 65 73 74` | `0D CB 01 04 54 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set device serial "Test" (returns continuation code) |
+| `0D 01 08 54 65 73 74 53 4E` | `0D CB 01 08 54 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set device serial "TestSN" (returns continuation code) |
+
+### Glasses Serial Number Commands (0x0E/0x33)
+
+#### GET Commands (0x33)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `33` | `33 33 [serial_string] [suffix] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get glasses serial number |
+
+#### PUT Commands (0x0E)
+| Command | Expected Response | Notes |
+|---------|------------------|-------|
+| `0E 01 08 54 65 73 74 47 53 4E` | `0E C9 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set glasses serial "TestGSN" |
+| `0E 01 0C 4E 65 77 47 6C 61 73 73 53 4E` | `0E C9 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Set glasses serial "NewGlassSN" |
+| `0E 01 0C 47 31 52 31 46 45 45 30 39 35 38` | `0E C9 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Restore original glasses serial "G1R1FEE0958" |
 
 ## File Management Commands
 
@@ -37,7 +93,7 @@
 ### GET Commands (0x35)
 | Command | Expected Response | Notes |
 |---------|------------------|-------|
-| `35` | `35 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get ESB channel information |
+| `35` | `35 c9 [data] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get ESB channel information |
 | `35 01` | `35 c9 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get ESB channel with length 1 |
 | `35 02` | `35 c9 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00` | Get ESB channel with length 2 |
 

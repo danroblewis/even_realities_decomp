@@ -13,6 +13,59 @@
 - **Behavior**: Sets screen brightness, accepts all values, returns consistent response
 - **Status**: Fully documented and tested
 
+#### 0x2A - Anti-Shake Enable Status (GET Request) - ✅ CONFIRMED
+- **Command Format**: `2A`
+- **Parameters**: None
+- **Response**: `2A 68 [current_state] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `2A` - Echo of command ID
+  - `68` - Status code (0x68 = 104)
+  - `[current_state]` - Current anti-shake state (0x00 = disabled, 0x01 = enabled, but accepts any value)
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Behavior**: Returns current anti-shake state from device memory
+- **Status**: Fully tested and documented
+
+#### 0x2B - Display Mode Status (GET Request) - ✅ CONFIRMED
+- **Command Format**: `2B`
+- **Parameters**: None
+- **Response**: `2B 69 [current_mode] [system_status] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `2B` - Echo of command ID
+  - `69` - Status code (0x69 = 105)
+  - `[current_mode]` - Current display mode value
+  - `[system_status]` - System status flag
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Behavior**: Returns current display mode and system status from device memory
+- **Status**: Fully tested and documented
+
+#### 0x2D - Device Info Retrieval (GET Request) - ✅ CONFIRMED
+- **Command Format**: `2D`
+- **Parameters**: None
+- **Response**: `2D 67 [12_bytes_of_data] 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `2D` - Echo of command ID
+  - `67` - Status code (0x67 = 103)
+  - `[12_bytes]` - Device information (likely MAC addresses and serial data)
+  - `00 00 00 00 00 00` - Padding with zeros (20 bytes total)
+- **Current Data**: `c5 21 f7 c0 57 ee a0 5f 0f d7 30 db`
+- **Behavior**: Returns comprehensive device identification information
+- **Status**: Fully tested and documented
+
+#### 0x33 - Glasses Serial Number Retrieval (GET Request) - ✅ CONFIRMED
+- **Command Format**: `33`
+- **Parameters**: None
+- **Response**: `33 33 [serial_string] [suffix] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `33` - Echo of command ID
+  - `33` - Status code (0x33 = 51)
+  - `[serial_string]` - Glasses serial number string
+  - `[suffix]` - Additional identifier (e.g., "ses")
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Current Data**: `47 31 52 31 46 45 45 30 39 35 38 00 73 65 73 00`
+- **Decoded**: "G1R1FEE0958" + "ses"
+- **Behavior**: Returns current glasses serial number and identifier
+- **Status**: Fully tested and documented
+
 #### 0x01 - Screen Brightness Control (PUT Request) - ✅ CONFIRMED
 - **Command Format**: `01 [brightness_level] [brightness_type]`
 - **Parameters**: 
@@ -25,6 +78,69 @@
   - `00` - Additional status byte
   - `00 00 00...` - Padding with zeros (20 bytes total)
 - **Behavior**: ✅ Confirmed to work and return success confirmation
+- **Status**: Fully tested and documented
+
+#### 0x02 - Anti-Shake Enable Control (PUT Request) - ✅ CONFIRMED
+- **Command Format**: `02 [state_value]`
+- **Parameters**: 
+  - state_value: Single byte (0x00 = disabled, 0x01 = enabled, accepts any byte value 0x00-0xFF)
+- **Actual Response**: `02 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `02` - Echo of command ID
+  - `c9` - Success confirmation code (0xC9)
+  - `00` - Additional status byte
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Behavior**: ✅ Confirmed to work and return success confirmation, immediately stores state
+- **Status**: Fully tested and documented
+
+#### 0x03 - Display Mode Control (PUT Request) - ✅ CONFIRMED
+- **Command Format**: `03 [mode_value] [flag_show_tip]`
+- **Parameters**: 
+  - mode_value: Display mode (0x00-0xFF, but only certain values have effects)
+  - flag_show_tip: Flag for showing tips (0x00 = disabled)
+- **Response**: `03 c9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `03` - Echo of command ID
+  - `c9` - Success confirmation code (0xC9)
+  - `00` - Additional status byte
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Functional Modes**:
+  - **0x0A (10)**: "Activated" mode - Sun icon, enables dashboard with head tilt
+  - **0x0B (11)**: "Persistent Dashboard" mode - Dashboard stays visible permanently
+  - **0x0C (12)**: "Silent" mode - Moon icon, disables dashboard with head tilt
+- **Behavior**: ✅ Confirmed to work with multiple functional modes
+- **Status**: Fully tested and documented with 31 modes systematically tested
+
+#### 0x0D - Device Serial Number Control (PUT Request) - ⚠️ PARTIALLY CONFIRMED
+- **Command Format**: `0D [param1] [length] [serial_data...]`
+- **Parameters**: 
+  - param1: Parameter 1 (typically 0x01)
+  - length: Length of serial data
+  - serial_data: Serial number data bytes
+- **Response**: `0D CB [param1] [length] [first_byte] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `0D` - Echo of command ID
+  - `CB` - **Continuation code** (0xCB, not 0xC9 success)
+  - `[param1]` - Parameter 1 (typically 0x01)
+  - `[length]` - Length of serial data
+  - `[first_byte]` - First byte of serial data
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Behavior**: ⚠️ Returns continuation code - may require multi-packet operation
+- **Status**: Partially tested, shows continuation behavior
+
+#### 0x0E - Glasses Serial Number Control (PUT Request) - ✅ CONFIRMED
+- **Command Format**: `0E [param1] [length] [serial_data...]`
+- **Parameters**: 
+  - param1: Parameter 1 (typically 0x01)
+  - length: Length of serial data
+  - serial_data: Serial number data bytes
+- **Response**: `0E C9 [param1] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+- **Response Pattern**: 
+  - `0E` - Echo of command ID
+  - `C9` - Success confirmation code (0xC9)
+  - `[param1]` - Parameter 1 (typically 0x01)
+  - `00 00 00...` - Padding with zeros (20 bytes total)
+- **Behavior**: ✅ Successfully sets glasses serial number
 - **Status**: Fully tested and documented
 
 #### 0x15 - File Enqueue (PUT Request) - 🔄 DISCOVERED
